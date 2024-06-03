@@ -22,7 +22,8 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>{/* End  Footer */}
-            {/* use this as future reference */}
+            {/* use this as future reference and use logic */}
+
             {/* <div id="preloader"></div> */}
             <a href="/" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short"></i></a>
         </>
