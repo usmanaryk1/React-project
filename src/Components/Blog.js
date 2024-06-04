@@ -1,3 +1,6 @@
+// import { Link } from "react-router-dom/cjs/react-router-dom";
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
+// import BlogDetails from "./BlogDetails";
 const Blog = () => {
     return (
         <>
@@ -21,7 +24,7 @@ const Blog = () => {
                         <div className="col-md-4">
                             <div className="card card-blog">
                                 <div className="card-img">
-                                    <a href="blog-single.html"><img src="assets/img/post-1.jpg" alt="" className="img-fluid" /></a>
+                                    <a href="/blog-details"><img src="assets/img/post-1.jpg" alt="" className="img-fluid" /></a>
                                 </div>
                                 <div className="card-body">
                                     <div className="card-category-box">
@@ -52,7 +55,7 @@ const Blog = () => {
                         <div className="col-md-4">
                             <div className="card card-blog">
                                 <div className="card-img">
-                                    <a href="blog-single.html"><img src="assets/img/post-2.jpg" alt="" className="img-fluid" /></a>
+                                    <a href="/blog-details.js"><img src="assets/img/post-2.jpg" alt="" className="img-fluid" /></a>
                                 </div>
                                 <div className="card-body">
                                     <div className="card-category-box">

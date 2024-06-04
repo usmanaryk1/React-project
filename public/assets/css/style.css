@@ -472,7 +472,7 @@ a:hover {
 }
 
 #header.header-scrolled {
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.8);
   padding: 12px 0;
 }
 
@@ -500,7 +500,7 @@ a:hover {
 
 .navbar>ul>li {
   white-space: nowrap;
-  padding: 10px 0 10px 30px;
+  padding: 10px 5px 10px 30px;
 }
 
 .navbar a,
@@ -509,7 +509,7 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   color: #fff;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   padding: 0;
   white-space: nowrap;
@@ -1280,7 +1280,7 @@ a:hover {
 
 .card-blog .post-date {
   color: #4e4e4e;
-  display: inline-block;
+  /* display: inline-block; */
   float: right;
 }
 
