@@ -1,0 +1,103 @@
+{
+    "blogs": [
+        {
+            "image": "assets/img/post-1.jpg",
+            "cardCategory": "Travel",
+            "cardTitle": "See more ideas about Travel",
+            "cardDescription": "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallia pellentesque nec,egestas non nisi.",
+            "authorImage": "assets/img/testimonial-2.jpg",
+            "authorName": "Morgan Freeman",
+            "postDate": "10 min",
+            "articleTitle": "Lorem ipsum dolor sit amet consec tetur adipisicing",
+            "biPerson": "John Doe",
+            "biChatLeftText": "24",
+            "articleContentP1": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictumporta. Quisque velitnisi, pretium ut lacinia in, elementum id eni.Praesent sapien massa, convallis a pellentesquenec, egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuerecubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.Nulla quis lorem ut libero malesuada feugiat.",
+            "articleContentP2" : "Nulla porttitor accumsan tincidunt. Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. ",
+            "articleContentP3" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+            "articleContentP4" : "Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Quisque velit nisi, pretium ut lacinia in, elementum id enim.Nulla porttitor accumsan tincidunt. ",
+            "articleContentP5" : "Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada.",
+            "blockquote" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.",
+            "id": "1"
+        },
+        {
+            "image": "assets/img/post-2.jpg",
+            "cardCategory": "Food",
+            "cardTitle": "See more ideas about Travel",
+            "cardDescription": "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallia pellentesque nec,egestas non nisi.",
+            "authorImage": "assets/img/testimonial-2.jpg",
+            "authorName": "Morgan Freeman",
+            "postDate": "20 min",
+            "articleTitle": "Lorem ipsum dolor sit amet consec tetur adipisicing",
+            "biPerson": "Kyle Smith",
+            "biChatLeftText": "30",
+            "articleContent": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictumporta. Quisque velitnisi, pretium ut lacinia in, elementum id eni.Praesent sapien massa, convallis a pellentesquenec, egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuerecubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.Nulla quis lorem ut libero malesuada feugiat.Nulla porttitor accumsan tincidunt. Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Quisque velit nisi, pretium ut lacinia in, elementum id enim.Nulla porttitor accumsan tincidunt. Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada.",
+            "blockquote" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.",
+            "id": "2"
+        },
+        {
+            "image": "assets/img/post-3.jpg",
+            "cardCategory": "Web Design",
+            "cardTitle": "See more ideas about Web Design",
+            "cardDescription": "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallia pellentesque nec,egestas non nisi.",
+            "authorImage": "assets/img/testimonial-2.jpg",
+            "authorName": "Morgan Freeman",
+            "postDate": "30 min",
+            "articleTitle": "Lorem ipsum dolor sit amet consec tetur adipisicing",
+            "biPerson": "Mario Jam",
+            "biChatLeftText": "19",
+            "articleContent": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictumporta. Quisque velitnisi, pretium ut lacinia in, elementum id eni.Praesent sapien massa, convallis a pellentesquenec, egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuerecubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.Nulla quis lorem ut libero malesuada feugiat.Nulla porttitor accumsan tincidunt. Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Quisque velit nisi, pretium ut lacinia in, elementum id enim.Nulla porttitor accumsan tincidunt. Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada.",
+            "blockquote" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.",
+            "id": "3"
+        }
+    ],
+    "works": [
+        {
+            "linkImage": "assets/img/work-1.jpg",
+            "workImage": "assets/img/work-1.jpg",
+            "wTitle": "Lorem impsum dolor",
+            "wCategory": "Web Design",
+            "wDate": "18 Sep. 2018",
+            "id": "1"
+        },
+        {
+            "linkImage": "assets/img/work-2.jpg",
+            "workImage": "assets/img/work-2.jpg",
+            "wTitle": "Loreda Cuno Nere",
+            "wCategory": "Web Design",
+            "wDate": "18 Sep. 2018",
+            "id": "2"
+        },
+        {
+            "linkImage": "assets/img/work-3.jpg",
+            "workImage": "assets/img/work-3.jpg",
+            "wTitle": "Mavrito Lana Dere",
+            "wCategory": "Web Design",
+            "wDate": "18 Sep. 2018",
+            "id": "3"
+        },
+        {
+            "linkImage": "assets/img/work-4.jpg",
+            "workImage": "assets/img/work-4.jpg",
+            "wTitle": "Bindo Laro Cado",
+            "wCategory": "Web Design",
+            "wDate": "18 Sep. 2018",
+            "id": "4"
+        },
+        {
+            "linkImage": "assets/img/work-5.jpg",
+            "workImage": "assets/img/work-5.jpg",
+            "wTitle": "Studio Lena Mado",
+            "wCategory": "Web Design",
+            "wDate": "18 Sep. 2018",
+            "id": "5"
+        },
+        {
+            "linkImage": "assets/img/work-6.jpg",
+            "workImage": "assets/img/work-6.jpg",
+            "wTitle": "Studio Big Bang",
+            "wCategory": "Web Design",
+            "wDate": "18 Sep. 2018",
+            "id": "6"
+        }
+    ]
+}
