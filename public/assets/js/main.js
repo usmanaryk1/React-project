@@ -180,7 +180,7 @@
   /**
    * Initiate portfolio lightbox 
    */
-  const portfolioLightbox = GLightbox({
+  const portfolioLightbox = gLightbox({
     selector: '.portfolio-lightbox'
   });
 

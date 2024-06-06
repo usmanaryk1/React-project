@@ -17,7 +17,7 @@ const Portfolio = ({ title, subtitle, works }) => {
                     <div className="row">
                         {works.map((work) => (
                             <div className="col-md-4" key={work.id}>
-                                <Link to={`/work/${work.id}`}>
+                                <Link to={`/works/${work.id}`}>
                                     <div className="work-box">
                                         <a href={work.linkImage} data-gallery="portfolioGallery" className="portfolio-lightbox">
                                             <div className="work-img">

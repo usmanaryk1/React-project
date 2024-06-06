@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom/cjs/react-router-dom";
-// import BlogDetails from "./BlogDetails";
+import BlogDetails from "./BlogDetails";
+
 const Blog = ({ title, subtitle, blogs }) => {
+    
     return (
         <>
             {/* ======= Blog Section ======= */}
