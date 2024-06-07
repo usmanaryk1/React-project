@@ -3,7 +3,7 @@ import useFetch from "./useFetch";
 import BlogsHero from "./BlogsHero"
 import BlogsContent from "./BlogsContent";
 
-const BlogDetails = ({}) => {
+const BlogDetails = () => {
 
     const { id } = useParams();
     const { data: blog } = useFetch("http://localhost:8000/blogs/" + id);

@@ -1,4 +1,18 @@
 {
+  "about": [
+    {
+      "aboutImg": "assets/img/testimonial-2.jpg",
+      "aboutName": "Morgan Freeman",
+      "aboutProfile": "Full stack developer",
+      "aboutEmail": "contact@example.com",
+      "aboutPhone": "(617) 557-0089",
+      "aboutTitle": "About me",
+      "aboutDesc1": "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nullaporttitor accumsan tincidunt.",
+      "aboutDesc2": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.",
+      "aboutDesc3": "Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor accumsantincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
+      "id": "1"
+    }
+  ],
   "blogs": [
     {
       "image": "assets/img/post-1.jpg",
@@ -138,44 +152,44 @@
       "id": "6"
     }
   ],
-  "testimonials" : [
+  "testimonials": [
     {
-        "authorImg" : "assets/img/testimonial-2.jpg",
-        "authorName" : "Xavi Alonso",
-        "authorDescription" : "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
-        "id" : "1"
+      "authorImg": "assets/img/testimonial-2.jpg",
+      "authorName": "Xavi Alonso",
+      "authorDescription": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
+      "id": "1"
     },
     {
-        "authorImg" : "assets/img/testimonial-4.jpg",
-        "authorName" : "Mario John",
-        "authorDescription" : "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
-        "id" : "2"
+      "authorImg": "assets/img/testimonial-4.jpg",
+      "authorName": "Mario John",
+      "authorDescription": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
+      "id": "2"
     }
   ],
-  "counts" : [
+  "counts": [
     {
-        "counterIcon" : "bi-check",
-        "counterEnd" : "450",
-        "counterText" : "WORKS COMPLETED",
-        "id" : "1"
+      "counterIcon": "bi-check",
+      "counterEnd": "450",
+      "counterText": "WORKS COMPLETED",
+      "id": "1"
     },
     {
-        "counterIcon" : "bi-journal-richtext",
-        "counterEnd" : "25",
-        "counterText" : "YEARS OF EXPERIENCE",
-        "id" : "2"
+      "counterIcon": "bi-journal-richtext",
+      "counterEnd": "25",
+      "counterText": "YEARS OF EXPERIENCE",
+      "id": "2"
     },
     {
-        "counterIcon" : "bi-people",
-        "counterEnd" : "550",
-        "counterText" : "TOTAL CLIENTS",
-        "id" : "3"
+      "counterIcon": "bi-people",
+      "counterEnd": "550",
+      "counterText": "TOTAL CLIENTS",
+      "id": "3"
     },
     {
-        "counterIcon" : "bi-award",
-        "counterEnd" : "48",
-        "counterText" : "AWARD WON",
-        "id" : "4"
+      "counterIcon": "bi-award",
+      "counterEnd": "48",
+      "counterText": "AWARD WON",
+      "id": "4"
     }
   ]
 }

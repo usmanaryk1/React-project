@@ -1,4 +1,8 @@
-const About = () => {
+const About = ({about}) => {
+
+    // console.log("About name:", about.aboutName);
+    // console.log("About profile:", about.aboutProfile)
+
     return (
         <>
             {/* ======= About Section ======= */}
@@ -12,15 +16,15 @@ const About = () => {
                                         <div className="row">
                                             <div className="col-sm-6 col-md-5">
                                                 <div className="about-img">
-                                                    <img src="assets/img/testimonial-2.jpg" className="img-fluid rounded b-shadow-a" alt="" />
+                                                    <img src={about.aboutImg} className="img-fluid rounded b-shadow-a" alt="" />
                                                 </div>
                                             </div>
                                             <div className="col-sm-6 col-md-7">
                                                 <div className="about-info">
-                                                    <p><span className="title-s">Name: </span> <span>Morgan Freeman</span></p>
-                                                    <p><span className="title-s">Profile: </span> <span>full stack developer</span></p>
-                                                    <p><span className="title-s">Email: </span> <span>contact@example.com</span></p>
-                                                    <p><span className="title-s">Phone: </span> <span>(617) 557-0089</span></p>
+                                                    <p><span className="title-s">Name: </span> <span> {about.aboutName} </span></p>
+                                                    <p><span className="title-s">Profile: </span> <span> {about.aboutProfile} </span></p>
+                                                    <p><span className="title-s">Email: </span> <span> {about.aboutEmail} </span></p>
+                                                    <p><span className="title-s">Phone: </span> <span> {about.aboutPhone} </span></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -48,24 +52,17 @@ const About = () => {
                                         <div className="about-me pt-4 pt-md-0">
                                             <div className="title-box-2">
                                                 <h5 className="title-left">
-                                                    About me
+                                                    {about.aboutTitle}
                                                 </h5>
                                             </div>
                                             <p className="lead">
-                                                Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan id
-                                                imperdiet et, porttitor
-                                                at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nulla
-                                                porttitor accumsan tincidunt.
+                                                {about.aboutDesc1}
                                             </p>
                                             <p className="lead">
-                                                Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis
-                                                porttitor volutpat. Vestibulum
-                                                ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.
+                                                {about.aboutDesc2}
                                             </p>
                                             <p className="lead">
-                                                Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim.
-                                                Nulla porttitor accumsan
-                                                tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.
+                                                {about.aboutDesc3}
                                             </p>
                                         </div>
                                     </div>

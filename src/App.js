@@ -1,20 +1,17 @@
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import Home from "./Components/Home";
-import BlogDetails from "./Components/BlogDetails";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
+// import BlogDetails from "./Components/BlogDetails";
+import { BrowserRouter as Router } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
+
   return (
     <Router>
       <div className="App">
         <Header />
         <div className="content">
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-          </Switch>
+          <Home />
         </div>
         <Footer />
       </div >
