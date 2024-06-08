@@ -18,9 +18,9 @@ const useFetch = (url) => {
                     return res.json();
                 })
                 .then(data => {
-                    console.log('Raw data:', data); // Inspect the raw data
-                    const about = data.about; // or whatever the key is
-                    console.log('About object:', about);
+                    // console.log('Raw data:', data); // Inspect the raw data
+                    // const about = data.about; // or whatever the key is
+                    // console.log('About object:', about);
                     setData(data);
                     setError(null);
                     setIsPending(false);
@@ -30,7 +30,7 @@ const useFetch = (url) => {
                     setError(err.message);
                     setIsPending(false);
                 })
-        }, 1000);
+        }, 5);
     }, [url])
 
     return { data, isPending, error };

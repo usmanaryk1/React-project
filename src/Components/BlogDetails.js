@@ -6,14 +6,15 @@ import BlogsContent from "./BlogsContent";
 const BlogDetails = () => {
 
     const { id } = useParams();
-    const { data: blog } = useFetch("http://localhost:8000/blogs/" + id);
+    const { data: blog , isPending, error} = useFetch("http://localhost:8000/blogs/" + id);
 
     return (
         <div className="blog-details">
-            {blog && <BlogsHero />}
-            {blog && <BlogsContent />}
-        </div>
-        
+            {isPending && <div className="loading"> Loading...</div>}
+            {error && <div className="error">{error}</div>}
+            {blog && <BlogsHero blog={blog} bgImgSrc="url(assets/img/overlay-bg.jpg)" />}
+            {blog && <BlogsContent blog={blog} />}
+        </div> 
     );
 }
 

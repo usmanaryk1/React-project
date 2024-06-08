@@ -1,71 +1,72 @@
-import useFetch from "./useFetch";
-import { useParams } from "react-router-dom/cjs/react-router-dom";
-const BlogsContent = () => {
+// import useFetch from "./useFetch";
+// import { useParams } from "react-router-dom/cjs/react-router-dom";
+const BlogsContent = ({ blog }) => {
 
-    const { id } = useParams();
-    const { data: blog } = useFetch("http://localhost:8000/blogs/" +id)
+    // const { id } = useParams();
+    // const { data: blog } = useFetch("http://localhost:8000/blogs/" +id)
+
 
     return (
         <>
             {/*======= Blog Single Section =======*/}
             <section className="blog-wrapper sect-pt4" id="blog">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-8">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-8">
                             {blog !== null && (
-                                <div class="post-box">
-                                <div class="post-thumb"><img src={blog.image} class="img-fluid" alt="" />
+                                <div className="post-box">
+                                    <div className="post-thumb"><img src={blog.image} className="img-fluid" alt="" />
+                                    </div>
+                                    <div className="post-meta">
+                                        <h1 className="article-title">{blog.articleTitle}</h1>
+                                        <ul>
+                                            <li>
+                                                <span className="bi bi-person"></span>
+                                                <a href="/">{blog.biPerson}</a>
+                                            </li>
+                                            <li>
+                                                <span className="bi bi-tag"></span>
+                                                <a href="/">{blog.cardCategory}</a>
+                                            </li>
+                                            <li>
+                                                <span className="bi bi-chat-left-text"></span>
+                                                <a href="/">{blog.biChatLeftText}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="article-content">
+                                        <p>
+                                            {blog.articleContentP1}
+                                        </p>
+                                        <p>
+                                            {blog.articleContentP2}
+                                        </p>
+                                        <p>
+                                            {blog.articleContentP3}
+                                        </p>
+                                        <p>
+                                            {blog.articleContentP4}
+                                        </p>
+                                        <blockquote className="blockquote">
+                                            <p className="mb-0">{blog.blockquote}</p>
+                                        </blockquote>
+                                        <p>
+                                            {blog.articleContentP5}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="post-meta">
-                                    <h1 class="article-title">{blog.articleTitle}</h1>
-                                    <ul>
-                                        <li>
-                                            <span class="bi bi-person"></span>
-                                            <a href="/">{blog.biPerson}</a>
-                                        </li>
-                                        <li>
-                                            <span class="bi bi-tag"></span>
-                                            <a href="/">{blog.cardCategory}</a>
-                                        </li>
-                                        <li>
-                                            <span class="bi bi-chat-left-text"></span>
-                                            <a href="/">{blog.biChatLeftText}</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="article-content">
-                                    <p>
-                                        {blog.articleContentP1}
-                                    </p>
-                                    <p>
-                                        {blog.articleContentP2}
-                                    </p>
-                                    <p>
-                                        {blog.articleContentP3}
-                                    </p>
-                                    <p>
-                                        {blog.articleContentP4}
-                                    </p>
-                                    <blockquote class="blockquote">
-                                        <p class="mb-0">{blog.blockquote}</p>
-                                    </blockquote>
-                                    <p>
-                                        {blog.articleContentP5}
-                                    </p>
-                                </div>
-                            </div>
                             )}
-                            <div class="box-comments">
-                                <div class="title-box-2">
-                                    <h4 class="title-comments title-left">Comments (34)</h4>
+                            <div className="box-comments">
+                                <div className="title-box-2">
+                                    <h4 className="title-comments title-left">Comments (34)</h4>
                                 </div>
-                                <ul class="list-comments">
+                                <ul className="list-comments">
                                     <li>
-                                        <div class="comment-avatar">
+                                        <div className="comment-avatar">
                                             <img src="assets/img/testimonial-2.jpg" alt="" />
                                         </div>
-                                        <div class="comment-details">
-                                            <h4 class="comment-author">Oliver Colmenares</h4>
+                                        <div className="comment-details">
+                                            <h4 className="comment-author">Oliver Colmenares</h4>
                                             <span>18 Sep 2017</span>
                                             <p>
                                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores reprehenderit, provident cumque
@@ -76,11 +77,11 @@ const BlogsContent = () => {
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="comment-avatar">
+                                        <div className="comment-avatar">
                                             <img src="assets/img/testimonial-4.jpg" alt="" />
                                         </div>
-                                        <div class="comment-details">
-                                            <h4 class="comment-author">Carmen Vegas</h4>
+                                        <div className="comment-details">
+                                            <h4 className="comment-author">Carmen Vegas</h4>
                                             <span>18 Sep 2017</span>
                                             <p>
                                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores reprehenderit, provident cumque
@@ -91,12 +92,12 @@ const BlogsContent = () => {
                                             <a href="3">Reply</a>
                                         </div>
                                     </li>
-                                    <li class="comment-children">
-                                        <div class="comment-avatar">
+                                    <li className="comment-children">
+                                        <div className="comment-avatar">
                                             <img src="assets/img/testimonial-2.jpg" alt="" />
                                         </div>
-                                        <div class="comment-details">
-                                            <h4 class="comment-author">Oliver Colmenares</h4>
+                                        <div className="comment-details">
+                                            <h4 className="comment-author">Oliver Colmenares</h4>
                                             <span>18 Sep 2017</span>
                                             <p>
                                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores reprehenderit, provident cumque
@@ -107,11 +108,11 @@ const BlogsContent = () => {
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="comment-avatar">
+                                        <div className="comment-avatar">
                                             <img src="assets/img/testimonial-2.jpg" alt="" />
                                         </div>
-                                        <div class="comment-details">
-                                            <h4 class="comment-author">Oliver Colmenares</h4>
+                                        <div className="comment-details">
+                                            <h4 className="comment-author">Oliver Colmenares</h4>
                                             <span>18 Sep 2017</span>
                                             <p>
                                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores reprehenderit, provident cumque
@@ -123,61 +124,61 @@ const BlogsContent = () => {
                                     </li>
                                 </ul>
                             </div>
-                            <div class="form-comments">
-                                <div class="title-box-2">
-                                    <h3 class="title-left">
+                            <div className="form-comments">
+                                <div className="title-box-2">
+                                    <h3 className="title-left">
                                         Leave a Reply
                                     </h3>
                                 </div>
-                                <form class="form-mf">
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control input-mf" id="inputName" placeholder="Name *" required />
+                                <form className="form-mf">
+                                    <div className="row">
+                                        <div className="col-md-6 mb-3">
+                                            <div className="form-group">
+                                                <input type="text" className="form-control input-mf" id="inputName" placeholder="Name *" required />
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <div class="form-group">
-                                                <input type="email" class="form-control input-mf" id="inputEmail1" placeholder="Email *" required />
+                                        <div className="col-md-6 mb-3">
+                                            <div className="form-group">
+                                                <input type="email" className="form-control input-mf" id="inputEmail1" placeholder="Email *" required />
                                             </div>
                                         </div>
-                                        <div class="col-md-12 mb-3">
-                                            <div class="form-group">
-                                                <input type="url" class="form-control input-mf" id="inputUrl" placeholder="Website" />
+                                        <div className="col-md-12 mb-3">
+                                            <div className="form-group">
+                                                <input type="url" className="form-control input-mf" id="inputUrl" placeholder="Website" />
                                             </div>
                                         </div>
-                                        <div class="col-md-12 mb-3">
-                                            <div class="form-group">
-                                                <textarea id="textMessage" class="form-control input-mf" placeholder="Comment *" name="message" cols="45" rows="8" required></textarea>
+                                        <div className="col-md-12 mb-3">
+                                            <div className="form-group">
+                                                <textarea id="textMessage" className="form-control input-mf" placeholder="Comment *" name="message" cols="45" rows="8" required></textarea>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <button type="submit" class="button button-a button-big button-rouded">Send Message</button>
+                                        <div className="col-md-12">
+                                            <button type="submit" className="button button-a button-big button-rouded">Send Message</button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="widget-sidebar sidebar-search">
-                                <h5 class="sidebar-title">Search</h5>
-                                <div class="sidebar-content">
+                        <div className="col-md-4">
+                            <div className="widget-sidebar sidebar-search">
+                                <h5 className="sidebar-title">Search</h5>
+                                <div className="sidebar-content">
                                     <form>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." />
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-secondary btn-search" type="button">
-                                                    <span class="bi bi-search"></span>
+                                        <div className="input-group">
+                                            <input type="text" className="form-control" placeholder="Search for..." aria-label="Search for..." />
+                                            <span className="input-group-btn">
+                                                <button className="btn btn-secondary btn-search" type="button">
+                                                    <span className="bi bi-search"></span>
                                                 </button>
                                             </span>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                            <div class="widget-sidebar">
-                                <h5 class="sidebar-title">Recent Post</h5>
-                                <div class="sidebar-content">
-                                    <ul class="list-sidebar">
+                            <div className="widget-sidebar">
+                                <h5 className="sidebar-title">Recent Post</h5>
+                                <div className="sidebar-content">
+                                    <ul className="list-sidebar">
                                         <li>
                                             <a href="/">Atque placeat maiores.</a>
                                         </li>
@@ -196,10 +197,10 @@ const BlogsContent = () => {
                                     </ul>
                                 </div>
                             </div>
-                            <div class="widget-sidebar">
-                                <h5 class="sidebar-title">Archives</h5>
-                                <div class="sidebar-content">
-                                    <ul class="list-sidebar">
+                            <div className="widget-sidebar">
+                                <h5 className="sidebar-title">Archives</h5>
+                                <div className="sidebar-content">
+                                    <ul className="list-sidebar">
                                         <li>
                                             <a href="/">September, 2017.</a>
                                         </li>
@@ -218,9 +219,9 @@ const BlogsContent = () => {
                                     </ul>
                                 </div>
                             </div>
-                            <div class="widget-sidebar widget-tags">
-                                <h5 class="sidebar-title">Tags</h5>
-                                <div class="sidebar-content">
+                            <div className="widget-sidebar widget-tags">
+                                <h5 className="sidebar-title">Tags</h5>
+                                <div className="sidebar-content">
                                     <ul>
                                         <li>
                                             <a href="/">Web.</a>
