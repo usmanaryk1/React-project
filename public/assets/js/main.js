@@ -6,7 +6,7 @@
 * License: https://bootstrapmade.com/license/
 */
 // import gLightbox from 'glightbox';
-
+console.log('External script loaded and executed!');
 (function() {
   "use strict";
 
@@ -85,8 +85,11 @@
    * Toggle .header-scrolled class to #header when page is scrolled
    */
   const selectHeader = select('#header');
+  console.log("Select Header",selectHeader);
   if (selectHeader) {
+    console.log("Select Header If",selectHeader);
     const headerScrolled = () => {
+      console.log("Header Scrolled",selectHeader);
       if (window.scrollY > 100) {
         selectHeader.classList.add('header-scrolled');
       } else {

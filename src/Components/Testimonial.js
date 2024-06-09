@@ -1,4 +1,5 @@
-const Testimonial = ({testimonials}) => {
+const Testimonial = ({ testimonials }) => {
+
     return (
         <>
             {/* ======= Testimonials Section ======= */}
@@ -10,7 +11,7 @@ const Testimonial = ({testimonials}) => {
                             <div className="testimonials-slider swiper" data-aos="fade-up" data-aos-delay={100}>
                                 <div className="swiper-wrapper">
                                     {testimonials.map((testimonial) => (
-                                        <div className="swiper-slide" key = {testimonial.id} >
+                                        <div className="swiper-slide" key={testimonial.id} >
                                             <div className="testimonial-box">
                                                 <div className="author-test">
                                                     <img src={testimonial.authorImg} alt="" className="rounded-circle b-shadow-a" />
@@ -22,7 +23,6 @@ const Testimonial = ({testimonials}) => {
                                             </div>
                                         </div>
                                     ))}
-                                    {/* End testimonial item */}
                                 </div>
                                 <div className="swiper-pagination" />
                             </div>

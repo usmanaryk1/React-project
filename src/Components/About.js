@@ -1,8 +1,27 @@
+// import { useEffect } from "react";
 const About = ({ about }) => {
 
     // console.log("About name:", about.aboutName);
     // console.log("About profile:", about.aboutProfile)
+    // useEffect(() => {
+    //     console.log("start contact");
+    //     const footer = document.getElementById('footer');
+    //     console.log("footer" , footer);
+    //     const handleClick = () => {
+    //         console.log("Click Event");
+    //     };
 
+    //     if (footer) {
+    //         footer.addEventListener('click', handleClick);
+    //     }
+
+    //     // Cleanup function to remove the event listener
+    //     return () => {
+    //         if (footer) {
+    //             footer.removeEventListener('click', handleClick);
+    //         }
+    //     };
+    // }, []);
     return (
         <>
             {/* ======= About Section ======= */}
