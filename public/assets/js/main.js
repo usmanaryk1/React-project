@@ -184,9 +184,9 @@ console.log('External script loaded and executed!');
   /**
    * Initiate portfolio lightbox 
    */
-  const portfolioLightbox = gLightbox({
-    selector: '.portfolio-lightbox'
-  });
+  // const portfolioLightbox = gLightbox({
+  //   selector: '.portfolio-lightbox'
+  // });
 
   /**
    * Testimonials slider
