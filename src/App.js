@@ -3,6 +3,7 @@ import Header from "./Components/Header";
 import Home from "./Components/Home";
 import BlogDetails from "./Components/BlogDetails";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
+import PortfolioDetails from "./Components/PortfolioDetails";
 
 function App() {
 
@@ -12,11 +13,14 @@ return (
       <Header />
       <div className="content">
         <Switch>
-          <Route>
+          <Route exact path="/">
             <Home />
           </Route>
           <Route path="/blogs/:id">
             <BlogDetails />
+          </Route>
+          <Route path="/works/:id">
+            <PortfolioDetails />
           </Route>
         </Switch>
       </div>

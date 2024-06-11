@@ -16,31 +16,31 @@ const Portfolio = ({ title, subtitle, works }) => {
                     </div>
                     <div className="row">
                         {works.map((work) => (
-                            <div className="col-md-4" key={work.id}>
-                                <Link to={`/works/${work.id}`}>
-                                    <div className="work-box">
-                                        <a href={work.linkImage} data-gallery="portfolioGallery" className="portfolio-lightbox">
-                                            <div className="work-img">
-                                                <img src={work.workImage} alt="" className="img-fluid" />
-                                            </div>
-                                        </a>
-                                        <div className="work-content">
-                                            <div className="row">
-                                                <div className="col-sm-8">
-                                                    <h2 className="w-title">{work.wTitle}</h2>
-                                                    <div className="w-more">
-                                                        <span className="w-ctegory">{work.wCategory}</span> / <span className="w-date">{work.wDate}</span>
-                                                    </div>
+                            <div className="col-md-4" key={work.id}>  
+                                <div className="work-box">
+                                    <a href={work.linkImage} data-gallery="portfolioGallery" className="portfolio-lightbox">
+                                        <div className="work-img">
+                                            <img src={work.workImage} alt="" className="img-fluid" />
+                                        </div>
+                                    </a>
+                                    <div className="work-content">
+                                        <div className="row">
+                                            <div className="col-sm-8">
+                                                <h2 className="w-title">{work.wTitle}</h2>
+                                                <div className="w-more">
+                                                    <span className="w-ctegory">{work.wCategory}</span> / <span className="w-date">{work.wDate}</span>
                                                 </div>
-                                                <div className="col-sm-4">
+                                            </div>
+                                            <div className="col-sm-4">
+                                                <Link to={`/works/${work.id}`}>
                                                     <div className="w-like">
                                                         <a href="portfolio-details.html"> <span className="bi bi-plus-circle" /></a>
                                                     </div>
-                                                </div>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
                             </div>
                         ))}
                     </div>

@@ -1,11 +1,21 @@
-// import useFetch from "./useFetch";
-// import { useParams } from "react-router-dom/cjs/react-router-dom";
 const BlogsContent = ({ blog }) => {
+    if (!blog) {
+        return <div>Loading...</div>;
+    }
 
-    // const { id } = useParams();
-    // const { data: blog } = useFetch("http://localhost:8000/blogs/" +id)
-
-
+    const {
+        image,
+        articleTitle,
+        biPerson,
+        cardCategory,
+        biChatLeftText,
+        articleContentP1,
+        articleContentP2,
+        articleContentP3,
+        articleContentP4,
+        articleContentP5,
+        blockquote,
+    } = blog;
     return (
         <>
             {/*======= Blog Single Section =======*/}
@@ -13,49 +23,37 @@ const BlogsContent = ({ blog }) => {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8">
-                            {blog !== null && (
-                                <div className="post-box">
-                                    <div className="post-thumb"><img src={blog.image} className="img-fluid" alt="" />
-                                    </div>
-                                    <div className="post-meta">
-                                        <h1 className="article-title">{blog.articleTitle}</h1>
-                                        <ul>
-                                            <li>
-                                                <span className="bi bi-person"></span>
-                                                <a href="/">{blog.biPerson}</a>
-                                            </li>
-                                            <li>
-                                                <span className="bi bi-tag"></span>
-                                                <a href="/">{blog.cardCategory}</a>
-                                            </li>
-                                            <li>
-                                                <span className="bi bi-chat-left-text"></span>
-                                                <a href="/">{blog.biChatLeftText}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div className="article-content">
-                                        <p>
-                                            {blog.articleContentP1}
-                                        </p>
-                                        <p>
-                                            {blog.articleContentP2}
-                                        </p>
-                                        <p>
-                                            {blog.articleContentP3}
-                                        </p>
-                                        <p>
-                                            {blog.articleContentP4}
-                                        </p>
-                                        <blockquote className="blockquote">
-                                            <p className="mb-0">{blog.blockquote}</p>
-                                        </blockquote>
-                                        <p>
-                                            {blog.articleContentP5}
-                                        </p>
-                                    </div>
+                            <div className="post-box">
+                                <div className="post-thumb"><img src={image} className="img-fluid" alt="" />
                                 </div>
-                            )}
+                                <div className="post-meta">
+                                    <h1 className="article-title">{articleTitle}</h1>
+                                    <ul>
+                                        <li>
+                                            <span className="bi bi-person"></span>
+                                            <a href="/">{biPerson}</a>
+                                        </li>
+                                        <li>
+                                            <span className="bi bi-tag"></span>
+                                            <a href="/">{cardCategory}</a>
+                                        </li>
+                                        <li>
+                                            <span className="bi bi-chat-left-text"></span>
+                                            <a href="/">{biChatLeftText}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="article-content">
+                                    {articleContentP1 && <p>{articleContentP1}</p>}
+                                    {articleContentP2 && <p>{articleContentP2}</p>}
+                                    {articleContentP3 && <p>{articleContentP3}</p>}
+                                    {articleContentP4 && <p>{articleContentP4}</p>}
+                                    <blockquote className="blockquote">
+                                        <p className="mb-0">{blockquote}</p>
+                                    </blockquote>
+                                    {articleContentP5 && <p>{articleContentP5}</p>}
+                                </div>
+                            </div>
                             <div className="box-comments">
                                 <div className="title-box-2">
                                     <h4 className="title-comments title-left">Comments (34)</h4>
@@ -63,7 +61,7 @@ const BlogsContent = ({ blog }) => {
                                 <ul className="list-comments">
                                     <li>
                                         <div className="comment-avatar">
-                                            <img src="assets/img/testimonial-2.jpg" alt="" />
+                                            <img src="../assets/img/testimonial-2.jpg" alt="" />
                                         </div>
                                         <div className="comment-details">
                                             <h4 className="comment-author">Oliver Colmenares</h4>
@@ -78,7 +76,7 @@ const BlogsContent = ({ blog }) => {
                                     </li>
                                     <li>
                                         <div className="comment-avatar">
-                                            <img src="assets/img/testimonial-4.jpg" alt="" />
+                                            <img src="../assets/img/testimonial-4.jpg" alt="" />
                                         </div>
                                         <div className="comment-details">
                                             <h4 className="comment-author">Carmen Vegas</h4>
@@ -94,7 +92,7 @@ const BlogsContent = ({ blog }) => {
                                     </li>
                                     <li className="comment-children">
                                         <div className="comment-avatar">
-                                            <img src="assets/img/testimonial-2.jpg" alt="" />
+                                            <img src="../assets/img/testimonial-2.jpg" alt="" />
                                         </div>
                                         <div className="comment-details">
                                             <h4 className="comment-author">Oliver Colmenares</h4>
@@ -109,7 +107,7 @@ const BlogsContent = ({ blog }) => {
                                     </li>
                                     <li>
                                         <div className="comment-avatar">
-                                            <img src="assets/img/testimonial-2.jpg" alt="" />
+                                            <img src="../assets/img/testimonial-2.jpg" alt="" />
                                         </div>
                                         <div className="comment-details">
                                             <h4 className="comment-author">Oliver Colmenares</h4>

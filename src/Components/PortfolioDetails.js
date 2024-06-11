@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom/cjs/react-router-dom";
 import useFetch from "./useFetch";
 import CustomHero from "./CustomHero"
-import BlogsContent from "./BlogsContent";
+import PortfolioContent from "./PortfolioContent";
 import { useEffect } from "react";
 
-const BlogDetails = () => {
+const PortfolioDetails = () => {
     useEffect(() => {
         const script = document.createElement('script');
         script.src = "%PUBLIC_URL%/assets/js/main.js";
-        console.log("blogdetails");
+        console.log("PortfolioDetails");
         script.async = true;
         document.body.appendChild(script);
 
@@ -17,20 +17,20 @@ const BlogDetails = () => {
         };
     }, []);
     const { id } = useParams();
-    const { data: blog, error } = useFetch("http://localhost:8000/blogs/" + id);
+    const { data: work, error } = useFetch("http://localhost:8000/works/" + id);
 
     return (
         <div className="blog-details">
             {/* {isPending && <div className="loading"> Loading...</div>} */}
             {error && <div className="error">{error}</div>}
-            {blog && (
+            {work && (
                 <>
-                    <CustomHero heroTitle="Blog Details" breadcrumbItem1="Home" breadcrumbItem2="Library" breadcrumbItem3="Data" />
-                    <BlogsContent blog={blog} />
+                    <CustomHero heroTitle="Portfolio Details" breadcrumbItem1="Home" breadcrumbItem2= "" breadcrumbItem3="Portfolio Details" />
+                    <PortfolioContent work={work} />
                 </>
             )}
         </div>
     );
 }
 
-export default BlogDetails;
+export default PortfolioDetails;

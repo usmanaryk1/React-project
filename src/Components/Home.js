@@ -1,13 +1,13 @@
 import About from "./About";
 import Blog from "./Blog";
-import BlogDetails from "./BlogDetails";
+// import BlogDetails from "./BlogDetails";
 import Contact from "./Contact";
 import Counter from "./Counter";
 import Hero from "./Hero";
 import Portfolio from "./Portfolio";
 import Services from "./Services";
 import Testimonial from "./Testimonial";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import useFetch from "./useFetch";
 // import { useParams } from "react-router-dom/cjs/react-router-dom";
 
@@ -25,25 +25,19 @@ const Home = () => {
 
     return (
         <>
-            <Router>
-                <main id="main">
-                    <Hero />
-                    {about && <About about={about} />}
-                    {services && <Services services={services} title="Services" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />}
-                    {counts && <Counter counts={counts} />}
-                    {works && <Portfolio title="Portfolio" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." works={works} />}
-                    {testimonials && <Testimonial testimonials={testimonials} />}
-                    {isPending && <div className="loading"> Loading...</div>}
-                    {error && <div className="error">{error}</div>}
-                    {blogs && <Blog blogs={blogs} title="Blogs" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />}
-                    <Switch>
-                        <Route path="/blogs/:id">
-                            <BlogDetails />
-                        </Route>
-                    </Switch>
-                    <Contact />
-                </main>     {/* End #main */}
-            </Router >
+            <main id="main">
+                <Hero />
+                {about && <About about={about} />}
+                {services && <Services services={services} title="Services" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />}
+                {counts && <Counter counts={counts} />}
+                {works && <Portfolio title="Portfolio" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." works={works} />}
+                {testimonials && <Testimonial testimonials={testimonials} />}
+                {isPending && <div className="loading"> Loading...</div>}
+                {error && <div className="error">{error}</div>}
+                {blogs && <Blog blogs={blogs} title="Blogs" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />}
+                <Contact />
+            </main>
+            {/* End #main */}
         </>
     );
 }
