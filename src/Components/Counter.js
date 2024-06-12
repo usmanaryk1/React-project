@@ -1,4 +1,16 @@
-const Counter = () => {
+import React, { useEffect } from 'react';
+import PureCounter from '@srexi/purecounterjs';
+
+const Counter = ({ counts }) => {
+
+    /**
+ * Initiate Pure Counter 
+ */
+    useEffect(() => {
+        new PureCounter();
+    }, []);
+
+
     return (
         <>
             {/* ======= Counter Section ======= */}
@@ -6,50 +18,19 @@ const Counter = () => {
                 <div className="overlay-mf" />
                 <div className="container position-relative">
                     <div className="row">
-                        <div className="col-sm-3 col-lg-3">
-                            <div className="counter-box counter-box pt-4 pt-md-0">
-                                <div className="counter-ico">
-                                    <span className="ico-circle"><i className="bi bi-check" /></span>
-                                </div>
-                                <div className="counter-num">
-                                    <p data-purecounter-start={0} data-purecounter-end={450} data-purecounter-duration={1} className="counter purecounter" />
-                                    <span className="counter-text">WORKS COMPLETED</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-sm-3 col-lg-3">
-                            <div className="counter-box pt-4 pt-md-0">
-                                <div className="counter-ico">
-                                    <span className="ico-circle"><i className="bi bi-journal-richtext" /></span>
-                                </div>
-                                <div className="counter-num">
-                                    <p data-purecounter-start={0} data-purecounter-end={25} data-purecounter-duration={1} className="counter purecounter" />
-                                    <span className="counter-text">YEARS OF EXPERIENCE</span>
+                        {counts.map((counter) => (
+                            <div className="col-sm-3 col-lg-3" key={counter.id} >
+                                <div className="counter-box counter-box pt-4 pt-md-0">
+                                    <div className="counter-ico">
+                                        <span className="ico-circle"><i className={counter.counterIcon} /></span>
+                                    </div>
+                                    <div className="counter-num">
+                                        <p data-purecounter-start={0} data-purecounter-end={counter.counterEnd} data-purecounter-duration={1} className="counter purecounter" />
+                                        <span className="counter-text"> {counter.counterText} </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-sm-3 col-lg-3">
-                            <div className="counter-box pt-4 pt-md-0">
-                                <div className="counter-ico">
-                                    <span className="ico-circle"><i className="bi bi-people" /></span>
-                                </div>
-                                <div className="counter-num">
-                                    <p data-purecounter-start={0} data-purecounter-end={550} data-purecounter-duration={1} className="counter purecounter" />
-                                    <span className="counter-text">TOTAL CLIENTS</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-sm-3 col-lg-3">
-                            <div className="counter-box pt-4 pt-md-0">
-                                <div className="counter-ico">
-                                    <span className="ico-circle"><i className="bi bi-award" /></span>
-                                </div>
-                                <div className="counter-num">
-                                    <p data-purecounter-start={0} data-purecounter-end={48} data-purecounter-duration={1} className="counter purecounter" />
-                                    <span className="counter-text">AWARD WON</span>
-                                </div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>{/* End Counter Section */}

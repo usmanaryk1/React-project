@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom/cjs/react-router-dom";
-// import BlogDetails from "./BlogDetails";
 
-const Blog = ({ title, subtitle, blogs }) => {
+const Certifications = ({ title, subtitle, certifications }) => {
     
     return (
         <>
-            {/* ======= Blog Section ======= */}
-            <section id="blog" className="blog-mf sect-pt4 route">
+            {/* ======= Certifications Section ======= */}
+            <section id="certifications" className="blog-mf sect-pt4 route">
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12">
@@ -18,31 +17,31 @@ const Blog = ({ title, subtitle, blogs }) => {
                         </div>
                     </div>
                     <div className="row">
-                        {blogs.map((blog) => (
-                            <div className="col-md-4" key={blog.id}>
-                                <Link to={`/blogs/${blog.id}`}>
+                        {certifications.map((certification) => (
+                            <div className="col-md-4" key={certification.id}>
+                                <Link to={`/certifications/${certification.id}`}>
                                     <div className="card card-blog">
                                         <div className="card-img">
-                                            <a href="/" ><img src={blog.image} alt="" className="img-fluid" /></a>
+                                            <a href="/" ><img src={certification.image} alt="" className="img-fluid" /></a>
                                         </div>
                                         <div className="card-body">
                                             <div className="card-category-box">
                                                 <div className="card-category">
-                                                    <h6 className="category">{blog.cardCategory}</h6>
+                                                    <h6 className="category">{certification.cardCategory}</h6>
                                                 </div>
                                             </div>
-                                            <h3 className="card-title"><a href="blog-single.html">{blog.cardTitle}</a></h3>
-                                            <p className="card-description">{blog.cardDescription}</p>
+                                            <h3 className="card-title"><a href="blog-single.html">{certification.cardTitle}</a></h3>
+                                            <p className="card-description">{certification.cardDescription}</p>
                                         </div>
                                         <div className="card-footer">
                                             <div className="post-author">
                                                 <a href="/">
-                                                    <img src={blog.authorImage} alt="" className="avatar rounded-circle" />
-                                                    <span className="author">{blog.authorName}</span>
+                                                    <img src={certification.authorImage} alt="" className="avatar rounded-circle" />
+                                                    <span className="author">{certification.authorName}</span>
                                                 </a>
                                             </div>
                                             <div className="post-date">
-                                                <span className="bi bi-clock" /> {blog.postDate}
+                                                <span className="bi bi-clock" /> {certification.postDate}
                                             </div>
                                         </div>
                                     </div>
@@ -51,8 +50,8 @@ const Blog = ({ title, subtitle, blogs }) => {
                         ))}
                     </div>
                 </div>
-            </section >  {/*End Blog Section */} 
+            </section >  {/*End Certifications Section */} 
         </>
     );
 }
-export default Blog;
+export default Certifications;

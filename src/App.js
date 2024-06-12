@@ -1,20 +1,35 @@
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import Home from "./Components/Home";
+// import BlogDetails from "./Components/BlogDetails";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
+import PortfolioDetails from "./Components/PortfolioDetails";
 
+// Template URL: https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/
 
 function App() {
-  return (
+
+return (
+  <Router>
     <div className="App">
-        <Header/>
+      <Header />
       <div className="content">
-        <Home />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          {/* <Route path="/blogs/:id">
+            <BlogDetails />
+          </Route> */}
+          <Route path="/works/:id">
+            <PortfolioDetails />
+          </Route>
+        </Switch>
       </div>
       <Footer />
-      
-        
-    </div>
-  );
+    </div >
+  </Router>
+);
 }
 
 export default App;
