@@ -1,4 +1,38 @@
+import React, { useEffect, useRef } from 'react';
+import Typed from 'typed.js';
+
 const Hero = () => {
+
+    /**
+* Intro type effect
+*/
+    const typedRef = useRef(null);
+    useEffect(() => {
+        const typedElement = document.querySelector('.typed');
+        if (typedElement) {
+            let typed_strings = typedElement.getAttribute('data-typed-items');
+            typed_strings = typed_strings.split(',');
+            // Initialize Typed.js and store the instance in the ref
+            typedRef.current = new Typed('.typed', {
+                strings: typed_strings,
+                loop: true,
+                typeSpeed: 100,
+                backSpeed: 50,
+                backDelay: 2000
+            });
+        }
+        // Cleanup function to destroy the Typed instance
+        return () => {
+            if (typedRef.current) {
+                typedRef.current.destroy();
+            }
+        };
+    }, []);
+
+
+
+
+
     return (
         <>
             {/* ======= Hero Section ======= */}

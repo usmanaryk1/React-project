@@ -1,4 +1,27 @@
+
+import React, { useEffect } from 'react';
+import Swiper from 'swiper/bundle';
+
 const PortfolioContent = ({ work }) => {
+
+      /**
+   * Portfolio details slider
+   */
+      useEffect(() => {
+        new Swiper('.portfolio-details-slider', {
+          speed: 400,
+          loop: true,
+          autoplay: {
+            delay: 5000,
+            disableOnInteraction: false
+          },
+          pagination: {
+            el: '.swiper-pagination',
+            type: 'bullets',
+            clickable: true
+          }
+        });
+      }, []);
 
     if (!work) {
         return <div>Loading...</div>;
