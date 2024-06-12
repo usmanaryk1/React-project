@@ -85,9 +85,8 @@ console.log('External script loaded and executed!');
    * Toggle .header-scrolled class to #header when page is scrolled
    */
   const selectHeader = select('#header');
-  console.log("Select Header",selectHeader);
   if (selectHeader) {
-    console.log("Select Header If",selectHeader);
+
     const headerScrolled = () => {
       console.log("Header Scrolled",selectHeader);
       if (window.scrollY > 100) {
@@ -101,21 +100,21 @@ console.log('External script loaded and executed!');
     
   };
 
-  /**
-   * Back to top button
-   */
-  let backtotop = select('.back-to-top')
-  if (backtotop) {
-    const toggleBacktotop = () => {
-      if (window.scrollY > 100) {
-        backtotop.classList.add('active')
-      } else {
-        backtotop.classList.remove('active')
-      }
-    }
-    window.addEventListener('load', toggleBacktotop)
-    onscroll(document, toggleBacktotop)
-  }
+  // /**
+  //  * Back to top button
+  //  */
+  // let backtotop = select('.back-to-top')
+  // if (backtotop) {
+  //   const toggleBacktotop = () => {
+  //     if (window.scrollY > 100) {
+  //       backtotop.classList.add('active')
+  //     } else {
+  //       backtotop.classList.remove('active')
+  //     }
+  //   }
+  //   window.addEventListener('load', toggleBacktotop)
+  //   onscroll(document, toggleBacktotop)
+  // }
 
   /**
    * Mobile nav toggle
@@ -223,15 +222,15 @@ console.log('External script loaded and executed!');
   //   }
   // });
 
-  /**
-   * Preloader
-   */
-  let preloader = select('#preloader');
-  if (preloader) {
-    window.addEventListener('load', () => {
-      preloader.remove()
-    });
-  }
+  // /**
+  //  * Preloader
+  //  */
+  // let preloader = select('#preloader');
+  // if (preloader) {
+  //   window.addEventListener('load', () => {
+  //     preloader.remove()
+  //   });
+  // }
 
   // /**
   //  * Initiate Pure Counter 

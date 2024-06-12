@@ -1047,7 +1047,7 @@ a:hover {
 .portfolio-details .portfolio-info ul {
   list-style: none;
   padding: 0;
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .portfolio-details .portfolio-info ul li+li {
@@ -1056,6 +1056,7 @@ a:hover {
 
 .portfolio-details .portfolio-description {
   padding-top: 30px;
+  font-size: 18px;
 }
 
 .portfolio-details .portfolio-description h2 {

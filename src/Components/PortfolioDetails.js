@@ -25,7 +25,7 @@ const PortfolioDetails = () => {
             {error && <div className="error">{error}</div>}
             {work && (
                 <>
-                    <CustomHero heroTitle="Portfolio Details" breadcrumbItem1="Home" breadcrumbItem2= "" breadcrumbItem3="Portfolio Details" />
+                    <CustomHero heroTitle="Portfolio Details" breadcrumbItem1="Home" breadcrumbItem2= "Library" breadcrumbItem3="Portfolio Details" />
                     <PortfolioContent work={work} />
                 </>
             )}

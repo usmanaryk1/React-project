@@ -39,8 +39,8 @@ const PortfolioContent = ({ work }) => {
     return (
         <>
             <section id="portfolio-details" className="portfolio-details">
-                <div className="container">
-                    <div className="row gy-4">
+                <div className="container px-5">
+                    <div className="row gy-4 pb-5">
                         <div className="col-lg-8">
                             <div className="portfolio-details-slider swiper">
                                 <div className="swiper-wrapper align-items-center">

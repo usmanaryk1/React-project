@@ -1,12 +1,39 @@
+import { useEffect } from "react";
+
 const Footer = () => {
-    
-    // const handleClick =() => {
-    //     alert("Hello");
-    // }
+
+    useEffect(() => {
+        const toggleBacktotop = () => {
+            const backtotop = document.querySelector('.back-to-top');
+            if (backtotop) {
+                if (window.scrollY > 100) {
+                    backtotop.classList.add('active');
+                } else {
+                    backtotop.classList.remove('active');
+                }
+            }
+        };
+
+        window.addEventListener('load', toggleBacktotop);
+        window.addEventListener('scroll', toggleBacktotop);
+
+        return () => {
+            window.removeEventListener('load', toggleBacktotop);
+            window.removeEventListener('scroll', toggleBacktotop);
+        };
+    }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
+
     return (
         <>
             {/* ======= Footer ======= */}
-            <footer id = "footer">
+            <footer id="footer">
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12">
@@ -29,7 +56,7 @@ const Footer = () => {
             {/* use this as future reference and use logic */}
 
             {/* <div id="preloader"></div> */}
-            <a href="/" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short"></i></a>
+            <a href="#home" className="back-to-top d-flex align-items-center justify-content-center" onClick={scrollToTop}><i className="bi bi-arrow-up-short"></i></a>
         </>
     );
 }
