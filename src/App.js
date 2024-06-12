@@ -7,27 +7,37 @@ import PortfolioDetails from "./Components/PortfolioDetails";
 
 function App() {
 
-return (
-  <Router>
-    <div className="App">
-      <Header />
-      <div className="content">
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          {/* <Route path="/blogs/:id">
+  useEffect(() => {
+    const preloader = document.querySelector('#preloader');
+    if (preloader) {
+      window.addEventListener('load', () => {
+        preloader.remove();
+      });
+    }
+  }, []);
+
+  return (
+    <Router>
+      <div className="App">
+        <div id="preloader"></div>
+        <Header />
+        <div className="content">
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            {/* <Route path="/blogs/:id">
             <BlogDetails />
           </Route> */}
-          <Route path="/works/:id">
-            <PortfolioDetails />
-          </Route>
-        </Switch>
-      </div>
-      <Footer />
-    </div >
-  </Router>
-);
+            <Route path="/works/:id">
+              <PortfolioDetails />
+            </Route>
+          </Switch>
+        </div>
+        <Footer />
+      </div >
+    </Router>
+  );
 }
 
 export default App;
