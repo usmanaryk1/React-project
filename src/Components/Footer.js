@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 const Footer = () => {
 
     useEffect(() => {
@@ -55,7 +53,7 @@ const Footer = () => {
             </footer>{/* End  Footer */}
             {/* use this as future reference and use logic */}
 
-            {/* <div id="preloader"></div> */}
+            
             <a href="#home" className="back-to-top d-flex align-items-center justify-content-center" onClick={scrollToTop}><i className="bi bi-arrow-up-short"></i></a>
         </>
     );
