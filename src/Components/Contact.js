@@ -1,8 +1,4 @@
-
 const Contact = () => {
-
-    
-
     return (
         <>
             {/* ======= Contact Section ======= */}

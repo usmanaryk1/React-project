@@ -29,10 +29,6 @@ const Hero = () => {
         };
     }, []);
 
-
-
-
-
     return (
         <>
             {/* ======= Hero Section ======= */}

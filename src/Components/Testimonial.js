@@ -23,7 +23,6 @@ const Testimonial = ({ testimonials }) => {
         });
     }, []);
 
-
     return (
         <>
             {/* ======= Testimonials Section ======= */}
