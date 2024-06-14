@@ -1297,7 +1297,65 @@ a:hover {
   /* display: inline-block; */
   float: right;
 }
+/*--------------------------------------------------------------
+# Certification
+--------------------------------------------------------------*/
+@media (min-width: 767px) {
+  .card-certification {
+    margin-bottom: 3rem;
+  }
+}
 
+.card-certification .card-body {
+  position: relative;
+}
+
+.card-certification .card-category-box {
+  position: absolute;
+  text-align: center;
+  top: -16px;
+  left: 15px;
+  right: 15px;
+  line-height: 25px;
+  overflow: hidden;
+}
+
+.card-certification .card-category {
+  display: inline-block;
+  color: #fff;
+  padding: 0 15px 5px;
+  overflow: hidden;
+  background-color: #0078ff;
+  border-radius: 4px;
+}
+
+.card-certification .card-category .category {
+  color: #fff;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.1px;
+  margin-bottom: 0;
+}
+
+.card-certification .card-title {
+  font-size: 1.3rem;
+  margin-top: 0.6rem;
+}
+
+.card-certification .card-description {
+  color: #4e4e4e;
+}
+
+.card-certification .post-author {
+  display: inline-block;
+}
+
+.card-certification .post-date {
+  color: #4e4e4e;
+  /* display: inline-block; */
+  float: right;
+}
 /*--------------------------------------------------------------
 # Blog Single
 --------------------------------------------------------------*/
@@ -1353,6 +1411,46 @@ a:hover {
 }
 
 .blog-wrapper .blockquote {
+  border-left: 4px solid #0078ff;
+  padding: 18px;
+  font-style: italic;
+}
+
+/* Certification details */
+
+.certification-wrapper .article-title {
+  font-size: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .certification-wrapper .article-title {
+    font-size: 1.9rem;
+  }
+}
+
+.certification-wrapper .post-meta {
+  margin: 1rem 0;
+}
+
+.certification-wrapper .post-meta ul {
+  border-left: 4px solid #0078ff;
+  margin-top: 1rem;
+}
+
+.certification-wrapper .post-meta ul li {
+  display: inline-block;
+  margin-left: 15px;
+}
+
+.certification-wrapper .post-meta ul a {
+  color: #0078ff;
+}
+
+.certification-wrapper .post-meta ul span {
+  color: #1e1e1e;
+}
+
+.certification-wrapper .blockquote {
   border-left: 4px solid #0078ff;
   padding: 18px;
   font-style: italic;

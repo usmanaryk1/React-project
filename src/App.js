@@ -5,6 +5,7 @@ import Home from "./Components/Home";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import PortfolioDetails from "./Components/PortfolioDetails";
 import { useEffect } from "react";
+import CertificationDetails from "./Components/CertificationDetails";
 // Template URL: https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/
 
 function App() {
@@ -34,6 +35,9 @@ function App() {
           </Route> */}
             <Route path="/works/:id">
               <PortfolioDetails />
+            </Route>
+            <Route path="/certifications/:id">
+              <CertificationDetails />
             </Route>
           </Switch>
         </div>
