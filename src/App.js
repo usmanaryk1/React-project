@@ -4,32 +4,43 @@ import Home from "./Components/Home";
 // import BlogDetails from "./Components/BlogDetails";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import PortfolioDetails from "./Components/PortfolioDetails";
-
+import { useEffect } from "react";
 // Template URL: https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/
 
 function App() {
 
-return (
-  <Router>
-    <div className="App">
-      <Header />
-      <div className="content">
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          {/* <Route path="/blogs/:id">
+  useEffect(() => {
+    const preloader = document.getElementById('preloader');
+
+    if (preloader) {
+      window.addEventListener('load', () => {
+        preloader.remove()
+      });
+    }
+  }, []);
+
+  return (
+    <Router>
+      <div className="App">
+        {/* <div id="preloader"></div> */}
+        <Header />
+        <div className="content">
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            {/* <Route path="/blogs/:id">
             <BlogDetails />
           </Route> */}
-          <Route path="/works/:id">
-            <PortfolioDetails />
-          </Route>
-        </Switch>
-      </div>
-      <Footer />
-    </div >
-  </Router>
-);
+            <Route path="/works/:id">
+              <PortfolioDetails />
+            </Route>
+          </Switch>
+        </div>
+        <Footer />
+      </div >
+    </Router>
+  );
 }
 
 export default App;

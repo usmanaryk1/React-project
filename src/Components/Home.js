@@ -1,5 +1,5 @@
 import About from "./About";
-import Certifications from "./Ceertifications";
+import Certifications from "./Certifications";
 // import Blog from "./Blog";
 // import BlogDetails from "./BlogDetails";
 import Contact from "./Contact";
@@ -9,6 +9,7 @@ import Portfolio from "./Portfolio";
 import Services from "./Services";
 import Testimonial from "./Testimonial";
 import useFetch from "./useFetch";
+
 
 const Home = () => {
 
@@ -21,7 +22,7 @@ const Home = () => {
     const { data: counts } = useFetch("http://localhost:8000/counts");
 
     // console.log("About props:", about);
-
+    
     return (
         <>
             <main id="main">
