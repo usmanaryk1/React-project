@@ -12,11 +12,11 @@ const Header = () => {
                     <nav id="navbar" className="navbar">
                         {/* <a href="index.html" class="logo"><img src="assets/img/logo/png" alt="" class="img-fluid"/></a> */}
                         <ul>
-                            <li><Link className="nav-link scrollto active" smooth to="/#hero">Home</Link></li>
-                            <li><Link className="nav-link scrollto" smooth to="/#about">About</Link></li>
-                            <li><Link className="nav-link scrollto" smooth to="/#services">Services</Link></li>
-                            <li><Link className="nav-link scrollto" smooth to="/#work">Work</Link></li>
-                            <li><Link className="nav-link scrollto" smooth to="/#certifications">Certifications</Link></li>
+                            <li><Link className="nav-link  active" smooth to="/#hero">Home</Link></li>
+                            <li><Link className="nav-link" smooth to="/#about">About</Link></li>
+                            <li><Link className="nav-link" smooth to="/#services">Services</Link></li>
+                            <li><Link className="nav-link" smooth to="/#work">Work</Link></li>
+                            <li><Link className="nav-link" smooth to="/#certifications">Certifications</Link></li>
                             {/* <li><Link to={``}><a className="nav-link scrollto" href="#blog">Blog</a></Link></li> */}
                             <li className="dropdown"><a href="/"><span>Drop Down</span> <i className="bi bi-chevron-down" /></a>
                                 <ul>
@@ -30,7 +30,7 @@ const Header = () => {
                                     </li>
                                 </ul>
                             </li>
-                            <li><Link className="nav-link scrollto" smooth to="/#contact">Contact</Link></li>
+                            <li><Link className="nav-link" smooth to="/#contact">Contact</Link></li>
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" />
                     </nav>{/* .navbar */}
