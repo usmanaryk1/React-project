@@ -32,7 +32,7 @@ const Hero = () => {
     return (
         <>
             {/* ======= Hero Section ======= */}
-            <div id="hero" className="hero route bg-image" style={{ backgroundImage: 'url(assets/img/hero-bg.jpg)' }}>
+            <div id="services" className="hero route bg-image" style={{ backgroundImage: 'url(assets/img/hero-bg.jpg)' }}>
                 <div className="overlay-itro" />
                 <div className="hero-content display-table">
                     <div className="table-cell">

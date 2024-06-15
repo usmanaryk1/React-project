@@ -2,7 +2,7 @@ const Services = ({title , services , subtitle}) => {
     return (
         <>
             {/* ======= Services Section ======= */}
-            <section id="services" className="services-mf pt-5 route">
+            <section id="hero" className="services-mf pt-5 route">
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12">
