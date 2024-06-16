@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/rea
 import PortfolioDetails from "./Components/PortfolioDetails";
 import { useEffect } from "react";
 import CertificationDetails from "./Components/CertificationDetails";
+import Form from "./Admin/Form";
 // Template URL: https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/
 
 function App() {
@@ -38,6 +39,9 @@ function App() {
             </Route>
             <Route path="/certifications/:id">
               <CertificationDetails />
+            </Route>
+            <Route path="/form">
+              <Form />
             </Route>
           </Switch>
         </div>

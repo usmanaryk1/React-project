@@ -31,6 +31,7 @@ const Header = () => {
                                 </ul>
                             </li>
                             <li><Link className="nav-link" smooth to="/#contact">Contact</Link></li>
+                            <li><Link className="nav-link" smooth to="/form">Upload Info</Link></li>
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" />
                     </nav>{/* .navbar */}

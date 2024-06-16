@@ -10,7 +10,6 @@ import Services from "./Services";
 import Testimonial from "./Testimonial";
 import useFetch from "./useFetch";
 
-
 const Home = () => {
 
     const { data: about, isPending, error } = useFetch("http://localhost:8000/about")
