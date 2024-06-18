@@ -1576,18 +1576,18 @@ footer .credits a {
 /*--------------------------------------------------------------
 # About Form
 --------------------------------------------------------------*/
-.about-form {
+.about-form, .certification-form{
   max-width: 600px;
   margin:100px auto 0;
   text-align: center;
 }
 
-.about-form label {
+.about-form label, .certification-form label {
   text-align: left;
   display: block;
 }
 
-.about-form h2 {
+.about-form h2, .certification-form h2 {
   /* font-size: 20px; */
   color: black;
   margin-bottom: 30px;
@@ -1595,7 +1595,8 @@ footer .credits a {
 
 .about-form input,
 .about-form textarea,
-.about-form select {
+.about-form select,
+.certification-form input {
   width: 100%;
   padding: 6px 10px;
   margin: 10px 0;
@@ -1604,7 +1605,7 @@ footer .credits a {
   display: block;
 }
 
-.about-form button {
+.about-form button, .certification-form button {
   background: #0062d3;
   color: #fff;
   border: 0;
@@ -1613,3 +1614,25 @@ footer .credits a {
   border-radius: 25px;
   cursor: pointer;
 }
+
+/*--------------------------------------------------------------
+# About Form
+--------------------------------------------------------------*/
+/* .certification-form input{
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
+
+.certification-form button {
+  background: #0062d3;
+  color: #fff;
+  border: 0;
+  padding: 10px 25px;
+  margin: 10px auto 15px;
+  border-radius: 25px;
+  cursor: pointer;
+} */
