@@ -9,7 +9,7 @@ const Certification = () => {
 
     return ( 
          <>
-            <section id="certification-form" class="certification-form">
+            <section id="certification-form" class="certification-form form">
                 <h2>Certifications Info!</h2>
                 <form>
                     <label>Add title of Certificate</label>
@@ -33,12 +33,13 @@ const Certification = () => {
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                     />
-                    <label for="file-upload">Upload Your Profile Picture:</label>
+                    <label for="file-upload">Upload Your Certificate Image:</label>
                     <input 
                         type="file" 
                         id="file-upload" 
                         name="file-upload" 
-                        accept="image/*" 
+                        accept="image/*"
+                        required 
                     />
                         <button>Next</button>
                         {/* {isPending && <button disabled>...</button>}  */}
