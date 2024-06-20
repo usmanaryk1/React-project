@@ -68,7 +68,7 @@ const About = ({ nextStep }) => {
                         accept="image/*"
                         required
                     />
-                    <button onClick = {handleSubmit}>Next</button>
+                    <button className = "next" onClick = {handleSubmit}>Next</button>
                     {/* {isPending && <button disabled>...</button>}  */}
                 </form>
             </section>
