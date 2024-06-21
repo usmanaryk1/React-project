@@ -1614,7 +1614,7 @@ footer .credits a {
   display: block;
 }
 
-.form .next {
+.form .submit {
   background: #0062d3;
   color: #fff;
   border: 0;
@@ -1624,12 +1624,31 @@ footer .credits a {
   cursor: pointer;
 }
 
+.form .cancel {
+  background: #0062d3;
+  color: #fff;
+  border: 0;
+  padding: 10px 25px;
+  margin: 10px 15px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.form .reset {
+  background: #0062d3;
+  color: #fff;
+  border: 0;
+  padding: 10px 25px;
+  margin: 10px auto 15px;
+  border-radius: 25px;
+  cursor: pointer;
+}
 .form .prev {
   background: #0062d3;
   color: #fff;
   border: 0;
   padding: 10px 25px;
-  margin: 10px 35px 0px 15px;
+  margin: 10px 15px 0px 15px;
   border-radius: 25px;
   cursor: pointer;
 }

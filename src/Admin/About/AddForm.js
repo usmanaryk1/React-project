@@ -1,6 +1,7 @@
 import { useState } from "react";
+import AboutDetails from "./AboutDetails";
 
-const About = ({ nextStep }) => {
+const AddForm = () => {
 
     const [name, setName] = useState('');
     const [profile, setProfile] = useState('');
@@ -8,15 +9,28 @@ const About = ({ nextStep }) => {
     const [phone, setPhone] = useState('');
     const [desc, setDesc] = useState('');
     const [skill, setSkill] = useState('');
+    const [file, setFile] = useState(null);
+    const details = { name, profile, email, phone, desc, skill, file };
 
-    const handleSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        nextStep();
+        onReset(e);
+    };
+
+    const onReset = (e) => {
+        e.preventDefault();
+        setName('');
+        setProfile('');
+        setEmail('');
+        setPhone('');
+        setDesc('');
+        setSkill('');
+
     };
 
     return (
         <>
-            <section id="about-form" class="about-form form">
+            <section id="about-form" className="about-form form">
                 <h2>About Info!</h2>
                 <form>
                     <label>Name:</label>
@@ -47,7 +61,7 @@ const About = ({ nextStep }) => {
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                     />
-                    <label for="skills">Enter Your Skills:</label>
+                    <label>Enter Your Skills:</label>
                     <input
                         type="text"
                         required
@@ -60,20 +74,25 @@ const About = ({ nextStep }) => {
                         value={desc}
                         onChange={(e) => setDesc(e.target.value)}
                     ></textarea>
-                    <label for="file-upload">Upload Your Profile Picture:</label>
+                    <label>Upload Your Profile Picture:</label>
                     <input
                         type="file"
                         id="file-upload"
                         name="file-upload"
                         accept="image/*"
+                        onChange={(e) => setFile(e.target.files[0])}
                         required
                     />
-                    <button className = "next" onClick = {handleSubmit}>Next</button>
-                    {/* {isPending && <button disabled>...</button>}  */}
+
+                    <button className="reset" onClick={onReset}>Reset</button>
+                    <button className="cancel">Cancel</button>
+                    <button className="submit" onClick={onSubmit}>Submit</button>
+
+                    <AboutDetails details={details} /> 
                 </form>
             </section>
         </>
     );
 }
 
-export default About;
+export default AddForm;

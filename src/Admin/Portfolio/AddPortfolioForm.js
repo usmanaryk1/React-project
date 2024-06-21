@@ -1,33 +1,31 @@
 import { useState } from "react";
+import PortfolioDetails from "./PortfolioDetails";
 
-const Portfolio = ({ nextStep, prevStep, addPortfolio }) => {
+const AddPortfolioForm = () => {
 
     const [title, setTitle] = useState('');
     const [link, setLink] = useState('');
     const [category, setCategory] = useState('');
-    const [portfolio, setPortfolio] = useState([]);
+    const [file, setFile] = useState(null);
+    const details = {title, link, category, file};
 
-    const handleAddPortfolio = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        const newPortfolio = { title, link, category };
-        setPortfolio([...portfolio, newPortfolio]);
+        onReset(e);
+    };
+
+    const onReset = (e) => {
+        e.preventDefault();
         setTitle('');
         setLink('');
         setCategory('');
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        addPortfolio(portfolio);
-        nextStep();
+        setFile(null);
     };
 
     return (
         <>
-            <section id="portfolio-form" class="portfolio-form form">
+            <section id="portfolio-form" className="portfolio-form form">
                 <h2>Portfolio Info!</h2>
-                <a className="add" onClick={handleAddPortfolio} href="/" > <span className="bi bi-plus-circle" /></a><br />
-
                 <form>
                     <label>Add title of Project</label>
                     <input
@@ -50,29 +48,24 @@ const Portfolio = ({ nextStep, prevStep, addPortfolio }) => {
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                     />
-                    <label for="file-upload">Upload Your Project Image:</label>
+                    <label>Upload Your Project Image:</label>
                     <input
                         type="file"
                         id="file-upload"
                         name="file-upload"
                         accept="image/*"
+                        onChange={(e) => setFile(e.target.files[0])}
                         required
                     />
-                    <button className="prev" onClick={prevStep}>Previous</button>
-                    <button className="next" onClick={handleSubmit}>Next</button>
+                    <button className="reset" onClick={onReset}>Reset</button>
+                    <button className="cancel">Cancel</button>
+                    <button className="submit" onClick={onSubmit}>Submit</button>
                     {/* {isPending && <button disabled>...</button>}  */}
                 </form>
-                <h5>Here, you can see the all the details you add</h5>
-                <ul>
-                    {portfolio.map((portfolios, index) => (
-                        <li key={index}>
-                            {portfolios.title} - {portfolios.link} - {portfolios.category}
-                        </li>
-                    ))}
-                </ul>
+                <PortfolioDetails details={details}/>
             </section>
         </>
     );
 }
 
-export default Portfolio;
+export default AddPortfolioForm;

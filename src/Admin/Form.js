@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
-import About from "./About";
-import Certification from "./Certification";
-import Portfolio from "./Portfolio";
-import Services from "./Services";
-
+import { useEffect } from "react";
+import AddCertificationForm from "./Certification/AddCertificationForm";
+import AddForm from "./About/AddForm";
+import AddServiceForm from "./Services/AddServiceForm";
+import AddPortfolioForm from "./Portfolio/AddPortfolioForm";
 
 const Form = () => {
 
@@ -18,42 +17,14 @@ const Form = () => {
         };
     }, []);
 
-    const [currentStep, setCurrentStep] = useState(0);
-    const [services, setServices] = useState([]);
-    const [portfolio, setPortfolio] = useState([]);
-    const [certification, setCertification] = useState([]);
-
-    const nextStep = () => {
-        setCurrentStep((prevStep) => prevStep + 1);
-    };
-
-    const prevStep = () => {
-        setCurrentStep((prevStep) => Math.max(prevStep - 1, 0));
-    };
-
-    const addService = (service) => {
-        setServices([...services, service]);
-    };
-
-    const addPortfolio = (portfolios) => {
-        setPortfolio([...portfolio, portfolios]);
-    };
-
-    const addCertificate = (certificate) => {
-        setCertification([...certification, certificate]);
-    };
 
     return (
         <>
             <section id="form">
-                {currentStep === 0 && <About nextStep={nextStep} />}
-                {currentStep === 1 && <Services nextStep={nextStep} prevStep={prevStep} addService={addService} />}
-                {currentStep === 2 && <Portfolio nextStep={nextStep} prevStep={prevStep} addPortfolio={addPortfolio} />}
-                {currentStep === 3 && <Certification nextStep={nextStep} prevStep={prevStep} addCertificate={addCertificate} />}
-                {/* <About />
-                <Services />
-                <Portfolio />
-                <Certification /> */}
+                <AddForm />
+                <AddServiceForm />
+                <AddPortfolioForm />
+                <AddCertificationForm />
             </section>
         </>
     );
