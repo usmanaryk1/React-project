@@ -1,8 +1,13 @@
-const Services = ({title , services , subtitle}) => {
+import useFetch from "./useFetch";
+
+const Services = ({ title, subtitle }) => {
+
+    const { data: services } = useFetch("http://localhost:8000/services");
+
     return (
         <>
             {/* ======= Services Section ======= */}
-            <section id="services" className="services-mf pt-5 route">
+            {services && <section id="services" className="services-mf pt-5 route">
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12">
@@ -15,10 +20,10 @@ const Services = ({title , services , subtitle}) => {
                     </div>
                     <div className="row">
                         {services.map((service) => (
-                            <div className="col-md-4" key= {service.id}  >
+                            <div className="col-md-4" key={service.id}  >
                                 <div className="service-box">
                                     <div className="service-ico">
-                                        <span className="ico-circle"><i className= {service.sIcon}/></span>
+                                        <span className="ico-circle"><i className={service.sIcon} /></span>
                                     </div>
                                     <div className="service-content">
                                         <h2 className="s-title">{service.sTitle}</h2>
@@ -28,10 +33,11 @@ const Services = ({title , services , subtitle}) => {
                                     </div>
                                 </div>
                             </div>
-                        ))}  
+                        ))}
                     </div>
                 </div>
-            </section>{/* End Services Section */}
+            </section>}
+            {/* End Services Section */}
         </>
     );
 }

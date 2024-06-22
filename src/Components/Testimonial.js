@@ -1,32 +1,37 @@
 import React, { useEffect } from 'react';
 import Swiper from 'swiper/bundle';
+import useFetch from './useFetch';
 
-const Testimonial = ({ testimonials }) => {
+const Testimonial = () => {
+
+    const { data: testimonials } = useFetch("http://localhost:8000/testimonials");
 
     /**
      * Testimonials slider
      */
     useEffect(() => {
-        new Swiper('.testimonials-slider', {
-            speed: 600,
-            loop: true,
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false
-            },
-            slidesPerView: 'auto',
-            pagination: {
-                el: '.swiper-pagination',
-                type: 'bullets',
-                clickable: true
-            }
-        });
-    }, []);
+        if(testimonials){
+            new Swiper('.testimonials-slider', {
+                speed: 600,
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false
+                },
+                slidesPerView: 'auto',
+                pagination: {
+                    el: '.swiper-pagination',
+                    type: 'bullets',
+                    clickable: true
+                }
+            });
+        } 
+    }, [testimonials]);
 
     return (
         <>
             {/* ======= Testimonials Section ======= */}
-            <div className="testimonials paralax-mf bg-image" style={{ backgroundImage: 'url(assets/img/overlay-bg.jpg)' }}>
+            {testimonials && <div className="testimonials paralax-mf bg-image" style={{ backgroundImage: 'url(assets/img/overlay-bg.jpg)' }}>
                 <div className="overlay-mf" />
                 <div className="container">
                     <div className="row">
@@ -53,7 +58,8 @@ const Testimonial = ({ testimonials }) => {
                         </div>
                     </div>
                 </div>
-            </div>{/* End Testimonials Section */}
+            </div>}
+            {/* End Testimonials Section */}
         </>
     );
 }

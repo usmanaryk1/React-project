@@ -469,6 +469,7 @@ a:hover {
   transition: all 0.5s;
   z-index: 997;
   padding: 20px 0;
+  background: rgba(0, 0, 0, 1); /*Temporary Add background */
 }
 
 #header .logo {
@@ -956,7 +957,7 @@ a:hover {
 # Portfolio
 --------------------------------------------------------------*/
 .work-box {
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   background-color: #fff;
@@ -1586,22 +1587,16 @@ footer .credits a {
 /*--------------------------------------------------------------
 #  Form
 --------------------------------------------------------------*/
-.form {
+form {
   max-width: 600px;
-  margin: 100px auto 0;
+  margin: 50px auto 0;
   text-align: center;
-}
-
-.form label {
-  text-align: left;
-  display: block;
-  clear: both;
 }
 
 .form h2 {
   color: black;
-  margin-bottom: 30px;
-  float: left;
+  margin-top: 130px;
+  text-align: center;
 }
 
 .form input,
@@ -1642,21 +1637,6 @@ footer .credits a {
   margin: 10px auto 15px;
   border-radius: 25px;
   cursor: pointer;
-}
-.form .prev {
-  background: #0062d3;
-  color: #fff;
-  border: 0;
-  padding: 10px 25px;
-  margin: 10px 15px 0px 15px;
-  border-radius: 25px;
-  cursor: pointer;
-}
-
-.form .add {
-  font-size: 2.5rem;
-  color: #0078ff;
-  float: right;
 }
 
 /* /* --------------------------------------------------------------

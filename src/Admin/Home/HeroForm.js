@@ -1,6 +1,6 @@
-import About from "../../Components/About";
+import Hero from "../../Components/Hero";
 
-const AddForm = () => {
+const HeroForm = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -9,7 +9,7 @@ const AddForm = () => {
         const formObject = Object.fromEntries(formData);
 
         console.log('Form Data:', formObject);
-        
+
     };
 
     const onReset = (e) => {
@@ -19,19 +19,14 @@ const AddForm = () => {
 
     return (
         <>
-            <section id="about-form" className="about-form form">
+            <section id="hero-form" className="hero-form form">
 
-                <h2>Add About Info!</h2>
+                <h2>Add Home Info!</h2>
 
                 <form onSubmit={onSubmit}>
 
                     <input type="text" name="name" placeholder="Name" />
-                    <input type="text" name="profile" placeholder="Profile" />
-                    <input type="email" name="email" placeholder="Email" />
-                    <input type="text" name="phone" placeholder="Phone Number" />
-                    <textarea name="desc" id=""  placeholder="Description" ></textarea>
-                    {/* <input type="text" name="skill" placeholder="Skills" /> */}
-                    <input type="file" name="file" placeholder="Upload Profile Picture"/>
+                    <input type="text" name="qualities" placeholder="Qualities" />
 
                     <button className="reset" type="reset" onClick={onReset}>Reset</button>
                     <button className="cancel">Cancel</button>
@@ -39,9 +34,9 @@ const AddForm = () => {
                 </form>
                 <hr />
             </section>
-            <About />
+            <Hero />
         </>
     );
 }
 
-export default AddForm;
+export default HeroForm;

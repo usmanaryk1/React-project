@@ -32,8 +32,8 @@ function App() {
               <Home />
             </Route>
             {/* <Route path="/blogs/:id">
-            <BlogDetails />
-          </Route> */}
+              <BlogDetails />
+             </Route> */}
             <Route path="/works/:id">
               <PortfolioDetails />
             </Route>

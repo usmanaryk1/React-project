@@ -1,22 +1,27 @@
 {
+  "hero" : [
+    {
+      "heroName" : "Morgan Freeman",
+      "id" : "1"
+    }
+  ],
   "about": [
     {
-      "aboutImg": "assets/img/testimonial-2.jpg",
       "aboutName": "Morgan Freeman",
-      "aboutProfile": "Full stack developer",
-      "aboutEmail": "contact@example.com",
-      "aboutPhone": "(617) 557-0089",
-      "aboutTitle": "About me",
-      "aboutDesc1": "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nullaporttitor accumsan tincidunt.",
+      "aboutProfile": "Full Stack Developer",
+      "aboutEmail": "example@gmail.com",
+      "aboutPhone": "068-1243778",
+      "aboutDesc1": "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan idimperdiet et, porttitorat sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nullaporttitor accumsan tincidunt.",
       "aboutDesc2": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.",
-      "aboutDesc3": "Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor accumsantincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
+      "aboutDesc3": "Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
+      "aboutImg": "./assets/img/testimonial-2.jpg",
       "id": "1"
     }
   ],
   "works": [
     {
-      "linkImage": "assets/img/work-1.jpg",
-      "workImage": "assets/img/work-1.jpg",
+      "linkImage": "../assets/img/work-1.jpg",
+      "workImage": "../assets/img/work-1.jpg",
       "wTitle": "Lorem impsum dolor",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
@@ -30,8 +35,8 @@
       "id": "1"
     },
     {
-      "linkImage": "assets/img/work-2.jpg",
-      "workImage": "assets/img/work-2.jpg",
+      "linkImage": "../assets/img/work-2.jpg",
+      "workImage": "../assets/img/work-2.jpg",
       "wTitle": "Loreda Cuno Nere",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
@@ -45,8 +50,8 @@
       "id": "2"
     },
     {
-      "linkImage": "assets/img/work-3.jpg",
-      "workImage": "assets/img/work-3.jpg",
+      "linkImage": "../assets/img/work-3.jpg",
+      "workImage": "../assets/img/work-3.jpg",
       "wTitle": "Mavrito Lana Dere",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
@@ -60,8 +65,8 @@
       "id": "3"
     },
     {
-      "linkImage": "assets/img/work-4.jpg",
-      "workImage": "assets/img/work-4.jpg",
+      "linkImage": "../assets/img/work-4.jpg",
+      "workImage": "../assets/img/work-4.jpg",
       "wTitle": "Bindo Laro Cado",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
@@ -75,8 +80,8 @@
       "id": "4"
     },
     {
-      "linkImage": "assets/img/work-5.jpg",
-      "workImage": "assets/img/work-5.jpg",
+      "linkImage": "../assets/img/work-5.jpg",
+      "workImage": "../assets/img/work-5.jpg",
       "wTitle": "Studio Lena Mado",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
@@ -90,8 +95,8 @@
       "id": "5"
     },
     {
-      "linkImage": "assets/img/work-6.jpg",
-      "workImage": "assets/img/work-6.jpg",
+      "linkImage": "../assets/img/work-6.jpg",
+      "workImage": "../assets/img/work-6.jpg",
       "wTitle": "Studio Big Bang",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
@@ -299,6 +304,15 @@
       "articleContentP5": "Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada.",
       "blockquote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.",
       "id": "3"
+    }
+  ],
+  "contact" : [
+    {
+      "contactDesc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolorum dolorem soluta quidem expedita aperiam aliquid at. Totam magni ipsum suscipit amet? Autem nemo esse laboriosam ratione nobis mollitia inventore?",
+      "contactLocation": " 329 WASHINGTON ST BOSTON, MA 02108",
+      "contactNumber": "(617) 557-0089",
+      "contactEmail": " contact@example.com",
+      "id": "1"
     }
   ]
 }

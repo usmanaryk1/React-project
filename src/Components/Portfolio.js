@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom/cjs/react-router-dom";
-const Portfolio = ({ title, subtitle, works }) => {
+import useFetch from "./useFetch";
+
+const Portfolio = ({ title, subtitle }) => {
+
+    const { data: works } = useFetch("http://localhost:8000/works");
+
     return (
         <>
             {/* ======= Portfolio Section ======= */}
-            <section id="work" className="portfolio-mf sect-pt4 route">
+            {works && <section id="work" className="portfolio-mf sect-pt4 route">
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12">
@@ -16,7 +21,7 @@ const Portfolio = ({ title, subtitle, works }) => {
                     </div>
                     <div className="row">
                         {works.map((work) => (
-                            <div className="col-md-4" key={work.id}>  
+                            <div className="col-md-4" key={work.id}>
                                 <div className="work-box">
                                     <a href={work.linkImage} data-gallery="portfolioGallery" className="portfolio-lightbox">
                                         <div className="work-img">
@@ -45,7 +50,8 @@ const Portfolio = ({ title, subtitle, works }) => {
                         ))}
                     </div>
                 </div>
-            </section>{/* End Portfolio Section */}
+            </section>}
+            {/* End Portfolio Section */}
         </>
     );
 }

@@ -1,8 +1,13 @@
-const About = ({ about }) => {
+import useFetch from "./useFetch";
+
+const About = () => {
+    
+    const { data: about } = useFetch("http://localhost:8000/about")
+
     return (
         <>
             {/* ======= About Section ======= */}
-            <section id="about" className="about-mf sect-pt4 route">
+            {about && <section id="about" className="about-mf sect-pt4 route">
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12">
@@ -49,7 +54,7 @@ const About = ({ about }) => {
                                             <div className="about-me pt-4 pt-md-0">
                                                 <div className="title-box-2">
                                                     <h5 className="title-left">
-                                                        {about.aboutTitle}
+                                                        About
                                                     </h5>
                                                 </div>
                                                 <p className="lead">
@@ -69,7 +74,8 @@ const About = ({ about }) => {
                         </div>
                     </div>
                 </div>
-            </section>{/* End About Section */}
+            </section>}
+            {/* End About Section */}
         </>
     );
 }

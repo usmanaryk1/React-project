@@ -1,20 +1,25 @@
 import React, { useEffect } from 'react';
 import PureCounter from '@srexi/purecounterjs';
+import useFetch from './useFetch';
 
-const Counter = ({ counts }) => {
+const Counter = () => {
+
+    const { data: counts } = useFetch("http://localhost:8000/counts");
 
     /**
  * Initiate Pure Counter 
  */
     useEffect(() => {
-        new PureCounter();
-    }, []);
+        if (counts) {
+            new PureCounter();
+        }
+    }, [counts]);
 
 
     return (
         <>
             {/* ======= Counter Section ======= */}
-            <div className="section-counter paralax-mf bg-image" style={{ backgroundImage: 'url(assets/img/counters-bg.jpg)' }}>
+            {counts && <div className="section-counter paralax-mf bg-image" style={{ backgroundImage: 'url(assets/img/counters-bg.jpg)' }}>
                 <div className="overlay-mf" />
                 <div className="container position-relative">
                     <div className="row">
@@ -33,7 +38,8 @@ const Counter = ({ counts }) => {
                         ))}
                     </div>
                 </div>
-            </div>{/* End Counter Section */}
+            </div>}
+            {/* End Counter Section */}
         </>
 
     );

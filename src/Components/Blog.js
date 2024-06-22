@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom/cjs/react-router-dom";
+import useFetch from "./useFetch";
 // import BlogDetails from "./BlogDetails";
 
-const Blog = ({ title, subtitle, blogs }) => {
-    
+const Blog = ({ title, subtitle }) => {
+
+    const { data: blogs } = useFetch("http://localhost:8000/blogs");
+
     return (
         <>
             {/* ======= Blog Section ======= */}
-            <section id="blog" className="blog-mf sect-pt4 route">
+            {blogs && <section id="blog" className="blog-mf sect-pt4 route">
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12">
@@ -51,7 +54,8 @@ const Blog = ({ title, subtitle, blogs }) => {
                         ))}
                     </div>
                 </div>
-            </section >  {/*End Blog Section */} 
+            </section >}
+            {/*End Blog Section */}
         </>
     );
 }

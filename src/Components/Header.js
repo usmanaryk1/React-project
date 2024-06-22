@@ -1,6 +1,34 @@
-// import { Link } from "react-router-dom/cjs/react-router-dom";
-import { HashLink as Link} from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
+import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
+import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+
 const Header = () => {
+
+    const location = useLocation();
+    const [navLinks, setNavLinks] = useState([]);
+
+    useEffect(() => {
+        if (location.pathname.startsWith('/form')) {
+            setNavLinks([
+                { to: '/form/hero-form', label: 'Home' },
+                { to: '/form/about-form', label: 'About' },
+                { to: '/form/service-form', label: 'Service' },
+                { to: '/form/portfolio-form', label: 'Portfolio' },
+                { to: '/form/certification-form', label: 'Certification' },
+                { to: '/form/contact-form', label: 'Contact' },
+            ]);
+        } else {
+            setNavLinks([
+                { to: '/#hero', label: 'Home' },
+                { to: '/#about', label: 'About' },
+                { to: '/#services', label: 'Services' },
+                { to: '/#work', label: 'Work' },
+                { to: '/#certifications', label: 'Certifications' },
+                { to: '/#contact', label: 'Contact' },
+                { to: '/form', label: 'Upload Info' },
+            ]);
+        }
+    }, [location.pathname]);
 
     return (
         <>
@@ -12,13 +40,18 @@ const Header = () => {
                     <nav id="navbar" className="navbar">
                         {/* <a href="index.html" class="logo"><img src="assets/img/logo/png" alt="" class="img-fluid"/></a> */}
                         <ul>
-                            <li><Link className="nav-link  active" smooth to="/#hero">Home</Link></li>
+                            {navLinks.map((link, index) => (
+                                <li key={index}>
+                                    <Link className="nav-link" smooth to={link.to}>{link.label}</Link>
+                                </li>
+                            ))}
+                            {/* <li><Link className="nav-link  active" smooth to="/#hero">Home</Link></li>
                             <li><Link className="nav-link" smooth to="/#about">About</Link></li>
                             <li><Link className="nav-link" smooth to="/#services">Services</Link></li>
                             <li><Link className="nav-link" smooth to="/#work">Work</Link></li>
                             <li><Link className="nav-link" smooth to="/#certifications">Certifications</Link></li>
                             {/* <li><Link to={``}><a className="nav-link scrollto" href="#blog">Blog</a></Link></li> */}
-                            <li className="dropdown"><a href="/"><span>Drop Down</span> <i className="bi bi-chevron-down" /></a>
+                            {/* <li className="dropdown"><a href="/"><span>Drop Down</span> <i className="bi bi-chevron-down" /></a>
                                 <ul>
                                     <li><a href="/">Drop Down 1</a></li>
                                     <li className="dropdown"><a href="/"><span>Deep Drop Down</span> <i className="bi bi-chevron-right" /></a>
@@ -31,7 +64,7 @@ const Header = () => {
                                 </ul>
                             </li>
                             <li><Link className="nav-link" smooth to="/#contact">Contact</Link></li>
-                            <li><Link className="nav-link" smooth to="/form">Upload Info</Link></li>
+                            <li><Link className="nav-link" smooth to="/form">Upload Info</Link></li> */}
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" />
                     </nav>{/* .navbar */}

@@ -1,26 +1,57 @@
-const CertificationDetails = ({details}) => {
+import { Link } from "react-router-dom/cjs/react-router-dom";
+
+const CertificationDetails = ({ title, subtitle, certifications }) => {
+    
     return (
         <>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Title</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Image</th>
-                    </tr>
-                </thead>
-                <tbody className="table-group-divider">
-                    <tr>
-                    <td>{details.title}</td>
-                    <td>{details.description}</td>
-                    <td>{details.category}</td>
-                    <td>{details.file ? details.file.name : "No File Uploaded"}</td>
-                    </tr>
-                </tbody>
-            </table>
+            {/* ======= Certifications Section ======= */}
+            <section id="certifications" className="blog-mf sect-pt4 route">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <div className="title-box text-center">
+                                <h3 className="title-a">{title}</h3>
+                                <p className="subtitle-a">{subtitle}</p>
+                                <div className="line-mf" />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        {certifications.map((certification) => (
+                            <div className="col-md-4" key={certification.id}>
+                                <Link to={`/certifications/${certification.id}`}>
+                                    <div className="card card-certification">
+                                        <div className="card-img">
+                                            <a href="/" ><img src={certification.image} alt="" className="img-fluid" /></a>
+                                        </div>
+                                        <div className="card-body">
+                                            <div className="card-category-box">
+                                                <div className="card-category">
+                                                    <h6 className="category">{certification.cardCategory}</h6>
+                                                </div>
+                                            </div>
+                                            <h3 className="card-title"><a href="blog-single.html">{certification.cardTitle}</a></h3>
+                                            <p className="card-description">{certification.cardDescription}</p>
+                                        </div>
+                                        <div className="card-footer">
+                                            <div className="post-author">
+                                                <a href="/">
+                                                    <img src={certification.authorImage} alt="" className="avatar rounded-circle" />
+                                                    <span className="author">{certification.authorName}</span>
+                                                </a>
+                                            </div>
+                                            <div className="post-date">
+                                                <span className="bi bi-clock" /> {certification.postDate}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section >  {/*End Certifications Section */} 
         </>
     );
 }
- 
 export default CertificationDetails;
