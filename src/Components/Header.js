@@ -6,10 +6,12 @@ const Header = () => {
 
     const location = useLocation();
     const [navLinks, setNavLinks] = useState([]);
+    const [portalLinks, setPortalLinks] = useState([]);
 
     useEffect(() => {
         if (location.pathname.startsWith('/form')) {
             setNavLinks([
+                { to: '/form/dashboard', label: 'Dashboard' },
                 { to: '/form/hero-form', label: 'Home' },
                 { to: '/form/about-form', label: 'About' },
                 { to: '/form/service-form', label: 'Service' },
@@ -17,6 +19,11 @@ const Header = () => {
                 { to: '/form/certification-form', label: 'Certification' },
                 { to: '/form/contact-form', label: 'Contact' },
             ]);
+            setPortalLinks([
+                { to: '/#hero', label: 'Go to user Portal' },
+            ]);
+            const header = document.querySelector("#header");
+            header.style.backgroundColor = "black";
         } else {
             setNavLinks([
                 { to: '/#hero', label: 'Home' },
@@ -25,9 +32,39 @@ const Header = () => {
                 { to: '/#work', label: 'Work' },
                 { to: '/#certifications', label: 'Certifications' },
                 { to: '/#contact', label: 'Contact' },
-                { to: '/form', label: 'Upload Info' },
             ]);
+            setPortalLinks([
+                { to: '/form/dashboard', label: 'Go to Admin Portal' },
+            ]);
+            const onscroll = (el, listener) => {
+                el.addEventListener('scroll', listener)
+            }
+
+            const selectHeader = document.querySelector('#header');
+            if (selectHeader) {
+
+                const headerScrolled = () => {
+                    if (window.scrollY > 100) {
+                        selectHeader.classList.add('header-scrolled');
+                    } else {
+                        selectHeader.classList.remove('header-scrolled');
+                    }
+                };
+                window.addEventListener('load', headerScrolled);
+                onscroll(document, headerScrolled);
+
+            };
         }
+
+        // if (location.pathname.startsWith('/form')) {
+        //     setPortalLinks([
+        //         { to: '/#hero', label: 'Go to user Portal' },
+        //     ]);
+        // } else {
+        //     setPortalLinks([
+        //         { to: '/form/dashboard', label: 'Go to Admin Portal' },
+        //     ]);
+        // }
     }, [location.pathname]);
 
     return (
@@ -45,6 +82,18 @@ const Header = () => {
                                     <Link className="nav-link" smooth to={link.to}>{link.label}</Link>
                                 </li>
                             ))}
+
+                            <li className="dropdown nav-link fixed-top"><Link smooth to="/form/login-form"><span>Login</span> <i className="bi bi-chevron-down" /></Link>
+                                <ul>
+                                    <li><Link smooth to="/form/login-form">Login</Link></li>
+                                    {portalLinks.map((direct, index) => (
+                                        <li key={index}>
+                                            <Link smooth to={direct.to}><span>{direct.label}</span></Link>
+                                        </li>
+                                    ))}
+
+                                </ul>
+                            </li>
                             {/* <li><Link className="nav-link  active" smooth to="/#hero">Home</Link></li>
                             <li><Link className="nav-link" smooth to="/#about">About</Link></li>
                             <li><Link className="nav-link" smooth to="/#services">Services</Link></li>

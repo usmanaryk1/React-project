@@ -469,7 +469,7 @@ a:hover {
   transition: all 0.5s;
   z-index: 997;
   padding: 20px 0;
-  background: rgba(0, 0, 0, 1); /*Temporary Add background */
+  /* background: rgba(0, 0, 0, 1); Temporary Add background */
 }
 
 #header .logo {
@@ -1587,6 +1587,9 @@ footer .credits a {
 /*--------------------------------------------------------------
 #  Form
 --------------------------------------------------------------*/
+.form{
+  min-height: 300px;
+}
 form {
   max-width: 600px;
   margin: 50px auto 0;
@@ -1602,11 +1605,12 @@ form {
 .form input,
 .form textarea {
   width: 100%;
-  padding: 6px 10px;
+  padding: 10px 10px;
   margin: 10px 0;
   border: 1px solid #ddd;
   box-sizing: border-box;
   display: block;
+  border-radius: 5px;
 }
 
 .form .submit {
@@ -1637,6 +1641,272 @@ form {
   margin: 10px auto 15px;
   border-radius: 25px;
   cursor: pointer;
+}
+
+button:hover {
+  border: 1px solid #0062d3;
+  color: #0062d3;
+  background-color: white;
+  transition: all 0.5s;
+}
+
+/*--------------------------------------------------------------
+# Login Form 
+--------------------------------------------------------------*/
+
+ .login-form{
+  background-color: #0078ff;
+}
+
+.login-container{
+  /* border: 1px solid lightgrey; */
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 130px auto 50px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: #ddd;
+}
+
+.login-container h2 {
+  color: black;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.login-container input[type = checkbox] {
+  text-align: left;
+}
+
+.pwd .login-button{
+  background: #0062d3;
+  color: #fff;
+  border: 0;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  width: 100%;
+  margin: 20px auto 5px;
+  transition: all 0.5s;
+}
+
+.pwd .login-button:hover{
+  border: 1px solid #0062d3;
+  color: #0062d3;
+  background-color: white;
+}
+
+.pwd a{
+  color: #0062d3;
+}
+
+.login-container input{
+  width: 100%;
+  padding: 20px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+  border-radius: 5px;
+}
+
+.signup-link{
+  margin: 30px auto;
+}
+
+.signup-link a{
+  /* background: #0062d3; */
+  color: #0062d3;
+  border: 1px solid #0062d3;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+
+}
+
+.signup-link a:hover{
+  background: #0062d3;
+  color: white;
+}
+
+/*--------------------------------------------------------------
+# SignUp Form 
+--------------------------------------------------------------*/
+
+.signup-form{
+  background-color: #0078ff;
+}
+
+.signup-container{
+  /* border: 1px solid lightgrey; */
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 130px auto 50px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: #ddd;
+}
+
+.signup-container h2 {
+  color: black;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.signup-container input[type = checkbox] {
+  text-align: left;
+}
+
+.sign .sign-button{
+  background: #0062d3;
+  color: #fff;
+  border: 0;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  width: 100%;
+  margin: 20px auto 5px;
+  transition: all 0.5s;
+}
+
+.sign .sign-button:hover{
+  border: 1px solid #0062d3;
+  color: #0062d3;
+  background-color: white;
+
+}
+
+.signup-container input{
+  width: 100%;
+  padding: 20px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
+
+.log{
+  margin: 30px auto;
+}
+
+.log a{
+  /* background: #0062d3; */
+  color: #0062d3;
+  border: 1px solid #0062d3;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+
+}
+
+.log a:hover{
+  background: #0062d3;
+  color: white;
+
+}
+
+/*--------------------------------------------------------------
+# Forget Form 
+--------------------------------------------------------------*/
+
+.forget-form{
+  background-color: #0078ff;
+}
+
+.forget-container{
+  /* border: 1px solid lightgrey; */
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 130px auto 50px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: #ddd;
+}
+
+.forget-container h2 {
+  color: black;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.forget .get-button{
+  background: #0062d3;
+  color: #fff;
+  border: 0;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  width: 100%;
+  margin: 20px auto 5px;
+  transition: all 0.5s;
+}
+
+.forget .get-button:hover{
+  border: 1px solid #0062d3;
+  color: #0062d3;
+  background-color: white;
+
+}
+
+.forget-container input{
+  width: 100%;
+  padding: 20px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
+
+/*--------------------------------------------------------------
+# Reset Form 
+--------------------------------------------------------------*/
+
+.reset-form{
+  background-color: #0078ff;
+}
+
+.reset-container{
+  /* border: 1px solid lightgrey; */
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 130px auto 50px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: #ddd;
+}
+
+.reset-container h2 {
+  color: black;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.reset .reset-button{
+  background: #0062d3;
+  color: #fff;
+  border: 0;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  width: 100%;
+  margin: 20px auto 5px;
+  transition: all 0.5s;
+}
+
+.reset .reset-button:hover{
+  border: 1px solid #0062d3;
+  color: #0062d3;
+  background-color: white;
+
+}
+
+.reset-container input{
+  width: 100%;
+  padding: 20px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
 }
 
 /* /* --------------------------------------------------------------

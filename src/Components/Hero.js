@@ -43,9 +43,10 @@ const Hero = () => {
                         <div className="container">
                             {/*<p class="display-6 color-d">Hello, world!</p>*/}
                             {hero.map((hero) => (
-                                <h1 className="hero-title mb-4">I am {hero.heroName}</h1>
+                                <><h1 className="hero-title mb-4">I am {hero.name}</h1>
+                                <p className="hero-subtitle"><span className="typed" data-typed-items={hero.skills} /></p></>
                             ))}
-                            <p className="hero-subtitle"><span className="typed" data-typed-items="Designer, Developer, Freelancer, Photographer" /></p>
+                            
                             {/* <p class="pt-3"><a class="btn btn-primary btn js-scroll px-4" href="#about" role="button">Learn More</a></p> */}
                         </div>
                     </div>

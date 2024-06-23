@@ -1,5 +1,5 @@
-import useFetch from "../../Components/useFetch";
-import CertificationDetails from "./CertificationDetails";
+import Certifications from "../../Components/Certifications";
+
 
 const AddCertificationForm = () => {
 
@@ -19,26 +19,32 @@ const AddCertificationForm = () => {
         e.target.form.reset();
     };
 
-    const { data: certifications } = useFetch("http://localhost:8000/certifications");
 
     return (
         <>
             <section id="certification-form" className="certification-form form">
-                <h2>Add Certifications Info!</h2>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            <h2>Add Certifications Info!</h2>
+                        </div>
+                        <div className="col-12">
+                            <form onSubmit={onSubmit}>
 
-                <form onSubmit={onSubmit}>
+                                <input type="text" name="title" placeholder="Tille of Certificate" required />
+                                <input type="text" name="category" placeholder="Category of Certificate" required />
+                                <textarea name="desc" placeholder="Description" required></textarea>
 
-                    <input type="text" name="title" placeholder="Tille of Certificate"/>
-                    <input type="text" name="category" placeholder="Category of Certificate" />
-                    <textarea name="desc" placeholder="Description"></textarea>
-
-                    <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                    <button className="cancel">Cancel</button>
-                    <button className="submit" type="submit">Submit</button>
-                </form>
+                                <button className="reset" type="reset" onClick={onReset}>Reset</button>
+                                <button className="cancel">Cancel</button>
+                                <button className="submit" type="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <hr />
             </section>
-            {certifications && <CertificationDetails certifications={certifications} title="Certifications" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />}
+            <Certifications title="Certifications" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
         </>
     );
 }

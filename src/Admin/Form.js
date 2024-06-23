@@ -7,6 +7,10 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Dashboard from "./Dashboard/Dashboard";
 import HeroForm from "./Home/HeroForm";
 import ContactForm from "./Contact/ContactForm";
+import Login from "./Login/Login";
+import SignUp from "./SignUp/SignUp";
+import ForgetPwd from "./ForgetPwd/ForgetPwd";
+import ResetPwd from "./ForgetPwd/ResetPwd";
 
 const Form = () => {
 
@@ -20,6 +24,7 @@ const Form = () => {
     //         document.body.removeChild(script);
     //     };
     // }, []);
+    
     let { path } = useRouteMatch();
     console.log("path" , path);
     return (
@@ -46,6 +51,18 @@ const Form = () => {
                     </Route>
                     <Route path={`${path}/contact-form`}>
                         <ContactForm />
+                    </Route>
+                    <Route path={`${path}/login-form`}>
+                        <Login />
+                    </Route>
+                    <Route path={`${path}/signup-form`}>
+                        <SignUp />
+                    </Route>
+                    <Route path={`${path}/forget-form`}>
+                        <ForgetPwd />
+                    </Route>
+                    <Route path={`${path}/reset-form`}>
+                        <ResetPwd/>
                     </Route>
                 </Switch>
             </section>
