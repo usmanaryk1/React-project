@@ -9,6 +9,7 @@ const Header = () => {
     const [portalLinks, setPortalLinks] = useState([]);
 
     useEffect(() => {
+        //need to change logic
         if (location.pathname.startsWith('/form')) {
             setNavLinks([
                 { to: '/form/dashboard', label: 'Dashboard' },
