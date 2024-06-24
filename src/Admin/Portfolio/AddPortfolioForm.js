@@ -20,18 +20,26 @@ const AddPortfolioForm = () => {
 
     return (
         <>
-            <section id="portfolio-form" className="portfolio-form form">
-                <h2>Add Portfolio Info!</h2>
-                <form onSubmit={onSubmit}>
-                    <input type="text" name="title" placeholder="Add title of Project"/>
-                    <input type="text" name="link" placeholder="Share Link of Project" />
-                    <input type="text" name="category" placeholder="Add the category of Project" />
-                    <input type="file" name="file-upload" />
+            <section id="portfolio-form" className="form">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            <h2>Add Portfolio Info!</h2>
+                        </div>
+                        <div className="col-12">
+                            <form onSubmit={onSubmit}>
+                                <input type="text" name="title" placeholder="Add title of Project" required />
+                                <input type="text" name="link" placeholder="Share Link of Project" required />
+                                <input type="text" name="category" placeholder="Add the category of Project" required />
+                                <input type="file" name="file-upload" required />
 
-                    <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                    <button className="cancel">Cancel</button>
-                    <button className="submit" type="submit">Submit</button>
-                </form>
+                                <button className="reset" type="reset" onClick={onReset}>Reset</button>
+                                <button className="cancel">Cancel</button>
+                                <button className="submit" type="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <hr />
             </section>
             <Portfolio title="Portfolio" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
