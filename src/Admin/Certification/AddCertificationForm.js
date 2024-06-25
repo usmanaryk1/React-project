@@ -5,15 +5,33 @@ const AddCertificationForm = () => {
     const [image, setImage] = useState(null);
     const imageRef = useRef(null);
 
-    const handleImageChange = (e) => {
+    const handleImageChange = async (e) => {
         const file = e.target.files[0];
+        const base64 = await convertBase64(file);
+        console.log("base64", base64);
         setImage(file);
     };
 
     const handleImageClick = () => {
         imageRef.current.click();
     }
-    
+
+    const convertBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader(file);
+            fileReader.readAsDataURL(file);
+
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            }
+
+            fileReader.onerror = (error) => {
+                reject(error);
+            }
+        })
+
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);

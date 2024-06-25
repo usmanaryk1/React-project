@@ -4,11 +4,32 @@ import About from "../../Components/About";
 const AddForm = () => {
     const [image, setImage] = useState(null);
     const imageRef = useRef(null);
+    const [base64Image, setBase64Image] = useState("");
 
-    const handleImageChange = (e) => {
+
+    const handleImageChange = async (e) => {
         const file = e.target.files[0];
+        const base64 = await convertBase64(file);
+        setBase64Image(base64);
+        console.log("base64", base64);
         setImage(file);
     };
+
+    const convertBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader(file);
+            fileReader.readAsDataURL(file);
+
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            }
+
+            fileReader.onerror = (error) => {
+                reject(error);
+            }
+        })
+
+    }
 
     const handleImageClick = () => {
         imageRef.current.click();
@@ -20,9 +41,11 @@ const AddForm = () => {
 
         const formObject = Object.fromEntries(formData);
 
+        formObject.aboutImage = base64Image; // Add the base64 image to the form object
+
         console.log('Form Data:', formObject);
 
-        let imageUrl = "../assets/img/testimonial-2.jpg"; // Default image path
+        let imageUrl = formObject.aboutImage; 
 
         // If a new image is selected, upload it
         if (image) {
@@ -52,6 +75,7 @@ const AddForm = () => {
             aboutImg: imageUrl,
             id: "1"
         };
+        console.log("imageUrl" , imageUrl)
 
         // Send PUT request to update the JSON data
         try {
@@ -65,7 +89,8 @@ const AddForm = () => {
             const data = await response.json();
             console.log('Success:', data);
             e.target.reset();  // Reset the form after successful submission
-            setImage(null);    // Clear the image state 
+            setImage(null); 
+            setBase64Image("");   // Clear the image state 
         } catch (error) {
             console.error('Error updating the JSON data:', error);
         }
@@ -75,7 +100,8 @@ const AddForm = () => {
     const onReset = (e) => {
         e.preventDefault();
         e.target.form.reset();
-        setImage(null);       // Clear the image state
+        setImage(null); 
+        setBase64Image("");      // Clear the image state
     };
 
     return (

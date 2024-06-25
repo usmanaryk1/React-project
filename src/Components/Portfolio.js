@@ -31,7 +31,7 @@ const Portfolio = ({ title, subtitle }) => {
                                     <div className="work-content">
                                         <div className="row">
                                             <div className="col-sm-8">
-                                                <h2 className="w-title">{work.wTitle}</h2>
+                                                <h2 className="w-title"><a href={work.pURL}>{work.wTitle}</a></h2>
                                                 <div className="w-more">
                                                     <span className="w-ctegory">{work.wCategory}</span> / <span className="w-date">{work.wDate}</span>
                                                 </div>
@@ -39,7 +39,7 @@ const Portfolio = ({ title, subtitle }) => {
                                             <div className="col-sm-4">
                                                 <Link to={`/works/${work.id}`}>
                                                     <div className="w-like">
-                                                        <a href="portfolio-details.html"> <span className="bi bi-plus-circle" /></a>
+                                                        <a href="/"> <span className="bi bi-plus-circle" /></a>
                                                     </div>
                                                 </Link>
                                             </div>
