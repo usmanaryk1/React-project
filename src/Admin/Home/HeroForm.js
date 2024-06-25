@@ -2,7 +2,7 @@ import Hero from "../../Components/Hero";
 
 const HeroForm = () => {
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
 
@@ -10,6 +10,28 @@ const HeroForm = () => {
 
         console.log('Form Data:', formObject);
 
+        const updatedData = {
+            name: formObject.name,
+            skills: formObject.skills,
+            id: "1"
+        };
+
+        fetch('http://localhost:8000/hero/1', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                e.target.reset();  // Reset the form after successful submission
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        e.target.reset(e);
     };
 
     const onReset = (e) => {
@@ -22,19 +44,21 @@ const HeroForm = () => {
             <section id="hero-form" className="hero-form form">
                 <div className="container">
                     <div className="row">
-                        <div className="col-12">
-                            <h2>Add Home Info!</h2>
-                        </div>
-                        <div className="col-12">
-                            <form onSubmit={onSubmit}>
+                        <div className="hero-container">
+                            <div className="col-12">
+                                <h2>Add Home Info!</h2>
+                            </div>
+                            <div className="col-12">
+                                <form onSubmit={onSubmit}>
 
-                                <input type="text" name="name" placeholder="Name" required />
-                                <input type="text" name="qualities" placeholder="Designer, Developer, Freelancer, Photographer" required />
+                                    <input type="text" name="name" placeholder="Name" required />
+                                    <input type="text" name="skills" placeholder="Designer, Developer, Freelancer, Photographer" required />
 
-                                <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                <button className="cancel">Cancel</button>
-                                <button className="submit" type="submit">Submit</button>
-                            </form>
+                                    <button className="reset" type="reset" onClick={onReset}>Reset</button>
+                                    <button className="cancel">Cancel</button>
+                                    <button className="submit" type="submit">Submit</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

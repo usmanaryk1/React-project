@@ -1,21 +1,21 @@
 {
-  "hero" : [
+  "hero": [
     {
-      "name" : "Morgan Freeman",
-      "skills": "Designer, Developer, Freelancer, Photographer",
-      "id" : "1"
+      "name": "Qirrat Rubah Yaseen",
+      "skills": "Artist, Gardener, Lawyer, Doctor",
+      "id": "1"
     }
   ],
   "about": [
     {
-      "aboutName": "Morgan Freeman",
-      "aboutProfile": "Full Stack Developer",
-      "aboutEmail": "example@gmail.com",
-      "aboutPhone": "068-1243778",
-      "aboutDesc1": "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan idimperdiet et, porttitorat sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nullaporttitor accumsan tincidunt.",
-      "aboutDesc2": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.",
-      "aboutDesc3": "Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
-      "aboutImg": "./assets/img/testimonial-2.jpg",
+      "aboutName": "",
+      "aboutProfile": "",
+      "aboutEmail": "",
+      "aboutPhone": "",
+      "aboutDesc1": "",
+      "aboutDesc2": "",
+      "aboutDesc3": "",
+      "aboutImg": "../assets/img/testimonial-2.jpg",
       "id": "1"
     }
   ],
@@ -151,13 +151,13 @@
   ],
   "testimonials": [
     {
-      "authorImg": "assets/img/testimonial-2.jpg",
+      "authorImg": "../assets/img/testimonial-2.jpg",
       "authorName": "Xavi Alonso",
       "authorDescription": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
       "id": "1"
     },
     {
-      "authorImg": "assets/img/testimonial-4.jpg",
+      "authorImg": "../assets/img/testimonial-4.jpg",
       "authorName": "Mario John",
       "authorDescription": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
       "id": "2"
@@ -254,7 +254,7 @@
       "cardCategory": "Travel",
       "cardTitle": "See more ideas about Travel",
       "cardDescription": "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallia pellentesque nec,egestas non nisi.",
-      "authorImage": "assets/img/testimonial-2.jpg",
+      "authorImage": "../assets/img/testimonial-2.jpg",
       "authorName": "Morgan Freeman",
       "postDate": "10 min",
       "articleTitle": "Lorem ipsum dolor sit amet consec tetur adipisicing",
@@ -273,7 +273,7 @@
       "cardCategory": "Food",
       "cardTitle": "See more ideas about Travel",
       "cardDescription": "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallia pellentesque nec,egestas non nisi.",
-      "authorImage": "assets/img/testimonial-2.jpg",
+      "authorImage": "../assets/img/testimonial-2.jpg",
       "authorName": "Morgan Freeman",
       "postDate": "20 min",
       "articleTitle": "Lorem ipsum dolor sit amet consec tetur adipisicing",
@@ -292,7 +292,7 @@
       "cardCategory": "Web Design",
       "cardTitle": "See more ideas about Web Design",
       "cardDescription": "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallia pellentesque nec,egestas non nisi.",
-      "authorImage": "assets/img/testimonial-2.jpg",
+      "authorImage": "../assets/img/testimonial-2.jpg",
       "authorName": "Morgan Freeman",
       "postDate": "30 min",
       "articleTitle": "Lorem ipsum dolor sit amet consec tetur adipisicing",
@@ -307,12 +307,14 @@
       "id": "3"
     }
   ],
-  "contact" : [
+  "contact": [
     {
-      "contactDesc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolorum dolorem soluta quidem expedita aperiam aliquid at. Totam magni ipsum suscipit amet? Autem nemo esse laboriosam ratione nobis mollitia inventore?",
-      "contactLocation": " 329 WASHINGTON ST BOSTON, MA 02108",
-      "contactNumber": "(617) 557-0089",
-      "contactEmail": " contact@example.com",
+      "description": "hello",
+      "location": "Pakistan",
+      "number": "03196322937",
+      "email": "nxzmx@gmail.com",
+      "twitter": "/",
+      "linkedIn": "/",
       "id": "1"
     }
   ]

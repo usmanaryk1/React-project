@@ -13,7 +13,7 @@ const ForgetPwd = () => {
     return (
         <>
 
-            <section id="forget-form" className="forget-form form">
+            <section id="forget-form" className="forget-form form bg-image" style={{ backgroundImage: 'url(../assets/img/overlay-bg.jpg)' }}>
                 <div className="container">
                     <div className="row">
                         <div className="forget-container">

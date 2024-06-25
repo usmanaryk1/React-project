@@ -7,7 +7,7 @@ const Contact = () => {
     return (
         <>
             {/* ======= Contact Section ======= */}
-            {contact && <section id="contact" className="paralax-mf footer-paralax bg-image sect-mt4 route" style={{ backgroundImage: 'url(assets/img/overlay-bg.jpg)' }}>
+            {contact && <section id="contact" className="paralax-mf footer-paralax bg-image sect-mt4 route" style={{ backgroundImage: 'url(../assets/img/overlay-bg.jpg)' }}>
                 <div className="overlay-mf" />
                 <div className="container">
                     <div className="row">
@@ -65,21 +65,21 @@ const Contact = () => {
                                             {contact.map((contact) => (
                                                 <div className="more-info" key={contact.id}>
                                                     <p className="lead">
-                                                        {contact.contactDesc}
+                                                        {contact.description}
                                                     </p>
                                                     <ul className="list-ico">
-                                                        <li><span className="bi bi-geo-alt" /> {contact.contactLocation}</li>
-                                                        <li><span className="bi bi-phone" />{contact.contactNumber}</li>
-                                                        <li><span className="bi bi-envelope" />{contact.contactEmail} </li>
+                                                        <li><span className="bi bi-geo-alt" /> {contact.location}</li>
+                                                        <li><span className="bi bi-phone" />{contact.number}</li>
+                                                        <li><span className="bi bi-envelope" />{contact.email} </li>
                                                     </ul>
                                                 </div>
                                             ))}
                                             <div className="socials">
                                                 <ul>
-                                                    <li><a href="/"><span className="ico-circle"><i className="bi bi-facebook" /></span></a></li>
-                                                    <li><a href="/"><span className="ico-circle"><i className="bi bi-instagram" /></span></a></li>
-                                                    <li><a href="/"><span className="ico-circle"><i className="bi bi-twitter" /></span></a></li>
-                                                    <li><a href="/"><span className="ico-circle"><i className="bi bi-linkedin" /></span></a></li>
+                                                    <li><a href={contact.facebook}><span className="ico-circle"><i className="bi bi-facebook" /></span></a></li>
+                                                    <li><a href={contact.instagram}><span className="ico-circle"><i className="bi bi-instagram" /></span></a></li>
+                                                    <li><a href={contact.twitter}><span className="ico-circle"><i className="bi bi-twitter" /></span></a></li>
+                                                    <li><a href={contact.linkedIn}><span className="ico-circle"><i className="bi bi-linkedin" /></span></a></li>
                                                 </ul>
                                             </div>
                                         </div>

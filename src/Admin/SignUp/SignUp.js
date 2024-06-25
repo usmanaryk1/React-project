@@ -13,7 +13,7 @@ const SignUp = () => {
     return (
         <>
 
-            <section id="signup-form" className="signup-form form">
+            <section id="signup-form" className="signup-form form bg-image" style={{ backgroundImage: 'url(../assets/img/overlay-bg.jpg)' }}>
                 <div className="container">
                     <div className="row">
                         <div className="signup-container">

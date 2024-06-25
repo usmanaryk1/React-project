@@ -10,19 +10,22 @@ const Hero = () => {
 */
     const typedRef = useRef(null);
     useEffect(() => {
-        if (hero) {
+        if (hero && hero.length > 0) {
             const typedElement = document.querySelector('.typed');
             if (typedElement) {
                 let typed_strings = typedElement.getAttribute('data-typed-items');
-                typed_strings = typed_strings.split(',');
-                // Initialize Typed.js and store the instance in the ref
-                typedRef.current = new Typed('.typed', {
-                    strings: typed_strings,
-                    loop: true,
-                    typeSpeed: 100,
-                    backSpeed: 50,
-                    backDelay: 2000
-                });
+
+                if (typed_strings) {
+                    typed_strings = typed_strings.split(',');
+                    // Initialize Typed.js and store the instance in the ref
+                    typedRef.current = new Typed('.typed', {
+                        strings: typed_strings,
+                        loop: true,
+                        typeSpeed: 100,
+                        backSpeed: 50,
+                        backDelay: 2000
+                    });
+                }
             }
             // Cleanup function to destroy the Typed instance
             return () => {
@@ -42,11 +45,17 @@ const Hero = () => {
                     <div className="table-cell">
                         <div className="container">
                             {/*<p class="display-6 color-d">Hello, world!</p>*/}
-                            {hero.map((hero) => (
-                                <><h1 className="hero-title mb-4">I am {hero.name}</h1>
-                                <p className="hero-subtitle"><span className="typed" data-typed-items={hero.skills} /></p></>
+                            {hero.map((heroItem) => (
+                                <div key={heroItem.id}>
+                                    <h1 className="hero-title mb-4">I am {heroItem.name}</h1>
+                                    <p className="hero-subtitle">
+                                        {heroItem.skills &&
+                                            <span className="typed" data-typed-items={heroItem.skills} />
+                                        }
+                                    </p>
+                                </div>
                             ))}
-                            
+
                             {/* <p class="pt-3"><a class="btn btn-primary btn js-scroll px-4" href="#about" role="button">Learn More</a></p> */}
                         </div>
                     </div>

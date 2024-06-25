@@ -1598,7 +1598,7 @@ form {
 
 .form h2 {
   color: black;
-  margin-top: 130px;
+  margin-top: 50px;
   text-align: center;
 }
 
@@ -1613,6 +1613,10 @@ form {
   border-radius: 5px;
 }
 
+.form input:focus, .form textarea:focus{
+  border:1px solid #0078ff;
+  box-shadow: 0 0 0.5 #0078ff;
+}
 .form .submit {
   background: #0062d3;
   color: #fff;
@@ -1651,12 +1655,104 @@ button:hover {
 }
 
 /*--------------------------------------------------------------
+# Hero Form 
+--------------------------------------------------------------*/
+.hero-container{
+  border-radius: 5px;
+  max-width: 550px;
+  margin: 130px auto 50px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+}
+/*--------------------------------------------------------------
+# About Form 
+--------------------------------------------------------------*/
+.add-container{
+  border-radius: 5px;
+  max-width: 550px;
+  margin: 130px auto 50px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+}
+
+.add-container .img-display-after {
+  height: 150px;
+  width: 150px;
+  border-radius: 5px;
+}
+
+.add-container .img-display-before {
+  height: 150px;
+  width: 150px;
+  border-radius: 5px;
+}
+/*--------------------------------------------------------------
+# Services Form 
+--------------------------------------------------------------*/
+.service-container{
+  border-radius: 5px;
+  max-width: 550px;
+  margin: 130px auto 50px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+}
+
+/*--------------------------------------------------------------
+# Portfolio Form 
+--------------------------------------------------------------*/
+.portfolio-container{
+  border-radius: 5px;
+  max-width: 550px;
+  margin: 130px auto 50px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+}
+
+.portfolio-container .img-display-before {
+  height: 260px;
+  width: 416px;
+  /* margin: 0px auto; */
+}
+
+/*--------------------------------------------------------------
+# certification Form 
+--------------------------------------------------------------*/
+.certification-container{
+  border-radius: 5px;
+  max-width: 550px;
+  margin: 130px auto 50px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+}
+
+.certification-container .img-display-before {
+  height: 276px;
+  width: 414px;
+  /* margin: 0px auto; */
+}
+/*--------------------------------------------------------------
+# Contact Form 
+--------------------------------------------------------------*/
+.contact-container{
+  border-radius: 5px;
+  max-width: 550px;
+  margin: 130px auto 50px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+}
+/*--------------------------------------------------------------
 # Login Form 
 --------------------------------------------------------------*/
 
- .login-form{
+/* .login-form{
   background-color: #0078ff;
-}
+} */
 
 .login-container{
   /* border: 1px solid lightgrey; */
@@ -1665,7 +1761,7 @@ button:hover {
   margin: 130px auto 50px;
   padding: 15px;
   background-color: white;
-  box-shadow: #ddd;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
 }
 
 .login-container h2 {
@@ -1674,10 +1770,20 @@ button:hover {
   text-align: center;
 }
 
-.login-container input[type = checkbox] {
-  text-align: left;
+.login-container input{
+  width: 100%;
+  padding: 20px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+  border-radius: 5px;
+  box-shadow: none;
 }
 
+.login-container input:focus{
+  border:1px solid #0078ff;
+}
 .pwd .login-button{
   background: #0062d3;
   color: #fff;
@@ -1698,16 +1804,6 @@ button:hover {
 
 .pwd a{
   color: #0062d3;
-}
-
-.login-container input{
-  width: 100%;
-  padding: 20px 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  display: block;
-  border-radius: 5px;
 }
 
 .signup-link{
@@ -1733,9 +1829,9 @@ button:hover {
 # SignUp Form 
 --------------------------------------------------------------*/
 
-.signup-form{
+/* .signup-form{
   background-color: #0078ff;
-}
+} */
 
 .signup-container{
   /* border: 1px solid lightgrey; */
@@ -1744,7 +1840,7 @@ button:hover {
   margin: 130px auto 50px;
   padding: 15px;
   background-color: white;
-  box-shadow: #ddd;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
 }
 
 .signup-container h2 {
@@ -1809,9 +1905,9 @@ button:hover {
 # Forget Form 
 --------------------------------------------------------------*/
 
-.forget-form{
+/* .forget-form{
   background-color: #0078ff;
-}
+} */
 
 .forget-container{
   /* border: 1px solid lightgrey; */
@@ -1820,7 +1916,7 @@ button:hover {
   margin: 130px auto 50px;
   padding: 15px;
   background-color: white;
-  box-shadow: #ddd;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
 }
 
 .forget-container h2 {
@@ -1861,9 +1957,9 @@ button:hover {
 # Reset Form 
 --------------------------------------------------------------*/
 
-.reset-form{
+/* .reset-form{
   background-color: #0078ff;
-}
+} */
 
 .reset-container{
   /* border: 1px solid lightgrey; */
@@ -1872,7 +1968,7 @@ button:hover {
   margin: 130px auto 50px;
   padding: 15px;
   background-color: white;
-  box-shadow: #ddd;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
 }
 
 .reset-container h2 {
@@ -1881,7 +1977,7 @@ button:hover {
   text-align: center;
 }
 
-.reset .reset-button{
+.reset-link{
   background: #0062d3;
   color: #fff;
   border: 0;
@@ -1893,7 +1989,7 @@ button:hover {
   transition: all 0.5s;
 }
 
-.reset .reset-button:hover{
+.reset .reset-link:hover{
   border: 1px solid #0062d3;
   color: #0062d3;
   background-color: white;

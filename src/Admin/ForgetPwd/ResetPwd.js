@@ -13,7 +13,7 @@ const ResetPwd = () => {
     return (
         <>
 
-            <section id="reset-form" className="reset-form form">
+            <section id="reset-form" className="reset-form form bg-image" style={{ backgroundImage: 'url(../assets/img/overlay-bg.jpg)' }}>
                 <div className="container">
                     <div className="row">
                         <div className="reset-container">
@@ -24,8 +24,8 @@ const ResetPwd = () => {
                                 <form onSubmit={onSubmit}>
                                 <input type="password" name="password" placeholder="Create Password" required />
                                 <input type="password" name="password" placeholder="Confirm Password" required />
-                                    <div className="reset">
-                                        <button className="reset-button" type="submit">Reset Password</button>
+                                    <div className="reset-button">
+                                        <button className="reset-link" type="submit">Reset Password</button>
                                     </div>
                                 </form>
                             </div>

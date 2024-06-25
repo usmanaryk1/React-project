@@ -12,11 +12,10 @@ const Login = () => {
 
     return (
         <>
-
-            <section id="login-form" className="login-form form">
+            <section id="login-form" className="login-form form bg-image" style={{ backgroundImage: 'url(../assets/img/overlay-bg.jpg)' }}>
                 <div className="container">
                     <div className="row">
-                        <div className="login-container">
+                        <div className="login-container"> 
                             <div className="col-12">
                                 <h2>Login</h2>
                             </div>
