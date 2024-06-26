@@ -21,7 +21,7 @@ const Certifications = ({ title, subtitle }) => {
                     </div>
                     <div className="row">
                         {certifications.map((certification) => (
-                            <div className="col-md-4" key={certification.id}>
+                            <div className="col-md-4 card-box" key={certification.id}>
                                 <Link to={`/certifications/${certification.id}`}>
                                     <div className="card card-certification">
                                         <div className="card-img">

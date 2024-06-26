@@ -1310,7 +1310,9 @@ a:hover {
     margin-bottom: 3rem;
   }
 }
-
+.card-box{
+  max-height: 497.3px;
+} 
 .card-certification .card-body {
   position: relative;
 }
@@ -1731,9 +1733,15 @@ button:hover {
 }
 
 .certification-container .img-display-before {
-  height: 276px;
-  width: 414px;
+  height: 150px;
+  width: 200px;
   /* margin: 0px auto; */
+}
+
+.certification-container .profile {
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
 }
 /*--------------------------------------------------------------
 # Contact Form 

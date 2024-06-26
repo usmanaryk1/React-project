@@ -6,6 +6,8 @@ const AddPortfolioForm = () => {
     const imageRef = useRef(null);
     const [base64Image, setBase64Image] = useState("");
 
+    const acceptedFileTypes= "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
+
     const handleImageChange = async (e) => {
         const file = e.target.files[0];
         const base64 = await convertBase64(file);
@@ -46,7 +48,6 @@ const AddPortfolioForm = () => {
         let imageUrl = formObject.linkImage;
         let imageUrl2 = formObject.workImage;
 
-
         console.log('Portfolio Data:', formObject);
 
         if (image) {
@@ -58,9 +59,12 @@ const AddPortfolioForm = () => {
                     method: 'POST',
                     body: imageFormData
                 });
+
                 const data = await response.json();
+
                 imageUrl = data.url; // Assuming the server responds with the URL of the uploaded image
                 imageUrl2 = data.url; // Assuming the server responds with the URL of the uploaded image
+
             } catch (error) {
                 console.error('Error uploading the image:', error);
             }
@@ -70,11 +74,12 @@ const AddPortfolioForm = () => {
             wTitle: formObject.title,
             pURL: formObject.link,
             wCategory: formObject.category,
-            pDate: formObject.date,
+            wDate: formObject.date,
             linkImage: imageUrl,
             workImage: imageUrl2,
             id: "1"
         };
+
         console.log("imageUrl", imageUrl)
         console.log("imageUrl2", imageUrl2)
 
@@ -87,11 +92,17 @@ const AddPortfolioForm = () => {
                 },
                 body: JSON.stringify(updatedData)
             });
+
             const data = await response.json();
+
             console.log('Success:', data);
+
             e.target.reset();  // Reset the form after successful submission
+
             setImage(null);
+
             setBase64Image("");   // Clear the image state 
+
         } catch (error) {
             console.error('Error updating the JSON data:', error);
         }
@@ -117,16 +128,53 @@ const AddPortfolioForm = () => {
                                 <form onSubmit={onSubmit}>
                                     <div className="image" onClick={handleImageClick}>
                                         {image ?
-                                            <img src={URL.createObjectURL(image)} alt="" className="img-display-before" />
-                                            : <img src="../assets/img/default-work-image.webp" alt="default" className="img-display-before" />
+                                            <img 
+                                                src={URL.createObjectURL(image)} 
+                                                alt="" 
+                                                className="img-display-before" 
+                                            />
+                                            : <img 
+                                                src="../assets/img/default-work-image.webp" 
+                                                alt="default" 
+                                                className="img-display-before" 
+                                            />
                                         }
-                                        <input type="file" name="file" onChange={handleImageChange} ref={imageRef} style={{ "display": "none" }} />
+                                        <input 
+                                            type="file" 
+                                            name="file" 
+                                            multiple={false} 
+                                            accept={acceptedFileTypes} 
+                                            onChange={handleImageChange} 
+                                            ref={imageRef} 
+                                            style={{ "display": "none" }} 
+                                            required
+                                        />
                                     </div>
                                     <label className="my-3"><b>Choose Project Image</b></label>
-                                    <input type="text" name="title" placeholder="Add title of Project" required />
-                                    <input type="text" name="link" placeholder="Share Link of Project" required />
-                                    <input type="text" name="category" placeholder="Add the category of Project" required />
-                                    <input type="date" name="date" placeholder="Date of Project" />
+                                    <input 
+                                        type="text" 
+                                        name="title" 
+                                        placeholder="Add title of Project" 
+                                        required 
+                                    />
+                                    <input 
+                                        type="text" 
+                                        name="link" 
+                                        placeholder="Share Link of Project" 
+                                        required 
+                                    />
+                                    <input 
+                                        type="text" 
+                                        name="category" 
+                                        placeholder="Add the category of Project" 
+                                        required 
+                                    />
+                                    <input 
+                                        type="date" 
+                                        name="date" 
+                                        placeholder="Date of Project" 
+                                        required
+                                    />
 
                                     <button className="reset" type="reset" onClick={onReset}>Reset</button>
                                     <button className="cancel">Cancel</button>
