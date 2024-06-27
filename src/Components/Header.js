@@ -15,7 +15,7 @@ const Header = () => {
                 { to: '/form/dashboard', label: 'Dashboard' },
                 { to: '/form/hero-form', label: 'Home' },
                 { to: '/form/about-form', label: 'About' },
-                { to: '/form/service-form', label: 'Service' },
+                { to: '/form/service-form', label: 'Services' },
                 { to: '/form/portfolio-form', label: 'Portfolio' },
                 { to: '/form/certification-form', label: 'Certification' },
                 { to: '/form/contact-form', label: 'Contact' },

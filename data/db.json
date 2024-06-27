@@ -1,7 +1,7 @@
 {
   "hero": [
     {
-      "name" : "Morgan Freeman",
+      "name": "Morgan Freeman",
       "skills": "Designer, Developer, Freelancer, Photographer",
       "id": "1"
     }
@@ -15,7 +15,7 @@
       "aboutDesc1": "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan idimperdiet et, porttitorat sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nullaporttitor accumsan tincidunt.",
       "aboutDesc2": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.",
       "aboutDesc3": "Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
-      "aboutImg": "./assets/img/testimonial-2.jpg",
+      "aboutImg": "../assets/img/testimonial-2.jpg",
       "id": "1"
     }
   ],
@@ -113,9 +113,8 @@
   ],
   "services": [
     {
-      "sIcon": "bi-briefcase",
-      "sTitle": "Web Design",
-      "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
+      "sTitle": "Graphic Design",
+      "sDescription": "lcump kkxgmu kuygm u98",
       "id": "1"
     },
     {
