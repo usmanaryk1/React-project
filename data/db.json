@@ -8,14 +8,14 @@
   ],
   "about": [
     {
-      "aboutName": "Morgan Freeman",
-      "aboutProfile": "Full Stack Developer",
-      "aboutEmail": "example@gmail.com",
-      "aboutPhone": "068-1243778",
-      "aboutDesc1": "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan idimperdiet et, porttitorat sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nullaporttitor accumsan tincidunt.",
-      "aboutDesc2": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.",
-      "aboutDesc3": "Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
-      "aboutImg": "../assets/img/testimonial-2.jpg",
+      "name": "Morgan Freeman",
+      "profile": "Full Stack Developer",
+      "email": "example@gmail.com",
+      "phone": "068-1243778",
+      "desc1": "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan idimperdiet et, porttitorat sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nullaporttitor accumsan tincidunt.",
+      "desc2": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.",
+      "desc3": "Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
+      "img": "../assets/img/testimonial-2.jpg",
       "id": "1"
     }
   ],

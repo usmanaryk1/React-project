@@ -18,15 +18,15 @@ const About = () => {
                                             <div className="row">
                                                 <div className="col-sm-6 col-md-5">
                                                     <div className="about-img">
-                                                        <img src={about.aboutImg} className="img-fluid rounded b-shadow-a" alt="" />
+                                                        <img src={about.img} className="img-fluid rounded b-shadow-a" alt="" />
                                                     </div>
                                                 </div>
                                                 <div className="col-sm-6 col-md-7">
                                                     <div className="about-info">
-                                                        <p><span className="title-s">Name: </span> <span> {about.aboutName} </span></p>
-                                                        <p><span className="title-s">Profile: </span> <span> {about.aboutProfile} </span></p>
-                                                        <p><span className="title-s">Email: </span> <span> {about.aboutEmail} </span></p>
-                                                        <p><span className="title-s">Phone: </span> <span> {about.aboutPhone} </span></p>
+                                                        <p><span className="title-s">Name: </span> <span> {about.name} </span></p>
+                                                        <p><span className="title-s">Profile: </span> <span> {about.profile} </span></p>
+                                                        <p><span className="title-s">Email: </span> <span> {about.email} </span></p>
+                                                        <p><span className="title-s">Phone: </span> <span> {about.phone} </span></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -58,13 +58,13 @@ const About = () => {
                                                     </h5>
                                                 </div>
                                                 <p className="lead">
-                                                    {about.aboutDesc1}
+                                                    {about.desc1}
                                                 </p>
                                                 <p className="lead">
-                                                    {about.aboutDesc2}
+                                                    {about.desc2}
                                                 </p>
                                                 <p className="lead">
-                                                    {about.aboutDesc3}
+                                                    {about.desc3}
                                                 </p>
                                             </div>
                                         </div>

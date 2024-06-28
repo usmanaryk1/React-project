@@ -100,14 +100,14 @@ const AddForm = () => {
         }
 
         const updatedData = {
-            aboutName: formObject.name,
-            aboutProfile: formObject.profile,
-            aboutEmail: formObject.email,
-            aboutPhone: formObject.phone,
-            aboutDesc1: formObject.desc, // Assuming all desc is in one textarea
-            aboutDesc2: "",
-            aboutDesc3: "",
-            aboutImg: imageUrl,
+            name: formObject.name,
+            profile: formObject.profile,
+            email: formObject.email,
+            phone: formObject.phone,
+            desc1: formObject.desc, // Assuming all desc is in one textarea
+            desc2: "",
+            desc3: "",
+            img: imageUrl,
             id: "1"
         };
         console.log("imageUrl", imageUrl)
