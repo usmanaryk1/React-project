@@ -1703,6 +1703,18 @@ button:hover {
 }
 
 /*--------------------------------------------------------------
+# Counter Form 
+--------------------------------------------------------------*/
+.counter-container{
+  border-radius: 5px;
+  max-width: 550px;
+  margin: 130px auto 50px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+}
+
+/*--------------------------------------------------------------
 # Portfolio Form 
 --------------------------------------------------------------*/
 .portfolio-container{
@@ -1718,6 +1730,49 @@ button:hover {
   height: 260px;
   width: 416px;
   /* margin: 0px auto; */
+}
+
+/*--------------------------------------------------------------
+# Portfolio Details Form 
+--------------------------------------------------------------*/
+.portfolioDetails-container{
+  border-radius: 5px;
+  max-width: 550px;
+  margin: 130px auto 50px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+}
+
+.portfolioDetails-container .img-display-before {
+  height: 150px;
+  width: 200px;
+  /* margin: 0px auto; */
+}
+
+/*--------------------------------------------------------------
+# Testimonial Form 
+--------------------------------------------------------------*/
+
+.testimonial-container{
+  border-radius: 5px;
+  max-width: 550px;
+  margin: 130px auto 50px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+}
+
+.testimonial-container .img-display-after {
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
+}
+
+.testimonial-container .img-display-before {
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
 }
 
 /*--------------------------------------------------------------

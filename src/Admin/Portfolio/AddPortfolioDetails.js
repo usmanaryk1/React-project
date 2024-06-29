@@ -1,13 +1,16 @@
-import Certifications from "../../Components/Certifications";
 import { useRef, useState } from "react";
 
-const AddCertificationForm = () => {
+const AddPortfolioDetails = () => {
+
     const [image1, setImage1] = useState(null);
     const [image2, setImage2] = useState(null);
+    const [image3, setImage3] = useState(null);
     const image1Ref = useRef(null);
     const image2Ref = useRef(null);
+    const image3Ref = useRef(null);
     const [base64Image1, setBase64Image1] = useState("");
     const [base64Image2, setBase64Image2] = useState("");
+    const [base64Image3, setBase64Image3] = useState("");
 
     const acceptedFileTypes = "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
 
@@ -27,6 +30,14 @@ const AddCertificationForm = () => {
         setBase64Image2(base64);
         setImage2(file);
         processImage(file, setImage2);
+    };
+
+    const handleImage3Change = async (e) => {
+        const file = e.target.files[0];
+        const base64 = await convertBase64(file);
+        setBase64Image3(base64);
+        setImage3(file);
+        processImage(file, setImage3);
     };
 
     const processImage = (file, setImage) => {
@@ -71,6 +82,10 @@ const AddCertificationForm = () => {
         image2Ref.current.click();
     }
 
+    const handleImage3Click = () => {
+        image3Ref.current.click();
+    }
+
     const convertBase64 = (file) => {
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader(file);
@@ -97,9 +112,11 @@ const AddCertificationForm = () => {
 
         formObject.image1 = base64Image1; // Add the base64 image to the form object
         formObject.image2 = base64Image2; // Add the base64 image to the form object
+        formObject.image3 = base64Image3; // Add the base64 image to the form object
 
         let imageUrl1 = formObject.image1;
         let imageUrl2 = formObject.image2;
+        let imageUrl3 = formObject.image3;
 
         console.log('Portfolio Data:', formObject);
 
@@ -141,24 +158,44 @@ const AddCertificationForm = () => {
             }
         }
 
+        if (image3) {
+            const imageFormData3 = new FormData();
+            imageFormData3.append('file', image3);
+
+            try {
+                const response = await fetch('http://localhost:8000/upload', {
+                    method: 'POST',
+                    body: imageFormData3
+                });
+
+                const data = await response.json();
+
+                imageUrl3 = data.url; // Assuming the server responds with the URL of the uploaded image
+
+            } catch (error) {
+                console.error('Error uploading the image2:', error);
+            }
+        }
 
         const updatedData = {
-            cardTitle: formObject.title,
-            cardCategory: formObject.category,
-            cardDescription: formObject.description,
-            postDate: formObject.time,
-            authorName: formObject.name,
-            image: imageUrl1,
-            authorImage: imageUrl2,
+            pCategory: formObject.category,
+            pClient: formObject.name,
+            pDate: formObject.date,
+            pURL: formObject.link,
+            desc: formObject.desc,
+            slideImage1: imageUrl1,
+            slideImage2: imageUrl2,
+            slideImage3: imageUrl3,
             id: "1"
         };
 
         console.log("imageUrl1", imageUrl1)
         console.log("imageUrl2", imageUrl2)
+        console.log("imageUrl3", imageUrl3)
 
         // Send PUT request to update the JSON data
         try {
-            const response = await fetch('http://localhost:8000/certifications/1', {
+            const response = await fetch('http://localhost:8000/works/1', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -176,8 +213,10 @@ const AddCertificationForm = () => {
 
             setImage1(null);
             setImage2(null);
+            setImage3(null);
             setBase64Image1("");
             setBase64Image2("");  // Clear the image state 
+            setBase64Image3("");  // Clear the image state 
 
         } catch (error) {
             console.error('Error updating the JSON data:', error);
@@ -192,20 +231,19 @@ const AddCertificationForm = () => {
         e.target.form.reset();
     };
 
-
     return (
         <>
-            {/* Certification Form Start */}
-            <section id="certification-form" className="certification-form form">
+            {/* PortfolioDetails Form Start */}
+            <section id="portfolioDetails-form" className="certification-form form">
                 <div className="container">
                     <div className="row">
-                        <div className="certification-container">
+                        <div className="portfolioDetails-container">
                             <div className="col-12">
-                                <h2>Add Certifications Info!</h2>
+                                <h2>Add Portfolio Details Info!</h2>
                             </div>
                             <div className="col-12">
                                 <form onSubmit={onSubmit}>
-                                    <div className="d-flex">
+                                    <div className="d-flex flex-wrap">
                                         <div className="image mx-auto" onClick={handleImage1Click}>
                                             {image1 ?
                                                 <img
@@ -235,12 +273,12 @@ const AddCertificationForm = () => {
                                                 <img
                                                     src={URL.createObjectURL(image2)}
                                                     alt=""
-                                                    className="profile"
+                                                    className="img-display-before"
                                                 />
                                                 : <img
-                                                    src="../assets/img/default-image.jpg"
+                                                    src="../assets/img/default-work-image.webp"
                                                     alt="default"
-                                                    className="profile"
+                                                    className="img-display-before"
                                                 />
                                             }
                                             <input
@@ -249,44 +287,68 @@ const AddCertificationForm = () => {
                                                 accept={acceptedFileTypes}
                                                 multiple={false}
                                                 onChange={handleImage2Change}
-                                                ref={ image2Ref }
+                                                ref={image2Ref}
+                                                style={{ "display": "none" }}
+                                                required
+                                            />
+                                        </div>
+
+
+                                        <div className="image mx-auto" onClick={handleImage3Click}>
+                                            {image3 ?
+                                                <img
+                                                    src={URL.createObjectURL(image3)}
+                                                    alt=""
+                                                    className="img-display-before mt-4"
+                                                />
+                                                : <img
+                                                    src="../assets/img/default-work-image.webp"
+                                                    alt="default"
+                                                    className="img-display-before mt-4"
+                                                />
+                                            }
+                                            <input
+                                                type="file"
+                                                name="file"
+                                                accept={acceptedFileTypes}
+                                                multiple={false}
+                                                onChange={handleImage3Change}
+                                                ref={image3Ref}
                                                 style={{ "display": "none" }}
                                                 required
                                             />
                                         </div>
                                     </div>
-                                    <label className="me-5 my-3"><b>Choose Project Image</b></label>
-                                    <label className="ms-5 my-3"><b>Choose Your Image</b></label>
+                                    <label className="mx-auto my-3"><b>Choose Project Images</b></label>
                                     <input
                                         type="text"
-                                        name="title"
-                                        placeholder="Tille of Certificate"
+                                        name="name"
+                                        placeholder="Client Company"
                                         required
                                     />
                                     <input
                                         type="text"
                                         name="category"
-                                        placeholder="Category of Certificate"
+                                        placeholder="Category of Project"
                                         required
                                     />
-                                    <textarea
-                                        name="description"
-                                        placeholder="Description"
+                                    <input
+                                        type="date"
+                                        name="name"
+                                        placeholder="Date"
+                                        required
+                                    />
+                                    <input 
+                                        type="text" 
+                                        name="link" 
+                                        placeholder="Enter link to your project" 
+                                        required 
+                                    />
+                                    <textarea 
+                                        name="desc" 
+                                        placeholder="Description" 
                                         required
                                     ></textarea>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        placeholder="Your Name"
-                                        required
-                                    />
-                                    <input
-                                        type="datetime"
-                                        name="time"
-                                        required
-                                    />
-
-
                                     <button className="reset" type="reset" onClick={onReset}>Reset</button>
                                     <button className="cancel">Cancel</button>
                                     <button className="submit" type="submit">Submit</button>
@@ -297,10 +359,9 @@ const AddCertificationForm = () => {
                 </div>
                 <hr />
             </section>
-            {/* Certification Form End */}
-            <Certifications title="Certifications" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
+            {/* PortfolioDetails Form End */}
         </>
     );
 }
 
-export default AddCertificationForm;
+export default AddPortfolioDetails;

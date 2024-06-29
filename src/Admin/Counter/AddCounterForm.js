@@ -1,6 +1,6 @@
-import Services from "../../Components/Services";
+import Counter from "../../Components/Counter";
 
-const AddServiceForm = () => {
+const AddCounterForm = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -11,12 +11,12 @@ const AddServiceForm = () => {
         console.log('Service Data:', formObject);
 
         const updatedData = {
-            sTitle: formObject.title,
-            sDescription: formObject.desc,
+            counterEnd: formObject.counts,
+            text: formObject.title,
             id: "1"
         };
 
-        fetch('http://localhost:8000/services/1', {
+        fetch('http://localhost:8000/counts/1', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -26,7 +26,9 @@ const AddServiceForm = () => {
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
+
                 alert("Submitted Successfully")
+
                 e.target.reset();  // Reset the form after successful submission
             })
             .catch((error) => {
@@ -41,30 +43,31 @@ const AddServiceForm = () => {
         e.target.form.reset();
     };
 
+
     return (
         <>
-            {/* Service Form Start */}
-            <section id="service-form" className="form">
+            {/* Counter Form Start */}
+            <section id="counter-form" className="form">
                 <div className="container">
                     <div className="row">
-                        <div className="service-container">
+                        <div className="counter-container">
                             <div className="col-12">
-                                <h2>Add Services Info!</h2>
+                                <h2>Add Counter Info!</h2>
                             </div>
                             <div className="col-12">
                                 <form onSubmit={onSubmit}>
                                     <input 
                                         type="text" 
                                         name="title" 
-                                        placeholder="Title of Service" 
+                                        placeholder="Title in Uppercase" 
                                         required 
                                     />
-                                    <textarea 
-                                        name="desc" 
-                                        placeholder="Description" 
+                                    <input 
+                                        type="number" 
+                                        name="counts" 
+                                        placeholder="Number of Counts"
                                         required
-                                    ></textarea>
-
+                                    />
                                     <button className="reset" type="reset" onClick={onReset}>Reset</button>
                                     <button className="cancel">Cancel</button>
                                     <button className="submit" type="submit">Submit</button>
@@ -75,10 +78,10 @@ const AddServiceForm = () => {
                 </div>
                 <hr />
             </section>
-            {/* Service Form End */}
-            <Services title="Services" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
+            {/* Counter Form End */}
+            <Counter />
         </>
     );
 }
-
-export default AddServiceForm;
+ 
+export default AddCounterForm;

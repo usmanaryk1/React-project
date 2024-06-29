@@ -16,7 +16,10 @@ const Header = () => {
                 { to: '/form/hero-form', label: 'Home' },
                 { to: '/form/about-form', label: 'About' },
                 { to: '/form/service-form', label: 'Services' },
+                { to: '/form/counter-form', label: 'Counter' },
                 { to: '/form/portfolio-form', label: 'Portfolio' },
+                { to: '/form/portfolioDetails-form', label: 'Portfolio Details' },
+                { to: '/form/testimonial-form', label: 'Testimonial' },
                 { to: '/form/certification-form', label: 'Certification' },
                 { to: '/form/contact-form', label: 'Contact' },
             ]);

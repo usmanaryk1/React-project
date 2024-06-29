@@ -11,6 +11,9 @@ import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
 import ForgetPwd from "./ForgetPwd/ForgetPwd";
 import ResetPwd from "./ForgetPwd/ResetPwd";
+import AddTestimonialForm from "./Testimonial/AddTestimonialForm";
+import AddCounterForm from "./Counter/AddCounterForm";
+import AddPortfolioDetails from "./Portfolio/AddPortfolioDetails";
 
 const Form = () => {
 
@@ -43,8 +46,17 @@ const Form = () => {
                     <Route path={`${path}/service-form`}>
                         <AddServiceForm />
                     </Route>
+                    <Route path={`${path}/counter-form`}>
+                        <AddCounterForm />
+                    </Route>
                     <Route path={`${path}/portfolio-form`}>
                         <AddPortfolioForm />
+                    </Route>
+                    <Route path={`${path}/portfolioDetails-form`}>
+                        <AddPortfolioDetails />
+                    </Route>
+                    <Route path={`${path}/testimonial-form`}>
+                        <AddTestimonialForm />
                     </Route>
                     <Route path={`${path}/certification-form`}>
                         <AddCertificationForm />
