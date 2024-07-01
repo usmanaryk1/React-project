@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/rea
 import PortfolioDetails from "./Components/PortfolioDetails";
 import { useEffect } from "react";
 import CertificationDetails from "./Components/CertificationDetails";
-import Form from "./Admin/Form";
+import Form from "./CMSAdmin/Form";
 // Template URL: https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/
 
 function App() {
