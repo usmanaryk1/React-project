@@ -130,6 +130,8 @@ const AddForm = () => {
             console.error('Error updating the JSON data:', error);
         }
 
+        e.target.reset();
+
     };
 
     const onReset = (e) => {

@@ -469,7 +469,7 @@ a:hover {
   transition: all 0.5s;
   z-index: 997;
   padding: 20px 0;
-  /* background: rgba(0, 0, 0, 1); Temporary Add background */
+  background: rgba(0, 0, 0, 1); /*Temporary Add background */
 }
 
 #header .logo {
@@ -1870,23 +1870,20 @@ button:hover {
 }
 
 .signup-link{
-  margin: 30px auto;
+  margin: 15px auto;
 }
 
 .signup-link a{
   /* background: #0062d3; */
   color: #0062d3;
-  border: 1px solid #0062d3;
-  padding: 10px 25px;
-  border-radius: 25px;
   cursor: pointer;
 
 }
 
-.signup-link a:hover{
+/* .signup-link a:hover{
   background: #0062d3;
   color: white;
-}
+} */
 
 /*--------------------------------------------------------------
 # SignUp Form 

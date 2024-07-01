@@ -2,11 +2,11 @@ import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
-const Header = () => {
+const Header = ({ user, onLogout }) => {
 
     const location = useLocation();
     const [navLinks, setNavLinks] = useState([]);
-    const [portalLinks, setPortalLinks] = useState([]);
+
 
     useEffect(() => {
         //need to change logic
@@ -19,15 +19,11 @@ const Header = () => {
                 { to: '/form/counter-form', label: 'Counter' },
                 { to: '/form/portfolio-form', label: 'Works' },
                 { to: '/form/portfolioDetails-form', label: 'Work Details' },
-                { to: '/form/testimonial-form', label: 'Testimonial' },
-                { to: '/form/certification-form', label: 'Certification' },
-                { to: '/form/contact-form', label: 'Contact' },
+                // { to: '/form/testimonial-form', label: 'Testimonial' },
+                // { to: '/form/certification-form', label: 'Certification' },
+                // { to: '/form/contact-form', label: 'Contact' },
             ]);
-            setPortalLinks([
-                { to: '/#hero', label: 'Go to user Portal' },
-            ]);
-            const header = document.querySelector("#header");
-            header.style.backgroundColor = "black";
+
         } else {
             setNavLinks([
                 { to: '/#hero', label: 'Home' },
@@ -37,39 +33,10 @@ const Header = () => {
                 { to: '/#certifications', label: 'Certifications' },
                 { to: '/#contact', label: 'Contact' },
             ]);
-            setPortalLinks([
-                { to: '/form/dashboard', label: 'Go to Admin Portal' },
-            ]);
-            const onscroll = (el, listener) => {
-                el.addEventListener('scroll', listener)
-            }
-
-            const selectHeader = document.querySelector('#header');
-            if (selectHeader) {
-
-                const headerScrolled = () => {
-                    if (window.scrollY > 100) {
-                        selectHeader.classList.add('header-scrolled');
-                    } else {
-                        selectHeader.classList.remove('header-scrolled');
-                    }
-                };
-                window.addEventListener('load', headerScrolled);
-                onscroll(document, headerScrolled);
-
-            };
         }
-
-        // if (location.pathname.startsWith('/form')) {
-        //     setPortalLinks([
-        //         { to: '/#hero', label: 'Go to user Portal' },
-        //     ]);
-        // } else {
-        //     setPortalLinks([
-        //         { to: '/form/dashboard', label: 'Go to Admin Portal' },
-        //     ]);
-        // }
     }, [location.pathname]);
+
+    const isAdminPage = location.pathname.startsWith('/form');
 
     return (
         <>
@@ -87,17 +54,30 @@ const Header = () => {
                                 </li>
                             ))}
 
-                            <li className="dropdown nav-link fixed-top"><Link smooth to="/form/login-form"><span>Login</span> <i className="bi bi-chevron-down" /></Link>
-                                <ul>
-                                    <li><Link smooth to="/form/login-form">Login</Link></li>
-                                    {portalLinks.map((direct, index) => (
-                                        <li key={index}>
-                                            <Link smooth to={direct.to}><span>{direct.label}</span></Link>
-                                        </li>
-                                    ))}
-
-                                </ul>
+                            <li className="dropdown nav-link">
+                                {user ? (
+                                    <>
+                                        <a href="/"><span>{user.userName}</span><i className="bi bi-chevron-down" /></a>
+                                        <ul>
+                                            <li><Link smooth to="/" onClick={onLogout}>Logout</Link></li>
+                                            {isAdminPage ? (
+                                                <li><Link smooth to="/hero">Go to User Portal</Link></li>
+                                            ) : (
+                                                <li><Link smooth to="/form/dashboard">Go to Admin Portal</Link></li>
+                                            )}
+                                        </ul>
+                                    </>
+                                ) : (
+                                    <>
+                                        <a href="/"><span>Account</span><i className="bi bi-chevron-down" /></a>
+                                        <ul>
+                                            <li><Link smooth to="/form/signup-form">Sign Up</Link></li>
+                                            <li><Link smooth to="/form/login-form">Login</Link></li>
+                                        </ul>
+                                    </>
+                                )}
                             </li>
+
                             {/* <li><Link className="nav-link  active" smooth to="/#hero">Home</Link></li>
                             <li><Link className="nav-link" smooth to="/#about">About</Link></li>
                             <li><Link className="nav-link" smooth to="/#services">Services</Link></li>
