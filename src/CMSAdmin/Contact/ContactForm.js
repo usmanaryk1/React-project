@@ -52,14 +52,48 @@ const ContactForm = () => {
                             <div className="col-12">
                                 <form onSubmit={onSubmit}>
 
-                                    <input type="text" name="description" placeholder="Description" required />
-                                    <input type="text" name="location" placeholder="Location" required />
-                                    <input type="text" name="number" placeholder="Telephone Number" required />
-                                    <input type="email" name="email" placeholder="Email" required />
+                                    <input 
+                                        type="text" 
+                                        name="description" 
+                                        placeholder="Description" 
+                                        required 
+                                    />
+                                    <input 
+                                        type="text" 
+                                        name="location" 
+                                        placeholder="Location" 
+                                        required 
+                                    />
+                                    <input 
+                                        type="text" 
+                                        name="number" 
+                                        placeholder="Telephone Number" 
+                                        required 
+                                    />
+                                    <input 
+                                        type="email" 
+                                        name="email" 
+                                        placeholder="Email" 
+                                        required 
+                                    />
 
-                                    <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                    <button className="cancel">Cancel</button>
-                                    <button className="submit" type="submit">Submit</button>
+                                    <div className="isActive">
+                                        <input
+                                            type="checkbox"
+                                            id="active"
+                                            className="mx-2"
+                                            required
+                                        />
+                                        <label htmlFor="active">
+                                            isActive
+                                        </label>
+                                    </div>
+
+                                    <div className="buttons">
+                                        <button className="reset" type="reset" onClick={onReset}>Reset</button>
+                                        <button className="cancel">Cancel</button>
+                                        <button className="submit" type="submit">Submit</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>

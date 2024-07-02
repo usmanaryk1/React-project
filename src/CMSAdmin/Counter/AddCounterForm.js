@@ -56,21 +56,35 @@ const AddCounterForm = () => {
                             </div>
                             <div className="col-12">
                                 <form onSubmit={onSubmit}>
-                                    <input 
-                                        type="text" 
-                                        name="title" 
-                                        placeholder="Title in Uppercase" 
-                                        required 
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        placeholder="Title in Uppercase"
+                                        required
                                     />
-                                    <input 
-                                        type="number" 
-                                        name="counts" 
+                                    <input
+                                        type="number"
+                                        name="counts"
                                         placeholder="Number of Counts"
                                         required
                                     />
-                                    <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                    <button className="cancel">Cancel</button>
-                                    <button className="submit" type="submit">Submit</button>
+                                    <div className="isActive">
+                                        <input
+                                            type="checkbox"
+                                            id="active"
+                                            className="mx-2"
+                                            required
+                                        />
+                                        <label htmlFor="active">
+                                            isActive
+                                        </label>
+                                    </div>
+
+                                    <div className="buttons">
+                                        <button className="reset" type="reset" onClick={onReset}>Reset</button>
+                                        <button className="cancel">Cancel</button>
+                                        <button className="submit" type="submit">Submit</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -83,5 +97,5 @@ const AddCounterForm = () => {
         </>
     );
 }
- 
+
 export default AddCounterForm;

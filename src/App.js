@@ -4,27 +4,33 @@ import Home from "./Components/Home";
 // import BlogDetails from "./Components/BlogDetails";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import PortfolioDetails from "./Components/PortfolioDetails";
-import { useState } from "react";
 import CertificationDetails from "./Components/CertificationDetails";
 import Form from "./CMSAdmin/Form";
+import { useState, useEffect } from "react";
 import SignUp from "./CMSAdmin/Auth/SignUp/SignUp";
 import Login from "./CMSAdmin/Auth/Login/Login";
-import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 // Template URL: https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/
 
 function App() {
 
   const [user, setUser] = useState(null);
-  const history = useHistory();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const handleSignup = (newUser) => {
+  const handleSignup = (newUser, authentication) => {
     setUser(newUser);
     console.log("User signed up:", newUser);
-    history.push("/#hero");
+    setIsAuthenticated(authentication);
+    console.log('auth:' , authentication);
   };
 
-  const handleLogin = (loggedInUser) => {
+  const handleLogin = (loggedInUser , authentication) => {
+    console.log("Loggedin user", loggedInUser);
     setUser(loggedInUser);
+    setIsAuthenticated(authentication);
+    console.log('authentication:' , authentication);
   };
 
   const handleLogout = async () => {
@@ -36,8 +42,14 @@ function App() {
     });
 
     setUser(null);
+    setIsAuthenticated(false);
+    // console.log('logout:', isAuthenticated);
   };
 
+  useEffect(() => {
+    console.log('logout:', isAuthenticated);
+  }, [isAuthenticated]);
+  
   return (
     <Router>
       <div className="App">
@@ -56,18 +68,23 @@ function App() {
             <Route path="/certifications/:id">
               <CertificationDetails />
             </Route>
-            <Route path="/form">
-              <Form />
-            </Route>
-            <Route path="/form/signup-form">
+            <Route path="/form" render={() => (
+              <Form
+                isAuthenticated={isAuthenticated}
+                onSignup={handleSignup}
+                onLogin={handleLogin}
+              />
+            )} />
+            <Route path="/form/signup-form" render={() => (
               <SignUp onSignup={handleSignup} />
-            </Route>
-            <Route path="/form/login-form">
+            )} />
+            <Route path="/form/login-form" render={() => (
               <Login onLogin={handleLogin} />
-            </Route>
+            )} />
           </Switch>
         </div>
         <Footer />
+        <ToastContainer />
       </div >
     </Router>
   );

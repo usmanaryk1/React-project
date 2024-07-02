@@ -205,7 +205,7 @@ const AddCertificationForm = () => {
                             </div>
                             <div className="col-12">
                                 <form onSubmit={onSubmit}>
-                                    <div className="d-flex">
+                                    <div className="img-container d-flex">
                                         <div className="image mx-auto" onClick={handleImage1Click}>
                                             {image1 ?
                                                 <img
@@ -249,14 +249,17 @@ const AddCertificationForm = () => {
                                                 accept={acceptedFileTypes}
                                                 multiple={false}
                                                 onChange={handleImage2Change}
-                                                ref={ image2Ref }
+                                                ref={image2Ref}
                                                 style={{ "display": "none" }}
                                                 required
                                             />
                                         </div>
                                     </div>
-                                    <label className="me-5 my-3"><b>Choose Project Image</b></label>
-                                    <label className="ms-5 my-3"><b>Choose Your Image</b></label>
+                                    <div className="label-container d-flex">
+                                        <label className="mx-auto my-3"><b>Choose Project Image</b></label>
+                                        <label className="mx-auto my-3"><b>Choose Your Image</b></label>
+                                    </div>
+
                                     <input
                                         type="text"
                                         name="title"
@@ -286,10 +289,23 @@ const AddCertificationForm = () => {
                                         required
                                     />
 
+                                    <div className="isActive">
+                                        <input
+                                            type="checkbox"
+                                            id="active"
+                                            className="mx-2"
+                                            required
+                                        />
+                                        <label htmlFor="active">
+                                            isActive
+                                        </label>
+                                    </div>
 
-                                    <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                    <button className="cancel">Cancel</button>
-                                    <button className="submit" type="submit">Submit</button>
+                                    <div className="buttons">
+                                        <button className="reset" type="reset" onClick={onReset}>Reset</button>
+                                        <button className="cancel">Cancel</button>
+                                        <button className="submit" type="submit">Submit</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>

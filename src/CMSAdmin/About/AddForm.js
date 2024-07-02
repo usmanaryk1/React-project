@@ -6,7 +6,7 @@ const AddForm = () => {
     const imageRef = useRef(null);
     const [base64Image, setBase64Image] = useState("");
 
-    const acceptedFileTypes= "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
+    const acceptedFileTypes = "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
 
     const handleImageChange = async (e) => {
         const file = e.target.files[0];
@@ -152,64 +152,79 @@ const AddForm = () => {
                             </div>
                             <div className="col-12">
                                 <form onSubmit={onSubmit}>
-                                    <div className="image" onClick={handleImageClick}>
-                                        {image ?
-                                            <img 
-                                                src={URL.createObjectURL(image)} 
-                                                alt="" 
-                                                className="img-display-after" 
+                                    <div className="img-container text-center">
+                                        <div className="image" onClick={handleImageClick}>
+                                            {image ?
+                                                <img
+                                                    src={URL.createObjectURL(image)}
+                                                    alt=""
+                                                    className="img-display-after"
+                                                />
+                                                : <img
+                                                    src="../assets/img/default-image.jpg"
+                                                    alt="default"
+                                                    className="img-display-before"
+                                                />
+                                            }
+                                            <input
+                                                type="file"
+                                                name="file"
+                                                accept={acceptedFileTypes}
+                                                multiple={false}
+                                                onChange={handleImageChange}
+                                                ref={imageRef}
+                                                style={{ "display": "none" }}
                                             />
-                                            : <img 
-                                                src="../assets/img/default-image.jpg" 
-                                                alt="default" 
-                                                className="img-display-before" 
-                                            />
-                                        }
-                                        <input 
-                                            type="file" 
-                                            name="file" 
-                                            accept={acceptedFileTypes} 
-                                            multiple={false} 
-                                            onChange={handleImageChange} 
-                                            ref={imageRef} 
-                                            style={{ "display": "none" }} 
-                                        />
+                                        </div>
+                                        <label className="my-3"><b>Choose Profile Image</b></label>
                                     </div>
-                                    <label className="my-3"><b>Choose Profile Image</b></label>
-                                    <input 
-                                        type="text" 
-                                        name="name" 
-                                        placeholder="Name" 
+
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        placeholder="Name"
                                         required
                                     />
-                                    <input 
-                                        type="text" 
-                                        name="profile" 
-                                        placeholder="Profile" 
+                                    <input
+                                        type="text"
+                                        name="profile"
+                                        placeholder="Profile"
                                         required
                                     />
-                                    <input 
-                                        type="email" 
-                                        name="email" 
-                                        placeholder="Email" 
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder="Email"
                                         required
                                     />
-                                    <input 
-                                        type="text" 
-                                        name="phone" 
-                                        placeholder="Phone Number" 
+                                    <input
+                                        type="text"
+                                        name="phone"
+                                        placeholder="Phone Number"
                                         required
                                     />
-                                    <textarea 
-                                        name="desc" 
-                                        placeholder="Description" 
+                                    <textarea
+                                        name="desc"
+                                        placeholder="Description"
                                         required
                                     ></textarea>
-                                    {/* <input type="text" name="skill" placeholder="Skills" /> */}
+                                    <div className="isActive">
+                                        <input
+                                            type="checkbox"
+                                            id="active"
+                                            className="mx-2"
+                                            required
+                                        />
+                                        <label htmlFor="active">
+                                            isActive
+                                        </label>
+                                    </div>
 
-                                    <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                    <button className="cancel">Cancel</button>
-                                    <button className="submit" type="submit">Submit</button>
+                                    <div className="buttons">
+                                        <button className="reset" type="reset" onClick={onReset}>Reset</button>
+                                        <button className="cancel">Cancel</button>
+                                        <button className="submit" type="submit">Submit</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>

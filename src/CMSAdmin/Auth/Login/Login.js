@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 const Login = ({ onLogin }) => {
+    
 
     const [error, setError] = useState('');
     const history = useHistory(); // for programmatic navigation
+
+    console.log("Login component received onLogin prop:", onLogin);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -18,8 +22,8 @@ const Login = ({ onLogin }) => {
         const users = await response.json();
 
         // Check if the credentials match any user
-        const user = users.find(user => 
-            (user.email === formObject.email) && 
+        const user = users.find(user =>
+            (user.email === formObject.email) &&
             user.password === formObject.password
         );
 
@@ -31,20 +35,12 @@ const Login = ({ onLogin }) => {
                 body: JSON.stringify({ loggedIn: true })
             });
 
-            // onLogin(user);
-            console.log("user",user);
-            alert('Login Successfully')
-            history.push('/#hero');
+            console.log("user", user);
+            onLogin(user ,true);
+            toast.success('Login Successfully');
+            history.push('/form/dashboard');
         } else {
             setError("Invalid email or password.");
-        }
-
-        if (typeof onLogin === 'function') {
-            onLogin(user);
-            console.log("user",user);
-           
-        } else {
-            console.error('onLogin is not a function');
         }
 
     };
@@ -54,35 +50,41 @@ const Login = ({ onLogin }) => {
             <section id="login-form" className="login-form form bg-image" style={{ backgroundImage: 'url(../assets/img/overlay-bg.jpg)' }}>
                 <div className="container">
                     <div className="row">
-                        <div className="login-container"> 
+                        <div className="login-container">
                             <div className="col-12">
                                 <h2>Login</h2>
                             </div>
                             <div className="col-12">
                                 <form onSubmit={onSubmit}>
+                                    {error && <p className="error-message">{error}</p>}
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder="Email"
+                                        required
+                                    />
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        placeholder="Enter Password"
+                                        required
+                                    />
+                                    <div className="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                        <div className="d-flex">
+                                            <div className="toast-body">
+                                                Hello, world! This is a toast message.
+                                            </div>
+                                            <button type="button" className="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close" />
+                                        </div>
+                                    </div>
 
-                                    <input 
-                                        type="email" 
-                                        name="email" 
-                                        placeholder="Email" 
-                                        required 
-                                    />
-                                    <input 
-                                        type="password" 
-                                        name="password" 
-                                        placeholder="Enter Password" 
-                                        required 
-                                    />
-                                    {/* <label>
-                                    <input type="checkbox" checked="checked" name="remember" /> Remember me
-                                </label> */}
                                     <div className="pwd">
                                         <button className="login-button" type="submit">Login</button>
                                         <p><a href="/form/forget-form">Forgot Password?</a></p>
                                     </div>
-                                    {error && <p className="error-message">{error}</p>}
-                                    <div className="signup-link">
-                                        <p>New User?</p><a href="/form/signup-form"><span>SignUp Now</span></a>
+
+                                    <div className="signup-link text-center">
+                                        <a href="/form/signup-form">New User? SignUp</a>
                                     </div>
                                 </form>
                             </div>

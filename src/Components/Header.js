@@ -6,11 +6,12 @@ const Header = ({ user, onLogout }) => {
 
     const location = useLocation();
     const [navLinks, setNavLinks] = useState([]);
+    const isAdminPage = location.pathname.startsWith('/form');
 
 
     useEffect(() => {
         //need to change logic
-        if (location.pathname.startsWith('/form')) {
+        if (user && isAdminPage) {
             setNavLinks([
                 { to: '/form/dashboard', label: 'Dashboard' },
                 { to: '/form/hero-form', label: 'Home' },
@@ -34,9 +35,8 @@ const Header = ({ user, onLogout }) => {
                 { to: '/#contact', label: 'Contact' },
             ]);
         }
-    }, [location.pathname]);
+    }, [user, isAdminPage]);
 
-    const isAdminPage = location.pathname.startsWith('/form');
 
     return (
         <>
@@ -61,7 +61,7 @@ const Header = ({ user, onLogout }) => {
                                         <ul>
                                             <li><Link smooth to="/" onClick={onLogout}>Logout</Link></li>
                                             {isAdminPage ? (
-                                                <li><Link smooth to="/hero">Go to User Portal</Link></li>
+                                                <li><Link smooth to="/#hero">Go to User Portal</Link></li>
                                             ) : (
                                                 <li><Link smooth to="/form/dashboard">Go to Admin Portal</Link></li>
                                             )}
@@ -69,9 +69,9 @@ const Header = ({ user, onLogout }) => {
                                     </>
                                 ) : (
                                     <>
-                                        <a href="/"><span>Account</span><i className="bi bi-chevron-down" /></a>
+                                        <a href="/"><span>Register</span><i className="bi bi-chevron-down" /></a>
                                         <ul>
-                                            <li><Link smooth to="/form/signup-form">Sign Up</Link></li>
+                                            {/* <li><Link smooth to="/form/signup-form">Sign Up</Link></li> */}
                                             <li><Link smooth to="/form/login-form">Login</Link></li>
                                         </ul>
                                     </>

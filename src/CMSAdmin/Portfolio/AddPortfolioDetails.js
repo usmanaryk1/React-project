@@ -234,7 +234,7 @@ const AddPortfolioDetails = () => {
     return (
         <>
             {/* PortfolioDetails Form Start */}
-            <section id="portfolioDetails-form" className="certification-form form">
+            <section id="portfolioDetails-form" className="portfolioDetails-form form">
                 <div className="container">
                     <div className="row">
                         <div className="portfolioDetails-container">
@@ -293,7 +293,6 @@ const AddPortfolioDetails = () => {
                                             />
                                         </div>
 
-
                                         <div className="image mx-auto" onClick={handleImage3Click}>
                                             {image3 ?
                                                 <img
@@ -319,7 +318,9 @@ const AddPortfolioDetails = () => {
                                             />
                                         </div>
                                     </div>
-                                    <label className="mx-auto my-3"><b>Choose Project Images</b></label>
+                                    <div className="label-container text-center">
+                                        <label className=" my-3"><b>Choose Project Images</b></label>
+                                    </div>
                                     <input
                                         type="text"
                                         name="name"
@@ -338,20 +339,34 @@ const AddPortfolioDetails = () => {
                                         placeholder="Date"
                                         required
                                     />
-                                    <input 
-                                        type="text" 
-                                        name="link" 
-                                        placeholder="Enter link to your project" 
-                                        required 
+                                    <input
+                                        type="text"
+                                        name="link"
+                                        placeholder="Enter link to your project"
+                                        required
                                     />
-                                    <textarea 
-                                        name="desc" 
-                                        placeholder="Description" 
+                                    <textarea
+                                        name="desc"
+                                        placeholder="Description"
                                         required
                                     ></textarea>
-                                    <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                    <button className="cancel">Cancel</button>
-                                    <button className="submit" type="submit">Submit</button>
+                                    <div className="isActive">
+                                        <input
+                                            type="checkbox"
+                                            id="active"
+                                            className="mx-2"
+                                            required
+                                        />
+                                        <label htmlFor="active">
+                                            isActive
+                                        </label>
+                                    </div>
+
+                                    <div className="buttons">
+                                        <button className="reset" type="reset" onClick={onReset}>Reset</button>
+                                        <button className="cancel">Cancel</button>
+                                        <button className="submit" type="submit">Submit</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>

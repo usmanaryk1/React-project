@@ -6,7 +6,7 @@ const AddPortfolioForm = () => {
     const imageRef = useRef(null);
     const [base64Image, setBase64Image] = useState("");
 
-    const acceptedFileTypes= "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
+    const acceptedFileTypes = "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
 
     const handleImageChange = async (e) => {
         const file = e.target.files[0];
@@ -126,59 +126,76 @@ const AddPortfolioForm = () => {
                             </div>
                             <div className="col-12">
                                 <form onSubmit={onSubmit}>
-                                    <div className="image" onClick={handleImageClick}>
-                                        {image ?
-                                            <img 
-                                                src={URL.createObjectURL(image)} 
-                                                alt="" 
-                                                className="img-display-before" 
+                                    <div className="img-container text-center">
+                                        <div className="image" onClick={handleImageClick}>
+                                            {image ?
+                                                <img
+                                                    src={URL.createObjectURL(image)}
+                                                    alt=""
+                                                    className="img-display-before"
+                                                />
+                                                : <img
+                                                    src="../assets/img/default-work-image.webp"
+                                                    alt="default"
+                                                    className="img-display-before"
+                                                />
+                                            }
+                                            <input
+                                                type="file"
+                                                name="file"
+                                                multiple={false}
+                                                accept={acceptedFileTypes}
+                                                onChange={handleImageChange}
+                                                ref={imageRef}
+                                                style={{ "display": "none" }}
+                                                required
                                             />
-                                            : <img 
-                                                src="../assets/img/default-work-image.webp" 
-                                                alt="default" 
-                                                className="img-display-before" 
-                                            />
-                                        }
-                                        <input 
-                                            type="file" 
-                                            name="file" 
-                                            multiple={false} 
-                                            accept={acceptedFileTypes} 
-                                            onChange={handleImageChange} 
-                                            ref={imageRef} 
-                                            style={{ "display": "none" }} 
-                                            required
-                                        />
+                                        </div>
+                                        <label className="my-3"><b>Choose Project Image</b></label>
                                     </div>
-                                    <label className="my-3"><b>Choose Project Image</b></label>
-                                    <input 
-                                        type="text" 
-                                        name="title" 
-                                        placeholder="Add title of Project" 
-                                        required 
+
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        placeholder="Add title of Project"
+                                        required
                                     />
-                                    <input 
-                                        type="text" 
-                                        name="link" 
-                                        placeholder="Share Link of Project" 
-                                        required 
+                                    <input
+                                        type="text"
+                                        name="link"
+                                        placeholder="Share Link of Project"
+                                        required
                                     />
-                                    <input 
-                                        type="text" 
-                                        name="category" 
-                                        placeholder="Add the category of Project" 
-                                        required 
+                                    <input
+                                        type="text"
+                                        name="category"
+                                        placeholder="Add the category of Project"
+                                        required
                                     />
-                                    <input 
-                                        type="date" 
-                                        name="date" 
-                                        placeholder="Date of Project" 
+                                    <input
+                                        type="date"
+                                        name="date"
+                                        placeholder="Date of Project"
                                         required
                                     />
 
-                                    <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                    <button className="cancel">Cancel</button>
-                                    <button className="submit" type="submit">Submit</button>
+                                    <div className="isActive">
+                                        <input
+                                            type="checkbox"
+                                            id="active"
+                                            className="mx-2"
+                                            required
+                                        />
+                                        <label htmlFor="active">
+                                            isActive
+                                        </label>
+                                    </div>
+
+                                    <div className="buttons">
+                                        <button className="reset" type="reset" onClick={onReset}>Reset</button>
+                                        <button className="cancel">Cancel</button>
+                                        <button className="submit" type="submit">Submit</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>

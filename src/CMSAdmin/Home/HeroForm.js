@@ -51,12 +51,36 @@ const HeroForm = () => {
                             <div className="col-12">
                                 <form onSubmit={onSubmit}>
 
-                                    <input type="text" name="name" placeholder="Name" required />
-                                    <input type="text" name="skills" placeholder="Designer, Developer, Freelancer, Photographer" required />
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        placeholder="Name"
+                                        required
+                                    />
+                                    <input
+                                        type="text"
+                                        name="skills"
+                                        placeholder="Designer, Developer, Freelancer, Photographer"
+                                        required
+                                    />
+                                    <div className="isActive">
+                                        <input
+                                            type="checkbox"
+                                            id="active"
+                                            className="mx-2"
+                                            required
+                                        />
+                                        <label htmlFor="active">
+                                            isActive
+                                        </label>
+                                    </div>
 
-                                    <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                    <button className="cancel">Cancel</button>
-                                    <button className="submit" type="submit">Submit</button>
+                                    <div className="buttons">
+                                        <button className="reset" type="reset" onClick={onReset}>Reset</button>
+                                        <button className="cancel">Cancel</button>
+                                        <button className="submit" type="submit">Submit</button>
+                                    </div>
+
                                 </form>
                             </div>
                         </div>

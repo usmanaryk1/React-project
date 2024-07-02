@@ -6,7 +6,7 @@ const AddTestimonialForm = () => {
     const imageRef = useRef(null);
     const [base64Image, setBase64Image] = useState("");
 
-    const acceptedFileTypes= "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
+    const acceptedFileTypes = "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
 
     const handleImageChange = async (e) => {
         const file = e.target.files[0];
@@ -134,7 +134,7 @@ const AddTestimonialForm = () => {
         setBase64Image("");      // Clear the image state
     };
 
-    
+
     return (
         <>
             {/* Testimonial Form Start */}
@@ -147,45 +147,62 @@ const AddTestimonialForm = () => {
                             </div>
                             <div className="col-12">
                                 <form onSubmit={onSubmit}>
-                                    <div className="image" onClick={handleImageClick}>
-                                        {image ?
-                                            <img 
-                                                src={URL.createObjectURL(image)} 
-                                                alt="" 
-                                                className="img-display-after" 
+                                    <div className="img-container text-center">
+                                        <div className="image" onClick={handleImageClick}>
+                                            {image ?
+                                                <img
+                                                    src={URL.createObjectURL(image)}
+                                                    alt=""
+                                                    className="img-display-after"
+                                                />
+                                                : <img
+                                                    src="../assets/img/default-image.jpg"
+                                                    alt="default"
+                                                    className="img-display-before"
+                                                />
+                                            }
+                                            <input
+                                                type="file"
+                                                name="file"
+                                                accept={acceptedFileTypes}
+                                                multiple={false}
+                                                onChange={handleImageChange}
+                                                ref={imageRef}
+                                                style={{ "display": "none" }}
                                             />
-                                            : <img 
-                                                src="../assets/img/default-image.jpg" 
-                                                alt="default" 
-                                                className="img-display-before" 
-                                            />
-                                        }
-                                        <input 
-                                            type="file" 
-                                            name="file" 
-                                            accept={acceptedFileTypes} 
-                                            multiple={false} 
-                                            onChange={handleImageChange} 
-                                            ref={imageRef} 
-                                            style={{ "display": "none" }} 
-                                        />
+                                        </div>
+                                        <label className="my-3"><b>Choose Client Image</b></label>
                                     </div>
-                                    <label className="my-3"><b>Choose Client Image</b></label>
-                                    <input 
-                                        type="text" 
-                                        name="name" 
-                                        placeholder="Client Name" 
+
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        placeholder="Client Name"
                                         required
                                     />
-                                    <textarea 
-                                        name="desc" 
-                                        placeholder="Description" 
+                                    <textarea
+                                        name="desc"
+                                        placeholder="Description"
                                         required
                                     ></textarea>
 
-                                    <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                    <button className="cancel">Cancel</button>
-                                    <button className="submit" type="submit">Submit</button>
+                                    <div className="isActive">
+                                        <input
+                                            type="checkbox"
+                                            id="active"
+                                            className="mx-2"
+                                            required
+                                        />
+                                        <label htmlFor="active">
+                                            isActive
+                                        </label>
+                                    </div>
+
+                                    <div className="buttons">
+                                        <button className="reset" type="reset" onClick={onReset}>Reset</button>
+                                        <button className="cancel">Cancel</button>
+                                        <button className="submit" type="submit">Submit</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -198,5 +215,5 @@ const AddTestimonialForm = () => {
         </>
     );
 }
- 
+
 export default AddTestimonialForm;

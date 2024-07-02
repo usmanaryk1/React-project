@@ -1595,7 +1595,7 @@ footer .credits a {
 form {
   max-width: 600px;
   margin: 50px auto 0;
-  text-align: center;
+
 }
 
 .form h2 {
@@ -1604,21 +1604,23 @@ form {
   text-align: center;
 }
 
-.form input,
+.form input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+input[type="datetime"],
+input[type="file"],
+input[type="number"],
 .form textarea {
   width: 100%;
   padding: 10px 10px;
   margin: 10px 0;
   border: 1px solid #ddd;
-  box-sizing: border-box;
+  box-sizing: border-box; 
   display: block;
-  border-radius: 5px;
+  border-radius: 5px; 
 }
 
-.form input:focus, .form textarea:focus{
-  border:1px solid #0078ff;
-  box-shadow: 0 0 0.5 #0078ff;
-}
 .form .submit {
   background: #0062d3;
   color: #fff;
@@ -1634,7 +1636,7 @@ form {
   color: #fff;
   border: 0;
   padding: 10px 25px;
-  margin: 10px 15px 15px;
+  margin: 10px auto 15px;
   border-radius: 25px;
   cursor: pointer;
 }
@@ -1656,6 +1658,18 @@ button:hover {
   transition: all 0.5s;
 }
 
+.buttons{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.buttons button:hover{
+  color: #0078ff;
+  background-color: white;
+  border: 1px solid #0078ff;
+  transition: all 0.5s;
+}
 /*--------------------------------------------------------------
 # Hero Form 
 --------------------------------------------------------------*/
@@ -1667,6 +1681,7 @@ button:hover {
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
 }
+
 /*--------------------------------------------------------------
 # About Form 
 --------------------------------------------------------------*/
@@ -1683,6 +1698,7 @@ button:hover {
   height: 150px;
   width: 150px;
   border-radius: 5px;
+  text-align: center;
 }
 
 .add-container .img-display-before {
@@ -1727,8 +1743,8 @@ button:hover {
 }
 
 .portfolio-container .img-display-before {
-  height: 260px;
-  width: 416px;
+  height: 175px;
+  width: 250px;
   /* margin: 0px auto; */
 }
 
@@ -1824,7 +1840,8 @@ button:hover {
   margin: 130px auto 50px;
   padding: 15px;
   background-color: white;
-  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
+  text-align: center;
 }
 
 .login-container h2 {
@@ -1874,12 +1891,15 @@ button:hover {
 }
 
 .signup-link a{
-  /* background: #0062d3; */
   color: #0062d3;
   cursor: pointer;
-
 }
-
+/* .signup-link a:hover{
+  
+} */
+.login-container .error-message{
+  color: red;
+}
 /* .signup-link a:hover{
   background: #0062d3;
   color: white;
@@ -1900,7 +1920,8 @@ button:hover {
   margin: 130px auto 50px;
   padding: 15px;
   background-color: white;
-  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
+  text-align: center;
 }
 
 .signup-container h2 {
@@ -1940,26 +1961,21 @@ button:hover {
   box-sizing: border-box;
   display: block;
 }
-
+.signup-container .error-message{
+  color: red;
+}
 .log{
   margin: 30px auto;
 }
 
 .log a{
-  /* background: #0062d3; */
   color: #0062d3;
-  border: 1px solid #0062d3;
-  padding: 10px 25px;
-  border-radius: 25px;
   cursor: pointer;
-
 }
+/* .log a:hover{
+  scale: ;
+} */
 
-.log a:hover{
-  background: #0062d3;
-  color: white;
-
-}
 
 /*--------------------------------------------------------------
 # Forget Form 
@@ -1976,7 +1992,8 @@ button:hover {
   margin: 130px auto 50px;
   padding: 15px;
   background-color: white;
-  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
+  text-align: center;
 }
 
 .forget-container h2 {
@@ -2028,7 +2045,8 @@ button:hover {
   margin: 130px auto 50px;
   padding: 15px;
   background-color: white;
-  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
+  text-align: center;
 }
 
 .reset-container h2 {
