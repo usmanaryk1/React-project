@@ -6,7 +6,6 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
     <Route
       {...rest}
       render={props => {
-        debugger; // Add debugger to inspect rendering logic
         return isAuthenticated ? (
           <Component {...props} />
         ) : (
