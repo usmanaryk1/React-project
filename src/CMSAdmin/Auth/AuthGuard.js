@@ -4,7 +4,8 @@ import { Route, Redirect } from 'react-router-dom';
 const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
   // debugger; // Add debugger to inspect props
   console.log("i added this for conflict");
-    console.log('M conflict my side');
+  console.log('M conflict my side');
+  console.log("i added this for conflict");
   return (
     <Route
       {...rest}
