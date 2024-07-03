@@ -339,7 +339,7 @@
       "userName": "malaika03",
       "email": "ghulamyaseen67776@gmail.com",
       "password": "ghulam",
-      "loggedIn": true
+      "loggedIn": false
     },
     {
       "id": "a5e5",
@@ -382,6 +382,13 @@
       "email": "xyzabc@123",
       "password": "hello",
       "loggedIn": true
+    },
+    {
+      "id": "8869",
+      "userName": "qirrat08",
+      "email": "abcdef@gmail.com",
+      "password": "abcd",
+      "loggedIn": false
     }
   ]
 }

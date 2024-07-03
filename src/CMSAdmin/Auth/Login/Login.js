@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 const Login = ({ onLogin }) => {
     
 
-    const [error, setError] = useState('');
     const history = useHistory(); // for programmatic navigation
 
     console.log("Login component received onLogin prop:", onLogin);
@@ -40,7 +39,7 @@ const Login = ({ onLogin }) => {
             toast.success('Login Successfully');
             history.push('/form/dashboard');
         } else {
-            setError("Invalid email or password.");
+            toast.error("Invalid email or password.");
         }
 
     };
@@ -56,7 +55,7 @@ const Login = ({ onLogin }) => {
                             </div>
                             <div className="col-12">
                                 <form onSubmit={onSubmit}>
-                                    {error && <p className="error-message">{error}</p>}
+                                    {/* {error && <p className="error-message">{error}</p>} */}
                                     <input
                                         type="email"
                                         name="email"
@@ -69,14 +68,6 @@ const Login = ({ onLogin }) => {
                                         placeholder="Enter Password"
                                         required
                                     />
-                                    <div className="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                                        <div className="d-flex">
-                                            <div className="toast-body">
-                                                Hello, world! This is a toast message.
-                                            </div>
-                                            <button type="button" className="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close" />
-                                        </div>
-                                    </div>
 
                                     <div className="pwd">
                                         <button className="login-button" type="submit">Login</button>

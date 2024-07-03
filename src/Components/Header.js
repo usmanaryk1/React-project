@@ -59,7 +59,7 @@ const Header = ({ user, onLogout }) => {
                                     <>
                                         <a href="/"><span>{user.userName}</span><i className="bi bi-chevron-down" /></a>
                                         <ul>
-                                            <li><Link smooth to="/" onClick={onLogout}>Logout</Link></li>
+                                            <li><Link smooth to="/" onClick={onLogout}>LogOut</Link></li>
                                             {isAdminPage ? (
                                                 <li><Link smooth to="/#hero">Go to User Portal</Link></li>
                                             ) : (
@@ -72,7 +72,7 @@ const Header = ({ user, onLogout }) => {
                                         <a href="/"><span>Register</span><i className="bi bi-chevron-down" /></a>
                                         <ul>
                                             {/* <li><Link smooth to="/form/signup-form">Sign Up</Link></li> */}
-                                            <li><Link smooth to="/form/login-form">Login</Link></li>
+                                            <li><Link smooth to="/form/login-form">LogIn</Link></li>
                                         </ul>
                                     </>
                                 )}

@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Swal from 'sweetalert2';
-
+import './Signup.css';
 const SignUp = ({ onSignup }) => {
+   
 
-    const [error, setError] = useState('');
-    const [emailError, setEmailError] = useState('');
     const history = useHistory(); // for programmatic navigation
 
     console.log("Signup component received onSignup prop:", onSignup);
@@ -22,7 +21,6 @@ const SignUp = ({ onSignup }) => {
 
 
         if (formObject.password !== formObject.confirmPassword) {
-            setError("Passwords do not match");
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -44,12 +42,15 @@ const SignUp = ({ onSignup }) => {
             const userExist = await checkResponse.json();
 //need to check the logic
             if (userExist.length > 0) {
-                setEmailError("Email already exists. Please log in.");
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'Signup failed. Please try again.',
-                });
+                    text: 'Email already exists. Please log in.',
+                    showCancelButton: false,
+                    cancelButtonText: 'Cancel',
+                    footer: '<a href="/form/login-form" class="swal2-link">Log in</a>',
+                    showConfirmButton: false,
+                  });
                 return;
             }
 
@@ -64,7 +65,6 @@ const SignUp = ({ onSignup }) => {
             });
 
             if (!response.ok) {
-                setError("Signup failed. Please try again.");
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
@@ -85,7 +85,6 @@ const SignUp = ({ onSignup }) => {
             history.push('/#hero');
         } catch (err) {
             console.error("Error during signup:", err);
-            setError("An error occurred. Please try again.");
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -106,7 +105,7 @@ const SignUp = ({ onSignup }) => {
                             </div>
                             <div className="col-12">
                                 <form onSubmit={onSubmit}>
-                                    {emailError && <p className="error-message">{emailError}</p>}
+                                    {/* {emailError && <p className="error-message">{emailError}</p>} */}
                                     <input
                                         type="text"
                                         name="userName"
@@ -131,7 +130,7 @@ const SignUp = ({ onSignup }) => {
                                         placeholder="Confirm Password"
                                         required
                                     />
-                                    {error && <p className="error-message">{error}</p>}
+                                    {/* {error && <p className="error-message">{error}</p>} */}
 
                                     <div className="sign">
                                         <button className="sign-button" type="submit">SignUp</button>

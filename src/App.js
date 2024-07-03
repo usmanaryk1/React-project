@@ -47,7 +47,7 @@ function App() {
   };
 
   useEffect(() => {
-    console.log('logout:', isAuthenticated);
+    console.log('Authentication:', isAuthenticated);
   }, [isAuthenticated]);
   
   return (
