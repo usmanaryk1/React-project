@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { toast } from 'react-toastify';
 
 const Login = ({ onLogin }) => {
-    
 
+    const [errors, setErrors] = useState({});
     const history = useHistory(); // for programmatic navigation
 
     console.log("Login component received onLogin prop:", onLogin);
@@ -16,6 +16,14 @@ const Login = ({ onLogin }) => {
         const formObject = Object.fromEntries(formData.entries());
 
         console.log('Form Data:', formObject);
+
+        const validationErrors = validate(formObject);
+
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
+        }
+
 
         const response = await fetch('http://localhost:8000/users');
         const users = await response.json();
@@ -35,7 +43,7 @@ const Login = ({ onLogin }) => {
             });
 
             console.log("user", user);
-            onLogin(user ,true);
+            onLogin(user, true);
             toast.success('Login Successfully');
             history.push('/form/dashboard');
         } else {
@@ -43,6 +51,25 @@ const Login = ({ onLogin }) => {
         }
 
     };
+
+    
+    const validate = (formObject) => {
+        const errors = {};
+
+        for (const [key, value] of Object.entries(formObject)) {
+            if (!value) {
+                errors[key] = `Please fill in the ${key}.`;
+            }
+        }
+
+        // Validate email format
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(formObject.email)) {
+            errors.email = 'Please enter a valid email address.';
+        }
+
+        return errors;
+    }
 
     return (
         <>
@@ -54,7 +81,7 @@ const Login = ({ onLogin }) => {
                                 <h2>Login</h2>
                             </div>
                             <div className="col-12">
-                                <form onSubmit={onSubmit}>
+                                <form onSubmit={onSubmit} noValidate>
                                     {/* {error && <p className="error-message">{error}</p>} */}
                                     <input
                                         type="email"
@@ -62,13 +89,15 @@ const Login = ({ onLogin }) => {
                                         placeholder="Email"
                                         required
                                     />
+                                    {errors.email && <p className="error-message">{errors.email}</p>}
                                     <input
                                         type="password"
                                         name="password"
                                         placeholder="Enter Password"
                                         required
                                     />
-
+                                    {errors.password && <p className="error-message">{errors.password}</p>}
+                                    {/* <p className="error-message">{formError.password}</p> */}
                                     <div className="pwd">
                                         <button className="login-button" type="submit">Login</button>
                                         <p><a href="/form/forget-form">Forgot Password?</a></p>

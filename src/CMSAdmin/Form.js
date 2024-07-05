@@ -31,7 +31,7 @@ const Form = ({ onSignup, onLogin, isAuthenticated }) => {
     // }, []);
 
     let { path } = useRouteMatch();
-    console.log("path", path);
+    console.log("form auth", isAuthenticated);
 
     return (
         <>

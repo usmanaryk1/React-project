@@ -31,6 +31,7 @@ function App() {
     setUser(loggedInUser);
     setIsAuthenticated(authentication);
     console.log('authentication:' , authentication);
+
   };
 
   const handleLogout = async () => {
@@ -43,7 +44,6 @@ function App() {
 
     setUser(null);
     setIsAuthenticated(false);
-    // console.log('logout:', isAuthenticated);
   };
 
   useEffect(() => {
@@ -57,7 +57,7 @@ function App() {
         <div className="content">
           <Switch>
             <Route exact path="/">
-              <Home />
+              <Home isAuthenticated={isAuthenticated} />
             </Route>
             {/* <Route path="/blogs/:id">
               <BlogDetails />

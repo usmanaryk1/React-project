@@ -54,7 +54,7 @@ const HeroForm = () => {
                                     <input
                                         type="text"
                                         name="name"
-                                        placeholder="Name"
+                                        placeholder="Full Name"
                                         required
                                     />
                                     <input

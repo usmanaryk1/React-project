@@ -9,6 +9,10 @@ const Header = ({ user, onLogout }) => {
     const isAdminPage = location.pathname.startsWith('/form');
 
 
+    const preventRefresh = (e) => {
+        e.preventDefault();
+    }
+
     useEffect(() => {
         //need to change logic
         if (user && isAdminPage) {
@@ -57,7 +61,7 @@ const Header = ({ user, onLogout }) => {
                             <li className="dropdown nav-link">
                                 {user ? (
                                     <>
-                                        <a href="/"><span>{user.userName}</span><i className="bi bi-chevron-down" /></a>
+                                        <a href="/" onClick={preventRefresh}><span>{user.userName}</span><i className="bi bi-chevron-down" /></a>
                                         <ul>
                                             <li><Link smooth to="/" onClick={onLogout}>LogOut</Link></li>
                                             {isAdminPage ? (
@@ -69,7 +73,7 @@ const Header = ({ user, onLogout }) => {
                                     </>
                                 ) : (
                                     <>
-                                        <a href="/"><span>Register</span><i className="bi bi-chevron-down" /></a>
+                                        <a href="/" onClick={preventRefresh}><span>Register</span><i className="bi bi-chevron-down" /></a>
                                         <ul>
                                             {/* <li><Link smooth to="/form/signup-form">Sign Up</Link></li> */}
                                             <li><Link smooth to="/form/login-form">LogIn</Link></li>

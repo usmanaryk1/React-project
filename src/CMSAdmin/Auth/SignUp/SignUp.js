@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import './Signup.css';
 const SignUp = ({ onSignup }) => {
    
-
+    const [errors, setErrors] = useState({});
     const history = useHistory(); // for programmatic navigation
 
     console.log("Signup component received onSignup prop:", onSignup);
@@ -19,6 +19,12 @@ const SignUp = ({ onSignup }) => {
 
         console.log('Form Data:', formObject);
 
+        const validationErrors = validate(formObject);
+
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
+        }
 
         if (formObject.password !== formObject.confirmPassword) {
             Swal.fire({
@@ -35,18 +41,20 @@ const SignUp = ({ onSignup }) => {
             const checkResponse = await fetch(`http://localhost:8000/users?email=${encodeURIComponent(formObject.email)}`);
             //check the type of check response
             console.log("checkResponse: " ,typeof(checkResponse), checkResponse);
+
             if (!checkResponse.ok) {
                 throw new Error("Failed to check email existence");
             }
 
             const userExist = await checkResponse.json();
-//need to check the logic
+            
+            //need to check the logic
             if (userExist.length > 0) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
                     text: 'Email already exists. Please log in.',
-                    showCancelButton: false,
+                    showCancelButton: true,
                     cancelButtonText: 'Cancel',
                     footer: '<a href="/form/login-form" class="swal2-link">Log in</a>',
                     showConfirmButton: false,
@@ -93,6 +101,36 @@ const SignUp = ({ onSignup }) => {
         }
     };
 
+
+    const validate = (formObject) => {
+        const errors = {};
+
+        for (const [key, value] of Object.entries(formObject)) {
+            if (!value) {
+                errors[key] = `Please fill in the ${key}.`;
+            }
+        }
+
+        // Validate email format
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(formObject.email)) {
+            errors.email = 'Please enter a valid email address.';
+        }
+
+        // Validate password strength
+        // const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+        // if (!passwordPattern.test(formObject.password)) {
+        //     errors.password = 'Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, and one digit.';
+        // }
+
+        // Validate password match
+        if (formObject.password !== formObject.confirmPassword) {
+            errors.confirmPassword = 'Passwords do not match.';
+        }
+
+        return errors;
+    }
+
     return (
         <>
             {/* SIGNUP FORM */}
@@ -104,33 +142,36 @@ const SignUp = ({ onSignup }) => {
                                 <h2>SignUp</h2>
                             </div>
                             <div className="col-12">
-                                <form onSubmit={onSubmit}>
+                                <form onSubmit={onSubmit} noValidate>
                                     {/* {emailError && <p className="error-message">{emailError}</p>} */}
                                     <input
                                         type="text"
-                                        name="userName"
+                                        name="username"
                                         placeholder="Username"
                                         required
                                     />
+                                    {errors.username && <p className="error-message">{errors.username}</p>}
                                     <input
                                         type="email"
                                         name="email"
                                         placeholder="Email"
                                         required
                                     />
+                                    {errors.email && <p className="error-message">{errors.email}</p>}
                                     <input
                                         type="password"
                                         name="password"
                                         placeholder="Create Password"
                                         required
                                     />
+                                    {errors.password && <p className="error-message">{errors.password}</p>}
                                     <input
                                         type="password"
                                         name="confirmPassword"
                                         placeholder="Confirm Password"
                                         required
                                     />
-                                    {/* {error && <p className="error-message">{error}</p>} */}
+                                    {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
 
                                     <div className="sign">
                                         <button className="sign-button" type="submit">SignUp</button>

@@ -1,8 +1,10 @@
 import useFetch from "./useFetch";
 
+
 const Services = ({ title, subtitle }) => {
 
     const { data: services } = useFetch("http://localhost:8000/services");
+
 
     return (
         <>
