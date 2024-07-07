@@ -1,7 +1,24 @@
 import Portfolio from "../../Components/Portfolio";
 import { useRef, useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from 'react-toastify';
+import { useForm } from "react-hook-form";
+import validationSchema from "./PortfolioValidation";
 
 const AddPortfolioForm = () => {
+
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm({
+        resolver: yupResolver(validationSchema),
+        defaultValues: {
+            file: '',
+            title: '',
+            link: '',
+            category: '',
+            date: '',
+            isActive: false
+        }
+    })
+
     const [image, setImage] = useState(null);
     const imageRef = useRef(null);
     const [base64Image, setBase64Image] = useState("");
@@ -14,6 +31,7 @@ const AddPortfolioForm = () => {
         setBase64Image(base64);
         console.log("base64", base64);
         setImage(file);
+        setValue("file", e.target.files);
     };
 
     const handleImageClick = () => {
@@ -36,11 +54,8 @@ const AddPortfolioForm = () => {
 
     }
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (formObject, e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-
-        const formObject = Object.fromEntries(formData);
 
         formObject.linkImage = base64Image; // Add the base64 image to the form object
         formObject.workImage = base64Image; // Add the base64 image to the form object
@@ -77,6 +92,7 @@ const AddPortfolioForm = () => {
             wDate: formObject.date,
             linkImage: imageUrl,
             workImage: imageUrl2,
+            isActive: formObject.isActive,
             id: "1"
         };
 
@@ -96,6 +112,8 @@ const AddPortfolioForm = () => {
             const data = await response.json();
 
             console.log('Success:', data);
+
+            toast.success('Submitted Successfully');
 
             e.target.reset();  // Reset the form after successful submission
 
@@ -125,7 +143,7 @@ const AddPortfolioForm = () => {
                                 <h2>Add Portfolio Info!</h2>
                             </div>
                             <div className="col-12">
-                                <form onSubmit={onSubmit}>
+                                <form onSubmit={handleSubmit(onSubmit)} noValidate>
                                     <div className="img-container text-center">
                                         <div className="image" onClick={handleImageClick}>
                                             {image ?
@@ -143,6 +161,7 @@ const AddPortfolioForm = () => {
                                             <input
                                                 type="file"
                                                 name="file"
+                                                {...register('file')}
                                                 multiple={false}
                                                 accept={acceptedFileTypes}
                                                 onChange={handleImageChange}
@@ -152,37 +171,47 @@ const AddPortfolioForm = () => {
                                             />
                                         </div>
                                         <label className="my-3"><b>Choose Project Image</b></label>
+                                        {errors.file && <p className="error-message">{errors.file.message}</p>}
                                     </div>
 
                                     <input
                                         type="text"
                                         name="title"
+                                        {...register('title')}
                                         placeholder="Add title of Project"
                                         required
                                     />
+                                    {errors.title && <p className="error-message">{errors.title.message}</p>}
                                     <input
                                         type="text"
                                         name="link"
+                                        {...register('link')}
                                         placeholder="Share Link of Project"
                                         required
                                     />
+                                    {errors.link && <p className="error-message">{errors.link.message}</p>}
                                     <input
                                         type="text"
                                         name="category"
+                                        {...register('category')}
                                         placeholder="Add the category of Project"
                                         required
                                     />
+                                    {errors.category && <p className="error-message">{errors.category.message}</p>}
                                     <input
                                         type="date"
                                         name="date"
+                                        {...register('date')}
                                         placeholder="Date of Project"
                                         required
                                     />
-
+                                    {errors.date && <p className="error-message">{errors.date.message}</p>}
                                     <div className="isActive">
                                         <input
                                             type="checkbox"
                                             id="active"
+                                            name="isActive"
+                                            {...register('isActive')}
                                             className="mx-2"
                                             required
                                         />
@@ -190,7 +219,7 @@ const AddPortfolioForm = () => {
                                             isActive
                                         </label>
                                     </div>
-
+                                    {errors.isActive && <p className="error-message">{errors.isActive.message}</p>}
                                     <div className="buttons">
                                         <button className="reset" type="reset" onClick={onReset}>Reset</button>
                                         <button className="cancel">Cancel</button>

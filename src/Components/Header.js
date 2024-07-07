@@ -61,11 +61,11 @@ const Header = ({ user, onLogout }) => {
                             <li className="dropdown nav-link">
                                 {user ? (
                                     <>
-                                        <a href="/" onClick={preventRefresh}><span>{user.userName}</span><i className="bi bi-chevron-down" /></a>
+                                        <a href="/" onClick={preventRefresh}><span>{user.username}</span><i className="bi bi-chevron-down" /></a>
                                         <ul>
                                             <li><Link smooth to="/" onClick={onLogout}>LogOut</Link></li>
                                             {isAdminPage ? (
-                                                <li><Link smooth to="/#hero">Go to User Portal</Link></li>
+                                                <li><Link smooth to="/">Go to User Portal</Link></li>
                                             ) : (
                                                 <li><Link smooth to="/form/dashboard">Go to Admin Portal</Link></li>
                                             )}

@@ -1899,6 +1899,7 @@ button:hover {
 } */
 .error-message{
   color: red;
+  text-align: left;
 }
 /* .signup-link a:hover{
   background: #0062d3;

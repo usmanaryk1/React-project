@@ -17,7 +17,7 @@ const PortfolioDetails = () => {
         };
     }, []);
     const { id } = useParams();
-    const { data: work, error } = useFetch("http://localhost:8000/works/" + id);
+    const { data: work, error } = useFetch("http://localhost:8000/workDetails/" + id);
 
     return (
         <div className="blog-details">

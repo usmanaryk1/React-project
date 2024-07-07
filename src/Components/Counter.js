@@ -31,7 +31,7 @@ const Counter = () => {
                                     </div>
                                     <div className="counter-num">
                                         <p data-purecounter-start={0} data-purecounter-end={counter.counterEnd} data-purecounter-duration={1} className="counter purecounter" />
-                                        <span className="counter-text"> {counter.text} </span>
+                                        <span className="counter-text text-uppercase"> {counter.text} </span>
                                     </div>
                                 </div>
                             </div>

@@ -1,7 +1,26 @@
 import { useRef, useState } from "react";
 import About from "../../Components/About";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from 'react-toastify';
+import validationSchema from "./AboutValidation";
 
 const AddForm = () => {
+
+    const { register, handleSubmit, formState: { errors }, setValue, trigger  } = useForm({
+        resolver: yupResolver(validationSchema),
+        defaultValues: {
+            file: '',
+            name: '',
+            profile: '',
+            skills: '',
+            email: '',
+            phone: '',
+            desc: '',
+            isActive: false
+        }
+    })
+
     const [image, setImage] = useState(null);
     const imageRef = useRef(null);
     const [base64Image, setBase64Image] = useState("");
@@ -14,6 +33,9 @@ const AddForm = () => {
         setBase64Image(base64);
         console.log("base64", base64);
         setImage(file);
+
+        setValue("file", file);
+        await trigger("file");
 
         const imgname = e.target.files[0].name;
         const reader = new FileReader();
@@ -70,11 +92,8 @@ const AddForm = () => {
         imageRef.current.click();
     }
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (formObject, e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-
-        const formObject = Object.fromEntries(formData);
 
         formObject.aboutImage = base64Image; // Add the base64 image to the form object
 
@@ -123,6 +142,7 @@ const AddForm = () => {
             });
             const data = await response.json();
             console.log('Success:', data);
+            toast.success('Data updated successfully!')
             e.target.reset();  // Reset the form after successful submission
             setImage(null);
             setBase64Image("");   // Clear the image state 
@@ -151,7 +171,7 @@ const AddForm = () => {
                                 <h2>Add About Info!</h2>
                             </div>
                             <div className="col-12">
-                                <form onSubmit={onSubmit}>
+                                <form onSubmit={handleSubmit(onSubmit)} noValidate>
                                     <div className="img-container text-center">
                                         <div className="image" onClick={handleImageClick}>
                                             {image ?
@@ -169,6 +189,7 @@ const AddForm = () => {
                                             <input
                                                 type="file"
                                                 name="file"
+                                                {...register('file')}
                                                 accept={acceptedFileTypes}
                                                 multiple={false}
                                                 onChange={handleImageChange}
@@ -178,40 +199,52 @@ const AddForm = () => {
                                         </div>
                                         <label className="my-3"><b>Choose Profile Image</b></label>
                                     </div>
-
+                                        {errors.file && <p className="error-message">{errors.file.message}</p>}
                                     <input
                                         type="text"
                                         name="name"
-                                        placeholder="Name"
+                                        {...register('name')}
+                                        placeholder="Full Name"
                                         required
                                     />
+                                    {errors.name && <p className="error-message">{errors.name.message}</p>}
                                     <input
                                         type="text"
                                         name="profile"
-                                        placeholder="Profile"
+                                        {...register('profile')}
+                                        placeholder="Occupation"
                                         required
                                     />
+                                    {errors.profile && <p className="error-message">{errors.profile.message}</p>}
                                     <input
                                         type="email"
                                         name="email"
+                                        {...register('email')}
                                         placeholder="Email"
                                         required
                                     />
+                                    {errors.email && <p className="error-message">{errors.email.message}</p>}
                                     <input
-                                        type="text"
+                                        type="number"
                                         name="phone"
+                                        {...register('phone')}
                                         placeholder="Phone Number"
                                         required
                                     />
+                                    {errors.phone && <p className="error-message">{errors.phone.message}</p>}
                                     <textarea
                                         name="desc"
+                                        {...register('desc')}
                                         placeholder="Description"
                                         required
                                     ></textarea>
+                                    {errors.desc && <p className="error-message">{errors.desc.message}</p>}
                                     <div className="isActive">
                                         <input
                                             type="checkbox"
                                             id="active"
+                                            name="isActive"
+                                            {...register('isActive')}
                                             className="mx-2"
                                             required
                                         />
@@ -219,7 +252,7 @@ const AddForm = () => {
                                             isActive
                                         </label>
                                     </div>
-
+                                    {errors.isActive && <p className="error-message">{errors.isActive.message}</p>}
                                     <div className="buttons">
                                         <button className="reset" type="reset" onClick={onReset}>Reset</button>
                                         <button className="cancel">Cancel</button>

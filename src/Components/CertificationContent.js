@@ -1,4 +1,11 @@
-const CertificationContent = ({ certification }) => {
+import { useParams } from "react-router-dom/cjs/react-router-dom";
+import useFetch from "./useFetch";
+
+const CertificationContent = () => {
+    const { id } = useParams();
+    const { data: certification } = useFetch("http://localhost:8000/certificationDetails/" + id);
+
+    
     if (!certification) {
         return <div>Loading...</div>;
     }
@@ -19,7 +26,7 @@ const CertificationContent = ({ certification }) => {
     return (
         <>
             {/*======= certification Single Section =======*/}
-            <section className="certification-wrapper sect-pt4" id="certification">
+            {certification && <section className="certification-wrapper sect-pt4" id="certification">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8">
@@ -245,7 +252,8 @@ const CertificationContent = ({ certification }) => {
                         </div>
                     </div>
                 </div>
-            </section> {/*======= Blog Section End =======*/}
+            </section> }
+            {/*======= Blog Section End =======*/}
         </>
     );
 }

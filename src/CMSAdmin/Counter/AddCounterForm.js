@@ -1,12 +1,23 @@
 import Counter from "../../Components/Counter";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from 'react-toastify';
+import { useForm } from "react-hook-form";
+import validationSchema from "./CounterValidation";
+
 
 const AddCounterForm = () => {
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(validationSchema),
+        defaultValues: {
+            title: '',
+            counts: '',
+            isActive: false
+        }
+    })
 
-        const formObject = Object.fromEntries(formData);
+    const onSubmit = (formObject, e) => {
+        e.preventDefault();
 
         console.log('Service Data:', formObject);
 
@@ -27,7 +38,7 @@ const AddCounterForm = () => {
             .then(data => {
                 console.log('Success:', data);
 
-                alert("Submitted Successfully")
+                toast.success("Submitted Successfully")
 
                 e.target.reset();  // Reset the form after successful submission
             })
@@ -55,23 +66,29 @@ const AddCounterForm = () => {
                                 <h2>Add Counter Info!</h2>
                             </div>
                             <div className="col-12">
-                                <form onSubmit={onSubmit}>
+                                <form onSubmit={handleSubmit(onSubmit)} noValidate>
                                     <input
                                         type="text"
                                         name="title"
+                                        {...register('title')}
                                         placeholder="Title in Uppercase"
                                         required
                                     />
+                                    {errors.title && <p className="error-message">{errors.title.message}</p>}
                                     <input
                                         type="number"
                                         name="counts"
+                                        {...register('counts')}
                                         placeholder="Number of Counts"
                                         required
                                     />
+                                    {errors.counts && <p className="error-message">{errors.counts.message}</p>}
                                     <div className="isActive">
                                         <input
                                             type="checkbox"
                                             id="active"
+                                            name="isActive"
+                                            {...register('isActive')}
                                             className="mx-2"
                                             required
                                         />
@@ -79,7 +96,7 @@ const AddCounterForm = () => {
                                             isActive
                                         </label>
                                     </div>
-
+                                    {errors.isActive && <p className="error-message">{errors.isActive.message}</p>}
                                     <div className="buttons">
                                         <button className="reset" type="reset" onClick={onReset}>Reset</button>
                                         <button className="cancel">Cancel</button>

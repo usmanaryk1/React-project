@@ -1,15 +1,27 @@
 import { useState, useEffect } from "react";
 import useFetch from "../../Components/useFetch";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from 'react-toastify';
+import { useForm } from "react-hook-form";
+import validationSchema from "./ServiceValidation";
 
 const AddServiceForm = ({ serviceToEdit }) => {
 
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(validationSchema),
+        defaultValues: {
+            title: '',
+            desc: '',
+            isActive: false
+        }
+    })
     // const [errors, setErrors] = useState({});
     const { data: services, setData: setServices } = useFetch("http://localhost:8000/services");
 
     const [formObject, setFormObject] = useState({
         title: "",
         desc: "",
-        // isActive: false
+        isActive: false
     });
 
     const [isEditing, setIsEditing] = useState(false);
@@ -43,26 +55,8 @@ const AddServiceForm = ({ serviceToEdit }) => {
     };
     console.log('Service List Before Update:', services);
 
-    const validateForm = () => {
-        const { title, desc } = formObject;
-        let isValid = true;
-
-        if (!title.trim()) {
-            alert("Title is required.");
-            isValid = false;
-        }
-        if (!desc.trim()) {
-            alert("Description is required.");
-            isValid = false;
-        }
-
-        return isValid;
-    };
-
-    const onSubmit = async (e) => {
+    const onSubmit = async (formObject, e) => {
         e.preventDefault();
-
-        if (!validateForm()) return;
 
         const updatedServiceData = {
             sTitle: formObject.title,
@@ -87,7 +81,7 @@ const AddServiceForm = ({ serviceToEdit }) => {
                 )
             );
             console.log('new updated service: ', services);
-            alert('Service updated successfully');
+            toast.success('Service updated successfully');
         } else {
             // Add new service
             const response = await fetch("http://localhost:8000/services", {
@@ -103,11 +97,11 @@ const AddServiceForm = ({ serviceToEdit }) => {
 
             console.log('Added service: ', services);
 
-            alert('Service added successfully');
+            toast.success('Service added successfully');
         }
 
         // Reset form
-        setFormObject({ title: "", desc: ""/*, isActive: false*/ });
+        setFormObject({ title: "", desc: "", isActive: false });
         setIsEditing(false);
         setEditingId(null);
     };
@@ -128,7 +122,7 @@ const AddServiceForm = ({ serviceToEdit }) => {
         });
 
         setServices(services.filter(service => service.id !== id));
-        alert('Service deleted successfully');
+        toast.error('Service deleted successfully');
     };
 
     const onReset = (e) => {
@@ -136,7 +130,7 @@ const AddServiceForm = ({ serviceToEdit }) => {
         setFormObject({
             title: '',
             desc: '',
-            // isActive: false,
+            isActive: false,
             id: null
         });
         setIsEditing(false);
@@ -154,29 +148,32 @@ const AddServiceForm = ({ serviceToEdit }) => {
                                 <h2>Add Services Info!</h2>
                             </div>
                             <div className="col-12">
-                                <form onSubmit={onSubmit} noValidate>
+                                <form onSubmit={handleSubmit(onSubmit)} noValidate>
                                     <input
                                         type="text"
                                         name="title"
+                                        {...register('title')}
                                         placeholder="Title of Service"
                                         value={formObject.title || ""}
                                         onChange={handleChange}
                                         required
                                     />
-                                    {/* {errors.title && <p className="error-message">{errors.title}</p>} */}
+                                    {errors.title && <p className="error-message">{errors.title.message}</p>}
                                     <textarea
                                         name="desc"
                                         placeholder="Description"
+                                        {...register('desc')}
                                         value={formObject.desc || ""}
                                         onChange={handleChange}
                                         required
                                     ></textarea>
-                                    {/* {errors.desc && <p className="error-message">{errors.desc}</p>} */}
-                                    {/* <div className="isActive">
+                                    {errors.desc && <p className="error-message">{errors.desc.message}</p>}
+                                    <div className="isActive">
                                         <input
                                             type="checkbox"
                                             id="active"
                                             name="isActive"
+                                            {...register('isActive')}
                                             className="mx-2"
                                             checked={formObject.isActive}
                                             onChange={handleChange}
@@ -185,8 +182,9 @@ const AddServiceForm = ({ serviceToEdit }) => {
                                         <label htmlFor="active">
                                             isActive
                                         </label>
-                                    </div> */}
-                                    {/* {errors.isActive && <p className="error-message">{errors.isActive}</p>} */}
+                                    </div>
+                                    {errors.isActive && <p className="error-message">{errors.isActive.message}</p>}
+
                                     <div className="buttons">
                                         <button className="reset" type="reset" onClick={onReset}>Reset</button>
                                         <button className="cancel">Cancel</button>

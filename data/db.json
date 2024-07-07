@@ -8,14 +8,14 @@
   ],
   "about": [
     {
-      "name": "Morgan Freeman",
-      "profile": "Full Stack Developer",
-      "email": "example@gmail.com",
-      "phone": "068-1243778",
-      "desc1": "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan idimperdiet et, porttitorat sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nullaporttitor accumsan tincidunt.",
-      "desc2": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.",
-      "desc3": "Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
-      "img": "../assets/img/testimonial-2.jpg",
+      "aboutName": "Morgan Freeman",
+      "aboutProfile": "Full Stack Developer",
+      "aboutEmail": "example@gmail.com",
+      "aboutPhone": "068-1243778",
+      "aboutDesc1": "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan idimperdiet et, porttitorat sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nullaporttitor accumsan tincidunt.",
+      "aboutDesc2": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.",
+      "aboutDesc3": "Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
+      "aboutImg": "../assets/img/testimonial-2.jpg",
       "id": "1"
     }
   ],
@@ -26,6 +26,51 @@
       "wTitle": "Lorem impsum dolor",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
+      "id": "1"
+    },
+    {
+      "linkImage": "../assets/img/work-2.jpg",
+      "workImage": "../assets/img/work-2.jpg",
+      "wTitle": "Loreda Cuno Nere",
+      "wCategory": "Web Design",
+      "wDate": "18 Sep. 2018",
+      "id": "2"
+    },
+    {
+      "linkImage": "../assets/img/work-3.jpg",
+      "workImage": "../assets/img/work-3.jpg",
+      "wTitle": "Mavrito Lana Dere",
+      "wCategory": "Web Design",
+      "wDate": "18 Sep. 2018",
+      "id": "3"
+    },
+    {
+      "linkImage": "../assets/img/work-4.jpg",
+      "workImage": "../assets/img/work-4.jpg",
+      "wTitle": "Bindo Laro Cado",
+      "wCategory": "Web Design",
+      "wDate": "18 Sep. 2018",
+      "id": "4"
+    },
+    {
+      "linkImage": "../assets/img/work-5.jpg",
+      "workImage": "../assets/img/work-5.jpg",
+      "wTitle": "Studio Lena Mado",
+      "wCategory": "Web Design",
+      "wDate": "18 Sep. 2018",
+      "id": "5"
+    },
+    {
+      "linkImage": "../assets/img/work-6.jpg",
+      "workImage": "../assets/img/work-6.jpg",
+      "wTitle": "Studio Big Bang",
+      "wCategory": "Web Design",
+      "wDate": "18 Sep. 2018",
+      "id": "6"
+    }
+  ],
+  "workDetails": [
+    {
       "slideImage1": "../assets/img/portfolio-details-1.jpg",
       "slideImage2": "../assets/img/portfolio-details-2.jpg",
       "slideImage3": "../assets/img/portfolio-details-3.jpg",
@@ -37,11 +82,6 @@
       "id": "1"
     },
     {
-      "linkImage": "../assets/img/work-2.jpg",
-      "workImage": "../assets/img/work-2.jpg",
-      "wTitle": "Loreda Cuno Nere",
-      "wCategory": "Web Design",
-      "wDate": "18 Sep. 2018",
       "slideImage1": "../assets/img/portfolio-details-1.jpg",
       "slideImage2": "../assets/img/portfolio-details-2.jpg",
       "slideImage3": "../assets/img/portfolio-details-3.jpg",
@@ -53,11 +93,6 @@
       "id": "2"
     },
     {
-      "linkImage": "../assets/img/work-3.jpg",
-      "workImage": "../assets/img/work-3.jpg",
-      "wTitle": "Mavrito Lana Dere",
-      "wCategory": "Web Design",
-      "wDate": "18 Sep. 2018",
       "slideImage1": "../assets/img/portfolio-details-1.jpg",
       "slideImage2": "../assets/img/portfolio-details-2.jpg",
       "slideImage3": "../assets/img/portfolio-details-3.jpg",
@@ -69,11 +104,6 @@
       "id": "3"
     },
     {
-      "linkImage": "../assets/img/work-4.jpg",
-      "workImage": "../assets/img/work-4.jpg",
-      "wTitle": "Bindo Laro Cado",
-      "wCategory": "Web Design",
-      "wDate": "18 Sep. 2018",
       "slideImage1": "../assets/img/portfolio-details-1.jpg",
       "slideImage2": "../assets/img/portfolio-details-2.jpg",
       "slideImage3": "../assets/img/portfolio-details-3.jpg",
@@ -85,11 +115,6 @@
       "id": "4"
     },
     {
-      "linkImage": "../assets/img/work-5.jpg",
-      "workImage": "../assets/img/work-5.jpg",
-      "wTitle": "Studio Lena Mado",
-      "wCategory": "Web Design",
-      "wDate": "18 Sep. 2018",
       "slideImage1": "../assets/img/portfolio-details-1.jpg",
       "slideImage2": "../assets/img/portfolio-details-2.jpg",
       "slideImage3": "../assets/img/portfolio-details-3.jpg",
@@ -101,11 +126,6 @@
       "id": "5"
     },
     {
-      "linkImage": "../assets/img/work-6.jpg",
-      "workImage": "../assets/img/work-6.jpg",
-      "wTitle": "Studio Big Bang",
-      "wCategory": "Web Design",
-      "wDate": "18 Sep. 2018",
       "slideImage1": "../assets/img/portfolio-details-1.jpg",
       "slideImage2": "../assets/img/portfolio-details-2.jpg",
       "slideImage3": "../assets/img/portfolio-details-3.jpg",
@@ -153,6 +173,12 @@
       "sTitle": "Marketing Services",
       "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
       "id": "6"
+    },
+    {
+      "id": "e80b",
+      "sTitle": "Web Design",
+      "sDescription": "Hey",
+      "isActive": true
     }
   ],
   "testimonials": [
@@ -173,25 +199,25 @@
     {
       "icon": "bi-check",
       "counterEnd": "450",
-      "text": "WORKS COMPLETED",
+      "text": "Works completed",
       "id": "1"
     },
     {
       "icon": "bi-journal-richtext",
       "counterEnd": "25",
-      "text": "YEARS OF EXPERIENCE",
+      "text": "Years of experience",
       "id": "2"
     },
     {
       "icon": "bi-people",
       "counterEnd": "550",
-      "text": "TOTAL CLIENTS",
+      "text": "Total clients",
       "id": "3"
     },
     {
       "icon": "bi-award",
       "counterEnd": "48",
-      "text": "AWARD WON",
+      "text": "Award won",
       "id": "4"
     }
   ],
@@ -313,6 +339,34 @@
       "id": "3"
     }
   ],
+  "certificationDetails": [
+    {
+      "image": "../assets/img/post-1.jpg",
+      "articleTitle": "Lorem ipsum dolor sit amet consec tetur adipisicing",
+      "biPerson": "John Doe",
+      "biChatLeftText": "24",
+      "articleContentP1": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictumporta. Quisque velitnisi, pretium ut lacinia in, elementum id eni.Praesent sapien massa, convallis a pellentesquenec, egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuerecubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.Nulla quis lorem ut libero malesuada feugiat.",
+      "articleContentP2": "Nulla porttitor accumsan tincidunt. Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. ",
+      "articleContentP3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+      "articleContentP4": "Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Quisque velit nisi, pretium ut lacinia in, elementum id enim.Nulla porttitor accumsan tincidunt. ",
+      "articleContentP5": "Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada.",
+      "blockquote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.",
+      "id": "1"
+    },
+    {
+      "image": "../assets/img/post-2.jpg",
+      "articleTitle": "Lorem ipsum dolor sit amet consec tetur adipisicing",
+      "biPerson": "Kyle Smith",
+      "biChatLeftText": "30",
+      "articleContentP1": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictumporta. Quisque velitnisi, pretium ut lacinia in, elementum id eni.Praesent sapien massa, convallis a pellentesquenec, egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuerecubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.Nulla quis lorem ut libero malesuada feugiat.",
+      "articleContentP2": "Nulla porttitor accumsan tincidunt. Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. ",
+      "articleContentP3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+      "articleContentP4": "Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Quisque velit nisi, pretium ut lacinia in, elementum id enim.Nulla porttitor accumsan tincidunt. ",
+      "articleContentP5": "Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada.",
+      "blockquote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.",
+      "id": "2"
+    }
+  ],
   "contact": [
     {
       "contactDesc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolorum dolorem soluta quidem expedita aperiam aliquid at. Totam magni ipsum suscipit amet? Autem nemo esse laboriosam ratione nobis mollitia inventore?",
@@ -328,67 +382,18 @@
   ],
   "users": [
     {
-      "id": "8ba0",
-      "userName": "malaika2003",
-      "email": "nxzmx@gmail.com",
-      "password": "hey11",
-      "loggedIn": true
-    },
-    {
-      "id": "5e4b",
-      "userName": "malaika03",
+      "id": "2345",
+      "username": "Malaika Yaseen",
       "email": "ghulamyaseen67776@gmail.com",
-      "password": "ghulam",
-      "loggedIn": true
-    },
-    {
-      "id": "a5e5",
-      "userName": "qirrat08",
-      "email": "nxzmx@gmail.com",
-      "password": "qirrat@08",
-      "loggedIn": true
-    },
-    {
-      "id": "60be",
-      "userName": "malaika03",
-      "email": "ghulamyaseen67776@gmail.com",
-      "password": "hey11",
+      "password": "Ghulamyaseen@1",
       "loggedIn": false
     },
     {
-      "id": "6d5b",
-      "userName": "qirrat08",
+      "id": "22d6",
+      "username": "Malaika03",
       "email": "nxzmx@gmail.com",
-      "password": "qirrat@08",
+      "password": "Ghulamyaseen@1",
       "loggedIn": true
-    },
-    {
-      "id": "d551",
-      "userName": "malaika03",
-      "email": "ghulamyaseen67776@gmail.com",
-      "password": "ghulam",
-      "loggedIn": true
-    },
-    {
-      "id": "7987",
-      "userName": "malaika03",
-      "email": "abc@123",
-      "password": "hey11",
-      "loggedIn": true
-    },
-    {
-      "id": "7930",
-      "userName": "malaika03",
-      "email": "xyzabc@123",
-      "password": "hello",
-      "loggedIn": true
-    },
-    {
-      "id": "8869",
-      "userName": "qirrat08",
-      "email": "abcdef@gmail.com",
-      "password": "abcd",
-      "loggedIn": false
     }
   ]
 }
