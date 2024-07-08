@@ -1,7 +1,26 @@
 import Certifications from "../../Components/Certifications";
 import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import validationSchema from "./CertificationValidation";
+import { toast } from 'react-toastify';
 
 const AddCertificationForm = () => {
+
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+        resolver: yupResolver(validationSchema),
+        defaultValues: {
+            file1: '',
+            file2: '',
+            title: '',
+            category: '',
+            description: '',
+            name: '',
+            time: '',
+            isActive: false
+        }
+    });
+
     const [image1, setImage1] = useState(null);
     const [image2, setImage2] = useState(null);
     const image1Ref = useRef(null);
@@ -87,11 +106,8 @@ const AddCertificationForm = () => {
 
     }
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (formObject, e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-
-        const formObject = Object.fromEntries(formData);
 
         console.log('Certification Data:', formObject);
 
@@ -170,9 +186,9 @@ const AddCertificationForm = () => {
 
             console.log('Success:', data);
 
-            alert("Successfully submitted");
+            toast.success("Successfully submitted");
 
-            e.target.reset();  // Reset the form after successful submission
+            reset();  // Reset the form after successful submission
 
             setImage1(null);
             setImage2(null);
@@ -189,7 +205,11 @@ const AddCertificationForm = () => {
 
     const onReset = (e) => {
         e.preventDefault();
-        e.target.form.reset();
+        reset();
+        setImage1(null);
+        setImage2(null);
+        setBase64Image1("");
+        setBase64Image2("");
     };
 
 
@@ -204,7 +224,7 @@ const AddCertificationForm = () => {
                                 <h2>Add Certifications Info!</h2>
                             </div>
                             <div className="col-12">
-                                <form onSubmit={onSubmit}>
+                                <form onSubmit={handleSubmit(onSubmit)} noValidate>
                                     <div className="img-container d-flex">
                                         <div className="image mx-auto" onClick={handleImage1Click}>
                                             {image1 ?
@@ -221,7 +241,8 @@ const AddCertificationForm = () => {
                                             }
                                             <input
                                                 type="file"
-                                                name="file"
+                                                name="file1"
+                                                {...register("file1")}
                                                 accept={acceptedFileTypes}
                                                 multiple={false}
                                                 onChange={handleImage1Change}
@@ -229,6 +250,7 @@ const AddCertificationForm = () => {
                                                 style={{ "display": "none" }}
                                                 required
                                             />
+                                            {errors.file1 && <p className="error-message">{errors.file1.message}</p>}
                                         </div>
                                         <div className="image mx-auto" onClick={handleImage2Click}>
                                             {image2 ?
@@ -245,7 +267,8 @@ const AddCertificationForm = () => {
                                             }
                                             <input
                                                 type="file"
-                                                name="file"
+                                                name="file2"
+                                                {...register("file2")}
                                                 accept={acceptedFileTypes}
                                                 multiple={false}
                                                 onChange={handleImage2Change}
@@ -253,6 +276,7 @@ const AddCertificationForm = () => {
                                                 style={{ "display": "none" }}
                                                 required
                                             />
+                                            {errors.file2 && <p className="error-message">{errors.file2.message}</p>}
                                         </div>
                                     </div>
                                     <div className="label-container d-flex">
@@ -263,42 +287,55 @@ const AddCertificationForm = () => {
                                     <input
                                         type="text"
                                         name="title"
+                                        {...register("title")}
                                         placeholder="Tille of Certificate"
                                         required
                                     />
+                                    {errors.title && <p className="error-message">{errors.title.message}</p>}
                                     <input
                                         type="text"
                                         name="category"
+                                        {...register("category")}
                                         placeholder="Category of Certificate"
                                         required
                                     />
+                                    {errors.category && <p className="error-message">{errors.category.message}</p>}
                                     <textarea
                                         name="description"
+                                        {...register("description")}
                                         placeholder="Description"
                                         required
                                     ></textarea>
+                                    {errors.description && <p className="error-message">{errors.description.message}</p>}
                                     <input
                                         type="text"
                                         name="name"
+                                        {...register("name")}
                                         placeholder="Your Name"
                                         required
                                     />
+                                    {errors.name && <p className="error-message">{errors.name.message}</p>}
                                     <input
                                         type="datetime"
                                         name="time"
+                                        placeholder="Time"
+                                        {...register("time")}
                                         required
                                     />
-
+                                    {errors.time && <p className="error-message">{errors.time.message}</p>}
                                     <div className="isActive">
                                         <input
                                             type="checkbox"
                                             id="active"
+                                            name="isActive"
+                                            {...register("isActive")}
                                             className="mx-2"
                                             required
                                         />
                                         <label htmlFor="active">
                                             isActive
                                         </label>
+                                        {errors.isActive && <p className="error-message">{errors.isActive.message}</p>}
                                     </div>
 
                                     <div className="buttons">

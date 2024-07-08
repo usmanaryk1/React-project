@@ -222,7 +222,7 @@ const AddPortfolioForm = () => {
                                     {errors.isActive && <p className="error-message">{errors.isActive.message}</p>}
                                     <div className="buttons">
                                         <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                        <button className="cancel">Cancel</button>
+                                        <button className="cancel" onClick={onReset}>Cancel</button>
                                         <button className="submit" type="submit">Submit</button>
                                     </div>
                                 </form>

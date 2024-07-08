@@ -7,7 +7,7 @@ import validationSchema from "./AboutValidation";
 
 const AddForm = () => {
 
-    const { register, handleSubmit, formState: { errors }, setValue, trigger  } = useForm({
+    const { register, handleSubmit, formState: { errors }, setValue  } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
             file: '',
@@ -35,7 +35,6 @@ const AddForm = () => {
         setImage(file);
 
         setValue("file", file);
-        await trigger("file");
 
         const imgname = e.target.files[0].name;
         const reader = new FileReader();

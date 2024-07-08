@@ -75,7 +75,7 @@ const Form = ({ onSignup, onLogin, isAuthenticated }) => {
                     <PrivateRoute path={`${path}/portfolio-form`} component={AddPortfolioForm} isAuthenticated={isAuthenticated} />
                     <PrivateRoute path={`${path}/portfolioDetails-form`} component={AddPortfolioDetails} isAuthenticated={isAuthenticated} />
                     <PrivateRoute path={`${path}/testimonial-form`} component={AddTestimonialForm} isAuthenticated={isAuthenticated} />
-                    <PrivateRoute path={`${path} /certification-form`} component={AddCertificationForm} isAuthenticated={isAuthenticated} />
+                    <PrivateRoute path={`${path}/certification-form`} component={AddCertificationForm} isAuthenticated={isAuthenticated} />
                     <PrivateRoute path={`${path}/contact-form`} component={ContactForm} isAuthenticated={isAuthenticated} />
                     <Route path="/form/signup-form">
                         <SignUp onSignup={onSignup} />

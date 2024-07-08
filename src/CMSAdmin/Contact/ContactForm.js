@@ -1,6 +1,22 @@
 import Contact from "../../Components/Contact";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from 'react-toastify';
+import validationSchema from "./ContactValidation";
 
 const ContactForm = () => {
+
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+        resolver: yupResolver(validationSchema),
+        defaultValues: {
+            description: '',
+            location: '',
+            number: '',
+            email: '',
+            isActive: false
+        }
+    });
+
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -27,17 +43,19 @@ const ContactForm = () => {
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                e.target.reset();  // Reset the form after successful submission
+
+                toast.success('Submited successfully!');
+                reset();  // Reset the form after successful submission
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
-        e.target.reset(e);
+    
     };
 
     const onReset = (e) => {
         e.preventDefault();
-        e.target.form.reset();
+        reset();
     };
 
     return (
@@ -50,43 +68,54 @@ const ContactForm = () => {
                                 <h2>Add Contact Info!</h2>
                             </div>
                             <div className="col-12">
-                                <form onSubmit={onSubmit}>
+                                <form onSubmit={handleSubmit(onSubmit)} noValidate>
 
                                     <input 
                                         type="text" 
                                         name="description" 
+                                        {...register("description")}
                                         placeholder="Description" 
                                         required 
                                     />
+                                    {errors.description && <p className="error-message">{errors.description.message}</p>}
                                     <input 
                                         type="text" 
                                         name="location" 
+                                        {...register("location")}
                                         placeholder="Location" 
                                         required 
                                     />
+                                    {errors.location && <p className="error-message">{errors.location.message}</p>}
                                     <input 
                                         type="text" 
-                                        name="number" 
+                                        name="number"
+                                        {...register("number")} 
                                         placeholder="Telephone Number" 
                                         required 
                                     />
+                                    {errors.number && <p className="error-message">{errors.number.message}</p>}
                                     <input 
                                         type="email" 
                                         name="email" 
+                                        {...register("email")}
                                         placeholder="Email" 
                                         required 
                                     />
+                                    {errors.email && <p className="error-message">{errors.email.message}</p>}
 
                                     <div className="isActive">
                                         <input
                                             type="checkbox"
-                                            id="active"
+                                            id="isActive"
+                                            name=""
+                                            {...register("isActive")}
                                             className="mx-2"
                                             required
                                         />
                                         <label htmlFor="active">
                                             isActive
                                         </label>
+                                        {errors.isActive && <p className="error-message">{errors.isActive.message}</p>}
                                     </div>
 
                                     <div className="buttons">
