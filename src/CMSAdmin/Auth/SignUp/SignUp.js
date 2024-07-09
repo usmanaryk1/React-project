@@ -4,8 +4,11 @@ import './Signup.css';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "./SignupValidation";
+import { useAuth } from "../AuthContext";
 
-const SignUp = ({ onSignup }) => {
+const SignUp = () => {
+
+    const { onSignup } = useAuth();
 
     const { register, handleSubmit, setError, formState: { errors } } = useForm({
         resolver: yupResolver(validationSchema),
@@ -69,11 +72,18 @@ const SignUp = ({ onSignup }) => {
             // Prepare data for submission
             const { confirmPassword, ...userData } = data;
 
+            // Add role to userData
+            const userWithRole = {
+                ...userData,
+                role: 'admin', // Assign the role of admin here
+                loggedIn: true
+            };
+
             // Make the request to the server
             const response = await fetch('http://localhost:8000/users', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...userData, loggedIn: true })
+                body: JSON.stringify(userWithRole)
             });
 
             if (!response.ok) {

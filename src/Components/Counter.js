@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import PureCounter from '@srexi/purecounterjs';
 import useFetch from './useFetch';
+import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
 const Counter = () => {
 
     const { data: counts } = useFetch("http://localhost:8000/counts");
-
+    const { isAuthenticated, isAdminPage } = useAuth();
     /**
  * Initiate Pure Counter 
  */
@@ -33,6 +34,12 @@ const Counter = () => {
                                         <p data-purecounter-start={0} data-purecounter-end={counter.counterEnd} data-purecounter-duration={1} className="counter purecounter" />
                                         <span className="counter-text text-uppercase"> {counter.text} </span>
                                     </div>
+                                    {isAuthenticated && isAdminPage && (
+                                        <div className='admin-actions mb-3'>
+                                            <button className='admin-btn' aria-label="Edit"><i className="bi bi-pencil" /></button>
+                                            <button className='admin-btn mx-1' aria-label="Delete"><i className="bi bi-trash" /></button>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ))}

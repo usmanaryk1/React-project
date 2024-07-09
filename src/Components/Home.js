@@ -9,16 +9,18 @@ import Portfolio from "./Portfolio";
 import Services from "./Services";
 import Testimonial from "./Testimonial";
 
-const Home = ({isAuthenticated}) => {
 
-    // console.log('home admin',isAuthenticated);
+const Home = () => {
+
+    // console.log('home auth',isAuthenticated);
+    // console.log('home user',user);
     
     return (
         <>
             <main id="main">
                 <Hero />
                 <About />
-                <Services title="Services" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." isAuthenticated={isAuthenticated} />
+                <Services title="Services" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
                 <Counter />
                 <Portfolio title="Portfolio" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
                 <Testimonial />

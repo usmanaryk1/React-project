@@ -5,7 +5,6 @@ const CertificationContent = () => {
     const { id } = useParams();
     const { data: certification } = useFetch("http://localhost:8000/certificationDetails/" + id);
 
-    
     if (!certification) {
         return <div>Loading...</div>;
     }
@@ -252,7 +251,7 @@ const CertificationContent = () => {
                         </div>
                     </div>
                 </div>
-            </section> }
+            </section>}
             {/*======= Blog Section End =======*/}
         </>
     );

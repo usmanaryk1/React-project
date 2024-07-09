@@ -276,13 +276,39 @@
   ],
   "certifications": [
     {
-      "image": "../assets/img/post-1.jpg",
-      "cardCategory": "Travel",
+      "image": "../assets/img/post-2.jpg",
+      "cardCategory": "Food",
       "cardTitle": "See more ideas about Travel",
       "cardDescription": "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallia pellentesque nec,egestas non nisi.",
       "authorImage": "assets/img/testimonial-2.jpg",
       "authorName": "Morgan Freeman",
-      "postDate": "10 min",
+      "postDate": "20 min",
+      "id": "1"
+    },
+    {
+      "image": "../assets/img/post-2.jpg",
+      "cardCategory": "Food",
+      "cardTitle": "See more ideas about Travel",
+      "cardDescription": "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallia pellentesque nec,egestas non nisi.",
+      "authorImage": "../assets/img/testimonial-2.jpg",
+      "authorName": "Morgan Freeman",
+      "postDate": "20 min",
+      "id": "2"
+    },
+    {
+      "image": "../assets/img/post-3.jpg",
+      "cardCategory": "Web Design",
+      "cardTitle": "See more ideas about Design",
+      "cardDescription": "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallia pellentesque nec,egestas non nisi.",
+      "authorImage": "../assets/img/testimonial-2.jpg",
+      "authorName": "Morgan Freeman",
+      "postDate": "30 min",
+      "id": "3"
+    }
+  ],
+  "certificationDetails": [
+    {
+      "image": "../assets/img/post-1.jpg",
       "articleTitle": "Lorem ipsum dolor sit amet consec tetur adipisicing",
       "biPerson": "John Doe",
       "biChatLeftText": "24",
@@ -296,12 +322,6 @@
     },
     {
       "image": "../assets/img/post-2.jpg",
-      "cardCategory": "Food",
-      "cardTitle": "See more ideas about Travel",
-      "cardDescription": "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallia pellentesque nec,egestas non nisi.",
-      "authorImage": "assets/img/testimonial-2.jpg",
-      "authorName": "Morgan Freeman",
-      "postDate": "20 min",
       "articleTitle": "Lorem ipsum dolor sit amet consec tetur adipisicing",
       "biPerson": "Kyle Smith",
       "biChatLeftText": "30",
@@ -315,12 +335,6 @@
     },
     {
       "image": "../assets/img/post-3.jpg",
-      "cardCategory": "Web Design",
-      "cardTitle": "See more ideas about Web Design",
-      "cardDescription": "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallia pellentesque nec,egestas non nisi.",
-      "authorImage": "assets/img/testimonial-2.jpg",
-      "authorName": "Morgan Freeman",
-      "postDate": "30 min",
       "articleTitle": "Lorem ipsum dolor sit amet consec tetur adipisicing",
       "biPerson": "Mario Jam",
       "biChatLeftText": "19",
@@ -335,14 +349,16 @@
   ],
   "contact" : [
     {
-      "contactDesc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolorum dolorem soluta quidem expedita aperiam aliquid at. Totam magni ipsum suscipit amet? Autem nemo esse laboriosam ratione nobis mollitia inventore?",
-      "contactLocation": " 329 WASHINGTON ST BOSTON, MA 02108",
-      "contactNumber": "(617) 557-0089",
-      "contactEmail": " contact@example.com",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolorum dolorem soluta quidem expedita aperiam aliquid at. Totam magni ipsum suscipit amet? Autem nemo esse laboriosam ratione nobis mollitia inventore?",
+      "location": " 329 WASHINGTON ST BOSTON, MA 02108",
+      "number": "(617) 557-0089",
+      "email": " contact@example.com",
       "twitter": "/",
       "linkedIn": "/",
       "facebook": "/",
       "instagram": "/",
+      "whatsapp": "/",
+      "github": "/",
       "id": "1"
     }
   ]

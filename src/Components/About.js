@@ -1,8 +1,10 @@
 import useFetch from "./useFetch";
+import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
 const About = () => {
-    
+
     const { data: about } = useFetch("http://localhost:8000/about")
+    const { isAuthenticated, isAdminPage } = useAuth();
 
     return (
         <>
@@ -52,10 +54,17 @@ const About = () => {
                                         </div>
                                         <div className="col-md-6">
                                             <div className="about-me pt-4 pt-md-0">
-                                                <div className="title-box-2">
+
+                                                <div className="title-box-2 d-flex justify-content-between">
                                                     <h5 className="title-left">
                                                         About
                                                     </h5>
+                                                    {isAuthenticated && isAdminPage && (
+                                                        <div className='admin-actions'>
+                                                            <button className='admin-btn me-1' aria-label="Edit"><i className="bi bi-pencil" /></button>
+                                                            <button className='admin-btn' aria-label="Delete"><i className="bi bi-trash" /></button>
+                                                        </div>
+                                                    )}
                                                 </div>
                                                 <p className="lead">
                                                     {about.desc1}

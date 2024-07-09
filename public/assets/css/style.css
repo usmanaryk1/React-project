@@ -2084,80 +2084,25 @@ button:hover {
   display: block;
 }
 
-/* /* --------------------------------------------------------------
-# About Form
---------------------------------------------------------------*/
-/* .about-form{
-  max-width: 600px;
-  margin:100px auto 0;
-  text-align: center;
-}
 
-.about-form label {
-  text-align: left;
-  display: block;
-}
-
-.about-form h2 {
-  color: black;
-  margin-bottom: 30px;
-}
-
-.about-form input,
-.about-form textarea,
-.about-form select {
-  width: 100%;
-  padding: 6px 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  display: block;
-}
-
-.about-form button, .certification-form button {
-  background: #0062d3;
-  color: #fff;
-  border: 0;
-  padding: 10px 25px;
-  margin: 10px auto 15px;
-  border-radius: 25px;
+/*Admin buttons*/
+.admin-btn {
+  background: #007bff;
+  border: none;
   cursor: pointer;
+  font-size: 1rem; /* Adjust size as needed */
+  color: white;
+  border-radius: 25px;
+  margin-top: 5px;
+}
+
+.admin-btn:hover {
+  color: #007bff; /* Adjust hover color as needed */
+}
+
+/* .admin-actions{
+  position:absolute;
+  right: 50px;
+  top: 50px;
 } */
 
-/*--------------------------------------------------------------
-# Certification Form
---------------------------------------------------------------*/
-/* .certification-form{
-  max-width: 600px;
-  margin:100px auto 0;
-  text-align: center;
-}
-
-.certification-form label {
-  text-align: left;
-  display: block;
-}
-
-.certification-form h2{
-  color: black;
-  margin-bottom: 30px;
-}
-
-.certification-form input{
-  width: 100%;
-  padding: 6px 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  display: block;
-}
-
-.certification-form button {
-  background: #0062d3;
-  color: #fff;
-  border: 0;
-  padding: 10px 25px;
-  margin: 10px auto 15px;
-  border-radius: 25px;
-  cursor: pointer;
-} */

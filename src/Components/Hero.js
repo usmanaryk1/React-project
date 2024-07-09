@@ -1,8 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import Typed from 'typed.js';
 import useFetch from './useFetch';
+import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
 const Hero = () => {
+
+    const { isAuthenticated, isAdminPage } = useAuth();
+
+    console.log('hero auth: ', isAuthenticated);
 
     const { data: hero } = useFetch("http://localhost:8000/hero");
     /**
@@ -36,6 +41,7 @@ const Hero = () => {
         }
     }, [hero]);
 
+
     return (
         <>
             {/* ======= Hero Section ======= */}
@@ -43,6 +49,12 @@ const Hero = () => {
                 <div className="overlay-itro" />
                 <div className="hero-content display-table">
                     <div className="table-cell">
+                        {isAuthenticated && isAdminPage && (
+                            <div className='admin-actions d-flex justify-content-end align-items-start'>
+                                <button className='admin-btn me-1' aria-label="Edit"><i className="bi bi-pencil" /></button>
+                                <button className='admin-btn me-5' aria-label="Delete"><i className="bi bi-trash" /></button>
+                            </div>
+                        )}
                         <div className="container">
                             {/*<p class="display-6 color-d">Hello, world!</p>*/}
                             {hero.map((heroItem) => (

@@ -17,8 +17,11 @@ import AddPortfolioDetails from "./Portfolio/AddPortfolioDetails";
 // import { useHistory } from "react-router-dom/cjs/react-router-dom";
 // import { useState } from "react";
 import PrivateRoute from "./Auth/AuthGuard";
-const Form = ({ onSignup, onLogin, isAuthenticated }) => {
+import { useAuth } from "./Auth/AuthContext";
 
+const Form = () => {
+
+    const { isAuthenticated } = useAuth();
     // useEffect(() => {
     //     const script = document.createElement('script');
     //     script.src = "%PUBLIC_URL%/assets/js/main.js";
@@ -78,10 +81,10 @@ const Form = ({ onSignup, onLogin, isAuthenticated }) => {
                     <PrivateRoute path={`${path}/certification-form`} component={AddCertificationForm} isAuthenticated={isAuthenticated} />
                     <PrivateRoute path={`${path}/contact-form`} component={ContactForm} isAuthenticated={isAuthenticated} />
                     <Route path="/form/signup-form">
-                        <SignUp onSignup={onSignup} />
+                        <SignUp />
                     </Route>
                     <Route path="/form/login-form">
-                        <Login onLogin={onLogin} />
+                        <Login />
                     </Route>
                     <Route path={`${path}/forget-form`}>
                         <ForgetPwd />

@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import useFetch from "./useFetch";
+import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
 const Certifications = ({ title, subtitle }) => {
 
     const { data: certifications } = useFetch("http://localhost:8000/certifications");
+    const { isAuthenticated, isAdminPage } = useAuth();
 
     return (
         <>
@@ -33,6 +35,14 @@ const Certifications = ({ title, subtitle }) => {
                                                     <h6 className="category">{certification.cardCategory}</h6>
                                                 </div>
                                             </div>
+                                            {isAuthenticated && isAdminPage && (
+                                                <>
+                                                    <div className='admin-actions d-flex justify-content-end'>
+                                                        <button className='admin-btn' aria-label="Edit"><i className="bi bi-pencil" /></button>
+                                                        <button className='admin-btn mx-1' aria-label="Delete"><i className="bi bi-trash" /></button>
+                                                    </div>
+                                                </>
+                                            )}
                                             <h3 className="card-title"><a href="blog-single.html">{certification.cardTitle}</a></h3>
                                             <p className="card-description">{certification.cardDescription}</p>
                                         </div>

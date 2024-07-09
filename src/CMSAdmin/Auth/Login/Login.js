@@ -3,9 +3,11 @@ import { toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "./LoginValidation";
+import { useAuth } from "../AuthContext";
 
-const Login = ({ onLogin }) => {
+const Login = () => {
 
+    const { onLogin } = useAuth();
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {

@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import validationSchema from "./ServiceValidation";
+import Services from "../../Components/Services";
 
 const AddServiceForm = ({ serviceToEdit }) => {
 
@@ -106,24 +107,24 @@ const AddServiceForm = ({ serviceToEdit }) => {
         setEditingId(null);
     };
 
-    const onEdit = (service) => {
-        setFormObject({
-            title: service.sTitle || "",
-            desc: service.sDescription || ""
-            // isActive: service.isActive || false
-        });
-        setIsEditing(true);
-        setEditingId(service.id);
-    };
+    // const onEdit = (service) => {
+    //     setFormObject({
+    //         title: service.sTitle || "",
+    //         desc: service.sDescription || ""
+    //         // isActive: service.isActive || false
+    //     });
+    //     setIsEditing(true);
+    //     setEditingId(service.id);
+    // };
 
-    const onDelete = async (id) => {
-        await fetch(`http://localhost:8000/services/${id}`, {
-            method: 'DELETE'
-        });
+    // const onDelete = async (id) => {
+    //     await fetch(`http://localhost:8000/services/${id}`, {
+    //         method: 'DELETE'
+    //     });
 
-        setServices(services.filter(service => service.id !== id));
-        toast.error('Service deleted successfully');
-    };
+    //     setServices(services.filter(service => service.id !== id));
+    //     toast.error('Service deleted successfully');
+    // };
 
     const onReset = (e) => {
         e.preventDefault();
@@ -198,31 +199,7 @@ const AddServiceForm = ({ serviceToEdit }) => {
                 <hr />
             </section>
             {/* Service Form End */}
-            {/* Services Section Start */}
-            <section>
-                <div className="container">
-                    <div className="row">
-                        {services && services.map(service => (
-                            <div className="col-md-4" key={service.id}>
-                                <div className="service-box">
-                                    <div className="service-ico">
-                                        <span className="ico-circle"><i className={service.sIcon} /></span>
-                                    </div>
-                                    <div className="service-content">
-                                        <h2 className="s-title">{service.sTitle}</h2>
-                                        <p className="s-description text-center">
-                                            {service.sDescription}
-                                        </p>
-                                        <button onClick={() => onEdit(service)}>Edit</button>
-                                        <button onClick={() => onDelete(service.id)}>Delete</button>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-            {/* Services Section End */}
+            <Services />
         </>
     );
 }

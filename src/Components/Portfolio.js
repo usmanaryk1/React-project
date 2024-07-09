@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import useFetch from "./useFetch";
+import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
 const Portfolio = ({ title, subtitle }) => {
 
     const { data: works } = useFetch("http://localhost:8000/works");
+    const { isAuthenticated, isAdminPage } = useAuth();
 
     return (
         <>
@@ -28,7 +30,14 @@ const Portfolio = ({ title, subtitle }) => {
                                             <img src={work.workImage} alt="" className="img-fluid" />
                                         </div>
                                     </a>
+                                    {isAuthenticated && isAdminPage && (
+                                        <div className='admin-actions d-flex align-items-start justify-content-end mt-2 mb-0'>
+                                            <button className='admin-btn me-1' aria-label="Edit"><i className="bi bi-pencil" /></button>
+                                            <button className='admin-btn' aria-label="Delete"><i className="bi bi-trash" /></button>
+                                        </div>
+                                    )}
                                     <div className="work-content">
+
                                         <div className="row">
                                             <div className="col-sm-8">
                                                 <h2 className="w-title"><a href={work.pURL}>{work.wTitle}</a></h2>

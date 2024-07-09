@@ -1,10 +1,10 @@
 import useFetch from "./useFetch";
-
+import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
 const Services = ({ title, subtitle }) => {
 
     const { data: services } = useFetch("http://localhost:8000/services");
-
+    const { isAuthenticated, isAdminPage } = useAuth();
 
     return (
         <>
@@ -24,6 +24,12 @@ const Services = ({ title, subtitle }) => {
                         {services.map((service) => (
                             <div className="col-md-4" key={service.id}  >
                                 <div className="service-box">
+                                    {isAuthenticated && isAdminPage && (
+                                        <div className='admin-actions d-flex justify-content-end align-items-start'>
+                                            <button className='admin-btn' aria-label="Edit"><i className="bi bi-pencil" /></button>
+                                            <button className='admin-btn mx-1' aria-label="Delete"><i className="bi bi-trash" /></button>
+                                        </div>
+                                    )}
                                     <div className="service-ico">
                                         <span className="ico-circle"><i className={service.sIcon} /></span>
                                     </div>

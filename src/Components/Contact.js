@@ -1,8 +1,10 @@
 import useFetch from "./useFetch";
+import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
 const Contact = () => {
 
     const { data: contact } = useFetch("http://localhost:8000/contact");
+    const { isAuthenticated, isAdminPage } = useAuth();
 
     return (
         <>
@@ -57,6 +59,14 @@ const Contact = () => {
                                             </div>
                                         </div>
                                         <div className="col-md-6">
+                                            {isAuthenticated && isAdminPage && (
+                                                <>
+                                                    <div className='admin-actions d-flex justify-content-end'>
+                                                        <button className='admin-btn' aria-label="Edit"><i className="bi bi-pencil" /></button>
+                                                        <button className='admin-btn mx-1' aria-label="Delete"><i className="bi bi-trash" /></button>
+                                                    </div>
+                                                </>
+                                            )}
                                             <div className="title-box-2 pt-4 pt-md-0">
                                                 <h5 className="title-left">
                                                     Get in Touch
@@ -80,6 +90,8 @@ const Contact = () => {
                                                     <li><a href={contact.instagram}><span className="ico-circle"><i className="bi bi-instagram" /></span></a></li>
                                                     <li><a href={contact.twitter}><span className="ico-circle"><i className="bi bi-twitter" /></span></a></li>
                                                     <li><a href={contact.linkedIn}><span className="ico-circle"><i className="bi bi-linkedin" /></span></a></li>
+                                                    <li><a href={contact.whatsapp}><span className="ico-circle"><i className="bi bi-whatsapp" /></span></a></li>
+                                                    <li><a href={contact.github}><span className="ico-circle"><i className="bi bi-github" /></span></a></li>
                                                 </ul>
                                             </div>
                                         </div>

@@ -1,18 +1,17 @@
 import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
-import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
+import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const Header = ({ user, onLogout }) => {
+const Header = () => {
 
-    const location = useLocation();
     const [navLinks, setNavLinks] = useState([]);
-    const isAdminPage = location.pathname.startsWith('/form');
-
+    
+    const { user, onLogout, isAdminPage } = useAuth();
 
     const preventRefresh = (e) => {
         e.preventDefault();
     }
-
+console.log('header user', user)
     useEffect(() => {
         //need to change logic
         if (user && isAdminPage) {
@@ -24,7 +23,7 @@ const Header = ({ user, onLogout }) => {
                 // { to: '/form/counter-form', label: 'Counter' },
                 { to: '/form/portfolio-form', label: 'Works' },
                 { to: '/form/portfolioDetails-form', label: 'Work Details' },
-                { to: '/form/testimonial-form', label: 'Testimonial' },
+                // { to: '/form/testimonial-form', label: 'Testimonial' },
                 { to: '/form/certification-form', label: 'Certification' },
                 { to: '/form/contact-form', label: 'Contact' },
             ]);

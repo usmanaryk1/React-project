@@ -1,5 +1,3 @@
-import { useParams } from "react-router-dom/cjs/react-router-dom";
-import useFetch from "./useFetch";
 import CustomHero from "./CustomHero"
 import PortfolioContent from "./PortfolioContent";
 import { useEffect } from "react";
@@ -16,19 +14,12 @@ const PortfolioDetails = () => {
             document.body.removeChild(script);
         };
     }, []);
-    const { id } = useParams();
-    const { data: work, error } = useFetch("http://localhost:8000/workDetails/" + id);
+
 
     return (
-        <div className="blog-details">
-            {/* {isPending && <div className="loading"> Loading...</div>} */}
-            {error && <div className="error">{error}</div>}
-            {work && (
-                <>
-                    <CustomHero heroTitle="Work Details" breadcrumbItem1="Home" breadcrumbItem2= "Library" breadcrumbItem3="Portfolio Details" />
-                    <PortfolioContent work={work} />
-                </>
-            )}
+        <div className="work-details">
+            <CustomHero heroTitle="Work Details" breadcrumbItem1="Home" breadcrumbItem2="Library" breadcrumbItem3="Portfolio Details" />
+            <PortfolioContent />
         </div>
     );
 }
