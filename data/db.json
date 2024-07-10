@@ -142,7 +142,10 @@
       "sIcon": "bi-briefcase",
       "sTitle": "Web Design",
       "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
-      "id": "1"
+      "id": "1",
+      "title": "Web Design",
+      "desc": "noprovident.",
+      "isActive": true
     },
     {
       "sIcon": "bi-card-checklist",
@@ -173,6 +176,18 @@
       "sTitle": "Marketing Services",
       "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
       "id": "6"
+    },
+    {
+      "id": 7,
+      "title": "Digital Marketing",
+      "desc": "djsahdjhdj",
+      "isActive": true
+    },
+    {
+      "id": 8,
+      "title": "Digital Markrting",
+      "desc": "dkfkjflej",
+      "isActive": true
     }
   ],
   "testimonials": [

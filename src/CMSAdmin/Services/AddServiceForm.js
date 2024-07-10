@@ -6,9 +6,11 @@ import { useForm } from "react-hook-form";
 import validationSchema from "./ServiceValidation";
 import Services from "../../Components/Services";
 
-const AddServiceForm = ({ serviceToEdit }) => {
+const AddServiceForm = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const [currentService, setCurrentService] = useState(null);
+    const { data: services, setData: setServices } = useFetch("http://localhost:8000/services");
+    const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
             title: '',
@@ -16,126 +18,66 @@ const AddServiceForm = ({ serviceToEdit }) => {
             isActive: false
         }
     })
-    // const [errors, setErrors] = useState({});
-    const { data: services, setData: setServices } = useFetch("http://localhost:8000/services");
 
-    const [formObject, setFormObject] = useState({
-        title: "",
-        desc: "",
-        isActive: false
-    });
-
-    const [isEditing, setIsEditing] = useState(false);
+    // console.log('Service List Before Update:', services);
 
     useEffect(() => {
-        if (serviceToEdit) {
-            setFormObject({
-                title: serviceToEdit.sTitle || "",
-                desc: serviceToEdit.sDescription || "",
-                isActive: serviceToEdit.isActive || false
-            });
-            setIsEditing(true);
+        if (currentService) {
+            setValue('title', currentService.sTitle);
+            setValue('desc', currentService.sDescription);
+            setValue('isActive', currentService.isActive);
         } else {
-            setFormObject({
-                title: "",
-                desc: "",
-                isActive: false
-            });
-            setIsEditing(false);
+            reset();
         }
-    }, [serviceToEdit]);
+    }, [currentService, setValue, reset]);
 
-    const [editingId, setEditingId] = useState(null);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormObject(prevFormObject => ({
-            ...prevFormObject,
-            [name]: value
-        }));
-    };
-    console.log('Service List Before Update:', services);
-
-    const onSubmit = async (formObject, e) => {
-        e.preventDefault();
-
-        const updatedServiceData = {
-            sTitle: formObject.title,
-            sDescription: formObject.desc,
-            isActive: formObject.isActive
-        };
-
-        if (isEditing) {
-            // Update existing service
-            const response = await fetch(`http://localhost:8000/services/${editingId}`, {
+    const onSubmit = async (data) => {
+        if (currentService) {
+            // Update service
+            const updatedService = { ...currentService, ...data };
+            const response = await fetch(`http://localhost:8000/services/${currentService.id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formObject)
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedService),
             });
-            console.log('Editing ID:', editingId);
-            const updatedService = await response.json();
-            console.log('updated service: ', updatedService);
-
-            setServices(prevServices =>
-                prevServices.map(service =>
-                    service.id === editingId ? updatedService : service
-                )
-            );
-            console.log('new updated service: ', services);
+            const result = await response.json();
+            setServices(services.map(service => service.id === result.id ? result : service));
             toast.success('Service updated successfully');
         } else {
             // Add new service
-            const response = await fetch("http://localhost:8000/services", {
+            const newService = { ...data, id: services.length + 1 }; // Mocking an ID
+            const response = await fetch('http://localhost:8000/services', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(updatedServiceData)
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newService),
             });
-            const newService = await response.json();
-
-            console.log('new service: ', newService);
-
-            setServices(prevServices => [...prevServices, newService]);
-
-            console.log('Added service: ', services);
-
+            const result = await response.json();
+            setServices([...services, result]);
             toast.success('Service added successfully');
         }
+        reset();
+        setCurrentService(null);
 
-        // Reset form
-        setFormObject({ title: "", desc: "", isActive: false });
-        setIsEditing(false);
-        setEditingId(null);
     };
 
-    // const onEdit = (service) => {
-    //     setFormObject({
-    //         title: service.sTitle || "",
-    //         desc: service.sDescription || ""
-    //         // isActive: service.isActive || false
-    //     });
-    //     setIsEditing(true);
-    //     setEditingId(service.id);
-    // };
+    const onReset = () => {
+        reset();
+        setCurrentService(null);
+    }
 
-    // const onDelete = async (id) => {
-    //     await fetch(`http://localhost:8000/services/${id}`, {
-    //         method: 'DELETE'
-    //     });
+    const handleEdit = (service) => {
+        setCurrentService(service);
+    };
 
-    //     setServices(services.filter(service => service.id !== id));
-    //     toast.error('Service deleted successfully');
-    // };
-
-    const onReset = (e) => {
-        e.preventDefault();
-        setFormObject({
-            title: '',
-            desc: '',
-            isActive: false,
-            id: null
+    const handleDelete = async (id) => {
+        await fetch(`http://localhost:8000/services/${id}`, {
+            method: 'DELETE',
         });
-        setIsEditing(false);
-        setEditingId(null);
+        setServices(services.filter(service => service.id !== id));
     };
 
     return (
@@ -155,8 +97,6 @@ const AddServiceForm = ({ serviceToEdit }) => {
                                         name="title"
                                         {...register('title')}
                                         placeholder="Title of Service"
-                                        value={formObject.title || ""}
-                                        onChange={handleChange}
                                         required
                                     />
                                     {errors.title && <p className="error-message">{errors.title.message}</p>}
@@ -164,8 +104,6 @@ const AddServiceForm = ({ serviceToEdit }) => {
                                         name="desc"
                                         placeholder="Description"
                                         {...register('desc')}
-                                        value={formObject.desc || ""}
-                                        onChange={handleChange}
                                         required
                                     ></textarea>
                                     {errors.desc && <p className="error-message">{errors.desc.message}</p>}
@@ -176,8 +114,6 @@ const AddServiceForm = ({ serviceToEdit }) => {
                                             name="isActive"
                                             {...register('isActive')}
                                             className="mx-2"
-                                            checked={formObject.isActive}
-                                            onChange={handleChange}
                                             required
                                         />
                                         <label htmlFor="active">
@@ -199,7 +135,7 @@ const AddServiceForm = ({ serviceToEdit }) => {
                 <hr />
             </section>
             {/* Service Form End */}
-            <Services />
+            <Services onEdit={handleEdit} onDelete={handleDelete} />
         </>
     );
 }

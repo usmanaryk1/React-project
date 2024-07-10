@@ -7,7 +7,7 @@ const PortfolioContent = () => {
 
     const { id } = useParams();
     const { data: work } = useFetch("http://localhost:8000/workDetails/" + id);
-console.log("from portfolio",work);
+    console.log("from portfolio", work);
     /**
  * Portfolio details slider
  */

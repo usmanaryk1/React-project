@@ -7,7 +7,7 @@ import validationSchema from "./PortfolioValidation";
 
 const AddPortfolioForm = () => {
 
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm({
+    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
             file: '',
@@ -125,12 +125,12 @@ const AddPortfolioForm = () => {
             console.error('Error updating the JSON data:', error);
         }
 
-        e.target.reset();
+        reset();
     };
 
     const onReset = (e) => {
         e.preventDefault();
-        e.target.form.reset();
+        reset();
     };
 
     return (

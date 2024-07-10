@@ -1820,11 +1820,24 @@ button:hover {
 .contact-container{
   border-radius: 5px;
   max-width: 550px;
+  margin: 50px auto;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+}
+
+/*--------------------------------------------------------------
+# Social Form 
+--------------------------------------------------------------*/
+.social-container{
+  border-radius: 5px;
+  max-width: 550px;
   margin: 130px auto 50px;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
 }
+
 /*--------------------------------------------------------------
 # Login Form 
 --------------------------------------------------------------*/
@@ -1888,34 +1901,29 @@ button:hover {
 
 .signup-link{
   margin: 15px auto;
+  transition: transform 0.3s ease;
 }
 
 .signup-link a{
   color: #0062d3;
   cursor: pointer;
-}
-/* .signup-link a:hover{
   
-} */
+}
+.signup-link:hover{
+  transform: scale(1.1);
+  border-color: #007bff;  
+  transition: transform 0.3 ease;
+}
 .error-message{
   color: red;
   text-align: left;
 }
-/* .signup-link a:hover{
-  background: #0062d3;
-  color: white;
-} */
 
 /*--------------------------------------------------------------
 # SignUp Form 
 --------------------------------------------------------------*/
 
-/* .signup-form{
-  background-color: #0078ff;
-} */
-
 .signup-container{
-  /* border: 1px solid lightgrey; */
   border-radius: 5px;
   max-width: 400px;
   margin: 130px auto 50px;
@@ -1967,24 +1975,22 @@ button:hover {
 }
 .log{
   margin: 30px auto;
+  transition: transform 0.3s ease;
 }
 
 .log a{
   color: #0062d3;
   cursor: pointer;
 }
-/* .log a:hover{
-  scale: ;
-} */
+.log:hover{
+  transform: scale(1.1);
+  border-color: #007bff;
+}
 
 
 /*--------------------------------------------------------------
 # Forget Form 
 --------------------------------------------------------------*/
-
-/* .forget-form{
-  background-color: #0078ff;
-} */
 
 .forget-container{
   /* border: 1px solid lightgrey; */
@@ -2100,9 +2106,119 @@ button:hover {
   color: #007bff; /* Adjust hover color as needed */
 }
 
-/* .admin-actions{
-  position:absolute;
-  right: 50px;
-  top: 50px;
-} */
+/*Vertical Navbar*/
 
+.vertical-header {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 235px; /* Adjust the width as needed */
+  background-color: #fff;
+  z-index: 9999;
+  padding-top: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.vertical-navbar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.vertical-navbar ul {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.vertical-navbar ul li {
+  width: 100%;
+  margin: 5px 0;
+  padding: 0px 5px 0px 0px;
+  position: relative;
+}
+
+.vertical-navbar .nav-link {
+  width: 100%;
+  padding: 10px 5px;
+  text-align: left;
+}
+
+/* Remove the logo in the vertical navbar */
+.vertical-header .logo {
+  display: none;
+}
+
+/* Styles for the dropdown in vertical navbar */
+.vertical-navbar .dropdown ul {
+  display: block;
+  /* position: absolute;
+  left: 100%;
+  top: 0; */
+  margin: 0;
+  padding: 10px 0;
+  z-index: 99;
+  opacity: 0;
+  /* visibility: hidden; */
+  background: #fff;
+  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+  transition: 0.3s;
+}
+
+.vertical-navbar .dropdown ul li {
+  min-width: 200px;
+}
+
+.vertical-navbar .dropdown ul a {
+  padding: 10px 20px;
+  font-size: 14px;
+  text-transform: none;
+  color: #4e4e4e;
+}
+
+.vertical-navbar .dropdown ul a i {
+  font-size: 12px;
+}
+
+.vertical-navbar .dropdown ul a:hover,
+.vertical-navbar .dropdown ul .active:hover,
+.vertical-navbar .dropdown ul li:hover>a {
+  color: #0078ff;
+}
+
+.vertical-navbar .dropdown:hover>ul {
+  opacity: 1;
+  visibility: visible;
+}
+
+.vertical-navbar .dropdown .dropdown ul {
+  top: 0;
+  left: calc(100% - 30px);
+  visibility: hidden;
+}
+
+.vertical-navbar .dropdown .dropdown:hover>ul {
+  opacity: 1;
+  top: 0;
+  left: 100%;
+  visibility: visible;
+}
+/* 
+.vertical-navbar .dropdown:hover ul {
+  display: flex;
+}
+
+.vertical-navbar .dropdown ul li {
+  width: 100%;
+  margin: 0;
+}
+
+.vertical-navbar .dropdown ul li a {
+  padding: 10px 20px;
+  text-align: left;
+  width: 100%;
+} */

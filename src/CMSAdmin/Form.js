@@ -18,6 +18,7 @@ import AddPortfolioDetails from "./Portfolio/AddPortfolioDetails";
 // import { useState } from "react";
 import PrivateRoute from "./Auth/AuthGuard";
 import { useAuth } from "./Auth/AuthContext";
+import SocialForm from "./Socials/SocialForm";
 
 const Form = () => {
 
@@ -80,6 +81,7 @@ const Form = () => {
                     <PrivateRoute path={`${path}/testimonial-form`} component={AddTestimonialForm} isAuthenticated={isAuthenticated} />
                     <PrivateRoute path={`${path}/certification-form`} component={AddCertificationForm} isAuthenticated={isAuthenticated} />
                     <PrivateRoute path={`${path}/contact-form`} component={ContactForm} isAuthenticated={isAuthenticated} />
+                    <PrivateRoute path={`${path}/social-form`} component={SocialForm} isAuthenticated={isAuthenticated} />
                     <Route path="/form/signup-form">
                         <SignUp />
                     </Route>

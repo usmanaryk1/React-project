@@ -1,7 +1,7 @@
 import useFetch from "./useFetch";
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const Services = ({ title, subtitle }) => {
+const Services = ({ title, subtitle, onEdit, onDelete }) => {
 
     const { data: services } = useFetch("http://localhost:8000/services");
     const { isAuthenticated, isAdminPage } = useAuth();
@@ -26,8 +26,8 @@ const Services = ({ title, subtitle }) => {
                                 <div className="service-box">
                                     {isAuthenticated && isAdminPage && (
                                         <div className='admin-actions d-flex justify-content-end align-items-start'>
-                                            <button className='admin-btn' aria-label="Edit"><i className="bi bi-pencil" /></button>
-                                            <button className='admin-btn mx-1' aria-label="Delete"><i className="bi bi-trash" /></button>
+                                            <button className='admin-btn' aria-label="Edit" onClick={() => onEdit(service)}><i className="bi bi-pencil" /></button>
+                                            <button className='admin-btn mx-1' aria-label="Delete" onClick={() => onDelete(service.id)}><i className="bi bi-trash" /></button>
                                         </div>
                                     )}
                                     <div className="service-ico">
