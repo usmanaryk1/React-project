@@ -41,7 +41,7 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section>{/* login form end*/}
         </>
     );
 }
