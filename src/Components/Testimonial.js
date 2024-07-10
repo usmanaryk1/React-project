@@ -31,7 +31,7 @@ const Testimonial = () => {
     return (
         <>
             {/* ======= Testimonials Section ======= */}
-            {testimonials && <div className="testimonials paralax-mf bg-image" style={{ backgroundImage: 'url(assets/img/overlay-bg.jpg)' }}>
+            {testimonials && <div className="testimonials paralax-mf bg-image" style={{ backgroundImage: 'url(../assets/img/overlay-bg.jpg)' }}>
                 <div className="overlay-mf" />
                 <div className="container">
                     <div className="row">
@@ -42,11 +42,11 @@ const Testimonial = () => {
                                         <div className="swiper-slide" key={testimonial.id} >
                                             <div className="testimonial-box">
                                                 <div className="author-test">
-                                                    <img src={testimonial.authorImg} alt="" className="rounded-circle b-shadow-a" />
-                                                    <span className="author"> {testimonial.authorName} </span>
+                                                    <img src={testimonial.img} alt="" className="rounded-circle b-shadow-a" />
+                                                    <span className="author"> {testimonial.name} </span>
                                                 </div>
                                                 <div className="content-test">
-                                                    <p className="description lead">{testimonial.authorDescription} </p>
+                                                    <p className="description lead">{testimonial.description} </p>
                                                 </div>
                                             </div>
                                         </div>

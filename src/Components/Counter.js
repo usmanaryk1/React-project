@@ -19,7 +19,7 @@ const Counter = () => {
     return (
         <>
             {/* ======= Counter Section ======= */}
-            {counts && <div className="section-counter paralax-mf bg-image" style={{ backgroundImage: 'url(assets/img/counters-bg.jpg)' }}>
+            {counts && <div className="section-counter paralax-mf bg-image" style={{ backgroundImage: 'url(../assets/img/counters-bg.jpg)' }}>
                 <div className="overlay-mf" />
                 <div className="container position-relative">
                     <div className="row">
@@ -27,11 +27,11 @@ const Counter = () => {
                             <div className="col-sm-3 col-lg-3" key={counter.id} >
                                 <div className="counter-box counter-box pt-4 pt-md-0">
                                     <div className="counter-ico">
-                                        <span className="ico-circle"><i className={counter.counterIcon} /></span>
+                                        <span className="ico-circle"><i className={counter.icon} /></span>
                                     </div>
                                     <div className="counter-num">
                                         <p data-purecounter-start={0} data-purecounter-end={counter.counterEnd} data-purecounter-duration={1} className="counter purecounter" />
-                                        <span className="counter-text"> {counter.counterText} </span>
+                                        <span className="counter-text"> {counter.text} </span>
                                     </div>
                                 </div>
                             </div>

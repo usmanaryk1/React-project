@@ -33,6 +33,7 @@
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
+      "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
       "id": "1"
     },
     {
@@ -48,6 +49,7 @@
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
+      "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
       "id": "2"
     },
     {
@@ -63,6 +65,7 @@
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
+      "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
       "id": "3"
     },
     {
@@ -78,6 +81,7 @@
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
+      "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
       "id": "4"
     },
     {
@@ -93,6 +97,7 @@
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
+      "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
       "id": "5"
     },
     {
@@ -108,13 +113,15 @@
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
+      "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
       "id": "6"
     }
   ],
   "services": [
     {
-      "sTitle": "Graphic Design",
-      "sDescription": "lcump kkxgmu kuygm u98",
+      "sIcon": "bi-briefcase",
+      "sTitle": "Web Design",
+      "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
       "id": "1"
     },
     {
@@ -150,41 +157,41 @@
   ],
   "testimonials": [
     {
-      "authorImg": "../assets/img/testimonial-2.jpg",
-      "authorName": "Xavi Alonso",
-      "authorDescription": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
+      "img": "../assets/img/testimonial-2.jpg",
+      "name": "Xavi Alonso",
+      "description": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
       "id": "1"
     },
     {
-      "authorImg": "../assets/img/testimonial-4.jpg",
-      "authorName": "Mario John",
-      "authorDescription": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
+      "img": "../assets/img/testimonial-4.jpg",
+      "name": "Mario John",
+      "description": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
       "id": "2"
     }
   ],
   "counts": [
     {
-      "counterIcon": "bi-check",
+      "icon": "bi-check",
       "counterEnd": "450",
-      "counterText": "WORKS COMPLETED",
+      "text": "WORKS COMPLETED",
       "id": "1"
     },
     {
-      "counterIcon": "bi-journal-richtext",
+      "icon": "bi-journal-richtext",
       "counterEnd": "25",
-      "counterText": "YEARS OF EXPERIENCE",
+      "text": "YEARS OF EXPERIENCE",
       "id": "2"
     },
     {
-      "counterIcon": "bi-people",
+      "icon": "bi-people",
       "counterEnd": "550",
-      "counterText": "TOTAL CLIENTS",
+      "text": "TOTAL CLIENTS",
       "id": "3"
     },
     {
-      "counterIcon": "bi-award",
+      "icon": "bi-award",
       "counterEnd": "48",
-      "counterText": "AWARD WON",
+      "text": "AWARD WON",
       "id": "4"
     }
   ],
@@ -317,6 +324,64 @@
       "facebook": "/",
       "instagram": "/",
       "id": "1"
+    }
+  ],
+  "users": [
+    {
+      "id": "8ba0",
+      "userName": "malaika2003",
+      "email": "nxzmx@gmail.com",
+      "password": "hey11",
+      "loggedIn": true
+    },
+    {
+      "id": "5e4b",
+      "userName": "malaika03",
+      "email": "ghulamyaseen67776@gmail.com",
+      "password": "ghulam",
+      "loggedIn": true
+    },
+    {
+      "id": "a5e5",
+      "userName": "qirrat08",
+      "email": "nxzmx@gmail.com",
+      "password": "qirrat@08",
+      "loggedIn": true
+    },
+    {
+      "id": "60be",
+      "userName": "malaika03",
+      "email": "ghulamyaseen67776@gmail.com",
+      "password": "hey11",
+      "loggedIn": false
+    },
+    {
+      "id": "6d5b",
+      "userName": "qirrat08",
+      "email": "nxzmx@gmail.com",
+      "password": "qirrat@08",
+      "loggedIn": true
+    },
+    {
+      "id": "d551",
+      "userName": "malaika03",
+      "email": "ghulamyaseen67776@gmail.com",
+      "password": "ghulam",
+      "loggedIn": true
+    },
+    {
+      "id": "7987",
+      "userName": "malaika03",
+      "email": "abc@123",
+      "password": "hey11",
+      "loggedIn": true
+    },
+    {
+      "id": "7930",
+      "userName": "malaika03",
+      "email": "xyzabc@123",
+      "password": "hello",
+      "loggedIn": true
     }
   ]
 }

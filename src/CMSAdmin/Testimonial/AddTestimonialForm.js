@@ -1,12 +1,12 @@
 import { useRef, useState } from "react";
-import About from "../../Components/About";
+import Testimonial from "../../Components/Testimonial";
 
-const AddForm = () => {
+const AddTestimonialForm = () => {
     const [image, setImage] = useState(null);
     const imageRef = useRef(null);
     const [base64Image, setBase64Image] = useState("");
 
-    const acceptedFileTypes= "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
+    const acceptedFileTypes = "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
 
     const handleImageChange = async (e) => {
         const file = e.target.files[0];
@@ -101,12 +101,7 @@ const AddForm = () => {
 
         const updatedData = {
             name: formObject.name,
-            profile: formObject.profile,
-            email: formObject.email,
-            phone: formObject.phone,
-            desc1: formObject.desc, // Assuming all desc is in one textarea
-            desc2: "",
-            desc3: "",
+            description: formObject.desc, // Assuming all desc is in one textarea
             img: imageUrl,
             id: "1"
         };
@@ -114,7 +109,7 @@ const AddForm = () => {
 
         // Send PUT request to update the JSON data
         try {
-            const response = await fetch('http://localhost:8000/about/1', {
+            const response = await fetch('http://localhost:8000/testimonials/1', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -139,75 +134,75 @@ const AddForm = () => {
         setBase64Image("");      // Clear the image state
     };
 
+
     return (
         <>
-            <section id="about-form" className="form">
+            {/* Testimonial Form Start */}
+            <section id="testimonial-form" className="form">
                 <div className="container">
                     <div className="row">
-                        <div className="add-container">
+                        <div className="testimonial-container">
                             <div className="col-12">
-                                <h2>Add About Info!</h2>
+                                <h2>Add Testimonial Info!</h2>
                             </div>
                             <div className="col-12">
                                 <form onSubmit={onSubmit}>
-                                    <div className="image" onClick={handleImageClick}>
-                                        {image ?
-                                            <img 
-                                                src={URL.createObjectURL(image)} 
-                                                alt="" 
-                                                className="img-display-after" 
+                                    <div className="img-container text-center">
+                                        <div className="image" onClick={handleImageClick}>
+                                            {image ?
+                                                <img
+                                                    src={URL.createObjectURL(image)}
+                                                    alt=""
+                                                    className="img-display-after"
+                                                />
+                                                : <img
+                                                    src="../assets/img/default-image.jpg"
+                                                    alt="default"
+                                                    className="img-display-before"
+                                                />
+                                            }
+                                            <input
+                                                type="file"
+                                                name="file"
+                                                accept={acceptedFileTypes}
+                                                multiple={false}
+                                                onChange={handleImageChange}
+                                                ref={imageRef}
+                                                style={{ "display": "none" }}
                                             />
-                                            : <img 
-                                                src="../assets/img/default-image.jpg" 
-                                                alt="default" 
-                                                className="img-display-before" 
-                                            />
-                                        }
-                                        <input 
-                                            type="file" 
-                                            name="file" 
-                                            accept={acceptedFileTypes} 
-                                            multiple={false} 
-                                            onChange={handleImageChange} 
-                                            ref={imageRef} 
-                                            style={{ "display": "none" }} 
-                                        />
+                                        </div>
+                                        <label className="my-3"><b>Choose Client Image</b></label>
                                     </div>
-                                    <label className="my-3"><b>Choose Profile Image</b></label>
-                                    <input 
-                                        type="text" 
-                                        name="name" 
-                                        placeholder="Name" 
+
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        placeholder="Client Name"
                                         required
                                     />
-                                    <input 
-                                        type="text" 
-                                        name="profile" 
-                                        placeholder="Profile" 
-                                        required
-                                    />
-                                    <input 
-                                        type="email" 
-                                        name="email" 
-                                        placeholder="Email" 
-                                        required
-                                    />
-                                    <input 
-                                        type="text" 
-                                        name="phone" 
-                                        placeholder="Phone Number" 
-                                        required
-                                    />
-                                    <textarea 
-                                        name="desc" 
-                                        placeholder="Description" 
+                                    <textarea
+                                        name="desc"
+                                        placeholder="Description"
                                         required
                                     ></textarea>
-                                    {/* <input type="text" name="skill" placeholder="Skills" /> */}
 
-                                    <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                    <button className="cancel">Cancel</button>
-                                    <button className="submit" type="submit">Submit</button>
+                                    <div className="isActive">
+                                        <input
+                                            type="checkbox"
+                                            id="active"
+                                            className="mx-2"
+                                            required
+                                        />
+                                        <label htmlFor="active">
+                                            isActive
+                                        </label>
+                                    </div>
+
+                                    <div className="buttons">
+                                        <button className="reset" type="reset" onClick={onReset}>Reset</button>
+                                        <button className="cancel">Cancel</button>
+                                        <button className="submit" type="submit">Submit</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -215,9 +210,10 @@ const AddForm = () => {
                 </div>
                 <hr />
             </section>
-            <About />
+            {/* Testimonial Form End */}
+            <Testimonial />
         </>
     );
 }
 
-export default AddForm;
+export default AddTestimonialForm;

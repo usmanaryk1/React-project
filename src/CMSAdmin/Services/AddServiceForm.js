@@ -43,30 +43,45 @@ const AddServiceForm = () => {
 
     return (
         <>
+            {/* Service Form Start */}
             <section id="service-form" className="form">
                 <div className="container">
                     <div className="row">
                         <div className="service-container">
                             <div className="col-12">
-                                <h2>Services Info!</h2>
+                                <h2>Add Services Info!</h2>
                             </div>
                             <div className="col-12">
                                 <form onSubmit={onSubmit}>
-                                    <input 
-                                        type="text" 
-                                        name="title" 
-                                        placeholder="Title of Service" 
-                                        required 
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        placeholder="Title of Service"
+                                        required
                                     />
-                                    <textarea 
-                                        name="desc" 
-                                        placeholder="Description" 
+                                    <textarea
+                                        name="desc"
+                                        placeholder="Description"
                                         required
                                     ></textarea>
 
-                                    <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                    <button className="cancel">Cancel</button>
-                                    <button className="submit" type="submit">Submit</button>
+                                    <div className="isActive">
+                                        <input
+                                            type="checkbox"
+                                            id="active"
+                                            className="mx-2"
+                                            required
+                                        />
+                                        <label htmlFor="active">
+                                            isActive
+                                        </label>
+                                    </div>
+
+                                    <div className="buttons">
+                                        <button className="reset" type="reset" onClick={onReset}>Reset</button>
+                                        <button className="cancel">Cancel</button>
+                                        <button className="submit" type="submit">Submit</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -74,6 +89,7 @@ const AddServiceForm = () => {
                 </div>
                 <hr />
             </section>
+            {/* Service Form End */}
             <Services title="Services" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
         </>
     );

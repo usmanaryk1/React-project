@@ -33,6 +33,7 @@
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
+      "desc":"Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
       "id": "1"
     },
     {
@@ -48,6 +49,7 @@
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
+      "desc":"Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
       "id": "2"
     },
     {
@@ -63,6 +65,7 @@
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
+      "desc":"Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
       "id": "3"
     },
     {
@@ -78,6 +81,7 @@
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
+      "desc":"Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
       "id": "4"
     },
     {
@@ -93,6 +97,7 @@
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
+      "desc":"Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
       "id": "5"
     },
     {
@@ -108,6 +113,7 @@
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
+      "desc":"Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
       "id": "6"
     }
   ],
@@ -151,41 +157,41 @@
   ],
   "testimonials": [
     {
-      "authorImg": "assets/img/testimonial-2.jpg",
-      "authorName": "Xavi Alonso",
-      "authorDescription": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
+      "img": "../assets/img/testimonial-2.jpg",
+      "name": "Xavi Alonso",
+      "description": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
       "id": "1"
     },
     {
-      "authorImg": "assets/img/testimonial-4.jpg",
-      "authorName": "Mario John",
-      "authorDescription": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
+      "img": "assets/img/testimonial-4.jpg",
+      "name": "Mario John",
+      "description": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
       "id": "2"
     }
   ],
   "counts": [
     {
-      "counterIcon": "bi-check",
+      "icon": "bi-check",
       "counterEnd": "450",
-      "counterText": "WORKS COMPLETED",
+      "text": "WORKS COMPLETED",
       "id": "1"
     },
     {
-      "counterIcon": "bi-journal-richtext",
+      "icon": "bi-journal-richtext",
       "counterEnd": "25",
-      "counterText": "YEARS OF EXPERIENCE",
+      "text": "YEARS OF EXPERIENCE",
       "id": "2"
     },
     {
-      "counterIcon": "bi-people",
+      "icon": "bi-people",
       "counterEnd": "550",
-      "counterText": "TOTAL CLIENTS",
+      "text": "TOTAL CLIENTS",
       "id": "3"
     },
     {
-      "counterIcon": "bi-award",
+      "icon": "bi-award",
       "counterEnd": "48",
-      "counterText": "AWARD WON",
+      "text": "AWARD WON",
       "id": "4"
     }
   ],
