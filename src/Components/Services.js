@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import useFetch from "./useFetch";
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
@@ -6,10 +7,27 @@ const Services = ({ title, subtitle, onEdit, onDelete }) => {
     const { data: services } = useFetch("http://localhost:8000/services");
     const { isAuthenticated, isAdminPage } = useAuth();
 
+    const handleDeleteClick = (serviceId) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                onDelete(serviceId);
+            }
+        });
+    };
+
     return (
         <>
             {/* ======= Services Section ======= */}
-            {services && <section id="services" className="services-mf pt-5 route">
+            {services && (
+                <section id="services" className="services-mf pt-5 route">
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12">
@@ -26,8 +44,12 @@ const Services = ({ title, subtitle, onEdit, onDelete }) => {
                                 <div className="service-box">
                                     {isAuthenticated && isAdminPage && (
                                         <div className='admin-actions d-flex justify-content-end align-items-start'>
-                                            <button className='admin-btn' aria-label="Edit" onClick={() => onEdit(service)}><i className="bi bi-pencil" /></button>
-                                            <button className='admin-btn mx-1' aria-label="Delete" onClick={() => onDelete(service.id)}><i className="bi bi-trash" /></button>
+                                            <button className='admin-btn' aria-label="Edit" onClick={() => onEdit(service)}>
+                                                <i className="bi bi-pencil" />
+                                            </button>
+                                            <button className='admin-btn mx-1' aria-label="Delete" onClick={() => handleDeleteClick(service.id)}>
+                                                <i className="bi bi-trash" />
+                                            </button>
                                         </div>
                                     )}
                                     <div className="service-ico">
@@ -44,8 +66,8 @@ const Services = ({ title, subtitle, onEdit, onDelete }) => {
                         ))}
                     </div>
                 </div>
-            </section>}
-            {/* End Services Section */}
+            </section>         
+            )}   {/* End Services Section */}
         </>
     );
 }

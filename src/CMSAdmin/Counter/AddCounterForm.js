@@ -3,11 +3,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import validationSchema from "./CounterValidation";
-
+import { useState, useEffect  } from "react";
+import useFetch from "../../Components/useFetch";
 
 const AddCounterForm = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const [currentCounter, setCurrentCounter] = useState(null);
+    const { data: counters, setData: setCounters, refetch } = useFetch("http://localhost:8000/counts");
+    const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
             title: '',
@@ -16,44 +19,87 @@ const AddCounterForm = () => {
         }
     })
 
-    const onSubmit = (formObject, e) => {
-        e.preventDefault();
+    useEffect(() => {
+        if (currentCounter) {
+            setValue('title', currentCounter.text);
+            setValue('counts', currentCounter.counterEnd);
+            setValue('isActive', currentCounter.isActive);
+        } else {
+            reset();
+        }
+    }, [currentCounter, setValue, reset]);
 
-        console.log('Service Data:', formObject);
+    const onSubmit = async (data) => {
 
-        const updatedData = {
-            counterEnd: formObject.counts,
-            text: formObject.title,
-            id: "1"
+        const formData = {
+            text: data.title,
+            counterEnd: data.counts,
+            isActive: data.isActive,
         };
 
-        fetch('http://localhost:8000/counts/1', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updatedData)
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
 
-                toast.success("Submitted Successfully")
-
-                e.target.reset();  // Reset the form after successful submission
-            })
-            .catch((error) => {
-                console.error('Error:', error);
+        if (currentCounter) {
+            // Update counter
+            const updatedCounter = { ...currentCounter, ...formData };
+            console.log('Updating counter:', updatedCounter);
+            const response = await fetch(`http://localhost:8000/counts/${currentCounter.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedCounter),
             });
+            const result = await response.json();
+            console.log('Updated counter response:', result);
 
-        e.target.reset();
+            setCounters(counters.map(counter => counter.id === result.id ? result : counter));
+            toast.success('Counter updated successfully');
+        } else {
+            // Add new counter
+            const response = await fetch('http://localhost:8000/counts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            if (response.ok) {
+                const result = await response.json();
+                setCounters(prevCounters => [...prevCounters, result]);
+                toast.success('Counter added successfully');
+                refetch(); // Ensure data is refreshed after addition
+            } else {
+                toast.error('Failed to add counter');
+            }
+        }
+        reset();
+        setCurrentCounter(null);
+        refetch();
     };
 
     const onReset = (e) => {
-        e.preventDefault();
-        e.target.form.reset();
+        reset();
+        setCurrentCounter(null);
     };
 
+    const handleEdit = (counter) => {
+        setCurrentCounter(counter);
+    };
+
+    const handleDelete = async (id) => {
+        console.log('Deleting counter with ID:', id);
+        const response = await fetch(`http://localhost:8000/counts/${id}`, {
+            method: 'DELETE',
+        });
+        if (response.ok) {
+            setCounters(counters.filter(counter => counter.id !== id));
+            refetch();
+            toast.success('Counter deleted successfully');
+        } else {
+            console.error('Failed to delete counter');
+            toast.error('Failed to delete counter');
+        }
+    };
 
     return (
         <>
@@ -71,12 +117,12 @@ const AddCounterForm = () => {
                                         type="text"
                                         name="title"
                                         {...register('title')}
-                                        placeholder="Title in Uppercase"
+                                        placeholder="Title"
                                         required
                                     />
                                     {errors.title && <p className="error-message">{errors.title.message}</p>}
                                     <input
-                                        type="number"
+                                        type="text"
                                         name="counts"
                                         {...register('counts')}
                                         placeholder="Number of Counts"
@@ -99,7 +145,6 @@ const AddCounterForm = () => {
                                     {errors.isActive && <p className="error-message">{errors.isActive.message}</p>}
                                     <div className="buttons">
                                         <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                        <button className="cancel">Cancel</button>
                                         <button className="submit" type="submit">Submit</button>
                                     </div>
                                 </form>
@@ -110,7 +155,7 @@ const AddCounterForm = () => {
                 <hr />
             </section>
             {/* Counter Form End */}
-            <Counter />
+            <Counter onEdit={handleEdit} onDelete={handleDelete} />
         </>
     );
 }

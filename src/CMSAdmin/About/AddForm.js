@@ -1,13 +1,14 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import About from "../../Components/About";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
 import validationSchema from "./AboutValidation";
+import useFetch from "../../Components/useFetch";
 
 const AddForm = () => {
 
-    const { register, handleSubmit, formState: { errors }, setValue  } = useForm({
+    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
             file: '',
@@ -24,6 +25,26 @@ const AddForm = () => {
     const [image, setImage] = useState(null);
     const imageRef = useRef(null);
     const [base64Image, setBase64Image] = useState("");
+    const [currentAbout, setCurrentAbout] = useState(null);
+    const { data: aboutList, setData: setAboutList, refetch } = useFetch("http://localhost:8000/about");
+
+
+    useEffect(() => {
+        if (currentAbout) {
+            setValue('name', currentAbout.name);
+            setValue('profile', currentAbout.profile);
+            setValue('email', currentAbout.email);
+            setValue('phone', currentAbout.phone);
+            setValue('desc', currentAbout.desc1);
+            setValue('isActive', currentAbout.isActive);
+            // setValue('file',setBase64Image(currentAbout.img));
+            setBase64Image(currentAbout.img);
+            setImage(null); 
+        } else {
+            reset();
+            setBase64Image("");
+        }
+    }, [currentAbout, setValue, reset]);
 
     const acceptedFileTypes = "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
 
@@ -33,41 +54,6 @@ const AddForm = () => {
         setBase64Image(base64);
         console.log("base64", base64);
         setImage(file);
-
-        setValue("file", file);
-
-        const imgname = e.target.files[0].name;
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            const img = new Image();
-            img.src = reader.result;
-            img.onload = () => {
-                const canvas = document.createElement("canvas");
-                const maxSize = Math.max(img.width, img.height);
-                canvas.width = maxSize;
-                canvas.height = maxSize;
-                const ctx = canvas.getContext("2d");
-                ctx.drawImage(
-                    img,
-                    (maxSize - img.width) / 2,
-                    (maxSize - img.height) / 2
-                );
-                canvas.toBlob(
-                    (blob) => {
-                        const file = new File([blob], imgname, {
-                            type: "image/png",
-                            lastModified: Date.now(),
-                        });
-
-                        console.log(file);
-                        setImage(file);
-                    },
-                    "image/jpeg",
-                    0.8
-                );
-            };
-        };
     };
 
     const convertBase64 = (file) => {
@@ -88,11 +74,11 @@ const AddForm = () => {
     }
 
     const handleImageClick = () => {
-        imageRef.current.click();
+        // imageRef.current.click();
+        document.getElementById('file-input').click();
     }
 
-    const onSubmit = async (formObject, e) => {
-        e.preventDefault();
+    const onSubmit = async (formObject) => {
 
         formObject.aboutImage = base64Image; // Add the base64 image to the form object
 
@@ -126,38 +112,68 @@ const AddForm = () => {
             desc2: "",
             desc3: "",
             img: imageUrl,
-            id: "1"
+            isActive: formObject.isActive
         };
         console.log("imageUrl", imageUrl)
 
-        // Send PUT request to update the JSON data
-        try {
-            const response = await fetch('http://localhost:8000/about/1', {
+        if (currentAbout) {
+            const response = await fetch(`http://localhost:8000/about/${currentAbout.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(updatedData)
             });
-            const data = await response.json();
-            console.log('Success:', data);
-            toast.success('Data updated successfully!')
-            e.target.reset();  // Reset the form after successful submission
-            setImage(null);
-            setBase64Image("");   // Clear the image state 
-        } catch (error) {
-            console.error('Error updating the JSON data:', error);
+            const result = await response.json();
+            setAboutList(aboutList.map(item => item.id === result.id ? result : item));
+            toast.success('About info updated successfully');
+        } else {
+            const response = await fetch('http://localhost:8000/about', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData)
+            });
+            if (response.ok) {
+                const result = await response.json();
+                setAboutList(prevAboutList => [...prevAboutList, result]);
+                toast.success('About info added successfully');
+            } else {
+                toast.error('Failed to add about info');
+            }
         }
 
-        e.target.reset();
+        reset();
+        setImage(null);
+        setBase64Image("");
+        setCurrentAbout(null);
+        refetch();
 
     };
 
-    const onReset = (e) => {
-        e.preventDefault();
-        e.target.form.reset();
+    const onReset = () => {
+        reset();
         setImage(null);
-        setBase64Image("");      // Clear the image state
+        setBase64Image("");
+        setCurrentAbout(null);     // Clear the image state
+    };
+
+    const handleEdit = (about) => {
+        setCurrentAbout(about);
+    };
+
+    const handleDelete = async (id) => {
+        const response = await fetch(`http://localhost:8000/about/${id}`, {
+            method: 'DELETE',
+        });
+        if (response.ok) {
+            setAboutList(aboutList.filter(item => item.id !== id));
+            refetch();
+            toast.success('About info deleted successfully');
+        } else {
+            toast.error('Failed to delete about info');
+        }
     };
 
     return (
@@ -180,7 +196,7 @@ const AddForm = () => {
                                                     className="img-display-after"
                                                 />
                                                 : <img
-                                                    src="../assets/img/default-image.jpg"
+                                                    src={base64Image || "../assets/img/default-image.jpg"}
                                                     alt="default"
                                                     className="img-display-before"
                                                 />
@@ -188,6 +204,7 @@ const AddForm = () => {
                                             <input
                                                 type="file"
                                                 name="file"
+                                                id="file-input"
                                                 {...register('file')}
                                                 accept={acceptedFileTypes}
                                                 multiple={false}
@@ -198,7 +215,7 @@ const AddForm = () => {
                                         </div>
                                         <label className="my-3"><b>Choose Profile Image</b></label>
                                     </div>
-                                        {errors.file && <p className="error-message">{errors.file.message}</p>}
+                                    {errors.file && <p className="error-message">{errors.file.message}</p>}
                                     <input
                                         type="text"
                                         name="name"
@@ -224,7 +241,7 @@ const AddForm = () => {
                                     />
                                     {errors.email && <p className="error-message">{errors.email.message}</p>}
                                     <input
-                                        type="number"
+                                        type="text"
                                         name="phone"
                                         {...register('phone')}
                                         placeholder="Phone Number"
@@ -254,7 +271,6 @@ const AddForm = () => {
                                     {errors.isActive && <p className="error-message">{errors.isActive.message}</p>}
                                     <div className="buttons">
                                         <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                        <button className="cancel">Cancel</button>
                                         <button className="submit" type="submit">Submit</button>
                                     </div>
                                 </form>
@@ -264,7 +280,7 @@ const AddForm = () => {
                 </div>
                 <hr />
             </section>
-            <About />
+            <About onEdit={handleEdit} onDelete={handleDelete} />
         </>
     );
 }

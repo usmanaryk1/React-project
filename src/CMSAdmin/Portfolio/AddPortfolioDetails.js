@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import validationSchema from "./PortfolioDetailsValidation";
 import PortfolioDetails from "../../Components/PortfolioDetails";
-import PortfolioContent from "../../Components/PortfolioContent";
 
 const AddPortfolioDetails = () => {
 
@@ -398,7 +397,6 @@ const AddPortfolioDetails = () => {
                                     {errors.isActive && <p className="error-message">{errors.isActive.message}</p>}
                                     <div className="buttons">
                                         <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                        <button className="cancel">Cancel</button>
                                         <button className="submit" type="submit">Submit</button>
                                     </div>
                                 </form>
@@ -410,7 +408,7 @@ const AddPortfolioDetails = () => {
             </section>
             {/* PortfolioDetails Form End */}
             <PortfolioDetails />
-            <PortfolioContent />
+            {/* <PortfolioContent /> */}
         </>
     );
 }

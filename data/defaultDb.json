@@ -3,6 +3,7 @@
     {
       "name" : "Morgan Freeman",
       "skills": "Designer, Developer, Freelancer, Photographer",
+      "isActive": true,
       "id" : "1"
     }
   ],
@@ -16,6 +17,7 @@
       "desc2": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.",
       "desc3": "Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
       "img": "../assets/img/testimonial-2.jpg",
+      "isActive": true,
       "id": "1"
     }
   ],
@@ -26,6 +28,8 @@
       "wTitle": "Lorem impsum dolor",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
+      "pURL": "www.example.com",
+      "isActive": true,
       "id": "1"
     },
     {
@@ -34,6 +38,8 @@
       "wTitle": "Loreda Cuno Nere",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
+      "pURL": "www.example.com",
+      "isActive": true,
       "id": "2"
     },
     {
@@ -42,6 +48,8 @@
       "wTitle": "Mavrito Lana Dere",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
+      "pURL": "www.example.com",
+      "isActive": true,
       "id": "3"
     },
     {
@@ -50,6 +58,8 @@
       "wTitle": "Bindo Laro Cado",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
+      "pURL": "www.example.com",
+      "isActive": true,
       "id": "4"
     },
     {
@@ -58,6 +68,8 @@
       "wTitle": "Studio Lena Mado",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
+      "pURL": "www.example.com",
+      "isActive": true,
       "id": "5"
     },
     {
@@ -66,6 +78,8 @@
       "wTitle": "Studio Big Bang",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
+      "pURL": "www.example.com",
+      "isActive": true,
       "id": "6"
     }
   ],
@@ -142,36 +156,42 @@
       "sIcon": "bi-briefcase",
       "sTitle": "Web Design",
       "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
+      "isActive": true,
       "id": "1"
     },
     {
       "sIcon": "bi-card-checklist",
       "sTitle": "Web Development",
       "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
+      "isActive": true,
       "id": "2"
     },
     {
       "sIcon": "bi-bar-chart",
       "sTitle": "Photography",
       "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
+      "isActive": true,
       "id": "3"
     },
     {
       "sIcon": "bi-binoculars",
       "sTitle": "Responsive Design",
       "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
+      "isActive": true,
       "id": "4"
     },
     {
       "sIcon": "bi-brightness-high",
       "sTitle": "Graphic Design",
       "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
+      "isActive": true,
       "id": "5"
     },
     {
       "sIcon": "bi-calendar4-week",
       "sTitle": "Marketing Services",
       "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
+      "isActive": true,
       "id": "6"
     }
   ],
@@ -194,24 +214,28 @@
       "icon": "bi-check",
       "counterEnd": "450",
       "text": "Works completed",
+      "isActive": true,
       "id": "1"
     },
     {
       "icon": "bi-journal-richtext",
       "counterEnd": "25",
       "text": "Years of experience",
+      "isActive": true,
       "id": "2"
     },
     {
       "icon": "bi-people",
       "counterEnd": "550",
       "text": "Total clients",
+      "isActive": true,
       "id": "3"
     },
     {
       "icon": "bi-award",
       "counterEnd": "48",
       "text": "Award won",
+      "isActive": true,
       "id": "4"
     }
   ],

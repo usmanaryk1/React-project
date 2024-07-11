@@ -1,11 +1,28 @@
+import Swal from 'sweetalert2';
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import useFetch from "./useFetch";
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const Portfolio = ({ title, subtitle }) => {
+const Portfolio = ({ title, subtitle, onEdit, onDelete }) => {
 
     const { data: works } = useFetch("http://localhost:8000/works");
     const { isAuthenticated, isAdminPage } = useAuth();
+
+    const handleDeleteClick = (serviceId) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                onDelete(serviceId);
+            }
+        });
+    };
 
     return (
         <>
@@ -32,8 +49,12 @@ const Portfolio = ({ title, subtitle }) => {
                                     </a>
                                     {isAuthenticated && isAdminPage && (
                                         <div className='admin-actions d-flex align-items-start justify-content-end mt-2 mb-0'>
-                                            <button className='admin-btn me-1' aria-label="Edit"><i className="bi bi-pencil" /></button>
-                                            <button className='admin-btn' aria-label="Delete"><i className="bi bi-trash" /></button>
+                                            <button className='admin-btn me-1' aria-label="Edit" onClick={() => onEdit(work)}>
+                                                <i className="bi bi-pencil" />
+                                            </button>
+                                            <button className='admin-btn' aria-label="Delete" onClick={() => handleDeleteClick(work.id)}>
+                                                <i className="bi bi-trash" />
+                                            </button>
                                         </div>
                                     )}
                                     <div className="work-content">

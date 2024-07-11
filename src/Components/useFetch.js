@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 
 const useFetch = (url) => {
@@ -7,33 +7,31 @@ const useFetch = (url) => {
     const [error, setError] = useState(null);
     const [isPending, setIsPending] = useState(true);
 
+    const fetchData = useCallback(() => {
+        setIsPending(true);
+        fetch(url)
+            .then(res => {
+                if (!res.ok) {
+                    throw Error('could not fetch data from that resource');
+                }
+                return res.json();
+            })
+            .then(data => {
+                setData(data);
+                setError(null);
+                setIsPending(false);
+            })
+            .catch(err => {
+                setError(err.message);
+                setIsPending(false);
+            });
+    }, [url]);
+
     useEffect(() => {
-        setTimeout(() => {
-            fetch(url)
-                .then(res => {
-                    if (!res.ok) {
-                        throw Error('could not fetch data from that resource')
-                    }
-                    // console.log("Response: ",res);
-                    return res.json();
-                })
-                .then(data => {
-                    // console.log('Raw data:', data); // Inspect the raw data
-                    // const about = data.about; // or whatever the key is
-                    // console.log('About object:', about);
-                    setData(data);
-                    setError(null);
-                    setIsPending(false);
+        fetchData();
+    }, [url, fetchData]);
 
-                })
-                .catch(err => {
-                    setError(err.message);
-                    setIsPending(false);
-                })
-        }, 5);
-    }, [url])
-
-    return { data, isPending, error, setData };
+    return { data, isPending, error, setData, refetch: fetchData };
 }
 
 export default useFetch;

@@ -1,10 +1,27 @@
+import Swal from 'sweetalert2';
 import useFetch from "./useFetch";
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const About = () => {
+const About = ({onEdit, onDelete}) => {
 
     const { data: about } = useFetch("http://localhost:8000/about")
     const { isAuthenticated, isAdminPage } = useAuth();
+
+    const handleDeleteClick = (aboutId) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                onDelete(aboutId);
+            }
+        });
+    };
 
     return (
         <>
@@ -61,8 +78,12 @@ const About = () => {
                                                     </h5>
                                                     {isAuthenticated && isAdminPage && (
                                                         <div className='admin-actions'>
-                                                            <button className='admin-btn me-1' aria-label="Edit"><i className="bi bi-pencil" /></button>
-                                                            <button className='admin-btn' aria-label="Delete"><i className="bi bi-trash" /></button>
+                                                            <button className='admin-btn me-1' aria-label="Edit" onClick={() => onEdit(about)}>
+                                                                <i className="bi bi-pencil" />
+                                                            </button>
+                                                            <button className='admin-btn' aria-label="Delete" onClick={() => handleDeleteClick(about.id)}>
+                                                                <i className="bi bi-trash" />
+                                                            </button>
                                                         </div>
                                                     )}
                                                 </div>

@@ -340,7 +340,6 @@ const AddCertificationForm = () => {
 
                                     <div className="buttons">
                                         <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                        <button className="cancel">Cancel</button>
                                         <button className="submit" type="submit">Submit</button>
                                     </div>
                                 </form>

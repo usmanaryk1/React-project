@@ -22,9 +22,8 @@ const validationSchema = yup.object({
         .required('Link is required'),
 
     category: yup.string().required('Category is required'),
+    date: yup.string().required('Date is required'),
 
-    date: yup.date()
-        .required('Date is required'),
 
     isActive: yup.bool().oneOf([true], 'Please check this field').required('Please check this field'),
     

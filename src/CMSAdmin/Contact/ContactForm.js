@@ -3,10 +3,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
 import validationSchema from "./ContactValidation";
-
+import useFetch from "../../Components/useFetch";
+import { useState, useEffect } from "react";
 const ContactForm = () => {
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    const [currentContact, setCurrentContact] = useState(null);
+    const { data: contacts, setData: setContacts, refetch } = useFetch("http://localhost:8000/contact");
+    const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
             description: '',
@@ -17,47 +20,99 @@ const ContactForm = () => {
         }
     });
 
+    useEffect(() => {
+        if (currentContact) {
+            setValue('description', currentContact.description);
+            setValue('location', currentContact.location);
+            setValue('number', currentContact.number);
+            setValue('email', currentContact.email);
+            setValue('isActive', currentContact.isActive);
+        } else {
+            reset();
+        }
+    }, [currentContact, setValue, reset]);
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
+    useEffect(() => {
+        console.log('Updated services:', contacts);
+    }, [contacts]);
 
-        const formObject = Object.fromEntries(formData);
+    const onSubmit = async (data) => {
 
-        console.log('Form Data:', formObject);
-        const updatedData = {
-            description: formObject.description,
-            location: formObject.location,
-            number: formObject.number,
-            email: formObject.email,
-            id: "1"
+        const formData = {
+            description: data.description,
+            location: data.location,
+            number: data.number,
+            email: data.email,
+            isActive: data.isActive
         };
 
-        fetch('http://localhost:8000/contact/1', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updatedData)
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-
-                toast.success('Submited successfully!');
-                reset();  // Reset the form after successful submission
-            })
-            .catch((error) => {
-                console.error('Error:', error);
+        if (currentContact) {
+            // Update service
+            const updatedService = { ...currentContact, ...formData };
+            console.log('Updating service:', updatedService);
+            const response = await fetch(`http://localhost:8000/contact/${currentContact.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedService),
             });
-    
-    };
+            const result = await response.json();
+            console.log('Updated contact response:', result);
 
-    const onReset = (e) => {
-        e.preventDefault();
+            setContacts(contacts.map(contact => contact.id === result.id ? result : contact));
+            console.log('service after updating: ', contacts);
+            toast.success('contacts updated successfully');
+        } else {
+            // Add new service
+            const response = await fetch('http://localhost:8000/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            if (response.ok) {
+                const result = await response.json();
+                console.log('new service: ', result);
+                setContacts(prevContacts => [...prevContacts, result]);
+                toast.success('Contact added successfully');
+                refetch(); // Ensure data is refreshed after addition
+            } else {
+                toast.error('Failed to add Contact');
+            }
+
+        }
         reset();
+        setCurrentContact(null);
+        refetch();
     };
 
+    const onReset = () => {
+        reset();
+        setCurrentContact(null);
+    }
+
+    const handleEdit = (contact) => {
+        setCurrentContact(contact);
+        console.log('onedit: ', contact);
+    };
+
+    const handleDelete = async (id) => {
+        console.log('Deleting service with ID:', id);
+        const response = await fetch(`http://localhost:8000/contact/${id}`, {
+            method: 'DELETE',
+        });
+        if (response.ok) {
+            setContacts(contacts.filter(contact => contact.id !== id));
+            refetch();
+            toast.success('Contact deleted successfully');
+            console.log('Contact deleted successfully', contacts);
+        } else {
+            console.error('Failed to delete service');
+            toast.error('Failed to delete service');
+        }
+    }
     return (
         <>
             <section id="contact-form" className="contact-form form" style={{ backgroundImage: 'url(assets/img/overlay-bg.jpg)' }}>
@@ -70,36 +125,36 @@ const ContactForm = () => {
                             <div className="col-12">
                                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
 
-                                    <input 
-                                        type="text" 
-                                        name="description" 
+                                    <input
+                                        type="text"
+                                        name="description"
                                         {...register("description")}
-                                        placeholder="Description" 
-                                        required 
+                                        placeholder="Description"
+                                        required
                                     />
                                     {errors.description && <p className="error-message">{errors.description.message}</p>}
-                                    <input 
-                                        type="text" 
-                                        name="location" 
+                                    <input
+                                        type="text"
+                                        name="location"
                                         {...register("location")}
-                                        placeholder="Location" 
-                                        required 
+                                        placeholder="Location"
+                                        required
                                     />
                                     {errors.location && <p className="error-message">{errors.location.message}</p>}
-                                    <input 
-                                        type="text" 
+                                    <input
+                                        type="text"
                                         name="number"
-                                        {...register("number")} 
-                                        placeholder="Telephone Number" 
-                                        required 
+                                        {...register("number")}
+                                        placeholder="Telephone Number"
+                                        required
                                     />
                                     {errors.number && <p className="error-message">{errors.number.message}</p>}
-                                    <input 
-                                        type="email" 
-                                        name="email" 
+                                    <input
+                                        type="email"
+                                        name="email"
                                         {...register("email")}
-                                        placeholder="Email" 
-                                        required 
+                                        placeholder="Email"
+                                        required
                                     />
                                     {errors.email && <p className="error-message">{errors.email.message}</p>}
 
@@ -120,7 +175,6 @@ const ContactForm = () => {
 
                                     <div className="buttons">
                                         <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                        <button className="cancel">Cancel</button>
                                         <button className="submit" type="submit">Submit</button>
                                     </div>
                                 </form>
@@ -130,7 +184,7 @@ const ContactForm = () => {
                 </div>
                 <hr />
             </section>
-            <Contact />
+            <Contact  onEdit={handleEdit} onDelete={handleDelete} />
         </>
     );
 }

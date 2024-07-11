@@ -3,10 +3,14 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
 import validationSchema from "./HeroValidation";
+import { useState, useEffect } from "react";
+import useFetch from "../../Components/useFetch";
 
 const HeroForm = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const [currentHero, setCurrentHero] = useState(null);
+    const { data: hero, setData: setHero, refetch } = useFetch("http://localhost:8000/hero");
+    const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
             name: '',
@@ -15,39 +19,96 @@ const HeroForm = () => {
         }
     })
 
-    const onSubmit = async (formObject, e) => {
-        e.preventDefault();
-        console.log('Data: ', formObject);
+    useEffect(() => {
+        if (currentHero) {
+            setValue('name', currentHero.name);
+            setValue('skills', currentHero.skills);
+            setValue('isActive', currentHero.isActive);
+        } else {
+            reset();
+        }
+    }, [currentHero, setValue, reset ]);
+    console.log('current hero before function: ', currentHero);
 
-        const updatedData = {
-            name: formObject.name,
-            skills: formObject.skills,
-            id: "1"
+    useEffect(() => {
+        console.log('Updated services:', hero);
+    }, [hero]);
+
+    const onSubmit = async (data) => {
+
+        const formData = {
+            name: data.name,
+            skills: data.skills,
+            isActive: data.isActive,
         };
-
-        fetch('http://localhost:8000/hero/1', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updatedData)
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                toast.success('Data updated successfully');
-
-                e.target.reset();  // Reset the form after successful submission
-            })
-            .catch((error) => {
-                console.error('Error:', error);
+        if (currentHero) {
+            // Update service
+            const updatedHero = { ...currentHero, ...formData };
+            console.log('Updating hero:', updatedHero);
+            const response = await fetch(`http://localhost:8000/hero/${currentHero.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedHero),
             });
-        e.target.reset(e);
+            const result = await response.json();
+            console.log('Updated hero response:', result);
+
+            setHero(hero.map(heroData => heroData.id === result.id ? result : heroData));
+            console.log('hero after updating: ', hero);
+            toast.success('Content updated successfully');
+        } else {
+            // Add new service
+            const response = await fetch('http://localhost:8000/hero', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            if (response.ok) {
+                const result = await response.json();
+                console.log('new hero: ',result);
+                setHero(prevHero => [...prevHero, result]);
+                toast.success('Hero added successfully');
+            } else {
+                toast.error('Failed to add Hero');
+            }
+    
+        }
+        reset();
+        setCurrentHero(null);
+        refetch();
+
     };
 
-    const onReset = (e) => {
-        e.preventDefault();
-        e.target.form.reset();
+    const onReset = () => {
+        reset();
+        setCurrentHero(null);
+    };
+
+    const handleEdit = (hero) => {
+        setCurrentHero(hero);
+        console.log('onedit: ', hero);
+    };
+
+    const handleDelete = async (id) => {
+        console.log('Deleting service with ID:', id);
+        const response = await fetch(`http://localhost:8000/hero/${id}`, {
+            method: 'DELETE',
+        });
+        if (response.ok) {
+            setHero(hero.filter(heroData => heroData.id !== id));
+            refetch();
+            toast.success('Hero section deleted successfully');
+            console.log('Hero section deleted successfully', hero);
+        } else {
+            console.error('Failed to delete section');
+            toast.error('Failed to delete hero section');
+        }
+        
+
     };
 
     return (
@@ -95,8 +156,7 @@ const HeroForm = () => {
                                     
                                     <div className="buttons">
                                         <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                        <button className="cancel">Cancel</button>
-                                        <button className="submit" type="submit">Submit</button>
+                                        <button className="submit btn btn-success" type="submit">Submit</button>
                                     </div>
 
                                 </form>
@@ -106,7 +166,7 @@ const HeroForm = () => {
                 </div>
                 <hr />
             </section>
-            <Hero />
+            <Hero onEdit={handleEdit} onDelete={handleDelete} />
         </>
     );
 }

@@ -1,12 +1,15 @@
 import Portfolio from "../../Components/Portfolio";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import validationSchema from "./PortfolioValidation";
+import useFetch from "../../Components/useFetch";
 
 const AddPortfolioForm = () => {
 
+    const [currentPortfolio, setCurrentPortfolio] = useState(null);
+    const { data: portfolios, setData: setPortfolios, refetch } = useFetch("http://localhost:8000/works");
     const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
@@ -31,11 +34,10 @@ const AddPortfolioForm = () => {
         setBase64Image(base64);
         console.log("base64", base64);
         setImage(file);
-        setValue("file", e.target.files);
     };
 
     const handleImageClick = () => {
-        imageRef.current.click();
+        document.getElementById('file-input').click();
     }
 
     const convertBase64 = (file) => {
@@ -52,6 +54,28 @@ const AddPortfolioForm = () => {
             }
         })
 
+    }
+
+    useEffect(() => {
+        if (currentPortfolio) {
+            setValue('title', currentPortfolio.wTitle);
+            setValue('link', currentPortfolio.pURL);
+            setValue('category', currentPortfolio.wCategory);
+            setValue('date', formatDate(currentPortfolio.wDate));
+            setValue('isActive', currentPortfolio.isActive);
+            setBase64Image(currentPortfolio.linkImage);
+            setImage(null); // or set to a placeholder if needed
+        } else {
+            reset();
+        }
+    }, [currentPortfolio, setValue, reset]);
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
     }
 
     const onSubmit = async (formObject, e) => {
@@ -93,44 +117,72 @@ const AddPortfolioForm = () => {
             linkImage: imageUrl,
             workImage: imageUrl2,
             isActive: formObject.isActive,
-            id: "1"
+            
         };
 
         console.log("imageUrl", imageUrl)
         console.log("imageUrl2", imageUrl2)
 
-        // Send PUT request to update the JSON data
-        try {
-            const response = await fetch('http://localhost:8000/works/1', {
+        if (currentPortfolio) {
+            const response = await fetch(`http://localhost:8000/works/${currentPortfolio.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(updatedData)
             });
-
-            const data = await response.json();
-
-            console.log('Success:', data);
-
-            toast.success('Submitted Successfully');
-
-            e.target.reset();  // Reset the form after successful submission
-
-            setImage(null);
-
-            setBase64Image("");   // Clear the image state 
-
-        } catch (error) {
-            console.error('Error updating the JSON data:', error);
+            const result = await response.json();
+            setPortfolios(portfolios.map(portfolio => portfolio.id === result.id ? result : portfolio));
+            toast.success('Portfolio updated successfully');
+        } else {
+            const response = await fetch('http://localhost:8000/works', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData)
+            });
+            if (response.ok) {
+                const result = await response.json();
+                setPortfolios(prevPortfolioList => [...prevPortfolioList, result]);
+                toast.success('Portfolio added successfully');
+            } else {
+                toast.error('Failed to add Portfolio info');
+            }
         }
 
         reset();
+        setImage(null);
+        setBase64Image("");
+        setCurrentPortfolio(null);
+        refetch();
     };
 
     const onReset = (e) => {
-        e.preventDefault();
         reset();
+        setImage(null);
+        setBase64Image("");
+        setCurrentPortfolio(null);
+    };
+
+    const handleEdit = (portfolio) => {
+        setCurrentPortfolio(portfolio);
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:8000/works/${id}`, {
+                method: 'DELETE',
+            });
+            if (response.ok) {
+                setPortfolios(portfolios.filter(portfolio => portfolio.id !== id));
+                toast.success('Portfolio deleted successfully');
+            } else {
+                toast.error('Failed to delete portfolio');
+            }
+        } catch (error) {
+            console.error('Error deleting portfolio:', error);
+        }
     };
 
     return (
@@ -153,7 +205,7 @@ const AddPortfolioForm = () => {
                                                     className="img-display-before"
                                                 />
                                                 : <img
-                                                    src="../assets/img/default-work-image.webp"
+                                                    src={base64Image || "../assets/img/default-work-image.webp"}
                                                     alt="default"
                                                     className="img-display-before"
                                                 />
@@ -161,6 +213,7 @@ const AddPortfolioForm = () => {
                                             <input
                                                 type="file"
                                                 name="file"
+                                                id="file-input"
                                                 {...register('file')}
                                                 multiple={false}
                                                 accept={acceptedFileTypes}
@@ -199,10 +252,10 @@ const AddPortfolioForm = () => {
                                     />
                                     {errors.category && <p className="error-message">{errors.category.message}</p>}
                                     <input
-                                        type="date"
+                                        type="text"
                                         name="date"
                                         {...register('date')}
-                                        placeholder="Date of Project"
+                                        placeholder="Date of Project (18 Sep, 2018)"
                                         required
                                     />
                                     {errors.date && <p className="error-message">{errors.date.message}</p>}
@@ -222,7 +275,6 @@ const AddPortfolioForm = () => {
                                     {errors.isActive && <p className="error-message">{errors.isActive.message}</p>}
                                     <div className="buttons">
                                         <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                        <button className="cancel" onClick={onReset}>Cancel</button>
                                         <button className="submit" type="submit">Submit</button>
                                     </div>
                                 </form>
@@ -232,7 +284,7 @@ const AddPortfolioForm = () => {
                 </div>
                 <hr />
             </section>
-            <Portfolio title="Portfolio" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
+            <Portfolio title="Portfolio" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." onEdit={handleEdit} onDelete={handleDelete} />
         </>
     );
 }

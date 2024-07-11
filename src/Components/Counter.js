@@ -1,9 +1,10 @@
+import Swal from 'sweetalert2';
 import React, { useEffect } from 'react';
 import PureCounter from '@srexi/purecounterjs';
 import useFetch from './useFetch';
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const Counter = () => {
+const Counter = ({onEdit, onDelete}) => {
 
     const { data: counts } = useFetch("http://localhost:8000/counts");
     const { isAuthenticated, isAdminPage } = useAuth();
@@ -15,6 +16,22 @@ const Counter = () => {
             new PureCounter();
         }
     }, [counts]);
+
+    const handleDeleteClick = (counterId) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                onDelete(counterId);
+            }
+        });
+    };
 
 
     return (
@@ -36,8 +53,12 @@ const Counter = () => {
                                     </div>
                                     {isAuthenticated && isAdminPage && (
                                         <div className='admin-actions mb-3'>
-                                            <button className='admin-btn' aria-label="Edit"><i className="bi bi-pencil" /></button>
-                                            <button className='admin-btn mx-1' aria-label="Delete"><i className="bi bi-trash" /></button>
+                                            <button className='admin-btn' aria-label="Edit" onClick={() => onEdit(counter)}>
+                                                <i className="bi bi-pencil" />
+                                            </button>
+                                            <button className='admin-btn mx-1' aria-label="Delete" onClick={() => handleDeleteClick(counter.id)}>
+                                                <i className="bi bi-trash" />
+                                            </button>
                                         </div>
                                     )}
                                 </div>

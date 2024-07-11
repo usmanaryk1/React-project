@@ -1,9 +1,10 @@
+import Swal from 'sweetalert2';
 import React, { useEffect } from 'react';
 import Swiper from 'swiper/bundle';
 import useFetch from './useFetch';
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const Testimonial = () => {
+const Testimonial = ({onEdit, onDelete}) => {
 
     const { data: testimonials } = useFetch("http://localhost:8000/testimonials");
     const { isAuthenticated, isAdminPage } = useAuth();
@@ -30,6 +31,22 @@ const Testimonial = () => {
         }
     }, [testimonials]);
 
+    const handleDeleteClick = (serviceId) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                onDelete(serviceId);
+            }
+        });
+    };
+
     return (
         <>
             {/* ======= Testimonials Section ======= */}
@@ -45,8 +62,12 @@ const Testimonial = () => {
                                             <div className="testimonial-box">
                                                 {isAuthenticated && isAdminPage && (
                                                     <div className='admin-actions d-flex justify-content-end'>
-                                                        <button className='admin-btn' aria-label="Edit"><i className="bi bi-pencil" /></button>
-                                                        <button className='admin-btn mx-1' aria-label="Delete"><i className="bi bi-trash" /></button>
+                                                        <button className='admin-btn' aria-label="Edit" onClick={() => onEdit(testimonial)}>
+                                                            <i className="bi bi-pencil" />
+                                                        </button>
+                                                        <button className='admin-btn mx-1' aria-label="Delete" onClick={() => handleDeleteClick(testimonial.id)}>
+                                                            <i className="bi bi-trash" />
+                                                        </button>
                                                     </div>
                                                 )}
                                                 <div className="author-test">

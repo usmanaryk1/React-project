@@ -1,5 +1,5 @@
 // AuthContext.js
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const AuthContext = createContext();
@@ -13,11 +13,13 @@ export const AuthProvider = ({ children }) => {
   const onSignup = (newUser, authentication) => {
     setUser(newUser);
     setIsAuthenticated(authentication);
+    localStorage.setItem('user', JSON.stringify(newUser));
   };
 
   const onLogin = (loggedInUser, authentication) => {
     setUser(loggedInUser);
     setIsAuthenticated(authentication);
+    localStorage.setItem('user', JSON.stringify(loggedInUser));
   };
 
   const onLogout = async () => {
@@ -29,7 +31,17 @@ export const AuthProvider = ({ children }) => {
 
     setUser(null);
     setIsAuthenticated(false);
+    localStorage.removeItem('user');
   };
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+      setIsAuthenticated(true); // Update authentication status
+    }
+  }, []);
+  
 
   return (
     <AuthContext.Provider value={{ user, isAuthenticated, onSignup, onLogin, onLogout, isAdminPage }}>

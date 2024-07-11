@@ -94,7 +94,6 @@ const SocialForm = () => {
                                     
                                     <div className="buttons">
                                         <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                        <button className="cancel" onClick={onReset}>Cancel</button>
                                         <button className="submit" type="submit">Submit</button>
                                     </div>
 

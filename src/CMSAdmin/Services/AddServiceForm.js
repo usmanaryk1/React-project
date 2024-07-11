@@ -9,7 +9,7 @@ import Services from "../../Components/Services";
 const AddServiceForm = () => {
 
     const [currentService, setCurrentService] = useState(null);
-    const { data: services, setData: setServices } = useFetch("http://localhost:8000/services");
+    const { data: services, setData: setServices, refetch } = useFetch("http://localhost:8000/services");
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
@@ -18,7 +18,7 @@ const AddServiceForm = () => {
             isActive: false
         }
     })
-
+    console.log('currentService before function: ', currentService);
     // console.log('Service List Before Update:', services);
 
     useEffect(() => {
@@ -29,12 +29,28 @@ const AddServiceForm = () => {
         } else {
             reset();
         }
-    }, [currentService, setValue, reset]);
+    }, [currentService, setValue, reset ]);
+
+    console.log('currentService after useEffect: ', currentService);
+
+    useEffect(() => {
+        console.log('Updated services:', services);
+    }, [services]);
+
 
     const onSubmit = async (data) => {
+
+        const formData = {
+            sTitle: data.title,
+            sDescription: data.desc,
+            isActive: data.isActive,
+        };
+
+
         if (currentService) {
             // Update service
-            const updatedService = { ...currentService, ...data };
+            const updatedService = { ...currentService, ...formData };
+            console.log('Updating service:', updatedService);
             const response = await fetch(`http://localhost:8000/services/${currentService.id}`, {
                 method: 'PUT',
                 headers: {
@@ -43,25 +59,35 @@ const AddServiceForm = () => {
                 body: JSON.stringify(updatedService),
             });
             const result = await response.json();
+            console.log('Updated service response:', result);
+
             setServices(services.map(service => service.id === result.id ? result : service));
+            console.log('service after updating: ', services);
             toast.success('Service updated successfully');
         } else {
             // Add new service
-            const newService = { ...data, id: services.length + 1 }; // Mocking an ID
+            // const newService = { ...data, id: services.length + 1 }; // Mocking an ID
             const response = await fetch('http://localhost:8000/services', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(newService),
+                body: JSON.stringify(formData),
             });
-            const result = await response.json();
-            setServices([...services, result]);
-            toast.success('Service added successfully');
+            if (response.ok) {
+                const result = await response.json();
+                console.log('new service: ',result);
+                setServices(prevServices => [...prevServices, result]);
+                toast.success('Service added successfully');
+                refetch(); // Ensure data is refreshed after addition
+            } else {
+                toast.error('Failed to add service');
+            }
+    
         }
         reset();
         setCurrentService(null);
-
+        refetch();
     };
 
     const onReset = () => {
@@ -71,13 +97,25 @@ const AddServiceForm = () => {
 
     const handleEdit = (service) => {
         setCurrentService(service);
+        console.log('onedit: ', service);
     };
 
     const handleDelete = async (id) => {
-        await fetch(`http://localhost:8000/services/${id}`, {
+        console.log('Deleting service with ID:', id);
+        const response = await fetch(`http://localhost:8000/services/${id}`, {
             method: 'DELETE',
         });
-        setServices(services.filter(service => service.id !== id));
+        if (response.ok) {
+            setServices(services.filter(service => service.id !== id));
+            refetch();
+            toast.success('Service deleted successfully');
+            console.log('Service deleted successfully', services);
+        } else {
+            console.error('Failed to delete service');
+            toast.error('Failed to delete service');
+        }
+        
+
     };
 
     return (
@@ -124,7 +162,6 @@ const AddServiceForm = () => {
 
                                     <div className="buttons">
                                         <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                        <button className="cancel">Cancel</button>
                                         <button className="submit" type="submit">Submit</button>
                                     </div>
                                 </form>
@@ -135,7 +172,7 @@ const AddServiceForm = () => {
                 <hr />
             </section>
             {/* Service Form End */}
-            <Services onEdit={handleEdit} onDelete={handleDelete} />
+            <Services title="Services" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."  onEdit={handleEdit} onDelete={handleDelete} />
         </>
     );
 }
