@@ -2,9 +2,10 @@ import Swal from 'sweetalert2';
 import useFetch from "./useFetch";
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const Contact = ({onEdit, onDelete}) => {
+const Contact = ({ onEdit, onDelete }) => {
 
     const { data: contact } = useFetch("http://localhost:8000/contact");
+    const { data: social } = useFetch("http://localhost:8000/social");
     const { isAuthenticated, isAdminPage } = useAuth();
 
     const handleDeleteClick = (contactId) => {
@@ -19,6 +20,22 @@ const Contact = ({onEdit, onDelete}) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 onDelete(contactId);
+            }
+        });
+    };
+
+    const handleDeleteLink = (linkId) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                onDelete(linkId);
             }
         });
     };
@@ -45,7 +62,8 @@ const Contact = ({onEdit, onDelete}) => {
                                                     <div className="row">
                                                         <div className="col-md-12 mb-3">
                                                             <div className="form-group">
-                                                                <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" autoComplete="on" required />
+                                                                <input type="text" className="form-control"
+                                                                 name="name" id="name" placeholder="Your Name" autoComplete="on" required />
                                                             </div>
                                                         </div>
                                                         <div className="col-md-12 mb-3">
@@ -95,7 +113,7 @@ const Contact = ({onEdit, onDelete}) => {
                                                     Get in Touch
                                                 </h5>
                                             </div>
-                                            {contact.map((contact) => (
+                                            {contact && contact.map((contact) => (
                                                 <div className="more-info" key={contact.id}>
                                                     <p className="lead">
                                                         {contact.description}
@@ -107,14 +125,36 @@ const Contact = ({onEdit, onDelete}) => {
                                                     </ul>
                                                 </div>
                                             ))}
+
                                             <div className="socials">
                                                 <ul>
-                                                    <li><a href={contact.facebook}><span className="ico-circle"><i className="bi bi-facebook" /></span></a></li>
-                                                    <li><a href={contact.instagram}><span className="ico-circle"><i className="bi bi-instagram" /></span></a></li>
-                                                    <li><a href={contact.twitter}><span className="ico-circle"><i className="bi bi-twitter" /></span></a></li>
-                                                    <li><a href={contact.linkedIn}><span className="ico-circle"><i className="bi bi-linkedin" /></span></a></li>
-                                                    <li><a href={contact.whatsapp}><span className="ico-circle"><i className="bi bi-whatsapp" /></span></a></li>
-                                                    <li><a href={contact.github}><span className="ico-circle"><i className="bi bi-github" /></span></a></li>
+                                                    {social && social.map((links) => (
+                                                        <li key={links.id}>
+                                                            <a href={links.link}>
+                                                                <span className="ico-circle">
+                                                                    <i className={links.platformIcon} />
+                                                                </span>
+                                                            </a>
+                                                            {isAuthenticated && isAdminPage && (
+                                                                <div className="admin-actions mt-3 me-2 d-flex justify-content-start">
+                                                                    <button
+                                                                        className="admin-btn me-1"
+                                                                        aria-label="Edit"
+                                                                        onClick={() => onEdit(links)}
+                                                                    >
+                                                                        <i className="bi bi-pencil" />
+                                                                    </button>
+                                                                    <button
+                                                                        className="admin-btn"
+                                                                        aria-label="Delete"
+                                                                        onClick={() => handleDeleteLink(links.id)}
+                                                                    >
+                                                                        <i className="bi bi-trash" />
+                                                                    </button>
+                                                                </div>
+                                                            )}
+                                                        </li>
+                                                    ))}
                                                 </ul>
                                             </div>
                                         </div>

@@ -1,13 +1,16 @@
 import Certifications from "../../Components/Certifications";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "./CertificationValidation";
 import { toast } from 'react-toastify';
+import useFetch from "../../Components/useFetch";
 
 const AddCertificationForm = () => {
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    const [currentCertifications, setCurrentCertifications] = useState(null);
+    const { data: certifications, setData: setCertifications, refetch } = useFetch("http://localhost:8000/certifications");
+    const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
             file1: '',
@@ -36,7 +39,6 @@ const AddCertificationForm = () => {
         console.log("base64", base64);
         setBase64Image1(base64);
         setImage1(file);
-        processImage(file, setImage1);
 
     };
 
@@ -45,49 +47,14 @@ const AddCertificationForm = () => {
         const base64 = await convertBase64(file);
         setBase64Image2(base64);
         setImage2(file);
-        processImage(file, setImage2);
-    };
-
-    const processImage = (file, setImage) => {
-        const imgname = file.name;
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            const img = new Image();
-            img.src = reader.result;
-            img.onload = () => {
-                const canvas = document.createElement("canvas");
-                const maxSize = Math.max(img.width, img.height);
-                canvas.width = maxSize;
-                canvas.height = maxSize;
-                const ctx = canvas.getContext("2d");
-                ctx.drawImage(
-                    img,
-                    (maxSize - img.width) / 2,
-                    (maxSize - img.height) / 2
-                );
-                canvas.toBlob(
-                    (blob) => {
-                        const file = new File([blob], imgname, {
-                            type: "image/png",
-                            lastModified: Date.now(),
-                        });
-
-                        setImage(file);
-                    },
-                    "image/jpeg",
-                    0.8
-                );
-            };
-        };
     };
 
     const handleImage1Click = () => {
-        image1Ref.current.click();
+        document.getElementById('file-input1').click();
     }
 
     const handleImage2Click = () => {
-        image2Ref.current.click();
+        document.getElementById('file-input2').click();
     }
 
     const convertBase64 = (file) => {
@@ -106,18 +73,35 @@ const AddCertificationForm = () => {
 
     }
 
+    useEffect(() => {
+        if (currentCertifications) {
+            setValue('title', currentCertifications.cardTitle);
+            setValue('description', currentCertifications.cardDescription);
+            setValue('category', currentCertifications.cardCategory);
+            setValue('name', currentCertifications.authorName);
+            setValue('time', currentCertifications.postDate);
+            setValue('isActive', currentCertifications.isActive);
+            setBase64Image1(currentCertifications.image);
+            setBase64Image2(currentCertifications.authorImage);
+            setImage1(null); // or set to a placeholder if needed
+            setImage2(null); // or set to a placeholder if needed
+        } else {
+            reset();
+        }
+    }, [currentCertifications, setValue, reset]);
+
     const onSubmit = async (formObject, e) => {
         e.preventDefault();
 
         console.log('Certification Data:', formObject);
 
-        formObject.image1 = base64Image1; // Add the base64 image to the form object
-        formObject.image2 = base64Image2; // Add the base64 image to the form object
+        formObject.image = base64Image1; // Add the base64 image to the form object
+        formObject.authorImage = base64Image2; // Add the base64 image to the form object
 
-        let imageUrl1 = formObject.image1;
-        let imageUrl2 = formObject.image2;
+        let imageUrl1 = formObject.image;
+        let imageUrl2 = formObject.authorImage;
 
-        console.log('Portfolio Data:', formObject);
+        console.log('Certification Data:', formObject);
 
         if (image1) {
             const imageFormData1 = new FormData();
@@ -166,50 +150,77 @@ const AddCertificationForm = () => {
             authorName: formObject.name,
             image: imageUrl1,
             authorImage: imageUrl2,
-            id: "1"
+            isActive: formObject.isActive
         };
 
         console.log("imageUrl1", imageUrl1)
         console.log("imageUrl2", imageUrl2)
 
-        // Send PUT request to update the JSON data
-        try {
-            const response = await fetch('http://localhost:8000/certifications/1', {
+        if (currentCertifications) {
+            const response = await fetch(`http://localhost:8000/certifications/${currentCertifications.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(updatedData)
             });
-
-            const data = await response.json();
-
-            console.log('Success:', data);
-
-            toast.success("Successfully submitted");
-
-            reset();  // Reset the form after successful submission
-
-            setImage1(null);
-            setImage2(null);
-            setBase64Image1("");
-            setBase64Image2("");  // Clear the image state 
-
-        } catch (error) {
-            console.error('Error updating the JSON data:', error);
+            const result = await response.json();
+            setCertifications(certifications.map(certification => certification.id === result.id ? result : certification));
+            toast.success('Certificate updated successfully');
+        } else {
+            const response = await fetch('http://localhost:8000/certifications', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData)
+            });
+            if (response.ok) {
+                const result = await response.json();
+                setCertifications(prevCertificationList => [...prevCertificationList, result]);
+                toast.success('Certificate added successfully');
+            } else {
+                toast.error('Failed to add Certificate info');
+            }
         }
 
-        e.target.reset();
-
-    };
-
-    const onReset = (e) => {
-        e.preventDefault();
         reset();
         setImage1(null);
         setImage2(null);
         setBase64Image1("");
         setBase64Image2("");
+        setCurrentCertifications(null);
+        refetch();
+
+    };
+
+    const onReset = () => {
+        reset();
+        setImage1(null);
+        setImage2(null);
+        setBase64Image1("");
+        setBase64Image2("");
+        setCurrentCertifications(null);
+    };
+
+    const handleEdit = (certification) => {
+        setCurrentCertifications(certification);
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:8000/certifications/${id}`, {
+                method: 'DELETE',
+            });
+            if (response.ok) {
+                setCertifications(certifications.filter(certification => certification.id !== id));
+                toast.success('Certificate deleted successfully');
+            } else {
+                toast.error('Failed to delete Certificate');
+            }
+        } catch (error) {
+            console.error('Error deleting Certificate:', error);
+        }
     };
 
 
@@ -234,7 +245,7 @@ const AddCertificationForm = () => {
                                                     className="img-display-before"
                                                 />
                                                 : <img
-                                                    src="../assets/img/default-work-image.webp"
+                                                    src={base64Image1 || "../assets/img/default-work-image.webp"}
                                                     alt="default"
                                                     className="img-display-before"
                                                 />
@@ -242,6 +253,7 @@ const AddCertificationForm = () => {
                                             <input
                                                 type="file"
                                                 name="file1"
+                                                id="file-input1"
                                                 {...register("file1")}
                                                 accept={acceptedFileTypes}
                                                 multiple={false}
@@ -260,7 +272,7 @@ const AddCertificationForm = () => {
                                                     className="profile"
                                                 />
                                                 : <img
-                                                    src="../assets/img/default-image.jpg"
+                                                    src={base64Image2 || "../assets/img/default-image.jpg"}
                                                     alt="default"
                                                     className="profile"
                                                 />
@@ -268,6 +280,7 @@ const AddCertificationForm = () => {
                                             <input
                                                 type="file"
                                                 name="file2"
+                                                id="file-input2"
                                                 {...register("file2")}
                                                 accept={acceptedFileTypes}
                                                 multiple={false}
@@ -316,9 +329,9 @@ const AddCertificationForm = () => {
                                     />
                                     {errors.name && <p className="error-message">{errors.name.message}</p>}
                                     <input
-                                        type="datetime"
+                                        type="text"
                                         name="time"
-                                        placeholder="Time"
+                                        placeholder="Time (10 min)"
                                         {...register("time")}
                                         required
                                     />
@@ -350,7 +363,12 @@ const AddCertificationForm = () => {
                 <hr />
             </section>
             {/* Certification Form End */}
-            <Certifications title="Certifications" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
+            <Certifications 
+                title="Certifications" 
+                subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." 
+                onEdit={handleEdit} 
+                onDelete={handleDelete} 
+            />
         </>
     );
 }

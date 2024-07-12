@@ -2,52 +2,112 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
 import validationSchema from "./SocialValidation";
+import useFetch from "../../Components/useFetch";
+import { useState, useEffect } from "react";
+import Contact from "../../Components/Contact";
 
 const SocialForm = () => {
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    const [currentLinks, setCurrentLinks] = useState(null);
+    const { data: links, setData: setLinks, refetch } = useFetch("http://localhost:8000/social");
+    const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
-            name: '',
-            skills: '',
+            platformIcon: '',
+            link: '',
             isActive: false
         }
     })
 
-    const onSubmit = async (formObject, e) => {
-        e.preventDefault();
-        console.log('Data: ', formObject);
+    useEffect(() => {
+        if (currentLinks) {
+            setValue('platformIcon', currentLinks.platformIcon);
+            setValue('link', currentLinks.link);
+            setValue('isActive', currentLinks.isActive);
+        } else {
+            reset();
+        }
+    }, [currentLinks, setValue, reset]);
 
-        const updatedData = {
-            name: formObject.name,
-            skills: formObject.skills,
-            id: "1"
+    useEffect(() => {
+        console.log('Updated link:', links);
+    }, [links]);
+
+    const onSubmit = async (data) => {
+
+        const formData = {
+            platformIcon: data.platformIcon,
+            link: data.link,
+            isActive: data.isActive
         };
 
-        fetch('http://localhost:8000/hero/1', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updatedData)
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                toast.success('Data updated successfully');
-
-                reset();  // Reset the form after successful submission
-            })
-            .catch((error) => {
-                console.error('Error:', error);
+        if (currentLinks) {
+            // Update service
+            const updatedLink = { ...currentLinks, ...formData };
+            console.log('Updating service:', updatedLink);
+            const response = await fetch(`http://localhost:8000/social/${currentLinks.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedLink),
             });
-        
+            const result = await response.json();
+            console.log('Updated social response:', result);
+
+            setLinks(links.map(link => link.id === result.id ? result : link));
+            console.log('Link after updating: ', links);
+            toast.success('Link updated successfully');
+        } else {
+            // Add new service
+            const response = await fetch('http://localhost:8000/social', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            if (response.ok) {
+                const result = await response.json();
+                console.log('new link: ', result);
+                setLinks(prevLinks => [...prevLinks, result]);
+                toast.success('Link added successfully');
+                refetch(); // Ensure data is refreshed after addition
+            } else {
+                toast.error('Failed to add Link');
+            }
+
+        }
+        reset();
+        setCurrentLinks(null);
+        refetch();
     };
 
-    const onReset = (e) => {
-        e.preventDefault();
+    const onReset = () => {
         reset();
+        setCurrentLinks(null)
     };
+
+    const handleEdit = (links) => {
+        setCurrentLinks(links);
+        console.log('onedit: ', links);
+    };
+
+    const handleDelete = async (id) => {
+        console.log('Deleting service with ID:', id);
+        const response = await fetch(`http://localhost:8000/social/${id}`, {
+            method: 'DELETE',
+        });
+        if (response.ok) {
+            setLinks(links.filter(links => links.id !== id));
+            refetch();
+            toast.success('Link deleted successfully');
+            console.log('Link deleted successfully', links);
+        } else {
+            console.error('Failed to delete Link');
+            toast.error('Failed to delete Link');
+        }
+    }
 
     return (
         <>
@@ -63,9 +123,9 @@ const SocialForm = () => {
 
                                     <input
                                         type="text"
-                                        name="platform"
-                                        {...register('platform')}
-                                        placeholder="Social Media Platform"
+                                        name="platformIcon"
+                                        {...register('platformIcon')}
+                                        placeholder="Icon of Social Media (bi bi-facebook)"
                                         required
                                     />
                                     {errors.platform && <p className="error-message">{errors.platform.message}</p>}
@@ -104,6 +164,7 @@ const SocialForm = () => {
                 </div>
                 <hr />
             </section>
+            <Contact onEdit={handleEdit} onDelete={handleDelete} />
             {/* <Hero /> */}
         </>
     );

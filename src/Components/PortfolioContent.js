@@ -1,12 +1,16 @@
+import Swal from 'sweetalert2';
 import useFetch from "./useFetch";
 import React, { useEffect } from 'react';
 import Swiper from 'swiper/bundle';
 import { useParams } from "react-router-dom/cjs/react-router-dom";
+import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const PortfolioContent = () => {
+const PortfolioContent = ({onDelete, onEdit}) => {
 
     const { id } = useParams();
     const { data: work } = useFetch("http://localhost:8000/workDetails/" + id);
+    const { isAuthenticated, isAdminPage } = useAuth();
+
     console.log("from portfolio", work);
     /**
  * Portfolio details slider
@@ -30,6 +34,22 @@ const PortfolioContent = () => {
     if (!work) {
         return <div>Loading...</div>;
     }
+
+    const handleDeleteClick = (workId) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                onDelete(workId);
+            }
+        });
+    };
 
     return (
         <>
@@ -62,6 +82,18 @@ const PortfolioContent = () => {
                                     <li><strong>Project URL</strong> : <a href={work.pURL}>{work.pURL}</a></li>
                                 </ul>
                             </div>
+                            {isAuthenticated && isAdminPage && (
+                                <>
+                                    <div className='admin-actions'>
+                                        <button className='admin-btn' aria-label="Edit" onClick={() => onEdit(work)}>
+                                            <i className="bi bi-pencil" />
+                                        </button>
+                                        <button className='admin-btn mx-1' aria-label="Delete" onClick={() => handleDeleteClick(work.id)}>
+                                            <i className="bi bi-trash" />
+                                        </button>
+                                    </div>
+                                </>
+                            )}
                             <div className="portfolio-description">
                                 <h2>This is an example of portfolio detail</h2>
                                 <p>

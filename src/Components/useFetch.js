@@ -7,7 +7,8 @@ const useFetch = (url) => {
     const [error, setError] = useState(null);
     const [isPending, setIsPending] = useState(true);
 
-    const fetchData = useCallback(() => {
+    const fetchData = useCallback((data) => {
+        console.log('fetch', data);
         setIsPending(true);
         fetch(url)
             .then(res => {
@@ -18,6 +19,7 @@ const useFetch = (url) => {
             })
             .then(data => {
                 setData(data);
+                console.log('fetched data: ',data)
                 setError(null);
                 setIsPending(false);
             })
@@ -28,6 +30,7 @@ const useFetch = (url) => {
     }, [url]);
 
     useEffect(() => {
+        console.log('useEffect fetch:');
         fetchData();
     }, [url, fetchData]);
 

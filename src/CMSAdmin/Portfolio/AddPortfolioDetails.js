@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import validationSchema from "./PortfolioDetailsValidation";
-import PortfolioDetails from "../../Components/PortfolioDetails";
+import Portfolio from "../../Components/Portfolio";
 
 const AddPortfolioDetails = () => {
 
@@ -407,7 +407,7 @@ const AddPortfolioDetails = () => {
                 <hr />
             </section>
             {/* PortfolioDetails Form End */}
-            <PortfolioDetails />
+            <Portfolio />
             {/* <PortfolioContent /> */}
         </>
     );

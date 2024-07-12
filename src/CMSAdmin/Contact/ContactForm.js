@@ -47,22 +47,22 @@ const ContactForm = () => {
         };
 
         if (currentContact) {
-            // Update service
-            const updatedService = { ...currentContact, ...formData };
-            console.log('Updating service:', updatedService);
+            // Update contact
+            const updatedContact = { ...currentContact, ...formData };
+            console.log('Updating contact:', updatedContact);
             const response = await fetch(`http://localhost:8000/contact/${currentContact.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(updatedService),
+                body: JSON.stringify(updatedContact),
             });
             const result = await response.json();
             console.log('Updated contact response:', result);
 
             setContacts(contacts.map(contact => contact.id === result.id ? result : contact));
-            console.log('service after updating: ', contacts);
-            toast.success('contacts updated successfully');
+            console.log('Contacts after updating: ', contacts);
+            toast.success('Contacts updated successfully');
         } else {
             // Add new service
             const response = await fetch('http://localhost:8000/contact', {
@@ -124,14 +124,17 @@ const ContactForm = () => {
                             </div>
                             <div className="col-12">
                                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                                    <div className="form-froup">
+                                        <input
+                                            type="text"
+                                            name="description"
+                                            className="form-control"
+                                            {...register("description")}
+                                            placeholder="Description"
+                                            required
+                                        />
+                                    </div>
 
-                                    <input
-                                        type="text"
-                                        name="description"
-                                        {...register("description")}
-                                        placeholder="Description"
-                                        required
-                                    />
                                     {errors.description && <p className="error-message">{errors.description.message}</p>}
                                     <input
                                         type="text"
@@ -184,7 +187,7 @@ const ContactForm = () => {
                 </div>
                 <hr />
             </section>
-            <Contact  onEdit={handleEdit} onDelete={handleDelete} />
+            <Contact onEdit={handleEdit} onDelete={handleDelete} />
         </>
     );
 }

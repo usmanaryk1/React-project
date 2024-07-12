@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 const validationSchema = yup.object({
-    platform: yup.string().required('Missing Name'),
+    platformIcon: yup.string().required('Missing Name'),
     link: yup.string()
         .url('Invalid URL format')
         .required('Link is required'),

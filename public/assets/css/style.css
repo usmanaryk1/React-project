@@ -2215,3 +2215,23 @@ input[type="number"],
   text-align: left;
   width: 100%;
 } */
+.vertical-navbar::-webkit-scrollbar {
+  width: 12px; /* Adjust the width as needed */
+}
+
+/* Track */
+.vertical-navbar::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Change the background color as needed */
+  border-radius: 10px; /* Optional: adjust border radius for rounded corners */
+}
+
+/* Handle */
+.vertical-navbar::-webkit-scrollbar-thumb {
+  background: #ececec; /* Change the thumb color as needed */
+  border-radius: 10px; /* Optional: adjust border radius for rounded corners */
+}
+
+/* Handle on hover */
+.vertical-navbar::-webkit-scrollbar-thumb:hover {
+  background: #b6b0b0; /* Change the hover color as needed */
+}
