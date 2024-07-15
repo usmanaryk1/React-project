@@ -12,10 +12,13 @@ import Login from "./CMSAdmin/Auth/Login/Login";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthProvider } from "./CMSAdmin/Auth/AuthContext";
+import AddPortfolioDetails from "./CMSAdmin/Portfolio/AddPortfolioDetails";
+// import { useAuth } from "./CMSAdmin/Auth/AuthContext";
 // Template URL: https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/
 
 function App() {
-
+  // const { isAuthenticated, isAdminPage } = useAuth();
+  
   return (
     <Router>
       <AuthProvider>
@@ -29,9 +32,10 @@ function App() {
               {/* <Route path="/blogs/:id">
               <BlogDetails />
              </Route> */}
-              <Route path="/works/:id">
+              <Route path={`/works/:id`}>
                 <PortfolioDetails />
               </Route>
+              <Route path="/form/portfolioDetails-form/:id" component={AddPortfolioDetails} />
               <Route path="/certifications/:id">
                 <CertificationDetails />
               </Route>

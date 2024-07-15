@@ -1,19 +1,22 @@
-import { useRef, useState } from "react";
+import { useState, useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import validationSchema from "./PortfolioDetailsValidation";
-import Portfolio from "../../Components/Portfolio";
+import PortfolioDetails from "../../Components/PortfolioDetails";
+import useFetch from "../../Components/useFetch";
 
 const AddPortfolioDetails = () => {
 
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm({
+    const [currentDetails, setCurrentDetails] = useState(null);
+    const { data: details, setData: setDetails } = useFetch("http://localhost:8000/workDetails");
+    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
             file1: '',
             file2: '',
             file3: '',
-            name: '',
+            client: '',
             category: '',
             date: '',
             link: '',
@@ -23,89 +26,44 @@ const AddPortfolioDetails = () => {
     })
 
 
-    const [image1, setImage1] = useState(null);
-    const [image2, setImage2] = useState(null);
-    const [image3, setImage3] = useState(null);
-    const image1Ref = useRef(null);
-    const image2Ref = useRef(null);
-    const image3Ref = useRef(null);
-    const [base64Image1, setBase64Image1] = useState("");
-    const [base64Image2, setBase64Image2] = useState("");
-    const [base64Image3, setBase64Image3] = useState("");
+    const [images, setImages] = useState({ file1: null, file2: null, file3: null });
+    const [base64Images, setBase64Images] = useState({ file1: "", file2: "", file3: "" });
 
-    const handleImage1Change = async (e) => {
-        const file = e.target.files[0];
-        const base64 = await convertBase64(file);
-        console.log("base64", base64);
-        setBase64Image1(base64);
-        setImage1(file);
-        processImage(file, setImage1);
-        setValue('file1', file); 
+    const handleImageChange = async (e) => {
+        const { name, files } = e.target;
+        if (files[0]) {
+            const file = files[0];
+            const base64 = await convertBase64(file);
+            setBase64Images(prev => ({ ...prev, [name]: base64 }));
+            setImages(prev => ({ ...prev, [name]: file }));
+        }
     };
 
-    const handleImage2Change = async (e) => {
-        const file = e.target.files[0];
-        const base64 = await convertBase64(file);
-        setBase64Image2(base64);
-        setImage2(file);
-        processImage(file, setImage2);
-        setValue('file12', file); 
-    };
+    // const handleImage2Change = async (e) => {
+    //     const file = e.target.files[0];
+    //     const base64 = await convertBase64(file);
+    //     setBase64Image2(base64);
+    //     setImage2(file);
+    // };
 
-    const handleImage3Change = async (e) => {
-        const file = e.target.files[0];
-        const base64 = await convertBase64(file);
-        setBase64Image3(base64);
-        setImage3(file);
-        processImage(file, setImage3);
-        setValue('file3', file); 
-    };
+    // const handleImage3Change = async (e) => {
+    //     const file = e.target.files[0];
+    //     const base64 = await convertBase64(file);
+    //     setBase64Image3(base64);
+    //     setImage3(file);
+    // };
 
-    const processImage = (file, setImage) => {
-        const imgname = file.name;
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            const img = new Image();
-            img.src = reader.result;
-            img.onload = () => {
-                const canvas = document.createElement("canvas");
-                const maxSize = Math.max(img.width, img.height);
-                canvas.width = maxSize;
-                canvas.height = maxSize;
-                const ctx = canvas.getContext("2d");
-                ctx.drawImage(
-                    img,
-                    (maxSize - img.width) / 2,
-                    (maxSize - img.height) / 2
-                );
-                canvas.toBlob(
-                    (blob) => {
-                        const file = new File([blob], imgname, {
-                            type: "image/png",
-                            lastModified: Date.now(),
-                        });
+    // const handleImage1Click = () => {
+    //     document.getElementById('file-input1').click();
+    // }
 
-                        setImage(file);
-                    },
-                    "image/jpeg",
-                    0.8
-                );
-            };
-        };
-    };
+    // const handleImage2Click = () => {
+    //     document.getElementById('file-input2').click();
+    // }
 
-    const handleImage1Click = () => {
-        image1Ref.current.click();
-    }
-
-    const handleImage2Click = () => {
-        image2Ref.current.click();
-    }
-
-    const handleImage3Click = () => {
-        image3Ref.current.click();
-    }
+    // const handleImage3Click = () => {
+    //     document.getElementById('file-input3').click();
+    // }
 
     const convertBase64 = (file) => {
         return new Promise((resolve, reject) => {
@@ -123,130 +81,132 @@ const AddPortfolioDetails = () => {
 
     }
 
-    const onSubmit = async (e, formObject) => {
+    useEffect(() => {
+        if (currentDetails) {
+            setValue('client', currentDetails.pClient);
+            setValue('category', currentDetails.pCategory);
+            setValue('date', currentDetails.pDate);
+            setValue('link', currentDetails.pURL);
+            setValue('desc', currentDetails.desc);
+            setValue('isActive', currentDetails.isActive);
+            setBase64Images({
+                file1: currentDetails.slideImage1,
+                file2: currentDetails.slideImage2,
+                file3: currentDetails.slideImage3
+            });
+            setImages({ file1: null, file2: null, file3: null }); // or set to a placeholder if needed
+        } else {
+            reset();
+        }
+    }, [currentDetails, setValue, reset]);
+
+    const uploadImage = async (imageFile) => {
+        try {
+            const formData = new FormData();
+            formData.append('image', imageFile);
+    
+            const response = await fetch('http://localhost:8000/upload', {
+                method: 'POST',
+                body: formData,
+            });
+    
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Server error response:', errorText);
+                throw new Error('Failed to upload image');
+            }
+    
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            throw error;
+        }
+    };
+    
+    const onSubmit = async (formObject) => {
         // e.preventDefault();
 
-        console.log('Certification Data:', formObject);
-
-        formObject.image1 = base64Image1; // Add the base64 image to the form object
-        formObject.image2 = base64Image2; // Add the base64 image to the form object
-        formObject.image3 = base64Image3; // Add the base64 image to the form object
-
-        let imageUrl1 = formObject.image1;
-        let imageUrl2 = formObject.image2;
-        let imageUrl3 = formObject.image3;
-
-        console.log('Portfolio Data:', formObject);
-
-        if (image1) {
-            const imageFormData1 = new FormData();
-            imageFormData1.append('file', image1);
-
-            try {
-                const response = await fetch('http://localhost:8000/upload', {
-                    method: 'POST',
-                    body: imageFormData1
-                });
-
-                const data = await response.json();
-
-                imageUrl1 = data.url; // Assuming the server responds with the URL of the uploaded image
-
-            } catch (error) {
-                console.error('Error uploading the image1:', error);
-            }
-        }
-
-        if (image2) {
-            const imageFormData2 = new FormData();
-            imageFormData2.append('file', image2);
-
-            try {
-                const response = await fetch('http://localhost:8000/upload', {
-                    method: 'POST',
-                    body: imageFormData2
-                });
-
-                const data = await response.json();
-
-                imageUrl2 = data.url; // Assuming the server responds with the URL of the uploaded image
-
-            } catch (error) {
-                console.error('Error uploading the image2:', error);
-            }
-        }
-
-        if (image3) {
-            const imageFormData3 = new FormData();
-            imageFormData3.append('file', image3);
-
-            try {
-                const response = await fetch('http://localhost:8000/upload', {
-                    method: 'POST',
-                    body: imageFormData3
-                });
-
-                const data = await response.json();
-
-                imageUrl3 = data.url; // Assuming the server responds with the URL of the uploaded image
-
-            } catch (error) {
-                console.error('Error uploading the image2:', error);
-            }
-        }
+        const uploadedImageUrls = await Promise.all(
+            Object.values(images).map(file => file ? uploadImage(file) : Promise.resolve(''))
+        );
 
         const updatedData = {
             pCategory: formObject.category,
-            pClient: formObject.name,
+            pClient: formObject.client,
             pDate: formObject.date,
             pURL: formObject.link,
             desc: formObject.desc,
-            slideImage1: imageUrl1,
-            slideImage2: imageUrl2,
-            slideImage3: imageUrl3,
-            id: "1"
+            slideImage1: uploadedImageUrls[0],
+            slideImage2: uploadedImageUrls[1],
+            slideImage3: uploadedImageUrls[2],
+            isActive: formObject.isActive
         };
 
-        console.log("imageUrl1", imageUrl1)
-        console.log("imageUrl2", imageUrl2)
-        console.log("imageUrl3", imageUrl3)
+
 
         // Send PUT request to update the JSON data
-        try {
-            const response = await fetch('http://localhost:8000/works/1', {
+        if (currentDetails) {
+            const response = await fetch(`http://localhost:8000/workDetails/${currentDetails.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(updatedData)
             });
-
-            const data = await response.json();
-
-            console.log('Success:', data);
-
-            toast.success("Successfully submitted");
-
-            e.target.reset();  // Reset the form after successful submission
-
-            setImage1(null);
-            setImage2(null);
-            setImage3(null);
-            setBase64Image1("");
-            setBase64Image2("");  // Clear the image state 
-            setBase64Image3("");  // Clear the image state 
-
-        } catch (error) {
-            console.error('Error updating the JSON data:', error);
+            const result = await response.json();
+            console.log("updatedDetails:", result);
+            setDetails(details.map(detail => detail.id === result.id ? result : detail));
+            toast.success('Details updated successfully');
+        } else {
+            const response = await fetch('http://localhost:8000/workDetails', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData)
+            });
+            if (response.ok) {
+                const result = await response.json();
+                console.log("Added Details:", result);
+                setDetails(prevDetails => [...prevDetails, result]);
+                toast.success('Details added successfully');
+            } else {
+                toast.error('Failed to add Details');
+            }
         }
 
-        // e.target.reset();
-
+        reset();
+        setCurrentDetails(null);
+        setImages({ file1: null, file2: null, file3: null });
+        setBase64Images({ file1: "", file2: "", file3: "" }); // Clear the image state 
     };
 
-    const onReset = (e) => {
-        e.preventDefault();
-        e.target.form.reset();
+    const onReset = () => {
+        reset();
+        setCurrentDetails(null);
+        setImages({ file1: null, file2: null, file3: null });
+        setBase64Images({ file1: "", file2: "", file3: "" });
+    };
+
+    const handleEdit = (details) => {
+        setCurrentDetails(details);
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:8000/workDetails/${id}`, {
+                method: 'DELETE',
+            });
+            if (response.ok) {
+                setDetails(details.filter(detail => detail.id !== id));
+                toast.success('Details deleted successfully');
+            } else {
+                toast.error('Failed to delete details');
+            }
+        } catch (error) {
+            console.log('Error deleting details:', error);
+        }
     };
 
     return (
@@ -261,91 +221,40 @@ const AddPortfolioDetails = () => {
                             </div>
                             <div className="col-12">
                                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                                    <div className="d-flex flex-wrap">
-                                        <div className="image mx-auto" onClick={handleImage1Click}>
-                                            {image1 ?
-                                                <img
-                                                    src={URL.createObjectURL(image1)}
-                                                    alt=""
-                                                    className="img-display-before"
-                                                />
-                                                : <img
-                                                    src="../assets/img/default-work-image.webp"
-                                                    alt="default"
-                                                    className="img-display-before"
-                                                />
-                                            }
-                                            <input
-                                                type="file"
-                                                name="file1"
-                                                {...register('file1')}
-                                                multiple={false}
-                                                onChange={handleImage1Change}
-                                                ref={image1Ref}
-                                                style={{ "display": "none" }}
-                                                required
-                                            />
-                                        </div>
-                                        <div className="image mx-auto" onClick={handleImage2Click}>
-                                            {image2 ?
-                                                <img
-                                                    src={URL.createObjectURL(image2)}
-                                                    alt=""
-                                                    className="img-display-before"
-                                                />
-                                                : <img
-                                                    src="../assets/img/default-work-image.webp"
-                                                    alt="default"
-                                                    className="img-display-before"
-                                                />
-                                            }
-                                            <input
-                                                type="file"
-                                                name="file2"
-                                                {...register('file2')}
-                                                multiple={false}
-                                                onChange={handleImage2Change}
-                                                ref={image2Ref}
-                                                style={{ "display": "none" }}
-                                                required
-                                            />
-                                        </div>
+                                    <div className="text-center">
+                                        {[1, 2, 3].map(index => (
+                                            <>
+                                                <div key={index} className="image mx-auto" onClick={() => document.getElementById(`file-input${index}`).click()}>
+                                                    <img
+                                                        src={images[`file${index}`] ? URL.createObjectURL(images[`file${index}`]) : base64Images[`file${index}`] || "../../assets/img/default-work-image.webp"}
+                                                        alt={`Project ${index}`}
+                                                        className="img-display-before"
+                                                    />
+                                                    <input
+                                                        type="file"
+                                                        name={`file${index}`}
+                                                        id={`file-input${index}`}
+                                                        {...register(`file${index}`)}
+                                                        multiple={false}
+                                                        onChange={handleImageChange}
+                                                        style={{ display: "none" }}
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="label-container text-center">
+                                                    <label className=" my-3"><b>{`Choose Slide${index} Image`}</b></label>
+                                                </div>
+                                            </>
+                                        ))}
+                                    </div>
 
-                                        <div className="image mx-auto" onClick={handleImage3Click}>
-                                            {image3 ?
-                                                <img
-                                                    src={URL.createObjectURL(image3)}
-                                                    alt=""
-                                                    className="img-display-before mt-4"
-                                                />
-                                                : <img
-                                                    src="../assets/img/default-work-image.webp"
-                                                    alt="default"
-                                                    className="img-display-before mt-4"
-                                                />
-                                            }
-                                            <input
-                                                type="file"
-                                                name="file3"
-                                                {...register('file3')}
-                                                multiple={false}
-                                                onChange={handleImage3Change}
-                                                ref={image3Ref}
-                                                style={{ "display": "none" }}
-                                                required
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="label-container text-center">
-                                        <label className=" my-3"><b>Choose Project Images</b></label>
-                                    </div>
                                     {errors.file1 && <p className="error-message">{errors.file1.message}</p>}
                                     {errors.file2 && <p className="error-message">{errors.file2.message}</p>}
                                     {errors.file3 && <p className="error-message">{errors.file3.message}</p>}
                                     <input
                                         type="text"
-                                        name="name"
-                                        {...register('name')}
+                                        name="client"
+                                        {...register('client')}
                                         placeholder="Client Company"
                                         required
                                     />
@@ -359,10 +268,10 @@ const AddPortfolioDetails = () => {
                                     />
                                     {errors.category && <p className="error-message">{errors.category.message}</p>}
                                     <input
-                                        type="date"
+                                        type="text"
                                         name="date"
                                         {...register('date')}
-                                        placeholder="Date"
+                                        placeholder="Date (YY-MM-DD)"
                                         required
                                     />
                                     {errors.date && <p className="error-message">{errors.date.message}</p>}
@@ -407,8 +316,8 @@ const AddPortfolioDetails = () => {
                 <hr />
             </section>
             {/* PortfolioDetails Form End */}
-            <Portfolio />
-            {/* <PortfolioContent /> */}
+            {/* <Portfolio /> */}
+            <PortfolioDetails onEdit={handleEdit} onDelete={handleDelete} />
         </>
     );
 }

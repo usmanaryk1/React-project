@@ -1,12 +1,11 @@
 import Swal from 'sweetalert2';
 import React, { useEffect } from 'react';
 import PureCounter from '@srexi/purecounterjs';
-import useFetch from './useFetch';
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const Counter = ({onEdit, onDelete}) => {
+const Counter = ({onEdit, onDelete, counts=[]}) => {
 
-    const { data: counts } = useFetch("http://localhost:8000/counts");
+    
     const { isAuthenticated, isAdminPage } = useAuth();
     /**
  * Initiate Pure Counter 

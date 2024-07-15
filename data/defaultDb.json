@@ -93,6 +93,7 @@
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
       "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
       "id": "1"
     },
     {
@@ -104,6 +105,7 @@
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
       "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
       "id": "2"
     },
     {
@@ -115,6 +117,7 @@
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
       "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
       "id": "3"
     },
     {
@@ -126,6 +129,7 @@
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
       "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
       "id": "4"
     },
     {
@@ -137,6 +141,7 @@
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
       "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
       "id": "5"
     },
     {
@@ -148,6 +153,7 @@
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
       "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
       "id": "6"
     }
   ],
@@ -200,12 +206,14 @@
       "img": "../assets/img/testimonial-2.jpg",
       "name": "Xavi Alonso",
       "description": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
+      "isActive": true,
       "id": "1"
     },
     {
       "img": "assets/img/testimonial-4.jpg",
       "name": "Mario John",
       "description": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
+      "isActive": true,
       "id": "2"
     }
   ],
@@ -307,6 +315,7 @@
       "authorImage": "assets/img/testimonial-2.jpg",
       "authorName": "Morgan Freeman",
       "postDate": "20 min",
+      "isActive": true,
       "id": "1"
     },
     {
@@ -317,6 +326,7 @@
       "authorImage": "../assets/img/testimonial-2.jpg",
       "authorName": "Morgan Freeman",
       "postDate": "20 min",
+      "isActive": true,
       "id": "2"
     },
     {
@@ -327,6 +337,7 @@
       "authorImage": "../assets/img/testimonial-2.jpg",
       "authorName": "Morgan Freeman",
       "postDate": "30 min",
+      "isActive": true,
       "id": "3"
     }
   ],
@@ -342,6 +353,7 @@
       "articleContentP4": "Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Quisque velit nisi, pretium ut lacinia in, elementum id enim.Nulla porttitor accumsan tincidunt. ",
       "articleContentP5": "Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada.",
       "blockquote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.",
+      "isActive": true,
       "id": "1"
     },
     {
@@ -355,6 +367,7 @@
       "articleContentP4": "Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Quisque velit nisi, pretium ut lacinia in, elementum id enim.Nulla porttitor accumsan tincidunt. ",
       "articleContentP5": "Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada.",
       "blockquote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.",
+      "isActive": true,
       "id": "2"
     },
     {
@@ -368,22 +381,26 @@
       "articleContentP4": "Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Quisque velit nisi, pretium ut lacinia in, elementum id enim.Nulla porttitor accumsan tincidunt. ",
       "articleContentP5": "Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada.",
       "blockquote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.",
+      "isActive": true,
       "id": "3"
     }
   ],
-  "contact" : [
+ "contact": [
     {
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolorum dolorem soluta quidem expedita aperiam aliquid at. Totam magni ipsum suscipit amet? Autem nemo esse laboriosam ratione nobis mollitia inventore?",
       "location": " 329 WASHINGTON ST BOSTON, MA 02108",
-      "number": "(617) 557-0089",
-      "email": " contact@example.com",
-      "twitter": "/",
-      "linkedIn": "/",
-      "facebook": "/",
-      "instagram": "/",
-      "whatsapp": "/",
-      "github": "/",
+      "number": "6175570089",
+      "email": "nxzmx@gmail.com",
+      "isActive": true,
       "id": "1"
+    }
+  ],
+  "social": [
+    {
+      "id": "f473",
+      "platformIcon": "bi bi-instagram",
+      "link": "https://www.google.com/",
+      "isActive": true
     }
   ]
 }

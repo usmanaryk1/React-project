@@ -1,13 +1,10 @@
 import Swal from 'sweetalert2';
-import useFetch from "./useFetch";
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const Services = ({ title, subtitle, onEdit, onDelete }) => {
+const Services = ({ title, subtitle, onEdit, onDelete, services=[] }) => {
 
-    const { data: services } = useFetch("http://localhost:8000/services");
     const { isAuthenticated, isAdminPage } = useAuth();
-    console.log('service rerender: ', services);
-
+    console.log('service content: ', services);
 
     const handleDeleteClick = (serviceId) => {
         Swal.fire({

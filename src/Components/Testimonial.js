@@ -1,12 +1,10 @@
 import Swal from 'sweetalert2';
 import React, { useEffect } from 'react';
 import Swiper from 'swiper/bundle';
-import useFetch from './useFetch';
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const Testimonial = ({onEdit, onDelete}) => {
+const Testimonial = ({onEditClick, onDeleteClick, testimonials=[]}) => {
 
-    const { data: testimonials } = useFetch("http://localhost:8000/testimonials");
     const { isAuthenticated, isAdminPage } = useAuth();
     
     /**
@@ -42,7 +40,7 @@ const Testimonial = ({onEdit, onDelete}) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                onDelete(serviceId);
+                onDeleteClick(serviceId);
             }
         });
     };
@@ -62,7 +60,7 @@ const Testimonial = ({onEdit, onDelete}) => {
                                             <div className="testimonial-box">
                                                 {isAuthenticated && isAdminPage && (
                                                     <div className='admin-actions d-flex justify-content-end'>
-                                                        <button className='admin-btn' aria-label="Edit" onClick={() => onEdit(testimonial)}>
+                                                        <button className='admin-btn' aria-label="Edit" onClick={() => onEditClick(testimonial)}>
                                                             <i className="bi bi-pencil" />
                                                         </button>
                                                         <button className='admin-btn mx-1' aria-label="Delete" onClick={() => handleDeleteClick(testimonial.id)}>

@@ -1,11 +1,9 @@
 import Swal from 'sweetalert2';
 import { Link } from "react-router-dom/cjs/react-router-dom";
-import useFetch from "./useFetch";
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const Certifications = ({ title, subtitle, onEdit, onDelete }) => {
+const Certifications = ({ title, subtitle, onEditClick, onDeleteClick, certifications=[] }) => {
 
-    const { data: certifications } = useFetch("http://localhost:8000/certifications");
     const { isAuthenticated, isAdminPage } = useAuth();
 
     const handleDeleteClick = (certificationId) => {
@@ -19,7 +17,7 @@ const Certifications = ({ title, subtitle, onEdit, onDelete }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                onDelete(certificationId);
+                onDeleteClick(certificationId);
             }
         });
     };
@@ -55,7 +53,7 @@ const Certifications = ({ title, subtitle, onEdit, onDelete }) => {
                                         {isAuthenticated && isAdminPage && (
                                             <>
                                                 <div className='admin-actions d-flex justify-content-end'>
-                                                    <button className='admin-btn' aria-label="Edit" onClick={() => onEdit(certification)}>
+                                                    <button className='admin-btn' aria-label="Edit" onClick={() => onEditClick(certification)}>
                                                         <i className="bi bi-pencil" />
                                                     </button>
                                                     <button className='admin-btn mx-1' aria-label="Delete" onClick={() => handleDeleteClick(certification.id)}>

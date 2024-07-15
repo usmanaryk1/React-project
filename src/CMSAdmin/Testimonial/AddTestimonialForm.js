@@ -68,6 +68,7 @@ const AddTestimonialForm = () => {
         }
     }, [currentTestimonial, setValue, reset]);
 
+    console.log('currentTestimonial:',currentTestimonial);
     const onSubmit = async (formObject, e) => {
         e.preventDefault();
 
@@ -111,7 +112,9 @@ const AddTestimonialForm = () => {
                 body: JSON.stringify(updatedData)
             });
             const result = await response.json();
+            console.log('Updated testimonial response: ',result);
             setTestimonials(testimonials.map(testimonial => testimonial.id === result.id ? result : testimonial));
+            console.log('Updated testimonial: ',testimonials);
             toast.success('Testimonial updated successfully');
         } else {
             const response = await fetch('http://localhost:8000/testimonials', {
@@ -123,7 +126,9 @@ const AddTestimonialForm = () => {
             });
             if (response.ok) {
                 const result = await response.json();
+                console.log('Added testimonial response: ',result);
                 setTestimonials(prevTestimonialList => [...prevTestimonialList, result]);
+                console.log('Added testimonial: ',testimonials);
                 toast.success('Testimonial added successfully');
             } else {
                 toast.error('Failed to add testimonial info');
@@ -156,6 +161,7 @@ const AddTestimonialForm = () => {
             });
             if (response.ok) {
                 setTestimonials(testimonials.filter(testimonial => testimonial.id !== id));
+                console.log('Deleted testimonial: ',testimonials);
                 toast.success('Testimonial deleted successfully');
             } else {
                 toast.error('Failed to delete testimonial');
@@ -248,7 +254,11 @@ const AddTestimonialForm = () => {
                 <hr />
             </section>
             {/* Testimonial Form End */}
-            <Testimonial onEdit={handleEdit} onDelete={handleDelete} />
+            <Testimonial 
+                onEditClick={handleEdit} 
+                onDeleteClick={handleDelete} 
+                testimonials={testimonials}
+            />
         </>
     );
 }

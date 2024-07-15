@@ -2,7 +2,7 @@ import CustomHero from "./CustomHero"
 import PortfolioContent from "./PortfolioContent";
 import { useEffect } from "react";
 
-const PortfolioDetails = () => {
+const PortfolioDetails = ({onDelete, onEdit}) => {
     useEffect(() => {
         const script = document.createElement('script');
         script.src = "%PUBLIC_URL%/assets/js/main.js";
@@ -19,7 +19,7 @@ const PortfolioDetails = () => {
     return (
         <div className="work-details">
             <CustomHero heroTitle="Work Details" breadcrumbItem1="Home" breadcrumbItem2="Library" breadcrumbItem3="Portfolio Details" />
-            <PortfolioContent />
+            <PortfolioContent onDelete={onDelete} onEdit={onEdit} />
         </div>
     );
 }

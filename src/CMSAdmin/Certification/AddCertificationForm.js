@@ -90,6 +90,9 @@ const AddCertificationForm = () => {
         }
     }, [currentCertifications, setValue, reset]);
 
+
+    console.log('currentCertifications',currentCertifications);
+
     const onSubmit = async (formObject, e) => {
         e.preventDefault();
 
@@ -165,7 +168,9 @@ const AddCertificationForm = () => {
                 body: JSON.stringify(updatedData)
             });
             const result = await response.json();
+            console.log("Updated certification response:",result);
             setCertifications(certifications.map(certification => certification.id === result.id ? result : certification));
+            console.log("Updated certification:",certifications);
             toast.success('Certificate updated successfully');
         } else {
             const response = await fetch('http://localhost:8000/certifications', {
@@ -177,7 +182,9 @@ const AddCertificationForm = () => {
             });
             if (response.ok) {
                 const result = await response.json();
+                console.log("Added certification response:",result);
                 setCertifications(prevCertificationList => [...prevCertificationList, result]);
+                console.log("Added certification:",certifications);
                 toast.success('Certificate added successfully');
             } else {
                 toast.error('Failed to add Certificate info');
@@ -214,6 +221,7 @@ const AddCertificationForm = () => {
             });
             if (response.ok) {
                 setCertifications(certifications.filter(certification => certification.id !== id));
+                console.log("Deleted certification:",certifications);
                 toast.success('Certificate deleted successfully');
             } else {
                 toast.error('Failed to delete Certificate');
@@ -366,8 +374,9 @@ const AddCertificationForm = () => {
             <Certifications 
                 title="Certifications" 
                 subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." 
-                onEdit={handleEdit} 
-                onDelete={handleDelete} 
+                onEditClick={handleEdit} 
+                onDeleteClick={handleDelete}
+                certifications={certifications} 
             />
         </>
     );

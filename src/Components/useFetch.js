@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 
 
 const useFetch = (url) => {
@@ -6,35 +6,41 @@ const useFetch = (url) => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [isPending, setIsPending] = useState(true);
-
-    const fetchData = useCallback((data) => {
-        console.log('fetch', data);
-        setIsPending(true);
-        fetch(url)
-            .then(res => {
-                if (!res.ok) {
-                    throw Error('could not fetch data from that resource');
+    const [fetchKey, setFetchKey] = useState(0); // Add fetch key
+    
+    useEffect(() => {
+        const fetchData = async (data) => {
+            console.log('fetching data', data);
+            setIsPending(true);
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Could not fetch data from that resource');
                 }
-                return res.json();
-            })
-            .then(data => {
-                setData(data);
-                console.log('fetched data: ',data)
+                const result = await response.json();
+                setData(result);
+                console.log('fetched data: ', result)
                 setError(null);
                 setIsPending(false);
-            })
-            .catch(err => {
+            } catch (err) {
                 setError(err.message);
                 setIsPending(false);
-            });
-    }, [url]);
-
-    useEffect(() => {
-        console.log('useEffect fetch:');
+            } finally {
+                setIsPending(false);
+            }
+        }
         fetchData();
-    }, [url, fetchData]);
+    }, [url, fetchKey]);
 
-    return { data, isPending, error, setData, refetch: fetchData };
+
+    // useEffect(() => {
+    //     fetchData();
+    //     console.log('useEffect fetch:');
+    // }, [fetchData]);
+
+    const refetch = () => setFetchKey(prevKey => prevKey + 1);
+
+    return { data, isPending, error, setData, refetch };
 }
 
 export default useFetch;

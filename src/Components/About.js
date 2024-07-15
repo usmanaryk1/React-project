@@ -1,11 +1,10 @@
 import Swal from 'sweetalert2';
-import useFetch from "./useFetch";
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const About = ({onEdit, onDelete}) => {
+const About = ({ onEditClick, onDeleteClick, about = [] }) => {
 
-    const { data: about } = useFetch("http://localhost:8000/about")
     const { isAuthenticated, isAdminPage } = useAuth();
+    console.log('about content:', about);
 
     const handleDeleteClick = (aboutId) => {
         Swal.fire({
@@ -18,7 +17,7 @@ const About = ({onEdit, onDelete}) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                onDelete(aboutId);
+                onDeleteClick(aboutId);
             }
         });
     };
@@ -78,7 +77,7 @@ const About = ({onEdit, onDelete}) => {
                                                     </h5>
                                                     {isAuthenticated && isAdminPage && (
                                                         <div className='admin-actions'>
-                                                            <button className='admin-btn me-1' aria-label="Edit" onClick={() => onEdit(about)}>
+                                                            <button className='admin-btn me-1' aria-label="Edit" onClick={() => onEditClick(about)}>
                                                                 <i className="bi bi-pencil" />
                                                             </button>
                                                             <button className='admin-btn' aria-label="Delete" onClick={() => handleDeleteClick(about.id)}>

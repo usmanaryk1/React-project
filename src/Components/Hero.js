@@ -3,14 +3,28 @@ import React, { useEffect, useRef } from 'react';
 import Typed from 'typed.js';
 import useFetch from './useFetch';
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
+import { forwardRef, useImperativeHandle } from 'react';
 
-const Hero = ({ onEdit, onDelete }) => {
-
+const Hero = forwardRef(({onDelete, onEditClick }, ref) => {
+    useImperativeHandle(ref, () => ({
+      childFunction
+    }));
     const { isAuthenticated, isAdminPage } = useAuth();
+    const { data: hero, refetch } = useFetch("http://localhost:8000/hero");
 
     console.log('hero auth: ', isAuthenticated);
 
-    const { data: hero } = useFetch("http://localhost:8000/hero");
+
+
+    console.log('hero rendering: ', hero);
+    useEffect(() => {
+        console.log('hero changed', hero);
+    }, [hero])
+
+    const childFunction = (newUser) => {
+        console.log('test function:', newUser);
+        refetch();
+    }
     /**
 * Intro type effect
 */
@@ -54,6 +68,7 @@ const Hero = ({ onEdit, onDelete }) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 onDelete(heroId);
+                // refetch();
             }
         });
     };
@@ -70,7 +85,7 @@ const Hero = ({ onEdit, onDelete }) => {
                                 <div className='admin-actions d-flex justify-content-end align-items-start'>
                                     {hero.map((heroItem) => (
                                         <div key={heroItem.id}>
-                                            <button className='admin-btn me-1' aria-label="Edit" onClick={() => onEdit(heroItem)}>
+                                            <button className='admin-btn me-1' aria-label="Edit" onClick={() => onEditClick(heroItem)}>
                                                 <i className="bi bi-pencil" />
                                             </button>
                                             <button className='admin-btn me-5' aria-label="Delete" onClick={() => handleDeleteClick(heroItem.id)}>
@@ -102,6 +117,6 @@ const Hero = ({ onEdit, onDelete }) => {
             {/* End Hero Section */}
         </>
     );
-}
+});
 
 export default Hero;

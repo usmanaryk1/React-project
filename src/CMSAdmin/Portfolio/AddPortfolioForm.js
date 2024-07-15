@@ -9,7 +9,7 @@ import useFetch from "../../Components/useFetch";
 const AddPortfolioForm = () => {
 
     const [currentPortfolio, setCurrentPortfolio] = useState(null);
-    const { data: portfolios, setData: setPortfolios, refetch } = useFetch("http://localhost:8000/works");
+    const { data: works, setData: setWorks, refetch } = useFetch("http://localhost:8000/works");
     const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
@@ -132,7 +132,7 @@ const AddPortfolioForm = () => {
                 body: JSON.stringify(updatedData)
             });
             const result = await response.json();
-            setPortfolios(portfolios.map(portfolio => portfolio.id === result.id ? result : portfolio));
+            setWorks(works.map(portfolio => portfolio.id === result.id ? result : portfolio));
             toast.success('Portfolio updated successfully');
         } else {
             const response = await fetch('http://localhost:8000/works', {
@@ -144,7 +144,7 @@ const AddPortfolioForm = () => {
             });
             if (response.ok) {
                 const result = await response.json();
-                setPortfolios(prevPortfolioList => [...prevPortfolioList, result]);
+                setWorks(prevPortfolioList => [...prevPortfolioList, result]);
                 toast.success('Portfolio added successfully');
             } else {
                 toast.error('Failed to add Portfolio info');
@@ -175,7 +175,7 @@ const AddPortfolioForm = () => {
                 method: 'DELETE',
             });
             if (response.ok) {
-                setPortfolios(portfolios.filter(portfolio => portfolio.id !== id));
+                setWorks(works.filter(portfolio => portfolio.id !== id));
                 toast.success('Portfolio deleted successfully');
             } else {
                 toast.error('Failed to delete portfolio');
@@ -284,7 +284,13 @@ const AddPortfolioForm = () => {
                 </div>
                 <hr />
             </section>
-            <Portfolio title="Portfolio" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." onEdit={handleEdit} onDelete={handleDelete} />
+            <Portfolio 
+                title="Portfolio" 
+                subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." 
+                onEdit={handleEdit} 
+                onDelete={handleDelete} 
+                works={works}
+            />
         </>
     );
 }

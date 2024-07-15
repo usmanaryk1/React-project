@@ -1,14 +1,11 @@
 import Swal from 'sweetalert2';
-import useFetch from "./useFetch";
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const Contact = ({ onEdit, onDelete }) => {
+const Contact = ({ onEditClick, onDeleteClick, contact=[], links=[] }) => {
 
-    const { data: contact } = useFetch("http://localhost:8000/contact");
-    const { data: social } = useFetch("http://localhost:8000/social");
     const { isAuthenticated, isAdminPage } = useAuth();
 
-    const handleDeleteClick = (contactId) => {
+    const handleDelete = (id) => {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -19,25 +16,17 @@ const Contact = ({ onEdit, onDelete }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                onDelete(contactId);
+                onDeleteClick(id);
             }
         });
     };
 
+    const handleDeleteClick = (contactId) => {
+        handleDelete(contactId);
+    };
+
     const handleDeleteLink = (linkId) => {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                onDelete(linkId);
-            }
-        });
+        handleDelete(linkId);
     };
 
     return (
@@ -98,7 +87,7 @@ const Contact = ({ onEdit, onDelete }) => {
                                                 <div className='admin-actions d-flex justify-content-end'>
                                                     {contact.map((contact) => (
                                                         <div key={contact.id}>
-                                                            <button className='admin-btn' aria-label="Edit" onClick={() => onEdit(contact)}>
+                                                            <button className='admin-btn' aria-label="Edit" onClick={() => onEditClick(contact)}>
                                                                 <i className="bi bi-pencil" />
                                                             </button>
                                                             <button className='admin-btn mx-1' aria-label="Delete" onClick={() => handleDeleteClick(contact.id)}>
@@ -128,11 +117,11 @@ const Contact = ({ onEdit, onDelete }) => {
 
                                             <div className="socials">
                                                 <ul>
-                                                    {social && social.map((links) => (
-                                                        <li key={links.id}>
-                                                            <a href={links.link}>
+                                                    {links && links.map((link) => (
+                                                        <li key={link.id}>
+                                                            <a href={link.link}>
                                                                 <span className="ico-circle">
-                                                                    <i className={links.platformIcon} />
+                                                                    <i className={link.platformIcon} />
                                                                 </span>
                                                             </a>
                                                             {isAuthenticated && isAdminPage && (
@@ -140,14 +129,14 @@ const Contact = ({ onEdit, onDelete }) => {
                                                                     <button
                                                                         className="admin-btn me-1"
                                                                         aria-label="Edit"
-                                                                        onClick={() => onEdit(links)}
+                                                                        onClick={() => onEditClick(link)}
                                                                     >
                                                                         <i className="bi bi-pencil" />
                                                                     </button>
                                                                     <button
                                                                         className="admin-btn"
                                                                         aria-label="Delete"
-                                                                        onClick={() => handleDeleteLink(links.id)}
+                                                                        onClick={() => handleDeleteLink(link.id)}
                                                                     >
                                                                         <i className="bi bi-trash" />
                                                                     </button>

@@ -1,13 +1,12 @@
 import Swal from 'sweetalert2';
-import { Link } from "react-router-dom/cjs/react-router-dom";
-import useFetch from "./useFetch";
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 
-const Portfolio = ({ title, subtitle, onEdit, onDelete }) => {
+const Portfolio = ({ title, subtitle, onEdit, onDelete, works=[] }) => {
 
-    const { data: works } = useFetch("http://localhost:8000/works");
     const { isAuthenticated, isAdminPage } = useAuth();
-
+    const history = useHistory();
+    
     const handleDeleteClick = (serviceId) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -23,6 +22,17 @@ const Portfolio = ({ title, subtitle, onEdit, onDelete }) => {
             }
         });
     };
+
+    const handleClickLink = (work) => {
+        if(isAuthenticated) {
+            if(isAdminPage) {
+                history.push(`/form/portfolioDetails-form/${work.id}`)
+            } else{
+                history.push(`/works/${work.id}`)
+            }
+        }
+       
+    }
 
     return (
         <>
@@ -67,11 +77,11 @@ const Portfolio = ({ title, subtitle, onEdit, onDelete }) => {
                                                 </div>
                                             </div>
                                             <div className="col-sm-4">
-                                                <Link to={`/works/${work.id}`}>
-                                                    <div className="w-like">
-                                                        <a href="/"> <span className="bi bi-plus-circle" /></a>
+                                               
+                                                    <div className="w-like" onClick={() => {handleClickLink(work)}}>
+                                                        <span className="bi bi-plus-circle" />
                                                     </div>
-                                                </Link>
+                                                
                                             </div>
                                         </div>
                                     </div>

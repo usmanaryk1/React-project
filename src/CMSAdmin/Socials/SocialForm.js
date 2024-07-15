@@ -29,9 +29,6 @@ const SocialForm = () => {
         }
     }, [currentLinks, setValue, reset]);
 
-    useEffect(() => {
-        console.log('Updated link:', links);
-    }, [links]);
 
     const onSubmit = async (data) => {
 
@@ -44,7 +41,6 @@ const SocialForm = () => {
         if (currentLinks) {
             // Update service
             const updatedLink = { ...currentLinks, ...formData };
-            console.log('Updating service:', updatedLink);
             const response = await fetch(`http://localhost:8000/social/${currentLinks.id}`, {
                 method: 'PUT',
                 headers: {
@@ -53,10 +49,10 @@ const SocialForm = () => {
                 body: JSON.stringify(updatedLink),
             });
             const result = await response.json();
-            console.log('Updated social response:', result);
+            console.log('Updated links response:', result);
 
             setLinks(links.map(link => link.id === result.id ? result : link));
-            console.log('Link after updating: ', links);
+            console.log('Updating links: ', links);
             toast.success('Link updated successfully');
         } else {
             // Add new service
@@ -69,10 +65,10 @@ const SocialForm = () => {
             });
             if (response.ok) {
                 const result = await response.json();
-                console.log('new link: ', result);
+                console.log('Added links response: ', result);
                 setLinks(prevLinks => [...prevLinks, result]);
+                console.log('Added links: ', links);
                 toast.success('Link added successfully');
-                refetch(); // Ensure data is refreshed after addition
             } else {
                 toast.error('Failed to add Link');
             }
@@ -102,9 +98,8 @@ const SocialForm = () => {
             setLinks(links.filter(links => links.id !== id));
             refetch();
             toast.success('Link deleted successfully');
-            console.log('Link deleted successfully', links);
+            console.log('Link deleted', links);
         } else {
-            console.error('Failed to delete Link');
             toast.error('Failed to delete Link');
         }
     }
@@ -164,8 +159,11 @@ const SocialForm = () => {
                 </div>
                 <hr />
             </section>
-            <Contact onEdit={handleEdit} onDelete={handleDelete} />
-            {/* <Hero /> */}
+            <Contact 
+                onEditClick={handleEdit} 
+                onDeleteClick={handleDelete} 
+                links={links}
+            />
         </>
     );
 }

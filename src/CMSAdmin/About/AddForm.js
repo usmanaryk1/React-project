@@ -26,9 +26,9 @@ const AddForm = () => {
     const imageRef = useRef(null);
     const [base64Image, setBase64Image] = useState("");
     const [currentAbout, setCurrentAbout] = useState(null);
-    const { data: aboutList, setData: setAboutList, refetch } = useFetch("http://localhost:8000/about");
+    const { data: about, setData: setAbout, refetch } = useFetch("http://localhost:8000/about");
 
-
+console.log('about:',about)
     useEffect(() => {
         if (currentAbout) {
             setValue('name', currentAbout.name);
@@ -37,7 +37,6 @@ const AddForm = () => {
             setValue('phone', currentAbout.phone);
             setValue('desc', currentAbout.desc1);
             setValue('isActive', currentAbout.isActive);
-            // setValue('file',setBase64Image(currentAbout.img));
             setBase64Image(currentAbout.img);
             setImage(null); 
         } else {
@@ -74,7 +73,6 @@ const AddForm = () => {
     }
 
     const handleImageClick = () => {
-        // imageRef.current.click();
         document.getElementById('file-input').click();
     }
 
@@ -125,7 +123,8 @@ const AddForm = () => {
                 body: JSON.stringify(updatedData)
             });
             const result = await response.json();
-            setAboutList(aboutList.map(item => item.id === result.id ? result : item));
+            setAbout(about.map(item => item.id === result.id ? result : item));
+            console.log('About info updated successfully', about);
             toast.success('About info updated successfully');
         } else {
             const response = await fetch('http://localhost:8000/about', {
@@ -137,7 +136,8 @@ const AddForm = () => {
             });
             if (response.ok) {
                 const result = await response.json();
-                setAboutList(prevAboutList => [...prevAboutList, result]);
+                setAbout(prevAboutList => [...prevAboutList, result]);
+                console.log('About info added successfully',about);
                 toast.success('About info added successfully');
             } else {
                 toast.error('Failed to add about info');
@@ -168,9 +168,10 @@ const AddForm = () => {
             method: 'DELETE',
         });
         if (response.ok) {
-            setAboutList(aboutList.filter(item => item.id !== id));
+            setAbout(about.filter(item => item.id !== id));
             refetch();
             toast.success('About info deleted successfully');
+            console.log('About info deleted successfully',about);
         } else {
             toast.error('Failed to delete about info');
         }
@@ -280,7 +281,7 @@ const AddForm = () => {
                 </div>
                 <hr />
             </section>
-            <About onEdit={handleEdit} onDelete={handleDelete} />
+            <About onEditClick={handleEdit} onDeleteClick={handleDelete} about={about} />
         </>
     );
 }

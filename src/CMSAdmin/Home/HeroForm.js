@@ -5,11 +5,13 @@ import { toast } from 'react-toastify';
 import validationSchema from "./HeroValidation";
 import { useState, useEffect } from "react";
 import useFetch from "../../Components/useFetch";
-
+import { useRef } from "react";
 const HeroForm = () => {
 
+
+    const childRef = useRef();
     const [currentHero, setCurrentHero] = useState(null);
-    const { data: hero, setData: setHero, refetch } = useFetch("http://localhost:8000/hero");
+    const { data: hero, setData: setHero } = useFetch("http://localhost:8000/hero");
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
@@ -18,6 +20,8 @@ const HeroForm = () => {
             isActive: false
         }
     })
+
+    
 
     useEffect(() => {
         if (currentHero) {
@@ -28,11 +32,7 @@ const HeroForm = () => {
             reset();
         }
     }, [currentHero, setValue, reset ]);
-    console.log('current hero before function: ', currentHero);
-
-    useEffect(() => {
-        console.log('Updated services:', hero);
-    }, [hero]);
+    console.log('hero before submit: ', currentHero);
 
     const onSubmit = async (data) => {
 
@@ -42,9 +42,8 @@ const HeroForm = () => {
             isActive: data.isActive,
         };
         if (currentHero) {
-            // Update service
+            // Update hero
             const updatedHero = { ...currentHero, ...formData };
-            console.log('Updating hero:', updatedHero);
             const response = await fetch(`http://localhost:8000/hero/${currentHero.id}`, {
                 method: 'PUT',
                 headers: {
@@ -52,12 +51,19 @@ const HeroForm = () => {
                 },
                 body: JSON.stringify(updatedHero),
             });
-            const result = await response.json();
-            console.log('Updated hero response:', result);
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Updated hero response:', result);
+                setHero(prevHero => {
+                    console.log('Previous Hero:', prevHero);
+                    return prevHero.map(heroData => heroData.id === result.id ? result : heroData
+                    );
+                });
 
-            setHero(hero.map(heroData => heroData.id === result.id ? result : heroData));
-            console.log('hero after updating: ', hero);
-            toast.success('Content updated successfully');
+                childRef.current.childFunction();
+                toast.success('Content updated successfully');
+            }
+            
         } else {
             // Add new service
             const response = await fetch('http://localhost:8000/hero', {
@@ -71,6 +77,7 @@ const HeroForm = () => {
                 const result = await response.json();
                 console.log('new hero: ',result);
                 setHero(prevHero => [...prevHero, result]);
+                childRef.current.childFunction();
                 toast.success('Hero added successfully');
             } else {
                 toast.error('Failed to add Hero');
@@ -79,18 +86,21 @@ const HeroForm = () => {
         }
         reset();
         setCurrentHero(null);
-        refetch();
 
     };
+
+    useEffect(() => {
+        console.log('hero after Updated :', hero);
+    }, [hero]);
 
     const onReset = () => {
         reset();
         setCurrentHero(null);
     };
 
-    const handleEdit = (hero) => {
-        setCurrentHero(hero);
-        console.log('onedit: ', hero);
+    const handleEdit = (heroItem) => {
+        setCurrentHero(heroItem);
+        console.log('onedit: ', heroItem);
     };
 
     const handleDelete = async (id) => {
@@ -99,8 +109,8 @@ const HeroForm = () => {
             method: 'DELETE',
         });
         if (response.ok) {
-            setHero(hero.filter(heroData => heroData.id !== id));
-            refetch();
+            setHero(prevHero => prevHero.filter(heroData => heroData.id !== id));
+            childRef.current.childFunction();
             toast.success('Hero section deleted successfully');
             console.log('Hero section deleted successfully', hero);
         } else {
@@ -155,7 +165,7 @@ const HeroForm = () => {
                                     </div>
                                     
                                     <div className="buttons">
-                                        <button className="reset" type="reset" onClick={onReset}>Reset</button>
+                                        <button className="reset" type="button" onClick={onReset}>Reset</button>
                                         <button className="submit btn btn-success" type="submit">Submit</button>
                                     </div>
 
@@ -166,7 +176,7 @@ const HeroForm = () => {
                 </div>
                 <hr />
             </section>
-            <Hero onEdit={handleEdit} onDelete={handleDelete} />
+            <Hero onEditClick={handleEdit} onDelete={handleDelete}  ref={childRef} hero={setHero} />
         </>
     );
 }

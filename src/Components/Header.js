@@ -22,7 +22,6 @@ console.log('header user', user)
                 { to: '/form/service-form', label: 'Services' },
                 { to: '/form/counter-form', label: 'Counter' },
                 { to: '/form/portfolio-form', label: 'Works' },
-                { to: '/form/portfolioDetails-form', label: 'Work Details' },
                 { to: '/form/testimonial-form', label: 'Testimonial' },
                 { to: '/form/certification-form', label: 'Certification' },
                 { to: '/form/contact-form', label: 'Contact' },

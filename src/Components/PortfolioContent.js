@@ -8,10 +8,10 @@ import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 const PortfolioContent = ({onDelete, onEdit}) => {
 
     const { id } = useParams();
-    const { data: work } = useFetch("http://localhost:8000/workDetails/" + id);
+    const { data: details, refetch } = useFetch("http://localhost:8000/workDetails/" + id);
     const { isAuthenticated, isAdminPage } = useAuth();
 
-    console.log("from portfolio", work);
+    console.log("from portfolio", details);
     /**
  * Portfolio details slider
  */
@@ -31,7 +31,7 @@ const PortfolioContent = ({onDelete, onEdit}) => {
         });
     }, []);
 
-    if (!work) {
+    if (!details) {
         return <div>Loading...</div>;
     }
 
@@ -47,57 +47,62 @@ const PortfolioContent = ({onDelete, onEdit}) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 onDelete(workId);
+                refetch();
             }
         });
     };
 
+    const getBasePath = () => {
+        return isAdminPage ? "../../" : "../";
+    };
+
     return (
         <>
-            {work && <section id="portfolio-details" className="portfolio-details">
+            {details && <section id="portfolio-details" className="portfolio-details">
                 <div className="container px-5">
                     <div className="row gy-4 pb-5">
                         <div className="col-lg-8">
                             <div className="portfolio-details-slider swiper">
                                 <div className="swiper-wrapper align-items-center">
                                     <div className="swiper-slide" >
-                                        <img src={work.slideImage1} alt="" />
+                                        <img src={`${getBasePath()}${details.slideImage1}`} alt="" />
                                     </div>
                                     <div className="swiper-slide">
-                                        <img src={work.slideImage2} alt="" />
+                                        <img src={`${getBasePath()}${details.slideImage2}`} alt="" />
                                     </div>
                                     <div className="swiper-slide">
-                                        <img src={work.slideImage3} alt="" />
+                                        <img src={`${getBasePath()}${details.slideImage3}`} alt="" />
                                     </div>
                                 </div>
                                 <div className="swiper-pagination" />
                             </div>
                         </div>
                         <div className="col-lg-4">
-                            <div className="portfolio-info">
-                                <h3>Project information</h3>
-                                <ul>
-                                    <li><strong>Category</strong> : {work.pCategory}</li>
-                                    <li><strong>Client</strong> : {work.pClient}</li>
-                                    <li><strong>Project date</strong> : {work.pDate}</li>
-                                    <li><strong>Project URL</strong> : <a href={work.pURL}>{work.pURL}</a></li>
-                                </ul>
-                            </div>
-                            {isAuthenticated && isAdminPage && (
+                        {isAuthenticated && isAdminPage && (
                                 <>
-                                    <div className='admin-actions'>
-                                        <button className='admin-btn' aria-label="Edit" onClick={() => onEdit(work)}>
+                                    <div className='admin-actions d-flex justify-content-end mb-3'>
+                                        <button className='admin-btn' aria-label="Edit" onClick={() => onEdit(details)}>
                                             <i className="bi bi-pencil" />
                                         </button>
-                                        <button className='admin-btn mx-1' aria-label="Delete" onClick={() => handleDeleteClick(work.id)}>
+                                        <button className='admin-btn mx-1' aria-label="Delete" onClick={() => handleDeleteClick(details.id)}>
                                             <i className="bi bi-trash" />
                                         </button>
                                     </div>
                                 </>
                             )}
+                            <div className="portfolio-info">
+                                <h3>Project information</h3>
+                                <ul>
+                                    <li><strong>Category</strong> : {details.pCategory}</li>
+                                    <li><strong>Client</strong> : {details.pClient}</li>
+                                    <li><strong>Project date</strong> : {details.pDate}</li>
+                                    <li><strong>Project URL</strong> : <a href={details.pURL}>{details.pURL}</a></li>
+                                </ul>
+                            </div>
                             <div className="portfolio-description">
                                 <h2>This is an example of portfolio detail</h2>
                                 <p>
-                                    {work.desc}
+                                    {details.desc}
                                 </p>
                             </div>
                         </div>

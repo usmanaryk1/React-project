@@ -32,9 +32,7 @@ const ContactForm = () => {
         }
     }, [currentContact, setValue, reset]);
 
-    useEffect(() => {
-        console.log('Updated services:', contacts);
-    }, [contacts]);
+    console.log('currentContact', currentContact);
 
     const onSubmit = async (data) => {
 
@@ -49,7 +47,6 @@ const ContactForm = () => {
         if (currentContact) {
             // Update contact
             const updatedContact = { ...currentContact, ...formData };
-            console.log('Updating contact:', updatedContact);
             const response = await fetch(`http://localhost:8000/contact/${currentContact.id}`, {
                 method: 'PUT',
                 headers: {
@@ -59,9 +56,8 @@ const ContactForm = () => {
             });
             const result = await response.json();
             console.log('Updated contact response:', result);
-
             setContacts(contacts.map(contact => contact.id === result.id ? result : contact));
-            console.log('Contacts after updating: ', contacts);
+            console.log('Updated Contact: ', contacts);
             toast.success('Contacts updated successfully');
         } else {
             // Add new service
@@ -74,10 +70,10 @@ const ContactForm = () => {
             });
             if (response.ok) {
                 const result = await response.json();
-                console.log('new service: ', result);
+                console.log('Added contact response: ', result);
                 setContacts(prevContacts => [...prevContacts, result]);
+                console.log('Added Contact: ', contacts);
                 toast.success('Contact added successfully');
-                refetch(); // Ensure data is refreshed after addition
             } else {
                 toast.error('Failed to add Contact');
             }
@@ -107,9 +103,8 @@ const ContactForm = () => {
             setContacts(contacts.filter(contact => contact.id !== id));
             refetch();
             toast.success('Contact deleted successfully');
-            console.log('Contact deleted successfully', contacts);
+            console.log('Deleted Contact', contacts);
         } else {
-            console.error('Failed to delete service');
             toast.error('Failed to delete service');
         }
     }
@@ -165,12 +160,12 @@ const ContactForm = () => {
                                         <input
                                             type="checkbox"
                                             id="isActive"
-                                            name=""
+                                            name="isActive"
                                             {...register("isActive")}
                                             className="mx-2"
                                             required
                                         />
-                                        <label htmlFor="active">
+                                        <label htmlFor="isActive">
                                             isActive
                                         </label>
                                         {errors.isActive && <p className="error-message">{errors.isActive.message}</p>}
@@ -187,7 +182,11 @@ const ContactForm = () => {
                 </div>
                 <hr />
             </section>
-            <Contact onEdit={handleEdit} onDelete={handleDelete} />
+            <Contact
+                onEditClick={handleEdit}
+                onDeleteClick={handleDelete}
+                contact={contacts}
+            />
         </>
     );
 }
