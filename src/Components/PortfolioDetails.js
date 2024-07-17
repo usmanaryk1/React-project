@@ -1,27 +1,39 @@
 import CustomHero from "./CustomHero"
 import PortfolioContent from "./PortfolioContent";
-import { useEffect } from "react";
+import { useParams } from "react-router-dom/cjs/react-router-dom";
+import useFetch from "./useFetch";
+import { forwardRef, useImperativeHandle } from 'react';
+import { useLocation } from "react-router-dom/cjs/react-router-dom";
 
-const PortfolioDetails = ({onDelete, onEdit}) => {
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = "%PUBLIC_URL%/assets/js/main.js";
-        console.log("PortfolioDetails");
-        script.async = true;
-        document.body.appendChild(script);
+const PortfolioDetails = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
+    useImperativeHandle(ref, () => ({
+        childFunction
+    }));
 
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
 
+    const workDetailsId = queryParams.get('workDetailsId');
+
+    const { id } = useParams();
+    console.log('details data id',id);
+    const { data: details, refetch } = useFetch("http://localhost:8000/workDetails/" + workDetailsId);
+    console.log('details data ',details);
+    const childFunction = (newUser) => {
+        console.log('test function:', newUser);
+        refetch();
+    }
 
     return (
         <div className="work-details">
             <CustomHero heroTitle="Work Details" breadcrumbItem1="Home" breadcrumbItem2="Library" breadcrumbItem3="Portfolio Details" />
-            <PortfolioContent onDelete={onDelete} onEdit={onEdit} />
+            {details && <PortfolioContent
+                onDeleteClick={onDeleteClick}
+                onEditClick={onEditClick}
+                details={details}
+            />}
         </div>
     );
-}
+})
 
 export default PortfolioDetails;

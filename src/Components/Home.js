@@ -28,7 +28,7 @@ const Home = () => {
                 <About 
                     about={about}
                 />
-                <Services 
+                <Services
                     title="Services" 
                     subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." 
                     services={services}

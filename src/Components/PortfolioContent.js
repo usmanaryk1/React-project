@@ -1,17 +1,15 @@
 import Swal from 'sweetalert2';
-import useFetch from "./useFetch";
 import React, { useEffect } from 'react';
 import Swiper from 'swiper/bundle';
-import { useParams } from "react-router-dom/cjs/react-router-dom";
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const PortfolioContent = ({onDelete, onEdit}) => {
-
-    const { id } = useParams();
-    const { data: details, refetch } = useFetch("http://localhost:8000/workDetails/" + id);
+const PortfolioContent =  ({onDeleteClick, onEditClick, details }) => {
+   
     const { isAuthenticated, isAdminPage } = useAuth();
 
-    console.log("from portfolio", details);
+    console.log(" portfolio details", details);
+    
+    
     /**
  * Portfolio details slider
  */
@@ -46,15 +44,15 @@ const PortfolioContent = ({onDelete, onEdit}) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                onDelete(workId);
-                refetch();
+                onDeleteClick(workId);
             }
         });
     };
 
-    const getBasePath = () => {
-        return isAdminPage ? "../../" : "../";
-    };
+    // const getBasePath = () => {
+    //     return isAdminPage ? "../../" : "../";
+    // ${getBasePath()}$
+    // };
 
     return (
         <>
@@ -65,13 +63,13 @@ const PortfolioContent = ({onDelete, onEdit}) => {
                             <div className="portfolio-details-slider swiper">
                                 <div className="swiper-wrapper align-items-center">
                                     <div className="swiper-slide" >
-                                        <img src={`${getBasePath()}${details.slideImage1}`} alt="" />
+                                        <img src={details.slideImage1} alt="" />
                                     </div>
                                     <div className="swiper-slide">
-                                        <img src={`${getBasePath()}${details.slideImage2}`} alt="" />
+                                        <img src={details.slideImage2} alt="" />
                                     </div>
                                     <div className="swiper-slide">
-                                        <img src={`${getBasePath()}${details.slideImage3}`} alt="" />
+                                        <img src={details.slideImage3} alt="" />
                                     </div>
                                 </div>
                                 <div className="swiper-pagination" />
@@ -81,7 +79,7 @@ const PortfolioContent = ({onDelete, onEdit}) => {
                         {isAuthenticated && isAdminPage && (
                                 <>
                                     <div className='admin-actions d-flex justify-content-end mb-3'>
-                                        <button className='admin-btn' aria-label="Edit" onClick={() => onEdit(details)}>
+                                        <button className='admin-btn' aria-label="Edit" onClick={() => onEditClick(details)}>
                                             <i className="bi bi-pencil" />
                                         </button>
                                         <button className='admin-btn mx-1' aria-label="Delete" onClick={() => handleDeleteClick(details.id)}>

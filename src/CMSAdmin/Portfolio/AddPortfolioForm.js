@@ -63,7 +63,7 @@ const AddPortfolioForm = () => {
             setValue('category', currentPortfolio.wCategory);
             setValue('date', formatDate(currentPortfolio.wDate));
             setValue('isActive', currentPortfolio.isActive);
-            setBase64Image(currentPortfolio.linkImage);
+            setBase64Image(currentPortfolio.workImage);
             setImage(null); // or set to a placeholder if needed
         } else {
             reset();
@@ -81,11 +81,9 @@ const AddPortfolioForm = () => {
     const onSubmit = async (formObject, e) => {
         e.preventDefault();
 
-        formObject.linkImage = base64Image; // Add the base64 image to the form object
         formObject.workImage = base64Image; // Add the base64 image to the form object
 
-        let imageUrl = formObject.linkImage;
-        let imageUrl2 = formObject.workImage;
+        let imageUrl = formObject.workImage;
 
         console.log('Portfolio Data:', formObject);
 
@@ -102,7 +100,6 @@ const AddPortfolioForm = () => {
                 const data = await response.json();
 
                 imageUrl = data.url; // Assuming the server responds with the URL of the uploaded image
-                imageUrl2 = data.url; // Assuming the server responds with the URL of the uploaded image
 
             } catch (error) {
                 console.error('Error uploading the image:', error);
@@ -114,14 +111,12 @@ const AddPortfolioForm = () => {
             pURL: formObject.link,
             wCategory: formObject.category,
             wDate: formObject.date,
-            linkImage: imageUrl,
-            workImage: imageUrl2,
+            workImage: imageUrl,
             isActive: formObject.isActive,
             
         };
 
         console.log("imageUrl", imageUrl)
-        console.log("imageUrl2", imageUrl2)
 
         if (currentPortfolio) {
             const response = await fetch(`http://localhost:8000/works/${currentPortfolio.id}`, {
@@ -135,12 +130,13 @@ const AddPortfolioForm = () => {
             setWorks(works.map(portfolio => portfolio.id === result.id ? result : portfolio));
             toast.success('Portfolio updated successfully');
         } else {
+              // Add new work card with a null workDetailsId initially
             const response = await fetch('http://localhost:8000/works', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(updatedData)
+                body: JSON.stringify({ ...updatedData, workDetailsId: null })
             });
             if (response.ok) {
                 const result = await response.json();

@@ -5,7 +5,7 @@ import useFetch from './useFetch';
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 import { forwardRef, useImperativeHandle } from 'react';
 
-const Hero = forwardRef(({onDelete, onEditClick }, ref) => {
+const Hero = forwardRef(({onDeleteClick, onEditClick }, ref) => {
     useImperativeHandle(ref, () => ({
       childFunction
     }));
@@ -67,8 +67,7 @@ const Hero = forwardRef(({onDelete, onEditClick }, ref) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                onDelete(heroId);
-                // refetch();
+                onDeleteClick(heroId);
             }
         });
     };

@@ -176,7 +176,7 @@ const HeroForm = () => {
                 </div>
                 <hr />
             </section>
-            <Hero onEditClick={handleEdit} onDelete={handleDelete}  ref={childRef} hero={setHero} />
+            <Hero onEditClick={handleEdit} onDeleteClick={handleDelete}  ref={childRef} hero={setHero} />
         </>
     );
 }

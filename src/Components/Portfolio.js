@@ -24,12 +24,17 @@ const Portfolio = ({ title, subtitle, onEdit, onDelete, works=[] }) => {
     };
 
     const handleClickLink = (work) => {
+        const queryParams = new URLSearchParams({
+            workDetailsId: work.workDetailsId,
+        }).toString();
         if(isAuthenticated) {
             if(isAdminPage) {
-                history.push(`/form/portfolioDetails-form/${work.id}`)
+                history.push(`/form/portfolioDetails-form/${work.id}?${queryParams}`)
             } else{
-                history.push(`/works/${work.id}`)
+                history.push(`/works/${work.id}?${queryParams}`)
             }
+        } else{
+            history.push(`/works/${work.id}?${queryParams}`)
         }
        
     }
@@ -52,11 +57,11 @@ const Portfolio = ({ title, subtitle, onEdit, onDelete, works=[] }) => {
                         {works.map((work) => (
                             <div className="col-md-4" key={work.id}>
                                 <div className="work-box">
-                                    <a href={work.linkImage} data-gallery="portfolioGallery" className="portfolio-lightbox">
+                                    {/* <a href={work.linkImage} data-gallery="portfolioGallery" className="portfolio-lightbox"> */}
                                         <div className="work-img">
                                             <img src={work.workImage} alt="" className="img-fluid" />
                                         </div>
-                                    </a>
+                                    {/* </a> */}
                                     {isAuthenticated && isAdminPage && (
                                         <div className='admin-actions d-flex align-items-start justify-content-end mt-2 mb-0'>
                                             <button className='admin-btn me-1' aria-label="Edit" onClick={() => onEdit(work)}>

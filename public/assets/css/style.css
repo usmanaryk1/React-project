@@ -1756,7 +1756,7 @@ input[type="number"],
 
 .portfolioDetails-container .img-display-before {
   height: 150px;
-  width: 200px;
+  width: 250px;
   /* margin: 0px auto; */
 }
 
@@ -2139,11 +2139,6 @@ input[type="number"],
   width: 100%;
   padding: 10px 5px;
   text-align: left;
-}
-
-/* Remove the logo in the vertical navbar */
-.vertical-header .logo {
-  display: none;
 }
 
 /* Styles for the dropdown in vertical navbar */
