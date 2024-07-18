@@ -6,15 +6,12 @@ import { useForm } from "react-hook-form";
 import validationSchema from "./PortfolioDetailsValidation";
 import PortfolioDetails from "../../Components/PortfolioDetails";
 import useFetch from "../../Components/useFetch";
-import { useLocation } from "react-router-dom/cjs/react-router-dom";
 
 const AddPortfolioDetails = () => {
 
-    const location= useLocation();
     const childRef = useRef();
     const [currentDetails, setCurrentDetails] = useState(null);
     const { data: details, setData: setDetails } = useFetch("http://localhost:8000/workDetails");
-    const { data: works, setData: setWorks } = useFetch("http://localhost:8000/workDetails");
     const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
@@ -145,6 +142,8 @@ const AddPortfolioDetails = () => {
 
     const onSubmit = async (formObject) => {
         // e.preventDefault();
+        // console.log('Initial workId:', workId);
+        console.log('Initial formObject:', formObject);
 
         formObject.slideImage1 = base64Images[0];
         formObject.slideImage2 = base64Images[1];
@@ -232,7 +231,6 @@ const AddPortfolioDetails = () => {
         //     }
         // }
 
-
         const updatedData = {
             pCategory: formObject.category,
             pClient: formObject.client,
@@ -249,52 +247,45 @@ const AddPortfolioDetails = () => {
         };
 
         console.log('updatedData', updatedData)
-        // Send PUT request to update the JSON data
-        if (currentDetails) {
-            const response = await fetch(`http://localhost:8000/workDetails/${currentDetails.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(updatedData)
-            });
-            const result = await response.json();
-            console.log('update details response:', result);
-            setDetails(details.map(detail => detail.id === result.id ? result : detail));
-            childRef.current.childFunction();
-            console.log('Updated Details: ', details);
-            toast.success('Details updated successfully');
-        } else {
-            const response = await fetch('http://localhost:8000/workDetails', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(updatedData)
-            });
-            if (response.ok) {
-                const result = await response.json();
-                console.log("Added Details response:", result);
-                console.log("Added Details response:", result.id);
-                // Update the work card with the new workDetailsId
-                const workId = location.state ? location.state.workId : null;
 
-                if (workId) {
-                const workResponse = await fetch(`http://localhost:8000/works/${workId}`, {
+        try {
+            // Send PUT request to update the JSON data
+            if (currentDetails) {
+                const response = await fetch(`http://localhost:8000/workDetails/${currentDetails.id}`, {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ workDetailsId: result.id })
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updatedData)
                 });
-                const workResult = await workResponse.json();
-                setWorks(works.map(work => work.id === workResult.id ? workResult : work));
+                const result = await response.json();
+                console.log('update details response:', result);
+                setDetails(details.map(detail => detail.id === result.id ? result : detail));
+                childRef.current.childFunction();
+                console.log('Updated Details: ', details);
+                toast.success('Details updated successfully');
+            } else {
+                // Send POST request to update the JSON data
+                const response = await fetch('http://localhost:8000/workDetails', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updatedData)
+                });
+                if (!response.ok) {
+                    throw new Error(`Failed to add details: ${response.statusText}`);
                 }
+                const result = await response.json();
+                
                 setDetails(prevDetails => [...prevDetails, result]);
                 childRef.current.childFunction();
-                console.log("Added Details:", details);
                 toast.success('Details added successfully');
-            } else {
-                toast.error('Failed to add Details');
             }
+        }
+        catch (error) {
+            console.error('Error:', error);
+            toast.error(error.message);
         }
 
         reset();
