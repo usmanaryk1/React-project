@@ -1622,16 +1622,19 @@ input[type="number"],
 }
 
 .form .submit {
-  background: #0062d3;
+  background: #128f32;
   color: #fff;
   border: 0;
   padding: 10px 25px;
-  margin: 10px auto 15px;
   border-radius: 25px;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.form .cancel {
+.form .submit:hover{
+  transform: scale(1.1);
+}
+/* .form .cancel {
   background: #0062d3;
   color: #fff;
   border: 0;
@@ -1639,44 +1642,35 @@ input[type="number"],
   margin: 10px auto 15px;
   border-radius: 25px;
   cursor: pointer;
-}
+} */
 
 .form .reset {
   background: #0062d3;
   color: #fff;
   border: 0;
   padding: 10px 25px;
-  margin: 10px auto 15px;
+  margin-right: 15px;
   border-radius: 25px;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-button:hover {
-  border: 1px solid #0062d3;
-  color: #0062d3;
-  background-color: white;
-  transition: all 0.5s;
+.form .reset:hover{
+  transform: scale(1.1);
 }
+
 
 .buttons{
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  margin-top: 20px;
 }
 
-.buttons button:hover{
-  color: #0078ff;
-  background-color: white;
-  border: 1px solid #0078ff;
-  transition: all 0.5s;
-}
 /*--------------------------------------------------------------
 # Hero Form 
 --------------------------------------------------------------*/
 .hero-container{
   border-radius: 5px;
   max-width: 550px;
-  margin: 130px auto 50px;
+  margin: 50px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
@@ -1688,7 +1682,7 @@ button:hover {
 .add-container{
   border-radius: 5px;
   max-width: 550px;
-  margin: 130px auto 50px;
+  margin: 50px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
@@ -1712,7 +1706,7 @@ button:hover {
 .service-container{
   border-radius: 5px;
   max-width: 550px;
-  margin: 130px auto 50px;
+  margin: 50px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
@@ -1724,7 +1718,7 @@ button:hover {
 .counter-container{
   border-radius: 5px;
   max-width: 550px;
-  margin: 130px auto 50px;
+  margin: 50px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
@@ -1736,7 +1730,7 @@ button:hover {
 .portfolio-container{
   border-radius: 5px;
   max-width: 550px;
-  margin: 130px auto 50px;
+  margin: 50px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
@@ -1754,15 +1748,15 @@ button:hover {
 .portfolioDetails-container{
   border-radius: 5px;
   max-width: 550px;
-  margin: 130px auto 50px;
+  margin: 50px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
 }
 
 .portfolioDetails-container .img-display-before {
-  height: 150px;
-  width: 200px;
+  height: 175px;
+  width: 250px;
   /* margin: 0px auto; */
 }
 
@@ -1773,7 +1767,7 @@ button:hover {
 .testimonial-container{
   border-radius: 5px;
   max-width: 550px;
-  margin: 130px auto 50px;
+  margin: 50px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
@@ -1797,7 +1791,7 @@ button:hover {
 .certification-container{
   border-radius: 5px;
   max-width: 550px;
-  margin: 130px auto 50px;
+  margin: 50px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
@@ -1820,11 +1814,24 @@ button:hover {
 .contact-container{
   border-radius: 5px;
   max-width: 550px;
-  margin: 130px auto 50px;
+  margin: 50px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
 }
+
+/*--------------------------------------------------------------
+# Social Form 
+--------------------------------------------------------------*/
+.social-container{
+  border-radius: 5px;
+  max-width: 550px;
+  margin: 50px auto;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+}
+
 /*--------------------------------------------------------------
 # Login Form 
 --------------------------------------------------------------*/
@@ -1888,33 +1895,27 @@ button:hover {
 
 .signup-link{
   margin: 15px auto;
+  transition: transform 0.3s ease;
 }
 
 .signup-link a{
   color: #0062d3;
   cursor: pointer;
-}
-/* .signup-link a:hover{
   
-} */
-.login-container .error-message{
-  color: red;
 }
-/* .signup-link a:hover{
-  background: #0062d3;
-  color: white;
-} */
+.signup-link:hover{
+  transform: scale(1.1);
+}
+.error-message{
+  color: red;
+  text-align: left;
+}
 
 /*--------------------------------------------------------------
 # SignUp Form 
 --------------------------------------------------------------*/
 
-/* .signup-form{
-  background-color: #0078ff;
-} */
-
 .signup-container{
-  /* border: 1px solid lightgrey; */
   border-radius: 5px;
   max-width: 400px;
   margin: 130px auto 50px;
@@ -1966,24 +1967,22 @@ button:hover {
 }
 .log{
   margin: 30px auto;
+  transition: transform 0.3s ease;
 }
 
 .log a{
   color: #0062d3;
   cursor: pointer;
 }
-/* .log a:hover{
-  scale: ;
-} */
+.log:hover{
+  transform: scale(1.1);
+  border-color: #007bff;
+}
 
 
 /*--------------------------------------------------------------
 # Forget Form 
 --------------------------------------------------------------*/
-
-/* .forget-form{
-  background-color: #0078ff;
-} */
 
 .forget-container{
   /* border: 1px solid lightgrey; */
@@ -2083,80 +2082,151 @@ button:hover {
   display: block;
 }
 
-/* /* --------------------------------------------------------------
-# About Form
---------------------------------------------------------------*/
-/* .about-form{
-  max-width: 600px;
-  margin:100px auto 0;
-  text-align: center;
-}
 
-.about-form label {
-  text-align: left;
-  display: block;
-}
-
-.about-form h2 {
-  color: black;
-  margin-bottom: 30px;
-}
-
-.about-form input,
-.about-form textarea,
-.about-form select {
-  width: 100%;
-  padding: 6px 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  display: block;
-}
-
-.about-form button, .certification-form button {
-  background: #0062d3;
-  color: #fff;
-  border: 0;
-  padding: 10px 25px;
-  margin: 10px auto 15px;
-  border-radius: 25px;
+/*Admin buttons*/
+.admin-btn {
+  background: #007bff;
+  border: none;
   cursor: pointer;
-} */
-
-/*--------------------------------------------------------------
-# Certification Form
---------------------------------------------------------------*/
-/* .certification-form{
-  max-width: 600px;
-  margin:100px auto 0;
-  text-align: center;
-}
-
-.certification-form label {
-  text-align: left;
-  display: block;
-}
-
-.certification-form h2{
-  color: black;
-  margin-bottom: 30px;
-}
-
-.certification-form input{
-  width: 100%;
-  padding: 6px 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  display: block;
-}
-
-.certification-form button {
-  background: #0062d3;
-  color: #fff;
-  border: 0;
-  padding: 10px 25px;
-  margin: 10px auto 15px;
+  font-size: 1rem; /* Adjust size as needed */
+  color: white;
   border-radius: 25px;
-  cursor: pointer;
+  margin-top: 5px;
+  transition: transform 0.3s ease;
+}
+
+.admin-btn:hover {
+  transform: scale(1.1); /* Adjust hover color as needed */
+}
+
+/*Vertical Navbar*/
+
+.vertical-header {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 235px; /* Adjust the width as needed */
+  background-color: #fff;
+  z-index: 9999;
+  padding-top: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.vertical-navbar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.vertical-navbar ul {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.vertical-navbar ul li {
+  width: 100%;
+  margin: 5px 0;
+  padding: 0px 5px 0px 0px;
+  position: relative;
+}
+
+.vertical-navbar .nav-link {
+  width: 100%;
+  padding: 10px 5px;
+  text-align: left;
+}
+
+/* Styles for the dropdown in vertical navbar */
+.vertical-navbar .dropdown ul {
+  display: block;
+  /* position: absolute;
+  left: 100%;
+  top: 0; */
+  margin: 0;
+  padding: 10px 0;
+  z-index: 99;
+  opacity: 0;
+  /* visibility: hidden; */
+  background: #fff;
+  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+  transition: 0.3s;
+}
+
+.vertical-navbar .dropdown ul li {
+  min-width: 200px;
+}
+
+.vertical-navbar .dropdown ul a {
+  padding: 10px 20px;
+  font-size: 14px;
+  text-transform: none;
+  color: #4e4e4e;
+}
+
+.vertical-navbar .dropdown ul a i {
+  font-size: 12px;
+}
+
+.vertical-navbar .dropdown ul a:hover,
+.vertical-navbar .dropdown ul .active:hover,
+.vertical-navbar .dropdown ul li:hover>a {
+  color: #0078ff;
+}
+
+.vertical-navbar .dropdown:hover>ul {
+  opacity: 1;
+  visibility: visible;
+}
+
+.vertical-navbar .dropdown .dropdown ul {
+  top: 0;
+  left: calc(100% - 30px);
+  visibility: hidden;
+}
+
+.vertical-navbar .dropdown .dropdown:hover>ul {
+  opacity: 1;
+  top: 0;
+  left: 100%;
+  visibility: visible;
+}
+/* 
+.vertical-navbar .dropdown:hover ul {
+  display: flex;
+}
+
+.vertical-navbar .dropdown ul li {
+  width: 100%;
+  margin: 0;
+}
+
+.vertical-navbar .dropdown ul li a {
+  padding: 10px 20px;
+  text-align: left;
+  width: 100%;
 } */
+.vertical-navbar::-webkit-scrollbar {
+  width: 12px; /* Adjust the width as needed */
+}
+
+/* Track */
+.vertical-navbar::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Change the background color as needed */
+  border-radius: 10px; /* Optional: adjust border radius for rounded corners */
+}
+
+/* Handle */
+.vertical-navbar::-webkit-scrollbar-thumb {
+  background: #ececec; /* Change the thumb color as needed */
+  border-radius: 10px; /* Optional: adjust border radius for rounded corners */
+}
+
+/* Handle on hover */
+.vertical-navbar::-webkit-scrollbar-thumb:hover {
+  background: #b6b0b0; /* Change the hover color as needed */
+}

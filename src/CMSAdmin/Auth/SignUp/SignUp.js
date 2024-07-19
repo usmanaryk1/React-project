@@ -1,70 +1,92 @@
-import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Swal from 'sweetalert2';
+import './Signup.css';
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import validationSchema from "./SignupValidation";
+import { useAuth } from "../AuthContext";
 
-const SignUp = ({ onSignup }) => {
+const SignUp = () => {
 
-    const [error, setError] = useState('');
-    const [emailError, setEmailError] = useState('');
+    const { onSignup } = useAuth();
+
+    const { register, handleSubmit, setError, formState: { errors } } = useForm({
+        resolver: yupResolver(validationSchema),
+        defaultValues: {
+            username: '',
+            email: '',
+            password: '',
+            confirmPassword: ''
+        }
+    })
     const history = useHistory(); // for programmatic navigation
 
     console.log("Signup component received onSignup prop:", onSignup);
 
-    const onSubmit = async (e) => {
 
-        e.preventDefault();
-
-        const formData = new FormData(e.target);
-
-        const formObject = Object.fromEntries(formData.entries());
-
-        console.log('Form Data:', formObject);
-
-
-        if (formObject.password !== formObject.confirmPassword) {
-            setError("Passwords do not match");
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Passwords do not match',
-            });
-            return;
+    const checkIfEmailExists = async (email) => {
+        const response = await fetch(`http://localhost:8000/users?email=${encodeURIComponent(email)}`);
+        if (response.ok) {
+            const data = await response.json();
+            return data.length > 0;
         }
+        throw new Error('Failed to check email existence');
+    };
 
+    const checkIfUsernameExists = async (username) => {
+        const response = await fetch(`http://localhost:8000/users?username=${encodeURIComponent(username)}`);
+        if (response.ok) {
+            const data = await response.json();
+            return data.length > 0;
+        }
+        throw new Error('Failed to check username existence');
+    };
 
+    const onSubmit = async (data) => {
+
+        console.log('Data', data);
+
+        // check email existance
         try {
-            // Check if the email already exists
-            const checkResponse = await fetch(`http://localhost:8000/users?email=${encodeURIComponent(formObject.email)}`);
-            //check the type of check response
-            console.log("checkResponse: " ,typeof(checkResponse), checkResponse);
-            if (!checkResponse.ok) {
-                throw new Error("Failed to check email existence");
-            }
-
-            const userExist = await checkResponse.json();
-//need to check the logic
-            if (userExist.length > 0) {
-                setEmailError("Email already exists. Please log in.");
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Signup failed. Please try again.',
+            const emailExists = await checkIfEmailExists(data.email);
+            if (emailExists) {
+                setError('email', {
+                    type: 'manual',
+                    message: 'Email already exists. Please log in.',
                 });
                 return;
             }
 
+
+            // check username existance
+            const usernameExists = await checkIfUsernameExists(data.username);
+            if (usernameExists) {
+                setError('username', {
+                    type: 'manual',
+                    message: 'Username already exists. Please choose another.',
+                });
+                return;
+            }
+
+
             // Prepare data for submission
-            const { confirmPassword, ...userData } = formObject;
+            const { confirmPassword, ...userData } = data;
+
+            // Add role to userData
+            const userWithRole = {
+                ...userData,
+                role: 'admin', // Assign the role of admin here
+                loggedIn: true
+            };
 
             // Make the request to the server
             const response = await fetch('http://localhost:8000/users', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...userData, loggedIn: true })
+                body: JSON.stringify(userWithRole)
             });
 
             if (!response.ok) {
-                setError("Signup failed. Please try again.");
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
@@ -82,10 +104,10 @@ const SignUp = ({ onSignup }) => {
                 text: 'User registered successfully!',
             })
             onSignup(user, true);
-            history.push('/#hero');
+
+            history.push('/form/dashboard');
         } catch (err) {
             console.error("Error during signup:", err);
-            setError("An error occurred. Please try again.");
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -93,6 +115,7 @@ const SignUp = ({ onSignup }) => {
             });
         }
     };
+
 
     return (
         <>
@@ -105,33 +128,50 @@ const SignUp = ({ onSignup }) => {
                                 <h2>SignUp</h2>
                             </div>
                             <div className="col-12">
-                                <form onSubmit={onSubmit}>
-                                    {emailError && <p className="error-message">{emailError}</p>}
+                                <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                                    {/* {emailError && <p className="error-message">{emailError}</p>} */}
                                     <input
                                         type="text"
-                                        name="userName"
+                                        name="username"
+                                        {...register('username', {
+                                            validate: async (value) => {
+                                                const exists = await checkIfUsernameExists(value);
+                                                return !exists || 'Username already exists. Please choose another.';
+                                            }
+                                        })}
                                         placeholder="Username"
                                         required
                                     />
+                                    {errors.username && <p className="error-message">{errors.username.message}</p>}
                                     <input
                                         type="email"
                                         name="email"
+                                        {...register('email', {
+                                            validate: async (value) => {
+                                                const exists = await checkIfEmailExists(value);
+                                                return !exists || 'Email already exists. Please log in.';
+                                            }
+                                        })}
                                         placeholder="Email"
                                         required
                                     />
+                                    {errors.email && <p className="error-message">{errors.email.message}</p>}
                                     <input
                                         type="password"
                                         name="password"
+                                        {...register('password')}
                                         placeholder="Create Password"
                                         required
                                     />
+                                    {errors.password && <p className="error-message">{errors.password.message}</p>}
                                     <input
                                         type="password"
                                         name="confirmPassword"
+                                        {...register('confirmPassword')}
                                         placeholder="Confirm Password"
                                         required
                                     />
-                                    {error && <p className="error-message">{error}</p>}
+                                    {errors.confirmPassword && <p className="error-message">{errors.confirmPassword.message}</p>}
 
                                     <div className="sign">
                                         <button className="sign-button" type="submit">SignUp</button>

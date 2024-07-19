@@ -1,9 +1,43 @@
-import { Link } from "react-router-dom/cjs/react-router-dom";
-import useFetch from "./useFetch";
+import Swal from 'sweetalert2';
+import { useAuth } from '../CMSAdmin/Auth/AuthContext';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 
-const Portfolio = ({ title, subtitle }) => {
+const Portfolio = ({ title, subtitle, onEdit, onDelete, works=[] }) => {
 
-    const { data: works } = useFetch("http://localhost:8000/works");
+    const { isAuthenticated, isAdminPage } = useAuth();
+    const history = useHistory();
+    
+    const handleDeleteClick = (serviceId) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                onDelete(serviceId);
+            }
+        });
+    };
+
+    const handleClickLink = (work) => {
+        const queryParams = new URLSearchParams({
+            workDetailsId: work.workDetailsId,
+        }).toString();
+        if(isAuthenticated) {
+            if(isAdminPage) {
+                history.push(`/form/portfolioDetails-form/${work.id}?${queryParams}`)
+            } else{
+                history.push(`/works/${work.id}?${queryParams}`)
+            }
+        } else{
+            history.push(`/works/${work.id}?${queryParams}`)
+        }
+       
+    }
 
     return (
         <>
@@ -23,12 +57,23 @@ const Portfolio = ({ title, subtitle }) => {
                         {works.map((work) => (
                             <div className="col-md-4" key={work.id}>
                                 <div className="work-box">
-                                    <a href={work.linkImage} data-gallery="portfolioGallery" className="portfolio-lightbox">
+                                    {/* <a href={work.linkImage} data-gallery="portfolioGallery" className="portfolio-lightbox"> */}
                                         <div className="work-img">
                                             <img src={work.workImage} alt="" className="img-fluid" />
                                         </div>
-                                    </a>
+                                    {/* </a> */}
+                                    {isAuthenticated && isAdminPage && (
+                                        <div className='admin-actions d-flex align-items-start justify-content-end mt-2 mb-0'>
+                                            <button className='admin-btn me-1' aria-label="Edit" onClick={() => onEdit(work)}>
+                                                <i className="bi bi-pencil" />
+                                            </button>
+                                            <button className='admin-btn' aria-label="Delete" onClick={() => handleDeleteClick(work.id)}>
+                                                <i className="bi bi-trash" />
+                                            </button>
+                                        </div>
+                                    )}
                                     <div className="work-content">
+
                                         <div className="row">
                                             <div className="col-sm-8">
                                                 <h2 className="w-title"><a href={work.pURL}>{work.wTitle}</a></h2>
@@ -37,11 +82,11 @@ const Portfolio = ({ title, subtitle }) => {
                                                 </div>
                                             </div>
                                             <div className="col-sm-4">
-                                                <Link to={`/works/${work.id}`}>
-                                                    <div className="w-like">
-                                                        <a href="/"> <span className="bi bi-plus-circle" /></a>
+                                               
+                                                    <div className="w-like" onClick={() => {handleClickLink(work)}}>
+                                                        <span className="bi bi-plus-circle" />
                                                     </div>
-                                                </Link>
+                                                
                                             </div>
                                         </div>
                                     </div>

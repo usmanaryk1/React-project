@@ -3,19 +3,21 @@
     {
       "name" : "Morgan Freeman",
       "skills": "Designer, Developer, Freelancer, Photographer",
+      "isActive": true,
       "id" : "1"
     }
   ],
   "about": [
     {
-      "aboutName": "Morgan Freeman",
-      "aboutProfile": "Full Stack Developer",
-      "aboutEmail": "example@gmail.com",
-      "aboutPhone": "068-1243778",
-      "aboutDesc1": "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan idimperdiet et, porttitorat sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nullaporttitor accumsan tincidunt.",
-      "aboutDesc2": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.",
-      "aboutDesc3": "Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
-      "aboutImg": "../assets/img/testimonial-2.jpg",
+      "name": "Morgan Freeman",
+      "profile": "Full Stack Developer",
+      "email": "example@gmail.com",
+      "phone": "068-1243778",
+      "desc1": "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan idimperdiet et, porttitorat sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nullaporttitor accumsan tincidunt.",
+      "desc2": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.",
+      "desc3": "Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
+      "img": "../assets/img/testimonial-2.jpg",
+      "isActive": true,
       "id": "1"
     }
   ],
@@ -26,14 +28,8 @@
       "wTitle": "Lorem impsum dolor",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
-      "slideImage1": "../assets/img/portfolio-details-1.jpg",
-      "slideImage2": "../assets/img/portfolio-details-2.jpg",
-      "slideImage3": "../assets/img/portfolio-details-3.jpg",
-      "pCategory": "Web Design",
-      "pClient": "ASU Company",
-      "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
-      "desc":"Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
       "id": "1"
     },
     {
@@ -42,14 +38,8 @@
       "wTitle": "Loreda Cuno Nere",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
-      "slideImage1": "../assets/img/portfolio-details-1.jpg",
-      "slideImage2": "../assets/img/portfolio-details-2.jpg",
-      "slideImage3": "../assets/img/portfolio-details-3.jpg",
-      "pCategory": "Web Design",
-      "pClient": "ASU Company",
-      "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
-      "desc":"Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
       "id": "2"
     },
     {
@@ -58,14 +48,8 @@
       "wTitle": "Mavrito Lana Dere",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
-      "slideImage1": "../assets/img/portfolio-details-1.jpg",
-      "slideImage2": "../assets/img/portfolio-details-2.jpg",
-      "slideImage3": "../assets/img/portfolio-details-3.jpg",
-      "pCategory": "Web Design",
-      "pClient": "ASU Company",
-      "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
-      "desc":"Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
       "id": "3"
     },
     {
@@ -74,14 +58,8 @@
       "wTitle": "Bindo Laro Cado",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
-      "slideImage1": "../assets/img/portfolio-details-1.jpg",
-      "slideImage2": "../assets/img/portfolio-details-2.jpg",
-      "slideImage3": "../assets/img/portfolio-details-3.jpg",
-      "pCategory": "Web Design",
-      "pClient": "ASU Company",
-      "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
-      "desc":"Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
       "id": "4"
     },
     {
@@ -90,14 +68,8 @@
       "wTitle": "Studio Lena Mado",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
-      "slideImage1": "../assets/img/portfolio-details-1.jpg",
-      "slideImage2": "../assets/img/portfolio-details-2.jpg",
-      "slideImage3": "../assets/img/portfolio-details-3.jpg",
-      "pCategory": "Web Design",
-      "pClient": "ASU Company",
-      "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
-      "desc":"Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
       "id": "5"
     },
     {
@@ -106,14 +78,82 @@
       "wTitle": "Studio Big Bang",
       "wCategory": "Web Design",
       "wDate": "18 Sep. 2018",
-      "slideImage1": "../assets/img/portfolio-details-1.jpg",
-      "slideImage2": "../assets/img/portfolio-details-2.jpg",
-      "slideImage3": "../assets/img/portfolio-details-3.jpg",
+      "pURL": "www.example.com",
+      "isActive": true,
+      "id": "6"
+    }
+  ],
+  "workDetails": [
+    {
+      "slideImage1": "../../assets/img/portfolio-details-1.jpg",
+      "slideImage2": "../../assets/img/portfolio-details-2.jpg",
+      "slideImage3": "../../assets/img/portfolio-details-3.jpg",
       "pCategory": "Web Design",
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
       "pURL": "www.example.com",
-      "desc":"Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
+      "id": "1"
+    },
+    {
+      "slideImage1": "../../assets/img/portfolio-details-1.jpg",
+      "slideImage2": "../../assets/img/portfolio-details-2.jpg",
+      "slideImage3": "../../assets/img/portfolio-details-3.jpg",
+      "pCategory": "Web Design",
+      "pClient": "ASU Company",
+      "pDate": "18 Sep. 2018",
+      "pURL": "www.example.com",
+      "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
+      "id": "2"
+    },
+    {
+      "slideImage1": "../../assets/img/portfolio-details-1.jpg",
+      "slideImage2": "../../assets/img/portfolio-details-2.jpg",
+      "slideImage3": "../../assets/img/portfolio-details-3.jpg",
+      "pCategory": "Web Design",
+      "pClient": "ASU Company",
+      "pDate": "18 Sep. 2018",
+      "pURL": "www.example.com",
+      "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
+      "id": "3"
+    },
+    {
+      "slideImage1": "../../assets/img/portfolio-details-1.jpg",
+      "slideImage2": "../../assets/img/portfolio-details-2.jpg",
+      "slideImage3": "../../assets/img/portfolio-details-3.jpg",
+      "pCategory": "Web Design",
+      "pClient": "ASU Company",
+      "pDate": "18 Sep. 2018",
+      "pURL": "www.example.com",
+      "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
+      "id": "4"
+    },
+    {
+      "slideImage1": "../../assets/img/portfolio-details-1.jpg",
+      "slideImage2": "../../assets/img/portfolio-details-2.jpg",
+      "slideImage3": "../../assets/img/portfolio-details-3.jpg",
+      "pCategory": "Web Design",
+      "pClient": "ASU Company",
+      "pDate": "18 Sep. 2018",
+      "pURL": "www.example.com",
+      "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
+      "id": "5"
+    },
+    {
+      "slideImage1": "../../assets/img/portfolio-details-1.jpg",
+      "slideImage2": "../../assets/img/portfolio-details-2.jpg",
+      "slideImage3": "../../assets/img/portfolio-details-3.jpg",
+      "pCategory": "Web Design",
+      "pClient": "ASU Company",
+      "pDate": "18 Sep. 2018",
+      "pURL": "www.example.com",
+      "desc": "Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi laborExercitationerepudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantiumnesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.",
+      "isActive": true,
       "id": "6"
     }
   ],
@@ -122,36 +162,42 @@
       "sIcon": "bi-briefcase",
       "sTitle": "Web Design",
       "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
+      "isActive": true,
       "id": "1"
     },
     {
       "sIcon": "bi-card-checklist",
       "sTitle": "Web Development",
       "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
+      "isActive": true,
       "id": "2"
     },
     {
       "sIcon": "bi-bar-chart",
       "sTitle": "Photography",
       "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
+      "isActive": true,
       "id": "3"
     },
     {
       "sIcon": "bi-binoculars",
       "sTitle": "Responsive Design",
       "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
+      "isActive": true,
       "id": "4"
     },
     {
       "sIcon": "bi-brightness-high",
       "sTitle": "Graphic Design",
       "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
+      "isActive": true,
       "id": "5"
     },
     {
       "sIcon": "bi-calendar4-week",
       "sTitle": "Marketing Services",
       "sDescription": "Lorem ipsum dolor sit amet consectetuad ipisicing elit. Magni adipisci eaque aute fugiat! Quia,provident vitae! Magnitempora perferendis eum noprovident.",
+      "isActive": true,
       "id": "6"
     }
   ],
@@ -160,12 +206,14 @@
       "img": "../assets/img/testimonial-2.jpg",
       "name": "Xavi Alonso",
       "description": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
+      "isActive": true,
       "id": "1"
     },
     {
       "img": "assets/img/testimonial-4.jpg",
       "name": "Mario John",
       "description": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Lore ipsudolor sit amet,consectetur adipiscing elit.",
+      "isActive": true,
       "id": "2"
     }
   ],
@@ -173,25 +221,29 @@
     {
       "icon": "bi-check",
       "counterEnd": "450",
-      "text": "WORKS COMPLETED",
+      "text": "Works completed",
+      "isActive": true,
       "id": "1"
     },
     {
       "icon": "bi-journal-richtext",
       "counterEnd": "25",
-      "text": "YEARS OF EXPERIENCE",
+      "text": "Years of experience",
+      "isActive": true,
       "id": "2"
     },
     {
       "icon": "bi-people",
       "counterEnd": "550",
-      "text": "TOTAL CLIENTS",
+      "text": "Total clients",
+      "isActive": true,
       "id": "3"
     },
     {
       "icon": "bi-award",
       "counterEnd": "48",
-      "text": "AWARD WON",
+      "text": "Award won",
+      "isActive": true,
       "id": "4"
     }
   ],
@@ -256,13 +308,42 @@
   ],
   "certifications": [
     {
-      "image": "../assets/img/post-1.jpg",
-      "cardCategory": "Travel",
+      "image": "../assets/img/post-2.jpg",
+      "cardCategory": "Food",
       "cardTitle": "See more ideas about Travel",
       "cardDescription": "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallia pellentesque nec,egestas non nisi.",
       "authorImage": "assets/img/testimonial-2.jpg",
       "authorName": "Morgan Freeman",
-      "postDate": "10 min",
+      "postDate": "20 min",
+      "isActive": true,
+      "id": "1"
+    },
+    {
+      "image": "../assets/img/post-2.jpg",
+      "cardCategory": "Food",
+      "cardTitle": "See more ideas about Travel",
+      "cardDescription": "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallia pellentesque nec,egestas non nisi.",
+      "authorImage": "../assets/img/testimonial-2.jpg",
+      "authorName": "Morgan Freeman",
+      "postDate": "20 min",
+      "isActive": true,
+      "id": "2"
+    },
+    {
+      "image": "../assets/img/post-3.jpg",
+      "cardCategory": "Web Design",
+      "cardTitle": "See more ideas about Design",
+      "cardDescription": "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallia pellentesque nec,egestas non nisi.",
+      "authorImage": "../assets/img/testimonial-2.jpg",
+      "authorName": "Morgan Freeman",
+      "postDate": "30 min",
+      "isActive": true,
+      "id": "3"
+    }
+  ],
+  "certificationDetails": [
+    {
+      "image": "../assets/img/post-1.jpg",
       "articleTitle": "Lorem ipsum dolor sit amet consec tetur adipisicing",
       "biPerson": "John Doe",
       "biChatLeftText": "24",
@@ -272,16 +353,11 @@
       "articleContentP4": "Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Quisque velit nisi, pretium ut lacinia in, elementum id enim.Nulla porttitor accumsan tincidunt. ",
       "articleContentP5": "Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada.",
       "blockquote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.",
+      "isActive": true,
       "id": "1"
     },
     {
       "image": "../assets/img/post-2.jpg",
-      "cardCategory": "Food",
-      "cardTitle": "See more ideas about Travel",
-      "cardDescription": "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallia pellentesque nec,egestas non nisi.",
-      "authorImage": "assets/img/testimonial-2.jpg",
-      "authorName": "Morgan Freeman",
-      "postDate": "20 min",
       "articleTitle": "Lorem ipsum dolor sit amet consec tetur adipisicing",
       "biPerson": "Kyle Smith",
       "biChatLeftText": "30",
@@ -291,16 +367,11 @@
       "articleContentP4": "Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Quisque velit nisi, pretium ut lacinia in, elementum id enim.Nulla porttitor accumsan tincidunt. ",
       "articleContentP5": "Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada.",
       "blockquote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.",
+      "isActive": true,
       "id": "2"
     },
     {
       "image": "../assets/img/post-3.jpg",
-      "cardCategory": "Web Design",
-      "cardTitle": "See more ideas about Web Design",
-      "cardDescription": "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallia pellentesque nec,egestas non nisi.",
-      "authorImage": "assets/img/testimonial-2.jpg",
-      "authorName": "Morgan Freeman",
-      "postDate": "30 min",
       "articleTitle": "Lorem ipsum dolor sit amet consec tetur adipisicing",
       "biPerson": "Mario Jam",
       "biChatLeftText": "19",
@@ -310,20 +381,26 @@
       "articleContentP4": "Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Quisque velit nisi, pretium ut lacinia in, elementum id enim.Nulla porttitor accumsan tincidunt. ",
       "articleContentP5": "Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada.",
       "blockquote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.",
+      "isActive": true,
       "id": "3"
     }
   ],
-  "contact" : [
+ "contact": [
     {
-      "contactDesc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolorum dolorem soluta quidem expedita aperiam aliquid at. Totam magni ipsum suscipit amet? Autem nemo esse laboriosam ratione nobis mollitia inventore?",
-      "contactLocation": " 329 WASHINGTON ST BOSTON, MA 02108",
-      "contactNumber": "(617) 557-0089",
-      "contactEmail": " contact@example.com",
-      "twitter": "/",
-      "linkedIn": "/",
-      "facebook": "/",
-      "instagram": "/",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolorum dolorem soluta quidem expedita aperiam aliquid at. Totam magni ipsum suscipit amet? Autem nemo esse laboriosam ratione nobis mollitia inventore?",
+      "location": " 329 WASHINGTON ST BOSTON, MA 02108",
+      "number": "6175570089",
+      "email": "nxzmx@gmail.com",
+      "isActive": true,
       "id": "1"
+    }
+  ],
+  "social": [
+    {
+      "id": "f473",
+      "platformIcon": "bi bi-instagram",
+      "link": "https://www.google.com/",
+      "isActive": true
     }
   ]
 }

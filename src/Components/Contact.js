@@ -1,8 +1,33 @@
-import useFetch from "./useFetch";
+import Swal from 'sweetalert2';
+import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const Contact = () => {
+const Contact = ({ onEditClick, onDeleteClick, contact=[], links=[] }) => {
 
-    const { data: contact } = useFetch("http://localhost:8000/contact");
+    const { isAuthenticated, isAdminPage } = useAuth();
+
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                onDeleteClick(id);
+            }
+        });
+    };
+
+    const handleDeleteClick = (contactId) => {
+        handleDelete(contactId);
+    };
+
+    const handleDeleteLink = (linkId) => {
+        handleDelete(linkId);
+    };
 
     return (
         <>
@@ -26,7 +51,8 @@ const Contact = () => {
                                                     <div className="row">
                                                         <div className="col-md-12 mb-3">
                                                             <div className="form-group">
-                                                                <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" autoComplete="on" required />
+                                                                <input type="text" className="form-control"
+                                                                 name="name" id="name" placeholder="Your Name" autoComplete="on" required />
                                                             </div>
                                                         </div>
                                                         <div className="col-md-12 mb-3">
@@ -57,12 +83,26 @@ const Contact = () => {
                                             </div>
                                         </div>
                                         <div className="col-md-6">
+                                            {isAuthenticated && isAdminPage && (
+                                                <div className='admin-actions d-flex justify-content-end'>
+                                                    {contact.map((contact) => (
+                                                        <div key={contact.id}>
+                                                            <button className='admin-btn' aria-label="Edit" onClick={() => onEditClick(contact)}>
+                                                                <i className="bi bi-pencil" />
+                                                            </button>
+                                                            <button className='admin-btn mx-1' aria-label="Delete" onClick={() => handleDeleteClick(contact.id)}>
+                                                                <i className="bi bi-trash" />
+                                                            </button>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
                                             <div className="title-box-2 pt-4 pt-md-0">
                                                 <h5 className="title-left">
                                                     Get in Touch
                                                 </h5>
                                             </div>
-                                            {contact.map((contact) => (
+                                            {contact && contact.map((contact) => (
                                                 <div className="more-info" key={contact.id}>
                                                     <p className="lead">
                                                         {contact.description}
@@ -74,12 +114,36 @@ const Contact = () => {
                                                     </ul>
                                                 </div>
                                             ))}
+
                                             <div className="socials">
                                                 <ul>
-                                                    <li><a href={contact.facebook}><span className="ico-circle"><i className="bi bi-facebook" /></span></a></li>
-                                                    <li><a href={contact.instagram}><span className="ico-circle"><i className="bi bi-instagram" /></span></a></li>
-                                                    <li><a href={contact.twitter}><span className="ico-circle"><i className="bi bi-twitter" /></span></a></li>
-                                                    <li><a href={contact.linkedIn}><span className="ico-circle"><i className="bi bi-linkedin" /></span></a></li>
+                                                    {links && links.map((link) => (
+                                                        <li key={link.id}>
+                                                            <a href={link.link}>
+                                                                <span className="ico-circle">
+                                                                    <i className={link.platformIcon} />
+                                                                </span>
+                                                            </a>
+                                                            {isAuthenticated && isAdminPage && (
+                                                                <div className="admin-actions mt-3 me-2 d-flex justify-content-start">
+                                                                    <button
+                                                                        className="admin-btn me-1"
+                                                                        aria-label="Edit"
+                                                                        onClick={() => onEditClick(link)}
+                                                                    >
+                                                                        <i className="bi bi-pencil" />
+                                                                    </button>
+                                                                    <button
+                                                                        className="admin-btn"
+                                                                        aria-label="Delete"
+                                                                        onClick={() => handleDeleteLink(link.id)}
+                                                                    >
+                                                                        <i className="bi bi-trash" />
+                                                                    </button>
+                                                                </div>
+                                                            )}
+                                                        </li>
+                                                    ))}
                                                 </ul>
                                             </div>
                                         </div>

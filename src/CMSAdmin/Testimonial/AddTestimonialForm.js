@@ -1,7 +1,25 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Testimonial from "../../Components/Testimonial";
+import { toast } from 'react-toastify';
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import validationSchema from "./TestimonialValidation";
+import useFetch from "../../Components/useFetch";
 
 const AddTestimonialForm = () => {
+
+    const [currentTestimonial, setCurrentTestimonial] = useState(null);
+    const { data: testimonials, setData: setTestimonials, refetch } = useFetch("http://localhost:8000/testimonials");
+    const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
+        resolver: yupResolver(validationSchema),
+        defaultValues: {
+            file: '',
+            name: '',
+            desc: '',
+            isActive: false
+        }
+    });
+
     const [image, setImage] = useState(null);
     const imageRef = useRef(null);
     const [base64Image, setBase64Image] = useState("");
@@ -14,40 +32,12 @@ const AddTestimonialForm = () => {
         setBase64Image(base64);
         console.log("base64", base64);
         setImage(file);
-
-        const imgname = e.target.files[0].name;
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            const img = new Image();
-            img.src = reader.result;
-            img.onload = () => {
-                const canvas = document.createElement("canvas");
-                const maxSize = Math.max(img.width, img.height);
-                canvas.width = maxSize;
-                canvas.height = maxSize;
-                const ctx = canvas.getContext("2d");
-                ctx.drawImage(
-                    img,
-                    (maxSize - img.width) / 2,
-                    (maxSize - img.height) / 2
-                );
-                canvas.toBlob(
-                    (blob) => {
-                        const file = new File([blob], imgname, {
-                            type: "image/png",
-                            lastModified: Date.now(),
-                        });
-
-                        console.log(file);
-                        setImage(file);
-                    },
-                    "image/jpeg",
-                    0.8
-                );
-            };
-        };
     };
+
+
+    const handleImageClick = () => {
+        document.getElementById('file-input').click();
+    }
 
     const convertBase64 = (file) => {
         return new Promise((resolve, reject) => {
@@ -66,21 +56,27 @@ const AddTestimonialForm = () => {
 
     }
 
-    const handleImageClick = () => {
-        imageRef.current.click();
-    }
+    useEffect(() => {
+        if (currentTestimonial) {
+            setValue('name', currentTestimonial.name);
+            setValue('desc', currentTestimonial.description);
+            setValue('isActive', currentTestimonial.isActive);
+            setBase64Image(currentTestimonial.img);
+            setImage(null); // or set to a placeholder if needed
+        } else {
+            reset();
+        }
+    }, [currentTestimonial, setValue, reset]);
 
-    const onSubmit = async (e) => {
+    console.log('currentTestimonial:',currentTestimonial);
+    const onSubmit = async (formObject, e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
 
-        const formObject = Object.fromEntries(formData);
-
-        formObject.aboutImage = base64Image; // Add the base64 image to the form object
+        formObject.img = base64Image; // Add the base64 image to the form object
 
         console.log('Form Data:', formObject);
 
-        let imageUrl = formObject.aboutImage;
+        let imageUrl = formObject.img;
 
         // If a new image is selected, upload it
         if (image) {
@@ -103,35 +99,76 @@ const AddTestimonialForm = () => {
             name: formObject.name,
             description: formObject.desc, // Assuming all desc is in one textarea
             img: imageUrl,
-            id: "1"
+            isActive: formObject.isActive
         };
         console.log("imageUrl", imageUrl)
 
-        // Send PUT request to update the JSON data
-        try {
-            const response = await fetch('http://localhost:8000/testimonials/1', {
+        if (currentTestimonial) {
+            const response = await fetch(`http://localhost:8000/testimonials/${currentTestimonial.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(updatedData)
             });
-            const data = await response.json();
-            console.log('Success:', data);
-            e.target.reset();  // Reset the form after successful submission
-            setImage(null);
-            setBase64Image("");   // Clear the image state 
-        } catch (error) {
-            console.error('Error updating the JSON data:', error);
+            const result = await response.json();
+            console.log('Updated testimonial response: ',result);
+            setTestimonials(testimonials.map(testimonial => testimonial.id === result.id ? result : testimonial));
+            console.log('Updated testimonial: ',testimonials);
+            toast.success('Testimonial updated successfully');
+        } else {
+            const response = await fetch('http://localhost:8000/testimonials', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData)
+            });
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Added testimonial response: ',result);
+                setTestimonials(prevTestimonialList => [...prevTestimonialList, result]);
+                console.log('Added testimonial: ',testimonials);
+                toast.success('Testimonial added successfully');
+            } else {
+                toast.error('Failed to add testimonial info');
+            }
         }
+
+        reset();
+        setImage(null);
+        setBase64Image("");
+        setCurrentTestimonial(null);
+        refetch();
 
     };
 
     const onReset = (e) => {
-        e.preventDefault();
-        e.target.form.reset();
+        reset();
         setImage(null);
-        setBase64Image("");      // Clear the image state
+        setBase64Image("");
+        setCurrentTestimonial(null);
+    };
+
+    const handleEdit = (testimonial) => {
+        setCurrentTestimonial(testimonial);
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:8000/testimonials/${id}`, {
+                method: 'DELETE',
+            });
+            if (response.ok) {
+                setTestimonials(testimonials.filter(testimonial => testimonial.id !== id));
+                console.log('Deleted testimonial: ',testimonials);
+                toast.success('Testimonial deleted successfully');
+            } else {
+                toast.error('Failed to delete testimonial');
+            }
+        } catch (error) {
+            console.error('Error deleting testimonial:', error);
+        }
     };
 
 
@@ -146,7 +183,7 @@ const AddTestimonialForm = () => {
                                 <h2>Add Testimonial Info!</h2>
                             </div>
                             <div className="col-12">
-                                <form onSubmit={onSubmit}>
+                                <form onSubmit={handleSubmit(onSubmit)} noValidate>
                                     <div className="img-container text-center">
                                         <div className="image" onClick={handleImageClick}>
                                             {image ?
@@ -156,7 +193,7 @@ const AddTestimonialForm = () => {
                                                     className="img-display-after"
                                                 />
                                                 : <img
-                                                    src="../assets/img/default-image.jpg"
+                                                    src={base64Image || "../assets/img/default-image.jpg"}
                                                     alt="default"
                                                     className="img-display-before"
                                                 />
@@ -164,6 +201,8 @@ const AddTestimonialForm = () => {
                                             <input
                                                 type="file"
                                                 name="file"
+                                                id="file-input"
+                                                {...register("file")}
                                                 accept={acceptedFileTypes}
                                                 multiple={false}
                                                 onChange={handleImageChange}
@@ -173,34 +212,38 @@ const AddTestimonialForm = () => {
                                         </div>
                                         <label className="my-3"><b>Choose Client Image</b></label>
                                     </div>
-
+                                    {errors.file && <p className="error-message">{errors.file.message}</p>}
                                     <input
                                         type="text"
                                         name="name"
+                                        {...register("name")}
                                         placeholder="Client Name"
                                         required
                                     />
+                                    {errors.name && <p className="error-message">{errors.name.message}</p>}
                                     <textarea
                                         name="desc"
+                                        {...register("desc")}
                                         placeholder="Description"
                                         required
                                     ></textarea>
-
+                                    {errors.desc && <p className="error-message">{errors.desc.message}</p>}
                                     <div className="isActive">
                                         <input
                                             type="checkbox"
                                             id="active"
+                                            {...register("isActive")}
+                                            name="isActive"
                                             className="mx-2"
-                                            required
                                         />
                                         <label htmlFor="active">
                                             isActive
                                         </label>
+                                        {errors.isActive && <p className="error-message">{errors.isActive.message}</p>}
                                     </div>
 
                                     <div className="buttons">
                                         <button className="reset" type="reset" onClick={onReset}>Reset</button>
-                                        <button className="cancel">Cancel</button>
                                         <button className="submit" type="submit">Submit</button>
                                     </div>
                                 </form>
@@ -211,7 +254,11 @@ const AddTestimonialForm = () => {
                 <hr />
             </section>
             {/* Testimonial Form End */}
-            <Testimonial />
+            <Testimonial 
+                onEditClick={handleEdit} 
+                onDeleteClick={handleDelete} 
+                testimonials={testimonials}
+            />
         </>
     );
 }

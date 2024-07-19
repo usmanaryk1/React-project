@@ -1,83 +1,113 @@
-
+import Swal from 'sweetalert2';
 import React, { useEffect } from 'react';
 import Swiper from 'swiper/bundle';
+import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const PortfolioContent = ({ work }) => {
+const PortfolioContent =  ({onDeleteClick, onEditClick, details }) => {
+   
+    const { isAuthenticated, isAdminPage } = useAuth();
 
-      /**
-   * Portfolio details slider
-   */
-      useEffect(() => {
+    console.log(" portfolio details", details);
+    
+    
+    /**
+ * Portfolio details slider
+ */
+    useEffect(() => {
         new Swiper('.portfolio-details-slider', {
-          speed: 400,
-          loop: true,
-          autoplay: {
-            delay: 5000,
-            disableOnInteraction: false
-          },
-          pagination: {
-            el: '.swiper-pagination',
-            type: 'bullets',
-            clickable: true
-          }
+            speed: 400,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'bullets',
+                clickable: true
+            }
         });
-      }, []);
+    }, []);
 
-    if (!work) {
+    if (!details) {
         return <div>Loading...</div>;
     }
 
-    const {
-        slideImage1,
-        slideImage2,
-        slideImage3,
-        pCategory,
-        pClient,
-        pDate,
-        pURL,
-        desc
-    } = work;
+    const handleDeleteClick = (workId) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                onDeleteClick(workId);
+            }
+        });
+    };
+
+    // const getBasePath = () => {
+    //     return isAdminPage ? "../../" : "../";
+    // ${getBasePath()}$
+    // };
+
     return (
         <>
-            <section id="portfolio-details" className="portfolio-details">
+            {details && <section id="portfolio-details" className="portfolio-details">
                 <div className="container px-5">
                     <div className="row gy-4 pb-5">
                         <div className="col-lg-8">
                             <div className="portfolio-details-slider swiper">
                                 <div className="swiper-wrapper align-items-center">
                                     <div className="swiper-slide" >
-                                        <img src={slideImage1} alt="" />
+                                        <img src={details.slideImage1} alt="" />
                                     </div>
                                     <div className="swiper-slide">
-                                        <img src={slideImage2} alt="" />
+                                        <img src={details.slideImage2} alt="" />
                                     </div>
                                     <div className="swiper-slide">
-                                        <img src={slideImage3} alt="" />
+                                        <img src={details.slideImage3} alt="" />
                                     </div>
                                 </div>
                                 <div className="swiper-pagination" />
                             </div>
                         </div>
                         <div className="col-lg-4">
+                        {isAuthenticated && isAdminPage && (
+                                <>
+                                    <div className='admin-actions d-flex justify-content-end mb-3'>
+                                        <button className='admin-btn' aria-label="Edit" onClick={() => onEditClick(details)}>
+                                            <i className="bi bi-pencil" />
+                                        </button>
+                                        <button className='admin-btn mx-1' aria-label="Delete" onClick={() => handleDeleteClick(details.id)}>
+                                            <i className="bi bi-trash" />
+                                        </button>
+                                    </div>
+                                </>
+                            )}
                             <div className="portfolio-info">
                                 <h3>Project information</h3>
                                 <ul>
-                                    <li><strong>Category</strong> : {pCategory}</li>
-                                    <li><strong>Client</strong> : {pClient}</li>
-                                    <li><strong>Project date</strong> : {pDate}</li>
-                                    <li><strong>Project URL</strong> : <a href="/"> {pURL}</a></li>
+                                    <li><strong>Category</strong> : {details.pCategory}</li>
+                                    <li><strong>Client</strong> : {details.pClient}</li>
+                                    <li><strong>Project date</strong> : {details.pDate}</li>
+                                    <li><strong>Project URL</strong> : <a href={details.pURL}>{details.pURL}</a></li>
                                 </ul>
                             </div>
                             <div className="portfolio-description">
                                 <h2>This is an example of portfolio detail</h2>
                                 <p>
-                                    {desc}
+                                    {details.desc}
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>{/* End Portfolio Details Section */ }
+            </section>}
+            {/* End Portfolio Details Section */}
         </>
     );
 }

@@ -1,30 +1,35 @@
-import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import validationSchema from "./LoginValidation";
+import { useAuth } from "../AuthContext";
 
-const Login = ({ onLogin }) => {
-    
+const Login = () => {
 
-    const [error, setError] = useState('');
+    const { onLogin } = useAuth();
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(validationSchema),
+        defaultValues: {
+            email: '',
+            password: '',
+        }
+    })
+
+
     const history = useHistory(); // for programmatic navigation
 
     console.log("Login component received onLogin prop:", onLogin);
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-
-        const formObject = Object.fromEntries(formData.entries());
-
-        console.log('Form Data:', formObject);
+    const onSubmit = async (data) => {
 
         const response = await fetch('http://localhost:8000/users');
         const users = await response.json();
 
         // Check if the credentials match any user
         const user = users.find(user =>
-            (user.email === formObject.email) &&
-            user.password === formObject.password
+            (user.email === data.email) &&
+            user.password === data.password
         );
 
         if (user) {
@@ -36,11 +41,14 @@ const Login = ({ onLogin }) => {
             });
 
             console.log("user", user);
-            onLogin(user ,true);
+
+            onLogin(user, true);
+
             toast.success('Login Successfully');
+
             history.push('/form/dashboard');
         } else {
-            setError("Invalid email or password.");
+            toast.error("Invalid email or password.");
         }
 
     };
@@ -55,29 +63,25 @@ const Login = ({ onLogin }) => {
                                 <h2>Login</h2>
                             </div>
                             <div className="col-12">
-                                <form onSubmit={onSubmit}>
-                                    {error && <p className="error-message">{error}</p>}
+                                <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                                    {/* {error && <p className="error-message">{error}</p>} */}
                                     <input
                                         type="email"
                                         name="email"
+                                        {...register('email')}
                                         placeholder="Email"
                                         required
                                     />
+                                    {errors.email && <p className="error-message">{errors.email.message}</p>}
                                     <input
                                         type="password"
                                         name="password"
+                                        {...register('password')}
                                         placeholder="Enter Password"
                                         required
                                     />
-                                    <div className="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                                        <div className="d-flex">
-                                            <div className="toast-body">
-                                                Hello, world! This is a toast message.
-                                            </div>
-                                            <button type="button" className="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close" />
-                                        </div>
-                                    </div>
-
+                                    {errors.password && <p className="error-message">{errors.password.message}</p>}
+                                    {/* <p className="error-message">{formError.password}</p> */}
                                     <div className="pwd">
                                         <button className="login-button" type="submit">Login</button>
                                         <p><a href="/form/forget-form">Forgot Password?</a></p>

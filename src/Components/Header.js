@@ -1,14 +1,17 @@
 import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
-import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
+import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const Header = ({ user, onLogout }) => {
+const Header = () => {
 
-    const location = useLocation();
     const [navLinks, setNavLinks] = useState([]);
-    const isAdminPage = location.pathname.startsWith('/form');
+    
+    const { user, onLogout, isAdminPage } = useAuth();
 
-
+    const preventRefresh = (e) => {
+        e.preventDefault();
+    }
+console.log('header user', user)
     useEffect(() => {
         //need to change logic
         if (user && isAdminPage) {
@@ -19,10 +22,10 @@ const Header = ({ user, onLogout }) => {
                 { to: '/form/service-form', label: 'Services' },
                 { to: '/form/counter-form', label: 'Counter' },
                 { to: '/form/portfolio-form', label: 'Works' },
-                { to: '/form/portfolioDetails-form', label: 'Work Details' },
-                // { to: '/form/testimonial-form', label: 'Testimonial' },
-                // { to: '/form/certification-form', label: 'Certification' },
-                // { to: '/form/contact-form', label: 'Contact' },
+                { to: '/form/testimonial-form', label: 'Testimonial' },
+                { to: '/form/certification-form', label: 'Certification' },
+                { to: '/form/contact-form', label: 'Contact' },
+                { to: '/form/social-form', label: 'Social Links' },
             ]);
 
         } else {
@@ -41,11 +44,12 @@ const Header = ({ user, onLogout }) => {
     return (
         <>
             {/* ======= Header ======= */}
-            <header id="header" className="fixed-top">
+            <header id="header" className={`fixed-top ${user && isAdminPage ? 'vertical-header' : ''}`}>
                 <div className="container d-flex align-items-center justify-content-between">
-                    <h1 className="logo"><a href="index.html">Portfolio</a></h1>
+                {!isAdminPage && <h1 className="logo"><a href="index.html">Portfolio</a></h1>}
+                    {/* <h1 className="logo"><a href="index.html">Portfolio</a></h1> */}
                     {/* Uncomment below if you prefer to use an image logo */}
-                    <nav id="navbar" className="navbar">
+                    <nav id="navbar" className={`navbar ${user && isAdminPage ? 'vertical-navbar' : ''}`}>
                         {/* <a href="index.html" class="logo"><img src="assets/img/logo/png" alt="" class="img-fluid"/></a> */}
                         <ul>
                             {navLinks.map((link, index) => (
@@ -57,11 +61,11 @@ const Header = ({ user, onLogout }) => {
                             <li className="dropdown nav-link">
                                 {user ? (
                                     <>
-                                        <a href="/"><span>{user.userName}</span><i className="bi bi-chevron-down" /></a>
+                                        <a href="/" onClick={preventRefresh}><span>{user.username}</span><i className="bi bi-chevron-down" /></a>
                                         <ul>
-                                            <li><Link smooth to="/" onClick={onLogout}>Logout</Link></li>
+                                            <li><Link smooth to="/" onClick={onLogout}>LogOut</Link></li>
                                             {isAdminPage ? (
-                                                <li><Link smooth to="/#hero">Go to User Portal</Link></li>
+                                                <li><Link smooth to="/">Go to User Portal</Link></li>
                                             ) : (
                                                 <li><Link smooth to="/form/dashboard">Go to Admin Portal</Link></li>
                                             )}
@@ -69,10 +73,10 @@ const Header = ({ user, onLogout }) => {
                                     </>
                                 ) : (
                                     <>
-                                        <a href="/"><span>Register</span><i className="bi bi-chevron-down" /></a>
+                                        <a href="/" onClick={preventRefresh}><span>Register</span><i className={`bi bi-chevron-down ${user && isAdminPage ? 'bi bi-chevron-right' : ''}`} /></a>
                                         <ul>
                                             {/* <li><Link smooth to="/form/signup-form">Sign Up</Link></li> */}
-                                            <li><Link smooth to="/form/login-form">Login</Link></li>
+                                            <li><Link smooth to="/form/login-form">LogIn</Link></li>
                                         </ul>
                                     </>
                                 )}

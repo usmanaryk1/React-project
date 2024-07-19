@@ -1,8 +1,26 @@
-import useFetch from "./useFetch";
+import Swal from 'sweetalert2';
+import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 
-const About = () => {
-    
-    const { data: about } = useFetch("http://localhost:8000/about")
+const About = ({ onEditClick, onDeleteClick, about = [] }) => {
+
+    const { isAuthenticated, isAdminPage } = useAuth();
+    console.log('about content:', about);
+
+    const handleDeleteClick = (aboutId) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                onDeleteClick(aboutId);
+            }
+        });
+    };
 
     return (
         <>
@@ -52,10 +70,21 @@ const About = () => {
                                         </div>
                                         <div className="col-md-6">
                                             <div className="about-me pt-4 pt-md-0">
-                                                <div className="title-box-2">
+
+                                                <div className="title-box-2 d-flex justify-content-between">
                                                     <h5 className="title-left">
                                                         About
                                                     </h5>
+                                                    {isAuthenticated && isAdminPage && (
+                                                        <div className='admin-actions'>
+                                                            <button className='admin-btn me-1' aria-label="Edit" onClick={() => onEditClick(about)}>
+                                                                <i className="bi bi-pencil" />
+                                                            </button>
+                                                            <button className='admin-btn' aria-label="Delete" onClick={() => handleDeleteClick(about.id)}>
+                                                                <i className="bi bi-trash" />
+                                                            </button>
+                                                        </div>
+                                                    )}
                                                 </div>
                                                 <p className="lead">
                                                     {about.desc1}
