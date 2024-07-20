@@ -5,9 +5,9 @@ import useFetch from './useFetch';
 import { useAuth } from '../CMSAdmin/Auth/AuthContext';
 import { forwardRef, useImperativeHandle } from 'react';
 
-const Hero = forwardRef(({onDeleteClick, onEditClick }, ref) => {
+const Hero = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
     useImperativeHandle(ref, () => ({
-      childFunction
+        childFunction
     }));
     const { isAuthenticated, isAdminPage } = useAuth();
     const { data: hero, refetch } = useFetch("http://localhost:8000/hero");
@@ -62,8 +62,8 @@ const Hero = forwardRef(({onDeleteClick, onEditClick }, ref) => {
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            camcelButtonColor: '#3085d6',
+            confirmButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
@@ -94,10 +94,11 @@ const Hero = forwardRef(({onDeleteClick, onEditClick }, ref) => {
                                     ))}
                                 </div>
                             )}
-                            <div className="container">
-                                {/*<p class="display-6 color-d">Hello, world!</p>*/}
-                                {hero.map((heroItem) => (
-                                    <div key={heroItem.id}>
+
+                            {hero.map((heroItem) => (
+                                <div className="container" key={heroItem.id}>
+                                    {/*<p class="display-6 color-d">Hello, world!</p>*/}
+                                    <div>
                                         <h1 className="hero-title mb-4">I am {heroItem.name}</h1>
                                         <p className="hero-subtitle">
                                             {heroItem.skills &&
@@ -105,10 +106,9 @@ const Hero = forwardRef(({onDeleteClick, onEditClick }, ref) => {
                                             }
                                         </p>
                                     </div>
-                                ))}
-
-                                {/* <p class="pt-3"><a class="btn btn-primary btn js-scroll px-4" href="#about" role="button">Learn More</a></p> */}
-                            </div>
+                                    {/* <p class="pt-3"><a class="btn btn-primary btn js-scroll px-4" href="#about" role="button">Learn More</a></p> */}
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>

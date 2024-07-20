@@ -91,7 +91,7 @@ const AddCertificationForm = () => {
     }, [currentCertifications, setValue, reset]);
 
 
-    console.log('currentCertifications',currentCertifications);
+    console.log('currentCertifications', currentCertifications);
 
     const onSubmit = async (formObject, e) => {
         e.preventDefault();
@@ -168,9 +168,9 @@ const AddCertificationForm = () => {
                 body: JSON.stringify(updatedData)
             });
             const result = await response.json();
-            console.log("Updated certification response:",result);
+            console.log("Updated certification response:", result);
             setCertifications(certifications.map(certification => certification.id === result.id ? result : certification));
-            console.log("Updated certification:",certifications);
+            console.log("Updated certification:", certifications);
             toast.success('Certificate updated successfully');
         } else {
             const response = await fetch('http://localhost:8000/certifications', {
@@ -182,9 +182,9 @@ const AddCertificationForm = () => {
             });
             if (response.ok) {
                 const result = await response.json();
-                console.log("Added certification response:",result);
+                console.log("Added certification response:", result);
                 setCertifications(prevCertificationList => [...prevCertificationList, result]);
-                console.log("Added certification:",certifications);
+                console.log("Added certification:", certifications);
                 toast.success('Certificate added successfully');
             } else {
                 toast.error('Failed to add Certificate info');
@@ -221,7 +221,7 @@ const AddCertificationForm = () => {
             });
             if (response.ok) {
                 setCertifications(certifications.filter(certification => certification.id !== id));
-                console.log("Deleted certification:",certifications);
+                console.log("Deleted certification:", certifications);
                 toast.success('Certificate deleted successfully');
             } else {
                 toast.error('Failed to delete Certificate');
@@ -305,45 +305,66 @@ const AddCertificationForm = () => {
                                         <label className="mx-auto my-3"><b>Choose Your Image</b></label>
                                     </div>
 
-                                    <input
-                                        type="text"
-                                        name="title"
-                                        {...register("title")}
-                                        placeholder="Tille of Certificate"
-                                        required
-                                    />
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
+                                            name="title"
+                                            className="form-control"
+                                            {...register("title")}
+                                            placeholder="Tille of Certificate"
+                                            required
+                                        />
+                                    </div>
                                     {errors.title && <p className="error-message">{errors.title.message}</p>}
-                                    <input
-                                        type="text"
-                                        name="category"
-                                        {...register("category")}
-                                        placeholder="Category of Certificate"
-                                        required
-                                    />
+
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
+                                            name="category"
+                                            className="form-control"
+                                            {...register("category")}
+                                            placeholder="Category of Certificate"
+                                            required
+                                        />
+                                    </div>
                                     {errors.category && <p className="error-message">{errors.category.message}</p>}
-                                    <textarea
-                                        name="description"
-                                        {...register("description")}
-                                        placeholder="Description"
-                                        required
-                                    ></textarea>
-                                    {errors.description && <p className="error-message">{errors.description.message}</p>}
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        {...register("name")}
-                                        placeholder="Your Name"
-                                        required
-                                    />
+
+
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            className="form-control"
+                                            {...register("name")}
+                                            placeholder="Your Name"
+                                            required
+                                        />
+                                    </div>
                                     {errors.name && <p className="error-message">{errors.name.message}</p>}
-                                    <input
-                                        type="text"
-                                        name="time"
-                                        placeholder="Time (10 min)"
-                                        {...register("time")}
-                                        required
-                                    />
+
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
+                                            name="time"
+                                            className="form-control"
+                                            placeholder="Time (10 min)"
+                                            {...register("time")}
+                                            required
+                                        />
+                                    </div>
                                     {errors.time && <p className="error-message">{errors.time.message}</p>}
+
+                                    <div className="form-group">
+                                        <textarea
+                                            name="description"
+                                            className="form-control"
+                                            {...register("description")}
+                                            placeholder="Description"
+                                            required
+                                        ></textarea>
+                                    </div>
+                                    {errors.description && <p className="error-message">{errors.description.message}</p>}
+                                    
                                     <div className="isActive">
                                         <input
                                             type="checkbox"
@@ -371,12 +392,12 @@ const AddCertificationForm = () => {
                 <hr />
             </section>
             {/* Certification Form End */}
-            <Certifications 
-                title="Certifications" 
-                subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." 
-                onEditClick={handleEdit} 
+            <Certifications
+                title="Certifications"
+                subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+                onEditClick={handleEdit}
                 onDeleteClick={handleDelete}
-                certifications={certifications} 
+                certifications={certifications}
             />
         </>
     );

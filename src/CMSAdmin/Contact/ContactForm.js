@@ -129,31 +129,42 @@ const ContactForm = () => {
                                             required
                                         />
                                     </div>
-
                                     {errors.description && <p className="error-message">{errors.description.message}</p>}
-                                    <input
-                                        type="text"
-                                        name="location"
-                                        {...register("location")}
-                                        placeholder="Location"
-                                        required
-                                    />
+
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
+                                            name="location"
+                                            className="form-control"
+                                            {...register("location")}
+                                            placeholder="Location"
+                                            required
+                                        />
+                                    </div>
                                     {errors.location && <p className="error-message">{errors.location.message}</p>}
-                                    <input
-                                        type="text"
-                                        name="number"
-                                        {...register("number")}
-                                        placeholder="Telephone Number"
-                                        required
-                                    />
+
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
+                                            name="number"
+                                            className="form-control"
+                                            {...register("number")}
+                                            placeholder="Telephone Number"
+                                            required
+                                        />
+                                    </div>
                                     {errors.number && <p className="error-message">{errors.number.message}</p>}
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        {...register("email")}
-                                        placeholder="Email"
-                                        required
-                                    />
+
+                                    <div className="form-group">
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            className="form-control"
+                                            {...register("email")}
+                                            placeholder="Email"
+                                            required
+                                        />
+                                    </div>
                                     {errors.email && <p className="error-message">{errors.email.message}</p>}
 
                                     <div className="isActive">

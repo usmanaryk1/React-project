@@ -113,7 +113,7 @@ const AddPortfolioForm = () => {
             wDate: formObject.date,
             workImage: imageUrl,
             isActive: formObject.isActive,
-            
+
         };
 
         console.log("imageUrl", imageUrl)
@@ -130,7 +130,7 @@ const AddPortfolioForm = () => {
             setWorks(works.map(portfolio => portfolio.id === result.id ? result : portfolio));
             toast.success('Portfolio updated successfully');
         } else {
-              // Add new work card with a null workDetailsId initially
+            // Add new work card with a null workDetailsId initially
             const response = await fetch('http://localhost:8000/works', {
                 method: 'POST',
                 headers: {
@@ -223,38 +223,54 @@ const AddPortfolioForm = () => {
                                         {errors.file && <p className="error-message">{errors.file.message}</p>}
                                     </div>
 
-                                    <input
-                                        type="text"
-                                        name="title"
-                                        {...register('title')}
-                                        placeholder="Add title of Project"
-                                        required
-                                    />
+                                    <div className="from-group">
+                                        <input
+                                            type="text"
+                                            name="title"
+                                            className="form-control"
+                                            {...register('title')}
+                                            placeholder="Add title of Project"
+                                            required
+                                        />
+                                    </div>
                                     {errors.title && <p className="error-message">{errors.title.message}</p>}
-                                    <input
-                                        type="text"
-                                        name="link"
-                                        {...register('link')}
-                                        placeholder="Share Link of Project"
-                                        required
-                                    />
+
+                                    <div className="from-group">
+                                        <input
+                                            type="text"
+                                            name="link"
+                                            className="form-control"
+                                            {...register('link')}
+                                            placeholder="Share Link of Project"
+                                            required
+                                        />
+                                    </div>
                                     {errors.link && <p className="error-message">{errors.link.message}</p>}
-                                    <input
-                                        type="text"
-                                        name="category"
-                                        {...register('category')}
-                                        placeholder="Add the category of Project"
-                                        required
-                                    />
+
+                                    <div className="from-group">
+                                        <input
+                                            type="text"
+                                            name="category"
+                                            className="form-control"
+                                            {...register('category')}
+                                            placeholder="Add the category of Project"
+                                            required
+                                        />
+                                    </div>
                                     {errors.category && <p className="error-message">{errors.category.message}</p>}
-                                    <input
-                                        type="text"
-                                        name="date"
-                                        {...register('date')}
-                                        placeholder="Date of Project (18 Sep, 2018)"
-                                        required
-                                    />
+
+                                    <div className="from-group">
+                                        <input
+                                            type="text"
+                                            name="date"
+                                            className="form-control"
+                                            {...register('date')}
+                                            placeholder="Date of Project (18 Sep, 2018)"
+                                            required
+                                        />
+                                    </div>
                                     {errors.date && <p className="error-message">{errors.date.message}</p>}
+
                                     <div className="isActive">
                                         <input
                                             type="checkbox"
@@ -280,11 +296,11 @@ const AddPortfolioForm = () => {
                 </div>
                 <hr />
             </section>
-            <Portfolio 
-                title="Portfolio" 
-                subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." 
-                onEdit={handleEdit} 
-                onDelete={handleDelete} 
+            <Portfolio
+                title="Portfolio"
+                subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+                onEdit={handleEdit}
+                onDelete={handleDelete}
                 works={works}
             />
         </>

@@ -13,14 +13,15 @@ const PortfolioDetails = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
 
-    const workDetailsId = queryParams.get('workDetailsId');
+    let workDetailsId = queryParams.get('workDetailsId');
 
     const { id } = useParams();
-    console.log('details data id',id);
+    console.log('details data id', id);
     const { data: details, refetch } = useFetch("http://localhost:8000/workDetails/" + workDetailsId);
-    console.log('details data ',details);
-    const childFunction = (newUser) => {
-        console.log('test function:', newUser);
+    console.log('details data ', details);
+
+    const childFunction = (newWorkDetailsId) => {
+        console.log('newWorkDetailsId:', newWorkDetailsId);
         refetch();
     }
 

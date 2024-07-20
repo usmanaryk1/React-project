@@ -65,23 +65,30 @@ const Login = () => {
                             <div className="col-12">
                                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
                                     {/* {error && <p className="error-message">{error}</p>} */}
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        {...register('email')}
-                                        placeholder="Email"
-                                        required
-                                    />
+                                    <div className="form-group">
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            className="form-control"
+                                            {...register('email')}
+                                            placeholder="Email"
+                                            required
+                                        />
+                                    </div>
                                     {errors.email && <p className="error-message">{errors.email.message}</p>}
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        {...register('password')}
-                                        placeholder="Enter Password"
-                                        required
-                                    />
+
+                                    <div className="form-group">
+                                        <input
+                                            type="password"
+                                            name="password"
+                                            className="form-control"
+                                            {...register('password')}
+                                            placeholder="Enter Password"
+                                            required
+                                        />
+                                    </div>
                                     {errors.password && <p className="error-message">{errors.password.message}</p>}
-                                    {/* <p className="error-message">{formError.password}</p> */}
+                                    
                                     <div className="pwd">
                                         <button className="login-button" type="submit">Login</button>
                                         <p><a href="/form/forget-form">Forgot Password?</a></p>

@@ -6,12 +6,20 @@ import { useForm } from "react-hook-form";
 import validationSchema from "./PortfolioDetailsValidation";
 import PortfolioDetails from "../../Components/PortfolioDetails";
 import useFetch from "../../Components/useFetch";
+import { useParams, useHistory, useLocation } from "react-router-dom/cjs/react-router-dom";
 
 const AddPortfolioDetails = () => {
 
     const childRef = useRef();
+    const location= useLocation();
+    const queryParams = new URLSearchParams(location.search);
+
+    const history = useHistory();
+    const { id: workId } = useParams();
+    console.log('Initial workId', workId);
     const [currentDetails, setCurrentDetails] = useState(null);
     const { data: details, setData: setDetails } = useFetch("http://localhost:8000/workDetails");
+    // const { data: works, setData: setWorks } = useFetch("http://localhost:8000/works");
     const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: {
@@ -243,11 +251,12 @@ const AddPortfolioDetails = () => {
             // slideImage1: imageUrl1,
             // slideImage2: imageUrl2,
             // slideImage3: imageUrl3,
-            isActive: formObject.isActive
+            isActive: formObject.isActive,
+            workId: workId
         };
 
         console.log('updatedData', updatedData)
-
+        console.log('workId', workId);
         try {
             // Send PUT request to update the JSON data
             if (currentDetails) {
@@ -277,7 +286,30 @@ const AddPortfolioDetails = () => {
                     throw new Error(`Failed to add details: ${response.statusText}`);
                 }
                 const result = await response.json();
+                console.log('RESULT', result, result.id);
+                // Update corresponding work's workDetailsId
+                const updatedWorkResponse = await fetch(`http://localhost:8000/works/${workId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ workDetailsId: result.id }),
+
+                });
                 
+                    // Update the URL
+                    queryParams.set('workDetailsId',result.id  );
+                    history.push({
+                        pathname: location.pathname,
+                        search: queryParams.toString(),
+                    });
+                
+                childRef.current.childFunction(result.id);
+                console.log('updatedWorkResponse', updatedWorkResponse);
+                if (!updatedWorkResponse.ok) {
+                    throw new Error(`Failed to update work: ${updatedWorkResponse.statusText}`);
+                }
+                childRef.current.childFunction();
                 setDetails(prevDetails => [...prevDetails, result]);
                 childRef.current.childFunction();
                 toast.success('Details added successfully');
@@ -306,12 +338,34 @@ const AddPortfolioDetails = () => {
         console.log('onEditClick: ', details);
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (id, workId) => {
         try {
             const response = await fetch(`http://localhost:8000/workDetails/${id}`, {
                 method: 'DELETE',
             });
             if (response.ok) {
+                console.log('delete workId',workId);
+                const updatedWorkResponse = await fetch(`http://localhost:8000/works/${workId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ workDetailsId: null }),
+
+                });
+
+                queryParams.set('workDetailsId',null );
+                history.push({
+                    pathname: location.pathname,
+                    search: queryParams.toString(),
+                });
+
+                childRef.current.childFunction(null);
+                
+                if (!updatedWorkResponse.ok) {
+                    throw new Error(`Failed to update work: ${updatedWorkResponse.statusText}`);
+                }
+                // Update the URL
                 setDetails(details.filter(detail => detail.id !== id));
                 childRef.current.childFunction();
                 toast.success('Details deleted successfully');
@@ -462,45 +516,66 @@ const AddPortfolioDetails = () => {
                                     {errors.file1 && <p className="error-message">{errors.file1.message}</p>}
                                     {errors.file2 && <p className="error-message">{errors.file2.message}</p>}
                                     {errors.file3 && <p className="error-message">{errors.file3.message}</p>}
-                                    <input
-                                        type="text"
-                                        name="client"
-                                        {...register('client')}
-                                        placeholder="Client Company"
-                                        required
-                                    />
+
+                                    <div className="from-group">
+                                        <input
+                                            type="text"
+                                            name="client"
+                                            className="form-control"
+                                            {...register('client')}
+                                            placeholder="Client Company"
+                                            required
+                                        />
+                                    </div>
                                     {errors.name && <p className="error-message">{errors.name.message}</p>}
-                                    <input
-                                        type="text"
-                                        name="category"
-                                        {...register('category')}
-                                        placeholder="Category of Project"
-                                        required
-                                    />
+
+                                    <div className="from-group">
+                                        <input
+                                            type="text"
+                                            name="category"
+                                            className="form-control"
+                                            {...register('category')}
+                                            placeholder="Category of Project"
+                                            required
+                                        />
+                                    </div>
                                     {errors.category && <p className="error-message">{errors.category.message}</p>}
-                                    <input
-                                        type="text"
-                                        name="date"
-                                        {...register('date')}
-                                        placeholder="Date (YY-MM-DD)"
-                                        required
-                                    />
+
+                                    <div className="from-group">
+                                        <input
+                                            type="text"
+                                            name="date"
+                                            className="form-control"
+                                            {...register('date')}
+                                            placeholder="Date (YY-MM-DD)"
+                                            required
+                                        />
+                                    </div>
                                     {errors.date && <p className="error-message">{errors.date.message}</p>}
-                                    <input
-                                        type="text"
-                                        name="link"
-                                        {...register('link')}
-                                        placeholder="Enter link to your project"
-                                        required
-                                    />
+
+                                    <div className="from-group">
+                                        <input
+                                            type="text"
+                                            name="link"
+                                            className="form-control"
+                                            {...register('link')}
+                                            placeholder="Enter link to your project"
+                                            required
+                                        />
+                                    </div>
                                     {errors.link && <p className="error-message">{errors.link.message}</p>}
-                                    <textarea
-                                        name="desc"
-                                        {...register('desc')}
-                                        placeholder="Description"
-                                        required
-                                    ></textarea>
+
+                                    <div className="from-group">
+                                        <textarea
+                                            name="desc"
+                                            className="form-control"
+                                            {...register('desc')}
+                                            placeholder="Description"
+                                            required
+                                        ></textarea>
+                                    </div>
                                     {errors.desc && <p className="error-message">{errors.desc.message}</p>}
+
                                     <div className="isActive">
                                         <input
                                             type="checkbox"

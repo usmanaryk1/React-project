@@ -129,48 +129,59 @@ const SignUp = () => {
                             </div>
                             <div className="col-12">
                                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                                    {/* {emailError && <p className="error-message">{emailError}</p>} */}
-                                    <input
-                                        type="text"
-                                        name="username"
-                                        {...register('username', {
-                                            validate: async (value) => {
-                                                const exists = await checkIfUsernameExists(value);
-                                                return !exists || 'Username already exists. Please choose another.';
-                                            }
-                                        })}
-                                        placeholder="Username"
-                                        required
-                                    />
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
+                                            name="username"
+                                            className="form-control"
+                                            {...register('username', {
+                                                validate: async (value) => {
+                                                    const exists = await checkIfUsernameExists(value);
+                                                    return !exists || 'Username already exists. Please choose another.';
+                                                }
+                                            })}
+                                            placeholder="Username"
+                                            required
+                                        />
+                                    </div>
                                     {errors.username && <p className="error-message">{errors.username.message}</p>}
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        {...register('email', {
-                                            validate: async (value) => {
-                                                const exists = await checkIfEmailExists(value);
-                                                return !exists || 'Email already exists. Please log in.';
-                                            }
-                                        })}
-                                        placeholder="Email"
-                                        required
-                                    />
+
+                                    <div className="form-group">
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            {...register('email', {
+                                                validate: async (value) => {
+                                                    const exists = await checkIfEmailExists(value);
+                                                    return !exists || 'Email already exists. Please log in.';
+                                                }
+                                            })}
+                                            placeholder="Email"
+                                            required
+                                        />
+                                    </div>
                                     {errors.email && <p className="error-message">{errors.email.message}</p>}
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        {...register('password')}
-                                        placeholder="Create Password"
-                                        required
-                                    />
+
+                                    <div className="form-group">
+                                        <input
+                                            type="password"
+                                            name="password"
+                                            {...register('password')}
+                                            placeholder="Create Password"
+                                            required
+                                        />
+                                    </div>
                                     {errors.password && <p className="error-message">{errors.password.message}</p>}
-                                    <input
-                                        type="password"
-                                        name="confirmPassword"
-                                        {...register('confirmPassword')}
-                                        placeholder="Confirm Password"
-                                        required
-                                    />
+
+                                    <div className="from-group">
+                                        <input
+                                            type="password"
+                                            name="confirmPassword"
+                                            {...register('confirmPassword')}
+                                            placeholder="Confirm Password"
+                                            required
+                                        />
+                                    </div>
                                     {errors.confirmPassword && <p className="error-message">{errors.confirmPassword.message}</p>}
 
                                     <div className="sign">
