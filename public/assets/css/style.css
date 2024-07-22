@@ -316,7 +316,7 @@ a:hover {
 }
 
 .owl-theme .owl-dots .owl-dot.active span {
-  background-color: #1B1B1B;
+  background-color: #1b1b1b;
   width: 25px;
 }
 
@@ -515,7 +515,7 @@ a:hover {
   position: relative;
 }
 
-.navbar>ul>li {
+.navbar > ul > li {
   white-space: nowrap;
   padding: 10px 5px 10px 30px;
 }
@@ -543,7 +543,7 @@ a:hover {
   margin-left: 5px;
 }
 
-.navbar>ul>li>a:before {
+.navbar > ul > li > a:before {
   content: "";
   position: absolute;
   width: 100%;
@@ -557,7 +557,7 @@ a:hover {
 }
 
 .navbar a:hover:before,
-.navbar li:hover>a:before,
+.navbar li:hover > a:before,
 .navbar .active:before {
   visibility: visible;
   width: 80%;
@@ -566,7 +566,7 @@ a:hover {
 .navbar a:hover,
 .navbar .active,
 .navbar .active:focus,
-.navbar li:hover>a {
+.navbar li:hover > a {
   color: #fff;
 }
 
@@ -602,11 +602,11 @@ a:hover {
 
 .navbar .dropdown ul a:hover,
 .navbar .dropdown ul .active:hover,
-.navbar .dropdown ul li:hover>a {
+.navbar .dropdown ul li:hover > a {
   color: #0078ff;
 }
 
-.navbar .dropdown:hover>ul {
+.navbar .dropdown:hover > ul {
   opacity: 1;
   top: 100%;
   visibility: visible;
@@ -618,7 +618,7 @@ a:hover {
   visibility: hidden;
 }
 
-.navbar .dropdown .dropdown:hover>ul {
+.navbar .dropdown .dropdown:hover > ul {
   opacity: 1;
   top: 0;
   left: 100%;
@@ -630,7 +630,7 @@ a:hover {
     left: -90%;
   }
 
-  .navbar .dropdown .dropdown:hover>ul {
+  .navbar .dropdown .dropdown:hover > ul {
     left: -100%;
   }
 }
@@ -688,12 +688,12 @@ a:hover {
   transition: 0.3s;
 }
 
-.navbar-mobile>ul>li {
+.navbar-mobile > ul > li {
   padding: 0;
 }
 
 .navbar-mobile a:hover:before,
-.navbar-mobile li:hover>a:before,
+.navbar-mobile li:hover > a:before,
 .navbar-mobile .active:before {
   visibility: hidden;
 }
@@ -707,7 +707,7 @@ a:hover {
 
 .navbar-mobile a:hover,
 .navbar-mobile .active,
-.navbar-mobile li:hover>a {
+.navbar-mobile li:hover > a {
   color: #0078ff;
 }
 
@@ -742,11 +742,11 @@ a:hover {
 
 .navbar-mobile .dropdown ul a:hover,
 .navbar-mobile .dropdown ul .active:hover,
-.navbar-mobile .dropdown ul li:hover>a {
+.navbar-mobile .dropdown ul li:hover > a {
   color: #0078ff;
 }
 
-.navbar-mobile .dropdown>.dropdown-active {
+.navbar-mobile .dropdown > .dropdown-active {
   display: block;
 }
 
@@ -1023,7 +1023,10 @@ a:hover {
   position: relative;
 }
 
-.portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet {
+.portfolio-details
+  .portfolio-details-slider
+  .swiper-pagination
+  .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
   background-color: #fff;
@@ -1031,7 +1034,10 @@ a:hover {
   border: 1px solid #0078ff;
 }
 
-.portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
+.portfolio-details
+  .portfolio-details-slider
+  .swiper-pagination
+  .swiper-pagination-bullet-active {
   background-color: #0078ff;
 }
 
@@ -1054,7 +1060,7 @@ a:hover {
   font-size: 18px;
 }
 
-.portfolio-details .portfolio-info ul li+li {
+.portfolio-details .portfolio-info ul li + li {
   margin-top: 10px;
 }
 
@@ -1220,7 +1226,7 @@ a:hover {
   margin-bottom: 0;
 }
 
-.php-email-form button[type=submit] {
+.php-email-form button[type="submit"] {
   background: #0078ff;
   border: 0;
   padding: 10px 24px;
@@ -1228,7 +1234,7 @@ a:hover {
   transition: 0.4s;
 }
 
-.php-email-form button[type=submit]:hover {
+.php-email-form button[type="submit"]:hover {
   background: #3393ff;
 }
 
@@ -1310,9 +1316,9 @@ a:hover {
     margin-bottom: 3rem;
   }
 }
-.card-box{
+.card-box {
   max-height: 497.3px;
-} 
+}
 .card-certification .card-body {
   position: relative;
 }
@@ -1377,7 +1383,6 @@ a:hover {
 }
 
 @media (min-width: 768px) {
-
   .post-box,
   .form-comments,
   .box-comments,
@@ -1571,7 +1576,6 @@ footer {
   bottom: 0;
   left: 0;
   right: 0; */
-
 }
 
 footer .copyright {
@@ -1589,13 +1593,12 @@ footer .credits a {
 /*--------------------------------------------------------------
 #  Form
 --------------------------------------------------------------*/
-.form{
+.form {
   min-height: 300px;
 }
 form {
   max-width: 600px;
   margin: 50px auto 0;
-
 }
 
 .form h2 {
@@ -1616,9 +1619,9 @@ input[type="number"],
   padding: 10px 10px;
   margin: 10px 0;
   border: 1px solid #ddd;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   display: block;
-  border-radius: 5px; 
+  border-radius: 5px;
 }
 
 .form .submit {
@@ -1631,7 +1634,7 @@ input[type="number"],
   transition: transform 0.3s ease;
 }
 
-.form .submit:hover{
+.form .submit:hover {
   transform: scale(1.1);
 }
 /* .form .cancel {
@@ -1644,6 +1647,21 @@ input[type="number"],
   cursor: pointer;
 } */
 
+.form .add-more-btn {
+  background: #0062d3;
+  color: #fff;
+  border: 0;
+  padding: 10px 25px;
+  margin-right: 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.form .add-more-btn:hover {
+  transform: scale(1.1);
+}
+
 .form .reset {
   background: #0062d3;
   color: #fff;
@@ -1655,37 +1673,36 @@ input[type="number"],
   transition: transform 0.3s ease;
 }
 
-.form .reset:hover{
+.form .reset:hover {
   transform: scale(1.1);
 }
 
-
-.buttons{
+.buttons {
   margin-top: 20px;
 }
 
 /*--------------------------------------------------------------
 # Hero Form 
 --------------------------------------------------------------*/
-.hero-container{
+.hero-container {
   border-radius: 5px;
   max-width: 550px;
   margin: 50px auto;
   padding: 15px;
   background-color: white;
-  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
 }
 
 /*--------------------------------------------------------------
 # About Form 
 --------------------------------------------------------------*/
-.add-container{
+.add-container {
   border-radius: 5px;
   max-width: 550px;
   margin: 50px auto;
   padding: 15px;
   background-color: white;
-  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
 }
 
 .add-container .img-display-after {
@@ -1703,74 +1720,72 @@ input[type="number"],
 /*--------------------------------------------------------------
 # Services Form 
 --------------------------------------------------------------*/
-.service-container{
+.service-container {
   border-radius: 5px;
   max-width: 550px;
   margin: 50px auto;
   padding: 15px;
   background-color: white;
-  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
 }
 
 /*--------------------------------------------------------------
 # Counter Form 
 --------------------------------------------------------------*/
-.counter-container{
+.counter-container {
   border-radius: 5px;
   max-width: 550px;
   margin: 50px auto;
   padding: 15px;
   background-color: white;
-  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
 }
 
 /*--------------------------------------------------------------
 # Portfolio Form 
 --------------------------------------------------------------*/
-.portfolio-container{
+.portfolio-container {
   border-radius: 5px;
   max-width: 550px;
   margin: 50px auto;
   padding: 15px;
   background-color: white;
-  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
 }
 
 .portfolio-container .img-display-before {
   height: 175px;
   width: 250px;
-  /* margin: 0px auto; */
 }
 
 /*--------------------------------------------------------------
 # Portfolio Details Form 
 --------------------------------------------------------------*/
-.portfolioDetails-container{
+.portfolioDetails-container {
   border-radius: 5px;
   max-width: 550px;
   margin: 50px auto;
   padding: 15px;
   background-color: white;
-  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
 }
 
 .portfolioDetails-container .img-display-before {
   height: 175px;
   width: 250px;
-  /* margin: 0px auto; */
 }
 
 /*--------------------------------------------------------------
 # Testimonial Form 
 --------------------------------------------------------------*/
 
-.testimonial-container{
+.testimonial-container {
   border-radius: 5px;
   max-width: 550px;
   margin: 50px auto;
   padding: 15px;
   background-color: white;
-  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
 }
 
 .testimonial-container .img-display-after {
@@ -1788,19 +1803,18 @@ input[type="number"],
 /*--------------------------------------------------------------
 # certification Form 
 --------------------------------------------------------------*/
-.certification-container{
+.certification-container {
   border-radius: 5px;
   max-width: 550px;
   margin: 50px auto;
   padding: 15px;
   background-color: white;
-  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
 }
 
 .certification-container .img-display-before {
   height: 150px;
   width: 200px;
-  /* margin: 0px auto; */
 }
 
 .certification-container .profile {
@@ -1811,37 +1825,32 @@ input[type="number"],
 /*--------------------------------------------------------------
 # Contact Form 
 --------------------------------------------------------------*/
-.contact-container{
+.contact-container {
   border-radius: 5px;
   max-width: 550px;
   margin: 50px auto;
   padding: 15px;
   background-color: white;
-  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
 }
 
 /*--------------------------------------------------------------
 # Social Form 
 --------------------------------------------------------------*/
-.social-container{
+.social-container {
   border-radius: 5px;
   max-width: 550px;
   margin: 50px auto;
   padding: 15px;
   background-color: white;
-  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%)
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
 }
 
 /*--------------------------------------------------------------
 # Login Form 
 --------------------------------------------------------------*/
 
-/* .login-form{
-  background-color: #0078ff;
-} */
-
-.login-container{
-  /* border: 1px solid lightgrey; */
+.login-container {
   border-radius: 5px;
   max-width: 400px;
   margin: 130px auto 50px;
@@ -1857,7 +1866,7 @@ input[type="number"],
   text-align: center;
 }
 
-.login-container input{
+.login-container input {
   width: 100%;
   padding: 20px 10px;
   margin: 10px 0;
@@ -1868,10 +1877,10 @@ input[type="number"],
   box-shadow: none;
 }
 
-.login-container input:focus{
-  border:1px solid #0078ff;
+.login-container input:focus {
+  border: 1px solid #0078ff;
 }
-.pwd .login-button{
+.pwd .login-button {
   background: #0062d3;
   color: #fff;
   border: 0;
@@ -1883,30 +1892,29 @@ input[type="number"],
   transition: all 0.5s;
 }
 
-.pwd .login-button:hover{
+.pwd .login-button:hover {
   border: 1px solid #0062d3;
   color: #0062d3;
   background-color: white;
 }
 
-.pwd a{
+.pwd a {
   color: #0062d3;
 }
 
-.signup-link{
+.signup-link {
   margin: 15px auto;
   transition: transform 0.3s ease;
 }
 
-.signup-link a{
+.signup-link a {
   color: #0062d3;
   cursor: pointer;
-  
 }
-.signup-link:hover{
+.signup-link:hover {
   transform: scale(1.1);
 }
-.error-message{
+.error-message {
   color: red;
   text-align: left;
 }
@@ -1915,7 +1923,7 @@ input[type="number"],
 # SignUp Form 
 --------------------------------------------------------------*/
 
-.signup-container{
+.signup-container {
   border-radius: 5px;
   max-width: 400px;
   margin: 130px auto 50px;
@@ -1931,11 +1939,11 @@ input[type="number"],
   text-align: center;
 }
 
-.signup-container input[type = checkbox] {
+.signup-container input[type="checkbox"] {
   text-align: left;
 }
 
-.sign .sign-button{
+.sign .sign-button {
   background: #0062d3;
   color: #fff;
   border: 0;
@@ -1947,14 +1955,13 @@ input[type="number"],
   transition: all 0.5s;
 }
 
-.sign .sign-button:hover{
+.sign .sign-button:hover {
   border: 1px solid #0062d3;
   color: #0062d3;
   background-color: white;
-
 }
 
-.signup-container input{
+.signup-container input {
   width: 100%;
   padding: 20px 10px;
   margin: 10px 0;
@@ -1962,30 +1969,28 @@ input[type="number"],
   box-sizing: border-box;
   display: block;
 }
-.signup-container .error-message{
+.signup-container .error-message {
   color: red;
 }
-.log{
+.log {
   margin: 30px auto;
   transition: transform 0.3s ease;
 }
 
-.log a{
+.log a {
   color: #0062d3;
   cursor: pointer;
 }
-.log:hover{
+.log:hover {
   transform: scale(1.1);
   border-color: #007bff;
 }
-
 
 /*--------------------------------------------------------------
 # Forget Form 
 --------------------------------------------------------------*/
 
-.forget-container{
-  /* border: 1px solid lightgrey; */
+.forget-container {
   border-radius: 5px;
   max-width: 400px;
   margin: 130px auto 50px;
@@ -2001,7 +2006,7 @@ input[type="number"],
   text-align: center;
 }
 
-.forget .get-button{
+.forget .get-button {
   background: #0062d3;
   color: #fff;
   border: 0;
@@ -2013,14 +2018,13 @@ input[type="number"],
   transition: all 0.5s;
 }
 
-.forget .get-button:hover{
+.forget .get-button:hover {
   border: 1px solid #0062d3;
   color: #0062d3;
   background-color: white;
-
 }
 
-.forget-container input{
+.forget-container input {
   width: 100%;
   padding: 20px 10px;
   margin: 10px 0;
@@ -2033,11 +2037,7 @@ input[type="number"],
 # Reset Form 
 --------------------------------------------------------------*/
 
-/* .reset-form{
-  background-color: #0078ff;
-} */
-
-.reset-container{
+.reset-container {
   /* border: 1px solid lightgrey; */
   border-radius: 5px;
   max-width: 400px;
@@ -2054,7 +2054,7 @@ input[type="number"],
   text-align: center;
 }
 
-.reset-link{
+.reset-link {
   background: #0062d3;
   color: #fff;
   border: 0;
@@ -2066,14 +2066,13 @@ input[type="number"],
   transition: all 0.5s;
 }
 
-.reset .reset-link:hover{
+.reset .reset-link:hover {
   border: 1px solid #0062d3;
   color: #0062d3;
   background-color: white;
-
 }
 
-.reset-container input{
+.reset-container input {
   width: 100%;
   padding: 20px 10px;
   margin: 10px 0;
@@ -2082,14 +2081,16 @@ input[type="number"],
   display: block;
 }
 
+/*--------------------------------------------------------------
+# Admin buttons
+--------------------------------------------------------------*/
 
-/*Admin buttons*/
 .admin-btn {
-  background: #007bff;
+  /* background: #007bff; */
   border: none;
   cursor: pointer;
   font-size: 1rem; /* Adjust size as needed */
-  color: white;
+  /* color: white; */
   border-radius: 25px;
   margin-top: 5px;
   transition: transform 0.3s ease;
@@ -2099,7 +2100,9 @@ input[type="number"],
   transform: scale(1.1); /* Adjust hover color as needed */
 }
 
-/*Vertical Navbar*/
+/*--------------------------------------------------------------
+# Vertical Navbar
+--------------------------------------------------------------*/
 
 .vertical-header {
   display: flex;
@@ -2144,14 +2147,10 @@ input[type="number"],
 /* Styles for the dropdown in vertical navbar */
 .vertical-navbar .dropdown ul {
   display: block;
-  /* position: absolute;
-  left: 100%;
-  top: 0; */
   margin: 0;
   padding: 10px 0;
   z-index: 99;
   opacity: 0;
-  /* visibility: hidden; */
   background: #fff;
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
   transition: 0.3s;
@@ -2174,11 +2173,11 @@ input[type="number"],
 
 .vertical-navbar .dropdown ul a:hover,
 .vertical-navbar .dropdown ul .active:hover,
-.vertical-navbar .dropdown ul li:hover>a {
+.vertical-navbar .dropdown ul li:hover > a {
   color: #0078ff;
 }
 
-.vertical-navbar .dropdown:hover>ul {
+.vertical-navbar .dropdown:hover > ul {
   opacity: 1;
   visibility: visible;
 }
@@ -2189,27 +2188,13 @@ input[type="number"],
   visibility: hidden;
 }
 
-.vertical-navbar .dropdown .dropdown:hover>ul {
+.vertical-navbar .dropdown .dropdown:hover > ul {
   opacity: 1;
   top: 0;
   left: 100%;
   visibility: visible;
 }
-/* 
-.vertical-navbar .dropdown:hover ul {
-  display: flex;
-}
 
-.vertical-navbar .dropdown ul li {
-  width: 100%;
-  margin: 0;
-}
-
-.vertical-navbar .dropdown ul li a {
-  padding: 10px 20px;
-  text-align: left;
-  width: 100%;
-} */
 .vertical-navbar::-webkit-scrollbar {
   width: 12px; /* Adjust the width as needed */
 }
