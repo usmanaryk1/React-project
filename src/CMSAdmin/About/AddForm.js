@@ -217,44 +217,63 @@ console.log('about:',about)
                                         <label className="my-3"><b>Choose Profile Image</b></label>
                                     </div>
                                     {errors.file && <p className="error-message">{errors.file.message}</p>}
+                                    <div className="form-group">
                                     <input
                                         type="text"
                                         name="name"
+                                        className="form-control"
                                         {...register('name')}
                                         placeholder="Full Name"
                                         required
                                     />
+                                    </div>
                                     {errors.name && <p className="error-message">{errors.name.message}</p>}
+
+                                    <div className="form-group">
                                     <input
                                         type="text"
                                         name="profile"
+                                        className="form-control"
                                         {...register('profile')}
                                         placeholder="Occupation"
                                         required
                                     />
+                                    </div>
                                     {errors.profile && <p className="error-message">{errors.profile.message}</p>}
+
+                                    <div className="form-group">
                                     <input
                                         type="email"
                                         name="email"
+                                        className="form-control"
                                         {...register('email')}
                                         placeholder="Email"
                                         required
                                     />
+                                    </div>
                                     {errors.email && <p className="error-message">{errors.email.message}</p>}
+
+                                    <div className="form-group">
                                     <input
                                         type="text"
                                         name="phone"
+                                        className="form-control"
                                         {...register('phone')}
                                         placeholder="Phone Number"
                                         required
                                     />
+                                    </div>
                                     {errors.phone && <p className="error-message">{errors.phone.message}</p>}
+                                    
+                                    <div className="form-group">
                                     <textarea
                                         name="desc"
+                                        className="form-control"
                                         {...register('desc')}
                                         placeholder="Description"
                                         required
                                     ></textarea>
+                                    </div>
                                     {errors.desc && <p className="error-message">{errors.desc.message}</p>}
                                     <div className="isActive">
                                         <input

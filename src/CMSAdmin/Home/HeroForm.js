@@ -21,7 +21,7 @@ const HeroForm = () => {
         }
     })
 
-    
+
 
     useEffect(() => {
         if (currentHero) {
@@ -31,7 +31,7 @@ const HeroForm = () => {
         } else {
             reset();
         }
-    }, [currentHero, setValue, reset ]);
+    }, [currentHero, setValue, reset]);
     console.log('hero before submit: ', currentHero);
 
     const onSubmit = async (data) => {
@@ -63,7 +63,7 @@ const HeroForm = () => {
                 childRef.current.childFunction();
                 toast.success('Content updated successfully');
             }
-            
+
         } else {
             // Add new service
             const response = await fetch('http://localhost:8000/hero', {
@@ -75,14 +75,14 @@ const HeroForm = () => {
             });
             if (response.ok) {
                 const result = await response.json();
-                console.log('new hero: ',result);
+                console.log('new hero: ', result);
                 setHero(prevHero => [...prevHero, result]);
                 childRef.current.childFunction();
                 toast.success('Hero added successfully');
             } else {
                 toast.error('Failed to add Hero');
             }
-    
+
         }
         reset();
         setCurrentHero(null);
@@ -117,7 +117,7 @@ const HeroForm = () => {
             console.error('Failed to delete section');
             toast.error('Failed to delete hero section');
         }
-        
+
 
     };
 
@@ -132,22 +132,27 @@ const HeroForm = () => {
                             </div>
                             <div className="col-12">
                                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
-
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        {...register('name')}
-                                        placeholder="Full Name"
-                                        required
-                                    />
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            className="form-control"
+                                            {...register('name')}
+                                            placeholder="Full Name"
+                                            required
+                                        />
+                                    </div>
                                     {errors.name && <p className="error-message">{errors.name.message}</p>}
-                                    <input
-                                        type="text"
-                                        name="skills"
-                                        {...register('skills')}
-                                        placeholder="Designer, Developer, Freelancer, Photographer"
-                                        required
-                                    />
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
+                                            name="skills"
+                                            className="form-control"
+                                            {...register('skills')}
+                                            placeholder="Designer, Developer, Freelancer, Photographer"
+                                            required
+                                        />
+                                    </div>
                                     {errors.skills && <p className="error-message">{errors.skills.message}</p>}
                                     <div className="isActive">
                                         <input
@@ -163,7 +168,7 @@ const HeroForm = () => {
                                         </label>
                                         {errors.isActive && <p className="error-message">{errors.isActive.message}</p>}
                                     </div>
-                                    
+
                                     <div className="buttons">
                                         <button className="reset" type="button" onClick={onReset}>Reset</button>
                                         <button className="submit btn btn-success" type="submit">Submit</button>
@@ -176,7 +181,7 @@ const HeroForm = () => {
                 </div>
                 <hr />
             </section>
-            <Hero onEditClick={handleEdit} onDeleteClick={handleDelete}  ref={childRef} hero={setHero} />
+            <Hero onEditClick={handleEdit} onDeleteClick={handleDelete} ref={childRef} hero={setHero} />
         </>
     );
 }

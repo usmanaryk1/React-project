@@ -115,22 +115,30 @@ const AddCounterForm = () => {
                             </div>
                             <div className="col-12">
                                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                                    <div className="form-group">
                                     <input
                                         type="text"
                                         name="title"
+                                        className="form-control"
                                         {...register('title')}
                                         placeholder="Title"
                                         required
                                     />
+                                    </div>
                                     {errors.title && <p className="error-message">{errors.title.message}</p>}
+
+                                    <div className="form-group">
                                     <input
                                         type="text"
                                         name="counts"
+                                        className="form-control"
                                         {...register('counts')}
                                         placeholder="Number of Counts"
                                         required
                                     />
+                                    </div>
                                     {errors.counts && <p className="error-message">{errors.counts.message}</p>}
+
                                     <div className="isActive">
                                         <input
                                             type="checkbox"

@@ -115,23 +115,30 @@ const SocialForm = () => {
                             </div>
                             <div className="col-12">
                                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
-
-                                    <input
-                                        type="text"
-                                        name="platformIcon"
-                                        {...register('platformIcon')}
-                                        placeholder="Icon of Social Media (bi bi-facebook)"
-                                        required
-                                    />
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
+                                            name="platformIcon"
+                                            className="form-control"
+                                            {...register('platformIcon')}
+                                            placeholder="Icon of Social Media (bi bi-facebook)"
+                                            required
+                                        />
+                                    </div>
                                     {errors.platform && <p className="error-message">{errors.platform.message}</p>}
-                                    <input
-                                        type="text"
-                                        name="link"
-                                        {...register('link')}
-                                        placeholder="Link of your accounnt"
-                                        required
-                                    />
+
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
+                                            name="link"
+                                            className="form-control"
+                                            {...register('link')}
+                                            placeholder="Link of your accounnt"
+                                            required
+                                        />
+                                    </div>
                                     {errors.link && <p className="error-message">{errors.link.message}</p>}
+
                                     <div className="isActive">
                                         <input
                                             type="checkbox"
@@ -146,7 +153,7 @@ const SocialForm = () => {
                                         </label>
                                         {errors.isActive && <p className="error-message">{errors.isActive.message}</p>}
                                     </div>
-                                    
+
                                     <div className="buttons">
                                         <button className="reset" type="reset" onClick={onReset}>Reset</button>
                                         <button className="submit" type="submit">Submit</button>
@@ -159,9 +166,9 @@ const SocialForm = () => {
                 </div>
                 <hr />
             </section>
-            <Contact 
-                onEditClick={handleEdit} 
-                onDeleteClick={handleDelete} 
+            <Contact
+                onEditClick={handleEdit}
+                onDeleteClick={handleDelete}
                 links={links}
             />
         </>

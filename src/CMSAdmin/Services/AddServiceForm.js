@@ -126,21 +126,29 @@ const AddServiceForm = () => {
                                 </div>
                                 <div className="col-12">
                                     <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                                        <div className="form-group">
                                         <input
                                             type="text"
                                             name="title"
+                                            className="form-control"
                                             {...register('title')}
                                             placeholder="Title of Service"
                                             required
                                         />
+                                        </div>
                                         {errors.title && <p className="error-message">{errors.title.message}</p>}
+
+                                        <div className="form-group">
                                         <textarea
                                             name="desc"
+                                            className="form-control"
                                             placeholder="Description"
                                             {...register('desc')}
                                             required
                                         ></textarea>
+                                        </div> 
                                         {errors.desc && <p className="error-message">{errors.desc.message}</p>}
+
                                         <div className="isActive">
                                             <input
                                                 type="checkbox"
