@@ -23,7 +23,7 @@ const About = ({ onEditClick, onDeleteClick, about = [] }) => {
 
   return (
     <>
-      {/* ======= About Section ======= */}
+      {/* ======= About Section Start======= */}
       {about && (
         <section id="about" className="about-mf sect-pt4 route">
           <div className="container">
