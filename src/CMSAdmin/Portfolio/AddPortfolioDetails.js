@@ -86,6 +86,7 @@ const AddPortfolioDetails = () => {
       });
     }
   };
+  
 
   const addNewImageInput = () => {
     setImages((prevState) => [...prevState, null]);
