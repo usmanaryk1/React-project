@@ -11,7 +11,13 @@ const personal_skillsRoutes = require("./router/personal_skills.js");
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://react-project-frontend-iota.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 
 app.use(
   "/customer",
