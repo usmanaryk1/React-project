@@ -1,8 +1,9 @@
 const express = require("express");
-let books = require("./booksdb.js");
+let books = require("./database.js");
 let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
 const public_users = express.Router();
+const Personal_SkillsModel = require("../models/personalSchema.js");
 
 public_users.post("/register", (req, res) => {
   //Write your code here
@@ -102,6 +103,38 @@ public_users.get("/review/:isbn", async (req, res) => {
     }
   } catch (error) {
     res.status(500).send(error);
+  }
+});
+
+// POST PERSONAL INFO
+
+public_users.post("/hero", async (req, res) => {
+  console.log("Inside post function");
+
+  const data = new Personal_SkillsModel({
+    name: req.body.name,
+    skills: req.body.skills,
+    id: req.body.id,
+  });
+
+  try {
+    const val = await data.save();
+    res.json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to save data" });
+  }
+});
+
+public_users.get("/hero", async (req, res) => {
+  try {
+    const PersonalSkills = await Personal_SkillsModel.find(); // Ensure you're querying by the correct field, `email` not `id`
+    if (PersonalSkills.length === 0) {
+      return res.status(404).send("Inforamtion Not Found");
+    }
+    res.send(PersonalSkills);
+  } catch (err) {
+    res.status(500).send(err);
   }
 });
 

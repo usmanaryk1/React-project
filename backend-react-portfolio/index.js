@@ -2,12 +2,16 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const session = require("express-session");
 const mongoose = require("mongoose");
+const connectDB = require("./router/database.js");
 const customer_routes = require("./router/auth_users.js").authenticated;
 const genl_routes = require("./router/general.js").general;
+const cors = require("cors");
+const personal_skillsRoutes = require("./router/personal_skills.js");
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.use(
   "/customer",
@@ -36,20 +40,20 @@ app.use("/customer/auth/*", async function auth(req, res, next) {
 
 app.use("/customer", customer_routes);
 app.use("/", genl_routes);
+app.use("/hero", personal_skillsRoutes);
+// const uri = "mongodb+srv://user:user123@cluster0.uogjtlx.mongodb.net/crud";
 
-const uri = "mongodb+srv://user:user123@cluster0.uogjtlx.mongodb.net/crud";
+// const connect = async () => {
+//   try {
+//     await mongoose.connect(uri);
+//     console.log("Mongoose connected");
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
-const connect = async () => {
-  try {
-    await mongoose.connect(uri);
-    console.log("Mongoose connected");
-  } catch (error) {
-    console.log(error);
-  }
-};
+// connect();
+connectDB();
+const PORT = 8000;
 
-connect();
-
-const PORT = 3333;
-
-app.listen(PORT, () => console.log("Server is running at 3333"));
+app.listen(PORT, () => console.log("Server is running at 8000"));

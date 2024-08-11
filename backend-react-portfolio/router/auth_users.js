@@ -1,7 +1,8 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-let books = require("./booksdb.js");
 const regd_users = express.Router();
+// const mongoose = require("./database.js");
+const personalSchema = require("../models/personalSchema.js");
 
 let users = [];
 
@@ -84,6 +85,36 @@ regd_users.post("/login", async (req, res) => {
 //     return res.status(200).json({ message: "Review addedd successfully", rev });
 //   } catch (err) {
 //     return res.status(401).json({ message: "Invalid token" });
+//   }
+// });
+// regd_users.get("/hero:id", async (req, res) => {
+//   const Id = req.params.id;
+
+//   try {
+//     const user = await userModel.find({ id: Id }); // Ensure you're querying by the correct field, `email` not `id`
+//     if (user.length === 0) {
+//       return res.status(404).send("User Not Found");
+//     }
+//     res.send(user);
+//   } catch (err) {
+//     res.status(500).send(err);
+//   }
+// });
+
+// regd_users.post("/hero", async (req, res) => {
+//   console.log("Inside post function");
+
+//   const data = new personalSchema({
+//     name: req.body.name,
+//     skills: req.body.skills,
+//   });
+
+//   try {
+//     const val = await data.save();
+//     res.json(val);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: "Failed to save data" });
 //   }
 // });
 
