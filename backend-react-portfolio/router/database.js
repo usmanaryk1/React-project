@@ -17,15 +17,15 @@
 //go to mongodb.comand download community server and install that included compass during install if you are new to see mongodb database
 //open compass and connect to see mongodb database
 //install mongoose to use mongodb easily or alternatively you can use directally mongodb atlas {mongoClient} with install mongodb
-
+require("dotenv").config();
 //include mongoose
 const mongoose = require("mongoose");
 
-const uri = "mongodb+srv://user:user123@cluster0.uogjtlx.mongodb.net/crud";
+// const uri = "mongodb+srv://user:user123@cluster0.uogjtlx.mongodb.net/crud";
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(uri);
+    await mongoose.connect(process.env.MONGO_URI);
     console.log("DB Connection Successsful mongodb");
   } catch (error) {
     console.log(`Error in Connection mongodb ${error}`);

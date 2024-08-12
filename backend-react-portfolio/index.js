@@ -7,6 +7,7 @@ const customer_routes = require("./router/auth_users.js").authenticated;
 const genl_routes = require("./router/general.js").general;
 const cors = require("cors");
 const personal_skillsRoutes = require("./router/personal_skills.js");
+require("dotenv").config();
 
 const app = express();
 
