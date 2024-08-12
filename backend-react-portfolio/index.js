@@ -64,8 +64,10 @@ connectDB();
 // const PORT = 8000;
 
 // app.listen(PORT, () => console.log("Server is running at 8000"));
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
 
-const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}`);
 });
