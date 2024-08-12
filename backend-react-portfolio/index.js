@@ -75,6 +75,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const serverless = require("serverless-http");
 
 dotenv.config();
 
@@ -97,6 +98,6 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
-// Start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Export the app as a serverless function
+module.exports = app;
+module.exports.handler = serverless(app);

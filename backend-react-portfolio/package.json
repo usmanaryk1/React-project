@@ -18,6 +18,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.1",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "serverless-http": "^3.2.0"
   }
 }
