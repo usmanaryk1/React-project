@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://react-project-frontend-iota.vercel.app"],
+    origin: ["https://react-project-frontend-six.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true,
   })
