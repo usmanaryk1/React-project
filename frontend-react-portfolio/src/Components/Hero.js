@@ -11,7 +11,7 @@ const Hero = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
   }));
   const { isAuthenticated, isAdminPage } = useAuth();
   const { data: hero, refetch } = useFetch(
-    "https://react-project-backend-red.vercel.app/hero"
+    "https://react-project-backend-seven.vercel.app/hero"
   );
 
   console.log("hero auth: ", isAuthenticated);

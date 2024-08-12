@@ -38,10 +38,10 @@ router.get("/", async (req, res) => {
 // GET PERSONAL INFO BY SPECIFIC ID
 
 router.get("/:id", async (req, res) => {
-  const ID = req.params.id;
+  const Id = req.params.id;
 
   try {
-    const PersonalSkills = await Personal_SkillsModel.find({ id: ID }); // Ensure you're querying by the correct field, `email` not `id`
+    const PersonalSkills = await Personal_SkillsModel.find({ id: Id }); // Ensure you're querying by the correct field, `email` not `id`
     if (PersonalSkills.length === 0) {
       return res.status(404).send("Inforamtion Not Found");
     }
@@ -54,10 +54,10 @@ router.get("/:id", async (req, res) => {
 // DELETE METHOD
 
 router.delete("/:id", async (req, res) => {
-  const emailId = req.params.email;
+  const Id = req.params.id;
 
   try {
-    const user = await userModel.findOneAndDelete({ email: emailId }); // Ensure you're querying by the correct field, `email` not `id`
+    const user = await userModel.findOneAndDelete({ id: Id }); // Ensure you're querying by the correct field, `email` not `id`
     if (user == null) {
       return res.status(404).send(`The user with ${emailId} not found.`);
     }
