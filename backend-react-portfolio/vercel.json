@@ -7,6 +7,6 @@
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/backend-react-portfolio/index.js" }
+    { "src": "/api/(.*)", "dest": "/backend-react-portfolio/api/index.js" }
   ]
 }
