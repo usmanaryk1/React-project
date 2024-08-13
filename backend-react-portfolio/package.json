@@ -19,6 +19,7 @@
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.1",
     "nodemon": "^2.0.19",
-    "serverless-http": "^3.2.0"
+    "serverless-http": "^3.2.0",
+    "vercel": "^35.2.4"
   }
 }
