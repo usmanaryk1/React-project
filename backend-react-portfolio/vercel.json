@@ -1,3 +1,12 @@
 {
-  "rewrites": [{ "source": "/(.*)", "desination": "/api" }]
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend-react-portfolio/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/backend-react-portfolio/index.js" }
+  ]
 }
