@@ -85,7 +85,7 @@ const app = express();
 app.use(express.json());
 
 // Simple route
-app.get("/api/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 

@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend-react-portfolio/index.js",
+      "src": "backend-react-portfolio/api/index.js",
       "use": "@vercel/node"
     }
   ],
