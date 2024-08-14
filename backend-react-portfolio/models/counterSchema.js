@@ -1,15 +1,17 @@
-//need to make models to use for mongodb also called mongoose schema
-//include mongoose
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 //advance mongodb query search query
-const personalSchema = new Schema({
-  name: {
+const counterSchema = new Schema({
+  icon: {
     type: String,
     required: true,
   },
-  skills: {
+  counterEnd: {
+    type: Number,
+    required: true,
+  },
+  text: {
     type: String,
     required: true,
   },
@@ -18,12 +20,9 @@ const personalSchema = new Schema({
     required: true,
     default: true,
   },
-  id: {
-    type: Number,
-    required: true,
-  },
+  id: { type: Number },
 });
 
 //two argument need in schema 1st one is name  and 2nd one is Schema
-const Personal_SkillsModel = mongoose.model("Personal_Skills", personalSchema);
-module.exports = Personal_SkillsModel;
+const Counter_Model = mongoose.model("Counter", counterSchema);
+module.exports = Counter_Model;

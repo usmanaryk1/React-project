@@ -22,7 +22,8 @@ router.post("/", async (req, res) => {
   }
 });
 
-// GET PERSONAL INFO
+// GET All PERSONAL INFO
+
 router.get("/", async (req, res) => {
   try {
     const PersonalSkills = await Personal_SkillsModel.find(); // Ensure you're querying by the correct field, `email` not `id`
@@ -47,7 +48,8 @@ router.get("/:id", async (req, res) => {
     }
     res.send(PersonalSkills);
   } catch (err) {
-    res.status(500).send(err);
+    console.error("Error fetching personal skills:", err); // Log error for debugging
+    res.status(500).send("Server Error");
   }
 });
 
@@ -57,11 +59,15 @@ router.delete("/:id", async (req, res) => {
   const Id = req.params.id;
 
   try {
-    const user = await userModel.findOneAndDelete({ id: Id }); // Ensure you're querying by the correct field, `email` not `id`
-    if (user == null) {
-      return res.status(404).send(`The user with ${emailId} not found.`);
+    const PersonalSkills = await Personal_SkillsModel.findOneAndDelete({
+      id: Id,
+    }); // Ensure you're querying by the correct field, `email` not `id`
+    if (PersonalSkills == null) {
+      return res.status(404).send(`The user with ${Id} not found.`);
     }
-    res.status(200).send(`The user with ${emailId} has been deleted.` + user);
+    res
+      .status(200)
+      .send(`The user with ${Id} has been deleted.` + PersonalSkills);
   } catch (err) {
     res.status(500).send(err);
   }
