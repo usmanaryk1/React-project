@@ -1,10 +1,10 @@
 {
-  "hero" : [
+  "hero": [
     {
-      "name" : "Morgan Freeman",
+      "name": "Morgan Freeman",
       "skills": "Designer, Developer, Freelancer, Photographer",
       "isActive": true,
-      "id" : "1"
+      "id": "1"
     }
   ],
   "about": [
@@ -91,9 +91,11 @@
   ],
   "workDetails": [
     {
-      "slideImage1": "../../assets/img/portfolio-details-1.jpg",
-      "slideImage2": "../../assets/img/portfolio-details-2.jpg",
-      "slideImage3": "../../assets/img/portfolio-details-3.jpg",
+      "slideImages": [
+        "../../assets/img/portfolio-details-1.jpg",
+        "../../assets/img/portfolio-details-2.jpg",
+        "../../assets/img/portfolio-details-3.jpg"
+      ],
       "pCategory": "Web Design",
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
@@ -103,9 +105,11 @@
       "id": "1"
     },
     {
-      "slideImage1": "../../assets/img/portfolio-details-1.jpg",
-      "slideImage2": "../../assets/img/portfolio-details-2.jpg",
-      "slideImage3": "../../assets/img/portfolio-details-3.jpg",
+      "slideImages": [
+        "../../assets/img/portfolio-details-1.jpg",
+        "../../assets/img/portfolio-details-2.jpg",
+        "../../assets/img/portfolio-details-3.jpg"
+      ],
       "pCategory": "Web Design",
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
@@ -115,9 +119,11 @@
       "id": "2"
     },
     {
-      "slideImage1": "../../assets/img/portfolio-details-1.jpg",
-      "slideImage2": "../../assets/img/portfolio-details-2.jpg",
-      "slideImage3": "../../assets/img/portfolio-details-3.jpg",
+      "slideImages": [
+        "../../assets/img/portfolio-details-1.jpg",
+        "../../assets/img/portfolio-details-2.jpg",
+        "../../assets/img/portfolio-details-3.jpg"
+      ],
       "pCategory": "Web Design",
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
@@ -127,9 +133,11 @@
       "id": "3"
     },
     {
-      "slideImage1": "../../assets/img/portfolio-details-1.jpg",
-      "slideImage2": "../../assets/img/portfolio-details-2.jpg",
-      "slideImage3": "../../assets/img/portfolio-details-3.jpg",
+      "slideImages": [
+        "../../assets/img/portfolio-details-1.jpg",
+        "../../assets/img/portfolio-details-2.jpg",
+        "../../assets/img/portfolio-details-3.jpg"
+      ],
       "pCategory": "Web Design",
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
@@ -139,9 +147,11 @@
       "id": "4"
     },
     {
-      "slideImage1": "../../assets/img/portfolio-details-1.jpg",
-      "slideImage2": "../../assets/img/portfolio-details-2.jpg",
-      "slideImage3": "../../assets/img/portfolio-details-3.jpg",
+      "slideImages": [
+        "../../assets/img/portfolio-details-1.jpg",
+        "../../assets/img/portfolio-details-2.jpg",
+        "../../assets/img/portfolio-details-3.jpg"
+      ],
       "pCategory": "Web Design",
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
@@ -151,9 +161,11 @@
       "id": "5"
     },
     {
-      "slideImage1": "../../assets/img/portfolio-details-1.jpg",
-      "slideImage2": "../../assets/img/portfolio-details-2.jpg",
-      "slideImage3": "../../assets/img/portfolio-details-3.jpg",
+      "slideImages": [
+        "../../assets/img/portfolio-details-1.jpg",
+        "../../assets/img/portfolio-details-2.jpg",
+        "../../assets/img/portfolio-details-3.jpg"
+      ],
       "pCategory": "Web Design",
       "pClient": "ASU Company",
       "pDate": "18 Sep. 2018",
@@ -391,7 +403,7 @@
       "id": "3"
     }
   ],
- "contact": [
+  "contact": [
     {
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolorum dolorem soluta quidem expedita aperiam aliquid at. Totam magni ipsum suscipit amet? Autem nemo esse laboriosam ratione nobis mollitia inventore?",
       "location": " 329 WASHINGTON ST BOSTON, MA 02108",
