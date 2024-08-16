@@ -28,12 +28,12 @@ const Portfolio = ({ title, subtitle, onEdit, onDelete, works = [] }) => {
     }).toString();
     if (isAuthenticated) {
       if (isAdminPage) {
-        history.push(`/form/portfolioDetails-form/${work.id}?${queryParams}`);
+        history.push(`/form/portfolioDetails-form/${work._id}?${queryParams}`);
       } else {
-        history.push(`/works/${work.id}?${queryParams}`);
+        history.push(`/works/${work._id}?${queryParams}`);
       }
     } else {
-      history.push(`/works/${work.id}?${queryParams}`);
+      history.push(`/works/${work._id}?${queryParams}`);
     }
   };
 
