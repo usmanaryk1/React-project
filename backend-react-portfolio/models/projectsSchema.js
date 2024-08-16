@@ -36,8 +36,11 @@ const projectSchema = new Schema({
     required: true,
     default: true,
   },
-  workDetailsId: { type: Number },
-  id: { type: Number },
+  workDetailsId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ProjectDetails_Model", // Ensure this matches the name of your `workDetails` model
+    required: true, // Make it required if necessary
+  },
 });
 
 //two argument need in schema 1st one is name  and 2nd one is Schema

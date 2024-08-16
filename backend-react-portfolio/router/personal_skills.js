@@ -10,12 +10,11 @@ router.post("/", async (req, res) => {
   const data = new Personal_SkillsModel({
     name: req.body.name,
     skills: req.body.skills,
-    id: req.body.id,
   });
 
   try {
     const val = await data.save();
-    res.json(val);
+    res.status(201).json(val);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to save data" });
@@ -30,9 +29,9 @@ router.get("/", async (req, res) => {
     if (PersonalSkills.length === 0) {
       return res.status(404).send("Inforamtion Not Found");
     }
-    res.send(PersonalSkills);
+    res.status(200).json(PersonalSkills); // 200 OK status code
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).json({ error: "Failed to fetch data" });
   }
 });
 
@@ -42,34 +41,34 @@ router.get("/:id", async (req, res) => {
   const Id = req.params.id;
 
   try {
-    const PersonalSkills = await Personal_SkillsModel.find({ id: Id }); // Ensure you're querying by the correct field, `email` not `id`
-    if (PersonalSkills.length === 0) {
+    const PersonalSkills = await Personal_SkillsModel.findById(Id); // Ensure you're querying by the correct field, `email` not `id`
+    if (!PersonalSkills) {
       return res.status(404).send("Inforamtion Not Found");
     }
-    res.send(PersonalSkills);
+    res.status(200).json(PersonalSkills);
   } catch (err) {
-    console.error("Error fetching personal skills:", err); // Log error for debugging
-    res.status(500).send("Server Error");
+    res.status(500).json({ error: `Failed to fetch data with ${Id}` });
   }
 });
 
-// DELETE METHOD
+// DELETE PERSONAL INFO BY ID
 
 router.delete("/:id", async (req, res) => {
   const Id = req.params.id;
 
   try {
-    const PersonalSkills = await Personal_SkillsModel.findOneAndDelete({
-      id: Id,
-    }); // Ensure you're querying by the correct field, `email` not `id`
-    if (PersonalSkills == null) {
-      return res.status(404).send(`The user with ${Id} not found.`);
+    const PersonalSkills = await Personal_SkillsModel.findByIdAndDelete(Id); // Ensure you're querying by the correct field, `email` not `id`
+    if (!PersonalSkills) {
+      return res
+        .status(404)
+        .send({ message: `Information with ID ${Id} not found` });
     }
-    res
-      .status(200)
-      .send(`The user with ${Id} has been deleted.` + PersonalSkills);
+    res.status(200).send({
+      message: `Information with ID ${Id} has been deleted`,
+      deletedInfo: PersonalSkills,
+    });
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).json({ error: `Failed to delete data with ${Id}` });
   }
 });
 

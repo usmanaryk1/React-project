@@ -2,28 +2,6 @@ const express = require("express");
 const Testimonial_Model = require("../models/testimonialSchema");
 const router = express.Router();
 
-// POST TESTIMONIAL INFO
-
-router.post("/", async (req, res) => {
-  console.log("Inside post function");
-
-  const data = new Testimonial_Model({
-    name: req.body.name,
-    description: req.body.description,
-    img: req.body.img,
-    isActive: req.body.isActive,
-    id: req.body.id, // Ensure this matches your schema field
-  });
-
-  try {
-    const val = await data.save();
-    res.status(201).json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to save data" });
-  }
-});
-
 // GET ALL TESTIMONIAL INFO
 
 router.get("/", async (req, res) => {
@@ -44,7 +22,7 @@ router.get("/:id", async (req, res) => {
   const Id = req.params.id;
 
   try {
-    const TestimonialInfo = await Testimonial_Model.find({ id: Id }); // Ensure you're querying by the correct field, `email` not `id`
+    const TestimonialInfo = await Testimonial_Model.findById(Id); // Ensure you're querying by the correct field, `id`
     if (TestimonialInfo.length === 0) {
       return res
         .status(404)
@@ -52,19 +30,53 @@ router.get("/:id", async (req, res) => {
     }
     res.status(200).json(TestimonialInfo); // 200 OK status code
   } catch (err) {
-    res.status(500).json({ error: "Failed to fetch data" });
+    res.status(500).json({ error: `Failed to fetch data with ${Id}` });
   }
 });
 
-// DELETE TESTIMONIAL INFO BY ID
+// POST TESTIMONIAL INFO (AUTHENTICATED ONLY)
+
+router.post("/", async (req, res) => {
+  console.log("Inside post function");
+
+  const data = new Testimonial_Model({
+    name: req.body.name,
+    description: req.body.description,
+    img: req.body.img,
+    isActive: req.body.isActive,
+  });
+
+  try {
+    const val = await data.save();
+    res.status(201).json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to save data" });
+  }
+});
+
+// UPDATE TESTIMONIAL BY ID (AUTHENTICATED ONLY)
+
+router.put("/:id", async (req, res) => {
+  try {
+    const updatedTestimonial = await Testimonial_Model.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json(updatedTestimonial);
+  } catch (error) {
+    res.status(400).json({ error: "Failed to updated testimonial." });
+  }
+});
+
+// DELETE TESTIMONIAL INFO BY ID (AUTHENTICATED ONLY)
 
 router.delete("/:id", async (req, res) => {
   const Id = req.params.id;
 
   try {
-    const TestimonialInfo = await Testimonial_Model.findOneAndDelete({
-      id: Id,
-    }); // Ensure you're querying by the correct field, `email` not `id`
+    const TestimonialInfo = await Testimonial_Model.findByIdAndDelete(Id); // Ensure you're querying by the correct field, `id`
     if (TestimonialInfo == null) {
       return res
         .status(404)
@@ -75,7 +87,7 @@ router.delete("/:id", async (req, res) => {
       deletedInfo: TestimonialInfo,
     });
   } catch (err) {
-    res.status(500).json({ error: "Failed to delete data" });
+    res.status(500).json({ error: `Failed to delete data with ${Id}` });
   }
 });
 

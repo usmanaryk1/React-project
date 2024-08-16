@@ -18,10 +18,6 @@ const personalSchema = new Schema({
     required: true,
     default: true,
   },
-  id: {
-    type: Number,
-    required: true,
-  },
 });
 
 //two argument need in schema 1st one is name  and 2nd one is Schema

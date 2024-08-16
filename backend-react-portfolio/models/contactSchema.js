@@ -12,7 +12,7 @@ const contactSchema = new Schema({
     required: true,
   },
   number: {
-    type: String,
+    type: Number,
     required: true,
   },
   email: {
@@ -25,7 +25,6 @@ const contactSchema = new Schema({
     required: true,
     default: true,
   },
-  id: { type: Number },
 });
 
 //two argument need in schema 1st one is name  and 2nd one is Schema

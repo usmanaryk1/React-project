@@ -5,28 +5,6 @@ let users = require("./auth_users.js").users;
 const public_users = express.Router();
 const Personal_SkillsModel = require("../models/personalSchema.js");
 
-public_users.post("/register", (req, res) => {
-  //Write your code here
-  let username = req.body.username;
-  let password = req.body.password;
-  if (!username || !password) {
-    return res
-      .status(400)
-      .json({ message: "username and password are required." });
-  }
-
-  if (!isValid(username)) {
-    users.push({
-      username: username,
-      password: password,
-      currDate: new Date(),
-    });
-    return res.status(201).json({ message: "User registered successfully" });
-  } else {
-    return res.status(404).json({ message: "username already exists" });
-  }
-});
-
 // Get the book list available in the shop
 public_users.get("/", function (req, res) {
   //Write your code here

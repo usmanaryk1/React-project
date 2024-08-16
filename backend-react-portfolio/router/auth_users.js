@@ -1,160 +1,72 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const regd_users = express.Router();
-// const mongoose = require("./database.js");
-const personalSchema = require("../models/personalSchema.js");
+const UserModel = require("../models/userSchema");
+const router = express.Router();
 
-let users = [];
+// REGISTERING NEW USER
 
-const isValid = (username) => {
-  //returns boolean
-  //write code to check is the username is valid
-  let isValid = users.filter((user) => user.username === username);
-  if (isValid.length > 0) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-const authenticatedUser = (username, password) => {
-  //returns boolean
-  //write code to check if username and password match the one we have in records.
-  return users.find(
-    (user) => user.username === username && user.password === password
-  );
-};
-
-//only registered users can login
-regd_users.post("/login", async (req, res) => {
-  //Write your code here
-  let username = req.body.username;
-  let password = req.body.password;
-
-  if (!username || !password) {
-    return res
-      .status(400)
-      .json({ message: "username or password is required" });
-  }
-
-  if (authenticatedUser(username, password)) {
-    try {
-      let accessToken = jwt.sign(
-        {
-          username: username,
-          password: password,
-        },
-        "access",
-        { expiresIn: 60 * 60 }
-      );
-
-      req.session.authentication = {
-        accessToken: accessToken,
-      };
-      return res
-        .status(200)
-        .json({ message: " User logged in sucessfully!", accessToken });
-    } catch (error) {
-      res.status(403).send("User not authenticated");
+router.post("/register", async (req, res) => {
+  try {
+    // Check if the user already exists
+    const existingUser = await UserModel.findOne({
+      username: req.body.username,
+      password: req.body.password,
+    });
+    if (existingUser) {
+      return res.status(400).json({
+        error: "User is already registered with the provided credentials",
+      });
     }
-  } else {
-    return res.status(401).json({ message: "Invalid username or password" });
+
+    // Create new user if not already registered
+    const newUser = new UserModel({
+      username: req.body.username,
+      password: req.body.password, // Storing password directly (not recommended for production)
+    });
+    await newUser.save();
+    res.status(201).json({ message: "User registered successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 
-// Add a book review
-// regd_users.put("/auth/review/:isbn", (req, res) => {
-//   //Write your code here
-//   const isbn = req.params.isbn;
-//   const { review } = req.body;
-//   let token = req.session.authentication.accessToken;
+// ONLY REGISTERED USERS CAN LOGIN
 
-//   if (!token) {
-//     return res.status(404).json({ message: "User not authenticated" });
-//   }
-
-//   try {
-//     let decoded = jwt.verify(token, "access");
-//     const username = decoded.username;
-
-//     if (!books[isbn]) {
-//       return res.status(404).json({ message: "book not found" });
-//     }
-//     books[isbn].reviews[username] = review;
-//     const rev = books[isbn].reviews[username];
-//     return res.status(200).json({ message: "Review addedd successfully", rev });
-//   } catch (err) {
-//     return res.status(401).json({ message: "Invalid token" });
-//   }
-// });
-// regd_users.get("/hero:id", async (req, res) => {
-//   const Id = req.params.id;
-
-//   try {
-//     const user = await userModel.find({ id: Id }); // Ensure you're querying by the correct field, `email` not `id`
-//     if (user.length === 0) {
-//       return res.status(404).send("User Not Found");
-//     }
-//     res.send(user);
-//   } catch (err) {
-//     res.status(500).send(err);
-//   }
-// });
-
-// regd_users.post("/hero", async (req, res) => {
-//   console.log("Inside post function");
-
-//   const data = new personalSchema({
-//     name: req.body.name,
-//     skills: req.body.skills,
-//   });
-
-//   try {
-//     const val = await data.save();
-//     res.json(val);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: "Failed to save data" });
-//   }
-// });
-
-regd_users.put("/auth/review/:isbn", async (req, res) => {
-  const isbn = req.params.isbn;
-  const { review } = req.body;
-  const token = req.session.authentication.accessToken;
-  if (!token) {
-    res.status(404).json({ message: "User not authenticated!" });
-  }
-
+router.post("/login", async (req, res) => {
   try {
-    const decodded = jwt.verify(token, "access");
-    const username = decodded.username;
-    const book = books[isbn];
-    if (!book) {
-      res.status(404).json({ message: "Book not found" });
-    }
-    book.reviews[username] = review;
-    const rev = book.reviews[username];
-    res.status(200).json({
-      message: `Review for the ${book} has been added successfully.`,
-      rev,
-    });
-  } catch (err) {
-    res.status(401).json({ message: "Invalid token!" });
+    const user = await User.findOne({ username: req.body.username });
+    if (!user) return res.status(400).json({ error: "User not found" });
+
+    // Simple password comparison
+    if (req.body.password !== user.password)
+      return res.status(400).json({ error: "Invalid password" });
+
+    const accessToken = jwt.sign(
+      { username: user.username, password: password, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    req.session.authentication = {
+      accessToken: accessToken,
+    };
+    return res
+      .status(200)
+      .json({ message: " User logged in sucessfully!", accessToken });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 
 // Add logout logic
-regd_users.post("/logout", (req, res) => {
+router.post("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
-      return res.status(404).json({ message: "error logged out" });
+      return res.status(404).json({ message: "Error logging out" });
     }
     res.clearCookie("connect.sid");
-    return res.status(200).json({ message: "successfully logged out" });
+    return res.status(200).json({ message: "Successfully logged out" });
   });
 });
 
-module.exports.authenticated = regd_users;
-module.exports.isValid = isValid;
-module.exports.users = users;
+module.exports = router;

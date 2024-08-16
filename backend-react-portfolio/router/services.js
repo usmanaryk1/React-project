@@ -1,8 +1,40 @@
 const express = require("express");
 const Service_Model = require("../models/serviceSchema.js");
+const { auth, isAdmin } = require("../middleware/authmiddleware.js");
 const router = express.Router();
 
-// POST PERSONAL INFO
+// GET ALL SERVICE INFO
+router.get("/", async (req, res) => {
+  try {
+    const ServiceInfo = await Service_Model.find(); // Ensure you're querying by the correct field, `id`
+    if (ServiceInfo.length === 0) {
+      return res.status(404).send("Inforamtion Not Found");
+    }
+    res.status(200).json(ServiceInfo); // 200 OK status code
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch data" });
+  }
+});
+
+// GET SERVICE INFO BY SPECIFIC ID
+
+router.get("/:id", async (req, res) => {
+  const Id = req.params.id;
+
+  try {
+    const ServiceInfo = await Service_Model.findById(Id); // Ensure you're querying by the correct field,`id`
+    if (ServiceInfo.length === 0) {
+      return res
+        .status(404)
+        .send({ message: `Information with ID ${Id} not found` });
+    }
+    res.status(200).json(ServiceInfo);
+  } catch (err) {
+    res.status(500).json({ error: `Failed to fetch data with ${Id}` });
+  }
+});
+
+// POST SERVICE INFO (AUTHENTICATED ONLY)
 
 router.post("/", async (req, res) => {
   console.log("Inside post function");
@@ -12,62 +44,50 @@ router.post("/", async (req, res) => {
     sTitle: req.body.sTitle,
     sDescription: req.body.sDescription,
     isActive: req.body.isActive,
-    id: req.body.id,
   });
 
   try {
     const val = await data.save();
-    res.json(val);
+    res.status(201).json(val);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to save data" });
   }
 });
 
-// GET PERSONAL INFO
-router.get("/", async (req, res) => {
+// UPDATE SERVICE BY ID (AUTHENTICATED ONLY)
+
+router.put("/:id", async (req, res) => {
   try {
-    const ServiceInfo = await Service_Model.find(); // Ensure you're querying by the correct field, `email` not `id`
-    if (ServiceInfo.length === 0) {
-      return res.status(404).send("Inforamtion Not Found");
-    }
-    res.send(ServiceInfo);
-  } catch (err) {
-    res.status(500).send(err);
+    const updatedService = await Service_Model.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json(updatedService);
+  } catch (error) {
+    res.status(400).json({ error: "Failed to update service" });
   }
 });
 
-// GET PERSONAL INFO BY SPECIFIC ID
-
-router.get("/:id", async (req, res) => {
-  const Id = req.params.id;
-
-  try {
-    const ServiceInfo = await Service_Model.find({ id: Id }); // Ensure you're querying by the correct field, `email` not `id`
-    if (ServiceInfo.length === 0) {
-      return res.status(404).send("Inforamtion Not Found");
-    }
-    res.send(ServiceInfo);
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
-
-// DELETE METHOD
+// DELETE SERVICE INFO BY ID (AUTHENTICATED ONLY)
 
 router.delete("/:id", async (req, res) => {
   const Id = req.params.id;
 
   try {
-    const ServiceInfo = await Service_Model.findOneAndDelete({ id: Id }); // Ensure you're querying by the correct field, `email` not `id`
+    const ServiceInfo = await Service_Model.findByIdAndDelete(Id); // Ensure you're querying by the correct field,`id`
     if (ServiceInfo == null) {
-      return res.status(404).send(`The Service info with ${Id} not found.`);
+      return res
+        .status(404)
+        .send({ message: `Information with ID ${Id} not found` });
     }
-    res
-      .status(200)
-      .send(`The Service info with ${Id} has been deleted.` + ServiceInfo);
+    res.status(200).send({
+      message: `Information with ID ${Id} has been deleted`,
+      deletedInfo: ServiceInfo,
+    });
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).json({ error: `Failed to delete data with ${Id}` });
   }
 });
 
