@@ -1,6 +1,6 @@
 // AuthContext.js
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { createContext, useState, useContext, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -8,43 +8,56 @@ export const AuthProvider = ({ children }) => {
   const location = useLocation();
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const isAdminPage = location.pathname.startsWith('/form');
+  const isAdminPage = location.pathname.startsWith("/form");
 
   const onSignup = (newUser, authentication) => {
     setUser(newUser);
     setIsAuthenticated(authentication);
-    localStorage.setItem('user', JSON.stringify(newUser));
+    localStorage.setItem("user", JSON.stringify(newUser));
+    localStorage.setItem("token", newUser.token); // Save JWT token
   };
 
   const onLogin = (loggedInUser, authentication) => {
     setUser(loggedInUser);
     setIsAuthenticated(authentication);
-    localStorage.setItem('user', JSON.stringify(loggedInUser));
+    localStorage.setItem("user", JSON.stringify(loggedInUser));
+    localStorage.setItem("token", loggedInUser.token); // Save JWT token
   };
 
   const onLogout = async () => {
-    await fetch(`http://localhost:8000/users/${user.id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ loggedIn: false })
-    });
+    // await fetch(`http://localhost:8000/users/${user.id}`, {
+    //   method: "PATCH",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ loggedIn: false }),
+    // });
 
     setUser(null);
     setIsAuthenticated(false);
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
+    localStorage.removeItem("token"); // Remove JWT token
   };
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
+    const storedUser = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
+    if (storedUser && token) {
       setUser(JSON.parse(storedUser));
       setIsAuthenticated(true); // Update authentication status
     }
   }, []);
-  
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, onSignup, onLogin, onLogout, isAdminPage }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        isAuthenticated,
+        onSignup,
+        onLogin,
+        onLogout,
+        isAdminPage,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

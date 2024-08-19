@@ -23,32 +23,66 @@ const Login = () => {
 
   console.log("Login component received onLogin prop:", onLogin);
 
+  // const onSubmit = async (data) => {
+
+  //   const response = await fetch("http://localhost:8000/auth/login");
+  //   const users = await response.json();
+
+  //   // Check if the credentials match any user
+  //   const user = users.find(
+  //     (user) => user.email === data.email && user.password === data.password
+  //   );
+
+  //   if (user) {
+  //     // Update user status and redirect
+  //     await fetch(`http://localhost:8000/users/${user.id}`, {
+  //       method: "PATCH",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ loggedIn: true }),
+  //     });
+
+  //     console.log("user", user);
+
+  //     onLogin(user, true);
+
+  //     toast.success("Login Successfully");
+
+  //     history.push("/form/dashboard");
+  //   } else {
+  //     toast.error("Invalid email or password.");
+  //   }
+  // };
+
   const onSubmit = async (data) => {
-    const response = await fetch("http://localhost:8000/users");
-    const users = await response.json();
-
-    // Check if the credentials match any user
-    const user = users.find(
-      (user) => user.email === data.email && user.password === data.password
-    );
-
-    if (user) {
-      // Update user status and redirect
-      await fetch(`http://localhost:8000/users/${user.id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ loggedIn: true, role: "admin" }),
+    try {
+      const response = await fetch("http://localhost:8000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       });
 
-      console.log("user", user);
+      const result = await response.json();
 
-      onLogin(user, true);
+      if (response.ok) {
+        const loggedInUser = { ...result.UserModel, loggedIn: true };
 
-      toast.success("Login Successfully");
+        // Save the token to localStorage
+        localStorage.setItem("token", result.accessToken);
 
-      history.push("/form/dashboard");
-    } else {
-      toast.error("Invalid email or password.");
+        // Update user status in the context
+        onLogin(loggedInUser, true);
+
+        toast.success("Login Successfully");
+
+        history.push("/form/dashboard");
+      } else {
+        toast.error(result.error || "Invalid email or password.");
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again.");
+      console.error("Login error:", error);
     }
   };
 
