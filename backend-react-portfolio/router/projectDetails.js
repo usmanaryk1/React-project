@@ -2,30 +2,6 @@ const express = require("express");
 const ProjectDetails_Model = require("../models/projectDetailsSchema");
 const router = express.Router();
 
-// POST PROJECT DETAILS INFO
-
-router.post("/", async (req, res) => {
-  console.log("Inside post function");
-
-  const data = new ProjectDetails_Model({
-    slideImages: req.body.slideImages,
-    pCategory: req.body.pCategory,
-    pClient: req.body.pClient,
-    pDate: req.body.pDate,
-    pURL: req.body.pURL,
-    desc: req.body.desc,
-    isActive: req.body.isActive,
-  });
-
-  try {
-    const val = await data.save();
-    res.status(201).json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to save data" });
-  }
-});
-
 // GET ALL PROJECT DETAILS INFO
 
 router.get("/", async (req, res) => {
@@ -58,7 +34,46 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// DELETE PROJECT DETAILS INFO BY ID
+// POST PROJECT DETAILS INFO (AUTHENTICATED ONLY)
+
+router.post("/", async (req, res) => {
+  console.log("Inside post function");
+
+  const data = new ProjectDetails_Model({
+    slideImages: req.body.slideImages,
+    pCategory: req.body.pCategory,
+    pClient: req.body.pClient,
+    pDate: req.body.pDate,
+    pURL: req.body.pURL,
+    desc: req.body.desc,
+    isActive: req.body.isActive,
+  });
+
+  try {
+    const val = await data.save();
+    res.status(201).json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to save data" });
+  }
+});
+
+// UPDATE PROJECT DETAILS BY ID (AUTHENTICATED ONLY)
+
+router.put("/:id", async (req, res) => {
+  try {
+    const updatedDetails = await ProjectDetails_Model.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json(updatedDetails);
+  } catch (error) {
+    res.status(400).json({ error: "Failed to update project details" });
+  }
+});
+
+// DELETE PROJECT DETAILS INFO BY ID (AUTHENTICATED ONLY)
 
 router.delete("/:id", async (req, res) => {
   const Id = req.params.id;

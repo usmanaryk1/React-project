@@ -2,27 +2,6 @@ const express = require("express");
 const Counter_Model = require("../models/counterSchema");
 const router = express.Router();
 
-// POST COUNTER INFO
-
-router.post("/", async (req, res) => {
-  console.log("Inside post function");
-
-  const data = new Counter_Model({
-    icon: req.body.icon,
-    counterEnd: req.body.counterEnd,
-    text: req.body.text,
-    isActive: req.body.isActive,
-  });
-
-  try {
-    const val = await data.save();
-    res.status(201).json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to save data" });
-  }
-});
-
 // GET ALL COUNTER INFO
 router.get("/", async (req, res) => {
   try {
@@ -54,7 +33,43 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// DELETE COUNTER INFO BY ID
+// POST COUNTER INFO (AUTHENTICATED ONLY)
+
+router.post("/", async (req, res) => {
+  console.log("Inside post function");
+
+  const data = new Counter_Model({
+    icon: req.body.icon,
+    counterEnd: req.body.counterEnd,
+    text: req.body.text,
+    isActive: req.body.isActive,
+  });
+
+  try {
+    const val = await data.save();
+    res.status(201).json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to save data" });
+  }
+});
+
+// UPDATE COUNT BY ID (AUTHENTICATED ONLY)
+
+router.put("/:id", async (req, res) => {
+  try {
+    const updatedCounts = await Counter_Model.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json(updatedCounts);
+  } catch (error) {
+    res.status(400).json({ error: "Failed to update count" });
+  }
+});
+
+// DELETE COUNTER INFO BY ID (AUTHENTICATED ONLY)
 
 router.delete("/:id", async (req, res) => {
   const Id = req.params.id;

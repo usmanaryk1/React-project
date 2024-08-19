@@ -7,6 +7,7 @@ const userSchema = new Schema(
     username: {
       type: String,
       required: true,
+      unique: true, // Ensure username is unique
       trim: true,
     },
     email: {
@@ -19,21 +20,15 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    role: {
-      type: String,
-      required: true,
-      enum: ["admin", "user"], // Role can be either 'admin' or 'user'
-      default: "user", // Default role is 'user'
-    },
     loggedIn: {
       type: Boolean,
-      default: false, // Default is logged out
+      default: false, //User will be logged out by default
     },
   },
   { timestamps: true }
 ); // Automatically add createdAt and updatedAt fields
 
 // Create the model
-const UserModel = mongoose.model("User", userSchema);
+const UserModel = mongoose.model("Users", userSchema);
 
 module.exports = UserModel;

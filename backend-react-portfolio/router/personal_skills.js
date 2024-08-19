@@ -1,25 +1,7 @@
 const express = require("express");
 const Personal_SkillsModel = require("../models/personalSchema.js");
+const authenticateJWT = require("../middleware/authmiddleware.js");
 const router = express.Router();
-
-// POST PERSONAL INFO
-
-router.post("/", async (req, res) => {
-  console.log("Inside post function");
-
-  const data = new Personal_SkillsModel({
-    name: req.body.name,
-    skills: req.body.skills,
-  });
-
-  try {
-    const val = await data.save();
-    res.status(201).json(val);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to save data" });
-  }
-});
 
 // GET All PERSONAL INFO
 
@@ -51,9 +33,43 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// DELETE PERSONAL INFO BY ID
+// POST PERSONAL INFO (AUTHENTICATED ONLY)
 
-router.delete("/:id", async (req, res) => {
+router.post("/", authenticateJWT, async (req, res) => {
+  console.log("Inside post function");
+
+  const data = new Personal_SkillsModel({
+    name: req.body.name,
+    skills: req.body.skills,
+  });
+
+  try {
+    const val = await data.save();
+    res.status(201).json(val);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to save data" });
+  }
+});
+
+// UPDATE PERSONAL INFO BY ID (AUTHENTICATED ONLY)
+
+router.put("/:id", authenticateJWT, async (req, res) => {
+  try {
+    const updatedSkills = await Personal_SkillsModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json(updatedSkills);
+  } catch (error) {
+    res.status(400).json({ error: "Failed to update skills" });
+  }
+});
+
+// DELETE PERSONAL INFO BY ID (AUTHENTICATED ONLY)
+
+router.delete("/:id", authenticateJWT, async (req, res) => {
   const Id = req.params.id;
 
   try {
