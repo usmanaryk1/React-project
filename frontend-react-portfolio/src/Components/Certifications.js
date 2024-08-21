@@ -44,7 +44,7 @@ const Certifications = ({
             </div>
             <div className="row">
               {certifications.map((certification) => (
-                <div className="col-md-4 card-box" key={certification.id}>
+                <div className="col-md-4 card-box" key={certification._id}>
                   <div className="card card-certification">
                     <div className="card-img">
                       <img
@@ -75,7 +75,7 @@ const Certifications = ({
                               className="admin-btn btn btn-danger btn-sm mx-1"
                               aria-label="Delete"
                               onClick={() =>
-                                handleDeleteClick(certification.id)
+                                handleDeleteClick(certification._id)
                               }
                             >
                               <i className="bi bi-trash" />
@@ -83,7 +83,7 @@ const Certifications = ({
                           </div>
                         </>
                       )}
-                      <Link to={`/certifications/${certification.id}`}>
+                      <Link to={`/certifications/${certification._id}`}>
                         <h3 className="card-title">
                           <a href="blog-single.html">
                             {certification.cardTitle}

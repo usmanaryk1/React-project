@@ -17,9 +17,7 @@ const PortfolioDetails = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
 
   const { id: workId } = useParams();
   console.log("details data id", workId);
-  const { data: details, refetch } = useFetch(
-    "http://localhost:8000/workDetails/" + workDetailsId
-  );
+  const { data: details, refetch } = useFetch("/workDetails/" + workDetailsId);
   console.log("details data ", details);
 
   const childFunction = (newWorkDetailsId) => {

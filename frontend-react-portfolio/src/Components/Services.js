@@ -38,7 +38,7 @@ const Services = ({ title, subtitle, onEdit, onDelete, services = [] }) => {
             </div>
             <div className="row">
               {services.map((service) => (
-                <div className="col-md-4" key={service.id}>
+                <div className="col-md-4" key={service._id}>
                   <div className="service-box">
                     {isAuthenticated && isAdminPage && (
                       <div className="admin-actions d-flex justify-content-end align-items-start">
@@ -52,7 +52,7 @@ const Services = ({ title, subtitle, onEdit, onDelete, services = [] }) => {
                         <button
                           className="admin-btn btn btn-danger btn-sm mx-1"
                           aria-label="Delete"
-                          onClick={() => handleDeleteClick(service.id)}
+                          onClick={() => handleDeleteClick(service._id)}
                         >
                           <i className="bi bi-trash" />
                         </button>

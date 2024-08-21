@@ -8,11 +8,12 @@ import useFetch from "../../Components/useFetch";
 
 const AddCertificationForm = () => {
   const [currentCertifications, setCurrentCertifications] = useState(null);
+  const token = localStorage.getItem("token");
   const {
     data: certifications,
     setData: setCertifications,
     refetch,
-  } = useFetch("http://localhost:8000/certifications");
+  } = useFetch("/certifications");
   const {
     register,
     handleSubmit,
@@ -165,10 +166,11 @@ const AddCertificationForm = () => {
 
     if (currentCertifications) {
       const response = await fetch(
-        `http://localhost:8000/certifications/${currentCertifications.id}`,
+        `/certifications/${currentCertifications._id}`,
         {
           method: "PUT",
           headers: {
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(updatedData),
@@ -178,15 +180,16 @@ const AddCertificationForm = () => {
       console.log("Updated certification response:", result);
       setCertifications(
         certifications.map((certification) =>
-          certification.id === result.id ? result : certification
+          certification._id === result._id ? result : certification
         )
       );
       console.log("Updated certification:", certifications);
       toast.success("Certificate updated successfully");
     } else {
-      const response = await fetch("http://localhost:8000/certifications", {
+      const response = await fetch("/certifications", {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedData),
@@ -229,15 +232,15 @@ const AddCertificationForm = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(
-        `http://localhost:8000/certifications/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`/certifications/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (response.ok) {
         setCertifications(
-          certifications.filter((certification) => certification.id !== id)
+          certifications.filter((certification) => certification._id !== id)
         );
         console.log("Deleted certification:", certifications);
         toast.success("Certificate deleted successfully");

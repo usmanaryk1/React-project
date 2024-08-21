@@ -85,7 +85,7 @@ const Hero = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
               {isAuthenticated && isAdminPage && (
                 <div className="admin-actions d-flex justify-content-end align-items-start">
                   {hero.map((heroItem) => (
-                    <div key={heroItem.id}>
+                    <div key={heroItem._id}>
                       <button
                         className="admin-btn btn btn-primary btn-sm me-1"
                         aria-label="Edit"
@@ -96,7 +96,7 @@ const Hero = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
                       <button
                         className="admin-btn btn btn-danger btn-sm me-5"
                         aria-label="Delete"
-                        onClick={() => handleDeleteClick(heroItem.id)}
+                        onClick={() => handleDeleteClick(heroItem._id)}
                       >
                         <i className="bi bi-trash" />
                       </button>
@@ -106,7 +106,7 @@ const Hero = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
               )}
 
               {hero.map((heroItem) => (
-                <div className="container" key={heroItem.id}>
+                <div className="container" key={heroItem._id}>
                   {/*<p class="display-6 color-d">Hello, world!</p>*/}
                   <div>
                     <h1 className="hero-title mb-4">I am {heroItem.name}</h1>

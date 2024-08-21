@@ -8,6 +8,8 @@ import useFetch from "../../Components/useFetch";
 import { useRef } from "react";
 const HeroForm = () => {
   const token = localStorage.getItem("token");
+  // console.log("Stored Token:", token);
+
   const childRef = useRef();
   const [currentHero, setCurrentHero] = useState(null);
   const { data: hero, setData: setHero } = useFetch("/hero");
@@ -35,7 +37,7 @@ const HeroForm = () => {
       reset();
     }
   }, [currentHero, setValue, reset]);
-  console.log("hero before submit: ", currentHero);
+  console.log("currentHero ", currentHero);
 
   const onSubmit = async (data) => {
     const formData = {
@@ -45,14 +47,14 @@ const HeroForm = () => {
     };
     if (currentHero) {
       // Update hero
-      const updatedHero = { ...currentHero, ...formData };
+      // const updatedHero = { ...currentHero, ...formData };
       const response = await fetch(`/hero/${currentHero._id}`, {
         method: "PUT",
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedHero),
+        body: JSON.stringify(formData),
       });
       if (response.ok) {
         const result = await response.json();
@@ -60,7 +62,7 @@ const HeroForm = () => {
         setHero((prevHero) => {
           console.log("Previous Hero:", prevHero);
           return prevHero.map((heroData) =>
-            heroData.id === result.id ? result : heroData
+            heroData._id === result._id ? result : heroData
           );
         });
 
@@ -72,7 +74,7 @@ const HeroForm = () => {
       const response = await fetch("/hero", {
         method: "POST",
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
@@ -91,10 +93,6 @@ const HeroForm = () => {
     setCurrentHero(null);
   };
 
-  useEffect(() => {
-    console.log("hero after Updated :", hero);
-  }, [hero]);
-
   const onReset = () => {
     reset();
     setCurrentHero(null);
@@ -110,11 +108,11 @@ const HeroForm = () => {
     const response = await fetch(`/hero/${id}`, {
       method: "DELETE",
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     });
     if (response.ok) {
-      setHero((prevHero) => prevHero.filter((heroData) => heroData.id !== id));
+      setHero((prevHero) => prevHero.filter((heroData) => heroData._id !== id));
       childRef.current.childFunction();
       toast.success("Hero section deleted successfully");
       console.log("Hero section deleted successfully", hero);

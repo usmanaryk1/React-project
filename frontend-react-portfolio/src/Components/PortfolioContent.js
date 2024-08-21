@@ -95,7 +95,7 @@ const PortfolioContent = ({ onDeleteClick, onEditClick, details, workId }) => {
                       <button
                         className="admin-btn mx-1 btn btn-danger"
                         aria-label="Delete"
-                        onClick={() => handleDeleteClick(details.id)}
+                        onClick={() => handleDeleteClick(details._id)}
                       >
                         <i className="bi bi-trash" />
                       </button>

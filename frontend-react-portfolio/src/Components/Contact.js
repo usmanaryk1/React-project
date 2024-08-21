@@ -122,7 +122,7 @@ const Contact = ({ onEditClick, onDeleteClick, contact = [], links = [] }) => {
                         {isAuthenticated && isAdminPage && (
                           <div className="admin-actions d-flex justify-content-end">
                             {contact.map((contact) => (
-                              <div key={contact.id}>
+                              <div key={contact._id}>
                                 <button
                                   className="admin-btn btn btn-primary btn-sm"
                                   aria-label="Edit"
@@ -133,7 +133,7 @@ const Contact = ({ onEditClick, onDeleteClick, contact = [], links = [] }) => {
                                 <button
                                   className="admin-btn btn btn-danger btn-sm mx-1"
                                   aria-label="Delete"
-                                  onClick={() => handleDeleteClick(contact.id)}
+                                  onClick={() => handleDeleteClick(contact._id)}
                                 >
                                   <i className="bi bi-trash" />
                                 </button>
@@ -146,7 +146,7 @@ const Contact = ({ onEditClick, onDeleteClick, contact = [], links = [] }) => {
                         </div>
                         {contact &&
                           contact.map((contact) => (
-                            <div className="more-info" key={contact.id}>
+                            <div className="more-info" key={contact._id}>
                               <p className="lead">{contact.description}</p>
                               <ul className="list-ico">
                                 <li>
@@ -169,7 +169,7 @@ const Contact = ({ onEditClick, onDeleteClick, contact = [], links = [] }) => {
                           <ul>
                             {links &&
                               links.map((link) => (
-                                <li key={link.id}>
+                                <li key={link._id}>
                                   <a href={link.link}>
                                     <span className="ico-circle">
                                       <i className={link.platformIcon} />
@@ -188,7 +188,7 @@ const Contact = ({ onEditClick, onDeleteClick, contact = [], links = [] }) => {
                                         className="admin-btn btn btn-danger btn-sm"
                                         aria-label="Delete"
                                         onClick={() =>
-                                          handleDeleteLink(link.id)
+                                          handleDeleteLink(link._id)
                                         }
                                       >
                                         <i className="bi bi-trash" />

@@ -16,10 +16,9 @@ const AddForm = () => {
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      file: "",
+      // file: "",
       name: "",
       profile: "",
-      skills: "",
       email: "",
       phone: "",
       desc: "",
@@ -27,15 +26,12 @@ const AddForm = () => {
     },
   });
 
+  const token = localStorage.getItem("token");
   const [image, setImage] = useState(null);
   const imageRef = useRef(null);
   const [base64Image, setBase64Image] = useState("");
   const [currentAbout, setCurrentAbout] = useState(null);
-  const {
-    data: about,
-    setData: setAbout,
-    refetch,
-  } = useFetch("http://localhost:8000/about");
+  const { data: about, setData: setAbout, refetch } = useFetch("/about");
 
   console.log("about:", about);
   useEffect(() => {
@@ -114,32 +110,29 @@ const AddForm = () => {
       email: formObject.email,
       phone: formObject.phone,
       desc1: formObject.desc, // Assuming all desc is in one textarea
-      desc2: "",
-      desc3: "",
       img: imageUrl,
       isActive: formObject.isActive,
     };
     console.log("imageUrl", imageUrl);
 
     if (currentAbout) {
-      const response = await fetch(
-        `http://localhost:8000/about/${currentAbout.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedData),
-        }
-      );
+      const response = await fetch(`/about/${currentAbout._id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      });
       const result = await response.json();
-      setAbout(about.map((item) => (item.id === result.id ? result : item)));
+      setAbout(about.map((item) => (item._id === result._id ? result : item)));
       console.log("About info updated successfully", about);
       toast.success("About info updated successfully");
     } else {
-      const response = await fetch("http://localhost:8000/about", {
+      const response = await fetch("/about", {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedData),
@@ -173,11 +166,14 @@ const AddForm = () => {
   };
 
   const handleDelete = async (id) => {
-    const response = await fetch(`http://localhost:8000/about/${id}`, {
+    const response = await fetch(`/about/${id}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
     if (response.ok) {
-      setAbout(about.filter((item) => item.id !== id));
+      setAbout(about.filter((item) => item._id !== id));
       refetch();
       toast.success("About info deleted successfully");
       console.log("About info deleted successfully", about);

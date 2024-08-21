@@ -28,7 +28,7 @@ const Testimonial = ({ onEditClick, onDeleteClick, testimonials = [] }) => {
     }
   }, [testimonials]);
 
-  const handleDeleteClick = (serviceId) => {
+  const handleDeleteClick = (testimonialId) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -39,7 +39,7 @@ const Testimonial = ({ onEditClick, onDeleteClick, testimonials = [] }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        onDeleteClick(serviceId);
+        onDeleteClick(testimonialId);
       }
     });
   };
@@ -63,7 +63,7 @@ const Testimonial = ({ onEditClick, onDeleteClick, testimonials = [] }) => {
                 >
                   <div className="swiper-wrapper">
                     {testimonials.map((testimonial) => (
-                      <div className="swiper-slide" key={testimonial.id}>
+                      <div className="swiper-slide" key={testimonial._id}>
                         <div className="testimonial-box">
                           {isAuthenticated && isAdminPage && (
                             <div className="admin-actions d-flex justify-content-end">
@@ -78,7 +78,7 @@ const Testimonial = ({ onEditClick, onDeleteClick, testimonials = [] }) => {
                                 className="admin-btn btn btn-danger btn-sm mx-1"
                                 aria-label="Delete"
                                 onClick={() =>
-                                  handleDeleteClick(testimonial.id)
+                                  handleDeleteClick(testimonial._id)
                                 }
                               >
                                 <i className="bi bi-trash" />

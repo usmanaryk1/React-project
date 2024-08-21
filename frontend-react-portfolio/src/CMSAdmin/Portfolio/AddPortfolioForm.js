@@ -8,11 +8,7 @@ import useFetch from "../../Components/useFetch";
 
 const AddPortfolioForm = () => {
   const [currentPortfolio, setCurrentPortfolio] = useState(null);
-  const {
-    data: works,
-    setData: setWorks,
-    refetch,
-  } = useFetch("http://localhost:8000/works");
+  const { data: works, setData: setWorks, refetch } = useFetch("/works");
   const {
     register,
     handleSubmit,
@@ -22,15 +18,15 @@ const AddPortfolioForm = () => {
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      file: "",
       title: "",
       link: "",
       category: "",
       date: "",
+      workDetailsId: null,
       isActive: false,
     },
   });
-
+  const token = localStorage.getItem("token");
   const [image, setImage] = useState(null);
   const imageRef = useRef(null);
   const [base64Image, setBase64Image] = useState("");
@@ -84,7 +80,7 @@ const AddPortfolioForm = () => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
+    return `${month}-${day}-${year}`;
   };
 
   const onSubmit = async (formObject, e) => {
@@ -126,28 +122,27 @@ const AddPortfolioForm = () => {
     console.log("imageUrl", imageUrl);
 
     if (currentPortfolio) {
-      const response = await fetch(
-        `http://localhost:8000/works/${currentPortfolio.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedData),
-        }
-      );
+      const response = await fetch(`/works/${currentPortfolio._id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      });
       const result = await response.json();
       setWorks(
         works.map((portfolio) =>
-          portfolio.id === result.id ? result : portfolio
+          portfolio._id === result._id ? result : portfolio
         )
       );
       toast.success("Portfolio updated successfully");
     } else {
       // Add new work card with a null workDetailsId initially
-      const response = await fetch("http://localhost:8000/works", {
+      const response = await fetch("/works", {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ ...updatedData, workDetailsId: null }),
@@ -181,11 +176,14 @@ const AddPortfolioForm = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8000/works/${id}`, {
+      const response = await fetch(`/works/${id}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       if (response.ok) {
-        setWorks(works.filter((portfolio) => portfolio.id !== id));
+        setWorks(works.filter((portfolio) => portfolio._id !== id));
         toast.success("Portfolio deleted successfully");
       } else {
         toast.error("Failed to delete portfolio");

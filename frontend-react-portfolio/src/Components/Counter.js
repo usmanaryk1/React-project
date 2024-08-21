@@ -42,7 +42,7 @@ const Counter = ({ onEdit, onDelete, counts = [] }) => {
           <div className="container position-relative">
             <div className="row">
               {counts.map((counter) => (
-                <div className="col-sm-3 col-lg-3" key={counter.id}>
+                <div className="col-sm-3 col-lg-3" key={counter._id}>
                   <div className="counter-box counter-box pt-4 pt-md-0">
                     <div className="counter-ico">
                       <span className="ico-circle">
@@ -73,7 +73,7 @@ const Counter = ({ onEdit, onDelete, counts = [] }) => {
                         <button
                           className="admin-btn btn btn-danger btn-sm mx-1"
                           aria-label="Delete"
-                          onClick={() => handleDeleteClick(counter.id)}
+                          onClick={() => handleDeleteClick(counter._id)}
                         >
                           <i className="bi bi-trash" />
                         </button>

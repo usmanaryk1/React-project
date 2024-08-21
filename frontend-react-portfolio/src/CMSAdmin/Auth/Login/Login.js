@@ -55,7 +55,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("http://localhost:8000/auth/login", {
+      const response = await fetch("/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,12 +67,13 @@ const Login = () => {
 
       if (response.ok) {
         const loggedInUser = { ...result.UserModel, loggedIn: true };
+        console.log("loggedInUser", loggedInUser);
 
         // Save the token to localStorage
-        localStorage.setItem("token", result.accessToken);
-
+        // localStorage.setItem("token", result.accessToken);
+        console.log("Result accessToken", result.accessToken);
         // Update user status in the context
-        onLogin(loggedInUser, true);
+        onLogin(loggedInUser, result.accessToken, true);
 
         toast.success("Login Successfully");
 

@@ -30,7 +30,7 @@ const About = ({ onEditClick, onDeleteClick, about = [] }) => {
             <div className="row">
               <div className="col-sm-12">
                 {about.map((about) => (
-                  <div className="box-shadow-full" key={about.id}>
+                  <div className="box-shadow-full" key={about._id}>
                     <div className="row">
                       <div className="col-md-6">
                         <div className="row">
@@ -132,7 +132,7 @@ const About = ({ onEditClick, onDeleteClick, about = [] }) => {
                                 <button
                                   className="admin-btn btn btn-danger btn-sm"
                                   aria-label="Delete"
-                                  onClick={() => handleDeleteClick(about.id)}
+                                  onClick={() => handleDeleteClick(about._id)}
                                 >
                                   <i className="bi bi-trash" />
                                 </button>

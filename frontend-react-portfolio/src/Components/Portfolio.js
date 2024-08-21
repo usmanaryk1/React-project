@@ -54,7 +54,7 @@ const Portfolio = ({ title, subtitle, onEdit, onDelete, works = [] }) => {
             </div>
             <div className="row">
               {works.map((work) => (
-                <div className="col-md-4" key={work.id}>
+                <div className="col-md-4" key={work._id}>
                   <div className="work-box">
                     {/* <a href={work.linkImage} data-gallery="portfolioGallery" className="portfolio-lightbox"> */}
                     <div className="work-img">
@@ -73,7 +73,7 @@ const Portfolio = ({ title, subtitle, onEdit, onDelete, works = [] }) => {
                         <button
                           className="admin-btn btn btn-danger btn-sm"
                           aria-label="Delete"
-                          onClick={() => handleDeleteClick(work.id)}
+                          onClick={() => handleDeleteClick(work._id)}
                         >
                           <i className="bi bi-trash" />
                         </button>
