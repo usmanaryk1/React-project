@@ -1,6 +1,7 @@
 const express = require("express");
 const ProjectDetails_Model = require("../models/projectDetailsSchema");
 const router = express.Router();
+const authenticateJWT = require("../middleware/authmiddleware.js");
 
 // GET ALL PROJECT DETAILS INFO
 
@@ -36,7 +37,7 @@ router.get("/:id", async (req, res) => {
 
 // POST PROJECT DETAILS INFO (AUTHENTICATED ONLY)
 
-router.post("/", async (req, res) => {
+router.post("/", authenticateJWT, async (req, res) => {
   console.log("Inside post function");
 
   const data = new ProjectDetails_Model({
@@ -60,7 +61,7 @@ router.post("/", async (req, res) => {
 
 // UPDATE PROJECT DETAILS BY ID (AUTHENTICATED ONLY)
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", authenticateJWT, async (req, res) => {
   try {
     const updatedDetails = await ProjectDetails_Model.findByIdAndUpdate(
       req.params.id,
@@ -75,7 +76,7 @@ router.put("/:id", async (req, res) => {
 
 // DELETE PROJECT DETAILS INFO BY ID (AUTHENTICATED ONLY)
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authenticateJWT, async (req, res) => {
   const Id = req.params.id;
 
   try {

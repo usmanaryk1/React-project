@@ -1,6 +1,7 @@
 const express = require("express");
 const Certification_Model = require("../models/certificationSchema");
 const router = express.Router();
+const authenticateJWT = require("../middleware/authmiddleware.js");
 
 // GET ALL CERTIFICATION INFO
 
@@ -36,7 +37,7 @@ router.get("/:id", async (req, res) => {
 
 // POST CERTIFICATION INFO (AUTHENTICATED ONLY)
 
-router.post("/", async (req, res) => {
+router.post("/", authenticateJWT, async (req, res) => {
   console.log("Inside post function");
 
   const data = new Certification_Model({
@@ -61,7 +62,7 @@ router.post("/", async (req, res) => {
 
 // UPDATE CERTIFICATION BY ID (AUTHENTICATED ONLY)
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", authenticateJWT, async (req, res) => {
   try {
     const updatedCertificate = await Certification_Model.findByIdAndUpdate(
       req.params.id,
@@ -76,7 +77,7 @@ router.put("/:id", async (req, res) => {
 
 // DELETE CERTIFICATION INFO BY ID (AUTHENTICATED ONLY)
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authenticateJWT, async (req, res) => {
   const Id = req.params.id;
 
   try {

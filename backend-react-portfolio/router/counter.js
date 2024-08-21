@@ -1,7 +1,7 @@
 const express = require("express");
 const Counter_Model = require("../models/counterSchema");
 const router = express.Router();
-
+const authenticateJWT = require("../middleware/authmiddleware.js");
 // GET ALL COUNTER INFO
 router.get("/", async (req, res) => {
   try {
@@ -35,7 +35,7 @@ router.get("/:id", async (req, res) => {
 
 // POST COUNTER INFO (AUTHENTICATED ONLY)
 
-router.post("/", async (req, res) => {
+router.post("/", authenticateJWT, async (req, res) => {
   console.log("Inside post function");
 
   const data = new Counter_Model({
@@ -56,7 +56,7 @@ router.post("/", async (req, res) => {
 
 // UPDATE COUNT BY ID (AUTHENTICATED ONLY)
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", authenticateJWT, async (req, res) => {
   try {
     const updatedCounts = await Counter_Model.findByIdAndUpdate(
       req.params.id,
@@ -71,7 +71,7 @@ router.put("/:id", async (req, res) => {
 
 // DELETE COUNTER INFO BY ID (AUTHENTICATED ONLY)
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authenticateJWT, async (req, res) => {
   const Id = req.params.id;
 
   try {

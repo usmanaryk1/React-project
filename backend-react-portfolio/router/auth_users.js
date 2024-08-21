@@ -104,12 +104,9 @@ router.post("/login", async (req, res) => {
     const accessToken = jwt.sign(
       { id: existingUser._id },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "7d" }
     );
 
-    // req.session.authentication = {
-    //   accessToken: accessToken,
-    // };
     return res.status(200).json({
       message: " User logged in sucessfully!",
       UserModel: existingUser,

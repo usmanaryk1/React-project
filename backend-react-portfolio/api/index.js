@@ -18,8 +18,12 @@ const ProjectDetails_Routes = require("../router/projectDetails.js");
 const Auth_Routes = require("../router/auth_users.js");
 
 app.use(express.json());
-app.use(cors());
-
+// app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 // USE ROUTES
 
 app.use("/hero", personal_SkillsRoutes);

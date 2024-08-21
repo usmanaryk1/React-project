@@ -1,5 +1,5 @@
 const express = require("express");
-const Contact_Model = require("../models/contactSchema");
+const authenticateJWT = require("../middleware/authmiddleware.js");
 const Social_Model = require("../models/socialSchema");
 const router = express.Router();
 
@@ -37,7 +37,7 @@ router.get("/:id", async (req, res) => {
 
 // POST SOCIAL INFO (AUTHENTICATED ONLY)
 
-router.post("/", async (req, res) => {
+router.post("/", authenticateJWT, async (req, res) => {
   console.log("Inside post function");
 
   const data = new Social_Model({
@@ -57,7 +57,7 @@ router.post("/", async (req, res) => {
 
 // UPDATE SOCIAL BY ID (AUTHENTICATED ONLY)
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", authenticateJWT, async (req, res) => {
   try {
     const updatedSocial = await Social_Model.findByIdAndUpdate(
       req.params.id,
@@ -72,7 +72,7 @@ router.put("/:id", async (req, res) => {
 
 // DELETE SOCIAL INFO BY ID (AUTHENTICATED ONLY)
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authenticateJWT, async (req, res) => {
   const Id = req.params.id;
 
   try {

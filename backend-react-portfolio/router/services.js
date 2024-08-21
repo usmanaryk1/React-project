@@ -1,6 +1,6 @@
 const express = require("express");
 const Service_Model = require("../models/serviceSchema.js");
-const { auth, isAdmin } = require("../middleware/authmiddleware.js");
+const authenticateJWT = require("../middleware/authmiddleware.js");
 const router = express.Router();
 
 // GET ALL SERVICE INFO
@@ -36,7 +36,7 @@ router.get("/:id", async (req, res) => {
 
 // POST SERVICE INFO (AUTHENTICATED ONLY)
 
-router.post("/", async (req, res) => {
+router.post("/", authenticateJWT, async (req, res) => {
   console.log("Inside post function");
 
   const data = new Service_Model({
@@ -57,7 +57,7 @@ router.post("/", async (req, res) => {
 
 // UPDATE SERVICE BY ID (AUTHENTICATED ONLY)
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", authenticateJWT, async (req, res) => {
   try {
     const updatedService = await Service_Model.findByIdAndUpdate(
       req.params.id,
@@ -72,7 +72,7 @@ router.put("/:id", async (req, res) => {
 
 // DELETE SERVICE INFO BY ID (AUTHENTICATED ONLY)
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authenticateJWT, async (req, res) => {
   const Id = req.params.id;
 
   try {
