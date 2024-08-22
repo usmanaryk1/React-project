@@ -23,8 +23,6 @@ const AddCertificationForm = () => {
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      file1: "",
-      file2: "",
       title: "",
       category: "",
       description: "",
@@ -44,10 +42,14 @@ const AddCertificationForm = () => {
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
 
+  const handleImageClick = (inputId) => {
+    document.getElementById(inputId).click();
+  };
+
   const handleImage1Change = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
-    console.log("base64", base64);
+    // console.log("base64", base64);
     setBase64Image1(base64);
     setImage1(file);
   };
@@ -57,14 +59,6 @@ const AddCertificationForm = () => {
     const base64 = await convertBase64(file);
     setBase64Image2(base64);
     setImage2(file);
-  };
-
-  const handleImage1Click = () => {
-    document.getElementById("file-input1").click();
-  };
-
-  const handleImage2Click = () => {
-    document.getElementById("file-input2").click();
   };
 
   const convertBase64 = (file) => {
@@ -101,120 +95,113 @@ const AddCertificationForm = () => {
 
   console.log("currentCertifications", currentCertifications);
 
+  const uploadImage = async (imageFile) => {
+    // console.log("image file", imageFile);
+    const formData = new FormData();
+    formData.append("file", imageFile);
+    try {
+      const response = await fetch("http://localhost:8000/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+      return data.file; // Assuming the server responds with the URL of the uploaded image
+    } catch (error) {
+      console.error("Error uploading the image:", error);
+      throw new Error("Image upload failed");
+    }
+  };
   const onSubmit = async (formObject, e) => {
     e.preventDefault();
 
     console.log("Certification Data:", formObject);
 
-    formObject.image = base64Image1; // Add the base64 image to the form object
-    formObject.authorImage = base64Image2; // Add the base64 image to the form object
+    try {
+      formObject.image = base64Image1; // Add the base64 image to the form object
+      formObject.authorImage = base64Image2; // Add the base64 image to the form object
 
-    let imageUrl1 = formObject.image;
-    let imageUrl2 = formObject.authorImage;
+      let imageUrl1 = formObject.image; // Default to base64 if no upload is necessary
+      let imageUrl2 = formObject.authorImage;
 
-    console.log("Certification Data:", formObject);
-
-    if (image1) {
-      const imageFormData1 = new FormData();
-      imageFormData1.append("file", image1);
-
-      try {
-        const response = await fetch("http://localhost:8000/upload", {
-          method: "POST",
-          body: imageFormData1,
-        });
-
-        const data = await response.json();
-
-        imageUrl1 = data.url; // Assuming the server responds with the URL of the uploaded image
-      } catch (error) {
-        console.error("Error uploading the image1:", error);
+      // Upload images to the backend if the user selected new ones
+      if (image1) {
+        console.log("image1", image1);
+        imageUrl1 = await uploadImage(image1);
       }
-    }
-
-    if (image2) {
-      const imageFormData2 = new FormData();
-      imageFormData2.append("file", image2);
-
-      try {
-        const response = await fetch("http://localhost:8000/upload", {
-          method: "POST",
-          body: imageFormData2,
-        });
-
-        const data = await response.json();
-
-        imageUrl2 = data.url; // Assuming the server responds with the URL of the uploaded image
-      } catch (error) {
-        console.error("Error uploading the image2:", error);
+      if (image2) {
+        console.log("image2", image2);
+        imageUrl2 = await uploadImage(image2);
       }
-    }
 
-    const updatedData = {
-      cardTitle: formObject.title,
-      cardCategory: formObject.category,
-      cardDescription: formObject.description,
-      postDate: formObject.time,
-      authorName: formObject.name,
-      image: imageUrl1,
-      authorImage: imageUrl2,
-      isActive: formObject.isActive,
-    };
+      const updatedData = {
+        cardTitle: formObject.title,
+        cardCategory: formObject.category,
+        cardDescription: formObject.description,
+        postDate: formObject.time,
+        authorName: formObject.name,
+        image: imageUrl1,
+        authorImage: imageUrl2,
+        isActive: formObject.isActive,
+      };
 
-    console.log("imageUrl1", imageUrl1);
-    console.log("imageUrl2", imageUrl2);
+      console.log("imageUrl1", imageUrl1);
+      console.log("imageUrl2", imageUrl2);
 
-    if (currentCertifications) {
-      const response = await fetch(
-        `/certifications/${currentCertifications._id}`,
-        {
-          method: "PUT",
+      if (currentCertifications) {
+        const response = await fetch(
+          `/certifications/${currentCertifications._id}`,
+          {
+            method: "PUT",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedData),
+          }
+        );
+        const result = await response.json();
+        console.log("Updated certification response:", result);
+        setCertifications(
+          certifications.map((certification) =>
+            certification._id === result._id ? result : certification
+          )
+        );
+        console.log("Updated certification:", certifications);
+        toast.success("Certificate updated successfully");
+      } else {
+        const response = await fetch("/certifications", {
+          method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(updatedData),
+        });
+        if (response.ok) {
+          const result = await response.json();
+          console.log("Added certification response:", result);
+          setCertifications((prevCertificationList) => [
+            ...prevCertificationList,
+            result,
+          ]);
+          console.log("Added certification:", certifications);
+          toast.success("Certificate added successfully");
+        } else {
+          toast.error("Failed to add Certificate info");
         }
-      );
-      const result = await response.json();
-      console.log("Updated certification response:", result);
-      setCertifications(
-        certifications.map((certification) =>
-          certification._id === result._id ? result : certification
-        )
-      );
-      console.log("Updated certification:", certifications);
-      toast.success("Certificate updated successfully");
-    } else {
-      const response = await fetch("/certifications", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedData),
-      });
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Added certification response:", result);
-        setCertifications((prevCertificationList) => [
-          ...prevCertificationList,
-          result,
-        ]);
-        console.log("Added certification:", certifications);
-        toast.success("Certificate added successfully");
-      } else {
-        toast.error("Failed to add Certificate info");
       }
-    }
 
-    reset();
-    setImage1(null);
-    setImage2(null);
-    setBase64Image1("");
-    setBase64Image2("");
-    setCurrentCertifications(null);
-    refetch();
+      reset();
+      setImage1(null);
+      setImage2(null);
+      setBase64Image1("");
+      setBase64Image2("");
+      setCurrentCertifications(null);
+      refetch();
+    } catch (error) {
+      toast.error("Failed to upload images or submit the form");
+      console.error("Error submitting the form:", error);
+    }
   };
 
   const onReset = () => {
@@ -265,7 +252,10 @@ const AddCertificationForm = () => {
               <div className="col-12">
                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
                   <div className="img-container d-flex">
-                    <div className="image mx-auto" onClick={handleImage1Click}>
+                    <div
+                      className="image mx-auto"
+                      onClick={() => handleImageClick("file-input1")}
+                    >
                       {image1 ? (
                         <img
                           src={URL.createObjectURL(image1)}
@@ -286,7 +276,6 @@ const AddCertificationForm = () => {
                         type="file"
                         name="file1"
                         id="file-input1"
-                        {...register("file1")}
                         accept={acceptedFileTypes}
                         multiple={false}
                         onChange={handleImage1Change}
@@ -298,7 +287,10 @@ const AddCertificationForm = () => {
                         <p className="error-message">{errors.file1.message}</p>
                       )}
                     </div>
-                    <div className="image mx-auto" onClick={handleImage2Click}>
+                    <div
+                      className="image mx-auto"
+                      onClick={() => handleImageClick("file-input2")}
+                    >
                       {image2 ? (
                         <img
                           src={URL.createObjectURL(image2)}
@@ -318,7 +310,6 @@ const AddCertificationForm = () => {
                         type="file"
                         name="file2"
                         id="file-input2"
-                        {...register("file2")}
                         accept={acceptedFileTypes}
                         multiple={false}
                         onChange={handleImage2Change}

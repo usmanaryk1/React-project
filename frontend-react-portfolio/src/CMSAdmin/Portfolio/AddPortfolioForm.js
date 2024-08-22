@@ -38,7 +38,7 @@ const AddPortfolioForm = () => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
     setBase64Image(base64);
-    console.log("base64", base64);
+    // console.log("base64", base64);
     setImage(file);
   };
 
@@ -83,84 +83,92 @@ const AddPortfolioForm = () => {
     return `${month}-${day}-${year}`;
   };
 
+  const uploadImage = async (imageFile) => {
+    // console.log("image file", imageFile);
+    const formData = new FormData();
+    formData.append("file", imageFile);
+    try {
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+      return data.file; // Assuming the server responds with the URL of the uploaded image
+    } catch (error) {
+      console.error("Error uploading the image:", error);
+      throw new Error("Image upload failed");
+    }
+  };
+
   const onSubmit = async (formObject, e) => {
     e.preventDefault();
+    try {
+      formObject.workImage = base64Image; // Add the base64 image to the form object
 
-    formObject.workImage = base64Image; // Add the base64 image to the form object
+      let imageUrl = formObject.workImage;
+      // Upload images to the backend if the user selected new ones
+      if (image) {
+        console.log("image", image);
+        imageUrl = await uploadImage(image);
+      }
 
-    let imageUrl = formObject.workImage;
+      console.log("Portfolio Data:", formObject);
 
-    console.log("Portfolio Data:", formObject);
+      const updatedData = {
+        wTitle: formObject.title,
+        pURL: formObject.link,
+        wCategory: formObject.category,
+        wDate: formObject.date,
+        workImage: imageUrl,
+        isActive: formObject.isActive,
+      };
 
-    if (image) {
-      const imageFormData = new FormData();
-      imageFormData.append("file", image);
+      console.log("imageUrl", imageUrl);
 
-      try {
-        const response = await fetch("http://localhost:8000/upload", {
-          method: "POST",
-          body: imageFormData,
+      if (currentPortfolio) {
+        const response = await fetch(`/works/${currentPortfolio._id}`, {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedData),
         });
-
-        const data = await response.json();
-
-        imageUrl = data.url; // Assuming the server responds with the URL of the uploaded image
-      } catch (error) {
-        console.error("Error uploading the image:", error);
-      }
-    }
-
-    const updatedData = {
-      wTitle: formObject.title,
-      pURL: formObject.link,
-      wCategory: formObject.category,
-      wDate: formObject.date,
-      workImage: imageUrl,
-      isActive: formObject.isActive,
-    };
-
-    console.log("imageUrl", imageUrl);
-
-    if (currentPortfolio) {
-      const response = await fetch(`/works/${currentPortfolio._id}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedData),
-      });
-      const result = await response.json();
-      setWorks(
-        works.map((portfolio) =>
-          portfolio._id === result._id ? result : portfolio
-        )
-      );
-      toast.success("Portfolio updated successfully");
-    } else {
-      // Add new work card with a null workDetailsId initially
-      const response = await fetch("/works", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...updatedData, workDetailsId: null }),
-      });
-      if (response.ok) {
         const result = await response.json();
-        setWorks((prevPortfolioList) => [...prevPortfolioList, result]);
-        toast.success("Portfolio added successfully");
+        setWorks(
+          works.map((portfolio) =>
+            portfolio._id === result._id ? result : portfolio
+          )
+        );
+        toast.success("Portfolio updated successfully");
       } else {
-        toast.error("Failed to add Portfolio info");
+        // Add new work card with a null workDetailsId initially
+        const response = await fetch("/works", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedData),
+        });
+        if (response.ok) {
+          const result = await response.json();
+          setWorks((prevPortfolioList) => [...prevPortfolioList, result]);
+          toast.success("Portfolio added successfully");
+        } else {
+          toast.error("Failed to add Portfolio info");
+        }
       }
-    }
 
-    reset();
-    setImage(null);
-    setBase64Image("");
-    setCurrentPortfolio(null);
-    refetch();
+      reset();
+      setImage(null);
+      setBase64Image("");
+      setCurrentPortfolio(null);
+      refetch();
+    } catch (error) {
+      toast.error("Failed to upload images or submit the form");
+      console.error("Error submitting the form:", error);
+    }
   };
 
   const onReset = (e) => {
@@ -226,7 +234,7 @@ const AddPortfolioForm = () => {
                         type="file"
                         name="file"
                         id="file-input"
-                        {...register("file")}
+                        // {...register("file")}
                         multiple={false}
                         accept={acceptedFileTypes}
                         onChange={handleImageChange}

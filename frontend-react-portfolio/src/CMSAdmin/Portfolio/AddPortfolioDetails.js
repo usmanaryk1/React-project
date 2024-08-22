@@ -22,7 +22,6 @@ const AddPortfolioDetails = () => {
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      file: "",
       client: "",
       category: "",
       date: "",
