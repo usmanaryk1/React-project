@@ -39,7 +39,8 @@ const projectSchema = new Schema({
   workDetailsId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "ProjectDetails_Model", // Ensure this matches the name of your `workDetails` model
-    required: true, // Make it required if necessary
+    required: false, // Make it required if necessary
+    default: null,
   },
 });
 

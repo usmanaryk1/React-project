@@ -16,6 +16,7 @@ const Contact_Routes = require("../router/contact.js");
 const Social_Routes = require("../router/social.js");
 const ProjectDetails_Routes = require("../router/projectDetails.js");
 const Auth_Routes = require("../router/auth_users.js");
+const Upload_Route = require("../router/upload.js");
 
 app.use(express.json());
 // app.use(cors());
@@ -24,6 +25,7 @@ app.use(
     origin: "http://localhost:3000",
   })
 );
+
 // USE ROUTES
 
 app.use("/hero", personal_SkillsRoutes);
@@ -37,6 +39,10 @@ app.use("/contact", Contact_Routes);
 app.use("/social", Social_Routes);
 app.use("/workDetails", ProjectDetails_Routes);
 app.use("/auth", Auth_Routes);
+app.use("/api", Upload_Route);
+
+// Make uploads folder public
+app.use("/uploads", express.static("uploads"));
 
 connectDB();
 
