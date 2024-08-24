@@ -1599,6 +1599,7 @@ footer .credits a {
 form {
   max-width: 600px;
   margin: 50px auto 0;
+  padding: 10px;
 }
 
 .form h2 {
@@ -1637,15 +1638,6 @@ input[type="number"],
 .form .submit:hover {
   transform: scale(1.1);
 }
-/* .form .cancel {
-  background: #0062d3;
-  color: #fff;
-  border: 0;
-  padding: 10px 25px;
-  margin: 10px auto 15px;
-  border-radius: 25px;
-  cursor: pointer;
-} */
 
 .form .add-more-btn {
   background: #0062d3;
@@ -2104,7 +2096,7 @@ input[type="number"],
 # Vertical Navbar
 --------------------------------------------------------------*/
 
-.vertical-header {
+/* .vertical-header {
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -2112,7 +2104,7 @@ input[type="number"],
   left: 0;
   height: 100%;
   width: 235px; /* Adjust the width as needed */
-  background-color: #fff;
+/* background-color: #fff;
   z-index: 9999;
   padding-top: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
@@ -2142,10 +2134,10 @@ input[type="number"],
   width: 100%;
   padding: 10px 5px;
   text-align: left;
-}
+} */
 
 /* Styles for the dropdown in vertical navbar */
-.vertical-navbar .dropdown ul {
+/* .vertical-navbar .dropdown ul {
   display: block;
   margin: 0;
   padding: 10px 0;
@@ -2197,21 +2189,192 @@ input[type="number"],
 
 .vertical-navbar::-webkit-scrollbar {
   width: 12px; /* Adjust the width as needed */
-}
+/* }
 
 /* Track */
-.vertical-navbar::-webkit-scrollbar-track {
+/* .vertical-navbar::-webkit-scrollbar-track {
   background: #f1f1f1; /* Change the background color as needed */
-  border-radius: 10px; /* Optional: adjust border radius for rounded corners */
-}
+/* border-radius: 10px; Optional: adjust border radius for rounded corners */
+/* }  */
 
 /* Handle */
-.vertical-navbar::-webkit-scrollbar-thumb {
-  background: #ececec; /* Change the thumb color as needed */
-  border-radius: 10px; /* Optional: adjust border radius for rounded corners */
-}
+/* .vertical-navbar::-webkit-scrollbar-thumb { */
+/* background: #ececec; Change the thumb color as needed */
+/* border-radius: 10px; Optional: adjust border radius for rounded corners */
+/* } */
 
 /* Handle on hover */
-.vertical-navbar::-webkit-scrollbar-thumb:hover {
-  background: #b6b0b0; /* Change the hover color as needed */
+/* .vertical-navbar::-webkit-scrollbar-thumb:hover { */
+/* background: #b6b0b0; Change the hover color as needed */
+/* } */
+
+/*--------------------------------------------------------------
+# Vertical Navbar
+--------------------------------------------------------------*/
+/* Style for the offcanvas background */
+.offcanvas {
+  background-color: black; /* Change this to your desired background color */
+  /* width: 250px; */
+}
+
+/* Adjust the width of the offcanvas */
+.offcanvas.offcanvas-start {
+  width: 260px !important; /* Adjust this to your desired width */
+}
+.offcanvas-header h1 a {
+  color: white;
+}
+/* .offcanvas-header .btn-close {
+  color: white !important;
+} */
+
+/* Change the color of the close button */
+.offcanvas-header .btn-close {
+  background-color: transparent; /* Remove the default background */
+  background-image: none; /* Remove the default "X" icon */
+  color: white; /* Set the desired color */
+  font-size: 3.5rem; /* Adjust the size if needed */
+}
+
+/* Create a custom "X" icon with text */
+.offcanvas-header .btn-close:before {
+  content: "×"; /* You can use "×" or another symbol */
+  font-size: 3.5rem;
+  color: white; /* Set the desired color */
+  position: absolute;
+  top: 0px;
+  right: 10px;
+}
+
+.vertical-header .toggel-button i {
+  color: black;
+  font-size: 4 rem;
+}
+
+/* .vertical-header {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 235px; 
+  background-color: #fff;
+  z-index: 9999;
+  padding-top: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+} */
+
+.vertical-navbar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.vertical-navbar ul {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* margin: 0; */
+  padding-right: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.vertical-navbar ul li {
+  width: 100%;
+  margin: 5px 0;
+  padding: 0px 5px 0px 0px;
+  position: relative;
+}
+
+.vertical-navbar .nav-link {
+  width: 100%;
+  padding: 10px 5px;
+  text-align: left;
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+/* Styles for the dropdown in vertical navbar */
+
+.vertical-navbar .dropdown a {
+  color: white;
+}
+.vertical-navbar .dropdown ul {
+  display: block;
+  margin: 0;
+  padding: 10px 0;
+  z-index: 99;
+  opacity: 0;
+  background: #fff;
+  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+  transition: 0.3s;
+}
+
+.vertical-navbar .dropdown ul li {
+  min-width: 200px;
+}
+
+.vertical-navbar .dropdown ul a {
+  padding: 10px 20px;
+  font-size: 14px;
+  text-transform: none;
+  color: #4e4e4e;
+}
+
+.vertical-navbar .dropdown ul a i {
+  font-size: 12px;
+}
+
+.vertical-navbar .dropdown ul a:hover,
+.vertical-navbar .dropdown ul .active:hover,
+.vertical-navbar .dropdown ul li:hover > a {
+  color: #0078ff;
+}
+
+.vertical-navbar .dropdown:hover > ul {
+  opacity: 1;
+  visibility: visible;
+}
+
+.vertical-navbar .dropdown .dropdown ul {
+  top: 0;
+  left: calc(100% - 30px);
+  visibility: hidden;
+}
+
+.vertical-navbar .dropdown .dropdown:hover > ul {
+  opacity: 1;
+  top: 0;
+  left: 100%;
+  visibility: visible;
+}
+
+/* Custom scrollbar styles for WebKit browsers (Chrome, Safari) */
+.offcanvas-body::-webkit-scrollbar {
+  width: 13px; /* Change this to your desired scrollbar width */
+}
+
+.offcanvas-body::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track background color */
+}
+
+.offcanvas-body::-webkit-scrollbar-thumb {
+  background: #888; /* Scrollbar color */
+  border-radius: 18px; /* Rounded corners for the scrollbar */
+}
+
+.offcanvas-body::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Scrollbar color on hover */
+}
+
+/* Optional: Additional styling for the offcanvas header */
+.offcanvas-header {
+  border-bottom: 1px solid #e9ecef; /* Example border */
+  background-color: #070707; /* Example background color */
 }
