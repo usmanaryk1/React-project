@@ -37,7 +37,7 @@ const AddPortfolioDetails = () => {
   const queryParams = new URLSearchParams(location.search);
   const history = useHistory();
   const { id: workId } = useParams();
-  console.log("Initial workId", workId);
+  // console.log("Initial workId", workId);
 
   const [currentDetails, setCurrentDetails] = useState(null);
   const { data: details, setData: setDetails } = useFetch("/workDetails");
@@ -54,6 +54,7 @@ const AddPortfolioDetails = () => {
     const file = e.target.files[0];
     if (file) {
       const base64 = await convertBase64(file);
+      // console.log("base64", base64);
       setBase64Images((prevState) => {
         const newImages = [...prevState];
         newImages[index] = base64;
@@ -104,23 +105,26 @@ const AddPortfolioDetails = () => {
     }
   }, [currentDetails, setValue, reset]);
 
-  console.log("currentDetails", currentDetails);
+  // console.log("currentDetails", currentDetails);
 
   const onSubmit = async (formObject) => {
     let imageUrls = [...base64Images];
+    // console.log("imageUrls base64Images", imageUrls);
 
     for (let i = 0; i < images.length; i++) {
       if (images[i]) {
+        // console.log(`image ${i}:`, images[i]);
         const imageFormData = new FormData();
         imageFormData.append("file", images[i]);
 
         try {
-          const response = await fetch("http://localhost:8000/upload", {
+          const response = await fetch("/api/upload", {
             method: "POST",
             body: imageFormData,
           });
           const data = await response.json();
-          imageUrls[i] = data.url;
+          // console.log(`Uploaded image ${i}:`, data.file);
+          imageUrls[i] = data.file;
         } catch (error) {
           console.error("Error uploading the image:", error);
         }
@@ -135,10 +139,10 @@ const AddPortfolioDetails = () => {
       desc: formObject.desc,
       slideImages: imageUrls,
       isActive: formObject.isActive,
-      // workId: workId,
     };
 
-    console.log("updatedData", updatedData);
+    // console.log("ImgaeUrls:", imageUrls);
+    // console.log("updatedData", updatedData);
     // console.log("workId", workId);
     try {
       // Send PUT request to update the JSON data
@@ -152,12 +156,12 @@ const AddPortfolioDetails = () => {
           body: JSON.stringify(updatedData),
         });
         const result = await response.json();
-        console.log("update details response:", result);
+        // console.log("update details response:", result);
         setDetails(
           details.map((detail) => (detail._id === result._id ? result : detail))
         );
         childRef.current.childFunction();
-        console.log("Updated Details: ", details);
+        // console.log("Updated Details: ", details);
         toast.success("Details updated successfully");
       } else {
         // Send POST request to update the JSON data
@@ -173,11 +177,12 @@ const AddPortfolioDetails = () => {
           throw new Error(`Failed to add details: ${response.statusText}`);
         }
         const result = await response.json();
-        console.log("RESULT", result, result._id);
-        // Update corresponding work's workDetailsId
+        // console.log("RESULT", result, result._id);
+        // Update the workDetailsId in the corresponding work
         const updatedWorkResponse = await fetch(`/works/${workId}`, {
           method: "PATCH",
           headers: {
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ workDetailsId: result._id }),
@@ -191,7 +196,7 @@ const AddPortfolioDetails = () => {
         });
 
         childRef.current.childFunction(result._id);
-        console.log("updatedWorkResponse", updatedWorkResponse);
+        // console.log("updatedWorkResponse", updatedWorkResponse);
         if (!updatedWorkResponse.ok) {
           throw new Error(
             `Failed to update work: ${updatedWorkResponse.statusText}`
@@ -221,7 +226,7 @@ const AddPortfolioDetails = () => {
 
   const handleEdit = (details) => {
     setCurrentDetails(details);
-    console.log("onEditClick: ", details);
+    // console.log("onEditClick: ", details);
   };
 
   const handleDelete = async (detailsId, workId) => {
@@ -235,10 +240,11 @@ const AddPortfolioDetails = () => {
       if (!response.ok) {
         throw new Error(`Failed to delete details: ${response.statusText}`);
       }
-      console.log("delete workId", workId);
+      // console.log("delete workId", workId);
       const updatedWorkResponse = await fetch(`/works/${workId}`, {
         method: "PATCH",
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ workDetailsId: null }),
@@ -332,93 +338,6 @@ const AddPortfolioDetails = () => {
                       {images.length === 0 ? "Add Project Image" : "Add More +"}
                     </button>
                   </div>
-
-                  {/* <div className="text-center">
-                                        <div className="image" onClick={handleImage1Click}>
-                                            {base64Image1 ? (
-                                                <img
-                                                    src={base64Image1}
-                                                    alt="Uploaded"
-                                                    className="img-display-before"
-                                                />
-                                            ) : (
-                                                <img
-                                                    src="../../assets/img/default-work-image.webp"
-                                                    alt="default"
-                                                    className="img-display-before"
-                                                />
-                                            )}
-                                            <input
-                                                type="file"
-                                                name="file1"
-                                                id="file-input1"
-                                                {...register('file1')}
-                                                multiple={false}
-                                                onChange={handleImage1Change}
-                                                ref={imageRef1}
-                                                style={{ "display": "none" }}
-                                            />
-                                            <div className="label-container text-center">
-                                                <label className=" my-3"><b>Choose Slide1 Image</b></label>
-                                            </div>
-                                        </div>
-                                        <div className="image" onClick={handleImage2Click}>
-                                            {base64Image2 ? (
-                                                <img
-                                                    src={base64Image2}
-                                                    alt="Uploaded"
-                                                    className="img-display-before"
-                                                />
-                                            ) : (
-                                                <img
-                                                    src="../../assets/img/default-work-image.webp"
-                                                    alt="default"
-                                                    className="img-display-before"
-                                                />
-                                            )}
-                                            <input
-                                                type="file"
-                                                name="file2"
-                                                id="file-input2"
-                                                {...register('file2')}
-                                                multiple={false}
-                                                onChange={handleImage2Change}
-                                                ref={imageRef2}
-                                                style={{ "display": "none" }}
-                                            />
-                                            <div className="label-container text-center">
-                                                <label className=" my-3"><b>Choose Slide2 Image</b></label>
-                                            </div>
-                                        </div>
-                                        <div className="image" onClick={handleImage3Click}>
-                                            {base64Image3 ? (
-                                                <img
-                                                    src={base64Image3}
-                                                    alt="Uploaded"
-                                                    className="img-display-before"
-                                                />
-                                            ) : (
-                                                <img
-                                                    src="../../assets/img/default-work-image.webp"
-                                                    alt="default"
-                                                    className="img-display-before"
-                                                />
-                                            )}
-                                            <input
-                                                type="file"
-                                                name="file3"
-                                                id="file-input3"
-                                                {...register('file3')}
-                                                multiple={false}
-                                                onChange={handleImage3Change}
-                                                ref={imageRef3}
-                                                style={{ "display": "none" }}
-                                            />
-                                            <div className="label-container text-center">
-                                                <label className=" my-3"><b>Choose Slide3 Image</b></label>
-                                            </div>
-                                        </div>
-                                    </div> */}
 
                   <div className="from-group">
                     <input

@@ -1,12 +1,12 @@
 import * as yup from "yup";
 
-const acceptedFileTypes = [
-  "image/png",
-  "image/jpeg",
-  "image/jpg",
-  "image/webp",
-];
-const FILE_SIZE = 1024 * 1024; // 1MB
+// const acceptedFileTypes = [
+//   "image/png",
+//   "image/jpeg",
+//   "image/jpg",
+//   "image/webp",
+// ];
+// const FILE_SIZE = 1024 * 1024; // 1MB
 
 const validationSchema = yup
   .object({
