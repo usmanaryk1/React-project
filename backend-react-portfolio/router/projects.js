@@ -74,6 +74,25 @@ router.put("/:id", authenticateJWT, async (req, res) => {
   }
 });
 
+// UPDATE PROJECT BY ID BY PATCHING WORKDETAILSID(AUTHENTICATED ONLY)
+
+router.patch("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { workDetailsId } = req.body;
+  try {
+    const updatedWork = await Project_Model.findByIdAndUpdate(
+      id,
+      { workDetailsId },
+      { new: true }
+    );
+    res
+      .status(200)
+      .json({ message: "Project updated successfully", updatedWork });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update work" });
+  }
+});
+
 // DELETE PROJECT INFO BY ID (AUTHENTICATED ONLY)
 
 router.delete("/:id", authenticateJWT, async (req, res) => {

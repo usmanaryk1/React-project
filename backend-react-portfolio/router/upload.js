@@ -5,8 +5,8 @@ const upload = require("../api/multerConfig"); // Import the multer configuratio
 // Image upload route
 router.post("/upload", (req, res) => {
   upload(req, res, (err) => {
-    console.log(req.file); // Check the uploaded file
-    console.log(req.body); // Check if any other form data is received
+    console.log("req.file", req.file); // Check the uploaded file
+    console.log("req.body", req.body); // Check if any other form data is received
     if (err) {
       res.status(400).json({ msg: err });
     } else {
