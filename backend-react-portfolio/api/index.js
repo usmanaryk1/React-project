@@ -17,6 +17,7 @@ const Social_Routes = require("../router/social.js");
 const ProjectDetails_Routes = require("../router/projectDetails.js");
 const Auth_Routes = require("../router/auth_users.js");
 const Upload_Route = require("../router/upload.js");
+const Dashboard_Routes = require("../router/dashboard.js");
 
 app.use(express.json());
 // app.use(cors());
@@ -40,6 +41,7 @@ app.use("/social", Social_Routes);
 app.use("/workDetails", ProjectDetails_Routes);
 app.use("/auth", Auth_Routes);
 app.use("/api", Upload_Route);
+app.use("/dashboard", Dashboard_Routes);
 
 // Make uploads folder public
 app.use("/uploads", express.static("uploads"));
