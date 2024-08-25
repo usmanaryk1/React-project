@@ -229,7 +229,6 @@ const Header = () => {
             </div>
             <div class="offcanvas-body">
               <nav id="navbar" className="vertical-navbar">
-                <a href="index.html" class="logo"></a>
                 <ul>
                   {navLinks.map((link, index) => (
                     <li key={index}>
