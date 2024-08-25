@@ -42,7 +42,7 @@ const AddTestimonialForm = () => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
     setBase64Image(base64);
-    console.log("base64", base64);
+    // console.log("base64", base64);
     setImage(file);
   };
 
@@ -77,13 +77,13 @@ const AddTestimonialForm = () => {
     }
   }, [currentTestimonial, setValue, reset]);
 
-  console.log("currentTestimonial:", currentTestimonial);
+  // console.log("currentTestimonial:", currentTestimonial);
   const onSubmit = async (formObject, e) => {
     e.preventDefault();
 
     formObject.img = base64Image; // Add the base64 image to the form object
 
-    console.log("Form Data:", formObject);
+    // console.log("Form Data:", formObject);
 
     let imageUrl = formObject.img;
 
@@ -93,12 +93,12 @@ const AddTestimonialForm = () => {
       imageFormData.append("file", image);
 
       try {
-        const response = await fetch("http://localhost:8000/upload", {
+        const response = await fetch("/api/upload", {
           method: "POST",
           body: imageFormData,
         });
         const data = await response.json();
-        imageUrl = data.url; // Assuming the server responds with the URL of the uploaded image
+        imageUrl = data.file; // Assuming the server responds with the URL of the uploaded image
       } catch (error) {
         console.error("Error uploading the image:", error);
       }
@@ -110,7 +110,7 @@ const AddTestimonialForm = () => {
       img: imageUrl,
       isActive: formObject.isActive,
     };
-    console.log("imageUrl", imageUrl);
+    // console.log("imageUrl", imageUrl);
 
     if (currentTestimonial) {
       const response = await fetch(`/testimonials/${currentTestimonial._id}`, {
@@ -122,13 +122,13 @@ const AddTestimonialForm = () => {
         body: JSON.stringify(updatedData),
       });
       const result = await response.json();
-      console.log("Updated testimonial response: ", result);
+      // console.log("Updated testimonial response: ", result);
       setTestimonials(
         testimonials.map((testimonial) =>
           testimonial._id === result._id ? result : testimonial
         )
       );
-      console.log("Updated testimonial: ", testimonials);
+      // console.log("Updated testimonial: ", testimonials);
       toast.success("Testimonial updated successfully");
     } else {
       const response = await fetch("/testimonials", {
@@ -141,12 +141,12 @@ const AddTestimonialForm = () => {
       });
       if (response.ok) {
         const result = await response.json();
-        console.log("Added testimonial response: ", result);
+        // console.log("Added testimonial response: ", result);
         setTestimonials((prevTestimonialList) => [
           ...prevTestimonialList,
           result,
         ]);
-        console.log("Added testimonial: ", testimonials);
+        // console.log("Added testimonial: ", testimonials);
         toast.success("Testimonial added successfully");
       } else {
         toast.error("Failed to add testimonial info");
@@ -183,7 +183,7 @@ const AddTestimonialForm = () => {
         setTestimonials(
           testimonials.filter((testimonial) => testimonial._id !== id)
         );
-        console.log("Deleted testimonial: ", testimonials);
+        // console.log("Deleted testimonial: ", testimonials);
         toast.success("Testimonial deleted successfully");
       } else {
         toast.error("Failed to delete testimonial");

@@ -33,7 +33,7 @@ const AddForm = () => {
   const [currentAbout, setCurrentAbout] = useState(null);
   const { data: about, setData: setAbout, refetch } = useFetch("/about");
 
-  console.log("about:", about);
+  // console.log("about:", about);
   useEffect(() => {
     if (currentAbout) {
       setValue("name", currentAbout.name);
@@ -57,7 +57,7 @@ const AddForm = () => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
     setBase64Image(base64);
-    console.log("base64", base64);
+    // console.log("base64", base64);
     setImage(file);
   };
 
@@ -83,7 +83,7 @@ const AddForm = () => {
   const onSubmit = async (formObject) => {
     formObject.aboutImage = base64Image; // Add the base64 image to the form object
 
-    console.log("Form Data:", formObject);
+    // console.log("Form Data:", formObject);
 
     let imageUrl = formObject.aboutImage;
 
@@ -93,12 +93,12 @@ const AddForm = () => {
       imageFormData.append("file", image);
 
       try {
-        const response = await fetch("http://localhost:8000/upload", {
+        const response = await fetch("/api/upload", {
           method: "POST",
           body: imageFormData,
         });
         const data = await response.json();
-        imageUrl = data.url; // Assuming the server responds with the URL of the uploaded image
+        imageUrl = data.file; // Assuming the server responds with the URL of the uploaded image
       } catch (error) {
         console.error("Error uploading the image:", error);
       }
@@ -113,7 +113,7 @@ const AddForm = () => {
       img: imageUrl,
       isActive: formObject.isActive,
     };
-    console.log("imageUrl", imageUrl);
+    // console.log("imageUrl", imageUrl);
 
     if (currentAbout) {
       const response = await fetch(`/about/${currentAbout._id}`, {
@@ -126,7 +126,7 @@ const AddForm = () => {
       });
       const result = await response.json();
       setAbout(about.map((item) => (item._id === result._id ? result : item)));
-      console.log("About info updated successfully", about);
+      // console.log("About info updated successfully", about);
       toast.success("About info updated successfully");
     } else {
       const response = await fetch("/about", {
@@ -140,7 +140,7 @@ const AddForm = () => {
       if (response.ok) {
         const result = await response.json();
         setAbout((prevAboutList) => [...prevAboutList, result]);
-        console.log("About info added successfully", about);
+        // console.log("About info added successfully", about);
         toast.success("About info added successfully");
       } else {
         toast.error("Failed to add about info");
@@ -176,7 +176,7 @@ const AddForm = () => {
       setAbout(about.filter((item) => item._id !== id));
       refetch();
       toast.success("About info deleted successfully");
-      console.log("About info deleted successfully", about);
+      // console.log("About info deleted successfully", about);
     } else {
       toast.error("Failed to delete about info");
     }

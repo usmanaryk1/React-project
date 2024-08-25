@@ -100,7 +100,7 @@ const AddCertificationForm = () => {
     const formData = new FormData();
     formData.append("file", imageFile);
     try {
-      const response = await fetch("http://localhost:8000/api/upload", {
+      const response = await fetch("/api/upload", {
         method: "POST",
         body: formData,
       });
