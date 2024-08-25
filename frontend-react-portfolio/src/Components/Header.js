@@ -155,11 +155,12 @@
 import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../CMSAdmin/Auth/AuthContext";
+import { useLocation } from "react-router-dom/cjs/react-router-dom";
 
 const Header = () => {
   const [navLinks, setNavLinks] = useState([]);
   const { user, onLogout, isAdminPage, isAuthenticated } = useAuth();
-
+  const location = useLocation();
   const preventRefresh = (e) => {
     e.preventDefault();
   };
@@ -190,49 +191,57 @@ const Header = () => {
       ]);
     }
   }, [isAuthenticated, isAdminPage]);
-
+  const isActiveLink = (link) => {
+    return location.hash === link || location.pathname === link;
+  };
   return (
     <>
       {isAdminPage && isAuthenticated ? (
-        <header className="vertical-header">
+        <header id="header" className="fixed-top vertical-header">
           <button
-            class="btn toggle-button"
+            className="btn toggle-button"
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasScrolling"
             aria-controls="offcanvasScrolling"
           >
             <i
-              class="bi bi-list"
-              style={{ fontSize: "2rem", color: "black" }}
+              className="bi bi-list"
+              style={{ fontSize: "2rem", color: "white" }}
             ></i>
           </button>
 
           <div
-            class="offcanvas offcanvas-start"
+            className="offcanvas offcanvas-start"
             data-bs-scroll="true"
             data-bs-backdrop="false"
             tabindex="-1"
             id="offcanvasScrolling"
             aria-labelledby="offcanvasScrollingLabel"
           >
-            <div class="offcanvas-header">
-              <h1 class="offcanvas-title" id="offcanvasScrollingLabel">
+            <div className="offcanvas-header">
+              <h1 className="offcanvas-title logo" id="offcanvasScrollingLabel">
                 <a href="index.html">Portfolio</a>
               </h1>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="offcanvas"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="offcanvas-body">
+            <div className="offcanvas-body">
               <nav id="navbar" className="vertical-navbar">
                 <ul>
                   {navLinks.map((link, index) => (
                     <li key={index}>
-                      <Link className="nav-link" smooth to={link.to}>
+                      <Link
+                        className={`nav-link ${
+                          isActiveLink(link.to) ? "active" : ""
+                        }`}
+                        smooth
+                        to={link.to}
+                      >
                         {link.label}
                       </Link>
                     </li>
@@ -298,11 +307,16 @@ const Header = () => {
               <a href="index.html">Portfolio</a>
             </h1>
             <nav id="navbar" className="navbar">
-              {/* <a href="index.html" class="logo"><img src="assets/img/logo/png" alt="" class="img-fluid"/></a> */}
               <ul>
                 {navLinks.map((link, index) => (
                   <li key={index}>
-                    <Link className="nav-link" smooth to={link.to}>
+                    <Link
+                      className={`nav-link ${
+                        isActiveLink(link.to) ? "active" : ""
+                      }`}
+                      smooth
+                      to={link.to}
+                    >
                       {link.label}
                     </Link>
                   </li>

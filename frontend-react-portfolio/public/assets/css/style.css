@@ -468,8 +468,8 @@ a:hover {
 #header {
   transition: all 0.5s;
   z-index: 997;
-  padding: 20px 0;
-  background: rgba(0, 0, 0, 1); /*Temporary Add background */
+  padding: 10px 0;
+  background: rgba(0, 0, 0, 0.9);
 }
 
 #header .logo {
@@ -1676,10 +1676,24 @@ input[type="number"],
 /*--------------------------------------------------------------
 # Hero Form 
 --------------------------------------------------------------*/
+#dashboard {
+  padding-top: 100px;
+}
+#dashboard .service-content .s-description .link-item {
+  transition: transform 0.3s ease;
+}
+
+#dashboard .service-content .s-description .link-item:hover {
+  transform: scale(1.1);
+}
+
+/*--------------------------------------------------------------
+# Hero Form 
+--------------------------------------------------------------*/
 .hero-container {
   border-radius: 5px;
   max-width: 550px;
-  margin: 50px auto;
+  margin: 120px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
@@ -1691,7 +1705,7 @@ input[type="number"],
 .add-container {
   border-radius: 5px;
   max-width: 550px;
-  margin: 50px auto;
+  margin: 120px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
@@ -1715,7 +1729,7 @@ input[type="number"],
 .service-container {
   border-radius: 5px;
   max-width: 550px;
-  margin: 50px auto;
+  margin: 120px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
@@ -1727,7 +1741,7 @@ input[type="number"],
 .counter-container {
   border-radius: 5px;
   max-width: 550px;
-  margin: 50px auto;
+  margin: 120px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
@@ -1739,7 +1753,7 @@ input[type="number"],
 .portfolio-container {
   border-radius: 5px;
   max-width: 550px;
-  margin: 50px auto;
+  margin: 120px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
@@ -1756,7 +1770,7 @@ input[type="number"],
 .portfolioDetails-container {
   border-radius: 5px;
   max-width: 550px;
-  margin: 50px auto;
+  margin: 120px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
@@ -1774,7 +1788,7 @@ input[type="number"],
 .testimonial-container {
   border-radius: 5px;
   max-width: 550px;
-  margin: 50px auto;
+  margin: 120px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
@@ -1798,7 +1812,7 @@ input[type="number"],
 .certification-container {
   border-radius: 5px;
   max-width: 550px;
-  margin: 50px auto;
+  margin: 120px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
@@ -1820,7 +1834,7 @@ input[type="number"],
 .contact-container {
   border-radius: 5px;
   max-width: 550px;
-  margin: 50px auto;
+  margin: 120px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
@@ -1832,7 +1846,7 @@ input[type="number"],
 .social-container {
   border-radius: 5px;
   max-width: 550px;
-  margin: 50px auto;
+  margin: 120px auto;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
@@ -2095,175 +2109,41 @@ input[type="number"],
 /*--------------------------------------------------------------
 # Vertical Navbar
 --------------------------------------------------------------*/
-
-/* .vertical-header {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 235px; /* Adjust the width as needed */
-/* background-color: #fff;
-  z-index: 9999;
-  padding-top: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.vertical-navbar {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  overflow-y: auto;
-}
-
-.vertical-navbar ul {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.vertical-navbar ul li {
-  width: 100%;
-  margin: 5px 0;
-  padding: 0px 5px 0px 0px;
-  position: relative;
-}
-
-.vertical-navbar .nav-link {
-  width: 100%;
-  padding: 10px 5px;
-  text-align: left;
-} */
-
-/* Styles for the dropdown in vertical navbar */
-/* .vertical-navbar .dropdown ul {
-  display: block;
-  margin: 0;
-  padding: 10px 0;
-  z-index: 99;
-  opacity: 0;
-  background: #fff;
-  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
-  transition: 0.3s;
-}
-
-.vertical-navbar .dropdown ul li {
-  min-width: 200px;
-}
-
-.vertical-navbar .dropdown ul a {
-  padding: 10px 20px;
-  font-size: 14px;
-  text-transform: none;
-  color: #4e4e4e;
-}
-
-.vertical-navbar .dropdown ul a i {
-  font-size: 12px;
-}
-
-.vertical-navbar .dropdown ul a:hover,
-.vertical-navbar .dropdown ul .active:hover,
-.vertical-navbar .dropdown ul li:hover > a {
-  color: #0078ff;
-}
-
-.vertical-navbar .dropdown:hover > ul {
-  opacity: 1;
-  visibility: visible;
-}
-
-.vertical-navbar .dropdown .dropdown ul {
-  top: 0;
-  left: calc(100% - 30px);
-  visibility: hidden;
-}
-
-.vertical-navbar .dropdown .dropdown:hover > ul {
-  opacity: 1;
-  top: 0;
-  left: 100%;
-  visibility: visible;
-}
-
-.vertical-navbar::-webkit-scrollbar {
-  width: 12px; /* Adjust the width as needed */
-/* }
-
-/* Track */
-/* .vertical-navbar::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Change the background color as needed */
-/* border-radius: 10px; Optional: adjust border radius for rounded corners */
-/* }  */
-
-/* Handle */
-/* .vertical-navbar::-webkit-scrollbar-thumb { */
-/* background: #ececec; Change the thumb color as needed */
-/* border-radius: 10px; Optional: adjust border radius for rounded corners */
-/* } */
-
-/* Handle on hover */
-/* .vertical-navbar::-webkit-scrollbar-thumb:hover { */
-/* background: #b6b0b0; Change the hover color as needed */
-/* } */
-
-/*--------------------------------------------------------------
-# Vertical Navbar
---------------------------------------------------------------*/
 /* Style for the offcanvas background */
 .offcanvas {
-  background-color: black; /* Change this to your desired background color */
-  /* width: 250px; */
+  background-color: black;
 }
 
 /* Adjust the width of the offcanvas */
 .offcanvas.offcanvas-start {
-  width: 260px !important; /* Adjust this to your desired width */
+  width: 260px !important;
 }
 .offcanvas-header h1 a {
   color: white;
 }
-/* .offcanvas-header .btn-close {
-  color: white !important;
-} */
 
 /* Change the color of the close button */
 .offcanvas-header .btn-close {
   background-color: transparent; /* Remove the default background */
   background-image: none; /* Remove the default "X" icon */
-  color: white; /* Set the desired color */
-  font-size: 3.5rem; /* Adjust the size if needed */
+  color: white;
+  font-size: 3.5rem;
 }
 
 /* Create a custom "X" icon with text */
 .offcanvas-header .btn-close:before {
   content: "×"; /* You can use "×" or another symbol */
   font-size: 3.5rem;
-  color: white; /* Set the desired color */
+  color: white;
   position: absolute;
   top: 0px;
   right: 10px;
 }
 
 .vertical-header .toggel-button i {
-  color: black;
+  color: white;
   font-size: 4 rem;
 }
-
-/* .vertical-header {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 235px; 
-  background-color: #fff;
-  z-index: 9999;
-  padding-top: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-} */
 
 .vertical-navbar {
   display: flex;
@@ -2276,7 +2156,6 @@ input[type="number"],
   display: flex;
   flex-direction: column;
   width: 100%;
-  /* margin: 0; */
   padding-right: 0;
   padding-left: 0;
   list-style: none;
@@ -2357,7 +2236,7 @@ input[type="number"],
 
 /* Custom scrollbar styles for WebKit browsers (Chrome, Safari) */
 .offcanvas-body::-webkit-scrollbar {
-  width: 13px; /* Change this to your desired scrollbar width */
+  width: 13px;
 }
 
 .offcanvas-body::-webkit-scrollbar-track {
