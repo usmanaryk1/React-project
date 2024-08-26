@@ -191,9 +191,22 @@ const Header = () => {
       ]);
     }
   }, [isAuthenticated, isAdminPage]);
-  const isActiveLink = (link) => {
-    return location.hash === link || location.pathname === link;
+
+  const ActiveLink = (link) => {
+    // console.log("Location", location, "Link:", link);
+    return location.pathname === link;
   };
+
+  const isActiveLink = (link) => {
+    const linkHash = link.split("#")[1] ? `#${link.split("#")[1]}` : null;
+
+    // console.log("Location", location);
+    // console.log("link:", link);
+
+    // Check if the location's hash matches the link hash
+    return location.hash === linkHash || location.pathname === link;
+  };
+
   return (
     <>
       {isAdminPage && isAuthenticated ? (
@@ -237,7 +250,7 @@ const Header = () => {
                     <li key={index}>
                       <Link
                         className={`nav-link ${
-                          isActiveLink(link.to) ? "active" : ""
+                          ActiveLink(link.to) ? "active" : ""
                         }`}
                         smooth
                         to={link.to}
