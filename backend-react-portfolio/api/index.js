@@ -19,6 +19,11 @@ const Auth_Routes = require("../router/auth_users.js");
 const Upload_Route = require("../router/upload.js");
 const Dashboard_Routes = require("../router/dashboard.js");
 
+// Simple route
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
 app.use(express.json());
 // app.use(cors());
 app.use(
@@ -63,11 +68,6 @@ app.listen(PORT, () => {
 
 // // Middleware to parse JSON
 // app.use(express.json());
-
-// // Simple route
-// app.get("/", (req, res) => {
-//   res.send("Hello World!");
-// });
 
 // // Connect to MongoDB
 // mongoose
