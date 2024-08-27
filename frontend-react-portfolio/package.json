@@ -2,7 +2,7 @@
   "name": "devfolio",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8000",
+  "proxy": "https://react-project-backend-xi.vercel.app/",
   "homepage": ".",
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
