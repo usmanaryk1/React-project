@@ -47,9 +47,9 @@ app.use("/dashboard", Dashboard_Routes);
 app.use("/uploads", express.static("uploads"));
 
 connectDB();
-
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
+const PORT = 8000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 
 // const express = require("express");
