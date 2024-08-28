@@ -1,20 +1,5 @@
 {
   "version": 2,
   "builds": [{ "src": "api/index.js", "use": "@vercel/node" }],
-  "routes": [
-    { "src": "/auth/(.*)", "dest": "api/index.js" },
-    { "src": "/api/(.*)", "dest": "api/index.js" },
-    { "src": "/api/hero", "dest": "api/index.js" },
-    { "src": "/about", "dest": "api/index.js" },
-    { "src": "/services", "dest": "api/index.js" },
-    { "src": "/counts", "dest": "api/index.js" },
-    { "src": "/works", "dest": "api/index.js" },
-    { "src": "/testimonials", "dest": "api/index.js" },
-    { "src": "/certifications", "dest": "api/index.js" },
-    { "src": "/contact", "dest": "api/index.js" },
-    { "src": "/social", "dest": "api/index.js" },
-    { "src": "/workDetails", "dest": "api/index.js" },
-    { "src": "/dashboard", "dest": "api/index.js" },
-    { "src": "/(.*)", "dest": "api/index.js" }
-  ]
+  "routes": [{ "src": "/api/(.*)", "dest": "api/index.js" }]
 }

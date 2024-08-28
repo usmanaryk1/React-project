@@ -35,18 +35,18 @@ app.use(
 // USE ROUTES
 
 app.use("/api/hero", personal_SkillsRoutes);
-app.use("/about", About_Routes);
-app.use("/services", Service_Routes);
-app.use("/counts", Counter_Routes);
-app.use("/works", Project_Routes);
-app.use("/testimonials", Testimonial_Routes);
-app.use("/certifications", Certification_Routes);
-app.use("/contact", Contact_Routes);
-app.use("/social", Social_Routes);
-app.use("/workDetails", ProjectDetails_Routes);
-app.use("/auth", Auth_Routes);
-app.use("/api", Upload_Route);
-app.use("/dashboard", Dashboard_Routes);
+app.use("/api/about", About_Routes);
+app.use("/api/services", Service_Routes);
+app.use("/api/counts", Counter_Routes);
+app.use("/api/works", Project_Routes);
+app.use("/api/testimonials", Testimonial_Routes);
+app.use("/api/certifications", Certification_Routes);
+app.use("/api/contact", Contact_Routes);
+app.use("/api/social", Social_Routes);
+app.use("/api/workDetails", ProjectDetails_Routes);
+app.use("/api/auth", Auth_Routes);
+app.use("/api/file", Upload_Route);
+app.use("/api/dashboard", Dashboard_Routes);
 
 // Make uploads folder public
 app.use("/uploads", express.static("uploads"));
