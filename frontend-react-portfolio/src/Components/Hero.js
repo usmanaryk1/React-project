@@ -10,7 +10,10 @@ const Hero = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
     childFunction,
   }));
   const { isAuthenticated, isAdminPage } = useAuth();
-  const { data: hero, refetch } = useFetch("/hero");
+
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+
+  const { data: hero, refetch } = useFetch(`${API_URL}/hero`);
 
   console.log("hero auth: ", isAuthenticated);
 
