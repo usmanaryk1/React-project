@@ -34,7 +34,7 @@ app.use(
 
 // USE ROUTES
 
-app.use("/hero", personal_SkillsRoutes);
+app.use("/api/hero", personal_SkillsRoutes);
 app.use("/about", About_Routes);
 app.use("/services", Service_Routes);
 app.use("/counts", Counter_Routes);
