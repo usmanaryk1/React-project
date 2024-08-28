@@ -13,7 +13,7 @@ const Hero = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
 
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
-  const { data: hero, refetch } = useFetch(`${API_URL}/hero`);
+  const { data: hero, refetch } = useFetch(`${API_URL}/api/hero`);
 
   console.log("hero auth: ", isAuthenticated);
 
