@@ -20,7 +20,7 @@ const Upload_Route = require("../router/upload.js");
 const Dashboard_Routes = require("../router/dashboard.js");
 
 // Simple route
-app.get("/", (req, res) => {
+app.get("/api/hello", (req, res) => {
   res.send("Hello World!");
 });
 
@@ -31,7 +31,11 @@ app.use(
     origin: "https://frontend-react-portfolio.vercel.app",
   })
 );
-
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//   })
+// );
 // USE ROUTES
 
 app.use("/api/hero", personal_SkillsRoutes);
@@ -52,7 +56,7 @@ app.use("/api/dashboard", Dashboard_Routes);
 app.use("/uploads", express.static("uploads"));
 
 connectDB();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
