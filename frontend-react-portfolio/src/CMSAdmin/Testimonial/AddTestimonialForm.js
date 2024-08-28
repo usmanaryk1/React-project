@@ -9,12 +9,13 @@ import useFetch from "../../Components/useFetch";
 const AddTestimonialForm = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(null);
   const token = localStorage.getItem("token");
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
   const {
     data: testimonials,
     setData: setTestimonials,
     refetch,
-  } = useFetch("/testimonials");
+  } = useFetch(`${API_URL}/api/testimonials`);
   const {
     register,
     handleSubmit,
@@ -93,7 +94,7 @@ const AddTestimonialForm = () => {
       imageFormData.append("file", image);
 
       try {
-        const response = await fetch("/api/upload", {
+        const response = await fetch(`${API_URL}/api/file/upload`, {
           method: "POST",
           body: imageFormData,
         });
@@ -113,14 +114,17 @@ const AddTestimonialForm = () => {
     // console.log("imageUrl", imageUrl);
 
     if (currentTestimonial) {
-      const response = await fetch(`/testimonials/${currentTestimonial._id}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedData),
-      });
+      const response = await fetch(
+        `${API_URL}/api/testimonials/${currentTestimonial._id}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedData),
+        }
+      );
       const result = await response.json();
       // console.log("Updated testimonial response: ", result);
       setTestimonials(
@@ -131,7 +135,7 @@ const AddTestimonialForm = () => {
       // console.log("Updated testimonial: ", testimonials);
       toast.success("Testimonial updated successfully");
     } else {
-      const response = await fetch("/testimonials", {
+      const response = await fetch(`${API_URL}/api/testimonials`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -173,7 +177,7 @@ const AddTestimonialForm = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`/testimonials/${id}`, {
+      const response = await fetch(`${API_URL}/api/testimonials/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

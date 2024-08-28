@@ -8,12 +8,13 @@ import { useState, useEffect } from "react";
 const ContactForm = () => {
   const [currentContact, setCurrentContact] = useState(null);
   const token = localStorage.getItem("token");
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
   const {
     data: contacts,
     setData: setContacts,
     refetch,
-  } = useFetch("/contact");
+  } = useFetch(`${API_URL}/api/contact`);
   const {
     register,
     handleSubmit,
@@ -43,7 +44,7 @@ const ContactForm = () => {
     }
   }, [currentContact, setValue, reset]);
 
-  console.log("currentContact", currentContact);
+  // console.log("currentContact", currentContact);
 
   const onSubmit = async (data) => {
     const formData = {
@@ -57,26 +58,29 @@ const ContactForm = () => {
     if (currentContact) {
       // Update contact
       // const updatedContact = { ...currentContact, ...formData };
-      const response = await fetch(`/contact/${currentContact._id}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${API_URL}/api/contact/${currentContact._id}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const result = await response.json();
-      console.log("Updated contact response:", result);
+      // console.log("Updated contact response:", result);
       setContacts(
         contacts.map((contact) =>
           contact._id === result._id ? result : contact
         )
       );
-      console.log("Updated Contact: ", contacts);
+      // console.log("Updated Contact: ", contacts);
       toast.success("Contacts updated successfully");
     } else {
       // Add new service
-      const response = await fetch("/contact", {
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -86,9 +90,9 @@ const ContactForm = () => {
       });
       if (response.ok) {
         const result = await response.json();
-        console.log("Added contact response: ", result);
+        // console.log("Added contact response: ", result);
         setContacts((prevContacts) => [...prevContacts, result]);
-        console.log("Added Contact: ", contacts);
+        // console.log("Added Contact: ", contacts);
         toast.success("Contact added successfully");
       } else {
         toast.error("Failed to add Contact");
@@ -106,12 +110,12 @@ const ContactForm = () => {
 
   const handleEdit = (contact) => {
     setCurrentContact(contact);
-    console.log("onedit: ", contact);
+    // console.log("onedit: ", contact);
   };
 
   const handleDelete = async (id) => {
-    console.log("Deleting service with ID:", id);
-    const response = await fetch(`/contact/${id}`, {
+    // console.log("Deleting service with ID:", id);
+    const response = await fetch(`${API_URL}/api/contact/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -120,8 +124,8 @@ const ContactForm = () => {
     if (response.ok) {
       setContacts(contacts.filter((contact) => contact._id !== id));
       refetch();
-      toast.success("Contact deleted successfully");
-      console.log("Deleted Contact", contacts);
+      // toast.success("Contact deleted successfully");
+      // console.log("Deleted Contact", contacts);
     } else {
       toast.error("Failed to delete service");
     }

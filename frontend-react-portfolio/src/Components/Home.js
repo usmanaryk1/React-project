@@ -11,14 +11,16 @@ import Testimonial from "./Testimonial";
 import useFetch from "./useFetch";
 
 const Home = () => {
-  const { data: about } = useFetch("/about");
-  const { data: services } = useFetch("/services");
-  const { data: counts } = useFetch("/counts");
-  const { data: works } = useFetch("/works");
-  const { data: testimonials } = useFetch("/testimonials");
-  const { data: certifications } = useFetch("/certifications");
-  const { data: contacts } = useFetch("/contact");
-  const { data: links } = useFetch("/social");
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+
+  const { data: about } = useFetch(`${API_URL}/api/about`);
+  const { data: services } = useFetch(`${API_URL}/api/services`);
+  const { data: counts } = useFetch(`${API_URL}/api/counts`);
+  const { data: works } = useFetch(`${API_URL}/api/works`);
+  const { data: testimonials } = useFetch(`${API_URL}/api/testimonials`);
+  const { data: certifications } = useFetch(`${API_URL}/api/certifications`);
+  const { data: contacts } = useFetch(`${API_URL}/api/contact`);
+  const { data: links } = useFetch(`${API_URL}/api/social`);
 
   return (
     <>

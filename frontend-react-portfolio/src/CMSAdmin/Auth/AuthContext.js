@@ -25,12 +25,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const onLogout = async () => {
-    // await fetch(`http://localhost:8000/users/${user.id}`, {
-    //   method: "PATCH",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ loggedIn: false }),
-    // });
-
     setUser(null);
     setIsAuthenticated(false);
     localStorage.removeItem("user");

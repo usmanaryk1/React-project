@@ -15,15 +15,12 @@ const Hero = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
 
   const { data: hero, refetch } = useFetch(`${API_URL}/api/hero`);
 
-  console.log("hero auth: ", isAuthenticated);
+  // console.log("hero auth: ", isAuthenticated);
 
-  console.log("hero rendering: ", hero);
-  useEffect(() => {
-    console.log("hero changed", hero);
-  }, [hero]);
+  // console.log("hero rendering: ", hero);
 
   const childFunction = (newUser) => {
-    console.log("test function:", newUser);
+    // console.log("test function:", newUser);
     refetch();
   };
   /**

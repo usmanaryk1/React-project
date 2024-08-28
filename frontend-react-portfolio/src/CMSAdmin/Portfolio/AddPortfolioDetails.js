@@ -40,7 +40,11 @@ const AddPortfolioDetails = () => {
   // console.log("Initial workId", workId);
 
   const [currentDetails, setCurrentDetails] = useState(null);
-  const { data: details, setData: setDetails } = useFetch("/workDetails");
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+
+  const { data: details, setData: setDetails } = useFetch(
+    `${API_URL}/api/workDetails`
+  );
 
   const [images, setImages] = useState([]);
   const [base64Images, setBase64Images] = useState([]);
@@ -118,7 +122,7 @@ const AddPortfolioDetails = () => {
         imageFormData.append("file", images[i]);
 
         try {
-          const response = await fetch("/api/upload", {
+          const response = await fetch(`${API_URL}/api/file/upload`, {
             method: "POST",
             body: imageFormData,
           });
@@ -147,14 +151,17 @@ const AddPortfolioDetails = () => {
     try {
       // Send PUT request to update the JSON data
       if (currentDetails) {
-        const response = await fetch(`/workDetails/${currentDetails._id}`, {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedData),
-        });
+        const response = await fetch(
+          `${API_URL}/api/workDetails/${currentDetails._id}`,
+          {
+            method: "PUT",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedData),
+          }
+        );
         const result = await response.json();
         // console.log("update details response:", result);
         setDetails(
@@ -165,7 +172,7 @@ const AddPortfolioDetails = () => {
         toast.success("Details updated successfully");
       } else {
         // Send POST request to update the JSON data
-        const response = await fetch("/workDetails", {
+        const response = await fetch(`${API_URL}/api/workDetails`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -179,14 +186,17 @@ const AddPortfolioDetails = () => {
         const result = await response.json();
         // console.log("RESULT", result, result._id);
         // Update the workDetailsId in the corresponding work
-        const updatedWorkResponse = await fetch(`/works/${workId}`, {
-          method: "PATCH",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ workDetailsId: result._id }),
-        });
+        const updatedWorkResponse = await fetch(
+          `${API_URL}/api/works/${workId}`,
+          {
+            method: "PATCH",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ workDetailsId: result._id }),
+          }
+        );
 
         // Update the URL
         queryParams.set("workDetailsId", result._id);
@@ -231,7 +241,7 @@ const AddPortfolioDetails = () => {
 
   const handleDelete = async (detailsId, workId) => {
     try {
-      const response = await fetch(`/workDetails/${detailsId}`, {
+      const response = await fetch(`${API_URL}/api/workDetails/${detailsId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -241,14 +251,17 @@ const AddPortfolioDetails = () => {
         throw new Error(`Failed to delete details: ${response.statusText}`);
       }
       // console.log("delete workId", workId);
-      const updatedWorkResponse = await fetch(`/works/${workId}`, {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ workDetailsId: null }),
-      });
+      const updatedWorkResponse = await fetch(
+        `${API_URL}/api/works/${workId}`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ workDetailsId: null }),
+        }
+      );
       if (!updatedWorkResponse.ok) {
         throw new Error(
           `Failed to update work: ${updatedWorkResponse.statusText}`

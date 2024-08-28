@@ -8,7 +8,13 @@ import useFetch from "../../Components/useFetch";
 
 const AddPortfolioForm = () => {
   const [currentPortfolio, setCurrentPortfolio] = useState(null);
-  const { data: works, setData: setWorks, refetch } = useFetch("/works");
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+
+  const {
+    data: works,
+    setData: setWorks,
+    refetch,
+  } = useFetch(`${API_URL}/api/works`);
   const {
     register,
     handleSubmit,
@@ -88,7 +94,7 @@ const AddPortfolioForm = () => {
     const formData = new FormData();
     formData.append("file", imageFile);
     try {
-      const response = await fetch("/api/upload", {
+      const response = await fetch(`${API_URL}/api/file/upload`, {
         method: "POST",
         body: formData,
       });
@@ -108,11 +114,11 @@ const AddPortfolioForm = () => {
       let imageUrl = formObject.workImage;
       // Upload images to the backend if the user selected new ones
       if (image) {
-        console.log("image", image);
+        // console.log("image", image);
         imageUrl = await uploadImage(image);
       }
 
-      console.log("Portfolio Data:", formObject);
+      // console.log("Portfolio Data:", formObject);
 
       const updatedData = {
         wTitle: formObject.title,
@@ -123,17 +129,20 @@ const AddPortfolioForm = () => {
         isActive: formObject.isActive,
       };
 
-      console.log("imageUrl", imageUrl);
+      // console.log("imageUrl", imageUrl);
 
       if (currentPortfolio) {
-        const response = await fetch(`/works/${currentPortfolio._id}`, {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedData),
-        });
+        const response = await fetch(
+          `${API_URL}/api/works/${currentPortfolio._id}`,
+          {
+            method: "PUT",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedData),
+          }
+        );
         const result = await response.json();
         setWorks(
           works.map((portfolio) =>
@@ -143,7 +152,7 @@ const AddPortfolioForm = () => {
         toast.success("Portfolio updated successfully");
       } else {
         // Add new work card with a null workDetailsId initially
-        const response = await fetch("/works", {
+        const response = await fetch(`${API_URL}/api/works`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -184,7 +193,7 @@ const AddPortfolioForm = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`/works/${id}`, {
+      const response = await fetch(`${API_URL}/api/works/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

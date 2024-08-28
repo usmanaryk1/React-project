@@ -9,11 +9,13 @@ import Services from "../../Components/Services";
 const AddServiceForm = () => {
   const token = localStorage.getItem("token");
   const [currentService, setCurrentService] = useState(null);
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+
   const {
     data: services,
     setData: setServices,
     refetch,
-  } = useFetch("/services");
+  } = useFetch(`${API_URL}/api/services`);
   const {
     register,
     handleSubmit,
@@ -41,7 +43,7 @@ const AddServiceForm = () => {
     }
   }, [currentService, setValue, reset]);
 
-  console.log("currentService: ", currentService);
+  // console.log("currentService: ", currentService);
 
   const onSubmit = async (data) => {
     const formData = {
@@ -53,27 +55,30 @@ const AddServiceForm = () => {
 
     try {
       if (currentService) {
-        const response = await fetch(`/services/${currentService._id}`, {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
+        const response = await fetch(
+          `${API_URL}/api/services/${currentService._id}`,
+          {
+            method: "PUT",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          }
+        );
         const result = await response.json();
-        console.log("Updated service response:", result);
+        // console.log("Updated service response:", result);
 
         setServices(
           services.map((service) =>
             service._id === result._id ? result : service
           )
         );
-        console.log(" Update service: ", services);
+        // console.log(" Update service: ", services);
         toast.success("Service updated successfully");
       } else {
         // Add new service
-        const response = await fetch("/services", {
+        const response = await fetch(`${API_URL}/api/services`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -83,9 +88,9 @@ const AddServiceForm = () => {
         });
         if (response.ok) {
           const result = await response.json();
-          console.log("new service: ", result);
+          // console.log("new service: ", result);
           setServices((prevServices) => [...prevServices, result]);
-          console.log("Added service: ", services);
+          // console.log("Added service: ", services);
           toast.success("Service added successfully");
         } else {
           toast.error("Failed to add service");
@@ -107,12 +112,12 @@ const AddServiceForm = () => {
 
   const handleEdit = (service) => {
     setCurrentService(service);
-    console.log("oneditClick: ", service);
+    // console.log("oneditClick: ", service);
   };
 
   const handleDelete = async (id) => {
-    console.log("Deleting service with ID:", id);
-    const response = await fetch(`/services/${id}`, {
+    // console.log("Deleting service with ID:", id);
+    const response = await fetch(`${API_URL}/api/services/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -122,7 +127,7 @@ const AddServiceForm = () => {
       setServices(services.filter((service) => service._id !== id));
       refetch();
       toast.success("Service deleted successfully");
-      console.log("Service deleted successfully", services);
+      // console.log("Service deleted successfully", services);
     } else {
       toast.error("Failed to delete service");
     }
@@ -146,7 +151,7 @@ const AddServiceForm = () => {
                       name="icon"
                       className="form-control"
                       {...register("icon")}
-                      placeholder="Icon of Service"
+                      placeholder="Icon of Service (bi bi-briefcase) "
                       required
                     />
                   </div>

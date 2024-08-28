@@ -20,8 +20,9 @@ const Login = () => {
   });
 
   const history = useHistory(); // for programmatic navigation
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
-  console.log("Login component received onLogin prop:", onLogin);
+  // console.log("Login component received onLogin prop:", onLogin);
 
   // const onSubmit = async (data) => {
 
@@ -55,7 +56,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("/auth/login", {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,11 +68,11 @@ const Login = () => {
 
       if (response.ok) {
         const loggedInUser = { ...result.UserModel, loggedIn: true };
-        console.log("loggedInUser", loggedInUser);
+        // console.log("loggedInUser", loggedInUser);
 
         // Save the token to localStorage
         // localStorage.setItem("token", result.accessToken);
-        console.log("Result accessToken", result.accessToken);
+        // console.log("Result accessToken", result.accessToken);
         // Update user status in the context
         onLogin(loggedInUser, result.accessToken, true);
 

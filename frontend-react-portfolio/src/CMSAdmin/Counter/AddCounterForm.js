@@ -9,7 +9,13 @@ import useFetch from "../../Components/useFetch";
 const AddCounterForm = () => {
   const token = localStorage.getItem("token");
   const [currentCounter, setCurrentCounter] = useState(null);
-  const { data: counts, setData: setCounts, refetch } = useFetch("/counts");
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+
+  const {
+    data: counts,
+    setData: setCounts,
+    refetch,
+  } = useFetch(`${API_URL}/api/counts`);
   const {
     register,
     handleSubmit,
@@ -37,7 +43,7 @@ const AddCounterForm = () => {
     }
   }, [currentCounter, setValue, reset]);
 
-  console.log("currentCounter:", currentCounter);
+  // console.log("currentCounter:", currentCounter);
 
   const onSubmit = async (data) => {
     const formData = {
@@ -50,25 +56,28 @@ const AddCounterForm = () => {
     if (currentCounter) {
       // Update counter
       //   const updatedCounter = { ...currentCounter, ...formData };
-      const response = await fetch(`/counts/${currentCounter._id}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${API_URL}/api/counts/${currentCounter._id}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const result = await response.json();
-      console.log("Updated counter response:", result);
+      // console.log("Updated counter response:", result);
 
       setCounts(
         counts.map((counter) => (counter._id === result._id ? result : counter))
       );
-      console.log("Updated counter:", counts);
+      // console.log("Updated counter:", counts);
       toast.success("Counter updated successfully");
     } else {
       // Add new counter
-      const response = await fetch("/counts", {
+      const response = await fetch(`${API_URL}/api/counts`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -78,9 +87,9 @@ const AddCounterForm = () => {
       });
       if (response.ok) {
         const result = await response.json();
-        console.log("Added counter response:", result);
+        // console.log("Added counter response:", result);
         setCounts((prevCounters) => [...prevCounters, result]);
-        console.log("Added counter:", counts);
+        // console.log("Added counter:", counts);
         toast.success("Counter added successfully");
       } else {
         toast.error("Failed to add counter");
@@ -101,8 +110,8 @@ const AddCounterForm = () => {
   };
 
   const handleDelete = async (id) => {
-    console.log("Deleting counter with ID:", id);
-    const response = await fetch(`/counts/${id}`, {
+    // console.log("Deleting counter with ID:", id);
+    const response = await fetch(`${API_URL}/api/counts/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -111,7 +120,7 @@ const AddCounterForm = () => {
     if (response.ok) {
       setCounts(counts.filter((counter) => counter._id !== id));
       refetch();
-      console.log("deleted counter:", counts);
+      // console.log("deleted counter:", counts);
       toast.success("Counter deleted successfully");
     } else {
       toast.error("Failed to delete counter");
@@ -136,7 +145,7 @@ const AddCounterForm = () => {
                       name="icon"
                       className="form-control"
                       {...register("icon")}
-                      placeholder="Icon"
+                      placeholder="bi bi-award"
                       required
                     />
                   </div>

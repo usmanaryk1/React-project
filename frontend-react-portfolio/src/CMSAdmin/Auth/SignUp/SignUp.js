@@ -8,11 +8,11 @@ import { useAuth } from "../AuthContext";
 
 const SignUp = () => {
   const { onSignup } = useAuth();
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
   const {
     register,
     handleSubmit,
-    // setError,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
@@ -25,54 +25,11 @@ const SignUp = () => {
   });
   const history = useHistory(); // for programmatic navigation
 
-  console.log("Signup component received onSignup prop:", onSignup);
-
-  // const checkIfEmailExists = async (email) => {
-  //   const response = await fetch(
-  //     `http://localhost:8000/users?email=${encodeURIComponent(email)}`
-  //   );
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //     return data.length > 0;
-  //   }
-  //   throw new Error("Failed to check email existence");
-  // };
-
-  // const checkIfUsernameExists = async (username) => {
-  //   const response = await fetch(
-  //     `/users?username=${encodeURIComponent(username)}`
-  //   );
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //     return data.length > 0;
-  //   }
-  //   throw new Error("Failed to check username existence");
-  // };
+  // console.log("Signup component received onSignup prop:", onSignup);
 
   const onSubmit = async (data) => {
-    console.log("Data", data);
-
-    // check email existance
+    // console.log("Data", data);
     try {
-      //   const emailExists = await checkIfEmailExists(data.email);
-      //   if (emailExists) {
-      //     setError("email", {
-      //       type: "manual",
-      //       message: "Email already exists. Please log in.",
-      //     });
-      //     return;
-      //   }
-
-      // check username existance
-      // const usernameExists = await checkIfUsernameExists(data.username);
-      // if (usernameExists) {
-      //   setError("username", {
-      //     type: "manual",
-      //     message: "Username already exists. Please choose another.",
-      //   });
-      //   return;
-      // }
-
       // Prepare data for submission
       const { confirmPassword, ...userData } = data;
 
@@ -82,10 +39,10 @@ const SignUp = () => {
         loggedIn: false,
       };
 
-      console.log("userWithStatus", userWithStatus);
+      // console.log("userWithStatus", userWithStatus);
 
       // Make the request to the server
-      const response = await fetch("/auth/register", {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userWithStatus),

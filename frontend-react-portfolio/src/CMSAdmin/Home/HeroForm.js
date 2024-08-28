@@ -12,7 +12,9 @@ const HeroForm = () => {
 
   const childRef = useRef();
   const [currentHero, setCurrentHero] = useState(null);
-  const { data: hero, setData: setHero } = useFetch("/hero");
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+
+  const { data: hero, setData: setHero } = useFetch(`${API_URL}/api/hero`);
   const {
     register,
     handleSubmit,
@@ -37,7 +39,7 @@ const HeroForm = () => {
       reset();
     }
   }, [currentHero, setValue, reset]);
-  console.log("currentHero ", currentHero);
+  // console.log("currentHero ", currentHero);
 
   const onSubmit = async (data) => {
     const formData = {
@@ -48,7 +50,7 @@ const HeroForm = () => {
     if (currentHero) {
       // Update hero
       // const updatedHero = { ...currentHero, ...formData };
-      const response = await fetch(`/hero/${currentHero._id}`, {
+      const response = await fetch(`${API_URL}/api/hero/${currentHero._id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -58,9 +60,9 @@ const HeroForm = () => {
       });
       if (response.ok) {
         const result = await response.json();
-        console.log("Updated hero response:", result);
+        // console.log("Updated hero response:", result);
         setHero((prevHero) => {
-          console.log("Previous Hero:", prevHero);
+          // console.log("Previous Hero:", prevHero);
           return prevHero.map((heroData) =>
             heroData._id === result._id ? result : heroData
           );
@@ -71,7 +73,7 @@ const HeroForm = () => {
       }
     } else {
       // Add new service
-      const response = await fetch("/hero", {
+      const response = await fetch(`${API_URL}/api/hero`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -81,7 +83,7 @@ const HeroForm = () => {
       });
       if (response.ok) {
         const result = await response.json();
-        console.log("new hero: ", result);
+        // console.log("new hero: ", result);
         setHero((prevHero) => [...prevHero, result]);
         childRef.current.childFunction();
         toast.success("Hero added successfully");
@@ -104,8 +106,8 @@ const HeroForm = () => {
   };
 
   const handleDelete = async (id) => {
-    console.log("Deleting service with ID:", id);
-    const response = await fetch(`/hero/${id}`, {
+    // console.log("Deleting service with ID:", id);
+    const response = await fetch(`${API_URL}/api/hero/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -115,7 +117,7 @@ const HeroForm = () => {
       setHero((prevHero) => prevHero.filter((heroData) => heroData._id !== id));
       childRef.current.childFunction();
       toast.success("Hero section deleted successfully");
-      console.log("Hero section deleted successfully", hero);
+      // console.log("Hero section deleted successfully", hero);
     } else {
       console.error("Failed to delete section");
       toast.error("Failed to delete hero section");

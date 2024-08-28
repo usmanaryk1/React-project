@@ -16,9 +16,13 @@ const PortfolioDetails = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
   let workDetailsId = queryParams.get("workDetailsId");
 
   const { id: workId } = useParams();
-  console.log("details data id", workId);
-  const { data: details, refetch } = useFetch("/workDetails/" + workDetailsId);
-  console.log("details data ", details);
+  // console.log("details data id", workId);
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+
+  const { data: details, refetch } = useFetch(
+    `${API_URL}/api/workDetails/${workDetailsId}`
+  );
+  // console.log("details data ", details);
 
   const childFunction = (newWorkDetailsId) => {
     console.log("newWorkDetailsId:", newWorkDetailsId);

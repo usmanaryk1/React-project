@@ -9,8 +9,13 @@ import Contact from "../../Components/Contact";
 const SocialForm = () => {
   const [currentLinks, setCurrentLinks] = useState(null);
   const token = localStorage.getItem("token");
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
-  const { data: links, setData: setLinks, refetch } = useFetch("/social");
+  const {
+    data: links,
+    setData: setLinks,
+    refetch,
+  } = useFetch(`${API_URL}/api/social`);
   const {
     register,
     handleSubmit,
@@ -46,23 +51,26 @@ const SocialForm = () => {
     if (currentLinks) {
       // Update service
       //   const updatedLink = { ...currentLinks, ...formData };
-      const response = await fetch(`/social/${currentLinks._id}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${API_URL}/api/social/${currentLinks._id}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const result = await response.json();
-      console.log("Updated links response:", result);
+      // console.log("Updated links response:", result);
 
       setLinks(links.map((link) => (link._id === result._id ? result : link)));
-      console.log("Updating links: ", links);
+      // console.log("Updating links: ", links);
       toast.success("Link updated successfully");
     } else {
       // Add new service
-      const response = await fetch("/social", {
+      const response = await fetch(`${API_URL}/api/social`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -72,9 +80,9 @@ const SocialForm = () => {
       });
       if (response.ok) {
         const result = await response.json();
-        console.log("Added links response: ", result);
+        // console.log("Added links response: ", result);
         setLinks((prevLinks) => [...prevLinks, result]);
-        console.log("Added links: ", links);
+        // console.log("Added links: ", links);
         toast.success("Link added successfully");
       } else {
         toast.error("Failed to add Link");
@@ -92,12 +100,12 @@ const SocialForm = () => {
 
   const handleEdit = (links) => {
     setCurrentLinks(links);
-    console.log("onedit: ", links);
+    // console.log("onedit: ", links);
   };
 
   const handleDelete = async (id) => {
-    console.log("Deleting service with ID:", id);
-    const response = await fetch(`/social/${id}`, {
+    // console.log("Deleting service with ID:", id);
+    const response = await fetch(`${API_URL}/api/social/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -107,7 +115,7 @@ const SocialForm = () => {
       setLinks(links.filter((links) => links._id !== id));
       refetch();
       toast.success("Link deleted successfully");
-      console.log("Link deleted", links);
+      // console.log("Link deleted", links);
     } else {
       toast.error("Failed to delete Link");
     }

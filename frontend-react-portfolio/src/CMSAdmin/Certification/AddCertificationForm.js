@@ -9,11 +9,13 @@ import useFetch from "../../Components/useFetch";
 const AddCertificationForm = () => {
   const [currentCertifications, setCurrentCertifications] = useState(null);
   const token = localStorage.getItem("token");
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+
   const {
     data: certifications,
     setData: setCertifications,
     refetch,
-  } = useFetch("/certifications");
+  } = useFetch(`${API_URL}/api/certifications`);
   const {
     register,
     handleSubmit,
@@ -93,14 +95,14 @@ const AddCertificationForm = () => {
     }
   }, [currentCertifications, setValue, reset]);
 
-  console.log("currentCertifications", currentCertifications);
+  // console.log("currentCertifications", currentCertifications);
 
   const uploadImage = async (imageFile) => {
     // console.log("image file", imageFile);
     const formData = new FormData();
     formData.append("file", imageFile);
     try {
-      const response = await fetch("/api/upload", {
+      const response = await fetch(`${API_URL}/api/file/upload`, {
         method: "POST",
         body: formData,
       });
@@ -114,7 +116,7 @@ const AddCertificationForm = () => {
   const onSubmit = async (formObject, e) => {
     e.preventDefault();
 
-    console.log("Certification Data:", formObject);
+    // console.log("Certification Data:", formObject);
 
     try {
       formObject.image = base64Image1; // Add the base64 image to the form object
@@ -125,11 +127,11 @@ const AddCertificationForm = () => {
 
       // Upload images to the backend if the user selected new ones
       if (image1) {
-        console.log("image1", image1);
+        // console.log("image1", image1);
         imageUrl1 = await uploadImage(image1);
       }
       if (image2) {
-        console.log("image2", image2);
+        // console.log("image2", image2);
         imageUrl2 = await uploadImage(image2);
       }
 
@@ -144,12 +146,12 @@ const AddCertificationForm = () => {
         isActive: formObject.isActive,
       };
 
-      console.log("imageUrl1", imageUrl1);
-      console.log("imageUrl2", imageUrl2);
+      // console.log("imageUrl1", imageUrl1);
+      // console.log("imageUrl2", imageUrl2);
 
       if (currentCertifications) {
         const response = await fetch(
-          `/certifications/${currentCertifications._id}`,
+          `${API_URL}/api/certifications/${currentCertifications._id}`,
           {
             method: "PUT",
             headers: {
@@ -160,16 +162,16 @@ const AddCertificationForm = () => {
           }
         );
         const result = await response.json();
-        console.log("Updated certification response:", result);
+        // console.log("Updated certification response:", result);
         setCertifications(
           certifications.map((certification) =>
             certification._id === result._id ? result : certification
           )
         );
-        console.log("Updated certification:", certifications);
+        // console.log("Updated certification:", certifications);
         toast.success("Certificate updated successfully");
       } else {
-        const response = await fetch("/certifications", {
+        const response = await fetch(`${API_URL}/api/certifications`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -179,12 +181,12 @@ const AddCertificationForm = () => {
         });
         if (response.ok) {
           const result = await response.json();
-          console.log("Added certification response:", result);
+          // console.log("Added certification response:", result);
           setCertifications((prevCertificationList) => [
             ...prevCertificationList,
             result,
           ]);
-          console.log("Added certification:", certifications);
+          // console.log("Added certification:", certifications);
           toast.success("Certificate added successfully");
         } else {
           toast.error("Failed to add Certificate info");
@@ -219,7 +221,7 @@ const AddCertificationForm = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`/certifications/${id}`, {
+      const response = await fetch(`${API_URL}/api/certifications/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -229,7 +231,7 @@ const AddCertificationForm = () => {
         setCertifications(
           certifications.filter((certification) => certification._id !== id)
         );
-        console.log("Deleted certification:", certifications);
+        // console.log("Deleted certification:", certifications);
         toast.success("Certificate deleted successfully");
       } else {
         toast.error("Failed to delete Certificate");

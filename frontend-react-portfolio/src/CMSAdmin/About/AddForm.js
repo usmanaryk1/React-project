@@ -31,7 +31,14 @@ const AddForm = () => {
   const imageRef = useRef(null);
   const [base64Image, setBase64Image] = useState("");
   const [currentAbout, setCurrentAbout] = useState(null);
-  const { data: about, setData: setAbout, refetch } = useFetch("/about");
+
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+
+  const {
+    data: about,
+    setData: setAbout,
+    refetch,
+  } = useFetch(`${API_URL}/api/about`);
 
   // console.log("about:", about);
   useEffect(() => {
@@ -93,7 +100,7 @@ const AddForm = () => {
       imageFormData.append("file", image);
 
       try {
-        const response = await fetch("/api/upload", {
+        const response = await fetch(`${API_URL}/api/file/upload`, {
           method: "POST",
           body: imageFormData,
         });
@@ -116,7 +123,7 @@ const AddForm = () => {
     // console.log("imageUrl", imageUrl);
 
     if (currentAbout) {
-      const response = await fetch(`/about/${currentAbout._id}`, {
+      const response = await fetch(`${API_URL}/api/about/${currentAbout._id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -129,7 +136,7 @@ const AddForm = () => {
       // console.log("About info updated successfully", about);
       toast.success("About info updated successfully");
     } else {
-      const response = await fetch("/about", {
+      const response = await fetch(`${API_URL}/api/about`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -166,7 +173,7 @@ const AddForm = () => {
   };
 
   const handleDelete = async (id) => {
-    const response = await fetch(`/about/${id}`, {
+    const response = await fetch(`${API_URL}/api/about/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,

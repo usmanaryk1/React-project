@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import useFetch from "../../Components/useFetch";
 
 const Dashboard = () => {
-  const { data: formsList, error } = useFetch("/dashboard");
-  console.log("Form List:", formsList);
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+
+  const { data: formsList, error } = useFetch(`${API_URL}/api/dashboard`);
+  // console.log("Form List:", formsList);
   if (error) {
     console.error("Error fetching dashboard data:", error);
     return <p>Failed to load dashboard data</p>;
