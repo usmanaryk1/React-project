@@ -20,7 +20,7 @@ const Upload_Route = require("../router/upload.js");
 const Dashboard_Routes = require("../router/dashboard.js");
 
 // Simple route
-app.get("/api/hello", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
