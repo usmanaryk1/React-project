@@ -21,6 +21,7 @@ import AddPortfolioDetails from "./Portfolio/AddPortfolioDetails";
 import PrivateRoute from "./Auth/AuthGuard";
 import { useAuth } from "./Auth/AuthContext";
 import SocialForm from "./Socials/SocialForm";
+import CVUploader from "./UploadCV/CVUploaderForm";
 
 const Form = () => {
   const { isAuthenticated } = useAuth();
@@ -128,6 +129,11 @@ const Form = () => {
           <PrivateRoute
             path={`${path}/social-form`}
             component={SocialForm}
+            isAuthenticated={isAuthenticated}
+          />
+          <PrivateRoute
+            path={`${path}/CV-form`}
+            component={CVUploader}
             isAuthenticated={isAuthenticated}
           />
           <Route path="/form/signup-form">

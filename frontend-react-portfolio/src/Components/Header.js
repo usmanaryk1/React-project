@@ -179,6 +179,7 @@ const Header = () => {
         { to: "/form/certification-form", label: "Certification" },
         { to: "/form/contact-form", label: "Contact" },
         { to: "/form/social-form", label: "Social Links" },
+        { to: "/form/CV-form", label: "Upload CV" },
       ]);
     } else {
       setNavLinks([
@@ -187,7 +188,7 @@ const Header = () => {
         { to: "/#services", label: "Services" },
         { to: "/#work", label: "Work" },
         { to: "/#certifications", label: "Certifications" },
-        { to: "/#contact", label: "Contact" },
+        // { to: "/#contact", label: "Contact" },
       ]);
     }
   }, [isAuthenticated, isAdminPage]);
@@ -259,7 +260,6 @@ const Header = () => {
                       </Link>
                     </li>
                   ))}
-
                   <li className="dropdown nav-link">
                     {isAuthenticated && user ? (
                       <>
@@ -334,7 +334,11 @@ const Header = () => {
                     </Link>
                   </li>
                 ))}
-
+                <li className="download">
+                  <a href="/api/download-cv" download>
+                    Download CV
+                  </a>
+                </li>
                 <li className="dropdown nav-link">
                   {isAuthenticated && user ? (
                     <>
