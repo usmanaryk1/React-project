@@ -27,19 +27,19 @@ app.get("/", (req, res) => {
 });
 
 app.use(express.json());
-// app.use(cors());
-// app.use(
-//   cors({
-//     origin: "https://frontend-react-portfolio.vercel.app",
-//   })
-// );
+app.use(cors());
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
+    origin: "https://frontend-react-portfolio.vercel.app",
   })
 );
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//     methods: "GET,POST,PUT,DELETE",
+//     credentials: true,
+//   })
+// );
 // USE ROUTES
 
 app.use("/api/hero", personal_SkillsRoutes);
