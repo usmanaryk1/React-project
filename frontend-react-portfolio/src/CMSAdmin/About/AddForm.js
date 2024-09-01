@@ -5,6 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import validationSchema from "./AboutValidation";
 import useFetch from "../../Components/useFetch";
+import { storage } from "../../firebaseConfig"; // Import Firebase storage
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const AddForm = () => {
   const {
@@ -16,7 +18,6 @@ const AddForm = () => {
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      // file: "",
       name: "",
       profile: "",
       email: "",
@@ -31,6 +32,7 @@ const AddForm = () => {
   const imageRef = useRef(null);
   const [base64Image, setBase64Image] = useState("");
   const [currentAbout, setCurrentAbout] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
 
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
@@ -87,29 +89,54 @@ const AddForm = () => {
     document.getElementById("file-input").click();
   };
 
+  const uploadImageToFirebase = async (imageFile) => {
+    if (!imageFile) return null;
+
+    const imageRef = ref(storage, `aboutImages/${imageFile.name}`);
+    await uploadBytes(imageRef, imageFile);
+    // Complete the upload
+    setIsSubmitting(true);
+    const downloadURL = await getDownloadURL(imageRef);
+    return downloadURL;
+  };
+
   const onSubmit = async (formObject) => {
-    formObject.aboutImage = base64Image; // Add the base64 image to the form object
+    let imageUrl = base64Image;
 
-    // console.log("Form Data:", formObject);
-
-    let imageUrl = formObject.aboutImage;
-
-    // If a new image is selected, upload it
+    // If a new image is selected, upload it to Firebase Storage
     if (image) {
-      const imageFormData = new FormData();
-      imageFormData.append("file", image);
-
       try {
-        const response = await fetch(`${API_URL}/api/file/upload`, {
-          method: "POST",
-          body: imageFormData,
-        });
-        const data = await response.json();
-        imageUrl = data.file; // Assuming the server responds with the URL of the uploaded image
+        imageUrl = await uploadImageToFirebase(image);
       } catch (error) {
-        console.error("Error uploading the image:", error);
+        console.error("Error uploading image to Firebase:", error);
+        toast.error("Failed to upload image");
+        setIsSubmitting(false);
+        return;
       }
     }
+
+    // formObject.aboutImage = base64Image; // Add the base64 image to the form object
+
+    // // console.log("Form Data:", formObject);
+
+    // let imageUrl = formObject.aboutImage;
+
+    // // If a new image is selected, upload it
+    // if (image) {
+    //   const imageFormData = new FormData();
+    //   imageFormData.append("file", image);
+
+    //   try {
+    //     const response = await fetch(`${API_URL}/api/upload`, {
+    //       method: "POST",
+    //       body: imageFormData,
+    //     });
+    //     const data = await response.json();
+    //     imageUrl = data.file; // Assuming the server responds with the URL of the uploaded image
+    //   } catch (error) {
+    //     console.error("Error uploading the image:", error);
+    //   }
+    // }
 
     const updatedData = {
       name: formObject.name,
@@ -133,6 +160,7 @@ const AddForm = () => {
       });
       const result = await response.json();
       setAbout(about.map((item) => (item._id === result._id ? result : item)));
+      setIsSubmitting(true);
       // console.log("About info updated successfully", about);
       toast.success("About info updated successfully");
     } else {
@@ -147,6 +175,8 @@ const AddForm = () => {
       if (response.ok) {
         const result = await response.json();
         setAbout((prevAboutList) => [...prevAboutList, result]);
+        setIsSubmitting(true);
+
         // console.log("About info added successfully", about);
         toast.success("About info added successfully");
       } else {
@@ -157,14 +187,15 @@ const AddForm = () => {
     reset();
     setImage(null);
     setBase64Image("");
+    setIsSubmitting(false);
     setCurrentAbout(null);
-    refetch();
   };
 
   const onReset = () => {
     reset();
     setImage(null);
     setBase64Image("");
+    setIsSubmitting(false);
     setCurrentAbout(null); // Clear the image state
   };
 
@@ -320,8 +351,12 @@ const AddForm = () => {
                     <button className="reset" type="reset" onClick={onReset}>
                       Reset
                     </button>
-                    <button className="submit" type="submit">
-                      Submit
+                    <button
+                      type="submit"
+                      className="btn btn-primary submit"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
                   </div>
                 </form>

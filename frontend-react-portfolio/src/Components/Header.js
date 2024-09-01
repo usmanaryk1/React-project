@@ -161,6 +161,8 @@ const Header = () => {
   const [navLinks, setNavLinks] = useState([]);
   const { user, onLogout, isAdminPage, isAuthenticated } = useAuth();
   const location = useLocation();
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+
   const preventRefresh = (e) => {
     e.preventDefault();
   };
@@ -334,11 +336,16 @@ const Header = () => {
                     </Link>
                   </li>
                 ))}
-                <li className="download">
-                  <a href="/api/download-cv" download>
-                    Download CV
-                  </a>
-                </li>
+                {user && (
+                  <li className="download">
+                    <a
+                      href={`${API_URL}/api/download-cv?userId=${user._id}`}
+                      download
+                    >
+                      Download CV
+                    </a>
+                  </li>
+                )}
                 <li className="dropdown nav-link">
                   {isAuthenticated && user ? (
                     <>
