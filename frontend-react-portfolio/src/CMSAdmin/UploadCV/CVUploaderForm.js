@@ -4,24 +4,37 @@ import { storage } from "../../firebaseConfig";
 import { toast } from "react-toastify";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
+import validationSchema from "./CVValidation";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 const CVUploader = () => {
-  const { register, handleSubmit, reset } = useForm();
   const [preview, setPreview] = useState(null);
   const [file, setFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0); // Track upload progress
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+
   const onFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       setFile(selectedFile);
       setPreview(URL.createObjectURL(selectedFile));
+    } else {
+      toast.error("File is missing!");
     }
   };
 
   const onSubmit = async (data) => {
-    const userId = JSON.parse(localStorage.getItem("userId"));
+    const userId = JSON.stringify(localStorage.getItem("userId"));
     const token = localStorage.getItem("token"); // Retrieve userId from local storage
     console.log(userId);
     if (!token) {
@@ -104,6 +117,9 @@ const CVUploader = () => {
                     {...register("file")}
                     onChange={onFileChange}
                   />
+                  {errors.file && (
+                    <p className="error-message">{errors.file.message}</p>
+                  )}
                   <button
                     type="submit"
                     className="uploadcv"

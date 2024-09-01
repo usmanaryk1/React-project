@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(authentication);
     localStorage.setItem("user", JSON.stringify(loggedInUser));
     localStorage.setItem("token", token); // Save JWT token
-    localStorage.setItem("userId", JSON.stringify(loggedInUser._id));
+    localStorage.setItem("userId", loggedInUser._id);
   };
 
   const onLogout = async () => {
