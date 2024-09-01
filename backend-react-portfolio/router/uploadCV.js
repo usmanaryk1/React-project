@@ -5,13 +5,23 @@ const router = express.Router();
 // POST route to save CV URL
 router.post("/upload-cv", async (req, res) => {
   const { userId, cvUrl } = req.body;
+  console.log("userid", req.body.userId);
+  console.log("cvurl", req.body.cvUrl);
 
   try {
+    console.log("Request Body:", req.body); // Log request body
+    if (!userId || !cvUrl) {
+      return res.status(400).json({ message: "Missing userId or cvUrl" });
+    }
+
     const newCV = new CV_Model({ userId, cvUrl });
-    await newCV.save();
-    res.status(200).json(newCV);
+    const savedCV = await newCV.save();
+
+    console.log("CV Saved:", savedCV); // Log saved CV
+    return res.status(200).json(savedCV);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Error in /api/upload-cv:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
