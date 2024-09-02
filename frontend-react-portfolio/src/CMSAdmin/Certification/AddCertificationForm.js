@@ -5,6 +5,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "./CertificationValidation";
 import { toast } from "react-toastify";
 import useFetch from "../../Components/useFetch";
+import { v4 } from "uuid";
+import { storage } from "../../firebaseConfig"; // Import Firebase storage
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const AddCertificationForm = () => {
   const [currentCertifications, setCurrentCertifications] = useState(null);
@@ -40,6 +43,7 @@ const AddCertificationForm = () => {
   const image2Ref = useRef(null);
   const [base64Image1, setBase64Image1] = useState("");
   const [base64Image2, setBase64Image2] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
 
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
@@ -97,42 +101,31 @@ const AddCertificationForm = () => {
 
   // console.log("currentCertifications", currentCertifications);
 
-  const uploadImage = async (imageFile) => {
-    // console.log("image file", imageFile);
-    const formData = new FormData();
-    formData.append("file", imageFile);
-    try {
-      const response = await fetch(`${API_URL}/api/file/upload`, {
-        method: "POST",
-        body: formData,
-      });
-      const data = await response.json();
-      return data.file; // Assuming the server responds with the URL of the uploaded image
-    } catch (error) {
-      console.error("Error uploading the image:", error);
-      throw new Error("Image upload failed");
-    }
+  const uploadImageToFirebase = async (imageFile) => {
+    if (!imageFile) return null;
+
+    const imageRef = ref(
+      storage,
+      `certificationImages/${imageFile.name + v4()}`
+    );
+    await uploadBytes(imageRef, imageFile);
+    // Complete the upload
+    setIsSubmitting(true);
+    const downloadURL = await getDownloadURL(imageRef);
+    return downloadURL;
   };
   const onSubmit = async (formObject, e) => {
     e.preventDefault();
-
+    setIsSubmitting(true);
+    let imageUrl1 = base64Image1;
+    let imageUrl2 = base64Image2;
     // console.log("Certification Data:", formObject);
-
     try {
-      formObject.image = base64Image1; // Add the base64 image to the form object
-      formObject.authorImage = base64Image2; // Add the base64 image to the form object
-
-      let imageUrl1 = formObject.image; // Default to base64 if no upload is necessary
-      let imageUrl2 = formObject.authorImage;
-
-      // Upload images to the backend if the user selected new ones
       if (image1) {
-        // console.log("image1", image1);
-        imageUrl1 = await uploadImage(image1);
+        imageUrl1 = await uploadImageToFirebase(image1);
       }
       if (image2) {
-        // console.log("image2", image2);
-        imageUrl2 = await uploadImage(image2);
+        imageUrl2 = await uploadImageToFirebase(image2);
       }
 
       const updatedData = {
@@ -194,15 +187,17 @@ const AddCertificationForm = () => {
       }
 
       reset();
+      refetch();
       setImage1(null);
       setImage2(null);
       setBase64Image1("");
       setBase64Image2("");
       setCurrentCertifications(null);
-      refetch();
     } catch (error) {
       toast.error("Failed to upload images or submit the form");
       console.error("Error submitting the form:", error);
+    } finally {
+      setIsSubmitting(false); // Always reset submitting state
     }
   };
 
@@ -424,8 +419,12 @@ const AddCertificationForm = () => {
                     <button className="reset" type="reset" onClick={onReset}>
                       Reset
                     </button>
-                    <button className="submit" type="submit">
-                      Submit
+                    <button
+                      type="submit"
+                      className="submit"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
                   </div>
                 </form>

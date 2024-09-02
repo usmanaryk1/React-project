@@ -34,9 +34,10 @@ const CVUploader = () => {
   };
 
   const onSubmit = async (data) => {
-    const userId = JSON.stringify(localStorage.getItem("userId"));
+    const userId = JSON.parse(localStorage.getItem("userId"));
     const token = localStorage.getItem("token"); // Retrieve userId from local storage
     console.log(userId);
+
     if (!token) {
       toast.error("User not logged in!");
       return;

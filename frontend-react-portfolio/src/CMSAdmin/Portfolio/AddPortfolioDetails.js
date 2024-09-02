@@ -11,6 +11,9 @@ import {
   useHistory,
   useLocation,
 } from "react-router-dom/cjs/react-router-dom";
+import { v4 } from "uuid";
+import { storage } from "../../firebaseConfig"; // Import Firebase storage
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const AddPortfolioDetails = () => {
   const {
@@ -39,16 +42,17 @@ const AddPortfolioDetails = () => {
   const { id: workId } = useParams();
   // console.log("Initial workId", workId);
 
-  const [currentDetails, setCurrentDetails] = useState(null);
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
   const { data: details, setData: setDetails } = useFetch(
     `${API_URL}/api/workDetails`
   );
 
+  const [currentDetails, setCurrentDetails] = useState(null);
   const [images, setImages] = useState([]);
   const [base64Images, setBase64Images] = useState([]);
   const imageRefs = useRef([]);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
 
   const handleImageClick = (index) => {
     imageRefs.current[index].click();
@@ -110,28 +114,26 @@ const AddPortfolioDetails = () => {
   }, [currentDetails, setValue, reset]);
 
   // console.log("currentDetails", currentDetails);
+  const uploadImageToFirebase = async (imageFile) => {
+    if (!imageFile) return null;
 
+    const imageRef = ref(storage, `detailsImages/${imageFile.name + v4()}`);
+    await uploadBytes(imageRef, imageFile);
+    // Complete the upload
+    setIsSubmitting(true);
+    const downloadURL = await getDownloadURL(imageRef);
+    return downloadURL;
+  };
   const onSubmit = async (formObject) => {
+    setIsSubmitting(true);
     let imageUrls = [...base64Images];
     // console.log("imageUrls base64Images", imageUrls);
 
     for (let i = 0; i < images.length; i++) {
       if (images[i]) {
         // console.log(`image ${i}:`, images[i]);
-        const imageFormData = new FormData();
-        imageFormData.append("file", images[i]);
-
-        try {
-          const response = await fetch(`${API_URL}/api/file/upload`, {
-            method: "POST",
-            body: imageFormData,
-          });
-          const data = await response.json();
-          // console.log(`Uploaded image ${i}:`, data.file);
-          imageUrls[i] = data.file;
-        } catch (error) {
-          console.error("Error uploading the image:", error);
-        }
+        const downloadUrl = await uploadImageToFirebase(images[i]);
+        imageUrls[i] = downloadUrl;
       }
     }
 
@@ -219,12 +221,14 @@ const AddPortfolioDetails = () => {
     } catch (error) {
       console.error("Error:", error);
       toast.error(error.message);
+      setIsSubmitting(false);
     }
 
     reset();
     setCurrentDetails(null);
     setBase64Images([]);
     setImages([]);
+    setIsSubmitting(false);
   };
 
   const onReset = () => {
@@ -439,8 +443,12 @@ const AddPortfolioDetails = () => {
                     <button className="reset" type="reset" onClick={onReset}>
                       Reset
                     </button>
-                    <button className="submit" type="submit">
-                      Submit
+                    <button
+                      type="submit"
+                      className="submit"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
                   </div>
                 </form>

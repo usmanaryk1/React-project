@@ -103,7 +103,7 @@ const PortfolioContent = ({ onDeleteClick, onEditClick, details, workId }) => {
                   </>
                 )}
                 <div className="portfolio-info">
-                  <h3>Project information</h3>
+                  <h3>Project Information</h3>
                   <ul>
                     <li>
                       <strong>Category</strong> : {details.pCategory}
@@ -121,7 +121,7 @@ const PortfolioContent = ({ onDeleteClick, onEditClick, details, workId }) => {
                   </ul>
                 </div>
                 <div className="portfolio-description">
-                  <h2>This is an example of portfolio detail</h2>
+                  <h2>Project Description</h2>
                   <p>{details.desc}</p>
                 </div>
               </div>

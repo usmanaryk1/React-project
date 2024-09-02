@@ -156,7 +156,7 @@ import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../CMSAdmin/Auth/AuthContext";
 import { useLocation } from "react-router-dom/cjs/react-router-dom";
-
+import { saveAs } from "file-saver";
 const Header = () => {
   const [navLinks, setNavLinks] = useState([]);
   const { user, onLogout, isAdminPage, isAuthenticated } = useAuth();
@@ -237,7 +237,7 @@ const Header = () => {
           >
             <div className="offcanvas-header">
               <h1 className="offcanvas-title logo" id="offcanvasScrollingLabel">
-                <a href="index.html">Portfolio</a>
+                <Link to="/">Portfolio</Link>
               </h1>
               <button
                 type="button"
@@ -319,7 +319,9 @@ const Header = () => {
         <header id="header" className="fixed-top">
           <div className="container d-flex align-items-center justify-content-between">
             <h1 className="logo">
-              <a href="index.html">Portfolio</a>
+              <Link to="/" target="_blank">
+                Portfolio
+              </Link>
             </h1>
             <nav id="navbar" className="navbar">
               <ul>
@@ -339,7 +341,8 @@ const Header = () => {
                 {user && (
                   <li className="download">
                     <a
-                      href={`${API_URL}/api/download-cv?userId=${user._id}`}
+                      href={`${API_URL}/api/download-cv/${user._id}`}
+                      // onClick={preventRefresh}
                       download
                     >
                       Download CV

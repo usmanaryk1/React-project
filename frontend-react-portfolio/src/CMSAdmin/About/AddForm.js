@@ -7,6 +7,7 @@ import validationSchema from "./AboutValidation";
 import useFetch from "../../Components/useFetch";
 import { storage } from "../../firebaseConfig"; // Import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
 
 const AddForm = () => {
   const {
@@ -92,7 +93,7 @@ const AddForm = () => {
   const uploadImageToFirebase = async (imageFile) => {
     if (!imageFile) return null;
 
-    const imageRef = ref(storage, `aboutImages/${imageFile.name}`);
+    const imageRef = ref(storage, `aboutImages/${imageFile.name + v4()}`);
     await uploadBytes(imageRef, imageFile);
     // Complete the upload
     setIsSubmitting(true);
@@ -101,6 +102,7 @@ const AddForm = () => {
   };
 
   const onSubmit = async (formObject) => {
+    setIsSubmitting(true);
     let imageUrl = base64Image;
 
     // If a new image is selected, upload it to Firebase Storage
@@ -110,33 +112,9 @@ const AddForm = () => {
       } catch (error) {
         console.error("Error uploading image to Firebase:", error);
         toast.error("Failed to upload image");
-        setIsSubmitting(false);
         return;
       }
     }
-
-    // formObject.aboutImage = base64Image; // Add the base64 image to the form object
-
-    // // console.log("Form Data:", formObject);
-
-    // let imageUrl = formObject.aboutImage;
-
-    // // If a new image is selected, upload it
-    // if (image) {
-    //   const imageFormData = new FormData();
-    //   imageFormData.append("file", image);
-
-    //   try {
-    //     const response = await fetch(`${API_URL}/api/upload`, {
-    //       method: "POST",
-    //       body: imageFormData,
-    //     });
-    //     const data = await response.json();
-    //     imageUrl = data.file; // Assuming the server responds with the URL of the uploaded image
-    //   } catch (error) {
-    //     console.error("Error uploading the image:", error);
-    //   }
-    // }
 
     const updatedData = {
       name: formObject.name,
@@ -160,7 +138,6 @@ const AddForm = () => {
       });
       const result = await response.json();
       setAbout(about.map((item) => (item._id === result._id ? result : item)));
-      setIsSubmitting(true);
       // console.log("About info updated successfully", about);
       toast.success("About info updated successfully");
     } else {
@@ -175,7 +152,6 @@ const AddForm = () => {
       if (response.ok) {
         const result = await response.json();
         setAbout((prevAboutList) => [...prevAboutList, result]);
-        setIsSubmitting(true);
 
         // console.log("About info added successfully", about);
         toast.success("About info added successfully");
@@ -353,7 +329,7 @@ const AddForm = () => {
                     </button>
                     <button
                       type="submit"
-                      className="btn btn-primary submit"
+                      className="submit"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? "Submitting..." : "Submit"}

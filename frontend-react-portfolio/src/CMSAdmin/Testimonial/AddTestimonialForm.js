@@ -5,6 +5,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "./TestimonialValidation";
 import useFetch from "../../Components/useFetch";
+import { v4 } from "uuid";
+import { storage } from "../../firebaseConfig"; // Import Firebase storage
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const AddTestimonialForm = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(null);
@@ -35,6 +38,7 @@ const AddTestimonialForm = () => {
   const [image, setImage] = useState(null);
   const imageRef = useRef(null);
   const [base64Image, setBase64Image] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
 
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
@@ -78,32 +82,55 @@ const AddTestimonialForm = () => {
     }
   }, [currentTestimonial, setValue, reset]);
 
+  const uploadImageToFirebase = async (imageFile) => {
+    if (!imageFile) return null;
+
+    const imageRef = ref(storage, `testimonialImages/${imageFile.name + v4()}`);
+    await uploadBytes(imageRef, imageFile);
+    // Complete the upload
+    setIsSubmitting(true);
+    const downloadURL = await getDownloadURL(imageRef);
+    return downloadURL;
+  };
+
   // console.log("currentTestimonial:", currentTestimonial);
   const onSubmit = async (formObject, e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    let imageUrl = base64Image;
 
-    formObject.img = base64Image; // Add the base64 image to the form object
-
-    // console.log("Form Data:", formObject);
-
-    let imageUrl = formObject.img;
-
-    // If a new image is selected, upload it
+    // If a new image is selected, upload it to Firebase Storage
     if (image) {
-      const imageFormData = new FormData();
-      imageFormData.append("file", image);
-
       try {
-        const response = await fetch(`${API_URL}/api/file/upload`, {
-          method: "POST",
-          body: imageFormData,
-        });
-        const data = await response.json();
-        imageUrl = data.file; // Assuming the server responds with the URL of the uploaded image
+        imageUrl = await uploadImageToFirebase(image);
       } catch (error) {
-        console.error("Error uploading the image:", error);
+        console.error("Error uploading image to Firebase:", error);
+        toast.error("Failed to upload image");
+        return;
       }
     }
+    // formObject.img = base64Image; // Add the base64 image to the form object
+
+    // // console.log("Form Data:", formObject);
+
+    // let imageUrl = formObject.img;
+
+    // // If a new image is selected, upload it
+    // if (image) {
+    //   const imageFormData = new FormData();
+    //   imageFormData.append("file", image);
+
+    //   try {
+    //     const response = await fetch(`${API_URL}/api/file/upload`, {
+    //       method: "POST",
+    //       body: imageFormData,
+    //     });
+    //     const data = await response.json();
+    //     imageUrl = data.file; // Assuming the server responds with the URL of the uploaded image
+    //   } catch (error) {
+    //     console.error("Error uploading the image:", error);
+    //   }
+    // }
 
     const updatedData = {
       name: formObject.name,
@@ -160,6 +187,7 @@ const AddTestimonialForm = () => {
     reset();
     setImage(null);
     setBase64Image("");
+    setIsSubmitting(false);
     setCurrentTestimonial(null);
     refetch();
   };
@@ -240,10 +268,6 @@ const AddTestimonialForm = () => {
                       <b>Choose Client Image</b>
                     </label>
                   </div>
-                  {/* {errors.file && (
-                    <p className="error-message">{errors.file.message}</p>
-                  )} */}
-
                   <div className="form-group">
                     <input
                       type="text"
@@ -289,8 +313,12 @@ const AddTestimonialForm = () => {
                     <button className="reset" type="reset" onClick={onReset}>
                       Reset
                     </button>
-                    <button className="submit" type="submit">
-                      Submit
+                    <button
+                      type="submit"
+                      className="submit"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
                   </div>
                 </form>

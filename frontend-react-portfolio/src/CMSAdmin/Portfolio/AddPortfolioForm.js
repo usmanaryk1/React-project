@@ -5,6 +5,9 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import validationSchema from "./PortfolioValidation";
 import useFetch from "../../Components/useFetch";
+import { v4 } from "uuid";
+import { storage } from "../../firebaseConfig"; // Import Firebase storage
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const AddPortfolioForm = () => {
   const [currentPortfolio, setCurrentPortfolio] = useState(null);
@@ -36,6 +39,7 @@ const AddPortfolioForm = () => {
   const [image, setImage] = useState(null);
   const imageRef = useRef(null);
   const [base64Image, setBase64Image] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
 
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
@@ -89,36 +93,25 @@ const AddPortfolioForm = () => {
     return `${month}-${day}-${year}`;
   };
 
-  const uploadImage = async (imageFile) => {
-    // console.log("image file", imageFile);
-    const formData = new FormData();
-    formData.append("file", imageFile);
-    try {
-      const response = await fetch(`${API_URL}/api/file/upload`, {
-        method: "POST",
-        body: formData,
-      });
-      const data = await response.json();
-      return data.file; // Assuming the server responds with the URL of the uploaded image
-    } catch (error) {
-      console.error("Error uploading the image:", error);
-      throw new Error("Image upload failed");
-    }
-  };
+  const uploadImageToFirebase = async (imageFile) => {
+    if (!imageFile) return null;
 
+    const imageRef = ref(storage, `projectImages/${imageFile.name + v4()}`);
+    await uploadBytes(imageRef, imageFile);
+    // Complete the upload
+    setIsSubmitting(true);
+    const downloadURL = await getDownloadURL(imageRef);
+    return downloadURL;
+  };
   const onSubmit = async (formObject, e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    let imageUrl = base64Image;
+
     try {
-      formObject.workImage = base64Image; // Add the base64 image to the form object
-
-      let imageUrl = formObject.workImage;
-      // Upload images to the backend if the user selected new ones
       if (image) {
-        // console.log("image", image);
-        imageUrl = await uploadImage(image);
+        imageUrl = await uploadImageToFirebase(image);
       }
-
-      // console.log("Portfolio Data:", formObject);
 
       const updatedData = {
         wTitle: formObject.title,
@@ -170,10 +163,11 @@ const AddPortfolioForm = () => {
       }
 
       reset();
+      refetch();
       setImage(null);
       setBase64Image("");
       setCurrentPortfolio(null);
-      refetch();
+      setIsSubmitting(false);
     } catch (error) {
       toast.error("Failed to upload images or submit the form");
       console.error("Error submitting the form:", error);
@@ -243,7 +237,7 @@ const AddPortfolioForm = () => {
                         type="file"
                         name="file"
                         id="file-input"
-                        // {...register("file")}
+                        {...register("file")}
                         multiple={false}
                         accept={acceptedFileTypes}
                         onChange={handleImageChange}
@@ -333,8 +327,12 @@ const AddPortfolioForm = () => {
                     <button className="reset" type="reset" onClick={onReset}>
                       Reset
                     </button>
-                    <button className="submit" type="submit">
-                      Submit
+                    <button
+                      type="submit"
+                      className="submit"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
                   </div>
                 </form>
