@@ -35,13 +35,16 @@ const CV_Model = require("../models/CVSchema");
 const axios = require("axios");
 const router = express.Router();
 
-router.get("/download-cv", async (req, res) => {
+// Fetch CV URL by userId
+router.get("/download-cv/:userId", async (req, res) => {
+  const { userId } = req.params;
+
   try {
-    const cv = await CV_Model.findOne({ userId: req.query.userId });
+    const cv = await CV_Model.findOne({ userId });
+
     if (!cv) {
       return res.status(404).json({ message: "CV not found" });
     }
-
     // Fetch the file from Firebase Storage or wherever your file is hosted using Axios
     const response = await axios.get(cv.cvUrl, { responseType: "stream" });
 
