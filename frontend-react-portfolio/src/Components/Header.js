@@ -338,17 +338,14 @@ const Header = () => {
                     </Link>
                   </li>
                 ))}
-                {user && (
-                  <li className="download">
-                    <a
-                      href={`${API_URL}/api/download-cv/${user._id}`}
-                      // onClick={preventRefresh}
-                      download
-                    >
-                      Download CV
-                    </a>
-                  </li>
-                )}
+                <li className="download">
+                  <a
+                    href={`${API_URL}/api/download-cv/${user ? user._id : ""}`}
+                    download
+                  >
+                    Download CV
+                  </a>
+                </li>
                 <li className="dropdown nav-link">
                   {isAuthenticated && user ? (
                     <>
