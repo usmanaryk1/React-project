@@ -1,9 +1,10 @@
 const express = require("express");
 const CV_Model = require("../models/CVSchema");
+const authenticateJWT = require("../middleware/authmiddleware");
 const router = express.Router();
 
 // POST route to save CV URL
-router.post("/upload-cv", async (req, res) => {
+router.post("/upload-cv", authenticateJWT, async (req, res) => {
   const { userId, cvUrl } = req.body;
   console.log("userid", req.body.userId);
   console.log("cvurl", req.body.cvUrl);

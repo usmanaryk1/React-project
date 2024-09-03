@@ -1,35 +1,3 @@
-// const express = require("express");
-// const CV_Model = require("../models/CVSchema");
-// const axios = require("axios");
-// const router = express.Router();
-
-// router.get("/download-cv", async (req, res) => {
-//   try {
-//     const cv = await CV_Model.findOne({ userId: req.query.userId });
-//     if (!cv) {
-//       return res.status(404).json({ message: "CV not found" });
-//     }
-
-//     // Fetch the file from Firebase Storage
-//     const response = await axios({
-//       url: cv.cvUrl, // Firebase Storage URL
-//       method: "GET",
-//       responseType: "stream",
-//     });
-
-//     // Set the appropriate headers for file download
-//     res.setHeader("Content-Disposition", `attachment; filename="cv.pdf"`);
-//     res.setHeader("Content-Type", "application/pdf");
-
-//     // Pipe the stream to the response
-//     response.data.pipe(res);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// });
-
-// module.exports = router;
-
 const express = require("express");
 const CV_Model = require("../models/CVSchema");
 const axios = require("axios");
