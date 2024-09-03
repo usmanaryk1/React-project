@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -116,12 +116,12 @@ const Login = () => {
                       {isSubmitting ? "Logging In..." : "Login"}
                     </button>
                     <p>
-                      <a href="/form/forget-form">Forgot Password?</a>
+                      <Link to="/form/forget-form">Forgot Password?</Link>
                     </p>
                   </div>
 
                   <div className="signup-link text-center">
-                    <a href="/form/signup-form">New User? SignUp</a>
+                    <Link to="/form/signup-form">New User? SignUp</Link>
                   </div>
                 </form>
               </div>

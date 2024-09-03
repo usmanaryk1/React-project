@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./Signup.css";
 import { useForm } from "react-hook-form";
@@ -170,9 +170,9 @@ const SignUp = () => {
                     </button>
                   </div>
                   <div className="log">
-                    <a href="/form/login-form">
+                    <Link to="/form/login-form">
                       Already have an account? Login
-                    </a>
+                    </Link>
                   </div>
                 </form>
               </div>
