@@ -5,11 +5,13 @@ import validationSchema from "./SocialValidation";
 import useFetch from "../../Components/useFetch";
 import { useState, useEffect } from "react";
 import Contact from "../../Components/Contact";
+import icons from "../Icons";
 
 const SocialForm = () => {
   const [currentLinks, setCurrentLinks] = useState(null);
   const token = localStorage.getItem("token");
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+  const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
 
   const {
     data: links,
@@ -42,6 +44,7 @@ const SocialForm = () => {
   }, [currentLinks, setValue, reset]);
 
   const onSubmit = async (data) => {
+    setIsSubmitting(true);
     const formData = {
       platformIcon: data.platformIcon,
       link: data.link,
@@ -90,6 +93,7 @@ const SocialForm = () => {
     }
     reset();
     setCurrentLinks(null);
+    setIsSubmitting(false);
     refetch();
   };
 
@@ -133,18 +137,23 @@ const SocialForm = () => {
               <div className="col-12">
                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
                   <div className="form-group">
-                    <input
-                      type="text"
+                    <select
                       name="platformIcon"
                       className="form-control"
                       {...register("platformIcon")}
-                      placeholder="Icon of Social Media (bi bi-facebook)"
                       required
-                    />
+                    >
+                      <option value="">Select an icon</option>
+                      {icons.map((icon) => (
+                        <option key={icon} value={icon}>
+                          {icon.replace("bi-", "")}
+                        </option>
+                      ))}
+                    </select>
                   </div>
-                  {errors.platform && (
+                  {/* {errors.platform && (
                     <p className="error-message">{errors.platform.message}</p>
-                  )}
+                  )} */}
 
                   <div className="form-group">
                     <input
@@ -179,8 +188,12 @@ const SocialForm = () => {
                     <button className="reset" type="reset" onClick={onReset}>
                       Reset
                     </button>
-                    <button className="submit" type="submit">
-                      Submit
+                    <button
+                      type="submit"
+                      className="submit"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
                   </div>
                 </form>

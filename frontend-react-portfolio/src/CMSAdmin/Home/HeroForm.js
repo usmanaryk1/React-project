@@ -13,6 +13,7 @@ const HeroForm = () => {
   const childRef = useRef();
   const [currentHero, setCurrentHero] = useState(null);
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+  const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
 
   const { data: hero, setData: setHero } = useFetch(`${API_URL}/api/hero`);
   console.log("HeroForm", hero);
@@ -43,6 +44,7 @@ const HeroForm = () => {
   // console.log("currentHero ", currentHero);
 
   const onSubmit = async (data) => {
+    setIsSubmitting(true);
     const formData = {
       name: data.name,
       skills: data.skills,
@@ -93,6 +95,7 @@ const HeroForm = () => {
       }
     }
     reset();
+    setIsSubmitting(false);
     setCurrentHero(null);
   };
 
@@ -181,8 +184,12 @@ const HeroForm = () => {
                     <button className="reset" type="button" onClick={onReset}>
                       Reset
                     </button>
-                    <button className="submit btn btn-success" type="submit">
-                      Submit
+                    <button
+                      type="submit"
+                      className="submit"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
                   </div>
                 </form>

@@ -5,15 +5,17 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "./SignupValidation";
 import { useAuth } from "../AuthContext";
+import { useState } from "react";
 
 const SignUp = () => {
   const { onSignup } = useAuth();
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
@@ -29,6 +31,7 @@ const SignUp = () => {
 
   const onSubmit = async (data) => {
     // console.log("Data", data);
+    setIsSubmitting(true);
     try {
       // Prepare data for submission
       const { confirmPassword, ...userData } = data;
@@ -60,20 +63,19 @@ const SignUp = () => {
           title: "Error",
           text: errorMessage,
         });
-
+        setIsSubmitting(false);
         return;
       }
 
       // Handle successful signup
-      const user = await response.json();
-      console.log("user", user);
+      console.log("user", responseData.user);
       Swal.fire({
         icon: "success",
         title: "Success",
         text: "User registered successfully!",
       });
       onSignup(responseData.user, false);
-
+      setIsSubmitting(false);
       history.push("/form/login-form");
     } catch (err) {
       console.error("Error during signup:", err);
@@ -82,6 +84,8 @@ const SignUp = () => {
         title: "Error",
         text: "An error occurred. Please try again.",
       });
+      reset();
+      setIsSubmitting(false);
     }
   };
 
@@ -106,18 +110,7 @@ const SignUp = () => {
                       type="text"
                       name="username"
                       className="form-control"
-                      {...register(
-                        "username"
-                        //, {
-                        // validate: async (value) => {
-                        //   const exists = await checkIfUsernameExists(value);
-                        //   return (
-                        //     !exists ||
-                        //     "Username already exists. Please choose another."
-                        //   );
-                        // },
-                        //}
-                      )}
+                      {...register("username")}
                       placeholder="Username"
                       required
                     />
@@ -130,17 +123,7 @@ const SignUp = () => {
                     <input
                       type="email"
                       name="email"
-                      {...register(
-                        "email"
-                        //  , {
-                        //   validate: async (value) => {
-                        //     const exists = await checkIfEmailExists(value);
-                        //     return (
-                        //       !exists || "Email already exists. Please log in."
-                        //     );
-                        //   },
-                        // }
-                      )}
+                      {...register("email")}
                       placeholder="Email"
                       required
                     />
@@ -178,8 +161,12 @@ const SignUp = () => {
                   )}
 
                   <div className="sign">
-                    <button className="sign-button" type="submit">
-                      SignUp
+                    <button
+                      className="sign-button"
+                      type="submit"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Signing Up..." : "Signup"}
                     </button>
                   </div>
                   <div className="log">

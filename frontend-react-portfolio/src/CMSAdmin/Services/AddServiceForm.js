@@ -5,11 +5,13 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import validationSchema from "./ServiceValidation";
 import Services from "../../Components/Services";
+import icons from "../Icons";
 
 const AddServiceForm = () => {
   const token = localStorage.getItem("token");
   const [currentService, setCurrentService] = useState(null);
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+  const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
 
   const {
     data: services,
@@ -46,6 +48,7 @@ const AddServiceForm = () => {
   // console.log("currentService: ", currentService);
 
   const onSubmit = async (data) => {
+    setIsSubmitting(true);
     const formData = {
       sIcon: data.icon,
       sTitle: data.title,
@@ -101,6 +104,7 @@ const AddServiceForm = () => {
     } finally {
       reset();
       setCurrentService(null);
+      setIsSubmitting(false);
       refetch(); // Ensure data is refreshed
     }
   };
@@ -146,14 +150,18 @@ const AddServiceForm = () => {
               <div className="col-12">
                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
                   <div className="form-group">
-                    <input
-                      type="text"
+                    <select
                       name="icon"
                       className="form-control"
                       {...register("icon")}
-                      placeholder="Icon of Service (bi bi-briefcase) "
-                      required
-                    />
+                    >
+                      <option value="">Select an icon</option>
+                      {icons.map((icon) => (
+                        <option key={icon} value={icon}>
+                          {icon.replace("bi-", "")}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   {errors.icon && (
                     <p className="error-message">{errors.icon.message}</p>
@@ -204,8 +212,12 @@ const AddServiceForm = () => {
                     <button className="reset" type="reset" onClick={onReset}>
                       Reset
                     </button>
-                    <button className="submit" type="submit">
-                      Submit
+                    <button
+                      type="submit"
+                      className="submit"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
                   </div>
                 </form>

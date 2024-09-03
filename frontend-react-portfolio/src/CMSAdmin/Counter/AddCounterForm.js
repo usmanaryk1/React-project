@@ -5,11 +5,13 @@ import { useForm } from "react-hook-form";
 import validationSchema from "./CounterValidation";
 import { useState, useEffect } from "react";
 import useFetch from "../../Components/useFetch";
+import icons from "../Icons";
 
 const AddCounterForm = () => {
   const token = localStorage.getItem("token");
   const [currentCounter, setCurrentCounter] = useState(null);
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+  const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
 
   const {
     data: counts,
@@ -46,6 +48,7 @@ const AddCounterForm = () => {
   // console.log("currentCounter:", currentCounter);
 
   const onSubmit = async (data) => {
+    setIsSubmitting(true);
     const formData = {
       icon: data.icon,
       text: data.title,
@@ -97,6 +100,7 @@ const AddCounterForm = () => {
     }
     reset();
     setCurrentCounter(null);
+    setIsSubmitting(false);
     refetch();
   };
 
@@ -140,14 +144,19 @@ const AddCounterForm = () => {
               <div className="col-12">
                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
                   <div className="form-group">
-                    <input
-                      type="text"
+                    <select
                       name="icon"
                       className="form-control"
                       {...register("icon")}
-                      placeholder="bi bi-award"
                       required
-                    />
+                    >
+                      <option value="">Select an icon</option>
+                      {icons.map((icon) => (
+                        <option key={icon} value={icon}>
+                          {icon.replace("bi-", "")}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   {errors.icon && (
                     <p className="error-message">{errors.icon.message}</p>
@@ -199,8 +208,12 @@ const AddCounterForm = () => {
                     <button className="reset" type="reset" onClick={onReset}>
                       Reset
                     </button>
-                    <button className="submit" type="submit">
-                      Submit
+                    <button
+                      type="submit"
+                      className="submit"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
                   </div>
                 </form>

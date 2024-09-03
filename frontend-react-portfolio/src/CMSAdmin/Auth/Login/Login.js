@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "./LoginValidation";
 import { useAuth } from "../AuthContext";
+import { useState } from "react";
 
 const Login = () => {
   const { onLogin } = useAuth();
@@ -11,6 +12,7 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
@@ -21,40 +23,12 @@ const Login = () => {
 
   const history = useHistory(); // for programmatic navigation
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // console.log("Login component received onLogin prop:", onLogin);
 
-  // const onSubmit = async (data) => {
-
-  //   const response = await fetch("http://localhost:8000/auth/login");
-  //   const users = await response.json();
-
-  //   // Check if the credentials match any user
-  //   const user = users.find(
-  //     (user) => user.email === data.email && user.password === data.password
-  //   );
-
-  //   if (user) {
-  //     // Update user status and redirect
-  //     await fetch(`http://localhost:8000/users/${user.id}`, {
-  //       method: "PATCH",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ loggedIn: true }),
-  //     });
-
-  //     console.log("user", user);
-
-  //     onLogin(user, true);
-
-  //     toast.success("Login Successfully");
-
-  //     history.push("/form/dashboard");
-  //   } else {
-  //     toast.error("Invalid email or password.");
-  //   }
-  // };
-
   const onSubmit = async (data) => {
+    setIsSubmitting(true);
     try {
       const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
@@ -69,10 +43,6 @@ const Login = () => {
       if (response.ok) {
         const loggedInUser = { ...result.UserModel, loggedIn: true };
         // console.log("loggedInUser", loggedInUser);
-
-        // Save the token to localStorage
-        // localStorage.setItem("token", result.accessToken);
-        // console.log("Result accessToken", result.accessToken);
         // Update user status in the context
         onLogin(loggedInUser, result.accessToken, true);
 
@@ -81,10 +51,15 @@ const Login = () => {
         history.push("/form/dashboard");
       } else {
         toast.error(result.error || "Invalid email or password.");
+        setIsSubmitting(false);
       }
+      reset();
+      setIsSubmitting(false);
     } catch (error) {
       toast.error("An error occurred. Please try again.");
       console.error("Login error:", error);
+      setIsSubmitting(false);
+      reset();
     }
   };
 
@@ -133,8 +108,12 @@ const Login = () => {
                   )}
 
                   <div className="pwd">
-                    <button className="login-button" type="submit">
-                      Login
+                    <button
+                      className="login-button"
+                      type="submit"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Logging In..." : "Login"}
                     </button>
                     <p>
                       <a href="/form/forget-form">Forgot Password?</a>

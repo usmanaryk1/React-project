@@ -72,32 +72,20 @@ const About = ({ onEditClick, onDeleteClick, about = [] }) => {
                             <div
                               className="progress-bar"
                               role="progressbar"
-                              style={{ width: "85%" }}
-                              aria-valuenow={85}
+                              style={{ width: "100%" }}
+                              aria-valuenow={100}
                               aria-valuemin={0}
                               aria-valuemax={100}
                             />
                           </div>
                           <span>CSS3</span>{" "}
-                          <span className="pull-right">75%</span>
+                          <span className="pull-right">95%</span>
                           <div className="progress">
                             <div
                               className="progress-bar"
                               role="progressbar"
-                              style={{ width: "75%" }}
-                              aria-valuenow={75}
-                              aria-valuemin={0}
-                              aria-valuemax={100}
-                            />
-                          </div>
-                          <span>PHP</span>{" "}
-                          <span className="pull-right">50%</span>
-                          <div className="progress">
-                            <div
-                              className="progress-bar"
-                              role="progressbar"
-                              style={{ width: "50%" }}
-                              aria-valuenow={50}
+                              style={{ width: "95%" }}
+                              aria-valuenow={95}
                               aria-valuemin={0}
                               aria-valuemax={100}
                             />
@@ -110,6 +98,18 @@ const About = ({ onEditClick, onDeleteClick, about = [] }) => {
                               role="progressbar"
                               style={{ width: "90%" }}
                               aria-valuenow={90}
+                              aria-valuemin={0}
+                              aria-valuemax={100}
+                            />
+                          </div>
+                          <span>REACT</span>{" "}
+                          <span className="pull-right">50%</span>
+                          <div className="progress">
+                            <div
+                              className="progress-bar"
+                              role="progressbar"
+                              style={{ width: "85%" }}
+                              aria-valuenow={85}
                               aria-valuemin={0}
                               aria-valuemax={100}
                             />

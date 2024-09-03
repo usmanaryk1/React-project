@@ -9,6 +9,7 @@ const ContactForm = () => {
   const [currentContact, setCurrentContact] = useState(null);
   const token = localStorage.getItem("token");
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+  const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
 
   const {
     data: contacts,
@@ -47,6 +48,7 @@ const ContactForm = () => {
   // console.log("currentContact", currentContact);
 
   const onSubmit = async (data) => {
+    setIsSubmitting(true);
     const formData = {
       description: data.description,
       location: data.location,
@@ -100,6 +102,7 @@ const ContactForm = () => {
     }
     reset();
     setCurrentContact(null);
+    setIsSubmitting(false);
     refetch();
   };
 
@@ -222,8 +225,12 @@ const ContactForm = () => {
                     <button className="reset" type="reset" onClick={onReset}>
                       Reset
                     </button>
-                    <button className="submit" type="submit">
-                      Submit
+                    <button
+                      type="submit"
+                      className="submit"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
                   </div>
                 </form>
