@@ -19,6 +19,7 @@ const Auth_Routes = require("../router/auth_users.js");
 const Dashboard_Routes = require("../router/dashboard.js");
 const Upload_CV = require("../router/uploadCV.js");
 const Download_CV = require("../router/downloadCV.js");
+const Forgot_Routes = require("../router/forgetPwd.js");
 
 // Simple route
 app.get("/", (req, res) => {
@@ -52,6 +53,7 @@ app.use("/api/auth", Auth_Routes);
 app.use("/api/dashboard", Dashboard_Routes);
 app.use("/api", Upload_CV);
 app.use("/api", Download_CV);
+app.use("/api", Forgot_Routes);
 
 connectDB();
 const PORT = process.env.PORT || 8000;
