@@ -1925,19 +1925,21 @@ input[type="number"],
   cursor: pointer;
   width: 100%;
   margin: 20px auto 5px;
-  transition: all 0.5s;
+  transition: transform 0.3s ease;
 }
 
 .pwd .login-button:hover {
-  border: 1px solid #0062d3;
-  color: #0062d3;
-  background-color: white;
+  transform: scale(1.1);
 }
-
 .pwd a {
   color: #0062d3;
 }
-
+.forget-link {
+  transition: transform 0.3s ease;
+}
+.forget-link:hover {
+  transform: scale(1.1);
+}
 .signup-link {
   margin: 15px auto;
   transition: transform 0.3s ease;
@@ -1988,13 +1990,11 @@ input[type="number"],
   cursor: pointer;
   width: 100%;
   margin: 20px auto 5px;
-  transition: all 0.5s;
+  transition: transform 0.3s ease;
 }
 
 .sign .sign-button:hover {
-  border: 1px solid #0062d3;
-  color: #0062d3;
-  background-color: white;
+  transform: scale(1.1);
 }
 
 .signup-container input {
@@ -2051,13 +2051,11 @@ input[type="number"],
   cursor: pointer;
   width: 100%;
   margin: 20px auto 5px;
-  transition: all 0.5s;
+  transition: transform 0.3s ease;
 }
 
 .forget .get-button:hover {
-  border: 1px solid #0062d3;
-  color: #0062d3;
-  background-color: white;
+  transform: scale(1.1);
 }
 
 .forget-container input {
@@ -2099,13 +2097,11 @@ input[type="number"],
   cursor: pointer;
   width: 100%;
   margin: 20px auto 5px;
-  transition: all 0.5s;
+  transition: transform 0.3s ease;
 }
 
 .reset .reset-link:hover {
-  border: 1px solid #0062d3;
-  color: #0062d3;
-  background-color: white;
+  transform: scale(1.1);
 }
 
 .reset-container input {

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   useEffect(() => {
@@ -38,7 +39,7 @@ const Footer = () => {
             <div className="col-sm-12">
               <div className="copyright-box">
                 <p className="copyright">
-                  © Copyright <strong>DevFolio</strong>. All Rights Reserved
+                  © Copyright <strong>Portfolio</strong>. All Rights Reserved
                 </p>
                 <div className="credits">
                   {/*
@@ -47,8 +48,7 @@ const Footer = () => {
         Licensing information: https://bootstrapmade.com/license/
         Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=DevFolio
       */}
-                  Designed by{" "}
-                  <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                  Designed by <Link to="/">Portfolio</Link>
                 </div>
               </div>
             </div>

@@ -115,7 +115,7 @@ const Login = () => {
                     >
                       {isSubmitting ? "Logging In..." : "Login"}
                     </button>
-                    <p>
+                    <p className="forget-link">
                       <Link to="/form/forget-form">Forgot Password?</Link>
                     </p>
                   </div>

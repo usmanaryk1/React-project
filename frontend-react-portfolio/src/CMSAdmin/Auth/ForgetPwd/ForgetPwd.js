@@ -1,13 +1,44 @@
-import { Link } from "react-router-dom";
-
+import { Link, useHistory } from "react-router-dom";
+import validationSchema from "./ForgetPwdValidation";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useState } from "react";
 const ForgetPwd = () => {
-  const onSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+  const [isSubmitting, setIsSubmitting] = useState();
+  const history = useHistory();
 
-    const formObject = Object.fromEntries(formData);
+  const onSubmit = (email) => {
+    setIsSubmitting(true);
+    axios.defaults.withCredentials = true;
+    axios
+      .post(`${API_URL}/api/forgot-password`, { email })
+      .then((res) => {
+        if (res.data.message === "Success") {
+          history.push("/form/login-form");
+        }
+        setIsSubmitting(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err);
+        setIsSubmitting(false);
+      });
 
-    console.log("Form Data:", formObject);
+    reset();
   };
 
   return (
@@ -22,22 +53,34 @@ const ForgetPwd = () => {
             <div className="forget-container">
               <div className="col-12">
                 <p>
-                  Please enter your username or email address. You will recieve
-                  a link to create a new password via email.
+                  Please enter your email address. You will recieve a link to
+                  create a new password via email.
                 </p>
               </div>
               <div className="col-12">
-                <form onSubmit={onSubmit}>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email or Username"
-                    required
-                  />
+                <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                  <div className="form-group">
+                    <input
+                      type="email"
+                      name="email"
+                      className="form-control"
+                      autoComplete="off"
+                      {...register("email")}
+                      placeholder="Email"
+                      required
+                    />
+                  </div>
 
+                  {errors.email && (
+                    <p className="error-message">{errors.email.message}</p>
+                  )}
                   <div className="forget">
-                    <button className="get-button" type="submit">
-                      Get Password
+                    <button
+                      className="get-button"
+                      type="submit"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Sending..." : "Send"}
                     </button>
                     <Link to="/form/reset-form">Reset Password</Link>
                   </div>
