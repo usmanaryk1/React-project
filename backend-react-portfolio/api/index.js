@@ -3,6 +3,7 @@ const cors = require("cors");
 const connectDB = require("../router/database.js");
 require("dotenv").config({ path: "./api/.env" });
 const app = express();
+const path = require("path");
 
 // IMPORT ROUTES
 const personal_SkillsRoutes = require("../router/personal_skills.js");
@@ -20,6 +21,7 @@ const Dashboard_Routes = require("../router/dashboard.js");
 const Upload_CV = require("../router/uploadCV.js");
 const Download_CV = require("../router/downloadCV.js");
 const Forgot_Routes = require("../router/forgetPwd.js");
+const Reset_Routes = require("../router/resetPwd.js");
 
 // Simple route
 app.get("/", (req, res) => {
@@ -27,16 +29,18 @@ app.get("/", (req, res) => {
 });
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "https://frontend-react-portfolio.vercel.app",
-  })
-);
 // app.use(
 //   cors({
-//     origin: "http://localhost:3000",
+//     origin: "https://frontend-react-portfolio.vercel.app",
+//credentials: true,
 //   })
 // );
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 // USE ROUTES
 
 app.use("/api/hero", personal_SkillsRoutes);
@@ -54,6 +58,13 @@ app.use("/api/dashboard", Dashboard_Routes);
 app.use("/api", Upload_CV);
 app.use("/api", Download_CV);
 app.use("/api", Forgot_Routes);
+app.use("/api", Reset_Routes);
+app.use(express.static(path.join(__dirname, "public")));
+
+// Handle all other routes by serving the index.html file
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 connectDB();
 const PORT = process.env.PORT || 8000;

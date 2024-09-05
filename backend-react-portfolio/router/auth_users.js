@@ -1,8 +1,9 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/userSchema");
+const authenticateJWT = require("../middleware/authmiddleware");
 const router = express.Router();
-
+const bcrypt = require("bcrypt"); // Import bcrypt
 // REGISTERING NEW USER
 
 router.post("/register", async (req, res) => {
@@ -25,11 +26,15 @@ router.post("/register", async (req, res) => {
       });
     }
 
+    // Hash the password before saving
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
     // Create a new user
     const newUser = new UserModel({
       username,
       email,
-      password,
+      password: hashedPassword, // Save the hashed password
       loggedIn: false,
     });
     await newUser.save();
@@ -47,45 +52,6 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// REGISTERING NEW USER
-
-// router.post("/register", async (req, res) => {
-//   try {
-//     // Check if the user already exists
-//     const existingUser = await UserModel.findOne({
-//       email: req.body.email,
-//     });
-//     if (existingUser) {
-//       return res.status(400).json({
-//         error: "User is already registered with the provided credentials",
-//       });
-//     }
-
-//     // Create new user if not already registered
-//     const newUser = new UserModel({
-//       username: req.body.username,
-//       password: req.body.password, // Storing password directly (not recommended for production)
-//       email: req.body.email,
-//       role: req.body.role,
-//       loggedIn: req.body.loggedIn,
-//     });
-//     await newUser.save();
-
-//     const token = jwt.sign(
-//       { id: newUser._id, role: newUser.role },
-//       process.env.JWT_SECRET,
-//       { expiresIn: "1h" }
-//     );
-//     res.status(201).json({
-//       message: "User registered successfully",
-//       UserModel: newUser,
-//       token,
-//     });
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// });
-
 // ONLY REGISTERED USERS CAN LOGIN
 
 router.post("/login", async (req, res) => {
@@ -93,8 +59,12 @@ router.post("/login", async (req, res) => {
     const existingUser = await UserModel.findOne({ email: req.body.email });
     if (!existingUser) return res.status(400).json({ error: "User not found" });
 
-    // Simple password comparison
-    if (req.body.password !== existingUser.password)
+    // Compare the hashed password with the stored hashed password
+    const validPassword = await bcrypt.compare(
+      req.body.password,
+      existingUser.password
+    );
+    if (!validPassword)
       return res.status(400).json({ error: "Invalid password" });
 
     // Update loggedIn status
@@ -118,20 +88,21 @@ router.post("/login", async (req, res) => {
 });
 
 // LOGOUT
+router.post("/logout", authenticateJWT, async (req, res) => {
+  try {
+    // Get user ID from the token (req.user is set in the verifyToken middleware)
+    const userId = req.user._id;
 
-router.post("/logout", (req, res) => {
-  res.status(200).json({ message: "Logged out successfully" });
+    // Find the user by ID and update loggedIn to false
+    await UserModel.findByIdAndUpdate(
+      userId,
+      { loggedIn: false },
+      { new: true }
+    );
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Logout failed", error: error.message });
+  }
 });
-
-// Add logout logic
-// router.post("/logout", (req, res) => {
-//   req.session.destroy((err) => {
-//     if (err) {
-//       return res.status(404).json({ message: "Error logging out" });
-//     }
-//     res.clearCookie("connect.sid");
-//     return res.status(200).json({ message: "Successfully logged out" });
-//   });
-// });
 
 module.exports = router;
