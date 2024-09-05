@@ -12,7 +12,7 @@ import ContactForm from "./Contact/ContactForm";
 import Login from "./Auth/Login/Login";
 import SignUp from "./Auth/SignUp/SignUp";
 import ForgetPwd from "./Auth/ForgetPwd/ForgetPwd";
-import ResetPwd from "./Auth/ForgetPwd/ResetPwd";
+import ResetPwd from "./Auth/ResetPwd/ResetPwd";
 import AddTestimonialForm from "./Testimonial/AddTestimonialForm";
 import AddCounterForm from "./Counter/AddCounterForm";
 import AddPortfolioDetails from "./Portfolio/AddPortfolioDetails";
@@ -145,7 +145,10 @@ const Form = () => {
           <Route path={`${path}/forget-form`}>
             <ForgetPwd />
           </Route>
-          <Route path={`${path}/reset-form`}>
+          {/* <Route path={`${path}/reset-form`}>
+            <ResetPwd />
+          </Route> */}
+          <Route path={`${path}/reset-form/:id/:token`}>
             <ResetPwd />
           </Route>
         </Switch>

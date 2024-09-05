@@ -97,6 +97,7 @@ const Login = () => {
                     <input
                       type="password"
                       name="password"
+                      autoComplete="off"
                       className="form-control"
                       {...register("password")}
                       placeholder="Enter Password"

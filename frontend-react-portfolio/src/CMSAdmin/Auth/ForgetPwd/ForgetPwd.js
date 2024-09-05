@@ -2,10 +2,15 @@ import { Link, useHistory } from "react-router-dom";
 import validationSchema from "./ForgetPwdValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import axios from "axios";
+
 const ForgetPwd = () => {
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const history = useHistory();
+
   const {
     register,
     handleSubmit,
@@ -17,15 +22,17 @@ const ForgetPwd = () => {
       email: "",
     },
   });
-  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
-  const [isSubmitting, setIsSubmitting] = useState();
-  const history = useHistory();
 
-  const onSubmit = (email) => {
+  const onSubmit = ({ email }) => {
     setIsSubmitting(true);
-    axios.defaults.withCredentials = true;
     axios
-      .post(`${API_URL}/api/forgot-password`, { email })
+      .post(
+        `${API_URL}/api/forgot-password`,
+        { email }, // Now, email is correctly passed as a string
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         if (res.data.message === "Success") {
           history.push("/form/login-form");
@@ -34,7 +41,7 @@ const ForgetPwd = () => {
       })
       .catch((err) => {
         console.log(err);
-        toast.error(err);
+        toast.error(`Error: ${err.response?.data?.message || err.message}`);
         setIsSubmitting(false);
       });
 
@@ -64,7 +71,7 @@ const ForgetPwd = () => {
                       type="email"
                       name="email"
                       className="form-control"
-                      autoComplete="off"
+                      // autoComplete="off"
                       {...register("email")}
                       placeholder="Email"
                       required

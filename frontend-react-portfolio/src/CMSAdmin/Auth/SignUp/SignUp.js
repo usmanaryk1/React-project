@@ -123,6 +123,7 @@ const SignUp = () => {
                     <input
                       type="email"
                       name="email"
+                      className="form-control"
                       {...register("email")}
                       placeholder="Email"
                       required
@@ -136,6 +137,8 @@ const SignUp = () => {
                     <input
                       type="password"
                       name="password"
+                      className="form-control"
+                      autoComplete="off"
                       {...register("password")}
                       placeholder="Create Password"
                       required
@@ -149,6 +152,8 @@ const SignUp = () => {
                     <input
                       type="password"
                       name="confirmPassword"
+                      autoComplete="off"
+                      className="form-control"
                       {...register("confirmPassword")}
                       placeholder="Confirm Password"
                       required

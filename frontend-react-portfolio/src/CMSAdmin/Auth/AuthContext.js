@@ -1,6 +1,7 @@
 // AuthContext.js
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext();
 
@@ -9,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const isAdminPage = location.pathname.startsWith("/form");
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
   const onSignup = (newUser, authentication) => {
     setUser(newUser);
@@ -26,10 +28,28 @@ export const AuthProvider = ({ children }) => {
   };
 
   const onLogout = async () => {
-    setUser(null);
-    setIsAuthenticated(false);
-    localStorage.removeItem("user");
-    localStorage.removeItem("token"); // Remove JWT token
+    // Send the logout request to the server
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${API_URL}/api/auth/logout`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.ok) {
+      // Clear user data and show a toast message
+      setUser(null);
+      setIsAuthenticated(false);
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
+
+      // Show success toast message
+      toast.success("Logged out successfully!");
+    } else {
+      // Show error message if logout fails
+      toast.error("Failed to log out. Please try again.");
+    }
   };
 
   useEffect(() => {
