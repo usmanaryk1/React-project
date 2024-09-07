@@ -224,11 +224,7 @@ const Header = () => {
                     <>
                       <a href="/" onClick={preventRefresh}>
                         <span>Register</span>
-                        <i
-                          className={`bi bi-chevron-down ${
-                            user && isAdminPage ? "bi bi-chevron-right" : ""
-                          }`}
-                        />
+                        <i className="bi bi-chevron-down" />
                       </a>
                       <ul>
                         <li>

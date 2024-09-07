@@ -47,7 +47,7 @@ const Login = () => {
         onLogin(loggedInUser, result.accessToken, true);
 
         toast.success("Login Successfully");
-
+        reset();
         history.push("/form/dashboard");
       } else {
         toast.error(result.error || "Invalid email or password.");
@@ -83,6 +83,7 @@ const Login = () => {
                     <input
                       type="email"
                       name="email"
+                      autoComplete="off"
                       className="form-control"
                       {...register("email")}
                       placeholder="Email"
