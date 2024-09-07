@@ -69,6 +69,11 @@
 //           <p>Thank you for choosing Portfolio. Click the button below to reset your password:</p>
 //           <h2 style="margin: 0 auto; width: max-content; padding: 0 10px;">
 //             <a href="http://localhost:3000/form/reset-form/${user._id}/${token}">
+
+{
+  /* <a href="https://frontend-react-portfolio.vercel.app/form/reset-form/${user._id}/${token}"> */
+}
+
 //               Reset your password
 //             </a>
 //           </h2>
@@ -167,7 +172,7 @@ router.post("/forgot-password", async (req, res) => {
           <p style="font-size: 1.1em;">Hi,</p>
           <p>Thank you for choosing Portfolio. Click the button below to reset your password:</p>
           <h2 style="margin: 0 auto; width: max-content; padding: 0 10px;">
-            <a href="https://frontend-react-portfolio.vercel.app//form/reset-form/${user._id}/${token}">
+            <a href="https://frontend-react-portfolio.vercel.app/form/reset-form/${user._id}/${token}" style="color: white;">
               Reset your password
             </a>
           </h2>
