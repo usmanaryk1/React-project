@@ -59,11 +59,15 @@ app.use("/api", Upload_CV);
 app.use("/api", Download_CV);
 app.use("/api", Forgot_Routes);
 app.use("/api", Reset_Routes);
-app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  express.static(path.join(__dirname, "../frontend-react-portfolio/build"))
+);
 
 // Handle all other routes by serving the index.html file
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(
+    path.join(__dirname, "../frontend-react-portfolio/build", "index.html")
+  );
 });
 
 connectDB();
