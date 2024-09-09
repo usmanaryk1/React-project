@@ -63,10 +63,12 @@ app.use(
   express.static(path.join(__dirname, "../frontend-react-portfolio/build"))
 );
 
+// Serve static files from 'public/assets' directory
+app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 // Handle all other routes by serving the index.html file
-app.get("*", (req, res) => {
+app.use((req, res) => {
   res.sendFile(
-    path.join(__dirname, "../frontend-react-portfolio/build", "index.html")
+    path.resolve(__dirname, "frontend-react-portfolio", "build", "index.html")
   );
 });
 
