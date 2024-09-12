@@ -4,6 +4,7 @@ const router = express.Router();
 
 // GET ALL DASHBOARD INFO
 router.get("/", async (req, res) => {
+  console.log("Dashboard get");
   try {
     const DashboardInfo = await Dashboard_Model.find(); // Ensure you're querying by the correct field, `id`
     if (DashboardInfo.length === 0) {

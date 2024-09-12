@@ -25,7 +25,7 @@ const Reset_Routes = require("../router/resetPwd.js");
 
 // Simple route
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Welcome to API!");
 });
 
 app.use(express.json());
@@ -59,17 +59,19 @@ app.use("/api", Upload_CV);
 app.use("/api", Download_CV);
 app.use("/api", Forgot_Routes);
 app.use("/api", Reset_Routes);
+
+// Serve the static files from the React app (build folder)
 app.use(
-  express.static(path.join(__dirname, "../frontend-react-portfolio/build"))
+  express.static(path.join(__dirname, "../../frontend-react-portfolio/build"))
 );
 
-// Serve static files from 'public/assets' directory
-app.use("/assets", express.static(path.join(__dirname, "public/assets")));
-// Handle all other routes by serving the index.html file
-app.use((req, res) => {
-  res.sendFile(
-    path.resolve(__dirname, "frontend-react-portfolio", "build", "index.html")
-  );
+// Catch-all handler for any route that isn't an API call
+app.get("*", (req, res) => {
+  if (!req.path.startsWith("/api")) {
+    res.sendFile(
+      path.join(__dirname, "../../frontend-react-portfolio/build", "index.html")
+    );
+  }
 });
 
 connectDB();
