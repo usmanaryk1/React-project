@@ -85,9 +85,7 @@ const Certifications = ({
                       )}
                       <Link to={`/certifications/${certification._id}`}>
                         <h3 className="card-title">
-                          <a href="blog-single.html">
-                            {certification.cardTitle}
-                          </a>
+                          {certification.cardTitle}
                         </h3>
                       </Link>
                       <p className="card-description">

@@ -5,13 +5,15 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import validationSchema from "./ServiceValidation";
 import Services from "../../Components/Services";
-import icons from "../Icons";
+import "../Icons/IconsDropdownCss.css";
+import CustomIconDropdown from "../Icons/CustomIconDropdown";
 
 const AddServiceForm = () => {
   const token = localStorage.getItem("token");
   const [currentService, setCurrentService] = useState(null);
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
+  const [selectedIcon, setSelectedIcon] = useState(""); // Lift state up
 
   const {
     data: services,
@@ -37,11 +39,13 @@ const AddServiceForm = () => {
   useEffect(() => {
     if (currentService) {
       setValue("icon", currentService.sIcon);
+      setSelectedIcon(currentService.sIcon); // Sync selectedIcon
       setValue("title", currentService.sTitle);
       setValue("desc", currentService.sDescription);
       setValue("isActive", currentService.isActive);
     } else {
       reset();
+      setSelectedIcon(""); // Reset selectedIcon when no currentService
     }
   }, [currentService, setValue, reset]);
 
@@ -105,6 +109,7 @@ const AddServiceForm = () => {
       reset();
       setCurrentService(null);
       setIsSubmitting(false);
+      setSelectedIcon(""); // Reset the selectedIcon state
       refetch(); // Ensure data is refreshed
     }
   };
@@ -112,6 +117,7 @@ const AddServiceForm = () => {
   const onReset = () => {
     reset();
     setCurrentService(null);
+    setSelectedIcon(""); // Reset the selectedIcon state
   };
 
   const handleEdit = (service) => {
@@ -149,23 +155,40 @@ const AddServiceForm = () => {
               </div>
               <div className="col-12">
                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                  <div className="form-group">
+                  <CustomIconDropdown
+                    name="icon"
+                    register={register}
+                    errors={errors}
+                    setValue={setValue}
+                    selectedIcon={selectedIcon} // Pass selectedIcon
+                    setSelectedIcon={setSelectedIcon} // Pass setter function // Add this line
+                  />
+                  {/* <div className="form-group">
                     <select
                       name="icon"
                       className="form-control"
                       {...register("icon")}
                     >
                       <option value="">Select an icon</option>
-                      {icons.map((icon) => (
-                        <option key={icon} value={icon}>
-                          {icon.replace("bi-", "")}
+                      {icons.map((icon, index) => (
+                        <option key={index} value={icon.className}>
+                          <img
+                            src={icon.src}
+                            alt={icon.className}
+                            style={{
+                              width: "24px",
+                              height: "24px",
+                              marginRight: "8px",
+                            }}
+                          />
+                          {icon.className.replace("bi-", "")}
                         </option>
                       ))}
                     </select>
-                  </div>
-                  {errors.icon && (
+                  </div> */}
+                  {/* {errors.icon && (
                     <p className="error-message">{errors.icon.message}</p>
-                  )}
+                  )} */}
                   <div className="form-group">
                     <input
                       type="text"

@@ -2,25 +2,25 @@ import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import Home from "./Components/Home";
 // import BlogDetails from "./Components/BlogDetails";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+} from "react-router-dom/cjs/react-router-dom.min";
 import PortfolioDetails from "./Components/PortfolioDetails";
-import CertificationDetails from "./Components/CertificationDetails";
+// import CertificationDetails from "./Components/CertificationDetails";
 import Form from "./CMSAdmin/Form";
-// import { useState, useEffect } from "react";
 import SignUp from "./CMSAdmin/Auth/SignUp/SignUp";
 import Login from "./CMSAdmin/Auth/Login/Login";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "./CMSAdmin/Auth/AuthContext";
 import AddPortfolioDetails from "./CMSAdmin/Portfolio/AddPortfolioDetails";
-// import { useAuth } from "./CMSAdmin/Auth/AuthContext";
-// Template URL: https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/
+import NotFound from "./Components/404Page/404Page";
 
 function App() {
-  // const { isAuthenticated, isAdminPage } = useAuth();
-  
   return (
-    <Router>
+    <BrowserRouter>
       <AuthProvider>
         <div className="App">
           <Header />
@@ -35,26 +35,26 @@ function App() {
               <Route path={`/works/:id`}>
                 <PortfolioDetails />
               </Route>
-              <Route path="/form/portfolioDetails-form/:id" component={AddPortfolioDetails} />
-              <Route path="/certifications/:id">
+              <Route
+                path="/form/portfolioDetails-form/:id"
+                component={AddPortfolioDetails}
+              />
+              {/* <Route path="/certifications/:id">
                 <CertificationDetails />
+              </Route> */}
+              <Route path="/form" render={() => <Form />} />
+              <Route path="/form/signup-form" render={() => <SignUp />} />
+              <Route path="/form/login-form" render={() => <Login />} />
+              <Route path="*">
+                <NotFound />
               </Route>
-              <Route path="/form" render={() => (
-                <Form />
-              )} />
-              <Route path="/form/signup-form" render={() => (
-                <SignUp />
-              )} />
-              <Route path="/form/login-form" render={() => (
-                <Login />
-              )} />
             </Switch>
           </div>
           <Footer />
           <ToastContainer />
-        </div >
+        </div>
       </AuthProvider>
-    </Router>
+    </BrowserRouter>
   );
 }
 

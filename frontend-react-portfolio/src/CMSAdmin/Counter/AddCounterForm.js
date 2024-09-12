@@ -5,13 +5,15 @@ import { useForm } from "react-hook-form";
 import validationSchema from "./CounterValidation";
 import { useState, useEffect } from "react";
 import useFetch from "../../Components/useFetch";
-import icons from "../Icons";
+import "../Icons/IconsDropdownCss.css";
+import CustomIconDropdown from "../Icons/CustomIconDropdown";
 
 const AddCounterForm = () => {
   const token = localStorage.getItem("token");
   const [currentCounter, setCurrentCounter] = useState(null);
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
+  const [selectedIcon, setSelectedIcon] = useState(""); // Lift state up
 
   const {
     data: counts,
@@ -37,11 +39,13 @@ const AddCounterForm = () => {
   useEffect(() => {
     if (currentCounter) {
       setValue("icon", currentCounter.icon);
+      setSelectedIcon(currentCounter.icon); // Sync selectedIcon
       setValue("title", currentCounter.text);
       setValue("counts", currentCounter.counterEnd);
       setValue("isActive", currentCounter.isActive);
     } else {
       reset();
+      setSelectedIcon(""); // Reset selectedIcon when no currentService
     }
   }, [currentCounter, setValue, reset]);
 
@@ -101,12 +105,14 @@ const AddCounterForm = () => {
     reset();
     setCurrentCounter(null);
     setIsSubmitting(false);
+    setSelectedIcon(""); // Reset the selectedIcon state
     refetch();
   };
 
   const onReset = (e) => {
     reset();
     setCurrentCounter(null);
+    setSelectedIcon(""); // Reset the selectedIcon state
   };
 
   const handleEdit = (counter) => {
@@ -144,7 +150,15 @@ const AddCounterForm = () => {
               <div className="col-12">
                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
                   <div className="form-group">
-                    <select
+                    <CustomIconDropdown
+                      name="icon"
+                      register={register}
+                      errors={errors}
+                      setValue={setValue}
+                      selectedIcon={selectedIcon} // Pass selectedIcon
+                      setSelectedIcon={setSelectedIcon} // Pass setter function // Add this line
+                    />
+                    {/* <select
                       name="icon"
                       className="form-control"
                       {...register("icon")}
@@ -156,7 +170,7 @@ const AddCounterForm = () => {
                           {icon.replace("bi-", "")}
                         </option>
                       ))}
-                    </select>
+                    </select> */}
                   </div>
                   {errors.icon && (
                     <p className="error-message">{errors.icon.message}</p>

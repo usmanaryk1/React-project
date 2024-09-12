@@ -3,7 +3,7 @@ import useFetch from "../../Components/useFetch";
 
 const Dashboard = () => {
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
-
+  console.log("API_URL:", API_URL);
   const { data: formsList, error } = useFetch(`${API_URL}/api/dashboard`);
   // console.log("Form List:", formsList);
   if (error) {

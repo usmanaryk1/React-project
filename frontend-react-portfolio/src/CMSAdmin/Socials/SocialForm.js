@@ -5,13 +5,15 @@ import validationSchema from "./SocialValidation";
 import useFetch from "../../Components/useFetch";
 import { useState, useEffect } from "react";
 import Contact from "../../Components/Contact";
-import icons from "../Icons";
+import "../Icons/IconsDropdownCss.css";
+import CustomIconDropdown from "../Icons/CustomIconDropdown";
 
 const SocialForm = () => {
   const [currentLinks, setCurrentLinks] = useState(null);
   const token = localStorage.getItem("token");
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
+  const [selectedIcon, setSelectedIcon] = useState(""); // Lift state up
 
   const {
     data: links,
@@ -36,10 +38,12 @@ const SocialForm = () => {
   useEffect(() => {
     if (currentLinks) {
       setValue("platformIcon", currentLinks.platformIcon);
+      setSelectedIcon(currentLinks.platformIcon); // Sync selectedIcon
       setValue("link", currentLinks.link);
       setValue("isActive", currentLinks.isActive);
     } else {
       reset();
+      setSelectedIcon(""); // Reset selectedIcon when no currentService
     }
   }, [currentLinks, setValue, reset]);
 
@@ -94,12 +98,14 @@ const SocialForm = () => {
     reset();
     setCurrentLinks(null);
     setIsSubmitting(false);
+    setSelectedIcon(""); // Reset the selectedIcon state
     refetch();
   };
 
   const onReset = () => {
     reset();
     setCurrentLinks(null);
+    setSelectedIcon(""); // Reset the selectedIcon state
   };
 
   const handleEdit = (links) => {
@@ -136,7 +142,16 @@ const SocialForm = () => {
               </div>
               <div className="col-12">
                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                  <div className="form-group">
+                  <CustomIconDropdown
+                    // icons={icons}
+                    name="platformIcon"
+                    register={register}
+                    errors={errors}
+                    setValue={setValue}
+                    selectedIcon={selectedIcon} // Pass selectedIcon
+                    setSelectedIcon={setSelectedIcon} // Pass setter function // Add this line
+                  />
+                  {/* <div className="form-group">
                     <select
                       name="platformIcon"
                       className="form-control"
@@ -151,7 +166,7 @@ const SocialForm = () => {
                       ))}
                     </select>
                   </div>
-                  {/* {errors.platform && (
+                  {errors.platform && (
                     <p className="error-message">{errors.platform.message}</p>
                   )} */}
 

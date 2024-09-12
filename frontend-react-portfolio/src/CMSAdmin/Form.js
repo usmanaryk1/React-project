@@ -1,6 +1,3 @@
-// import { useEffect } from "react";
-
-//--------------------add social media form component for giving or updating link
 import AddCertificationForm from "./Certification/AddCertificationForm";
 import AddForm from "./About/AddForm";
 import AddServiceForm from "./Services/AddServiceForm";
@@ -16,8 +13,6 @@ import ResetPwd from "./Auth/ResetPwd/ResetPwd";
 import AddTestimonialForm from "./Testimonial/AddTestimonialForm";
 import AddCounterForm from "./Counter/AddCounterForm";
 import AddPortfolioDetails from "./Portfolio/AddPortfolioDetails";
-// import { useHistory } from "react-router-dom/cjs/react-router-dom";
-// import { useState } from "react";
 import PrivateRoute from "./Auth/AuthGuard";
 import { useAuth } from "./Auth/AuthContext";
 import SocialForm from "./Socials/SocialForm";
@@ -25,20 +20,11 @@ import CVUploader from "./UploadCV/CVUploaderForm";
 
 const Form = () => {
   const { isAuthenticated } = useAuth();
-  // useEffect(() => {
-  //     const script = document.createElement('script');
-  //     script.src = "%PUBLIC_URL%/assets/js/main.js";
-  //     script.async = true;
-  //     document.body.appendChild(script);
-  //     console.log("form");
-  //     return () => {
-  //         document.body.removeChild(script);
-  //     };
-  // }, []);
 
-  let { path } = useRouteMatch();
-  console.log("form auth", isAuthenticated);
-
+  // let { path } = useRouteMatch();
+  let { url } = useRouteMatch();
+  // console.log("form auth", isAuthenticated);
+  // console.log("path", path);
   return (
     <>
       <section id="form">
@@ -73,84 +59,82 @@ const Form = () => {
                     <Route path={`${path}/contact-form`}>
                         <ContactForm />
                     </Route> */}
-          <PrivateRoute
-            exact
-            path={`${path}/dashboard`}
-            component={Dashboard}
-            isAuthenticated={isAuthenticated}
-            title="FORMS"
-            subtitle="Navigate to any form"
-          />
-          <PrivateRoute
-            path={`${path}/hero-form`}
-            component={HeroForm}
-            isAuthenticated={isAuthenticated}
-          />
-          <PrivateRoute
-            path={`${path}/about-form`}
-            component={AddForm}
-            isAuthenticated={isAuthenticated}
-          />
-          <PrivateRoute
-            path={`${path}/service-form`}
-            component={AddServiceForm}
-            isAuthenticated={isAuthenticated}
-          />
-          <PrivateRoute
-            path={`${path}/counter-form`}
-            component={AddCounterForm}
-            isAuthenticated={isAuthenticated}
-          />
-          <PrivateRoute
-            path={`${path}/portfolio-form`}
-            component={AddPortfolioForm}
-            isAuthenticated={isAuthenticated}
-          />
-          <PrivateRoute
-            path={`${path}/portfolioDetails-form`}
-            component={AddPortfolioDetails}
-            isAuthenticated={isAuthenticated}
-          />
-          <PrivateRoute
-            path={`${path}/testimonial-form`}
-            component={AddTestimonialForm}
-            isAuthenticated={isAuthenticated}
-          />
-          <PrivateRoute
-            path={`${path}/certification-form`}
-            component={AddCertificationForm}
-            isAuthenticated={isAuthenticated}
-          />
-          <PrivateRoute
-            path={`${path}/contact-form`}
-            component={ContactForm}
-            isAuthenticated={isAuthenticated}
-          />
-          <PrivateRoute
-            path={`${path}/social-form`}
-            component={SocialForm}
-            isAuthenticated={isAuthenticated}
-          />
-          <PrivateRoute
-            path={`${path}/CV-form`}
-            component={CVUploader}
-            isAuthenticated={isAuthenticated}
-          />
+          {/* Public Routes */}
           <Route path="/form/signup-form">
             <SignUp />
           </Route>
           <Route path="/form/login-form">
             <Login />
           </Route>
-          <Route path={`${path}/forget-form`}>
+          <Route path={`${url}/forget-form`}>
             <ForgetPwd />
           </Route>
-          {/* <Route path={`${path}/reset-form`}>
-            <ResetPwd />
-          </Route> */}
-          <Route path={`${path}/reset-form/:id/:token`}>
+          <Route path={`${url}/reset-form/:id/:token`}>
             <ResetPwd />
           </Route>
+          <PrivateRoute
+            exact
+            path={`${url}/dashboard`}
+            component={Dashboard}
+            isAuthenticated={isAuthenticated}
+            title="FORMS"
+            subtitle="Navigate to any form"
+          />
+          <PrivateRoute
+            path={`${url}/hero-form`}
+            component={HeroForm}
+            isAuthenticated={isAuthenticated}
+          />
+          <PrivateRoute
+            path={`${url}/about-form`}
+            component={AddForm}
+            isAuthenticated={isAuthenticated}
+          />
+          <PrivateRoute
+            path={`${url}/service-form`}
+            component={AddServiceForm}
+            isAuthenticated={isAuthenticated}
+          />
+          <PrivateRoute
+            path={`${url}/counter-form`}
+            component={AddCounterForm}
+            isAuthenticated={isAuthenticated}
+          />
+          <PrivateRoute
+            path={`${url}/portfolio-form`}
+            component={AddPortfolioForm}
+            isAuthenticated={isAuthenticated}
+          />
+          <PrivateRoute
+            path={`${url}/portfolioDetails-form`}
+            component={AddPortfolioDetails}
+            isAuthenticated={isAuthenticated}
+          />
+          <PrivateRoute
+            path={`${url}/testimonial-form`}
+            component={AddTestimonialForm}
+            isAuthenticated={isAuthenticated}
+          />
+          <PrivateRoute
+            path={`${url}/certification-form`}
+            component={AddCertificationForm}
+            isAuthenticated={isAuthenticated}
+          />
+          <PrivateRoute
+            path={`${url}/contact-form`}
+            component={ContactForm}
+            isAuthenticated={isAuthenticated}
+          />
+          <PrivateRoute
+            path={`${url}/social-form`}
+            component={SocialForm}
+            isAuthenticated={isAuthenticated}
+          />
+          <PrivateRoute
+            path={`${url}/CV-form`}
+            component={CVUploader}
+            isAuthenticated={isAuthenticated}
+          />
         </Switch>
       </section>
     </>

@@ -77,7 +77,7 @@ const Hero = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
         <div
           id="hero"
           className="hero route bg-image"
-          style={{ backgroundImage: "url(../assets/img/hero-bg.jpg)" }}
+          style={{ backgroundImage: "url(../assets/img/counters-bg.jpg)" }}
         >
           <div className="overlay-itro" />
           <div className="hero-content display-table">
