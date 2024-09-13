@@ -1,16 +1,21 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
-const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
-  // debugger; // Add debugger to inspect props
-  console.log("i added this");
-  // console.log('M conflict my side');
-  // console.log("i added this for conflict");
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const { isAuthenticated, isLoading } = useAuth();
   return (
     <Route
       {...rest}
       render={(props) => {
-        return isAuthenticated ? <Component {...props} /> : <Redirect to="/" />;
+        if (isLoading) {
+          return <div>Loading...</div>; // Show loader while loading
+        }
+        return isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/form/login-form" />
+        );
       }}
     />
   );
