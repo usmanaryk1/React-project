@@ -1,5 +1,11 @@
 // AuthContext.js
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+  useCallback,
+} from "react";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -8,6 +14,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const location = useLocation();
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // New loading state
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const isAdminPage = location.pathname.startsWith("/form");
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
@@ -27,8 +34,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("userId", loggedInUser._id);
   };
 
-  const onLogout = async () => {
-    // Send the logout request to the server
+  // Use useCallback to avoid recreating the function on every render
+  const onLogout = useCallback(async () => {
     const token = localStorage.getItem("token");
     const response = await fetch(`${API_URL}/api/auth/logout`, {
       method: "POST",
@@ -36,31 +43,37 @@ export const AuthProvider = ({ children }) => {
         Authorization: `Bearer ${token}`,
       },
     });
+
     if (response.ok) {
-      // Clear user data and show a toast message
       setUser(null);
       setIsAuthenticated(false);
       localStorage.removeItem("user");
       localStorage.removeItem("token");
       localStorage.removeItem("userId");
-
-      // Show success toast message
       toast.success("Logged out successfully!");
     } else {
-      // Show error message if logout fails
       toast.error("Failed to log out. Please try again.");
     }
+  }, [API_URL]);
+  const isTokenExpired = (token) => {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    const expiry = payload.exp * 1000;
+    return Date.now() > expiry;
   };
-
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const token = localStorage.getItem("token");
 
     if (storedUser && token) {
-      setUser(JSON.parse(storedUser));
-      setIsAuthenticated(true); // Update authentication status
+      if (isTokenExpired(token)) {
+        onLogout(); // Automatically log out if token is expired
+      } else {
+        setUser(JSON.parse(storedUser));
+        setIsAuthenticated(true);
+      }
     }
-  }, []);
+    setIsLoading(false); // Set loading to false after check
+  }, [onLogout]);
 
   return (
     <AuthContext.Provider
@@ -71,6 +84,7 @@ export const AuthProvider = ({ children }) => {
         onLogin,
         onLogout,
         isAdminPage,
+        isLoading, // Expose isLoading to consumers
       }}
     >
       {children}
