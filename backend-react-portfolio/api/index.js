@@ -68,12 +68,15 @@ app.use(
 // Catch-all handler for any route that isn't an API call
 app.get("*", (req, res) => {
   if (!req.path.startsWith("/api")) {
-    res.sendFile(
-      path.join(__dirname, "../../frontend-react-portfolio/build", "index.html")
+    const filePath = path.join(
+      __dirname,
+      "../../frontend-react-portfolio/build",
+      "index.html"
     );
+    console.log("Serving file:", filePath); // Log the file path for debugging
+    res.sendFile(filePath);
   }
 });
-
 connectDB();
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
