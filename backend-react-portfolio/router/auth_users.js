@@ -8,13 +8,14 @@ const bcrypt = require("bcrypt"); // Import bcrypt
 
 router.post("/register", async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, firebaseUID } = req.body;
 
     // Check if email already exists
     const emailExists = await UserModel.findOne({ email });
-    if (emailExists) {
+    const firebaseUid = await UserModel.findOne({ firebaseUID });
+    if (emailExists || firebaseUid) {
       return res.status(400).json({
-        message: "Email already exists. Please log in.",
+        message: "User already exists. Please log in.",
       });
     }
 
@@ -35,6 +36,7 @@ router.post("/register", async (req, res) => {
       username,
       email,
       password: hashedPassword, // Save the hashed password
+      firebaseUID, // Store Firebase UID for reference
       loggedIn: false,
     });
     await newUser.save();
@@ -56,6 +58,12 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
+    const { idToken } = req.body; // Firebase ID token
+
+    // Verify Firebase ID token
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    const firebaseUID = decodedToken.uid;
+
     const existingUser = await UserModel.findOne({ email: req.body.email });
     if (!existingUser) return res.status(400).json({ error: "User not found" });
 
