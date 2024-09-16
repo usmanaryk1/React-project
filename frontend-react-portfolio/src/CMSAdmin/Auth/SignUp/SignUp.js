@@ -6,6 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "./SignupValidation";
 import { useAuth } from "../AuthContext";
 import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../firebaseConfig";
 
 const SignUp = () => {
   const { onSignup } = useAuth();
@@ -34,11 +36,22 @@ const SignUp = () => {
     setIsSubmitting(true);
     try {
       // Prepare data for submission
-      const { confirmPassword, ...userData } = data;
+      const { email, password, confirmPassword, ...userData } = data;
+      // const { confirmPassword, ...userData } = data;
+
+      // Sign up user with Firebase Auth
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const firebaseUser = userCredential.user;
 
       // Add role to userData
       const userWithStatus = {
         ...userData,
+        email: firebaseUser.email,
+        firebaseUID: firebaseUser.uid, // Unique identifier from Firebase
         loggedIn: false,
       };
 
