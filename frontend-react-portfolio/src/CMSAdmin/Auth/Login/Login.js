@@ -5,6 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "./LoginValidation";
 import { useAuth } from "../AuthContext";
 import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../firebaseConfig";
 
 const Login = () => {
   const { onLogin } = useAuth();
@@ -30,12 +32,22 @@ const Login = () => {
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
+      // Sign in user with Firebase Auth
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      const firebaseUser = userCredential.user;
+
+      const firebaseToken = await firebaseUser.getIdToken();
+
       const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ firebaseToken }),
       });
 
       const result = await response.json();
@@ -44,7 +56,7 @@ const Login = () => {
         const loggedInUser = { ...result.UserModel, loggedIn: true };
         // console.log("loggedInUser", loggedInUser);
         // Update user status in the context
-        onLogin(loggedInUser, result.accessToken, true);
+        onLogin(loggedInUser, result.accessToken, result.firebaseToken, true);
 
         toast.success("Login Successfully");
         reset();
@@ -83,7 +95,7 @@ const Login = () => {
                     <input
                       type="email"
                       name="email"
-                      autoComplete="off"
+                      autoComplete="on"
                       className="form-control"
                       {...register("email")}
                       placeholder="Email"

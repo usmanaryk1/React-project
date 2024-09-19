@@ -38,7 +38,15 @@ const SignUp = () => {
       // Prepare data for submission
       const { email, password, confirmPassword, ...userData } = data;
       // const { confirmPassword, ...userData } = data;
-
+      if (password !== confirmPassword) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Passwords do not match!",
+        });
+        setIsSubmitting(false);
+        return; // Add this to stop further execution
+      }
       // Sign up user with Firebase Auth
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -95,7 +103,7 @@ const SignUp = () => {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "An error occurred. Please try again.",
+        text: "An error occurred. Please try again." || err.message,
       });
       reset();
       setIsSubmitting(false);

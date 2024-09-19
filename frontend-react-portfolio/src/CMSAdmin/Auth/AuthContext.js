@@ -23,14 +23,14 @@ export const AuthProvider = ({ children }) => {
     setUser(newUser);
     setIsAuthenticated(authentication);
     localStorage.setItem("user", JSON.stringify(newUser));
-    localStorage.setItem("token", newUser.token); // Save JWT token
   };
 
-  const onLogin = (loggedInUser, token, authentication) => {
+  const onLogin = (loggedInUser, token, firebaseToken, authentication) => {
     setUser(loggedInUser);
     setIsAuthenticated(authentication);
     localStorage.setItem("user", JSON.stringify(loggedInUser));
     localStorage.setItem("token", token); // Save JWT token
+    localStorage.setItem("key", firebaseToken); // Save JWT token
     localStorage.setItem("userId", loggedInUser._id);
   };
 
@@ -56,9 +56,20 @@ export const AuthProvider = ({ children }) => {
     }
   }, [API_URL]);
   const isTokenExpired = (token) => {
-    const payload = JSON.parse(atob(token.split(".")[1]));
-    const expiry = payload.exp * 1000;
-    return Date.now() > expiry;
+    console.log("Token context", token);
+    if (token) {
+      try {
+        const tokenPayload = token.split(".")[1];
+        const decodedPayload = atob(tokenPayload);
+        const expiry = decodedPayload.exp * 1000;
+        return Date.now() > expiry;
+      } catch (error) {
+        console.error("Failed to decode the token:", error.message);
+      }
+      // const payload = JSON.parse(atob(token.split(".")[1]));
+      // const expiry = payload.exp * 1000;
+      // return Date.now() > expiry;
+    }
   };
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
