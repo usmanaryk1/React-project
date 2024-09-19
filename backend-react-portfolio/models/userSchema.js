@@ -16,10 +16,15 @@ const userSchema = new Schema(
       unique: true, // Ensure email is unique
       match: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, // Regex to validate email format
     },
-    password: {
+    firebaseUID: {
       type: String,
       required: true,
+      unique: true, // Ensure email is unique
     },
+    // password: {
+    //   type: String,
+    //   required: true,
+    // },
     loggedIn: {
       type: Boolean,
       default: false, //User will be logged out by default
