@@ -8,6 +8,7 @@ import useFetch from "../../Components/useFetch";
 import { v4 } from "uuid";
 import { storage } from "../../firebaseConfig"; // Import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import Resizer from "react-image-file-resizer"; // Import the image resizer
 
 const AddCertificationForm = () => {
   const [currentCertifications, setCurrentCertifications] = useState(null);
@@ -54,31 +55,49 @@ const AddCertificationForm = () => {
 
   const handleImage1Change = async (e) => {
     const file = e.target.files[0];
-    const base64 = await convertBase64(file);
-    // console.log("base64", base64);
-    setBase64Image1(base64);
-    setImage1(file);
+    const resizedImage = await resizeImage(file);
+    setBase64Image1(resizedImage.base64);
+    setImage1(resizedImage.file);
   };
 
   const handleImage2Change = async (e) => {
     const file = e.target.files[0];
-    const base64 = await convertBase64(file);
-    setBase64Image2(base64);
-    setImage2(file);
+    const resizedImage = await resizeImage2(file);
+    setBase64Image2(resizedImage.base64);
+    setImage2(resizedImage.file);
   };
 
-  const convertBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader(file);
-      fileReader.readAsDataURL(file);
+  const resizeImage = (file) => {
+    return new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        354,
+        236,
+        "JPEG",
+        100,
+        0,
+        (uri) => {
+          resolve({ base64: uri, file });
+        },
+        "base64"
+      );
+    });
+  };
 
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
+  const resizeImage2 = (file) => {
+    return new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        32,
+        32,
+        "JPEG",
+        100,
+        0,
+        (uri) => {
+          resolve({ base64: uri, file });
+        },
+        "base64"
+      );
     });
   };
 

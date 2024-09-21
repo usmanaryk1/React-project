@@ -1707,18 +1707,14 @@ input[type="number"],
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
 }
 
-.add-container .img-display-after {
-  height: 150px;
+.add-container .img-display-after,
+.img-display-before {
   width: 150px;
+  height: 150px;
+  object-fit: cover; /* Ensures the image is cropped to fill the area */
   border-radius: 5px;
-  text-align: center;
 }
 
-.add-container .img-display-before {
-  height: 150px;
-  width: 150px;
-  border-radius: 5px;
-}
 /*--------------------------------------------------------------
 # Services Form 
 --------------------------------------------------------------*/
@@ -1773,7 +1769,7 @@ input[type="number"],
 }
 
 .portfolioDetails-container .img-display-before {
-  height: 175px;
+  height: 180px;
   width: 250px;
 }
 
@@ -1790,16 +1786,18 @@ input[type="number"],
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
 }
 
-.testimonial-container .img-display-after {
+.testimonial-container .img-display-before .img-display-after {
   height: 150px;
   width: 150px;
   border-radius: 100%;
+  object-fit: cover;
 }
 
 .testimonial-container .img-display-before {
   height: 150px;
   width: 150px;
   border-radius: 100%;
+  object-fit: cover;
 }
 
 /*--------------------------------------------------------------

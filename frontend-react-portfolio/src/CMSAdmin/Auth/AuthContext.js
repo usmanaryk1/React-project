@@ -8,6 +8,8 @@ import React, {
 } from "react";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { auth } from "../../firebaseConfig";
+import { signOut } from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -36,7 +38,10 @@ export const AuthProvider = ({ children }) => {
 
   // Use useCallback to avoid recreating the function on every render
   const onLogout = useCallback(async () => {
+    await signOut(auth); // Sign out from Firebase
+
     const token = localStorage.getItem("token");
+
     const response = await fetch(`${API_URL}/api/auth/logout`, {
       method: "POST",
       headers: {
@@ -50,26 +55,23 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem("user");
       localStorage.removeItem("token");
       localStorage.removeItem("userId");
+      localStorage.removeItem("key");
       toast.success("Logged out successfully!");
     } else {
       toast.error("Failed to log out. Please try again.");
     }
   }, [API_URL]);
   const isTokenExpired = (token) => {
-    console.log("Token context", token);
     if (token) {
       try {
-        const tokenPayload = token.split(".")[1];
-        const decodedPayload = atob(tokenPayload);
-        const expiry = decodedPayload.exp * 1000;
+        const tokenPayload = JSON.parse(atob(token.split(".")[1]));
+        const expiry = tokenPayload.exp * 1000; // Convert to milliseconds
         return Date.now() > expiry;
       } catch (error) {
         console.error("Failed to decode the token:", error.message);
       }
-      // const payload = JSON.parse(atob(token.split(".")[1]));
-      // const expiry = payload.exp * 1000;
-      // return Date.now() > expiry;
     }
+    return true; // Default to true if no token
   };
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -82,6 +84,9 @@ export const AuthProvider = ({ children }) => {
         setUser(JSON.parse(storedUser));
         setIsAuthenticated(true);
       }
+    } else {
+      setUser(null);
+      setIsAuthenticated(false);
     }
     setIsLoading(false); // Set loading to false after check
   }, [onLogout]);

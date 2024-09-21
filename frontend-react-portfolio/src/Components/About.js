@@ -67,7 +67,7 @@ const About = ({ onEditClick, onDeleteClick, about = [] }) => {
                         <div className="skill-mf">
                           <p className="title-s">Skill</p>
                           <span>HTML</span>{" "}
-                          <span className="pull-right">85%</span>
+                          <span className="pull-right">100%</span>
                           <div className="progress">
                             <div
                               className="progress-bar"
@@ -103,7 +103,7 @@ const About = ({ onEditClick, onDeleteClick, about = [] }) => {
                             />
                           </div>
                           <span>REACT</span>{" "}
-                          <span className="pull-right">50%</span>
+                          <span className="pull-right">85%</span>
                           <div className="progress">
                             <div
                               className="progress-bar"

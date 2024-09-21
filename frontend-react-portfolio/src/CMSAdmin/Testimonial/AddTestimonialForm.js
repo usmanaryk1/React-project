@@ -8,6 +8,7 @@ import useFetch from "../../Components/useFetch";
 import { v4 } from "uuid";
 import { storage } from "../../firebaseConfig"; // Import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import Resizer from "react-image-file-resizer"; // Import the image resizer
 
 const AddTestimonialForm = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(null);
@@ -43,30 +44,35 @@ const AddTestimonialForm = () => {
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
 
-  const handleImageChange = async (e) => {
-    const file = e.target.files[0];
-    const base64 = await convertBase64(file);
-    setBase64Image(base64);
-    // console.log("base64", base64);
-    setImage(file);
-  };
-
   const handleImageClick = () => {
     document.getElementById("file-input").click();
   };
 
-  const convertBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader(file);
-      reader.readAsDataURL(file);
-
-      reader.onload = () => {
-        resolve(reader.result);
-      };
-
-      reader.onerror = (error) => {
-        reject(error);
-      };
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    const resizedImage = await resizeImage(file);
+    setBase64Image(resizedImage.base64);
+    // console.log("base64", base64);
+    setImage(resizedImage.file);
+  };
+  const resizeImage = (file) => {
+    return new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        150,
+        150,
+        "WEBP",
+        70, // Adjust quality to manage file size
+        0,
+        async (uri) => {
+          const blob = await fetch(uri).then((r) => r.blob());
+          const resizedFile = new File([blob], file.name, {
+            type: "image/webp",
+          });
+          resolve({ base64: uri, file: resizedFile });
+        },
+        "base64"
+      );
     });
   };
 
@@ -109,28 +115,6 @@ const AddTestimonialForm = () => {
         return;
       }
     }
-    // formObject.img = base64Image; // Add the base64 image to the form object
-
-    // // console.log("Form Data:", formObject);
-
-    // let imageUrl = formObject.img;
-
-    // // If a new image is selected, upload it
-    // if (image) {
-    //   const imageFormData = new FormData();
-    //   imageFormData.append("file", image);
-
-    //   try {
-    //     const response = await fetch(`${API_URL}/api/file/upload`, {
-    //       method: "POST",
-    //       body: imageFormData,
-    //     });
-    //     const data = await response.json();
-    //     imageUrl = data.file; // Assuming the server responds with the URL of the uploaded image
-    //   } catch (error) {
-    //     console.error("Error uploading the image:", error);
-    //   }
-    // }
 
     const updatedData = {
       name: formObject.name,

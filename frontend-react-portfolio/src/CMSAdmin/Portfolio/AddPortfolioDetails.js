@@ -14,6 +14,7 @@ import {
 import { v4 } from "uuid";
 import { storage } from "../../firebaseConfig"; // Import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import Resizer from "react-image-file-resizer"; // Ensure you have this import
 
 const AddPortfolioDetails = () => {
   const {
@@ -58,24 +59,6 @@ const AddPortfolioDetails = () => {
     imageRefs.current[index].click();
   };
 
-  const handleImageChange = async (e, index) => {
-    const file = e.target.files[0];
-    if (file) {
-      const base64 = await convertBase64(file);
-      // console.log("base64", base64);
-      setBase64Images((prevState) => {
-        const newImages = [...prevState];
-        newImages[index] = base64;
-        return newImages;
-      });
-      setImages((prevState) => {
-        const newImages = [...prevState];
-        newImages[index] = file;
-        return newImages;
-      });
-    }
-  };
-
   const addNewImageInput = () => {
     setImages((prevState) => [...prevState, null]);
     setBase64Images((prevState) => [...prevState, ""]);
@@ -86,12 +69,43 @@ const AddPortfolioDetails = () => {
     setBase64Images((prevState) => prevState.filter((_, i) => i !== index));
   };
 
-  const convertBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
+  const handleImageChange = async (e, index) => {
+    const file = e.target.files[0];
+    if (file) {
+      const resizedImage = await resizeImage(file);
+
+      setBase64Images((prevState) => {
+        const newImages = [...prevState];
+        newImages[index] = resizedImage.base64;
+        return newImages;
+      });
+
+      setImages((prevState) => {
+        const newImages = [...prevState];
+        newImages[index] = resizedImage.file; // Use resized file
+        return newImages;
+      });
+    }
+  };
+
+  const resizeImage = (file) => {
+    return new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        688, // Width
+        398, // Height
+        "WEBP", // Format
+        10, // Quality (adjust this to manage file size)
+        0,
+        async (uri) => {
+          const blob = await fetch(uri).then((r) => r.blob());
+          const resizedFile = new File([blob], file.name, {
+            type: "image/webp",
+          });
+          resolve({ base64: uri, file: resizedFile });
+        },
+        "base64"
+      );
     });
   };
 

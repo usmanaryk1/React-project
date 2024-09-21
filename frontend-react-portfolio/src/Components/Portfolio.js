@@ -83,7 +83,9 @@ const Portfolio = ({ title, subtitle, onEdit, onDelete, works = [] }) => {
                       <div className="row">
                         <div className="col-sm-8">
                           <h2 className="w-title">
-                            <a href={work.pURL}>{work.wTitle}</a>
+                            <a href={work.pURL} target="blank">
+                              {work.wTitle}
+                            </a>
                           </h2>
                           <div className="w-more">
                             <span className="w-ctegory">{work.wCategory}</span>{" "}

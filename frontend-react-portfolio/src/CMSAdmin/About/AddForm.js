@@ -8,6 +8,7 @@ import useFetch from "../../Components/useFetch";
 import { storage } from "../../firebaseConfig"; // Import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
+import Resizer from "react-image-file-resizer"; // Import the image resizer
 
 const AddForm = () => {
   const {
@@ -29,6 +30,7 @@ const AddForm = () => {
   });
 
   const token = localStorage.getItem("token");
+  // const firebaseToken = localStorage.getItem("key");
   const [image, setImage] = useState(null);
   const imageRef = useRef(null);
   const [base64Image, setBase64Image] = useState("");
@@ -63,31 +65,122 @@ const AddForm = () => {
   const acceptedFileTypes =
     "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
 
-  const handleImageChange = async (e) => {
-    const file = e.target.files[0];
-    const base64 = await convertBase64(file);
-    setBase64Image(base64);
-    // console.log("base64", base64);
-    setImage(file);
-  };
+  // const handleImageChange = async (e) => {
+  //   const file = e.target.files[0];
+  //   const base64 = await convertBase64(file);
+  //   setBase64Image(base64);
+  //   // console.log("base64", base64);
+  //   setImage(file);
+  // };
 
-  const convertBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader(file);
-      reader.readAsDataURL(file);
+  // const handleImageChange = async (e) => {
+  //   const file = e.target.files[0];
 
-      reader.onload = () => {
-        resolve(reader.result);
-      };
+  //   // Ensure the file is an image
+  //   if (!file.type.startsWith("image/")) {
+  //     toast.error("Please upload a valid image file");
+  //     return;
+  //   }
 
-      reader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
+  //   const image = new Image();
+  //   const objectUrl = URL.createObjectURL(file);
+  //   image.src = objectUrl;
+
+  //   image.onload = () => {
+  //     const canvas = document.createElement("canvas");
+  //     const ctx = canvas.getContext("2d");
+
+  //     // Set canvas size to 150x150 for resizing the image
+  //     canvas.width = 150;
+  //     canvas.height = 150;
+
+  //     const { width, height } = image;
+
+  //     // Determine the smaller dimension (width or height) to maintain aspect ratio
+  //     const minSize = Math.min(width, height);
+
+  //     // Calculate the X and Y coordinates for cropping the image to a square
+  //     const sx = width > height ? (width - height) / 2 : 0;
+  //     const sy = height > width ? (height - width) / 2 : 0;
+
+  //     // Draw the image onto the canvas, cropping and resizing it to 150x150
+  //     ctx.drawImage(image, sx, sy, minSize, minSize, 0, 0, 150, 150);
+
+  //     // Convert the canvas content to a base64 image with lower quality for compression
+  //     const base64 = canvas.toDataURL("image/jpeg", 0.7); // Adjust the quality to compress file size
+
+  //     // Set base64 image for preview and convert back to file for upload
+  //     console.log(base64); // Logs base64 image string
+  //     setBase64Image(base64);
+  //     setImage(convertBase64ToFile(base64, file.name));
+
+  //     URL.revokeObjectURL(objectUrl); // Clean up the object URL
+  //   };
+
+  //   image.onerror = () => {
+  //     toast.error("Failed to load the image");
+  //   };
+  // };
+
+  // // Helper function to convert base64 to a File object for Firebase upload
+  // const convertBase64ToFile = (base64, fileName) => {
+  //   const arr = base64.split(",");
+  //   const mime = arr[0].match(/:(.*?);/)[1];
+  //   const bstr = atob(arr[1]);
+  //   let n = bstr.length;
+  //   const u8arr = new Uint8Array(n);
+
+  //   while (n--) {
+  //     u8arr[n] = bstr.charCodeAt(n);
+  //   }
+
+  //   return new File([u8arr], fileName, { type: mime });
+  // };
+  // const convertBase64 = (file) => {
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader(file);
+  //     reader.readAsDataURL(file);
+
+  //     reader.onload = () => {
+  //       resolve(reader.result);
+  //     };
+
+  //     reader.onerror = (error) => {
+  //       reject(error);
+  //     };
+  //   });
+  // };
 
   const handleImageClick = () => {
     document.getElementById("file-input").click();
+  };
+
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    const resizedImage = await resizeImage(file);
+    setBase64Image(resizedImage.base64);
+    // console.log("base64", base64);
+    setImage(resizedImage.file);
+  };
+  const resizeImage = (file) => {
+    return new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        150,
+        150,
+        "WEBP",
+        70, // Adjust quality to manage file size
+        0,
+        async (uri) => {
+          const blob = await fetch(uri).then((r) => r.blob());
+          const resizedFile = new File([blob], file.name, {
+            type: "image/webp",
+          });
+          resolve({ base64: uri, file: resizedFile });
+        },
+        "base64"
+      );
+    });
   };
 
   const uploadImageToFirebase = async (imageFile) => {

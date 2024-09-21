@@ -116,7 +116,9 @@ const PortfolioContent = ({ onDeleteClick, onEditClick, details, workId }) => {
                     </li>
                     <li>
                       <strong>Project URL</strong> :{" "}
-                      <a href={details.pURL}>{details.pURL}</a>
+                      <a href={details.pURL} target="blank">
+                        {details.pURL}
+                      </a>
                     </li>
                   </ul>
                 </div>
