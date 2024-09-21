@@ -119,6 +119,9 @@ router.post("/login", async (req, res) => {
         email: firebasedecodedToken.email,
         loggedIn: true,
       });
+      await existingUser.save();
+    } else {
+      // Update the loggedIn status if the user already exists
       existingUser.loggedIn = true;
       await existingUser.save();
     }
