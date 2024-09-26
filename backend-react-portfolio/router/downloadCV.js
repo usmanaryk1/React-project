@@ -24,7 +24,7 @@ router.get("/download-cv/:userId", async (req, res) => {
     // Set headers to tell the browser to download the file
     res.setHeader("Content-Disposition", `attachment; filename="${fileName}"`);
     res.setHeader("Content-Type", contentType);
-
+    res.status(200);
     // Pipe the file stream to the client
     response.data.pipe(res);
   } catch (error) {
