@@ -20,7 +20,9 @@ const Dashboard = () => {
               <div className="col-sm-12">
                 <div className="title-box text-center">
                   <h3 className="title-a">FORMS</h3>
-                  <p className="subtitle-a">Navigate to Any Form</p>
+                  <p className="subtitle-a">
+                    Navigate to Any Form With Just One Tap
+                  </p>
                   <div className="line-mf" />
                 </div>
               </div>
@@ -36,8 +38,21 @@ const Dashboard = () => {
                     </div>
                     <div className="service-content">
                       <h2 className="s-title">{formItem.Title}</h2>
-                      <p className="s-description text-center">
-                        <Link to={formItem.link} className="link-item">
+                      <p className="s-description text-center form-link">
+                        <Link
+                          to={formItem.link}
+                          className="link-item"
+                          style={{
+                            display: "inline-block",
+                            transition: "transform 0.3s ease-in-out",
+                          }}
+                          onMouseEnter={(e) =>
+                            (e.target.style.transform = "scale(1.1)")
+                          }
+                          onMouseLeave={(e) =>
+                            (e.target.style.transform = "scale(1)")
+                          }
+                        >
                           {formItem.Description}
                         </Link>
                       </p>

@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import validationSchema from "./ForgetPwdValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -89,7 +89,6 @@ const ForgetPwd = () => {
                     >
                       {isSubmitting ? "Sending..." : "Send"}
                     </button>
-                    <Link to="/form/reset-form">Reset Password</Link>
                   </div>
                 </form>
               </div>

@@ -62,7 +62,6 @@ const AddCounterForm = () => {
 
     if (currentCounter) {
       // Update counter
-      //   const updatedCounter = { ...currentCounter, ...formData };
       const response = await fetch(
         `${API_URL}/api/counts/${currentCounter._id}`,
         {
@@ -158,23 +157,7 @@ const AddCounterForm = () => {
                       selectedIcon={selectedIcon} // Pass selectedIcon
                       setSelectedIcon={setSelectedIcon} // Pass setter function // Add this line
                     />
-                    {/* <select
-                      name="icon"
-                      className="form-control"
-                      {...register("icon")}
-                      required
-                    >
-                      <option value="">Select an icon</option>
-                      {icons.map((icon) => (
-                        <option key={icon} value={icon}>
-                          {icon.replace("bi-", "")}
-                        </option>
-                      ))}
-                    </select> */}
                   </div>
-                  {errors.icon && (
-                    <p className="error-message">{errors.icon.message}</p>
-                  )}
 
                   <div className="form-group">
                     <input

@@ -20,7 +20,14 @@ const validationSchema = yup
     //         if (!value.length) return true; // attachment is optional
     //         return value && value[0].size <= FILE_SIZE;
     //     }),
-    name: yup.string().required("Missing Name"),
+    name: yup
+      .string()
+      .required("Missing Name")
+      .test(
+        "is-not-number",
+        "Title should be a string value, not a number!",
+        (value) => isNaN(Number(value))
+      ),
     profile: yup.string().required("Missing Profile"),
     email: yup
       .string()

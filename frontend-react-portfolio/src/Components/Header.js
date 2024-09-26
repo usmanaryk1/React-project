@@ -2,7 +2,8 @@ import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../CMSAdmin/Auth/AuthContext";
 import { useLocation } from "react-router-dom/cjs/react-router-dom";
-
+import { toast } from "react-toastify";
+import axios from "axios";
 const Header = () => {
   const [navLinks, setNavLinks] = useState([]);
   const { user, onLogout, isAdminPage, isAuthenticated } = useAuth();
@@ -11,6 +12,40 @@ const Header = () => {
 
   const preventRefresh = (e) => {
     e.preventDefault();
+  };
+
+  const handleDownloadCV = async (e) => {
+    e.preventDefault();
+    if (!user) {
+      toast.error("User not found!");
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        `${API_URL}/api/download-cv/${user._id}`,
+        {
+          responseType: "blob", // Ensures the file is treated as binary data
+        }
+      );
+
+      if (response.status === 200) {
+        // Create a link element and trigger the download
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "My CV.pdf"); // Set the file name dynamically if needed
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        toast.error("CV not found!");
+      } else {
+        toast.error("An error occurred while downloading the CV.");
+      }
+    }
   };
 
   useEffect(() => {
@@ -185,12 +220,9 @@ const Header = () => {
                   </li>
                 ))}
                 <li className="download">
-                  <a
-                    href={`${API_URL}/api/download-cv/${user ? user._id : ""}`}
-                    download
-                  >
+                  <button onClick={handleDownloadCV} className="btn">
                     Download CV
-                  </a>
+                  </button>
                 </li>
                 <li className="dropdown nav-link">
                   {isAuthenticated && user ? (
