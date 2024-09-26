@@ -29,18 +29,18 @@ app.get("/", (req, res) => {
 });
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "https://frontend-react-portfolio.vercel.app",
-    credentials: true,
-  })
-);
 // app.use(
 //   cors({
-//     origin: "http://localhost:3000",
+//     origin: "https://frontend-react-portfolio.vercel.app",
 //     credentials: true,
 //   })
 // );
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 // USE ROUTES
 
 app.use("/api/hero", personal_SkillsRoutes);
