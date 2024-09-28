@@ -45,9 +45,9 @@ router.post("/register", async (req, res) => {
       user: newUser,
     });
   } catch (err) {
-    console.error("Error during signup:", err);
+    // console.error("Error during signup:", err);
     return res.status(503).json({
-      message: "Signup failed. Please try again.",
+      message: err,
       error: err.message,
     });
   }

@@ -13,8 +13,13 @@ router.get("/download-cv/:userId", async (req, res) => {
     if (!cv) {
       return res.status(404).json({ message: "CV not found" });
     }
-    // Fetch the file from Firebase Storage or wherever your file is hosted using Axios
+    // Fetch the file from MongoDB or wherever your file is hosted using Axios
     const response = await axios.get(cv.cvUrl, { responseType: "stream" });
+
+    // Check if the response is valid and not empty
+    if (!response || !response.data) {
+      return res.status(500).json({ message: "Failed to fetch the CV file." });
+    }
 
     // Get the file's content type and file name (you may need to customize this)
     const contentType =

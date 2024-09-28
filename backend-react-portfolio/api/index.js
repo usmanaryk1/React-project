@@ -5,6 +5,27 @@ require("dotenv").config({ path: "./api/.env" });
 const app = express();
 const path = require("path");
 
+app.use(express.json());
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://frontend-react-portfolio.vercel.app",
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: "GET,POST,PUT,DELETE", // Specify allowed methods
+    credentials: true,
+  })
+);
+
 // IMPORT ROUTES
 const personal_SkillsRoutes = require("../router/personal_skills.js");
 const About_Routes = require("../router/about.js");
@@ -28,19 +49,6 @@ app.get("/", (req, res) => {
   res.send("Welcome to API!");
 });
 
-app.use(express.json());
-app.use(
-  cors({
-    origin: "https://frontend-react-portfolio.vercel.app",
-    credentials: true,
-  })
-);
-// app.use(
-//   cors({
-//     origin: "http://localhost:3000",
-//     credentials: true,
-//   })
-// );
 // USE ROUTES
 
 app.use("/api/hero", personal_SkillsRoutes);
