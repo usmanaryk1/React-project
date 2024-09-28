@@ -38,12 +38,15 @@ const Header = () => {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+      } else {
+        toast.error("Failed to download CV");
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
         toast.error("CV not found");
       } else {
-        toast.error(error);
+        console.error(error); // Log detailed error for debugging
+        toast.error("An error occurred while downloading the CV");
       }
     }
   };
