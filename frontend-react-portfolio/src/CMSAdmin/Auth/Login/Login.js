@@ -68,7 +68,7 @@ const Login = () => {
       reset();
       setIsSubmitting(false);
     } catch (error) {
-      toast.error("An error occurred. Please try again.");
+      toast.error(error);
       console.error("Login error:", error);
       setIsSubmitting(false);
       reset();

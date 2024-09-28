@@ -41,9 +41,9 @@ const Header = () => {
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        toast.error("CV not found!");
+        toast.error("CV not found");
       } else {
-        toast.error("An error occurred while downloading the CV.");
+        toast.error(error);
       }
     }
   };
