@@ -156,7 +156,7 @@ const Header = () => {
                         <ul>
                           <li>
                             <Link smooth to="/" onClick={onLogout}>
-                              LogOut
+                              Log Out
                             </Link>
                           </li>
                           {isAdminPage ? (
@@ -187,7 +187,7 @@ const Header = () => {
                         <ul>
                           <li>
                             <Link smooth to="/form/login-form">
-                              LogIn
+                              Log in
                             </Link>
                           </li>
                         </ul>
@@ -237,7 +237,7 @@ const Header = () => {
                       <ul>
                         <li>
                           <Link smooth to="/" onClick={onLogout}>
-                            LogOut
+                            Log Out
                           </Link>
                         </li>
                         {isAdminPage ? (
@@ -264,7 +264,7 @@ const Header = () => {
                       <ul>
                         <li>
                           <Link smooth to="/form/login-form">
-                            LogIn
+                            Log in
                           </Link>
                         </li>
                       </ul>

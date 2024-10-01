@@ -27,12 +27,11 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(newUser));
   };
 
-  const onLogin = (loggedInUser, token, firebaseToken, authentication) => {
+  const onLogin = (loggedInUser, token, authentication) => {
     setUser(loggedInUser);
     setIsAuthenticated(authentication);
     localStorage.setItem("user", JSON.stringify(loggedInUser));
     localStorage.setItem("token", token); // Save JWT token
-    localStorage.setItem("key", firebaseToken); // Save JWT token
     localStorage.setItem("userId", loggedInUser._id);
   };
 
@@ -55,7 +54,6 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem("user");
       localStorage.removeItem("token");
       localStorage.removeItem("userId");
-      localStorage.removeItem("key");
       toast.success("Logged out successfully!");
     } else {
       toast.error("Failed to log out. Please try again.");

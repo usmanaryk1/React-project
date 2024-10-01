@@ -2,16 +2,19 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import validationSchema from "./ResetPwdValidation";
-import { useParams } from "react-router-dom/cjs/react-router-dom";
-import axios from "axios";
+import { useLocation } from "react-router-dom/cjs/react-router-dom";
+// import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import { auth } from "../../../firebaseConfig";
+import { confirmPasswordReset } from "firebase/auth";
 
 const ResetPwd = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+  // const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
   const history = useHistory();
-  const { id, token } = useParams();
+  // const { id, token } = useParams();
+  const location = useLocation();
   const {
     handleSubmit,
     reset,
@@ -25,28 +28,49 @@ const ResetPwd = () => {
     },
   });
 
-  const onSubmit = (formObject) => {
-    setIsSubmitting(true);
-    const data = {
-      password: formObject.password,
-      confirmPassword: formObject.confirmPassword,
-    };
-
-    axios.defaults.withCredentials = true;
-    axios
-      .post(`${API_URL}/api/reset-password/${id}/${token}`, data)
-      .then((res) => {
-        if (res.data.message === "Success") {
-          history.push("/form/login-form");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error(err);
-        setIsSubmitting(false);
-      });
-    reset();
+  // Utility function to get query parameters from the URL
+  const getQueryParam = (param) => {
+    return new URLSearchParams(location.search).get(param);
   };
+
+  const oobCode = getQueryParam("oobCode");
+  const onSubmit = async (data) => {
+    setIsSubmitting(true);
+
+    try {
+      // Call Firebase's confirmPasswordReset method to finalize the password reset
+      await confirmPasswordReset(auth, oobCode, data.password);
+      toast.success("Password has been reset successfully. Please log in.");
+      history.push("/form/login-form"); // Redirect the user to the login page
+    } catch (error) {
+      toast.error(`Error: ${error.message}`);
+    } finally {
+      setIsSubmitting(false);
+      reset();
+    }
+  };
+  // const onSubmit = (formObject) => {
+  //   setIsSubmitting(true);
+  //   const data = {
+  //     password: formObject.password,
+  //     confirmPassword: formObject.confirmPassword,
+  //   };
+
+  //   axios.defaults.withCredentials = true;
+  //   axios
+  //     .post(`${API_URL}/api/reset-password/${id}/${token}`, data)
+  //     .then((res) => {
+  //       if (res.data.message === "Success") {
+  //         history.push("/form/login-form");
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       toast.error(err);
+  //       setIsSubmitting(false);
+  //     });
+  //   reset();
+  // };
 
   return (
     <>

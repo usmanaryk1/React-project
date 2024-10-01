@@ -6,7 +6,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "./SignupValidation";
 import { useAuth } from "../AuthContext";
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
 
 const SignUp = () => {
@@ -32,83 +31,135 @@ const SignUp = () => {
   // console.log("Signup component received onSignup prop:", onSignup);
 
   const onSubmit = async (data) => {
-    // console.log("Data", data);
     setIsSubmitting(true);
+
     try {
-      // Prepare data for submission
-      const { email, password, confirmPassword, ...userData } = data;
-      // const { confirmPassword, ...userData } = data;
-      if (password !== confirmPassword) {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "Passwords do not match!",
-        });
-        setIsSubmitting(false);
-        return; // Add this to stop further execution
-      }
-      // Sign up user with Firebase Auth
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const firebaseUser = userCredential.user;
-
-      // Add role to userData
-      const userWithStatus = {
-        ...userData,
-        email: firebaseUser.email,
-        firebaseUID: firebaseUser.uid, // Unique identifier from Firebase
-        loggedIn: false,
-      };
-
-      // console.log("userWithStatus", userWithStatus);
-
-      // Make the request to the server
+      // Make a request to your backend to handle signup
       const response = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userWithStatus),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+          username: data.username,
+        }),
       });
 
-      const responseData = await response.json();
+      const result = await response.json();
 
-      if (!response.ok) {
-        // Check for specific error messages from the backend
-        const errorMessage =
-          responseData.message || "Signup failed. Please try again.";
+      if (response.ok) {
+        // Signup successful
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text:
+            result.message ||
+            "Signup successful! Please check your email for verification.",
+        });
+        // console.log("userRecord", result.UserRecord);
+        // console.log("userRecord", result.UserRecord.email);
 
+        onSignup(result.user, false);
+        // Optionally redirect user after successful signup
+        history.push("/form/login-form");
+      } else {
+        // Handle backend error response
         Swal.fire({
           icon: "error",
           title: "Error",
-          text: errorMessage,
+          text: result.message || "Signup failed. Please try again.",
         });
-        setIsSubmitting(false);
-        return;
       }
-
-      // Handle successful signup
-      console.log("user", responseData.user);
-      Swal.fire({
-        icon: "success",
-        title: "Success",
-        text: "User registered successfully!",
-      });
-      onSignup(responseData.user, false);
-      setIsSubmitting(false);
-      history.push("/form/login-form");
-    } catch (err) {
-      console.error("Error during signup:", err);
+    } catch (error) {
+      // Handle general errors
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "An error occurred. Please try again." || err.message,
+        text: "An error occurred. Please try again.",
       });
-      reset();
+    } finally {
       setIsSubmitting(false);
     }
   };
+
+  // const onSubmit = async (data) => {
+  //   // console.log("Data", data);
+  //   setIsSubmitting(true);
+  //   try {
+  //     // Prepare data for submission
+  //     const { email, password, confirmPassword, username, ...userData } = data;
+
+  //     // Step 3: Create user in Firebase
+  //     const userCredential = await createUserWithEmailAndPassword(
+  //       auth,
+  //       email,
+  //       password
+  //     );
+  //     const firebaseUser = userCredential.user;
+
+  //     // Send email verification
+  //     await sendEmailVerification(firebaseUser);
+  //     Swal.fire({
+  //       icon: "success",
+  //       title: "Success",
+  //       text: "Verfification email is sent. Check your email!",
+  //     });
+
+  //     // Step 4: Save user in MongoDB
+  //     const userWithFirebaseId = {
+  //       ...userData,
+  //       email: firebaseUser.email,
+  //       firebaseUID: firebaseUser.uid,
+  //       username,
+  //     };
+  //     // console.log("userWithFirebaseId", userWithFirebaseId);
+
+  //     // Make the request to the server
+  //     const response = await fetch(`${API_URL}/api/auth/register`, {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(userWithFirebaseId),
+  //     });
+
+  //     const responseData = await response.json();
+
+  //     if (!response.ok) {
+  //       // Check for specific error messages from the backend
+  //       const errorMessage =
+  //         responseData.message || "Signup failed. Please try again.";
+
+  //       Swal.fire({
+  //         icon: "error",
+  //         title: "Error",
+  //         text: errorMessage,
+  //       });
+  //       setIsSubmitting(false);
+  //       return;
+  //     } else {
+  //       // Handle successful signup
+  //       // console.log("user", responseData.user);
+  //       Swal.fire({
+  //         icon: "success",
+  //         title: "Success",
+  //         text: "User registered successfully!",
+  //       });
+  //       onSignup(responseData.user, false);
+  //       setIsSubmitting(false);
+  //       history.push("/form/login-form");
+  //     }
+  //   } catch (err) {
+  //     console.error("Error during signup:", err);
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Error",
+  //       text: "An error occurred. Please try again." || err.message,
+  //     });
+  //     reset();
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   return (
     <>

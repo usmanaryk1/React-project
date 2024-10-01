@@ -32,7 +32,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
-      // Sign in user with Firebase Auth
+      // Attempt to sign in the user with Firebase Auth
       const userCredential = await signInWithEmailAndPassword(
         auth,
         data.email,
@@ -40,6 +40,7 @@ const Login = () => {
       );
       const firebaseUser = userCredential.user;
 
+      // Get the ID token
       const firebaseToken = await firebaseUser.getIdToken();
 
       const response = await fetch(`${API_URL}/api/auth/login`, {
@@ -47,33 +48,81 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ firebaseToken }),
+        body: JSON.stringify({ firebaseToken, email: data.email }),
       });
 
       const result = await response.json();
 
       if (response.ok) {
-        const loggedInUser = { ...result.UserModel, loggedIn: true };
-        // console.log("loggedInUser", loggedInUser);
-        // Update user status in the context
-        onLogin(loggedInUser, result.accessToken, result.firebaseToken, true);
-
-        toast.success("Login Successfully");
+        // Handle successful login
+        const loggedInUser = result.User;
+        onLogin(loggedInUser, result.accessToken, true);
+        toast.success("User Logged In Successfully");
         reset();
         history.push("/form/dashboard");
       } else {
-        toast.error(result.error || "Invalid email or password.");
-        setIsSubmitting(false);
+        // Handle backend validation errors
+        toast.error(result.error || "An error occurred.");
       }
-      reset();
-      setIsSubmitting(false);
     } catch (error) {
-      toast.error(error);
-      console.error("Login error:", error);
+      // General error message
+      toast.error("Error logging in. Please check your credentials.");
+    } finally {
       setIsSubmitting(false);
-      reset();
+      reset(); // Reset form after handling all cases
     }
   };
+
+  // const onSubmit = async (data) => {
+  //   setIsSubmitting(true);
+  //   try {
+  //     console.log("data", data);
+  //     // Sign in user with Firebase Auth
+  //     const userCredential = await signInWithEmailAndPassword(
+  //       auth,
+  //       data.email,
+  //       data.password
+  //     );
+  //     const firebaseUser = userCredential.user;
+
+  //     const firebaseToken = await firebaseUser.getIdToken();
+
+  //     const response = await fetch(`${API_URL}/api/auth/login`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ firebaseToken }),
+  //     });
+
+  //     const result = await response.json();
+
+  //     if (response.ok) {
+  //       const loggedInUser = result.User;
+  //       // console.log("loggedInUser", loggedInUser);
+  //       // Update user status in the context
+  //       onLogin(loggedInUser, result.accessToken, true);
+
+  //       toast.success("Login Successfully");
+  //       reset();
+  //       history.push("/form/dashboard");
+  //     } else {
+  //       // Handle backend validation errors
+  //       if (result.error) {
+  //         toast.error(result.error.message || "An error occurred.");
+  //       } else {
+  //         toast.error("Login failed. Please try again.");
+  //       }
+  //     }
+  //     setIsSubmitting(false);
+  //   } catch (error) {
+  //       toast.error("Error logging in. Please check your credentials.");
+  //     }
+  //   } finally {
+  //     setIsSubmitting(false);
+  //     reset(); // Reset form only after handling all cases
+  //   }
+  // };
 
   return (
     <>
