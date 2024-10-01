@@ -5,8 +5,6 @@ require("dotenv").config({ path: "./api/.env" });
 const app = express();
 const path = require("path");
 
-app.use(express.json());
-
 const allowedOrigins = [
   "http://localhost:3000",
   "https://frontend-react-portfolio.vercel.app",
@@ -50,6 +48,7 @@ app.get("/", (req, res) => {
 });
 
 // USE ROUTES
+app.use(express.json());
 
 app.use("/api/hero", personal_SkillsRoutes);
 app.use("/api/about", About_Routes);
@@ -67,7 +66,6 @@ app.use("/api", Upload_CV);
 app.use("/api", Download_CV);
 app.use("/api", Forgot_Routes);
 app.use("/api", Reset_Routes);
-
 // Serve the static files from the React app (build folder)
 app.use(
   express.static(path.join(__dirname, "../../frontend-react-portfolio/build"))

@@ -4,52 +4,71 @@ const UserModel = require("../models/userSchema");
 const authenticateJWT = require("../middleware/authmiddleware");
 const router = express.Router();
 const admin = require("../api/firebaseAdmin.js");
-const authenticateFbToken = require("../middleware/FirebaseMiddleware.js");
+const checkFirebaseUserByEmail = require("../utils/checkFirebaseUser.js");
+const sendVerificationEmail = require("./verificationEmail.js");
 
 // const bcrypt = require("bcrypt"); // Import bcrypt
 // REGISTERING NEW USER
 
 router.post("/register", async (req, res) => {
-  try {
-    const { username, email, firebaseUID } = req.body;
+  const { email, password, username } = req.body;
 
-    // Check if email already exists
-    const userExists = await UserModel.findOne({
-      $or: [{ email }, { firebaseUID }],
-    });
-    if (userExists) {
+  try {
+    // Step 1: Check if the user already exists in Firebase
+    const firebaseCheck = await checkFirebaseUserByEmail(email);
+
+    if (firebaseCheck.exists) {
       return res.status(400).json({
-        message: "User already exists. Please log in.",
+        message: "Email already exists. Please login or use a different email.",
       });
     }
 
-    // Check if username already exists
+    // Step 2: If user doesn't exist, proceed with checking username in database (MongoDB)
     const usernameExists = await UserModel.findOne({ username });
+    console.log("username:", usernameExists);
     if (usernameExists) {
       return res.status(400).json({
         message: "Username already exists. Please choose another.",
       });
     }
 
-    // Create a new user
+    // Step 3: If user doesn't exist, proceed to create a new Firebase user
+    const UserRecord = await admin.auth().createUser({
+      email,
+      password,
+    });
+
+    console.log("firebase user:", UserRecord);
+
+    // Step 4: Generate email verification link
+    const verificationLink = await admin
+      .auth()
+      .generateEmailVerificationLink(email);
+
+    await sendVerificationEmail(verificationLink, email); // Implement sendEmail function
+
+    console.log("verificationLink", verificationLink);
+
+    // Step 5: Save the user in MongoDB (MongoDB logic here)
     const newUser = new UserModel({
       username,
-      email,
-      firebaseUID, // Store Firebase UID for reference
+      email: UserRecord.email,
+      firebaseUID: UserRecord.uid, // Store Firebase UID for reference
       loggedIn: false,
     });
+    console.log("newuser", newUser);
     await newUser.save();
 
-    return res.status(201).json({
-      message: "User registered successfully",
+    res.status(201).json({
+      message: "Signup successful! Please check your email for verification.",
       user: newUser,
+      UserRecord,
     });
-  } catch (err) {
-    // console.error("Error during signup:", err);
-    return res.status(503).json({
-      message: err,
-      error: err.message,
-    });
+  } catch (error) {
+    console.log("error:", error);
+    res
+      .status(500)
+      .json({ error: "Internal server error. Please try again later." });
   }
 });
 
@@ -102,8 +121,18 @@ router.post("/register", async (req, res) => {
 // ONLY REGISTERED USERS CAN LOGIN
 
 router.post("/login", async (req, res) => {
+  const { firebaseToken, email } = req.body; // Firebase ID token
+
   try {
-    const { firebaseToken } = req.body; // Firebase ID token
+    // Step 1: Check if the user exists in Firebase
+    const firebaseCheck = await checkFirebaseUserByEmail(email);
+
+    if (!firebaseCheck.exists) {
+      return res.status(404).json({
+        error: "User not found. Please sign up first.",
+      });
+    }
+
     // console.log("firebaseToken", firebaseToken);
     // Verify Firebase ID token
     const firebasedecodedToken = await admin
@@ -113,14 +142,7 @@ router.post("/login", async (req, res) => {
 
     // Check if user exists in your database
     let existingUser = await UserModel.findOne({ firebaseUID });
-    if (!existingUser) {
-      existingUser = new UserModel({
-        firebaseUID,
-        email: firebasedecodedToken.email,
-        loggedIn: true,
-      });
-      await existingUser.save();
-    } else {
+    if (existingUser) {
       // Update the loggedIn status if the user already exists
       existingUser.loggedIn = true;
       await existingUser.save();
@@ -134,13 +156,13 @@ router.post("/login", async (req, res) => {
 
     return res.status(200).json({
       message: " User logged in sucessfully!",
-      UserModel: existingUser,
-      firebaseToken,
+      User: existingUser,
       accessToken,
     });
   } catch (error) {
-    console.log("Login error:", error.message);
-    return res.status(500).json({ error: error.message });
+    return res
+      .status(500)
+      .json({ error: "Internal server error. Please try again later." });
   }
 });
 
