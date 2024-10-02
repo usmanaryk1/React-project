@@ -69,7 +69,6 @@ const Login = () => {
       toast.error("Error logging in. Please check your credentials.");
     } finally {
       setIsSubmitting(false);
-      reset(); // Reset form after handling all cases
     }
   };
 

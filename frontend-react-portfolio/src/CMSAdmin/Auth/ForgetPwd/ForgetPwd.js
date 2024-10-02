@@ -1,16 +1,13 @@
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import validationSchema from "./ForgetPwdValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useState } from "react";
-// import axios from "axios";
-import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../../../firebaseConfig";
 const ForgetPwd = () => {
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
   const [isSubmitting, setIsSubmitting] = useState(false);
-  // const history = useHistory();
+  const history = useHistory();
 
   const {
     register,
@@ -32,7 +29,7 @@ const ForgetPwd = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include", // Corrected this value
+        credentials: "include",
         body: JSON.stringify({ email }),
       });
       const result = await response.json();
@@ -40,43 +37,16 @@ const ForgetPwd = () => {
       if (!response.ok) {
         toast.error(result.message);
       } else {
-        await sendPasswordResetEmail(auth, email)
-          .then(() => {
-            toast.success("Password reset email sent! Check your email.");
-          })
-          .catch((error) => {
-            console.error("Error sending password reset email:", error);
-            toast.error("Failed to send reset email. Please try again later.");
-          });
+        toast.success("Password reset email sent! Check your email.");
+        history.push("/form/login-form");
       }
     } catch (error) {
       toast.error(error.message);
     } finally {
       setIsSubmitting(false);
-      reset();
     }
   };
 
-  // const onSubmit = ({ email }) => {
-  //   setIsSubmitting(true);
-
-  //   sendPasswordResetEmail(auth, email)
-  //     .then(() => {
-  //       toast.success("Password reset link sent! Check your email.");
-  //       setIsSubmitting(false);
-  //     })
-  //     .catch((error) => {
-  //       if (error.code === "auth/expired-action-code") {
-  //         toast.error("The reset link has expired. Please request a new one.");
-  //       } else if (error.code === "auth/invalid-action-code") {
-  //         toast.error("The reset link is invalid. Please request a new one.");
-  //       } else {
-  //         toast.error(`Error: ${error.message}`);
-  //       }
-  //     });
-
-  //   reset();
-  // };
   // const onSubmit = ({ email }) => {
   //   setIsSubmitting(true);
   //   axios

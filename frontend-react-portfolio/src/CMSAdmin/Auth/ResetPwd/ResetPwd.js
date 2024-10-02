@@ -14,10 +14,8 @@ const ResetPwd = () => {
   // const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
   const history = useHistory();
   // const { id, token } = useParams();
-  const location = useLocation();
   const {
     handleSubmit,
-    reset,
     formState: { errors },
     register,
   } = useForm({
@@ -27,13 +25,8 @@ const ResetPwd = () => {
       confrimPassword: "",
     },
   });
-
-  // Utility function to get query parameters from the URL
-  const getQueryParam = (param) => {
-    return new URLSearchParams(location.search).get(param);
-  };
-
-  const oobCode = getQueryParam("oobCode");
+  const query = new URLSearchParams(useLocation().search);
+  const oobCode = query.get("oobCode"); // Extract the oobCode from the URL
   const onSubmit = async (data) => {
     setIsSubmitting(true);
 
@@ -46,7 +39,6 @@ const ResetPwd = () => {
       toast.error(`Error: ${error.message}`);
     } finally {
       setIsSubmitting(false);
-      reset();
     }
   };
   // const onSubmit = (formObject) => {
