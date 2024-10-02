@@ -14,7 +14,6 @@ const sendVerificationEmail = async (link, email) => {
     from: `"Portfolio Support" <${process.env.SENDER_EMAIL}>`, // Replace with your sender email
     to: email,
     subject: "Verify Your Email Address",
-    text: `Click this link to verify your email: ${link}`,
     html: `
     <!DOCTYPE html>
     <html lang="en">

@@ -6,8 +6,8 @@ const app = express();
 const path = require("path");
 
 const allowedOrigins = [
-  "http://localhost:3000",
-  "https://frontend-react-portfolio.vercel.app",
+  process.env.FRONTEND_LOCALHOST_URL,
+  process.env.FRONTEND_VERCEL_URL,
 ];
 
 app.use(
