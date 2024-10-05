@@ -74,6 +74,7 @@ app.use(
 // Catch-all handler for any route that isn't an API call
 app.get("*", (req, res) => {
   if (!req.path.startsWith("/api")) {
+    console.log("index.html hit");
     const filePath = path.join(
       __dirname,
       "../../frontend-react-portfolio/build",
