@@ -1,0 +1,8202 @@
+[
+  {
+    "className": "bi-0-circle-fill",
+    "src": "/assets/icons/0-circle-fill.svg"
+  },
+  {
+    "className": "bi-0-circle",
+    "src": "/assets/icons/0-circle.svg"
+  },
+  {
+    "className": "bi-0-square-fill",
+    "src": "/assets/icons/0-square-fill.svg"
+  },
+  {
+    "className": "bi-0-square",
+    "src": "/assets/icons/0-square.svg"
+  },
+  {
+    "className": "bi-1-circle-fill",
+    "src": "/assets/icons/1-circle-fill.svg"
+  },
+  {
+    "className": "bi-1-circle",
+    "src": "/assets/icons/1-circle.svg"
+  },
+  {
+    "className": "bi-1-square-fill",
+    "src": "/assets/icons/1-square-fill.svg"
+  },
+  {
+    "className": "bi-1-square",
+    "src": "/assets/icons/1-square.svg"
+  },
+  {
+    "className": "bi-123",
+    "src": "/assets/icons/123.svg"
+  },
+  {
+    "className": "bi-2-circle-fill",
+    "src": "/assets/icons/2-circle-fill.svg"
+  },
+  {
+    "className": "bi-2-circle",
+    "src": "/assets/icons/2-circle.svg"
+  },
+  {
+    "className": "bi-2-square-fill",
+    "src": "/assets/icons/2-square-fill.svg"
+  },
+  {
+    "className": "bi-2-square",
+    "src": "/assets/icons/2-square.svg"
+  },
+  {
+    "className": "bi-3-circle-fill",
+    "src": "/assets/icons/3-circle-fill.svg"
+  },
+  {
+    "className": "bi-3-circle",
+    "src": "/assets/icons/3-circle.svg"
+  },
+  {
+    "className": "bi-3-square-fill",
+    "src": "/assets/icons/3-square-fill.svg"
+  },
+  {
+    "className": "bi-3-square",
+    "src": "/assets/icons/3-square.svg"
+  },
+  {
+    "className": "bi-4-circle-fill",
+    "src": "/assets/icons/4-circle-fill.svg"
+  },
+  {
+    "className": "bi-4-circle",
+    "src": "/assets/icons/4-circle.svg"
+  },
+  {
+    "className": "bi-4-square-fill",
+    "src": "/assets/icons/4-square-fill.svg"
+  },
+  {
+    "className": "bi-4-square",
+    "src": "/assets/icons/4-square.svg"
+  },
+  {
+    "className": "bi-5-circle-fill",
+    "src": "/assets/icons/5-circle-fill.svg"
+  },
+  {
+    "className": "bi-5-circle",
+    "src": "/assets/icons/5-circle.svg"
+  },
+  {
+    "className": "bi-5-square-fill",
+    "src": "/assets/icons/5-square-fill.svg"
+  },
+  {
+    "className": "bi-5-square",
+    "src": "/assets/icons/5-square.svg"
+  },
+  {
+    "className": "bi-6-circle-fill",
+    "src": "/assets/icons/6-circle-fill.svg"
+  },
+  {
+    "className": "bi-6-circle",
+    "src": "/assets/icons/6-circle.svg"
+  },
+  {
+    "className": "bi-6-square-fill",
+    "src": "/assets/icons/6-square-fill.svg"
+  },
+  {
+    "className": "bi-6-square",
+    "src": "/assets/icons/6-square.svg"
+  },
+  {
+    "className": "bi-7-circle-fill",
+    "src": "/assets/icons/7-circle-fill.svg"
+  },
+  {
+    "className": "bi-7-circle",
+    "src": "/assets/icons/7-circle.svg"
+  },
+  {
+    "className": "bi-7-square-fill",
+    "src": "/assets/icons/7-square-fill.svg"
+  },
+  {
+    "className": "bi-7-square",
+    "src": "/assets/icons/7-square.svg"
+  },
+  {
+    "className": "bi-8-circle-fill",
+    "src": "/assets/icons/8-circle-fill.svg"
+  },
+  {
+    "className": "bi-8-circle",
+    "src": "/assets/icons/8-circle.svg"
+  },
+  {
+    "className": "bi-8-square-fill",
+    "src": "/assets/icons/8-square-fill.svg"
+  },
+  {
+    "className": "bi-8-square",
+    "src": "/assets/icons/8-square.svg"
+  },
+  {
+    "className": "bi-9-circle-fill",
+    "src": "/assets/icons/9-circle-fill.svg"
+  },
+  {
+    "className": "bi-9-circle",
+    "src": "/assets/icons/9-circle.svg"
+  },
+  {
+    "className": "bi-9-square-fill",
+    "src": "/assets/icons/9-square-fill.svg"
+  },
+  {
+    "className": "bi-9-square",
+    "src": "/assets/icons/9-square.svg"
+  },
+  {
+    "className": "bi-activity",
+    "src": "/assets/icons/activity.svg"
+  },
+  {
+    "className": "bi-airplane-engines-fill",
+    "src": "/assets/icons/airplane-engines-fill.svg"
+  },
+  {
+    "className": "bi-airplane-engines",
+    "src": "/assets/icons/airplane-engines.svg"
+  },
+  {
+    "className": "bi-airplane-fill",
+    "src": "/assets/icons/airplane-fill.svg"
+  },
+  {
+    "className": "bi-airplane",
+    "src": "/assets/icons/airplane.svg"
+  },
+  {
+    "className": "bi-alarm-fill",
+    "src": "/assets/icons/alarm-fill.svg"
+  },
+  {
+    "className": "bi-alarm",
+    "src": "/assets/icons/alarm.svg"
+  },
+  {
+    "className": "bi-alexa",
+    "src": "/assets/icons/alexa.svg"
+  },
+  {
+    "className": "bi-align-bottom",
+    "src": "/assets/icons/align-bottom.svg"
+  },
+  {
+    "className": "bi-align-center",
+    "src": "/assets/icons/align-center.svg"
+  },
+  {
+    "className": "bi-align-end",
+    "src": "/assets/icons/align-end.svg"
+  },
+  {
+    "className": "bi-align-middle",
+    "src": "/assets/icons/align-middle.svg"
+  },
+  {
+    "className": "bi-align-start",
+    "src": "/assets/icons/align-start.svg"
+  },
+  {
+    "className": "bi-align-top",
+    "src": "/assets/icons/align-top.svg"
+  },
+  {
+    "className": "bi-alipay",
+    "src": "/assets/icons/alipay.svg"
+  },
+  {
+    "className": "bi-alphabet-uppercase",
+    "src": "/assets/icons/alphabet-uppercase.svg"
+  },
+  {
+    "className": "bi-alphabet",
+    "src": "/assets/icons/alphabet.svg"
+  },
+  {
+    "className": "bi-alt",
+    "src": "/assets/icons/alt.svg"
+  },
+  {
+    "className": "bi-amazon",
+    "src": "/assets/icons/amazon.svg"
+  },
+  {
+    "className": "bi-amd",
+    "src": "/assets/icons/amd.svg"
+  },
+  {
+    "className": "bi-android",
+    "src": "/assets/icons/android.svg"
+  },
+  {
+    "className": "bi-android2",
+    "src": "/assets/icons/android2.svg"
+  },
+  {
+    "className": "bi-app-indicator",
+    "src": "/assets/icons/app-indicator.svg"
+  },
+  {
+    "className": "bi-app",
+    "src": "/assets/icons/app.svg"
+  },
+  {
+    "className": "bi-apple",
+    "src": "/assets/icons/apple.svg"
+  },
+  {
+    "className": "bi-archive-fill",
+    "src": "/assets/icons/archive-fill.svg"
+  },
+  {
+    "className": "bi-archive",
+    "src": "/assets/icons/archive.svg"
+  },
+  {
+    "className": "bi-arrow-90deg-down",
+    "src": "/assets/icons/arrow-90deg-down.svg"
+  },
+  {
+    "className": "bi-arrow-90deg-left",
+    "src": "/assets/icons/arrow-90deg-left.svg"
+  },
+  {
+    "className": "bi-arrow-90deg-right",
+    "src": "/assets/icons/arrow-90deg-right.svg"
+  },
+  {
+    "className": "bi-arrow-90deg-up",
+    "src": "/assets/icons/arrow-90deg-up.svg"
+  },
+  {
+    "className": "bi-arrow-bar-down",
+    "src": "/assets/icons/arrow-bar-down.svg"
+  },
+  {
+    "className": "bi-arrow-bar-left",
+    "src": "/assets/icons/arrow-bar-left.svg"
+  },
+  {
+    "className": "bi-arrow-bar-right",
+    "src": "/assets/icons/arrow-bar-right.svg"
+  },
+  {
+    "className": "bi-arrow-bar-up",
+    "src": "/assets/icons/arrow-bar-up.svg"
+  },
+  {
+    "className": "bi-arrow-clockwise",
+    "src": "/assets/icons/arrow-clockwise.svg"
+  },
+  {
+    "className": "bi-arrow-counterclockwise",
+    "src": "/assets/icons/arrow-counterclockwise.svg"
+  },
+  {
+    "className": "bi-arrow-down-circle-fill",
+    "src": "/assets/icons/arrow-down-circle-fill.svg"
+  },
+  {
+    "className": "bi-arrow-down-circle",
+    "src": "/assets/icons/arrow-down-circle.svg"
+  },
+  {
+    "className": "bi-arrow-down-left-circle-fill",
+    "src": "/assets/icons/arrow-down-left-circle-fill.svg"
+  },
+  {
+    "className": "bi-arrow-down-left-circle",
+    "src": "/assets/icons/arrow-down-left-circle.svg"
+  },
+  {
+    "className": "bi-arrow-down-left-square-fill",
+    "src": "/assets/icons/arrow-down-left-square-fill.svg"
+  },
+  {
+    "className": "bi-arrow-down-left-square",
+    "src": "/assets/icons/arrow-down-left-square.svg"
+  },
+  {
+    "className": "bi-arrow-down-left",
+    "src": "/assets/icons/arrow-down-left.svg"
+  },
+  {
+    "className": "bi-arrow-down-right-circle-fill",
+    "src": "/assets/icons/arrow-down-right-circle-fill.svg"
+  },
+  {
+    "className": "bi-arrow-down-right-circle",
+    "src": "/assets/icons/arrow-down-right-circle.svg"
+  },
+  {
+    "className": "bi-arrow-down-right-square-fill",
+    "src": "/assets/icons/arrow-down-right-square-fill.svg"
+  },
+  {
+    "className": "bi-arrow-down-right-square",
+    "src": "/assets/icons/arrow-down-right-square.svg"
+  },
+  {
+    "className": "bi-arrow-down-right",
+    "src": "/assets/icons/arrow-down-right.svg"
+  },
+  {
+    "className": "bi-arrow-down-short",
+    "src": "/assets/icons/arrow-down-short.svg"
+  },
+  {
+    "className": "bi-arrow-down-square-fill",
+    "src": "/assets/icons/arrow-down-square-fill.svg"
+  },
+  {
+    "className": "bi-arrow-down-square",
+    "src": "/assets/icons/arrow-down-square.svg"
+  },
+  {
+    "className": "bi-arrow-down-up",
+    "src": "/assets/icons/arrow-down-up.svg"
+  },
+  {
+    "className": "bi-arrow-down",
+    "src": "/assets/icons/arrow-down.svg"
+  },
+  {
+    "className": "bi-arrow-left-circle-fill",
+    "src": "/assets/icons/arrow-left-circle-fill.svg"
+  },
+  {
+    "className": "bi-arrow-left-circle",
+    "src": "/assets/icons/arrow-left-circle.svg"
+  },
+  {
+    "className": "bi-arrow-left-right",
+    "src": "/assets/icons/arrow-left-right.svg"
+  },
+  {
+    "className": "bi-arrow-left-short",
+    "src": "/assets/icons/arrow-left-short.svg"
+  },
+  {
+    "className": "bi-arrow-left-square-fill",
+    "src": "/assets/icons/arrow-left-square-fill.svg"
+  },
+  {
+    "className": "bi-arrow-left-square",
+    "src": "/assets/icons/arrow-left-square.svg"
+  },
+  {
+    "className": "bi-arrow-left",
+    "src": "/assets/icons/arrow-left.svg"
+  },
+  {
+    "className": "bi-arrow-repeat",
+    "src": "/assets/icons/arrow-repeat.svg"
+  },
+  {
+    "className": "bi-arrow-return-left",
+    "src": "/assets/icons/arrow-return-left.svg"
+  },
+  {
+    "className": "bi-arrow-return-right",
+    "src": "/assets/icons/arrow-return-right.svg"
+  },
+  {
+    "className": "bi-arrow-right-circle-fill",
+    "src": "/assets/icons/arrow-right-circle-fill.svg"
+  },
+  {
+    "className": "bi-arrow-right-circle",
+    "src": "/assets/icons/arrow-right-circle.svg"
+  },
+  {
+    "className": "bi-arrow-right-short",
+    "src": "/assets/icons/arrow-right-short.svg"
+  },
+  {
+    "className": "bi-arrow-right-square-fill",
+    "src": "/assets/icons/arrow-right-square-fill.svg"
+  },
+  {
+    "className": "bi-arrow-right-square",
+    "src": "/assets/icons/arrow-right-square.svg"
+  },
+  {
+    "className": "bi-arrow-right",
+    "src": "/assets/icons/arrow-right.svg"
+  },
+  {
+    "className": "bi-arrow-through-heart-fill",
+    "src": "/assets/icons/arrow-through-heart-fill.svg"
+  },
+  {
+    "className": "bi-arrow-through-heart",
+    "src": "/assets/icons/arrow-through-heart.svg"
+  },
+  {
+    "className": "bi-arrow-up-circle-fill",
+    "src": "/assets/icons/arrow-up-circle-fill.svg"
+  },
+  {
+    "className": "bi-arrow-up-circle",
+    "src": "/assets/icons/arrow-up-circle.svg"
+  },
+  {
+    "className": "bi-arrow-up-left-circle-fill",
+    "src": "/assets/icons/arrow-up-left-circle-fill.svg"
+  },
+  {
+    "className": "bi-arrow-up-left-circle",
+    "src": "/assets/icons/arrow-up-left-circle.svg"
+  },
+  {
+    "className": "bi-arrow-up-left-square-fill",
+    "src": "/assets/icons/arrow-up-left-square-fill.svg"
+  },
+  {
+    "className": "bi-arrow-up-left-square",
+    "src": "/assets/icons/arrow-up-left-square.svg"
+  },
+  {
+    "className": "bi-arrow-up-left",
+    "src": "/assets/icons/arrow-up-left.svg"
+  },
+  {
+    "className": "bi-arrow-up-right-circle-fill",
+    "src": "/assets/icons/arrow-up-right-circle-fill.svg"
+  },
+  {
+    "className": "bi-arrow-up-right-circle",
+    "src": "/assets/icons/arrow-up-right-circle.svg"
+  },
+  {
+    "className": "bi-arrow-up-right-square-fill",
+    "src": "/assets/icons/arrow-up-right-square-fill.svg"
+  },
+  {
+    "className": "bi-arrow-up-right-square",
+    "src": "/assets/icons/arrow-up-right-square.svg"
+  },
+  {
+    "className": "bi-arrow-up-right",
+    "src": "/assets/icons/arrow-up-right.svg"
+  },
+  {
+    "className": "bi-arrow-up-short",
+    "src": "/assets/icons/arrow-up-short.svg"
+  },
+  {
+    "className": "bi-arrow-up-square-fill",
+    "src": "/assets/icons/arrow-up-square-fill.svg"
+  },
+  {
+    "className": "bi-arrow-up-square",
+    "src": "/assets/icons/arrow-up-square.svg"
+  },
+  {
+    "className": "bi-arrow-up",
+    "src": "/assets/icons/arrow-up.svg"
+  },
+  {
+    "className": "bi-arrows-angle-contract",
+    "src": "/assets/icons/arrows-angle-contract.svg"
+  },
+  {
+    "className": "bi-arrows-angle-expand",
+    "src": "/assets/icons/arrows-angle-expand.svg"
+  },
+  {
+    "className": "bi-arrows-collapse-vertical",
+    "src": "/assets/icons/arrows-collapse-vertical.svg"
+  },
+  {
+    "className": "bi-arrows-collapse",
+    "src": "/assets/icons/arrows-collapse.svg"
+  },
+  {
+    "className": "bi-arrows-expand-vertical",
+    "src": "/assets/icons/arrows-expand-vertical.svg"
+  },
+  {
+    "className": "bi-arrows-expand",
+    "src": "/assets/icons/arrows-expand.svg"
+  },
+  {
+    "className": "bi-arrows-fullscreen",
+    "src": "/assets/icons/arrows-fullscreen.svg"
+  },
+  {
+    "className": "bi-arrows-move",
+    "src": "/assets/icons/arrows-move.svg"
+  },
+  {
+    "className": "bi-arrows-vertical",
+    "src": "/assets/icons/arrows-vertical.svg"
+  },
+  {
+    "className": "bi-arrows",
+    "src": "/assets/icons/arrows.svg"
+  },
+  {
+    "className": "bi-aspect-ratio-fill",
+    "src": "/assets/icons/aspect-ratio-fill.svg"
+  },
+  {
+    "className": "bi-aspect-ratio",
+    "src": "/assets/icons/aspect-ratio.svg"
+  },
+  {
+    "className": "bi-asterisk",
+    "src": "/assets/icons/asterisk.svg"
+  },
+  {
+    "className": "bi-at",
+    "src": "/assets/icons/at.svg"
+  },
+  {
+    "className": "bi-award-fill",
+    "src": "/assets/icons/award-fill.svg"
+  },
+  {
+    "className": "bi-award",
+    "src": "/assets/icons/award.svg"
+  },
+  {
+    "className": "bi-back",
+    "src": "/assets/icons/back.svg"
+  },
+  {
+    "className": "bi-backpack-fill",
+    "src": "/assets/icons/backpack-fill.svg"
+  },
+  {
+    "className": "bi-backpack",
+    "src": "/assets/icons/backpack.svg"
+  },
+  {
+    "className": "bi-backpack2-fill",
+    "src": "/assets/icons/backpack2-fill.svg"
+  },
+  {
+    "className": "bi-backpack2",
+    "src": "/assets/icons/backpack2.svg"
+  },
+  {
+    "className": "bi-backpack3-fill",
+    "src": "/assets/icons/backpack3-fill.svg"
+  },
+  {
+    "className": "bi-backpack3",
+    "src": "/assets/icons/backpack3.svg"
+  },
+  {
+    "className": "bi-backpack4-fill",
+    "src": "/assets/icons/backpack4-fill.svg"
+  },
+  {
+    "className": "bi-backpack4",
+    "src": "/assets/icons/backpack4.svg"
+  },
+  {
+    "className": "bi-backspace-fill",
+    "src": "/assets/icons/backspace-fill.svg"
+  },
+  {
+    "className": "bi-backspace-reverse-fill",
+    "src": "/assets/icons/backspace-reverse-fill.svg"
+  },
+  {
+    "className": "bi-backspace-reverse",
+    "src": "/assets/icons/backspace-reverse.svg"
+  },
+  {
+    "className": "bi-backspace",
+    "src": "/assets/icons/backspace.svg"
+  },
+  {
+    "className": "bi-badge-3d-fill",
+    "src": "/assets/icons/badge-3d-fill.svg"
+  },
+  {
+    "className": "bi-badge-3d",
+    "src": "/assets/icons/badge-3d.svg"
+  },
+  {
+    "className": "bi-badge-4k-fill",
+    "src": "/assets/icons/badge-4k-fill.svg"
+  },
+  {
+    "className": "bi-badge-4k",
+    "src": "/assets/icons/badge-4k.svg"
+  },
+  {
+    "className": "bi-badge-8k-fill",
+    "src": "/assets/icons/badge-8k-fill.svg"
+  },
+  {
+    "className": "bi-badge-8k",
+    "src": "/assets/icons/badge-8k.svg"
+  },
+  {
+    "className": "bi-badge-ad-fill",
+    "src": "/assets/icons/badge-ad-fill.svg"
+  },
+  {
+    "className": "bi-badge-ad",
+    "src": "/assets/icons/badge-ad.svg"
+  },
+  {
+    "className": "bi-badge-ar-fill",
+    "src": "/assets/icons/badge-ar-fill.svg"
+  },
+  {
+    "className": "bi-badge-ar",
+    "src": "/assets/icons/badge-ar.svg"
+  },
+  {
+    "className": "bi-badge-cc-fill",
+    "src": "/assets/icons/badge-cc-fill.svg"
+  },
+  {
+    "className": "bi-badge-cc",
+    "src": "/assets/icons/badge-cc.svg"
+  },
+  {
+    "className": "bi-badge-hd-fill",
+    "src": "/assets/icons/badge-hd-fill.svg"
+  },
+  {
+    "className": "bi-badge-hd",
+    "src": "/assets/icons/badge-hd.svg"
+  },
+  {
+    "className": "bi-badge-sd-fill",
+    "src": "/assets/icons/badge-sd-fill.svg"
+  },
+  {
+    "className": "bi-badge-sd",
+    "src": "/assets/icons/badge-sd.svg"
+  },
+  {
+    "className": "bi-badge-tm-fill",
+    "src": "/assets/icons/badge-tm-fill.svg"
+  },
+  {
+    "className": "bi-badge-tm",
+    "src": "/assets/icons/badge-tm.svg"
+  },
+  {
+    "className": "bi-badge-vo-fill",
+    "src": "/assets/icons/badge-vo-fill.svg"
+  },
+  {
+    "className": "bi-badge-vo",
+    "src": "/assets/icons/badge-vo.svg"
+  },
+  {
+    "className": "bi-badge-vr-fill",
+    "src": "/assets/icons/badge-vr-fill.svg"
+  },
+  {
+    "className": "bi-badge-vr",
+    "src": "/assets/icons/badge-vr.svg"
+  },
+  {
+    "className": "bi-badge-wc-fill",
+    "src": "/assets/icons/badge-wc-fill.svg"
+  },
+  {
+    "className": "bi-badge-wc",
+    "src": "/assets/icons/badge-wc.svg"
+  },
+  {
+    "className": "bi-bag-check-fill",
+    "src": "/assets/icons/bag-check-fill.svg"
+  },
+  {
+    "className": "bi-bag-check",
+    "src": "/assets/icons/bag-check.svg"
+  },
+  {
+    "className": "bi-bag-dash-fill",
+    "src": "/assets/icons/bag-dash-fill.svg"
+  },
+  {
+    "className": "bi-bag-dash",
+    "src": "/assets/icons/bag-dash.svg"
+  },
+  {
+    "className": "bi-bag-fill",
+    "src": "/assets/icons/bag-fill.svg"
+  },
+  {
+    "className": "bi-bag-heart-fill",
+    "src": "/assets/icons/bag-heart-fill.svg"
+  },
+  {
+    "className": "bi-bag-heart",
+    "src": "/assets/icons/bag-heart.svg"
+  },
+  {
+    "className": "bi-bag-plus-fill",
+    "src": "/assets/icons/bag-plus-fill.svg"
+  },
+  {
+    "className": "bi-bag-plus",
+    "src": "/assets/icons/bag-plus.svg"
+  },
+  {
+    "className": "bi-bag-x-fill",
+    "src": "/assets/icons/bag-x-fill.svg"
+  },
+  {
+    "className": "bi-bag-x",
+    "src": "/assets/icons/bag-x.svg"
+  },
+  {
+    "className": "bi-bag",
+    "src": "/assets/icons/bag.svg"
+  },
+  {
+    "className": "bi-balloon-fill",
+    "src": "/assets/icons/balloon-fill.svg"
+  },
+  {
+    "className": "bi-balloon-heart-fill",
+    "src": "/assets/icons/balloon-heart-fill.svg"
+  },
+  {
+    "className": "bi-balloon-heart",
+    "src": "/assets/icons/balloon-heart.svg"
+  },
+  {
+    "className": "bi-balloon",
+    "src": "/assets/icons/balloon.svg"
+  },
+  {
+    "className": "bi-ban-fill",
+    "src": "/assets/icons/ban-fill.svg"
+  },
+  {
+    "className": "bi-ban",
+    "src": "/assets/icons/ban.svg"
+  },
+  {
+    "className": "bi-bandaid-fill",
+    "src": "/assets/icons/bandaid-fill.svg"
+  },
+  {
+    "className": "bi-bandaid",
+    "src": "/assets/icons/bandaid.svg"
+  },
+  {
+    "className": "bi-bank",
+    "src": "/assets/icons/bank.svg"
+  },
+  {
+    "className": "bi-bank2",
+    "src": "/assets/icons/bank2.svg"
+  },
+  {
+    "className": "bi-bar-chart-fill",
+    "src": "/assets/icons/bar-chart-fill.svg"
+  },
+  {
+    "className": "bi-bar-chart-line-fill",
+    "src": "/assets/icons/bar-chart-line-fill.svg"
+  },
+  {
+    "className": "bi-bar-chart-line",
+    "src": "/assets/icons/bar-chart-line.svg"
+  },
+  {
+    "className": "bi-bar-chart-steps",
+    "src": "/assets/icons/bar-chart-steps.svg"
+  },
+  {
+    "className": "bi-bar-chart",
+    "src": "/assets/icons/bar-chart.svg"
+  },
+  {
+    "className": "bi-basket-fill",
+    "src": "/assets/icons/basket-fill.svg"
+  },
+  {
+    "className": "bi-basket",
+    "src": "/assets/icons/basket.svg"
+  },
+  {
+    "className": "bi-basket2-fill",
+    "src": "/assets/icons/basket2-fill.svg"
+  },
+  {
+    "className": "bi-basket2",
+    "src": "/assets/icons/basket2.svg"
+  },
+  {
+    "className": "bi-basket3-fill",
+    "src": "/assets/icons/basket3-fill.svg"
+  },
+  {
+    "className": "bi-basket3",
+    "src": "/assets/icons/basket3.svg"
+  },
+  {
+    "className": "bi-battery-charging",
+    "src": "/assets/icons/battery-charging.svg"
+  },
+  {
+    "className": "bi-battery-full",
+    "src": "/assets/icons/battery-full.svg"
+  },
+  {
+    "className": "bi-battery-half",
+    "src": "/assets/icons/battery-half.svg"
+  },
+  {
+    "className": "bi-battery",
+    "src": "/assets/icons/battery.svg"
+  },
+  {
+    "className": "bi-behance",
+    "src": "/assets/icons/behance.svg"
+  },
+  {
+    "className": "bi-bell-fill",
+    "src": "/assets/icons/bell-fill.svg"
+  },
+  {
+    "className": "bi-bell-slash-fill",
+    "src": "/assets/icons/bell-slash-fill.svg"
+  },
+  {
+    "className": "bi-bell-slash",
+    "src": "/assets/icons/bell-slash.svg"
+  },
+  {
+    "className": "bi-bell",
+    "src": "/assets/icons/bell.svg"
+  },
+  {
+    "className": "bi-bezier",
+    "src": "/assets/icons/bezier.svg"
+  },
+  {
+    "className": "bi-bezier2",
+    "src": "/assets/icons/bezier2.svg"
+  },
+  {
+    "className": "bi-bicycle",
+    "src": "/assets/icons/bicycle.svg"
+  },
+  {
+    "className": "bi-bing",
+    "src": "/assets/icons/bing.svg"
+  },
+  {
+    "className": "bi-binoculars-fill",
+    "src": "/assets/icons/binoculars-fill.svg"
+  },
+  {
+    "className": "bi-binoculars",
+    "src": "/assets/icons/binoculars.svg"
+  },
+  {
+    "className": "bi-blockquote-left",
+    "src": "/assets/icons/blockquote-left.svg"
+  },
+  {
+    "className": "bi-blockquote-right",
+    "src": "/assets/icons/blockquote-right.svg"
+  },
+  {
+    "className": "bi-bluetooth",
+    "src": "/assets/icons/bluetooth.svg"
+  },
+  {
+    "className": "bi-body-text",
+    "src": "/assets/icons/body-text.svg"
+  },
+  {
+    "className": "bi-book-fill",
+    "src": "/assets/icons/book-fill.svg"
+  },
+  {
+    "className": "bi-book-half",
+    "src": "/assets/icons/book-half.svg"
+  },
+  {
+    "className": "bi-book",
+    "src": "/assets/icons/book.svg"
+  },
+  {
+    "className": "bi-bookmark-check-fill",
+    "src": "/assets/icons/bookmark-check-fill.svg"
+  },
+  {
+    "className": "bi-bookmark-check",
+    "src": "/assets/icons/bookmark-check.svg"
+  },
+  {
+    "className": "bi-bookmark-dash-fill",
+    "src": "/assets/icons/bookmark-dash-fill.svg"
+  },
+  {
+    "className": "bi-bookmark-dash",
+    "src": "/assets/icons/bookmark-dash.svg"
+  },
+  {
+    "className": "bi-bookmark-fill",
+    "src": "/assets/icons/bookmark-fill.svg"
+  },
+  {
+    "className": "bi-bookmark-heart-fill",
+    "src": "/assets/icons/bookmark-heart-fill.svg"
+  },
+  {
+    "className": "bi-bookmark-heart",
+    "src": "/assets/icons/bookmark-heart.svg"
+  },
+  {
+    "className": "bi-bookmark-plus-fill",
+    "src": "/assets/icons/bookmark-plus-fill.svg"
+  },
+  {
+    "className": "bi-bookmark-plus",
+    "src": "/assets/icons/bookmark-plus.svg"
+  },
+  {
+    "className": "bi-bookmark-star-fill",
+    "src": "/assets/icons/bookmark-star-fill.svg"
+  },
+  {
+    "className": "bi-bookmark-star",
+    "src": "/assets/icons/bookmark-star.svg"
+  },
+  {
+    "className": "bi-bookmark-x-fill",
+    "src": "/assets/icons/bookmark-x-fill.svg"
+  },
+  {
+    "className": "bi-bookmark-x",
+    "src": "/assets/icons/bookmark-x.svg"
+  },
+  {
+    "className": "bi-bookmark",
+    "src": "/assets/icons/bookmark.svg"
+  },
+  {
+    "className": "bi-bookmarks-fill",
+    "src": "/assets/icons/bookmarks-fill.svg"
+  },
+  {
+    "className": "bi-bookmarks",
+    "src": "/assets/icons/bookmarks.svg"
+  },
+  {
+    "className": "bi-bookshelf",
+    "src": "/assets/icons/bookshelf.svg"
+  },
+  {
+    "className": "bi-boombox-fill",
+    "src": "/assets/icons/boombox-fill.svg"
+  },
+  {
+    "className": "bi-boombox",
+    "src": "/assets/icons/boombox.svg"
+  },
+  {
+    "className": "bi-bootstrap-fill",
+    "src": "/assets/icons/bootstrap-fill.svg"
+  },
+  {
+    "className": "bi-bootstrap-reboot",
+    "src": "/assets/icons/bootstrap-reboot.svg"
+  },
+  {
+    "className": "bi-bootstrap",
+    "src": "/assets/icons/bootstrap.svg"
+  },
+  {
+    "className": "bi-border-all",
+    "src": "/assets/icons/border-all.svg"
+  },
+  {
+    "className": "bi-border-bottom",
+    "src": "/assets/icons/border-bottom.svg"
+  },
+  {
+    "className": "bi-border-center",
+    "src": "/assets/icons/border-center.svg"
+  },
+  {
+    "className": "bi-border-inner",
+    "src": "/assets/icons/border-inner.svg"
+  },
+  {
+    "className": "bi-border-left",
+    "src": "/assets/icons/border-left.svg"
+  },
+  {
+    "className": "bi-border-middle",
+    "src": "/assets/icons/border-middle.svg"
+  },
+  {
+    "className": "bi-border-outer",
+    "src": "/assets/icons/border-outer.svg"
+  },
+  {
+    "className": "bi-border-right",
+    "src": "/assets/icons/border-right.svg"
+  },
+  {
+    "className": "bi-border-style",
+    "src": "/assets/icons/border-style.svg"
+  },
+  {
+    "className": "bi-border-top",
+    "src": "/assets/icons/border-top.svg"
+  },
+  {
+    "className": "bi-border-width",
+    "src": "/assets/icons/border-width.svg"
+  },
+  {
+    "className": "bi-border",
+    "src": "/assets/icons/border.svg"
+  },
+  {
+    "className": "bi-bounding-box-circles",
+    "src": "/assets/icons/bounding-box-circles.svg"
+  },
+  {
+    "className": "bi-bounding-box",
+    "src": "/assets/icons/bounding-box.svg"
+  },
+  {
+    "className": "bi-box-arrow-down-left",
+    "src": "/assets/icons/box-arrow-down-left.svg"
+  },
+  {
+    "className": "bi-box-arrow-down-right",
+    "src": "/assets/icons/box-arrow-down-right.svg"
+  },
+  {
+    "className": "bi-box-arrow-down",
+    "src": "/assets/icons/box-arrow-down.svg"
+  },
+  {
+    "className": "bi-box-arrow-in-down-left",
+    "src": "/assets/icons/box-arrow-in-down-left.svg"
+  },
+  {
+    "className": "bi-box-arrow-in-down-right",
+    "src": "/assets/icons/box-arrow-in-down-right.svg"
+  },
+  {
+    "className": "bi-box-arrow-in-down",
+    "src": "/assets/icons/box-arrow-in-down.svg"
+  },
+  {
+    "className": "bi-box-arrow-in-left",
+    "src": "/assets/icons/box-arrow-in-left.svg"
+  },
+  {
+    "className": "bi-box-arrow-in-right",
+    "src": "/assets/icons/box-arrow-in-right.svg"
+  },
+  {
+    "className": "bi-box-arrow-in-up-left",
+    "src": "/assets/icons/box-arrow-in-up-left.svg"
+  },
+  {
+    "className": "bi-box-arrow-in-up-right",
+    "src": "/assets/icons/box-arrow-in-up-right.svg"
+  },
+  {
+    "className": "bi-box-arrow-in-up",
+    "src": "/assets/icons/box-arrow-in-up.svg"
+  },
+  {
+    "className": "bi-box-arrow-left",
+    "src": "/assets/icons/box-arrow-left.svg"
+  },
+  {
+    "className": "bi-box-arrow-right",
+    "src": "/assets/icons/box-arrow-right.svg"
+  },
+  {
+    "className": "bi-box-arrow-up-left",
+    "src": "/assets/icons/box-arrow-up-left.svg"
+  },
+  {
+    "className": "bi-box-arrow-up-right",
+    "src": "/assets/icons/box-arrow-up-right.svg"
+  },
+  {
+    "className": "bi-box-arrow-up",
+    "src": "/assets/icons/box-arrow-up.svg"
+  },
+  {
+    "className": "bi-box-fill",
+    "src": "/assets/icons/box-fill.svg"
+  },
+  {
+    "className": "bi-box-seam-fill",
+    "src": "/assets/icons/box-seam-fill.svg"
+  },
+  {
+    "className": "bi-box-seam",
+    "src": "/assets/icons/box-seam.svg"
+  },
+  {
+    "className": "bi-box",
+    "src": "/assets/icons/box.svg"
+  },
+  {
+    "className": "bi-box2-fill",
+    "src": "/assets/icons/box2-fill.svg"
+  },
+  {
+    "className": "bi-box2-heart-fill",
+    "src": "/assets/icons/box2-heart-fill.svg"
+  },
+  {
+    "className": "bi-box2-heart",
+    "src": "/assets/icons/box2-heart.svg"
+  },
+  {
+    "className": "bi-box2",
+    "src": "/assets/icons/box2.svg"
+  },
+  {
+    "className": "bi-boxes",
+    "src": "/assets/icons/boxes.svg"
+  },
+  {
+    "className": "bi-braces-asterisk",
+    "src": "/assets/icons/braces-asterisk.svg"
+  },
+  {
+    "className": "bi-braces",
+    "src": "/assets/icons/braces.svg"
+  },
+  {
+    "className": "bi-bricks",
+    "src": "/assets/icons/bricks.svg"
+  },
+  {
+    "className": "bi-briefcase-fill",
+    "src": "/assets/icons/briefcase-fill.svg"
+  },
+  {
+    "className": "bi-briefcase",
+    "src": "/assets/icons/briefcase.svg"
+  },
+  {
+    "className": "bi-brightness-alt-high-fill",
+    "src": "/assets/icons/brightness-alt-high-fill.svg"
+  },
+  {
+    "className": "bi-brightness-alt-high",
+    "src": "/assets/icons/brightness-alt-high.svg"
+  },
+  {
+    "className": "bi-brightness-alt-low-fill",
+    "src": "/assets/icons/brightness-alt-low-fill.svg"
+  },
+  {
+    "className": "bi-brightness-alt-low",
+    "src": "/assets/icons/brightness-alt-low.svg"
+  },
+  {
+    "className": "bi-brightness-high-fill",
+    "src": "/assets/icons/brightness-high-fill.svg"
+  },
+  {
+    "className": "bi-brightness-high",
+    "src": "/assets/icons/brightness-high.svg"
+  },
+  {
+    "className": "bi-brightness-low-fill",
+    "src": "/assets/icons/brightness-low-fill.svg"
+  },
+  {
+    "className": "bi-brightness-low",
+    "src": "/assets/icons/brightness-low.svg"
+  },
+  {
+    "className": "bi-brilliance",
+    "src": "/assets/icons/brilliance.svg"
+  },
+  {
+    "className": "bi-broadcast-pin",
+    "src": "/assets/icons/broadcast-pin.svg"
+  },
+  {
+    "className": "bi-broadcast",
+    "src": "/assets/icons/broadcast.svg"
+  },
+  {
+    "className": "bi-browser-chrome",
+    "src": "/assets/icons/browser-chrome.svg"
+  },
+  {
+    "className": "bi-browser-edge",
+    "src": "/assets/icons/browser-edge.svg"
+  },
+  {
+    "className": "bi-browser-firefox",
+    "src": "/assets/icons/browser-firefox.svg"
+  },
+  {
+    "className": "bi-browser-safari",
+    "src": "/assets/icons/browser-safari.svg"
+  },
+  {
+    "className": "bi-brush-fill",
+    "src": "/assets/icons/brush-fill.svg"
+  },
+  {
+    "className": "bi-brush",
+    "src": "/assets/icons/brush.svg"
+  },
+  {
+    "className": "bi-bucket-fill",
+    "src": "/assets/icons/bucket-fill.svg"
+  },
+  {
+    "className": "bi-bucket",
+    "src": "/assets/icons/bucket.svg"
+  },
+  {
+    "className": "bi-bug-fill",
+    "src": "/assets/icons/bug-fill.svg"
+  },
+  {
+    "className": "bi-bug",
+    "src": "/assets/icons/bug.svg"
+  },
+  {
+    "className": "bi-building-add",
+    "src": "/assets/icons/building-add.svg"
+  },
+  {
+    "className": "bi-building-check",
+    "src": "/assets/icons/building-check.svg"
+  },
+  {
+    "className": "bi-building-dash",
+    "src": "/assets/icons/building-dash.svg"
+  },
+  {
+    "className": "bi-building-down",
+    "src": "/assets/icons/building-down.svg"
+  },
+  {
+    "className": "bi-building-exclamation",
+    "src": "/assets/icons/building-exclamation.svg"
+  },
+  {
+    "className": "bi-building-fill-add",
+    "src": "/assets/icons/building-fill-add.svg"
+  },
+  {
+    "className": "bi-building-fill-check",
+    "src": "/assets/icons/building-fill-check.svg"
+  },
+  {
+    "className": "bi-building-fill-dash",
+    "src": "/assets/icons/building-fill-dash.svg"
+  },
+  {
+    "className": "bi-building-fill-down",
+    "src": "/assets/icons/building-fill-down.svg"
+  },
+  {
+    "className": "bi-building-fill-exclamation",
+    "src": "/assets/icons/building-fill-exclamation.svg"
+  },
+  {
+    "className": "bi-building-fill-gear",
+    "src": "/assets/icons/building-fill-gear.svg"
+  },
+  {
+    "className": "bi-building-fill-lock",
+    "src": "/assets/icons/building-fill-lock.svg"
+  },
+  {
+    "className": "bi-building-fill-slash",
+    "src": "/assets/icons/building-fill-slash.svg"
+  },
+  {
+    "className": "bi-building-fill-up",
+    "src": "/assets/icons/building-fill-up.svg"
+  },
+  {
+    "className": "bi-building-fill-x",
+    "src": "/assets/icons/building-fill-x.svg"
+  },
+  {
+    "className": "bi-building-fill",
+    "src": "/assets/icons/building-fill.svg"
+  },
+  {
+    "className": "bi-building-gear",
+    "src": "/assets/icons/building-gear.svg"
+  },
+  {
+    "className": "bi-building-lock",
+    "src": "/assets/icons/building-lock.svg"
+  },
+  {
+    "className": "bi-building-slash",
+    "src": "/assets/icons/building-slash.svg"
+  },
+  {
+    "className": "bi-building-up",
+    "src": "/assets/icons/building-up.svg"
+  },
+  {
+    "className": "bi-building-x",
+    "src": "/assets/icons/building-x.svg"
+  },
+  {
+    "className": "bi-building",
+    "src": "/assets/icons/building.svg"
+  },
+  {
+    "className": "bi-buildings-fill",
+    "src": "/assets/icons/buildings-fill.svg"
+  },
+  {
+    "className": "bi-buildings",
+    "src": "/assets/icons/buildings.svg"
+  },
+  {
+    "className": "bi-bullseye",
+    "src": "/assets/icons/bullseye.svg"
+  },
+  {
+    "className": "bi-bus-front-fill",
+    "src": "/assets/icons/bus-front-fill.svg"
+  },
+  {
+    "className": "bi-bus-front",
+    "src": "/assets/icons/bus-front.svg"
+  },
+  {
+    "className": "bi-c-circle-fill",
+    "src": "/assets/icons/c-circle-fill.svg"
+  },
+  {
+    "className": "bi-c-circle",
+    "src": "/assets/icons/c-circle.svg"
+  },
+  {
+    "className": "bi-c-square-fill",
+    "src": "/assets/icons/c-square-fill.svg"
+  },
+  {
+    "className": "bi-c-square",
+    "src": "/assets/icons/c-square.svg"
+  },
+  {
+    "className": "bi-cake-fill",
+    "src": "/assets/icons/cake-fill.svg"
+  },
+  {
+    "className": "bi-cake",
+    "src": "/assets/icons/cake.svg"
+  },
+  {
+    "className": "bi-cake2-fill",
+    "src": "/assets/icons/cake2-fill.svg"
+  },
+  {
+    "className": "bi-cake2",
+    "src": "/assets/icons/cake2.svg"
+  },
+  {
+    "className": "bi-calculator-fill",
+    "src": "/assets/icons/calculator-fill.svg"
+  },
+  {
+    "className": "bi-calculator",
+    "src": "/assets/icons/calculator.svg"
+  },
+  {
+    "className": "bi-calendar-check-fill",
+    "src": "/assets/icons/calendar-check-fill.svg"
+  },
+  {
+    "className": "bi-calendar-check",
+    "src": "/assets/icons/calendar-check.svg"
+  },
+  {
+    "className": "bi-calendar-date-fill",
+    "src": "/assets/icons/calendar-date-fill.svg"
+  },
+  {
+    "className": "bi-calendar-date",
+    "src": "/assets/icons/calendar-date.svg"
+  },
+  {
+    "className": "bi-calendar-day-fill",
+    "src": "/assets/icons/calendar-day-fill.svg"
+  },
+  {
+    "className": "bi-calendar-day",
+    "src": "/assets/icons/calendar-day.svg"
+  },
+  {
+    "className": "bi-calendar-event-fill",
+    "src": "/assets/icons/calendar-event-fill.svg"
+  },
+  {
+    "className": "bi-calendar-event",
+    "src": "/assets/icons/calendar-event.svg"
+  },
+  {
+    "className": "bi-calendar-fill",
+    "src": "/assets/icons/calendar-fill.svg"
+  },
+  {
+    "className": "bi-calendar-heart-fill",
+    "src": "/assets/icons/calendar-heart-fill.svg"
+  },
+  {
+    "className": "bi-calendar-heart",
+    "src": "/assets/icons/calendar-heart.svg"
+  },
+  {
+    "className": "bi-calendar-minus-fill",
+    "src": "/assets/icons/calendar-minus-fill.svg"
+  },
+  {
+    "className": "bi-calendar-minus",
+    "src": "/assets/icons/calendar-minus.svg"
+  },
+  {
+    "className": "bi-calendar-month-fill",
+    "src": "/assets/icons/calendar-month-fill.svg"
+  },
+  {
+    "className": "bi-calendar-month",
+    "src": "/assets/icons/calendar-month.svg"
+  },
+  {
+    "className": "bi-calendar-plus-fill",
+    "src": "/assets/icons/calendar-plus-fill.svg"
+  },
+  {
+    "className": "bi-calendar-plus",
+    "src": "/assets/icons/calendar-plus.svg"
+  },
+  {
+    "className": "bi-calendar-range-fill",
+    "src": "/assets/icons/calendar-range-fill.svg"
+  },
+  {
+    "className": "bi-calendar-range",
+    "src": "/assets/icons/calendar-range.svg"
+  },
+  {
+    "className": "bi-calendar-week-fill",
+    "src": "/assets/icons/calendar-week-fill.svg"
+  },
+  {
+    "className": "bi-calendar-week",
+    "src": "/assets/icons/calendar-week.svg"
+  },
+  {
+    "className": "bi-calendar-x-fill",
+    "src": "/assets/icons/calendar-x-fill.svg"
+  },
+  {
+    "className": "bi-calendar-x",
+    "src": "/assets/icons/calendar-x.svg"
+  },
+  {
+    "className": "bi-calendar",
+    "src": "/assets/icons/calendar.svg"
+  },
+  {
+    "className": "bi-calendar2-check-fill",
+    "src": "/assets/icons/calendar2-check-fill.svg"
+  },
+  {
+    "className": "bi-calendar2-check",
+    "src": "/assets/icons/calendar2-check.svg"
+  },
+  {
+    "className": "bi-calendar2-date-fill",
+    "src": "/assets/icons/calendar2-date-fill.svg"
+  },
+  {
+    "className": "bi-calendar2-date",
+    "src": "/assets/icons/calendar2-date.svg"
+  },
+  {
+    "className": "bi-calendar2-day-fill",
+    "src": "/assets/icons/calendar2-day-fill.svg"
+  },
+  {
+    "className": "bi-calendar2-day",
+    "src": "/assets/icons/calendar2-day.svg"
+  },
+  {
+    "className": "bi-calendar2-event-fill",
+    "src": "/assets/icons/calendar2-event-fill.svg"
+  },
+  {
+    "className": "bi-calendar2-event",
+    "src": "/assets/icons/calendar2-event.svg"
+  },
+  {
+    "className": "bi-calendar2-fill",
+    "src": "/assets/icons/calendar2-fill.svg"
+  },
+  {
+    "className": "bi-calendar2-heart-fill",
+    "src": "/assets/icons/calendar2-heart-fill.svg"
+  },
+  {
+    "className": "bi-calendar2-heart",
+    "src": "/assets/icons/calendar2-heart.svg"
+  },
+  {
+    "className": "bi-calendar2-minus-fill",
+    "src": "/assets/icons/calendar2-minus-fill.svg"
+  },
+  {
+    "className": "bi-calendar2-minus",
+    "src": "/assets/icons/calendar2-minus.svg"
+  },
+  {
+    "className": "bi-calendar2-month-fill",
+    "src": "/assets/icons/calendar2-month-fill.svg"
+  },
+  {
+    "className": "bi-calendar2-month",
+    "src": "/assets/icons/calendar2-month.svg"
+  },
+  {
+    "className": "bi-calendar2-plus-fill",
+    "src": "/assets/icons/calendar2-plus-fill.svg"
+  },
+  {
+    "className": "bi-calendar2-plus",
+    "src": "/assets/icons/calendar2-plus.svg"
+  },
+  {
+    "className": "bi-calendar2-range-fill",
+    "src": "/assets/icons/calendar2-range-fill.svg"
+  },
+  {
+    "className": "bi-calendar2-range",
+    "src": "/assets/icons/calendar2-range.svg"
+  },
+  {
+    "className": "bi-calendar2-week-fill",
+    "src": "/assets/icons/calendar2-week-fill.svg"
+  },
+  {
+    "className": "bi-calendar2-week",
+    "src": "/assets/icons/calendar2-week.svg"
+  },
+  {
+    "className": "bi-calendar2-x-fill",
+    "src": "/assets/icons/calendar2-x-fill.svg"
+  },
+  {
+    "className": "bi-calendar2-x",
+    "src": "/assets/icons/calendar2-x.svg"
+  },
+  {
+    "className": "bi-calendar2",
+    "src": "/assets/icons/calendar2.svg"
+  },
+  {
+    "className": "bi-calendar3-event-fill",
+    "src": "/assets/icons/calendar3-event-fill.svg"
+  },
+  {
+    "className": "bi-calendar3-event",
+    "src": "/assets/icons/calendar3-event.svg"
+  },
+  {
+    "className": "bi-calendar3-fill",
+    "src": "/assets/icons/calendar3-fill.svg"
+  },
+  {
+    "className": "bi-calendar3-range-fill",
+    "src": "/assets/icons/calendar3-range-fill.svg"
+  },
+  {
+    "className": "bi-calendar3-range",
+    "src": "/assets/icons/calendar3-range.svg"
+  },
+  {
+    "className": "bi-calendar3-week-fill",
+    "src": "/assets/icons/calendar3-week-fill.svg"
+  },
+  {
+    "className": "bi-calendar3-week",
+    "src": "/assets/icons/calendar3-week.svg"
+  },
+  {
+    "className": "bi-calendar3",
+    "src": "/assets/icons/calendar3.svg"
+  },
+  {
+    "className": "bi-calendar4-event",
+    "src": "/assets/icons/calendar4-event.svg"
+  },
+  {
+    "className": "bi-calendar4-range",
+    "src": "/assets/icons/calendar4-range.svg"
+  },
+  {
+    "className": "bi-calendar4-week",
+    "src": "/assets/icons/calendar4-week.svg"
+  },
+  {
+    "className": "bi-calendar4",
+    "src": "/assets/icons/calendar4.svg"
+  },
+  {
+    "className": "bi-camera-fill",
+    "src": "/assets/icons/camera-fill.svg"
+  },
+  {
+    "className": "bi-camera-reels-fill",
+    "src": "/assets/icons/camera-reels-fill.svg"
+  },
+  {
+    "className": "bi-camera-reels",
+    "src": "/assets/icons/camera-reels.svg"
+  },
+  {
+    "className": "bi-camera-video-fill",
+    "src": "/assets/icons/camera-video-fill.svg"
+  },
+  {
+    "className": "bi-camera-video-off-fill",
+    "src": "/assets/icons/camera-video-off-fill.svg"
+  },
+  {
+    "className": "bi-camera-video-off",
+    "src": "/assets/icons/camera-video-off.svg"
+  },
+  {
+    "className": "bi-camera-video",
+    "src": "/assets/icons/camera-video.svg"
+  },
+  {
+    "className": "bi-camera",
+    "src": "/assets/icons/camera.svg"
+  },
+  {
+    "className": "bi-camera2",
+    "src": "/assets/icons/camera2.svg"
+  },
+  {
+    "className": "bi-capslock-fill",
+    "src": "/assets/icons/capslock-fill.svg"
+  },
+  {
+    "className": "bi-capslock",
+    "src": "/assets/icons/capslock.svg"
+  },
+  {
+    "className": "bi-capsule-pill",
+    "src": "/assets/icons/capsule-pill.svg"
+  },
+  {
+    "className": "bi-capsule",
+    "src": "/assets/icons/capsule.svg"
+  },
+  {
+    "className": "bi-car-front-fill",
+    "src": "/assets/icons/car-front-fill.svg"
+  },
+  {
+    "className": "bi-car-front",
+    "src": "/assets/icons/car-front.svg"
+  },
+  {
+    "className": "bi-card-checklist",
+    "src": "/assets/icons/card-checklist.svg"
+  },
+  {
+    "className": "bi-card-heading",
+    "src": "/assets/icons/card-heading.svg"
+  },
+  {
+    "className": "bi-card-image",
+    "src": "/assets/icons/card-image.svg"
+  },
+  {
+    "className": "bi-card-list",
+    "src": "/assets/icons/card-list.svg"
+  },
+  {
+    "className": "bi-card-text",
+    "src": "/assets/icons/card-text.svg"
+  },
+  {
+    "className": "bi-caret-down-fill",
+    "src": "/assets/icons/caret-down-fill.svg"
+  },
+  {
+    "className": "bi-caret-down-square-fill",
+    "src": "/assets/icons/caret-down-square-fill.svg"
+  },
+  {
+    "className": "bi-caret-down-square",
+    "src": "/assets/icons/caret-down-square.svg"
+  },
+  {
+    "className": "bi-caret-down",
+    "src": "/assets/icons/caret-down.svg"
+  },
+  {
+    "className": "bi-caret-left-fill",
+    "src": "/assets/icons/caret-left-fill.svg"
+  },
+  {
+    "className": "bi-caret-left-square-fill",
+    "src": "/assets/icons/caret-left-square-fill.svg"
+  },
+  {
+    "className": "bi-caret-left-square",
+    "src": "/assets/icons/caret-left-square.svg"
+  },
+  {
+    "className": "bi-caret-left",
+    "src": "/assets/icons/caret-left.svg"
+  },
+  {
+    "className": "bi-caret-right-fill",
+    "src": "/assets/icons/caret-right-fill.svg"
+  },
+  {
+    "className": "bi-caret-right-square-fill",
+    "src": "/assets/icons/caret-right-square-fill.svg"
+  },
+  {
+    "className": "bi-caret-right-square",
+    "src": "/assets/icons/caret-right-square.svg"
+  },
+  {
+    "className": "bi-caret-right",
+    "src": "/assets/icons/caret-right.svg"
+  },
+  {
+    "className": "bi-caret-up-fill",
+    "src": "/assets/icons/caret-up-fill.svg"
+  },
+  {
+    "className": "bi-caret-up-square-fill",
+    "src": "/assets/icons/caret-up-square-fill.svg"
+  },
+  {
+    "className": "bi-caret-up-square",
+    "src": "/assets/icons/caret-up-square.svg"
+  },
+  {
+    "className": "bi-caret-up",
+    "src": "/assets/icons/caret-up.svg"
+  },
+  {
+    "className": "bi-cart-check-fill",
+    "src": "/assets/icons/cart-check-fill.svg"
+  },
+  {
+    "className": "bi-cart-check",
+    "src": "/assets/icons/cart-check.svg"
+  },
+  {
+    "className": "bi-cart-dash-fill",
+    "src": "/assets/icons/cart-dash-fill.svg"
+  },
+  {
+    "className": "bi-cart-dash",
+    "src": "/assets/icons/cart-dash.svg"
+  },
+  {
+    "className": "bi-cart-fill",
+    "src": "/assets/icons/cart-fill.svg"
+  },
+  {
+    "className": "bi-cart-plus-fill",
+    "src": "/assets/icons/cart-plus-fill.svg"
+  },
+  {
+    "className": "bi-cart-plus",
+    "src": "/assets/icons/cart-plus.svg"
+  },
+  {
+    "className": "bi-cart-x-fill",
+    "src": "/assets/icons/cart-x-fill.svg"
+  },
+  {
+    "className": "bi-cart-x",
+    "src": "/assets/icons/cart-x.svg"
+  },
+  {
+    "className": "bi-cart",
+    "src": "/assets/icons/cart.svg"
+  },
+  {
+    "className": "bi-cart2",
+    "src": "/assets/icons/cart2.svg"
+  },
+  {
+    "className": "bi-cart3",
+    "src": "/assets/icons/cart3.svg"
+  },
+  {
+    "className": "bi-cart4",
+    "src": "/assets/icons/cart4.svg"
+  },
+  {
+    "className": "bi-cash-coin",
+    "src": "/assets/icons/cash-coin.svg"
+  },
+  {
+    "className": "bi-cash-stack",
+    "src": "/assets/icons/cash-stack.svg"
+  },
+  {
+    "className": "bi-cash",
+    "src": "/assets/icons/cash.svg"
+  },
+  {
+    "className": "bi-cassette-fill",
+    "src": "/assets/icons/cassette-fill.svg"
+  },
+  {
+    "className": "bi-cassette",
+    "src": "/assets/icons/cassette.svg"
+  },
+  {
+    "className": "bi-cast",
+    "src": "/assets/icons/cast.svg"
+  },
+  {
+    "className": "bi-cc-circle-fill",
+    "src": "/assets/icons/cc-circle-fill.svg"
+  },
+  {
+    "className": "bi-cc-circle",
+    "src": "/assets/icons/cc-circle.svg"
+  },
+  {
+    "className": "bi-cc-square-fill",
+    "src": "/assets/icons/cc-square-fill.svg"
+  },
+  {
+    "className": "bi-cc-square",
+    "src": "/assets/icons/cc-square.svg"
+  },
+  {
+    "className": "bi-chat-dots-fill",
+    "src": "/assets/icons/chat-dots-fill.svg"
+  },
+  {
+    "className": "bi-chat-dots",
+    "src": "/assets/icons/chat-dots.svg"
+  },
+  {
+    "className": "bi-chat-fill",
+    "src": "/assets/icons/chat-fill.svg"
+  },
+  {
+    "className": "bi-chat-heart-fill",
+    "src": "/assets/icons/chat-heart-fill.svg"
+  },
+  {
+    "className": "bi-chat-heart",
+    "src": "/assets/icons/chat-heart.svg"
+  },
+  {
+    "className": "bi-chat-left-dots-fill",
+    "src": "/assets/icons/chat-left-dots-fill.svg"
+  },
+  {
+    "className": "bi-chat-left-dots",
+    "src": "/assets/icons/chat-left-dots.svg"
+  },
+  {
+    "className": "bi-chat-left-fill",
+    "src": "/assets/icons/chat-left-fill.svg"
+  },
+  {
+    "className": "bi-chat-left-heart-fill",
+    "src": "/assets/icons/chat-left-heart-fill.svg"
+  },
+  {
+    "className": "bi-chat-left-heart",
+    "src": "/assets/icons/chat-left-heart.svg"
+  },
+  {
+    "className": "bi-chat-left-quote-fill",
+    "src": "/assets/icons/chat-left-quote-fill.svg"
+  },
+  {
+    "className": "bi-chat-left-quote",
+    "src": "/assets/icons/chat-left-quote.svg"
+  },
+  {
+    "className": "bi-chat-left-text-fill",
+    "src": "/assets/icons/chat-left-text-fill.svg"
+  },
+  {
+    "className": "bi-chat-left-text",
+    "src": "/assets/icons/chat-left-text.svg"
+  },
+  {
+    "className": "bi-chat-left",
+    "src": "/assets/icons/chat-left.svg"
+  },
+  {
+    "className": "bi-chat-quote-fill",
+    "src": "/assets/icons/chat-quote-fill.svg"
+  },
+  {
+    "className": "bi-chat-quote",
+    "src": "/assets/icons/chat-quote.svg"
+  },
+  {
+    "className": "bi-chat-right-dots-fill",
+    "src": "/assets/icons/chat-right-dots-fill.svg"
+  },
+  {
+    "className": "bi-chat-right-dots",
+    "src": "/assets/icons/chat-right-dots.svg"
+  },
+  {
+    "className": "bi-chat-right-fill",
+    "src": "/assets/icons/chat-right-fill.svg"
+  },
+  {
+    "className": "bi-chat-right-heart-fill",
+    "src": "/assets/icons/chat-right-heart-fill.svg"
+  },
+  {
+    "className": "bi-chat-right-heart",
+    "src": "/assets/icons/chat-right-heart.svg"
+  },
+  {
+    "className": "bi-chat-right-quote-fill",
+    "src": "/assets/icons/chat-right-quote-fill.svg"
+  },
+  {
+    "className": "bi-chat-right-quote",
+    "src": "/assets/icons/chat-right-quote.svg"
+  },
+  {
+    "className": "bi-chat-right-text-fill",
+    "src": "/assets/icons/chat-right-text-fill.svg"
+  },
+  {
+    "className": "bi-chat-right-text",
+    "src": "/assets/icons/chat-right-text.svg"
+  },
+  {
+    "className": "bi-chat-right",
+    "src": "/assets/icons/chat-right.svg"
+  },
+  {
+    "className": "bi-chat-square-dots-fill",
+    "src": "/assets/icons/chat-square-dots-fill.svg"
+  },
+  {
+    "className": "bi-chat-square-dots",
+    "src": "/assets/icons/chat-square-dots.svg"
+  },
+  {
+    "className": "bi-chat-square-fill",
+    "src": "/assets/icons/chat-square-fill.svg"
+  },
+  {
+    "className": "bi-chat-square-heart-fill",
+    "src": "/assets/icons/chat-square-heart-fill.svg"
+  },
+  {
+    "className": "bi-chat-square-heart",
+    "src": "/assets/icons/chat-square-heart.svg"
+  },
+  {
+    "className": "bi-chat-square-quote-fill",
+    "src": "/assets/icons/chat-square-quote-fill.svg"
+  },
+  {
+    "className": "bi-chat-square-quote",
+    "src": "/assets/icons/chat-square-quote.svg"
+  },
+  {
+    "className": "bi-chat-square-text-fill",
+    "src": "/assets/icons/chat-square-text-fill.svg"
+  },
+  {
+    "className": "bi-chat-square-text",
+    "src": "/assets/icons/chat-square-text.svg"
+  },
+  {
+    "className": "bi-chat-square",
+    "src": "/assets/icons/chat-square.svg"
+  },
+  {
+    "className": "bi-chat-text-fill",
+    "src": "/assets/icons/chat-text-fill.svg"
+  },
+  {
+    "className": "bi-chat-text",
+    "src": "/assets/icons/chat-text.svg"
+  },
+  {
+    "className": "bi-chat",
+    "src": "/assets/icons/chat.svg"
+  },
+  {
+    "className": "bi-check-all",
+    "src": "/assets/icons/check-all.svg"
+  },
+  {
+    "className": "bi-check-circle-fill",
+    "src": "/assets/icons/check-circle-fill.svg"
+  },
+  {
+    "className": "bi-check-circle",
+    "src": "/assets/icons/check-circle.svg"
+  },
+  {
+    "className": "bi-check-lg",
+    "src": "/assets/icons/check-lg.svg"
+  },
+  {
+    "className": "bi-check-square-fill",
+    "src": "/assets/icons/check-square-fill.svg"
+  },
+  {
+    "className": "bi-check-square",
+    "src": "/assets/icons/check-square.svg"
+  },
+  {
+    "className": "bi-check",
+    "src": "/assets/icons/check.svg"
+  },
+  {
+    "className": "bi-check2-all",
+    "src": "/assets/icons/check2-all.svg"
+  },
+  {
+    "className": "bi-check2-circle",
+    "src": "/assets/icons/check2-circle.svg"
+  },
+  {
+    "className": "bi-check2-square",
+    "src": "/assets/icons/check2-square.svg"
+  },
+  {
+    "className": "bi-check2",
+    "src": "/assets/icons/check2.svg"
+  },
+  {
+    "className": "bi-chevron-bar-contract",
+    "src": "/assets/icons/chevron-bar-contract.svg"
+  },
+  {
+    "className": "bi-chevron-bar-down",
+    "src": "/assets/icons/chevron-bar-down.svg"
+  },
+  {
+    "className": "bi-chevron-bar-expand",
+    "src": "/assets/icons/chevron-bar-expand.svg"
+  },
+  {
+    "className": "bi-chevron-bar-left",
+    "src": "/assets/icons/chevron-bar-left.svg"
+  },
+  {
+    "className": "bi-chevron-bar-right",
+    "src": "/assets/icons/chevron-bar-right.svg"
+  },
+  {
+    "className": "bi-chevron-bar-up",
+    "src": "/assets/icons/chevron-bar-up.svg"
+  },
+  {
+    "className": "bi-chevron-compact-down",
+    "src": "/assets/icons/chevron-compact-down.svg"
+  },
+  {
+    "className": "bi-chevron-compact-left",
+    "src": "/assets/icons/chevron-compact-left.svg"
+  },
+  {
+    "className": "bi-chevron-compact-right",
+    "src": "/assets/icons/chevron-compact-right.svg"
+  },
+  {
+    "className": "bi-chevron-compact-up",
+    "src": "/assets/icons/chevron-compact-up.svg"
+  },
+  {
+    "className": "bi-chevron-contract",
+    "src": "/assets/icons/chevron-contract.svg"
+  },
+  {
+    "className": "bi-chevron-double-down",
+    "src": "/assets/icons/chevron-double-down.svg"
+  },
+  {
+    "className": "bi-chevron-double-left",
+    "src": "/assets/icons/chevron-double-left.svg"
+  },
+  {
+    "className": "bi-chevron-double-right",
+    "src": "/assets/icons/chevron-double-right.svg"
+  },
+  {
+    "className": "bi-chevron-double-up",
+    "src": "/assets/icons/chevron-double-up.svg"
+  },
+  {
+    "className": "bi-chevron-down",
+    "src": "/assets/icons/chevron-down.svg"
+  },
+  {
+    "className": "bi-chevron-expand",
+    "src": "/assets/icons/chevron-expand.svg"
+  },
+  {
+    "className": "bi-chevron-left",
+    "src": "/assets/icons/chevron-left.svg"
+  },
+  {
+    "className": "bi-chevron-right",
+    "src": "/assets/icons/chevron-right.svg"
+  },
+  {
+    "className": "bi-chevron-up",
+    "src": "/assets/icons/chevron-up.svg"
+  },
+  {
+    "className": "bi-circle-fill",
+    "src": "/assets/icons/circle-fill.svg"
+  },
+  {
+    "className": "bi-circle-half",
+    "src": "/assets/icons/circle-half.svg"
+  },
+  {
+    "className": "bi-circle-square",
+    "src": "/assets/icons/circle-square.svg"
+  },
+  {
+    "className": "bi-circle",
+    "src": "/assets/icons/circle.svg"
+  },
+  {
+    "className": "bi-clipboard-check-fill",
+    "src": "/assets/icons/clipboard-check-fill.svg"
+  },
+  {
+    "className": "bi-clipboard-check",
+    "src": "/assets/icons/clipboard-check.svg"
+  },
+  {
+    "className": "bi-clipboard-data-fill",
+    "src": "/assets/icons/clipboard-data-fill.svg"
+  },
+  {
+    "className": "bi-clipboard-data",
+    "src": "/assets/icons/clipboard-data.svg"
+  },
+  {
+    "className": "bi-clipboard-fill",
+    "src": "/assets/icons/clipboard-fill.svg"
+  },
+  {
+    "className": "bi-clipboard-heart-fill",
+    "src": "/assets/icons/clipboard-heart-fill.svg"
+  },
+  {
+    "className": "bi-clipboard-heart",
+    "src": "/assets/icons/clipboard-heart.svg"
+  },
+  {
+    "className": "bi-clipboard-minus-fill",
+    "src": "/assets/icons/clipboard-minus-fill.svg"
+  },
+  {
+    "className": "bi-clipboard-minus",
+    "src": "/assets/icons/clipboard-minus.svg"
+  },
+  {
+    "className": "bi-clipboard-plus-fill",
+    "src": "/assets/icons/clipboard-plus-fill.svg"
+  },
+  {
+    "className": "bi-clipboard-plus",
+    "src": "/assets/icons/clipboard-plus.svg"
+  },
+  {
+    "className": "bi-clipboard-pulse",
+    "src": "/assets/icons/clipboard-pulse.svg"
+  },
+  {
+    "className": "bi-clipboard-x-fill",
+    "src": "/assets/icons/clipboard-x-fill.svg"
+  },
+  {
+    "className": "bi-clipboard-x",
+    "src": "/assets/icons/clipboard-x.svg"
+  },
+  {
+    "className": "bi-clipboard",
+    "src": "/assets/icons/clipboard.svg"
+  },
+  {
+    "className": "bi-clipboard2-check-fill",
+    "src": "/assets/icons/clipboard2-check-fill.svg"
+  },
+  {
+    "className": "bi-clipboard2-check",
+    "src": "/assets/icons/clipboard2-check.svg"
+  },
+  {
+    "className": "bi-clipboard2-data-fill",
+    "src": "/assets/icons/clipboard2-data-fill.svg"
+  },
+  {
+    "className": "bi-clipboard2-data",
+    "src": "/assets/icons/clipboard2-data.svg"
+  },
+  {
+    "className": "bi-clipboard2-fill",
+    "src": "/assets/icons/clipboard2-fill.svg"
+  },
+  {
+    "className": "bi-clipboard2-heart-fill",
+    "src": "/assets/icons/clipboard2-heart-fill.svg"
+  },
+  {
+    "className": "bi-clipboard2-heart",
+    "src": "/assets/icons/clipboard2-heart.svg"
+  },
+  {
+    "className": "bi-clipboard2-minus-fill",
+    "src": "/assets/icons/clipboard2-minus-fill.svg"
+  },
+  {
+    "className": "bi-clipboard2-minus",
+    "src": "/assets/icons/clipboard2-minus.svg"
+  },
+  {
+    "className": "bi-clipboard2-plus-fill",
+    "src": "/assets/icons/clipboard2-plus-fill.svg"
+  },
+  {
+    "className": "bi-clipboard2-plus",
+    "src": "/assets/icons/clipboard2-plus.svg"
+  },
+  {
+    "className": "bi-clipboard2-pulse-fill",
+    "src": "/assets/icons/clipboard2-pulse-fill.svg"
+  },
+  {
+    "className": "bi-clipboard2-pulse",
+    "src": "/assets/icons/clipboard2-pulse.svg"
+  },
+  {
+    "className": "bi-clipboard2-x-fill",
+    "src": "/assets/icons/clipboard2-x-fill.svg"
+  },
+  {
+    "className": "bi-clipboard2-x",
+    "src": "/assets/icons/clipboard2-x.svg"
+  },
+  {
+    "className": "bi-clipboard2",
+    "src": "/assets/icons/clipboard2.svg"
+  },
+  {
+    "className": "bi-clock-fill",
+    "src": "/assets/icons/clock-fill.svg"
+  },
+  {
+    "className": "bi-clock-history",
+    "src": "/assets/icons/clock-history.svg"
+  },
+  {
+    "className": "bi-clock",
+    "src": "/assets/icons/clock.svg"
+  },
+  {
+    "className": "bi-cloud-arrow-down-fill",
+    "src": "/assets/icons/cloud-arrow-down-fill.svg"
+  },
+  {
+    "className": "bi-cloud-arrow-down",
+    "src": "/assets/icons/cloud-arrow-down.svg"
+  },
+  {
+    "className": "bi-cloud-arrow-up-fill",
+    "src": "/assets/icons/cloud-arrow-up-fill.svg"
+  },
+  {
+    "className": "bi-cloud-arrow-up",
+    "src": "/assets/icons/cloud-arrow-up.svg"
+  },
+  {
+    "className": "bi-cloud-check-fill",
+    "src": "/assets/icons/cloud-check-fill.svg"
+  },
+  {
+    "className": "bi-cloud-check",
+    "src": "/assets/icons/cloud-check.svg"
+  },
+  {
+    "className": "bi-cloud-download-fill",
+    "src": "/assets/icons/cloud-download-fill.svg"
+  },
+  {
+    "className": "bi-cloud-download",
+    "src": "/assets/icons/cloud-download.svg"
+  },
+  {
+    "className": "bi-cloud-drizzle-fill",
+    "src": "/assets/icons/cloud-drizzle-fill.svg"
+  },
+  {
+    "className": "bi-cloud-drizzle",
+    "src": "/assets/icons/cloud-drizzle.svg"
+  },
+  {
+    "className": "bi-cloud-fill",
+    "src": "/assets/icons/cloud-fill.svg"
+  },
+  {
+    "className": "bi-cloud-fog-fill",
+    "src": "/assets/icons/cloud-fog-fill.svg"
+  },
+  {
+    "className": "bi-cloud-fog",
+    "src": "/assets/icons/cloud-fog.svg"
+  },
+  {
+    "className": "bi-cloud-fog2-fill",
+    "src": "/assets/icons/cloud-fog2-fill.svg"
+  },
+  {
+    "className": "bi-cloud-fog2",
+    "src": "/assets/icons/cloud-fog2.svg"
+  },
+  {
+    "className": "bi-cloud-hail-fill",
+    "src": "/assets/icons/cloud-hail-fill.svg"
+  },
+  {
+    "className": "bi-cloud-hail",
+    "src": "/assets/icons/cloud-hail.svg"
+  },
+  {
+    "className": "bi-cloud-haze-fill",
+    "src": "/assets/icons/cloud-haze-fill.svg"
+  },
+  {
+    "className": "bi-cloud-haze",
+    "src": "/assets/icons/cloud-haze.svg"
+  },
+  {
+    "className": "bi-cloud-haze2-fill",
+    "src": "/assets/icons/cloud-haze2-fill.svg"
+  },
+  {
+    "className": "bi-cloud-haze2",
+    "src": "/assets/icons/cloud-haze2.svg"
+  },
+  {
+    "className": "bi-cloud-lightning-fill",
+    "src": "/assets/icons/cloud-lightning-fill.svg"
+  },
+  {
+    "className": "bi-cloud-lightning-rain-fill",
+    "src": "/assets/icons/cloud-lightning-rain-fill.svg"
+  },
+  {
+    "className": "bi-cloud-lightning-rain",
+    "src": "/assets/icons/cloud-lightning-rain.svg"
+  },
+  {
+    "className": "bi-cloud-lightning",
+    "src": "/assets/icons/cloud-lightning.svg"
+  },
+  {
+    "className": "bi-cloud-minus-fill",
+    "src": "/assets/icons/cloud-minus-fill.svg"
+  },
+  {
+    "className": "bi-cloud-minus",
+    "src": "/assets/icons/cloud-minus.svg"
+  },
+  {
+    "className": "bi-cloud-moon-fill",
+    "src": "/assets/icons/cloud-moon-fill.svg"
+  },
+  {
+    "className": "bi-cloud-moon",
+    "src": "/assets/icons/cloud-moon.svg"
+  },
+  {
+    "className": "bi-cloud-plus-fill",
+    "src": "/assets/icons/cloud-plus-fill.svg"
+  },
+  {
+    "className": "bi-cloud-plus",
+    "src": "/assets/icons/cloud-plus.svg"
+  },
+  {
+    "className": "bi-cloud-rain-fill",
+    "src": "/assets/icons/cloud-rain-fill.svg"
+  },
+  {
+    "className": "bi-cloud-rain-heavy-fill",
+    "src": "/assets/icons/cloud-rain-heavy-fill.svg"
+  },
+  {
+    "className": "bi-cloud-rain-heavy",
+    "src": "/assets/icons/cloud-rain-heavy.svg"
+  },
+  {
+    "className": "bi-cloud-rain",
+    "src": "/assets/icons/cloud-rain.svg"
+  },
+  {
+    "className": "bi-cloud-slash-fill",
+    "src": "/assets/icons/cloud-slash-fill.svg"
+  },
+  {
+    "className": "bi-cloud-slash",
+    "src": "/assets/icons/cloud-slash.svg"
+  },
+  {
+    "className": "bi-cloud-sleet-fill",
+    "src": "/assets/icons/cloud-sleet-fill.svg"
+  },
+  {
+    "className": "bi-cloud-sleet",
+    "src": "/assets/icons/cloud-sleet.svg"
+  },
+  {
+    "className": "bi-cloud-snow-fill",
+    "src": "/assets/icons/cloud-snow-fill.svg"
+  },
+  {
+    "className": "bi-cloud-snow",
+    "src": "/assets/icons/cloud-snow.svg"
+  },
+  {
+    "className": "bi-cloud-sun-fill",
+    "src": "/assets/icons/cloud-sun-fill.svg"
+  },
+  {
+    "className": "bi-cloud-sun",
+    "src": "/assets/icons/cloud-sun.svg"
+  },
+  {
+    "className": "bi-cloud-upload-fill",
+    "src": "/assets/icons/cloud-upload-fill.svg"
+  },
+  {
+    "className": "bi-cloud-upload",
+    "src": "/assets/icons/cloud-upload.svg"
+  },
+  {
+    "className": "bi-cloud",
+    "src": "/assets/icons/cloud.svg"
+  },
+  {
+    "className": "bi-clouds-fill",
+    "src": "/assets/icons/clouds-fill.svg"
+  },
+  {
+    "className": "bi-clouds",
+    "src": "/assets/icons/clouds.svg"
+  },
+  {
+    "className": "bi-cloudy-fill",
+    "src": "/assets/icons/cloudy-fill.svg"
+  },
+  {
+    "className": "bi-cloudy",
+    "src": "/assets/icons/cloudy.svg"
+  },
+  {
+    "className": "bi-code-slash",
+    "src": "/assets/icons/code-slash.svg"
+  },
+  {
+    "className": "bi-code-square",
+    "src": "/assets/icons/code-square.svg"
+  },
+  {
+    "className": "bi-code",
+    "src": "/assets/icons/code.svg"
+  },
+  {
+    "className": "bi-coin",
+    "src": "/assets/icons/coin.svg"
+  },
+  {
+    "className": "bi-collection-fill",
+    "src": "/assets/icons/collection-fill.svg"
+  },
+  {
+    "className": "bi-collection-play-fill",
+    "src": "/assets/icons/collection-play-fill.svg"
+  },
+  {
+    "className": "bi-collection-play",
+    "src": "/assets/icons/collection-play.svg"
+  },
+  {
+    "className": "bi-collection",
+    "src": "/assets/icons/collection.svg"
+  },
+  {
+    "className": "bi-columns-gap",
+    "src": "/assets/icons/columns-gap.svg"
+  },
+  {
+    "className": "bi-columns",
+    "src": "/assets/icons/columns.svg"
+  },
+  {
+    "className": "bi-command",
+    "src": "/assets/icons/command.svg"
+  },
+  {
+    "className": "bi-compass-fill",
+    "src": "/assets/icons/compass-fill.svg"
+  },
+  {
+    "className": "bi-compass",
+    "src": "/assets/icons/compass.svg"
+  },
+  {
+    "className": "bi-cone-striped",
+    "src": "/assets/icons/cone-striped.svg"
+  },
+  {
+    "className": "bi-cone",
+    "src": "/assets/icons/cone.svg"
+  },
+  {
+    "className": "bi-controller",
+    "src": "/assets/icons/controller.svg"
+  },
+  {
+    "className": "bi-cookie",
+    "src": "/assets/icons/cookie.svg"
+  },
+  {
+    "className": "bi-copy",
+    "src": "/assets/icons/copy.svg"
+  },
+  {
+    "className": "bi-cpu-fill",
+    "src": "/assets/icons/cpu-fill.svg"
+  },
+  {
+    "className": "bi-cpu",
+    "src": "/assets/icons/cpu.svg"
+  },
+  {
+    "className": "bi-credit-card-2-back-fill",
+    "src": "/assets/icons/credit-card-2-back-fill.svg"
+  },
+  {
+    "className": "bi-credit-card-2-back",
+    "src": "/assets/icons/credit-card-2-back.svg"
+  },
+  {
+    "className": "bi-credit-card-2-front-fill",
+    "src": "/assets/icons/credit-card-2-front-fill.svg"
+  },
+  {
+    "className": "bi-credit-card-2-front",
+    "src": "/assets/icons/credit-card-2-front.svg"
+  },
+  {
+    "className": "bi-credit-card-fill",
+    "src": "/assets/icons/credit-card-fill.svg"
+  },
+  {
+    "className": "bi-credit-card",
+    "src": "/assets/icons/credit-card.svg"
+  },
+  {
+    "className": "bi-crop",
+    "src": "/assets/icons/crop.svg"
+  },
+  {
+    "className": "bi-crosshair",
+    "src": "/assets/icons/crosshair.svg"
+  },
+  {
+    "className": "bi-crosshair2",
+    "src": "/assets/icons/crosshair2.svg"
+  },
+  {
+    "className": "bi-cup-fill",
+    "src": "/assets/icons/cup-fill.svg"
+  },
+  {
+    "className": "bi-cup-hot-fill",
+    "src": "/assets/icons/cup-hot-fill.svg"
+  },
+  {
+    "className": "bi-cup-hot",
+    "src": "/assets/icons/cup-hot.svg"
+  },
+  {
+    "className": "bi-cup-straw",
+    "src": "/assets/icons/cup-straw.svg"
+  },
+  {
+    "className": "bi-cup",
+    "src": "/assets/icons/cup.svg"
+  },
+  {
+    "className": "bi-currency-bitcoin",
+    "src": "/assets/icons/currency-bitcoin.svg"
+  },
+  {
+    "className": "bi-currency-dollar",
+    "src": "/assets/icons/currency-dollar.svg"
+  },
+  {
+    "className": "bi-currency-euro",
+    "src": "/assets/icons/currency-euro.svg"
+  },
+  {
+    "className": "bi-currency-exchange",
+    "src": "/assets/icons/currency-exchange.svg"
+  },
+  {
+    "className": "bi-currency-pound",
+    "src": "/assets/icons/currency-pound.svg"
+  },
+  {
+    "className": "bi-currency-rupee",
+    "src": "/assets/icons/currency-rupee.svg"
+  },
+  {
+    "className": "bi-currency-yen",
+    "src": "/assets/icons/currency-yen.svg"
+  },
+  {
+    "className": "bi-cursor-fill",
+    "src": "/assets/icons/cursor-fill.svg"
+  },
+  {
+    "className": "bi-cursor-text",
+    "src": "/assets/icons/cursor-text.svg"
+  },
+  {
+    "className": "bi-cursor",
+    "src": "/assets/icons/cursor.svg"
+  },
+  {
+    "className": "bi-dash-circle-dotted",
+    "src": "/assets/icons/dash-circle-dotted.svg"
+  },
+  {
+    "className": "bi-dash-circle-fill",
+    "src": "/assets/icons/dash-circle-fill.svg"
+  },
+  {
+    "className": "bi-dash-circle",
+    "src": "/assets/icons/dash-circle.svg"
+  },
+  {
+    "className": "bi-dash-lg",
+    "src": "/assets/icons/dash-lg.svg"
+  },
+  {
+    "className": "bi-dash-square-dotted",
+    "src": "/assets/icons/dash-square-dotted.svg"
+  },
+  {
+    "className": "bi-dash-square-fill",
+    "src": "/assets/icons/dash-square-fill.svg"
+  },
+  {
+    "className": "bi-dash-square",
+    "src": "/assets/icons/dash-square.svg"
+  },
+  {
+    "className": "bi-dash",
+    "src": "/assets/icons/dash.svg"
+  },
+  {
+    "className": "bi-database-add",
+    "src": "/assets/icons/database-add.svg"
+  },
+  {
+    "className": "bi-database-check",
+    "src": "/assets/icons/database-check.svg"
+  },
+  {
+    "className": "bi-database-dash",
+    "src": "/assets/icons/database-dash.svg"
+  },
+  {
+    "className": "bi-database-down",
+    "src": "/assets/icons/database-down.svg"
+  },
+  {
+    "className": "bi-database-exclamation",
+    "src": "/assets/icons/database-exclamation.svg"
+  },
+  {
+    "className": "bi-database-fill-add",
+    "src": "/assets/icons/database-fill-add.svg"
+  },
+  {
+    "className": "bi-database-fill-check",
+    "src": "/assets/icons/database-fill-check.svg"
+  },
+  {
+    "className": "bi-database-fill-dash",
+    "src": "/assets/icons/database-fill-dash.svg"
+  },
+  {
+    "className": "bi-database-fill-down",
+    "src": "/assets/icons/database-fill-down.svg"
+  },
+  {
+    "className": "bi-database-fill-exclamation",
+    "src": "/assets/icons/database-fill-exclamation.svg"
+  },
+  {
+    "className": "bi-database-fill-gear",
+    "src": "/assets/icons/database-fill-gear.svg"
+  },
+  {
+    "className": "bi-database-fill-lock",
+    "src": "/assets/icons/database-fill-lock.svg"
+  },
+  {
+    "className": "bi-database-fill-slash",
+    "src": "/assets/icons/database-fill-slash.svg"
+  },
+  {
+    "className": "bi-database-fill-up",
+    "src": "/assets/icons/database-fill-up.svg"
+  },
+  {
+    "className": "bi-database-fill-x",
+    "src": "/assets/icons/database-fill-x.svg"
+  },
+  {
+    "className": "bi-database-fill",
+    "src": "/assets/icons/database-fill.svg"
+  },
+  {
+    "className": "bi-database-gear",
+    "src": "/assets/icons/database-gear.svg"
+  },
+  {
+    "className": "bi-database-lock",
+    "src": "/assets/icons/database-lock.svg"
+  },
+  {
+    "className": "bi-database-slash",
+    "src": "/assets/icons/database-slash.svg"
+  },
+  {
+    "className": "bi-database-up",
+    "src": "/assets/icons/database-up.svg"
+  },
+  {
+    "className": "bi-database-x",
+    "src": "/assets/icons/database-x.svg"
+  },
+  {
+    "className": "bi-database",
+    "src": "/assets/icons/database.svg"
+  },
+  {
+    "className": "bi-device-hdd-fill",
+    "src": "/assets/icons/device-hdd-fill.svg"
+  },
+  {
+    "className": "bi-device-hdd",
+    "src": "/assets/icons/device-hdd.svg"
+  },
+  {
+    "className": "bi-device-ssd-fill",
+    "src": "/assets/icons/device-ssd-fill.svg"
+  },
+  {
+    "className": "bi-device-ssd",
+    "src": "/assets/icons/device-ssd.svg"
+  },
+  {
+    "className": "bi-diagram-2-fill",
+    "src": "/assets/icons/diagram-2-fill.svg"
+  },
+  {
+    "className": "bi-diagram-2",
+    "src": "/assets/icons/diagram-2.svg"
+  },
+  {
+    "className": "bi-diagram-3-fill",
+    "src": "/assets/icons/diagram-3-fill.svg"
+  },
+  {
+    "className": "bi-diagram-3",
+    "src": "/assets/icons/diagram-3.svg"
+  },
+  {
+    "className": "bi-diamond-fill",
+    "src": "/assets/icons/diamond-fill.svg"
+  },
+  {
+    "className": "bi-diamond-half",
+    "src": "/assets/icons/diamond-half.svg"
+  },
+  {
+    "className": "bi-diamond",
+    "src": "/assets/icons/diamond.svg"
+  },
+  {
+    "className": "bi-dice-1-fill",
+    "src": "/assets/icons/dice-1-fill.svg"
+  },
+  {
+    "className": "bi-dice-1",
+    "src": "/assets/icons/dice-1.svg"
+  },
+  {
+    "className": "bi-dice-2-fill",
+    "src": "/assets/icons/dice-2-fill.svg"
+  },
+  {
+    "className": "bi-dice-2",
+    "src": "/assets/icons/dice-2.svg"
+  },
+  {
+    "className": "bi-dice-3-fill",
+    "src": "/assets/icons/dice-3-fill.svg"
+  },
+  {
+    "className": "bi-dice-3",
+    "src": "/assets/icons/dice-3.svg"
+  },
+  {
+    "className": "bi-dice-4-fill",
+    "src": "/assets/icons/dice-4-fill.svg"
+  },
+  {
+    "className": "bi-dice-4",
+    "src": "/assets/icons/dice-4.svg"
+  },
+  {
+    "className": "bi-dice-5-fill",
+    "src": "/assets/icons/dice-5-fill.svg"
+  },
+  {
+    "className": "bi-dice-5",
+    "src": "/assets/icons/dice-5.svg"
+  },
+  {
+    "className": "bi-dice-6-fill",
+    "src": "/assets/icons/dice-6-fill.svg"
+  },
+  {
+    "className": "bi-dice-6",
+    "src": "/assets/icons/dice-6.svg"
+  },
+  {
+    "className": "bi-disc-fill",
+    "src": "/assets/icons/disc-fill.svg"
+  },
+  {
+    "className": "bi-disc",
+    "src": "/assets/icons/disc.svg"
+  },
+  {
+    "className": "bi-discord",
+    "src": "/assets/icons/discord.svg"
+  },
+  {
+    "className": "bi-display-fill",
+    "src": "/assets/icons/display-fill.svg"
+  },
+  {
+    "className": "bi-display",
+    "src": "/assets/icons/display.svg"
+  },
+  {
+    "className": "bi-displayport-fill",
+    "src": "/assets/icons/displayport-fill.svg"
+  },
+  {
+    "className": "bi-displayport",
+    "src": "/assets/icons/displayport.svg"
+  },
+  {
+    "className": "bi-distribute-horizontal",
+    "src": "/assets/icons/distribute-horizontal.svg"
+  },
+  {
+    "className": "bi-distribute-vertical",
+    "src": "/assets/icons/distribute-vertical.svg"
+  },
+  {
+    "className": "bi-door-closed-fill",
+    "src": "/assets/icons/door-closed-fill.svg"
+  },
+  {
+    "className": "bi-door-closed",
+    "src": "/assets/icons/door-closed.svg"
+  },
+  {
+    "className": "bi-door-open-fill",
+    "src": "/assets/icons/door-open-fill.svg"
+  },
+  {
+    "className": "bi-door-open",
+    "src": "/assets/icons/door-open.svg"
+  },
+  {
+    "className": "bi-dot",
+    "src": "/assets/icons/dot.svg"
+  },
+  {
+    "className": "bi-download",
+    "src": "/assets/icons/download.svg"
+  },
+  {
+    "className": "bi-dpad-fill",
+    "src": "/assets/icons/dpad-fill.svg"
+  },
+  {
+    "className": "bi-dpad",
+    "src": "/assets/icons/dpad.svg"
+  },
+  {
+    "className": "bi-dribbble",
+    "src": "/assets/icons/dribbble.svg"
+  },
+  {
+    "className": "bi-dropbox",
+    "src": "/assets/icons/dropbox.svg"
+  },
+  {
+    "className": "bi-droplet-fill",
+    "src": "/assets/icons/droplet-fill.svg"
+  },
+  {
+    "className": "bi-droplet-half",
+    "src": "/assets/icons/droplet-half.svg"
+  },
+  {
+    "className": "bi-droplet",
+    "src": "/assets/icons/droplet.svg"
+  },
+  {
+    "className": "bi-duffle-fill",
+    "src": "/assets/icons/duffle-fill.svg"
+  },
+  {
+    "className": "bi-duffle",
+    "src": "/assets/icons/duffle.svg"
+  },
+  {
+    "className": "bi-ear-fill",
+    "src": "/assets/icons/ear-fill.svg"
+  },
+  {
+    "className": "bi-ear",
+    "src": "/assets/icons/ear.svg"
+  },
+  {
+    "className": "bi-earbuds",
+    "src": "/assets/icons/earbuds.svg"
+  },
+  {
+    "className": "bi-easel-fill",
+    "src": "/assets/icons/easel-fill.svg"
+  },
+  {
+    "className": "bi-easel",
+    "src": "/assets/icons/easel.svg"
+  },
+  {
+    "className": "bi-easel2-fill",
+    "src": "/assets/icons/easel2-fill.svg"
+  },
+  {
+    "className": "bi-easel2",
+    "src": "/assets/icons/easel2.svg"
+  },
+  {
+    "className": "bi-easel3-fill",
+    "src": "/assets/icons/easel3-fill.svg"
+  },
+  {
+    "className": "bi-easel3",
+    "src": "/assets/icons/easel3.svg"
+  },
+  {
+    "className": "bi-egg-fill",
+    "src": "/assets/icons/egg-fill.svg"
+  },
+  {
+    "className": "bi-egg-fried",
+    "src": "/assets/icons/egg-fried.svg"
+  },
+  {
+    "className": "bi-egg",
+    "src": "/assets/icons/egg.svg"
+  },
+  {
+    "className": "bi-eject-fill",
+    "src": "/assets/icons/eject-fill.svg"
+  },
+  {
+    "className": "bi-eject",
+    "src": "/assets/icons/eject.svg"
+  },
+  {
+    "className": "bi-emoji-angry-fill",
+    "src": "/assets/icons/emoji-angry-fill.svg"
+  },
+  {
+    "className": "bi-emoji-angry",
+    "src": "/assets/icons/emoji-angry.svg"
+  },
+  {
+    "className": "bi-emoji-astonished-fill",
+    "src": "/assets/icons/emoji-astonished-fill.svg"
+  },
+  {
+    "className": "bi-emoji-astonished",
+    "src": "/assets/icons/emoji-astonished.svg"
+  },
+  {
+    "className": "bi-emoji-dizzy-fill",
+    "src": "/assets/icons/emoji-dizzy-fill.svg"
+  },
+  {
+    "className": "bi-emoji-dizzy",
+    "src": "/assets/icons/emoji-dizzy.svg"
+  },
+  {
+    "className": "bi-emoji-expressionless-fill",
+    "src": "/assets/icons/emoji-expressionless-fill.svg"
+  },
+  {
+    "className": "bi-emoji-expressionless",
+    "src": "/assets/icons/emoji-expressionless.svg"
+  },
+  {
+    "className": "bi-emoji-frown-fill",
+    "src": "/assets/icons/emoji-frown-fill.svg"
+  },
+  {
+    "className": "bi-emoji-frown",
+    "src": "/assets/icons/emoji-frown.svg"
+  },
+  {
+    "className": "bi-emoji-grimace-fill",
+    "src": "/assets/icons/emoji-grimace-fill.svg"
+  },
+  {
+    "className": "bi-emoji-grimace",
+    "src": "/assets/icons/emoji-grimace.svg"
+  },
+  {
+    "className": "bi-emoji-grin-fill",
+    "src": "/assets/icons/emoji-grin-fill.svg"
+  },
+  {
+    "className": "bi-emoji-grin",
+    "src": "/assets/icons/emoji-grin.svg"
+  },
+  {
+    "className": "bi-emoji-heart-eyes-fill",
+    "src": "/assets/icons/emoji-heart-eyes-fill.svg"
+  },
+  {
+    "className": "bi-emoji-heart-eyes",
+    "src": "/assets/icons/emoji-heart-eyes.svg"
+  },
+  {
+    "className": "bi-emoji-kiss-fill",
+    "src": "/assets/icons/emoji-kiss-fill.svg"
+  },
+  {
+    "className": "bi-emoji-kiss",
+    "src": "/assets/icons/emoji-kiss.svg"
+  },
+  {
+    "className": "bi-emoji-laughing-fill",
+    "src": "/assets/icons/emoji-laughing-fill.svg"
+  },
+  {
+    "className": "bi-emoji-laughing",
+    "src": "/assets/icons/emoji-laughing.svg"
+  },
+  {
+    "className": "bi-emoji-neutral-fill",
+    "src": "/assets/icons/emoji-neutral-fill.svg"
+  },
+  {
+    "className": "bi-emoji-neutral",
+    "src": "/assets/icons/emoji-neutral.svg"
+  },
+  {
+    "className": "bi-emoji-smile-fill",
+    "src": "/assets/icons/emoji-smile-fill.svg"
+  },
+  {
+    "className": "bi-emoji-smile-upside-down-fill",
+    "src": "/assets/icons/emoji-smile-upside-down-fill.svg"
+  },
+  {
+    "className": "bi-emoji-smile-upside-down",
+    "src": "/assets/icons/emoji-smile-upside-down.svg"
+  },
+  {
+    "className": "bi-emoji-smile",
+    "src": "/assets/icons/emoji-smile.svg"
+  },
+  {
+    "className": "bi-emoji-sunglasses-fill",
+    "src": "/assets/icons/emoji-sunglasses-fill.svg"
+  },
+  {
+    "className": "bi-emoji-sunglasses",
+    "src": "/assets/icons/emoji-sunglasses.svg"
+  },
+  {
+    "className": "bi-emoji-surprise-fill",
+    "src": "/assets/icons/emoji-surprise-fill.svg"
+  },
+  {
+    "className": "bi-emoji-surprise",
+    "src": "/assets/icons/emoji-surprise.svg"
+  },
+  {
+    "className": "bi-emoji-tear-fill",
+    "src": "/assets/icons/emoji-tear-fill.svg"
+  },
+  {
+    "className": "bi-emoji-tear",
+    "src": "/assets/icons/emoji-tear.svg"
+  },
+  {
+    "className": "bi-emoji-wink-fill",
+    "src": "/assets/icons/emoji-wink-fill.svg"
+  },
+  {
+    "className": "bi-emoji-wink",
+    "src": "/assets/icons/emoji-wink.svg"
+  },
+  {
+    "className": "bi-envelope-arrow-down-fill",
+    "src": "/assets/icons/envelope-arrow-down-fill.svg"
+  },
+  {
+    "className": "bi-envelope-arrow-down",
+    "src": "/assets/icons/envelope-arrow-down.svg"
+  },
+  {
+    "className": "bi-envelope-arrow-up-fill",
+    "src": "/assets/icons/envelope-arrow-up-fill.svg"
+  },
+  {
+    "className": "bi-envelope-arrow-up",
+    "src": "/assets/icons/envelope-arrow-up.svg"
+  },
+  {
+    "className": "bi-envelope-at-fill",
+    "src": "/assets/icons/envelope-at-fill.svg"
+  },
+  {
+    "className": "bi-envelope-at",
+    "src": "/assets/icons/envelope-at.svg"
+  },
+  {
+    "className": "bi-envelope-check-fill",
+    "src": "/assets/icons/envelope-check-fill.svg"
+  },
+  {
+    "className": "bi-envelope-check",
+    "src": "/assets/icons/envelope-check.svg"
+  },
+  {
+    "className": "bi-envelope-dash-fill",
+    "src": "/assets/icons/envelope-dash-fill.svg"
+  },
+  {
+    "className": "bi-envelope-dash",
+    "src": "/assets/icons/envelope-dash.svg"
+  },
+  {
+    "className": "bi-envelope-exclamation-fill",
+    "src": "/assets/icons/envelope-exclamation-fill.svg"
+  },
+  {
+    "className": "bi-envelope-exclamation",
+    "src": "/assets/icons/envelope-exclamation.svg"
+  },
+  {
+    "className": "bi-envelope-fill",
+    "src": "/assets/icons/envelope-fill.svg"
+  },
+  {
+    "className": "bi-envelope-heart-fill",
+    "src": "/assets/icons/envelope-heart-fill.svg"
+  },
+  {
+    "className": "bi-envelope-heart",
+    "src": "/assets/icons/envelope-heart.svg"
+  },
+  {
+    "className": "bi-envelope-open-fill",
+    "src": "/assets/icons/envelope-open-fill.svg"
+  },
+  {
+    "className": "bi-envelope-open-heart-fill",
+    "src": "/assets/icons/envelope-open-heart-fill.svg"
+  },
+  {
+    "className": "bi-envelope-open-heart",
+    "src": "/assets/icons/envelope-open-heart.svg"
+  },
+  {
+    "className": "bi-envelope-open",
+    "src": "/assets/icons/envelope-open.svg"
+  },
+  {
+    "className": "bi-envelope-paper-fill",
+    "src": "/assets/icons/envelope-paper-fill.svg"
+  },
+  {
+    "className": "bi-envelope-paper-heart-fill",
+    "src": "/assets/icons/envelope-paper-heart-fill.svg"
+  },
+  {
+    "className": "bi-envelope-paper-heart",
+    "src": "/assets/icons/envelope-paper-heart.svg"
+  },
+  {
+    "className": "bi-envelope-paper",
+    "src": "/assets/icons/envelope-paper.svg"
+  },
+  {
+    "className": "bi-envelope-plus-fill",
+    "src": "/assets/icons/envelope-plus-fill.svg"
+  },
+  {
+    "className": "bi-envelope-plus",
+    "src": "/assets/icons/envelope-plus.svg"
+  },
+  {
+    "className": "bi-envelope-slash-fill",
+    "src": "/assets/icons/envelope-slash-fill.svg"
+  },
+  {
+    "className": "bi-envelope-slash",
+    "src": "/assets/icons/envelope-slash.svg"
+  },
+  {
+    "className": "bi-envelope-x-fill",
+    "src": "/assets/icons/envelope-x-fill.svg"
+  },
+  {
+    "className": "bi-envelope-x",
+    "src": "/assets/icons/envelope-x.svg"
+  },
+  {
+    "className": "bi-envelope",
+    "src": "/assets/icons/envelope.svg"
+  },
+  {
+    "className": "bi-eraser-fill",
+    "src": "/assets/icons/eraser-fill.svg"
+  },
+  {
+    "className": "bi-eraser",
+    "src": "/assets/icons/eraser.svg"
+  },
+  {
+    "className": "bi-escape",
+    "src": "/assets/icons/escape.svg"
+  },
+  {
+    "className": "bi-ethernet",
+    "src": "/assets/icons/ethernet.svg"
+  },
+  {
+    "className": "bi-ev-front-fill",
+    "src": "/assets/icons/ev-front-fill.svg"
+  },
+  {
+    "className": "bi-ev-front",
+    "src": "/assets/icons/ev-front.svg"
+  },
+  {
+    "className": "bi-ev-station-fill",
+    "src": "/assets/icons/ev-station-fill.svg"
+  },
+  {
+    "className": "bi-ev-station",
+    "src": "/assets/icons/ev-station.svg"
+  },
+  {
+    "className": "bi-exclamation-circle-fill",
+    "src": "/assets/icons/exclamation-circle-fill.svg"
+  },
+  {
+    "className": "bi-exclamation-circle",
+    "src": "/assets/icons/exclamation-circle.svg"
+  },
+  {
+    "className": "bi-exclamation-diamond-fill",
+    "src": "/assets/icons/exclamation-diamond-fill.svg"
+  },
+  {
+    "className": "bi-exclamation-diamond",
+    "src": "/assets/icons/exclamation-diamond.svg"
+  },
+  {
+    "className": "bi-exclamation-lg",
+    "src": "/assets/icons/exclamation-lg.svg"
+  },
+  {
+    "className": "bi-exclamation-octagon-fill",
+    "src": "/assets/icons/exclamation-octagon-fill.svg"
+  },
+  {
+    "className": "bi-exclamation-octagon",
+    "src": "/assets/icons/exclamation-octagon.svg"
+  },
+  {
+    "className": "bi-exclamation-square-fill",
+    "src": "/assets/icons/exclamation-square-fill.svg"
+  },
+  {
+    "className": "bi-exclamation-square",
+    "src": "/assets/icons/exclamation-square.svg"
+  },
+  {
+    "className": "bi-exclamation-triangle-fill",
+    "src": "/assets/icons/exclamation-triangle-fill.svg"
+  },
+  {
+    "className": "bi-exclamation-triangle",
+    "src": "/assets/icons/exclamation-triangle.svg"
+  },
+  {
+    "className": "bi-exclamation",
+    "src": "/assets/icons/exclamation.svg"
+  },
+  {
+    "className": "bi-exclude",
+    "src": "/assets/icons/exclude.svg"
+  },
+  {
+    "className": "bi-explicit-fill",
+    "src": "/assets/icons/explicit-fill.svg"
+  },
+  {
+    "className": "bi-explicit",
+    "src": "/assets/icons/explicit.svg"
+  },
+  {
+    "className": "bi-exposure",
+    "src": "/assets/icons/exposure.svg"
+  },
+  {
+    "className": "bi-eye-fill",
+    "src": "/assets/icons/eye-fill.svg"
+  },
+  {
+    "className": "bi-eye-slash-fill",
+    "src": "/assets/icons/eye-slash-fill.svg"
+  },
+  {
+    "className": "bi-eye-slash",
+    "src": "/assets/icons/eye-slash.svg"
+  },
+  {
+    "className": "bi-eye",
+    "src": "/assets/icons/eye.svg"
+  },
+  {
+    "className": "bi-eyedropper",
+    "src": "/assets/icons/eyedropper.svg"
+  },
+  {
+    "className": "bi-eyeglasses",
+    "src": "/assets/icons/eyeglasses.svg"
+  },
+  {
+    "className": "bi-facebook",
+    "src": "/assets/icons/facebook.svg"
+  },
+  {
+    "className": "bi-fan",
+    "src": "/assets/icons/fan.svg"
+  },
+  {
+    "className": "bi-fast-forward-btn-fill",
+    "src": "/assets/icons/fast-forward-btn-fill.svg"
+  },
+  {
+    "className": "bi-fast-forward-btn",
+    "src": "/assets/icons/fast-forward-btn.svg"
+  },
+  {
+    "className": "bi-fast-forward-circle-fill",
+    "src": "/assets/icons/fast-forward-circle-fill.svg"
+  },
+  {
+    "className": "bi-fast-forward-circle",
+    "src": "/assets/icons/fast-forward-circle.svg"
+  },
+  {
+    "className": "bi-fast-forward-fill",
+    "src": "/assets/icons/fast-forward-fill.svg"
+  },
+  {
+    "className": "bi-fast-forward",
+    "src": "/assets/icons/fast-forward.svg"
+  },
+  {
+    "className": "bi-feather",
+    "src": "/assets/icons/feather.svg"
+  },
+  {
+    "className": "bi-feather2",
+    "src": "/assets/icons/feather2.svg"
+  },
+  {
+    "className": "bi-file-arrow-down-fill",
+    "src": "/assets/icons/file-arrow-down-fill.svg"
+  },
+  {
+    "className": "bi-file-arrow-down",
+    "src": "/assets/icons/file-arrow-down.svg"
+  },
+  {
+    "className": "bi-file-arrow-up-fill",
+    "src": "/assets/icons/file-arrow-up-fill.svg"
+  },
+  {
+    "className": "bi-file-arrow-up",
+    "src": "/assets/icons/file-arrow-up.svg"
+  },
+  {
+    "className": "bi-file-bar-graph-fill",
+    "src": "/assets/icons/file-bar-graph-fill.svg"
+  },
+  {
+    "className": "bi-file-bar-graph",
+    "src": "/assets/icons/file-bar-graph.svg"
+  },
+  {
+    "className": "bi-file-binary-fill",
+    "src": "/assets/icons/file-binary-fill.svg"
+  },
+  {
+    "className": "bi-file-binary",
+    "src": "/assets/icons/file-binary.svg"
+  },
+  {
+    "className": "bi-file-break-fill",
+    "src": "/assets/icons/file-break-fill.svg"
+  },
+  {
+    "className": "bi-file-break",
+    "src": "/assets/icons/file-break.svg"
+  },
+  {
+    "className": "bi-file-check-fill",
+    "src": "/assets/icons/file-check-fill.svg"
+  },
+  {
+    "className": "bi-file-check",
+    "src": "/assets/icons/file-check.svg"
+  },
+  {
+    "className": "bi-file-code-fill",
+    "src": "/assets/icons/file-code-fill.svg"
+  },
+  {
+    "className": "bi-file-code",
+    "src": "/assets/icons/file-code.svg"
+  },
+  {
+    "className": "bi-file-diff-fill",
+    "src": "/assets/icons/file-diff-fill.svg"
+  },
+  {
+    "className": "bi-file-diff",
+    "src": "/assets/icons/file-diff.svg"
+  },
+  {
+    "className": "bi-file-earmark-arrow-down-fill",
+    "src": "/assets/icons/file-earmark-arrow-down-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-arrow-down",
+    "src": "/assets/icons/file-earmark-arrow-down.svg"
+  },
+  {
+    "className": "bi-file-earmark-arrow-up-fill",
+    "src": "/assets/icons/file-earmark-arrow-up-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-arrow-up",
+    "src": "/assets/icons/file-earmark-arrow-up.svg"
+  },
+  {
+    "className": "bi-file-earmark-bar-graph-fill",
+    "src": "/assets/icons/file-earmark-bar-graph-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-bar-graph",
+    "src": "/assets/icons/file-earmark-bar-graph.svg"
+  },
+  {
+    "className": "bi-file-earmark-binary-fill",
+    "src": "/assets/icons/file-earmark-binary-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-binary",
+    "src": "/assets/icons/file-earmark-binary.svg"
+  },
+  {
+    "className": "bi-file-earmark-break-fill",
+    "src": "/assets/icons/file-earmark-break-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-break",
+    "src": "/assets/icons/file-earmark-break.svg"
+  },
+  {
+    "className": "bi-file-earmark-check-fill",
+    "src": "/assets/icons/file-earmark-check-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-check",
+    "src": "/assets/icons/file-earmark-check.svg"
+  },
+  {
+    "className": "bi-file-earmark-code-fill",
+    "src": "/assets/icons/file-earmark-code-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-code",
+    "src": "/assets/icons/file-earmark-code.svg"
+  },
+  {
+    "className": "bi-file-earmark-diff-fill",
+    "src": "/assets/icons/file-earmark-diff-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-diff",
+    "src": "/assets/icons/file-earmark-diff.svg"
+  },
+  {
+    "className": "bi-file-earmark-easel-fill",
+    "src": "/assets/icons/file-earmark-easel-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-easel",
+    "src": "/assets/icons/file-earmark-easel.svg"
+  },
+  {
+    "className": "bi-file-earmark-excel-fill",
+    "src": "/assets/icons/file-earmark-excel-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-excel",
+    "src": "/assets/icons/file-earmark-excel.svg"
+  },
+  {
+    "className": "bi-file-earmark-fill",
+    "src": "/assets/icons/file-earmark-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-font-fill",
+    "src": "/assets/icons/file-earmark-font-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-font",
+    "src": "/assets/icons/file-earmark-font.svg"
+  },
+  {
+    "className": "bi-file-earmark-image-fill",
+    "src": "/assets/icons/file-earmark-image-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-image",
+    "src": "/assets/icons/file-earmark-image.svg"
+  },
+  {
+    "className": "bi-file-earmark-lock-fill",
+    "src": "/assets/icons/file-earmark-lock-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-lock",
+    "src": "/assets/icons/file-earmark-lock.svg"
+  },
+  {
+    "className": "bi-file-earmark-lock2-fill",
+    "src": "/assets/icons/file-earmark-lock2-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-lock2",
+    "src": "/assets/icons/file-earmark-lock2.svg"
+  },
+  {
+    "className": "bi-file-earmark-medical-fill",
+    "src": "/assets/icons/file-earmark-medical-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-medical",
+    "src": "/assets/icons/file-earmark-medical.svg"
+  },
+  {
+    "className": "bi-file-earmark-minus-fill",
+    "src": "/assets/icons/file-earmark-minus-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-minus",
+    "src": "/assets/icons/file-earmark-minus.svg"
+  },
+  {
+    "className": "bi-file-earmark-music-fill",
+    "src": "/assets/icons/file-earmark-music-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-music",
+    "src": "/assets/icons/file-earmark-music.svg"
+  },
+  {
+    "className": "bi-file-earmark-pdf-fill",
+    "src": "/assets/icons/file-earmark-pdf-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-pdf",
+    "src": "/assets/icons/file-earmark-pdf.svg"
+  },
+  {
+    "className": "bi-file-earmark-person-fill",
+    "src": "/assets/icons/file-earmark-person-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-person",
+    "src": "/assets/icons/file-earmark-person.svg"
+  },
+  {
+    "className": "bi-file-earmark-play-fill",
+    "src": "/assets/icons/file-earmark-play-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-play",
+    "src": "/assets/icons/file-earmark-play.svg"
+  },
+  {
+    "className": "bi-file-earmark-plus-fill",
+    "src": "/assets/icons/file-earmark-plus-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-plus",
+    "src": "/assets/icons/file-earmark-plus.svg"
+  },
+  {
+    "className": "bi-file-earmark-post-fill",
+    "src": "/assets/icons/file-earmark-post-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-post",
+    "src": "/assets/icons/file-earmark-post.svg"
+  },
+  {
+    "className": "bi-file-earmark-ppt-fill",
+    "src": "/assets/icons/file-earmark-ppt-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-ppt",
+    "src": "/assets/icons/file-earmark-ppt.svg"
+  },
+  {
+    "className": "bi-file-earmark-richtext-fill",
+    "src": "/assets/icons/file-earmark-richtext-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-richtext",
+    "src": "/assets/icons/file-earmark-richtext.svg"
+  },
+  {
+    "className": "bi-file-earmark-ruled-fill",
+    "src": "/assets/icons/file-earmark-ruled-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-ruled",
+    "src": "/assets/icons/file-earmark-ruled.svg"
+  },
+  {
+    "className": "bi-file-earmark-slides-fill",
+    "src": "/assets/icons/file-earmark-slides-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-slides",
+    "src": "/assets/icons/file-earmark-slides.svg"
+  },
+  {
+    "className": "bi-file-earmark-spreadsheet-fill",
+    "src": "/assets/icons/file-earmark-spreadsheet-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-spreadsheet",
+    "src": "/assets/icons/file-earmark-spreadsheet.svg"
+  },
+  {
+    "className": "bi-file-earmark-text-fill",
+    "src": "/assets/icons/file-earmark-text-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-text",
+    "src": "/assets/icons/file-earmark-text.svg"
+  },
+  {
+    "className": "bi-file-earmark-word-fill",
+    "src": "/assets/icons/file-earmark-word-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-word",
+    "src": "/assets/icons/file-earmark-word.svg"
+  },
+  {
+    "className": "bi-file-earmark-x-fill",
+    "src": "/assets/icons/file-earmark-x-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-x",
+    "src": "/assets/icons/file-earmark-x.svg"
+  },
+  {
+    "className": "bi-file-earmark-zip-fill",
+    "src": "/assets/icons/file-earmark-zip-fill.svg"
+  },
+  {
+    "className": "bi-file-earmark-zip",
+    "src": "/assets/icons/file-earmark-zip.svg"
+  },
+  {
+    "className": "bi-file-earmark",
+    "src": "/assets/icons/file-earmark.svg"
+  },
+  {
+    "className": "bi-file-easel-fill",
+    "src": "/assets/icons/file-easel-fill.svg"
+  },
+  {
+    "className": "bi-file-easel",
+    "src": "/assets/icons/file-easel.svg"
+  },
+  {
+    "className": "bi-file-excel-fill",
+    "src": "/assets/icons/file-excel-fill.svg"
+  },
+  {
+    "className": "bi-file-excel",
+    "src": "/assets/icons/file-excel.svg"
+  },
+  {
+    "className": "bi-file-fill",
+    "src": "/assets/icons/file-fill.svg"
+  },
+  {
+    "className": "bi-file-font-fill",
+    "src": "/assets/icons/file-font-fill.svg"
+  },
+  {
+    "className": "bi-file-font",
+    "src": "/assets/icons/file-font.svg"
+  },
+  {
+    "className": "bi-file-image-fill",
+    "src": "/assets/icons/file-image-fill.svg"
+  },
+  {
+    "className": "bi-file-image",
+    "src": "/assets/icons/file-image.svg"
+  },
+  {
+    "className": "bi-file-lock-fill",
+    "src": "/assets/icons/file-lock-fill.svg"
+  },
+  {
+    "className": "bi-file-lock",
+    "src": "/assets/icons/file-lock.svg"
+  },
+  {
+    "className": "bi-file-lock2-fill",
+    "src": "/assets/icons/file-lock2-fill.svg"
+  },
+  {
+    "className": "bi-file-lock2",
+    "src": "/assets/icons/file-lock2.svg"
+  },
+  {
+    "className": "bi-file-medical-fill",
+    "src": "/assets/icons/file-medical-fill.svg"
+  },
+  {
+    "className": "bi-file-medical",
+    "src": "/assets/icons/file-medical.svg"
+  },
+  {
+    "className": "bi-file-minus-fill",
+    "src": "/assets/icons/file-minus-fill.svg"
+  },
+  {
+    "className": "bi-file-minus",
+    "src": "/assets/icons/file-minus.svg"
+  },
+  {
+    "className": "bi-file-music-fill",
+    "src": "/assets/icons/file-music-fill.svg"
+  },
+  {
+    "className": "bi-file-music",
+    "src": "/assets/icons/file-music.svg"
+  },
+  {
+    "className": "bi-file-pdf-fill",
+    "src": "/assets/icons/file-pdf-fill.svg"
+  },
+  {
+    "className": "bi-file-pdf",
+    "src": "/assets/icons/file-pdf.svg"
+  },
+  {
+    "className": "bi-file-person-fill",
+    "src": "/assets/icons/file-person-fill.svg"
+  },
+  {
+    "className": "bi-file-person",
+    "src": "/assets/icons/file-person.svg"
+  },
+  {
+    "className": "bi-file-play-fill",
+    "src": "/assets/icons/file-play-fill.svg"
+  },
+  {
+    "className": "bi-file-play",
+    "src": "/assets/icons/file-play.svg"
+  },
+  {
+    "className": "bi-file-plus-fill",
+    "src": "/assets/icons/file-plus-fill.svg"
+  },
+  {
+    "className": "bi-file-plus",
+    "src": "/assets/icons/file-plus.svg"
+  },
+  {
+    "className": "bi-file-post-fill",
+    "src": "/assets/icons/file-post-fill.svg"
+  },
+  {
+    "className": "bi-file-post",
+    "src": "/assets/icons/file-post.svg"
+  },
+  {
+    "className": "bi-file-ppt-fill",
+    "src": "/assets/icons/file-ppt-fill.svg"
+  },
+  {
+    "className": "bi-file-ppt",
+    "src": "/assets/icons/file-ppt.svg"
+  },
+  {
+    "className": "bi-file-richtext-fill",
+    "src": "/assets/icons/file-richtext-fill.svg"
+  },
+  {
+    "className": "bi-file-richtext",
+    "src": "/assets/icons/file-richtext.svg"
+  },
+  {
+    "className": "bi-file-ruled-fill",
+    "src": "/assets/icons/file-ruled-fill.svg"
+  },
+  {
+    "className": "bi-file-ruled",
+    "src": "/assets/icons/file-ruled.svg"
+  },
+  {
+    "className": "bi-file-slides-fill",
+    "src": "/assets/icons/file-slides-fill.svg"
+  },
+  {
+    "className": "bi-file-slides",
+    "src": "/assets/icons/file-slides.svg"
+  },
+  {
+    "className": "bi-file-spreadsheet-fill",
+    "src": "/assets/icons/file-spreadsheet-fill.svg"
+  },
+  {
+    "className": "bi-file-spreadsheet",
+    "src": "/assets/icons/file-spreadsheet.svg"
+  },
+  {
+    "className": "bi-file-text-fill",
+    "src": "/assets/icons/file-text-fill.svg"
+  },
+  {
+    "className": "bi-file-text",
+    "src": "/assets/icons/file-text.svg"
+  },
+  {
+    "className": "bi-file-word-fill",
+    "src": "/assets/icons/file-word-fill.svg"
+  },
+  {
+    "className": "bi-file-word",
+    "src": "/assets/icons/file-word.svg"
+  },
+  {
+    "className": "bi-file-x-fill",
+    "src": "/assets/icons/file-x-fill.svg"
+  },
+  {
+    "className": "bi-file-x",
+    "src": "/assets/icons/file-x.svg"
+  },
+  {
+    "className": "bi-file-zip-fill",
+    "src": "/assets/icons/file-zip-fill.svg"
+  },
+  {
+    "className": "bi-file-zip",
+    "src": "/assets/icons/file-zip.svg"
+  },
+  {
+    "className": "bi-file",
+    "src": "/assets/icons/file.svg"
+  },
+  {
+    "className": "bi-files-alt",
+    "src": "/assets/icons/files-alt.svg"
+  },
+  {
+    "className": "bi-files",
+    "src": "/assets/icons/files.svg"
+  },
+  {
+    "className": "bi-filetype-aac",
+    "src": "/assets/icons/filetype-aac.svg"
+  },
+  {
+    "className": "bi-filetype-ai",
+    "src": "/assets/icons/filetype-ai.svg"
+  },
+  {
+    "className": "bi-filetype-bmp",
+    "src": "/assets/icons/filetype-bmp.svg"
+  },
+  {
+    "className": "bi-filetype-cs",
+    "src": "/assets/icons/filetype-cs.svg"
+  },
+  {
+    "className": "bi-filetype-css",
+    "src": "/assets/icons/filetype-css.svg"
+  },
+  {
+    "className": "bi-filetype-csv",
+    "src": "/assets/icons/filetype-csv.svg"
+  },
+  {
+    "className": "bi-filetype-doc",
+    "src": "/assets/icons/filetype-doc.svg"
+  },
+  {
+    "className": "bi-filetype-docx",
+    "src": "/assets/icons/filetype-docx.svg"
+  },
+  {
+    "className": "bi-filetype-exe",
+    "src": "/assets/icons/filetype-exe.svg"
+  },
+  {
+    "className": "bi-filetype-gif",
+    "src": "/assets/icons/filetype-gif.svg"
+  },
+  {
+    "className": "bi-filetype-heic",
+    "src": "/assets/icons/filetype-heic.svg"
+  },
+  {
+    "className": "bi-filetype-html",
+    "src": "/assets/icons/filetype-html.svg"
+  },
+  {
+    "className": "bi-filetype-java",
+    "src": "/assets/icons/filetype-java.svg"
+  },
+  {
+    "className": "bi-filetype-jpg",
+    "src": "/assets/icons/filetype-jpg.svg"
+  },
+  {
+    "className": "bi-filetype-js",
+    "src": "/assets/icons/filetype-js.svg"
+  },
+  {
+    "className": "bi-filetype-json",
+    "src": "/assets/icons/filetype-json.svg"
+  },
+  {
+    "className": "bi-filetype-jsx",
+    "src": "/assets/icons/filetype-jsx.svg"
+  },
+  {
+    "className": "bi-filetype-key",
+    "src": "/assets/icons/filetype-key.svg"
+  },
+  {
+    "className": "bi-filetype-m4p",
+    "src": "/assets/icons/filetype-m4p.svg"
+  },
+  {
+    "className": "bi-filetype-md",
+    "src": "/assets/icons/filetype-md.svg"
+  },
+  {
+    "className": "bi-filetype-mdx",
+    "src": "/assets/icons/filetype-mdx.svg"
+  },
+  {
+    "className": "bi-filetype-mov",
+    "src": "/assets/icons/filetype-mov.svg"
+  },
+  {
+    "className": "bi-filetype-mp3",
+    "src": "/assets/icons/filetype-mp3.svg"
+  },
+  {
+    "className": "bi-filetype-mp4",
+    "src": "/assets/icons/filetype-mp4.svg"
+  },
+  {
+    "className": "bi-filetype-otf",
+    "src": "/assets/icons/filetype-otf.svg"
+  },
+  {
+    "className": "bi-filetype-pdf",
+    "src": "/assets/icons/filetype-pdf.svg"
+  },
+  {
+    "className": "bi-filetype-php",
+    "src": "/assets/icons/filetype-php.svg"
+  },
+  {
+    "className": "bi-filetype-png",
+    "src": "/assets/icons/filetype-png.svg"
+  },
+  {
+    "className": "bi-filetype-ppt",
+    "src": "/assets/icons/filetype-ppt.svg"
+  },
+  {
+    "className": "bi-filetype-pptx",
+    "src": "/assets/icons/filetype-pptx.svg"
+  },
+  {
+    "className": "bi-filetype-psd",
+    "src": "/assets/icons/filetype-psd.svg"
+  },
+  {
+    "className": "bi-filetype-py",
+    "src": "/assets/icons/filetype-py.svg"
+  },
+  {
+    "className": "bi-filetype-raw",
+    "src": "/assets/icons/filetype-raw.svg"
+  },
+  {
+    "className": "bi-filetype-rb",
+    "src": "/assets/icons/filetype-rb.svg"
+  },
+  {
+    "className": "bi-filetype-sass",
+    "src": "/assets/icons/filetype-sass.svg"
+  },
+  {
+    "className": "bi-filetype-scss",
+    "src": "/assets/icons/filetype-scss.svg"
+  },
+  {
+    "className": "bi-filetype-sh",
+    "src": "/assets/icons/filetype-sh.svg"
+  },
+  {
+    "className": "bi-filetype-sql",
+    "src": "/assets/icons/filetype-sql.svg"
+  },
+  {
+    "className": "bi-filetype-svg",
+    "src": "/assets/icons/filetype-svg.svg"
+  },
+  {
+    "className": "bi-filetype-tiff",
+    "src": "/assets/icons/filetype-tiff.svg"
+  },
+  {
+    "className": "bi-filetype-tsx",
+    "src": "/assets/icons/filetype-tsx.svg"
+  },
+  {
+    "className": "bi-filetype-ttf",
+    "src": "/assets/icons/filetype-ttf.svg"
+  },
+  {
+    "className": "bi-filetype-txt",
+    "src": "/assets/icons/filetype-txt.svg"
+  },
+  {
+    "className": "bi-filetype-wav",
+    "src": "/assets/icons/filetype-wav.svg"
+  },
+  {
+    "className": "bi-filetype-woff",
+    "src": "/assets/icons/filetype-woff.svg"
+  },
+  {
+    "className": "bi-filetype-xls",
+    "src": "/assets/icons/filetype-xls.svg"
+  },
+  {
+    "className": "bi-filetype-xlsx",
+    "src": "/assets/icons/filetype-xlsx.svg"
+  },
+  {
+    "className": "bi-filetype-xml",
+    "src": "/assets/icons/filetype-xml.svg"
+  },
+  {
+    "className": "bi-filetype-yml",
+    "src": "/assets/icons/filetype-yml.svg"
+  },
+  {
+    "className": "bi-film",
+    "src": "/assets/icons/film.svg"
+  },
+  {
+    "className": "bi-filter-circle-fill",
+    "src": "/assets/icons/filter-circle-fill.svg"
+  },
+  {
+    "className": "bi-filter-circle",
+    "src": "/assets/icons/filter-circle.svg"
+  },
+  {
+    "className": "bi-filter-left",
+    "src": "/assets/icons/filter-left.svg"
+  },
+  {
+    "className": "bi-filter-right",
+    "src": "/assets/icons/filter-right.svg"
+  },
+  {
+    "className": "bi-filter-square-fill",
+    "src": "/assets/icons/filter-square-fill.svg"
+  },
+  {
+    "className": "bi-filter-square",
+    "src": "/assets/icons/filter-square.svg"
+  },
+  {
+    "className": "bi-filter",
+    "src": "/assets/icons/filter.svg"
+  },
+  {
+    "className": "bi-fingerprint",
+    "src": "/assets/icons/fingerprint.svg"
+  },
+  {
+    "className": "bi-fire",
+    "src": "/assets/icons/fire.svg"
+  },
+  {
+    "className": "bi-flag-fill",
+    "src": "/assets/icons/flag-fill.svg"
+  },
+  {
+    "className": "bi-flag",
+    "src": "/assets/icons/flag.svg"
+  },
+  {
+    "className": "bi-floppy-fill",
+    "src": "/assets/icons/floppy-fill.svg"
+  },
+  {
+    "className": "bi-floppy",
+    "src": "/assets/icons/floppy.svg"
+  },
+  {
+    "className": "bi-floppy2-fill",
+    "src": "/assets/icons/floppy2-fill.svg"
+  },
+  {
+    "className": "bi-floppy2",
+    "src": "/assets/icons/floppy2.svg"
+  },
+  {
+    "className": "bi-flower1",
+    "src": "/assets/icons/flower1.svg"
+  },
+  {
+    "className": "bi-flower2",
+    "src": "/assets/icons/flower2.svg"
+  },
+  {
+    "className": "bi-flower3",
+    "src": "/assets/icons/flower3.svg"
+  },
+  {
+    "className": "bi-folder-check",
+    "src": "/assets/icons/folder-check.svg"
+  },
+  {
+    "className": "bi-folder-fill",
+    "src": "/assets/icons/folder-fill.svg"
+  },
+  {
+    "className": "bi-folder-minus",
+    "src": "/assets/icons/folder-minus.svg"
+  },
+  {
+    "className": "bi-folder-plus",
+    "src": "/assets/icons/folder-plus.svg"
+  },
+  {
+    "className": "bi-folder-symlink-fill",
+    "src": "/assets/icons/folder-symlink-fill.svg"
+  },
+  {
+    "className": "bi-folder-symlink",
+    "src": "/assets/icons/folder-symlink.svg"
+  },
+  {
+    "className": "bi-folder-x",
+    "src": "/assets/icons/folder-x.svg"
+  },
+  {
+    "className": "bi-folder",
+    "src": "/assets/icons/folder.svg"
+  },
+  {
+    "className": "bi-folder2-open",
+    "src": "/assets/icons/folder2-open.svg"
+  },
+  {
+    "className": "bi-folder2",
+    "src": "/assets/icons/folder2.svg"
+  },
+  {
+    "className": "bi-fonts",
+    "src": "/assets/icons/fonts.svg"
+  },
+  {
+    "className": "bi-forward-fill",
+    "src": "/assets/icons/forward-fill.svg"
+  },
+  {
+    "className": "bi-forward",
+    "src": "/assets/icons/forward.svg"
+  },
+  {
+    "className": "bi-front",
+    "src": "/assets/icons/front.svg"
+  },
+  {
+    "className": "bi-fuel-pump-diesel-fill",
+    "src": "/assets/icons/fuel-pump-diesel-fill.svg"
+  },
+  {
+    "className": "bi-fuel-pump-diesel",
+    "src": "/assets/icons/fuel-pump-diesel.svg"
+  },
+  {
+    "className": "bi-fuel-pump-fill",
+    "src": "/assets/icons/fuel-pump-fill.svg"
+  },
+  {
+    "className": "bi-fuel-pump",
+    "src": "/assets/icons/fuel-pump.svg"
+  },
+  {
+    "className": "bi-fullscreen-exit",
+    "src": "/assets/icons/fullscreen-exit.svg"
+  },
+  {
+    "className": "bi-fullscreen",
+    "src": "/assets/icons/fullscreen.svg"
+  },
+  {
+    "className": "bi-funnel-fill",
+    "src": "/assets/icons/funnel-fill.svg"
+  },
+  {
+    "className": "bi-funnel",
+    "src": "/assets/icons/funnel.svg"
+  },
+  {
+    "className": "bi-gear-fill",
+    "src": "/assets/icons/gear-fill.svg"
+  },
+  {
+    "className": "bi-gear-wide-connected",
+    "src": "/assets/icons/gear-wide-connected.svg"
+  },
+  {
+    "className": "bi-gear-wide",
+    "src": "/assets/icons/gear-wide.svg"
+  },
+  {
+    "className": "bi-gear",
+    "src": "/assets/icons/gear.svg"
+  },
+  {
+    "className": "bi-gem",
+    "src": "/assets/icons/gem.svg"
+  },
+  {
+    "className": "bi-gender-ambiguous",
+    "src": "/assets/icons/gender-ambiguous.svg"
+  },
+  {
+    "className": "bi-gender-female",
+    "src": "/assets/icons/gender-female.svg"
+  },
+  {
+    "className": "bi-gender-male",
+    "src": "/assets/icons/gender-male.svg"
+  },
+  {
+    "className": "bi-gender-neuter",
+    "src": "/assets/icons/gender-neuter.svg"
+  },
+  {
+    "className": "bi-gender-trans",
+    "src": "/assets/icons/gender-trans.svg"
+  },
+  {
+    "className": "bi-geo-alt-fill",
+    "src": "/assets/icons/geo-alt-fill.svg"
+  },
+  {
+    "className": "bi-geo-alt",
+    "src": "/assets/icons/geo-alt.svg"
+  },
+  {
+    "className": "bi-geo-fill",
+    "src": "/assets/icons/geo-fill.svg"
+  },
+  {
+    "className": "bi-geo",
+    "src": "/assets/icons/geo.svg"
+  },
+  {
+    "className": "bi-gift-fill",
+    "src": "/assets/icons/gift-fill.svg"
+  },
+  {
+    "className": "bi-gift",
+    "src": "/assets/icons/gift.svg"
+  },
+  {
+    "className": "bi-git",
+    "src": "/assets/icons/git.svg"
+  },
+  {
+    "className": "bi-github",
+    "src": "/assets/icons/github.svg"
+  },
+  {
+    "className": "bi-gitlab",
+    "src": "/assets/icons/gitlab.svg"
+  },
+  {
+    "className": "bi-globe-americas",
+    "src": "/assets/icons/globe-americas.svg"
+  },
+  {
+    "className": "bi-globe-asia-australia",
+    "src": "/assets/icons/globe-asia-australia.svg"
+  },
+  {
+    "className": "bi-globe-central-south-asia",
+    "src": "/assets/icons/globe-central-south-asia.svg"
+  },
+  {
+    "className": "bi-globe-europe-africa",
+    "src": "/assets/icons/globe-europe-africa.svg"
+  },
+  {
+    "className": "bi-globe",
+    "src": "/assets/icons/globe.svg"
+  },
+  {
+    "className": "bi-globe2",
+    "src": "/assets/icons/globe2.svg"
+  },
+  {
+    "className": "bi-google-play",
+    "src": "/assets/icons/google-play.svg"
+  },
+  {
+    "className": "bi-google",
+    "src": "/assets/icons/google.svg"
+  },
+  {
+    "className": "bi-gpu-card",
+    "src": "/assets/icons/gpu-card.svg"
+  },
+  {
+    "className": "bi-graph-down-arrow",
+    "src": "/assets/icons/graph-down-arrow.svg"
+  },
+  {
+    "className": "bi-graph-down",
+    "src": "/assets/icons/graph-down.svg"
+  },
+  {
+    "className": "bi-graph-up-arrow",
+    "src": "/assets/icons/graph-up-arrow.svg"
+  },
+  {
+    "className": "bi-graph-up",
+    "src": "/assets/icons/graph-up.svg"
+  },
+  {
+    "className": "bi-grid-1x2-fill",
+    "src": "/assets/icons/grid-1x2-fill.svg"
+  },
+  {
+    "className": "bi-grid-1x2",
+    "src": "/assets/icons/grid-1x2.svg"
+  },
+  {
+    "className": "bi-grid-3x2-gap-fill",
+    "src": "/assets/icons/grid-3x2-gap-fill.svg"
+  },
+  {
+    "className": "bi-grid-3x2-gap",
+    "src": "/assets/icons/grid-3x2-gap.svg"
+  },
+  {
+    "className": "bi-grid-3x2",
+    "src": "/assets/icons/grid-3x2.svg"
+  },
+  {
+    "className": "bi-grid-3x3-gap-fill",
+    "src": "/assets/icons/grid-3x3-gap-fill.svg"
+  },
+  {
+    "className": "bi-grid-3x3-gap",
+    "src": "/assets/icons/grid-3x3-gap.svg"
+  },
+  {
+    "className": "bi-grid-3x3",
+    "src": "/assets/icons/grid-3x3.svg"
+  },
+  {
+    "className": "bi-grid-fill",
+    "src": "/assets/icons/grid-fill.svg"
+  },
+  {
+    "className": "bi-grid",
+    "src": "/assets/icons/grid.svg"
+  },
+  {
+    "className": "bi-grip-horizontal",
+    "src": "/assets/icons/grip-horizontal.svg"
+  },
+  {
+    "className": "bi-grip-vertical",
+    "src": "/assets/icons/grip-vertical.svg"
+  },
+  {
+    "className": "bi-h-circle-fill",
+    "src": "/assets/icons/h-circle-fill.svg"
+  },
+  {
+    "className": "bi-h-circle",
+    "src": "/assets/icons/h-circle.svg"
+  },
+  {
+    "className": "bi-h-square-fill",
+    "src": "/assets/icons/h-square-fill.svg"
+  },
+  {
+    "className": "bi-h-square",
+    "src": "/assets/icons/h-square.svg"
+  },
+  {
+    "className": "bi-hammer",
+    "src": "/assets/icons/hammer.svg"
+  },
+  {
+    "className": "bi-hand-index-fill",
+    "src": "/assets/icons/hand-index-fill.svg"
+  },
+  {
+    "className": "bi-hand-index-thumb-fill",
+    "src": "/assets/icons/hand-index-thumb-fill.svg"
+  },
+  {
+    "className": "bi-hand-index-thumb",
+    "src": "/assets/icons/hand-index-thumb.svg"
+  },
+  {
+    "className": "bi-hand-index",
+    "src": "/assets/icons/hand-index.svg"
+  },
+  {
+    "className": "bi-hand-thumbs-down-fill",
+    "src": "/assets/icons/hand-thumbs-down-fill.svg"
+  },
+  {
+    "className": "bi-hand-thumbs-down",
+    "src": "/assets/icons/hand-thumbs-down.svg"
+  },
+  {
+    "className": "bi-hand-thumbs-up-fill",
+    "src": "/assets/icons/hand-thumbs-up-fill.svg"
+  },
+  {
+    "className": "bi-hand-thumbs-up",
+    "src": "/assets/icons/hand-thumbs-up.svg"
+  },
+  {
+    "className": "bi-handbag-fill",
+    "src": "/assets/icons/handbag-fill.svg"
+  },
+  {
+    "className": "bi-handbag",
+    "src": "/assets/icons/handbag.svg"
+  },
+  {
+    "className": "bi-hash",
+    "src": "/assets/icons/hash.svg"
+  },
+  {
+    "className": "bi-hdd-fill",
+    "src": "/assets/icons/hdd-fill.svg"
+  },
+  {
+    "className": "bi-hdd-network-fill",
+    "src": "/assets/icons/hdd-network-fill.svg"
+  },
+  {
+    "className": "bi-hdd-network",
+    "src": "/assets/icons/hdd-network.svg"
+  },
+  {
+    "className": "bi-hdd-rack-fill",
+    "src": "/assets/icons/hdd-rack-fill.svg"
+  },
+  {
+    "className": "bi-hdd-rack",
+    "src": "/assets/icons/hdd-rack.svg"
+  },
+  {
+    "className": "bi-hdd-stack-fill",
+    "src": "/assets/icons/hdd-stack-fill.svg"
+  },
+  {
+    "className": "bi-hdd-stack",
+    "src": "/assets/icons/hdd-stack.svg"
+  },
+  {
+    "className": "bi-hdd",
+    "src": "/assets/icons/hdd.svg"
+  },
+  {
+    "className": "bi-hdmi-fill",
+    "src": "/assets/icons/hdmi-fill.svg"
+  },
+  {
+    "className": "bi-hdmi",
+    "src": "/assets/icons/hdmi.svg"
+  },
+  {
+    "className": "bi-headphones",
+    "src": "/assets/icons/headphones.svg"
+  },
+  {
+    "className": "bi-headset-vr",
+    "src": "/assets/icons/headset-vr.svg"
+  },
+  {
+    "className": "bi-headset",
+    "src": "/assets/icons/headset.svg"
+  },
+  {
+    "className": "bi-heart-arrow",
+    "src": "/assets/icons/heart-arrow.svg"
+  },
+  {
+    "className": "bi-heart-fill",
+    "src": "/assets/icons/heart-fill.svg"
+  },
+  {
+    "className": "bi-heart-half",
+    "src": "/assets/icons/heart-half.svg"
+  },
+  {
+    "className": "bi-heart-pulse-fill",
+    "src": "/assets/icons/heart-pulse-fill.svg"
+  },
+  {
+    "className": "bi-heart-pulse",
+    "src": "/assets/icons/heart-pulse.svg"
+  },
+  {
+    "className": "bi-heart",
+    "src": "/assets/icons/heart.svg"
+  },
+  {
+    "className": "bi-heartbreak-fill",
+    "src": "/assets/icons/heartbreak-fill.svg"
+  },
+  {
+    "className": "bi-heartbreak",
+    "src": "/assets/icons/heartbreak.svg"
+  },
+  {
+    "className": "bi-hearts",
+    "src": "/assets/icons/hearts.svg"
+  },
+  {
+    "className": "bi-heptagon-fill",
+    "src": "/assets/icons/heptagon-fill.svg"
+  },
+  {
+    "className": "bi-heptagon-half",
+    "src": "/assets/icons/heptagon-half.svg"
+  },
+  {
+    "className": "bi-heptagon",
+    "src": "/assets/icons/heptagon.svg"
+  },
+  {
+    "className": "bi-hexagon-fill",
+    "src": "/assets/icons/hexagon-fill.svg"
+  },
+  {
+    "className": "bi-hexagon-half",
+    "src": "/assets/icons/hexagon-half.svg"
+  },
+  {
+    "className": "bi-hexagon",
+    "src": "/assets/icons/hexagon.svg"
+  },
+  {
+    "className": "bi-highlighter",
+    "src": "/assets/icons/highlighter.svg"
+  },
+  {
+    "className": "bi-highlights",
+    "src": "/assets/icons/highlights.svg"
+  },
+  {
+    "className": "bi-hospital-fill",
+    "src": "/assets/icons/hospital-fill.svg"
+  },
+  {
+    "className": "bi-hospital",
+    "src": "/assets/icons/hospital.svg"
+  },
+  {
+    "className": "bi-hourglass-bottom",
+    "src": "/assets/icons/hourglass-bottom.svg"
+  },
+  {
+    "className": "bi-hourglass-split",
+    "src": "/assets/icons/hourglass-split.svg"
+  },
+  {
+    "className": "bi-hourglass-top",
+    "src": "/assets/icons/hourglass-top.svg"
+  },
+  {
+    "className": "bi-hourglass",
+    "src": "/assets/icons/hourglass.svg"
+  },
+  {
+    "className": "bi-house-add-fill",
+    "src": "/assets/icons/house-add-fill.svg"
+  },
+  {
+    "className": "bi-house-add",
+    "src": "/assets/icons/house-add.svg"
+  },
+  {
+    "className": "bi-house-check-fill",
+    "src": "/assets/icons/house-check-fill.svg"
+  },
+  {
+    "className": "bi-house-check",
+    "src": "/assets/icons/house-check.svg"
+  },
+  {
+    "className": "bi-house-dash-fill",
+    "src": "/assets/icons/house-dash-fill.svg"
+  },
+  {
+    "className": "bi-house-dash",
+    "src": "/assets/icons/house-dash.svg"
+  },
+  {
+    "className": "bi-house-door-fill",
+    "src": "/assets/icons/house-door-fill.svg"
+  },
+  {
+    "className": "bi-house-door",
+    "src": "/assets/icons/house-door.svg"
+  },
+  {
+    "className": "bi-house-down-fill",
+    "src": "/assets/icons/house-down-fill.svg"
+  },
+  {
+    "className": "bi-house-down",
+    "src": "/assets/icons/house-down.svg"
+  },
+  {
+    "className": "bi-house-exclamation-fill",
+    "src": "/assets/icons/house-exclamation-fill.svg"
+  },
+  {
+    "className": "bi-house-exclamation",
+    "src": "/assets/icons/house-exclamation.svg"
+  },
+  {
+    "className": "bi-house-fill",
+    "src": "/assets/icons/house-fill.svg"
+  },
+  {
+    "className": "bi-house-gear-fill",
+    "src": "/assets/icons/house-gear-fill.svg"
+  },
+  {
+    "className": "bi-house-gear",
+    "src": "/assets/icons/house-gear.svg"
+  },
+  {
+    "className": "bi-house-heart-fill",
+    "src": "/assets/icons/house-heart-fill.svg"
+  },
+  {
+    "className": "bi-house-heart",
+    "src": "/assets/icons/house-heart.svg"
+  },
+  {
+    "className": "bi-house-lock-fill",
+    "src": "/assets/icons/house-lock-fill.svg"
+  },
+  {
+    "className": "bi-house-lock",
+    "src": "/assets/icons/house-lock.svg"
+  },
+  {
+    "className": "bi-house-slash-fill",
+    "src": "/assets/icons/house-slash-fill.svg"
+  },
+  {
+    "className": "bi-house-slash",
+    "src": "/assets/icons/house-slash.svg"
+  },
+  {
+    "className": "bi-house-up-fill",
+    "src": "/assets/icons/house-up-fill.svg"
+  },
+  {
+    "className": "bi-house-up",
+    "src": "/assets/icons/house-up.svg"
+  },
+  {
+    "className": "bi-house-x-fill",
+    "src": "/assets/icons/house-x-fill.svg"
+  },
+  {
+    "className": "bi-house-x",
+    "src": "/assets/icons/house-x.svg"
+  },
+  {
+    "className": "bi-house",
+    "src": "/assets/icons/house.svg"
+  },
+  {
+    "className": "bi-houses-fill",
+    "src": "/assets/icons/houses-fill.svg"
+  },
+  {
+    "className": "bi-houses",
+    "src": "/assets/icons/houses.svg"
+  },
+  {
+    "className": "bi-hr",
+    "src": "/assets/icons/hr.svg"
+  },
+  {
+    "className": "bi-hurricane",
+    "src": "/assets/icons/hurricane.svg"
+  },
+  {
+    "className": "bi-hypnotize",
+    "src": "/assets/icons/hypnotize.svg"
+  },
+  {
+    "className": "bi-image-alt",
+    "src": "/assets/icons/image-alt.svg"
+  },
+  {
+    "className": "bi-image-fill",
+    "src": "/assets/icons/image-fill.svg"
+  },
+  {
+    "className": "bi-image",
+    "src": "/assets/icons/image.svg"
+  },
+  {
+    "className": "bi-images",
+    "src": "/assets/icons/images.svg"
+  },
+  {
+    "className": "bi-inbox-fill",
+    "src": "/assets/icons/inbox-fill.svg"
+  },
+  {
+    "className": "bi-inbox",
+    "src": "/assets/icons/inbox.svg"
+  },
+  {
+    "className": "bi-inboxes-fill",
+    "src": "/assets/icons/inboxes-fill.svg"
+  },
+  {
+    "className": "bi-inboxes",
+    "src": "/assets/icons/inboxes.svg"
+  },
+  {
+    "className": "bi-incognito",
+    "src": "/assets/icons/incognito.svg"
+  },
+  {
+    "className": "bi-indent",
+    "src": "/assets/icons/indent.svg"
+  },
+  {
+    "className": "bi-infinity",
+    "src": "/assets/icons/infinity.svg"
+  },
+  {
+    "className": "bi-info-circle-fill",
+    "src": "/assets/icons/info-circle-fill.svg"
+  },
+  {
+    "className": "bi-info-circle",
+    "src": "/assets/icons/info-circle.svg"
+  },
+  {
+    "className": "bi-info-lg",
+    "src": "/assets/icons/info-lg.svg"
+  },
+  {
+    "className": "bi-info-square-fill",
+    "src": "/assets/icons/info-square-fill.svg"
+  },
+  {
+    "className": "bi-info-square",
+    "src": "/assets/icons/info-square.svg"
+  },
+  {
+    "className": "bi-info",
+    "src": "/assets/icons/info.svg"
+  },
+  {
+    "className": "bi-input-cursor-text",
+    "src": "/assets/icons/input-cursor-text.svg"
+  },
+  {
+    "className": "bi-input-cursor",
+    "src": "/assets/icons/input-cursor.svg"
+  },
+  {
+    "className": "bi-instagram",
+    "src": "/assets/icons/instagram.svg"
+  },
+  {
+    "className": "bi-intersect",
+    "src": "/assets/icons/intersect.svg"
+  },
+  {
+    "className": "bi-journal-album",
+    "src": "/assets/icons/journal-album.svg"
+  },
+  {
+    "className": "bi-journal-arrow-down",
+    "src": "/assets/icons/journal-arrow-down.svg"
+  },
+  {
+    "className": "bi-journal-arrow-up",
+    "src": "/assets/icons/journal-arrow-up.svg"
+  },
+  {
+    "className": "bi-journal-bookmark-fill",
+    "src": "/assets/icons/journal-bookmark-fill.svg"
+  },
+  {
+    "className": "bi-journal-bookmark",
+    "src": "/assets/icons/journal-bookmark.svg"
+  },
+  {
+    "className": "bi-journal-check",
+    "src": "/assets/icons/journal-check.svg"
+  },
+  {
+    "className": "bi-journal-code",
+    "src": "/assets/icons/journal-code.svg"
+  },
+  {
+    "className": "bi-journal-medical",
+    "src": "/assets/icons/journal-medical.svg"
+  },
+  {
+    "className": "bi-journal-minus",
+    "src": "/assets/icons/journal-minus.svg"
+  },
+  {
+    "className": "bi-journal-plus",
+    "src": "/assets/icons/journal-plus.svg"
+  },
+  {
+    "className": "bi-journal-richtext",
+    "src": "/assets/icons/journal-richtext.svg"
+  },
+  {
+    "className": "bi-journal-text",
+    "src": "/assets/icons/journal-text.svg"
+  },
+  {
+    "className": "bi-journal-x",
+    "src": "/assets/icons/journal-x.svg"
+  },
+  {
+    "className": "bi-journal",
+    "src": "/assets/icons/journal.svg"
+  },
+  {
+    "className": "bi-journals",
+    "src": "/assets/icons/journals.svg"
+  },
+  {
+    "className": "bi-joystick",
+    "src": "/assets/icons/joystick.svg"
+  },
+  {
+    "className": "bi-justify-left",
+    "src": "/assets/icons/justify-left.svg"
+  },
+  {
+    "className": "bi-justify-right",
+    "src": "/assets/icons/justify-right.svg"
+  },
+  {
+    "className": "bi-justify",
+    "src": "/assets/icons/justify.svg"
+  },
+  {
+    "className": "bi-kanban-fill",
+    "src": "/assets/icons/kanban-fill.svg"
+  },
+  {
+    "className": "bi-kanban",
+    "src": "/assets/icons/kanban.svg"
+  },
+  {
+    "className": "bi-key-fill",
+    "src": "/assets/icons/key-fill.svg"
+  },
+  {
+    "className": "bi-key",
+    "src": "/assets/icons/key.svg"
+  },
+  {
+    "className": "bi-keyboard-fill",
+    "src": "/assets/icons/keyboard-fill.svg"
+  },
+  {
+    "className": "bi-keyboard",
+    "src": "/assets/icons/keyboard.svg"
+  },
+  {
+    "className": "bi-ladder",
+    "src": "/assets/icons/ladder.svg"
+  },
+  {
+    "className": "bi-lamp-fill",
+    "src": "/assets/icons/lamp-fill.svg"
+  },
+  {
+    "className": "bi-lamp",
+    "src": "/assets/icons/lamp.svg"
+  },
+  {
+    "className": "bi-laptop-fill",
+    "src": "/assets/icons/laptop-fill.svg"
+  },
+  {
+    "className": "bi-laptop",
+    "src": "/assets/icons/laptop.svg"
+  },
+  {
+    "className": "bi-layer-backward",
+    "src": "/assets/icons/layer-backward.svg"
+  },
+  {
+    "className": "bi-layer-forward",
+    "src": "/assets/icons/layer-forward.svg"
+  },
+  {
+    "className": "bi-layers-fill",
+    "src": "/assets/icons/layers-fill.svg"
+  },
+  {
+    "className": "bi-layers-half",
+    "src": "/assets/icons/layers-half.svg"
+  },
+  {
+    "className": "bi-layers",
+    "src": "/assets/icons/layers.svg"
+  },
+  {
+    "className": "bi-layout-sidebar-inset-reverse",
+    "src": "/assets/icons/layout-sidebar-inset-reverse.svg"
+  },
+  {
+    "className": "bi-layout-sidebar-inset",
+    "src": "/assets/icons/layout-sidebar-inset.svg"
+  },
+  {
+    "className": "bi-layout-sidebar-reverse",
+    "src": "/assets/icons/layout-sidebar-reverse.svg"
+  },
+  {
+    "className": "bi-layout-sidebar",
+    "src": "/assets/icons/layout-sidebar.svg"
+  },
+  {
+    "className": "bi-layout-split",
+    "src": "/assets/icons/layout-split.svg"
+  },
+  {
+    "className": "bi-layout-text-sidebar-reverse",
+    "src": "/assets/icons/layout-text-sidebar-reverse.svg"
+  },
+  {
+    "className": "bi-layout-text-sidebar",
+    "src": "/assets/icons/layout-text-sidebar.svg"
+  },
+  {
+    "className": "bi-layout-text-window-reverse",
+    "src": "/assets/icons/layout-text-window-reverse.svg"
+  },
+  {
+    "className": "bi-layout-text-window",
+    "src": "/assets/icons/layout-text-window.svg"
+  },
+  {
+    "className": "bi-layout-three-columns",
+    "src": "/assets/icons/layout-three-columns.svg"
+  },
+  {
+    "className": "bi-layout-wtf",
+    "src": "/assets/icons/layout-wtf.svg"
+  },
+  {
+    "className": "bi-life-preserver",
+    "src": "/assets/icons/life-preserver.svg"
+  },
+  {
+    "className": "bi-lightbulb-fill",
+    "src": "/assets/icons/lightbulb-fill.svg"
+  },
+  {
+    "className": "bi-lightbulb-off-fill",
+    "src": "/assets/icons/lightbulb-off-fill.svg"
+  },
+  {
+    "className": "bi-lightbulb-off",
+    "src": "/assets/icons/lightbulb-off.svg"
+  },
+  {
+    "className": "bi-lightbulb",
+    "src": "/assets/icons/lightbulb.svg"
+  },
+  {
+    "className": "bi-lightning-charge-fill",
+    "src": "/assets/icons/lightning-charge-fill.svg"
+  },
+  {
+    "className": "bi-lightning-charge",
+    "src": "/assets/icons/lightning-charge.svg"
+  },
+  {
+    "className": "bi-lightning-fill",
+    "src": "/assets/icons/lightning-fill.svg"
+  },
+  {
+    "className": "bi-lightning",
+    "src": "/assets/icons/lightning.svg"
+  },
+  {
+    "className": "bi-line",
+    "src": "/assets/icons/line.svg"
+  },
+  {
+    "className": "bi-link-45deg",
+    "src": "/assets/icons/link-45deg.svg"
+  },
+  {
+    "className": "bi-link",
+    "src": "/assets/icons/link.svg"
+  },
+  {
+    "className": "bi-linkedin",
+    "src": "/assets/icons/linkedin.svg"
+  },
+  {
+    "className": "bi-list-check",
+    "src": "/assets/icons/list-check.svg"
+  },
+  {
+    "className": "bi-list-columns-reverse",
+    "src": "/assets/icons/list-columns-reverse.svg"
+  },
+  {
+    "className": "bi-list-columns",
+    "src": "/assets/icons/list-columns.svg"
+  },
+  {
+    "className": "bi-list-nested",
+    "src": "/assets/icons/list-nested.svg"
+  },
+  {
+    "className": "bi-list-ol",
+    "src": "/assets/icons/list-ol.svg"
+  },
+  {
+    "className": "bi-list-stars",
+    "src": "/assets/icons/list-stars.svg"
+  },
+  {
+    "className": "bi-list-task",
+    "src": "/assets/icons/list-task.svg"
+  },
+  {
+    "className": "bi-list-ul",
+    "src": "/assets/icons/list-ul.svg"
+  },
+  {
+    "className": "bi-list",
+    "src": "/assets/icons/list.svg"
+  },
+  {
+    "className": "bi-lock-fill",
+    "src": "/assets/icons/lock-fill.svg"
+  },
+  {
+    "className": "bi-lock",
+    "src": "/assets/icons/lock.svg"
+  },
+  {
+    "className": "bi-luggage-fill",
+    "src": "/assets/icons/luggage-fill.svg"
+  },
+  {
+    "className": "bi-luggage",
+    "src": "/assets/icons/luggage.svg"
+  },
+  {
+    "className": "bi-lungs-fill",
+    "src": "/assets/icons/lungs-fill.svg"
+  },
+  {
+    "className": "bi-lungs",
+    "src": "/assets/icons/lungs.svg"
+  },
+  {
+    "className": "bi-magic",
+    "src": "/assets/icons/magic.svg"
+  },
+  {
+    "className": "bi-magnet-fill",
+    "src": "/assets/icons/magnet-fill.svg"
+  },
+  {
+    "className": "bi-magnet",
+    "src": "/assets/icons/magnet.svg"
+  },
+  {
+    "className": "bi-mailbox-flag",
+    "src": "/assets/icons/mailbox-flag.svg"
+  },
+  {
+    "className": "bi-mailbox",
+    "src": "/assets/icons/mailbox.svg"
+  },
+  {
+    "className": "bi-mailbox2-flag",
+    "src": "/assets/icons/mailbox2-flag.svg"
+  },
+  {
+    "className": "bi-mailbox2",
+    "src": "/assets/icons/mailbox2.svg"
+  },
+  {
+    "className": "bi-map-fill",
+    "src": "/assets/icons/map-fill.svg"
+  },
+  {
+    "className": "bi-map",
+    "src": "/assets/icons/map.svg"
+  },
+  {
+    "className": "bi-markdown-fill",
+    "src": "/assets/icons/markdown-fill.svg"
+  },
+  {
+    "className": "bi-markdown",
+    "src": "/assets/icons/markdown.svg"
+  },
+  {
+    "className": "bi-marker-tip",
+    "src": "/assets/icons/marker-tip.svg"
+  },
+  {
+    "className": "bi-mask",
+    "src": "/assets/icons/mask.svg"
+  },
+  {
+    "className": "bi-mastodon",
+    "src": "/assets/icons/mastodon.svg"
+  },
+  {
+    "className": "bi-medium",
+    "src": "/assets/icons/medium.svg"
+  },
+  {
+    "className": "bi-megaphone-fill",
+    "src": "/assets/icons/megaphone-fill.svg"
+  },
+  {
+    "className": "bi-megaphone",
+    "src": "/assets/icons/megaphone.svg"
+  },
+  {
+    "className": "bi-memory",
+    "src": "/assets/icons/memory.svg"
+  },
+  {
+    "className": "bi-menu-app-fill",
+    "src": "/assets/icons/menu-app-fill.svg"
+  },
+  {
+    "className": "bi-menu-app",
+    "src": "/assets/icons/menu-app.svg"
+  },
+  {
+    "className": "bi-menu-button-fill",
+    "src": "/assets/icons/menu-button-fill.svg"
+  },
+  {
+    "className": "bi-menu-button-wide-fill",
+    "src": "/assets/icons/menu-button-wide-fill.svg"
+  },
+  {
+    "className": "bi-menu-button-wide",
+    "src": "/assets/icons/menu-button-wide.svg"
+  },
+  {
+    "className": "bi-menu-button",
+    "src": "/assets/icons/menu-button.svg"
+  },
+  {
+    "className": "bi-menu-down",
+    "src": "/assets/icons/menu-down.svg"
+  },
+  {
+    "className": "bi-menu-up",
+    "src": "/assets/icons/menu-up.svg"
+  },
+  {
+    "className": "bi-messenger",
+    "src": "/assets/icons/messenger.svg"
+  },
+  {
+    "className": "bi-meta",
+    "src": "/assets/icons/meta.svg"
+  },
+  {
+    "className": "bi-mic-fill",
+    "src": "/assets/icons/mic-fill.svg"
+  },
+  {
+    "className": "bi-mic-mute-fill",
+    "src": "/assets/icons/mic-mute-fill.svg"
+  },
+  {
+    "className": "bi-mic-mute",
+    "src": "/assets/icons/mic-mute.svg"
+  },
+  {
+    "className": "bi-mic",
+    "src": "/assets/icons/mic.svg"
+  },
+  {
+    "className": "bi-microsoft-teams",
+    "src": "/assets/icons/microsoft-teams.svg"
+  },
+  {
+    "className": "bi-microsoft",
+    "src": "/assets/icons/microsoft.svg"
+  },
+  {
+    "className": "bi-minecart-loaded",
+    "src": "/assets/icons/minecart-loaded.svg"
+  },
+  {
+    "className": "bi-minecart",
+    "src": "/assets/icons/minecart.svg"
+  },
+  {
+    "className": "bi-modem-fill",
+    "src": "/assets/icons/modem-fill.svg"
+  },
+  {
+    "className": "bi-modem",
+    "src": "/assets/icons/modem.svg"
+  },
+  {
+    "className": "bi-moisture",
+    "src": "/assets/icons/moisture.svg"
+  },
+  {
+    "className": "bi-moon-fill",
+    "src": "/assets/icons/moon-fill.svg"
+  },
+  {
+    "className": "bi-moon-stars-fill",
+    "src": "/assets/icons/moon-stars-fill.svg"
+  },
+  {
+    "className": "bi-moon-stars",
+    "src": "/assets/icons/moon-stars.svg"
+  },
+  {
+    "className": "bi-moon",
+    "src": "/assets/icons/moon.svg"
+  },
+  {
+    "className": "bi-mortarboard-fill",
+    "src": "/assets/icons/mortarboard-fill.svg"
+  },
+  {
+    "className": "bi-mortarboard",
+    "src": "/assets/icons/mortarboard.svg"
+  },
+  {
+    "className": "bi-motherboard-fill",
+    "src": "/assets/icons/motherboard-fill.svg"
+  },
+  {
+    "className": "bi-motherboard",
+    "src": "/assets/icons/motherboard.svg"
+  },
+  {
+    "className": "bi-mouse-fill",
+    "src": "/assets/icons/mouse-fill.svg"
+  },
+  {
+    "className": "bi-mouse",
+    "src": "/assets/icons/mouse.svg"
+  },
+  {
+    "className": "bi-mouse2-fill",
+    "src": "/assets/icons/mouse2-fill.svg"
+  },
+  {
+    "className": "bi-mouse2",
+    "src": "/assets/icons/mouse2.svg"
+  },
+  {
+    "className": "bi-mouse3-fill",
+    "src": "/assets/icons/mouse3-fill.svg"
+  },
+  {
+    "className": "bi-mouse3",
+    "src": "/assets/icons/mouse3.svg"
+  },
+  {
+    "className": "bi-music-note-beamed",
+    "src": "/assets/icons/music-note-beamed.svg"
+  },
+  {
+    "className": "bi-music-note-list",
+    "src": "/assets/icons/music-note-list.svg"
+  },
+  {
+    "className": "bi-music-note",
+    "src": "/assets/icons/music-note.svg"
+  },
+  {
+    "className": "bi-music-player-fill",
+    "src": "/assets/icons/music-player-fill.svg"
+  },
+  {
+    "className": "bi-music-player",
+    "src": "/assets/icons/music-player.svg"
+  },
+  {
+    "className": "bi-newspaper",
+    "src": "/assets/icons/newspaper.svg"
+  },
+  {
+    "className": "bi-nintendo-switch",
+    "src": "/assets/icons/nintendo-switch.svg"
+  },
+  {
+    "className": "bi-node-minus-fill",
+    "src": "/assets/icons/node-minus-fill.svg"
+  },
+  {
+    "className": "bi-node-minus",
+    "src": "/assets/icons/node-minus.svg"
+  },
+  {
+    "className": "bi-node-plus-fill",
+    "src": "/assets/icons/node-plus-fill.svg"
+  },
+  {
+    "className": "bi-node-plus",
+    "src": "/assets/icons/node-plus.svg"
+  },
+  {
+    "className": "bi-noise-reduction",
+    "src": "/assets/icons/noise-reduction.svg"
+  },
+  {
+    "className": "bi-nut-fill",
+    "src": "/assets/icons/nut-fill.svg"
+  },
+  {
+    "className": "bi-nut",
+    "src": "/assets/icons/nut.svg"
+  },
+  {
+    "className": "bi-nvidia",
+    "src": "/assets/icons/nvidia.svg"
+  },
+  {
+    "className": "bi-nvme-fill",
+    "src": "/assets/icons/nvme-fill.svg"
+  },
+  {
+    "className": "bi-nvme",
+    "src": "/assets/icons/nvme.svg"
+  },
+  {
+    "className": "bi-octagon-fill",
+    "src": "/assets/icons/octagon-fill.svg"
+  },
+  {
+    "className": "bi-octagon-half",
+    "src": "/assets/icons/octagon-half.svg"
+  },
+  {
+    "className": "bi-octagon",
+    "src": "/assets/icons/octagon.svg"
+  },
+  {
+    "className": "bi-opencollective",
+    "src": "/assets/icons/opencollective.svg"
+  },
+  {
+    "className": "bi-optical-audio-fill",
+    "src": "/assets/icons/optical-audio-fill.svg"
+  },
+  {
+    "className": "bi-optical-audio",
+    "src": "/assets/icons/optical-audio.svg"
+  },
+  {
+    "className": "bi-option",
+    "src": "/assets/icons/option.svg"
+  },
+  {
+    "className": "bi-outlet",
+    "src": "/assets/icons/outlet.svg"
+  },
+  {
+    "className": "bi-p-circle-fill",
+    "src": "/assets/icons/p-circle-fill.svg"
+  },
+  {
+    "className": "bi-p-circle",
+    "src": "/assets/icons/p-circle.svg"
+  },
+  {
+    "className": "bi-p-square-fill",
+    "src": "/assets/icons/p-square-fill.svg"
+  },
+  {
+    "className": "bi-p-square",
+    "src": "/assets/icons/p-square.svg"
+  },
+  {
+    "className": "bi-paint-bucket",
+    "src": "/assets/icons/paint-bucket.svg"
+  },
+  {
+    "className": "bi-palette-fill",
+    "src": "/assets/icons/palette-fill.svg"
+  },
+  {
+    "className": "bi-palette",
+    "src": "/assets/icons/palette.svg"
+  },
+  {
+    "className": "bi-palette2",
+    "src": "/assets/icons/palette2.svg"
+  },
+  {
+    "className": "bi-paperclip",
+    "src": "/assets/icons/paperclip.svg"
+  },
+  {
+    "className": "bi-paragraph",
+    "src": "/assets/icons/paragraph.svg"
+  },
+  {
+    "className": "bi-pass-fill",
+    "src": "/assets/icons/pass-fill.svg"
+  },
+  {
+    "className": "bi-pass",
+    "src": "/assets/icons/pass.svg"
+  },
+  {
+    "className": "bi-passport-fill",
+    "src": "/assets/icons/passport-fill.svg"
+  },
+  {
+    "className": "bi-passport",
+    "src": "/assets/icons/passport.svg"
+  },
+  {
+    "className": "bi-patch-check-fill",
+    "src": "/assets/icons/patch-check-fill.svg"
+  },
+  {
+    "className": "bi-patch-check",
+    "src": "/assets/icons/patch-check.svg"
+  },
+  {
+    "className": "bi-patch-exclamation-fill",
+    "src": "/assets/icons/patch-exclamation-fill.svg"
+  },
+  {
+    "className": "bi-patch-exclamation",
+    "src": "/assets/icons/patch-exclamation.svg"
+  },
+  {
+    "className": "bi-patch-minus-fill",
+    "src": "/assets/icons/patch-minus-fill.svg"
+  },
+  {
+    "className": "bi-patch-minus",
+    "src": "/assets/icons/patch-minus.svg"
+  },
+  {
+    "className": "bi-patch-plus-fill",
+    "src": "/assets/icons/patch-plus-fill.svg"
+  },
+  {
+    "className": "bi-patch-plus",
+    "src": "/assets/icons/patch-plus.svg"
+  },
+  {
+    "className": "bi-patch-question-fill",
+    "src": "/assets/icons/patch-question-fill.svg"
+  },
+  {
+    "className": "bi-patch-question",
+    "src": "/assets/icons/patch-question.svg"
+  },
+  {
+    "className": "bi-pause-btn-fill",
+    "src": "/assets/icons/pause-btn-fill.svg"
+  },
+  {
+    "className": "bi-pause-btn",
+    "src": "/assets/icons/pause-btn.svg"
+  },
+  {
+    "className": "bi-pause-circle-fill",
+    "src": "/assets/icons/pause-circle-fill.svg"
+  },
+  {
+    "className": "bi-pause-circle",
+    "src": "/assets/icons/pause-circle.svg"
+  },
+  {
+    "className": "bi-pause-fill",
+    "src": "/assets/icons/pause-fill.svg"
+  },
+  {
+    "className": "bi-pause",
+    "src": "/assets/icons/pause.svg"
+  },
+  {
+    "className": "bi-paypal",
+    "src": "/assets/icons/paypal.svg"
+  },
+  {
+    "className": "bi-pc-display-horizontal",
+    "src": "/assets/icons/pc-display-horizontal.svg"
+  },
+  {
+    "className": "bi-pc-display",
+    "src": "/assets/icons/pc-display.svg"
+  },
+  {
+    "className": "bi-pc-horizontal",
+    "src": "/assets/icons/pc-horizontal.svg"
+  },
+  {
+    "className": "bi-pc",
+    "src": "/assets/icons/pc.svg"
+  },
+  {
+    "className": "bi-pci-card-network",
+    "src": "/assets/icons/pci-card-network.svg"
+  },
+  {
+    "className": "bi-pci-card-sound",
+    "src": "/assets/icons/pci-card-sound.svg"
+  },
+  {
+    "className": "bi-pci-card",
+    "src": "/assets/icons/pci-card.svg"
+  },
+  {
+    "className": "bi-peace-fill",
+    "src": "/assets/icons/peace-fill.svg"
+  },
+  {
+    "className": "bi-peace",
+    "src": "/assets/icons/peace.svg"
+  },
+  {
+    "className": "bi-pen-fill",
+    "src": "/assets/icons/pen-fill.svg"
+  },
+  {
+    "className": "bi-pen",
+    "src": "/assets/icons/pen.svg"
+  },
+  {
+    "className": "bi-pencil-fill",
+    "src": "/assets/icons/pencil-fill.svg"
+  },
+  {
+    "className": "bi-pencil-square",
+    "src": "/assets/icons/pencil-square.svg"
+  },
+  {
+    "className": "bi-pencil",
+    "src": "/assets/icons/pencil.svg"
+  },
+  {
+    "className": "bi-pentagon-fill",
+    "src": "/assets/icons/pentagon-fill.svg"
+  },
+  {
+    "className": "bi-pentagon-half",
+    "src": "/assets/icons/pentagon-half.svg"
+  },
+  {
+    "className": "bi-pentagon",
+    "src": "/assets/icons/pentagon.svg"
+  },
+  {
+    "className": "bi-people-fill",
+    "src": "/assets/icons/people-fill.svg"
+  },
+  {
+    "className": "bi-people",
+    "src": "/assets/icons/people.svg"
+  },
+  {
+    "className": "bi-percent",
+    "src": "/assets/icons/percent.svg"
+  },
+  {
+    "className": "bi-person-add",
+    "src": "/assets/icons/person-add.svg"
+  },
+  {
+    "className": "bi-person-arms-up",
+    "src": "/assets/icons/person-arms-up.svg"
+  },
+  {
+    "className": "bi-person-badge-fill",
+    "src": "/assets/icons/person-badge-fill.svg"
+  },
+  {
+    "className": "bi-person-badge",
+    "src": "/assets/icons/person-badge.svg"
+  },
+  {
+    "className": "bi-person-bounding-box",
+    "src": "/assets/icons/person-bounding-box.svg"
+  },
+  {
+    "className": "bi-person-check-fill",
+    "src": "/assets/icons/person-check-fill.svg"
+  },
+  {
+    "className": "bi-person-check",
+    "src": "/assets/icons/person-check.svg"
+  },
+  {
+    "className": "bi-person-circle",
+    "src": "/assets/icons/person-circle.svg"
+  },
+  {
+    "className": "bi-person-dash-fill",
+    "src": "/assets/icons/person-dash-fill.svg"
+  },
+  {
+    "className": "bi-person-dash",
+    "src": "/assets/icons/person-dash.svg"
+  },
+  {
+    "className": "bi-person-down",
+    "src": "/assets/icons/person-down.svg"
+  },
+  {
+    "className": "bi-person-exclamation",
+    "src": "/assets/icons/person-exclamation.svg"
+  },
+  {
+    "className": "bi-person-fill-add",
+    "src": "/assets/icons/person-fill-add.svg"
+  },
+  {
+    "className": "bi-person-fill-check",
+    "src": "/assets/icons/person-fill-check.svg"
+  },
+  {
+    "className": "bi-person-fill-dash",
+    "src": "/assets/icons/person-fill-dash.svg"
+  },
+  {
+    "className": "bi-person-fill-down",
+    "src": "/assets/icons/person-fill-down.svg"
+  },
+  {
+    "className": "bi-person-fill-exclamation",
+    "src": "/assets/icons/person-fill-exclamation.svg"
+  },
+  {
+    "className": "bi-person-fill-gear",
+    "src": "/assets/icons/person-fill-gear.svg"
+  },
+  {
+    "className": "bi-person-fill-lock",
+    "src": "/assets/icons/person-fill-lock.svg"
+  },
+  {
+    "className": "bi-person-fill-slash",
+    "src": "/assets/icons/person-fill-slash.svg"
+  },
+  {
+    "className": "bi-person-fill-up",
+    "src": "/assets/icons/person-fill-up.svg"
+  },
+  {
+    "className": "bi-person-fill-x",
+    "src": "/assets/icons/person-fill-x.svg"
+  },
+  {
+    "className": "bi-person-fill",
+    "src": "/assets/icons/person-fill.svg"
+  },
+  {
+    "className": "bi-person-gear",
+    "src": "/assets/icons/person-gear.svg"
+  },
+  {
+    "className": "bi-person-heart",
+    "src": "/assets/icons/person-heart.svg"
+  },
+  {
+    "className": "bi-person-hearts",
+    "src": "/assets/icons/person-hearts.svg"
+  },
+  {
+    "className": "bi-person-lines-fill",
+    "src": "/assets/icons/person-lines-fill.svg"
+  },
+  {
+    "className": "bi-person-lock",
+    "src": "/assets/icons/person-lock.svg"
+  },
+  {
+    "className": "bi-person-plus-fill",
+    "src": "/assets/icons/person-plus-fill.svg"
+  },
+  {
+    "className": "bi-person-plus",
+    "src": "/assets/icons/person-plus.svg"
+  },
+  {
+    "className": "bi-person-raised-hand",
+    "src": "/assets/icons/person-raised-hand.svg"
+  },
+  {
+    "className": "bi-person-rolodex",
+    "src": "/assets/icons/person-rolodex.svg"
+  },
+  {
+    "className": "bi-person-slash",
+    "src": "/assets/icons/person-slash.svg"
+  },
+  {
+    "className": "bi-person-square",
+    "src": "/assets/icons/person-square.svg"
+  },
+  {
+    "className": "bi-person-standing-dress",
+    "src": "/assets/icons/person-standing-dress.svg"
+  },
+  {
+    "className": "bi-person-standing",
+    "src": "/assets/icons/person-standing.svg"
+  },
+  {
+    "className": "bi-person-up",
+    "src": "/assets/icons/person-up.svg"
+  },
+  {
+    "className": "bi-person-vcard-fill",
+    "src": "/assets/icons/person-vcard-fill.svg"
+  },
+  {
+    "className": "bi-person-vcard",
+    "src": "/assets/icons/person-vcard.svg"
+  },
+  {
+    "className": "bi-person-video",
+    "src": "/assets/icons/person-video.svg"
+  },
+  {
+    "className": "bi-person-video2",
+    "src": "/assets/icons/person-video2.svg"
+  },
+  {
+    "className": "bi-person-video3",
+    "src": "/assets/icons/person-video3.svg"
+  },
+  {
+    "className": "bi-person-walking",
+    "src": "/assets/icons/person-walking.svg"
+  },
+  {
+    "className": "bi-person-wheelchair",
+    "src": "/assets/icons/person-wheelchair.svg"
+  },
+  {
+    "className": "bi-person-workspace",
+    "src": "/assets/icons/person-workspace.svg"
+  },
+  {
+    "className": "bi-person-x-fill",
+    "src": "/assets/icons/person-x-fill.svg"
+  },
+  {
+    "className": "bi-person-x",
+    "src": "/assets/icons/person-x.svg"
+  },
+  {
+    "className": "bi-person",
+    "src": "/assets/icons/person.svg"
+  },
+  {
+    "className": "bi-phone-fill",
+    "src": "/assets/icons/phone-fill.svg"
+  },
+  {
+    "className": "bi-phone-flip",
+    "src": "/assets/icons/phone-flip.svg"
+  },
+  {
+    "className": "bi-phone-landscape-fill",
+    "src": "/assets/icons/phone-landscape-fill.svg"
+  },
+  {
+    "className": "bi-phone-landscape",
+    "src": "/assets/icons/phone-landscape.svg"
+  },
+  {
+    "className": "bi-phone-vibrate-fill",
+    "src": "/assets/icons/phone-vibrate-fill.svg"
+  },
+  {
+    "className": "bi-phone-vibrate",
+    "src": "/assets/icons/phone-vibrate.svg"
+  },
+  {
+    "className": "bi-phone",
+    "src": "/assets/icons/phone.svg"
+  },
+  {
+    "className": "bi-pie-chart-fill",
+    "src": "/assets/icons/pie-chart-fill.svg"
+  },
+  {
+    "className": "bi-pie-chart",
+    "src": "/assets/icons/pie-chart.svg"
+  },
+  {
+    "className": "bi-piggy-bank-fill",
+    "src": "/assets/icons/piggy-bank-fill.svg"
+  },
+  {
+    "className": "bi-piggy-bank",
+    "src": "/assets/icons/piggy-bank.svg"
+  },
+  {
+    "className": "bi-pin-angle-fill",
+    "src": "/assets/icons/pin-angle-fill.svg"
+  },
+  {
+    "className": "bi-pin-angle",
+    "src": "/assets/icons/pin-angle.svg"
+  },
+  {
+    "className": "bi-pin-fill",
+    "src": "/assets/icons/pin-fill.svg"
+  },
+  {
+    "className": "bi-pin-map-fill",
+    "src": "/assets/icons/pin-map-fill.svg"
+  },
+  {
+    "className": "bi-pin-map",
+    "src": "/assets/icons/pin-map.svg"
+  },
+  {
+    "className": "bi-pin",
+    "src": "/assets/icons/pin.svg"
+  },
+  {
+    "className": "bi-pinterest",
+    "src": "/assets/icons/pinterest.svg"
+  },
+  {
+    "className": "bi-pip-fill",
+    "src": "/assets/icons/pip-fill.svg"
+  },
+  {
+    "className": "bi-pip",
+    "src": "/assets/icons/pip.svg"
+  },
+  {
+    "className": "bi-play-btn-fill",
+    "src": "/assets/icons/play-btn-fill.svg"
+  },
+  {
+    "className": "bi-play-btn",
+    "src": "/assets/icons/play-btn.svg"
+  },
+  {
+    "className": "bi-play-circle-fill",
+    "src": "/assets/icons/play-circle-fill.svg"
+  },
+  {
+    "className": "bi-play-circle",
+    "src": "/assets/icons/play-circle.svg"
+  },
+  {
+    "className": "bi-play-fill",
+    "src": "/assets/icons/play-fill.svg"
+  },
+  {
+    "className": "bi-play",
+    "src": "/assets/icons/play.svg"
+  },
+  {
+    "className": "bi-playstation",
+    "src": "/assets/icons/playstation.svg"
+  },
+  {
+    "className": "bi-plug-fill",
+    "src": "/assets/icons/plug-fill.svg"
+  },
+  {
+    "className": "bi-plug",
+    "src": "/assets/icons/plug.svg"
+  },
+  {
+    "className": "bi-plugin",
+    "src": "/assets/icons/plugin.svg"
+  },
+  {
+    "className": "bi-plus-circle-dotted",
+    "src": "/assets/icons/plus-circle-dotted.svg"
+  },
+  {
+    "className": "bi-plus-circle-fill",
+    "src": "/assets/icons/plus-circle-fill.svg"
+  },
+  {
+    "className": "bi-plus-circle",
+    "src": "/assets/icons/plus-circle.svg"
+  },
+  {
+    "className": "bi-plus-lg",
+    "src": "/assets/icons/plus-lg.svg"
+  },
+  {
+    "className": "bi-plus-slash-minus",
+    "src": "/assets/icons/plus-slash-minus.svg"
+  },
+  {
+    "className": "bi-plus-square-dotted",
+    "src": "/assets/icons/plus-square-dotted.svg"
+  },
+  {
+    "className": "bi-plus-square-fill",
+    "src": "/assets/icons/plus-square-fill.svg"
+  },
+  {
+    "className": "bi-plus-square",
+    "src": "/assets/icons/plus-square.svg"
+  },
+  {
+    "className": "bi-plus",
+    "src": "/assets/icons/plus.svg"
+  },
+  {
+    "className": "bi-postage-fill",
+    "src": "/assets/icons/postage-fill.svg"
+  },
+  {
+    "className": "bi-postage-heart-fill",
+    "src": "/assets/icons/postage-heart-fill.svg"
+  },
+  {
+    "className": "bi-postage-heart",
+    "src": "/assets/icons/postage-heart.svg"
+  },
+  {
+    "className": "bi-postage",
+    "src": "/assets/icons/postage.svg"
+  },
+  {
+    "className": "bi-postcard-fill",
+    "src": "/assets/icons/postcard-fill.svg"
+  },
+  {
+    "className": "bi-postcard-heart-fill",
+    "src": "/assets/icons/postcard-heart-fill.svg"
+  },
+  {
+    "className": "bi-postcard-heart",
+    "src": "/assets/icons/postcard-heart.svg"
+  },
+  {
+    "className": "bi-postcard",
+    "src": "/assets/icons/postcard.svg"
+  },
+  {
+    "className": "bi-power",
+    "src": "/assets/icons/power.svg"
+  },
+  {
+    "className": "bi-prescription",
+    "src": "/assets/icons/prescription.svg"
+  },
+  {
+    "className": "bi-prescription2",
+    "src": "/assets/icons/prescription2.svg"
+  },
+  {
+    "className": "bi-printer-fill",
+    "src": "/assets/icons/printer-fill.svg"
+  },
+  {
+    "className": "bi-printer",
+    "src": "/assets/icons/printer.svg"
+  },
+  {
+    "className": "bi-projector-fill",
+    "src": "/assets/icons/projector-fill.svg"
+  },
+  {
+    "className": "bi-projector",
+    "src": "/assets/icons/projector.svg"
+  },
+  {
+    "className": "bi-puzzle-fill",
+    "src": "/assets/icons/puzzle-fill.svg"
+  },
+  {
+    "className": "bi-puzzle",
+    "src": "/assets/icons/puzzle.svg"
+  },
+  {
+    "className": "bi-qr-code-scan",
+    "src": "/assets/icons/qr-code-scan.svg"
+  },
+  {
+    "className": "bi-qr-code",
+    "src": "/assets/icons/qr-code.svg"
+  },
+  {
+    "className": "bi-question-circle-fill",
+    "src": "/assets/icons/question-circle-fill.svg"
+  },
+  {
+    "className": "bi-question-circle",
+    "src": "/assets/icons/question-circle.svg"
+  },
+  {
+    "className": "bi-question-diamond-fill",
+    "src": "/assets/icons/question-diamond-fill.svg"
+  },
+  {
+    "className": "bi-question-diamond",
+    "src": "/assets/icons/question-diamond.svg"
+  },
+  {
+    "className": "bi-question-lg",
+    "src": "/assets/icons/question-lg.svg"
+  },
+  {
+    "className": "bi-question-octagon-fill",
+    "src": "/assets/icons/question-octagon-fill.svg"
+  },
+  {
+    "className": "bi-question-octagon",
+    "src": "/assets/icons/question-octagon.svg"
+  },
+  {
+    "className": "bi-question-square-fill",
+    "src": "/assets/icons/question-square-fill.svg"
+  },
+  {
+    "className": "bi-question-square",
+    "src": "/assets/icons/question-square.svg"
+  },
+  {
+    "className": "bi-question",
+    "src": "/assets/icons/question.svg"
+  },
+  {
+    "className": "bi-quora",
+    "src": "/assets/icons/quora.svg"
+  },
+  {
+    "className": "bi-quote",
+    "src": "/assets/icons/quote.svg"
+  },
+  {
+    "className": "bi-r-circle-fill",
+    "src": "/assets/icons/r-circle-fill.svg"
+  },
+  {
+    "className": "bi-r-circle",
+    "src": "/assets/icons/r-circle.svg"
+  },
+  {
+    "className": "bi-r-square-fill",
+    "src": "/assets/icons/r-square-fill.svg"
+  },
+  {
+    "className": "bi-r-square",
+    "src": "/assets/icons/r-square.svg"
+  },
+  {
+    "className": "bi-radar",
+    "src": "/assets/icons/radar.svg"
+  },
+  {
+    "className": "bi-radioactive",
+    "src": "/assets/icons/radioactive.svg"
+  },
+  {
+    "className": "bi-rainbow",
+    "src": "/assets/icons/rainbow.svg"
+  },
+  {
+    "className": "bi-receipt-cutoff",
+    "src": "/assets/icons/receipt-cutoff.svg"
+  },
+  {
+    "className": "bi-receipt",
+    "src": "/assets/icons/receipt.svg"
+  },
+  {
+    "className": "bi-reception-0",
+    "src": "/assets/icons/reception-0.svg"
+  },
+  {
+    "className": "bi-reception-1",
+    "src": "/assets/icons/reception-1.svg"
+  },
+  {
+    "className": "bi-reception-2",
+    "src": "/assets/icons/reception-2.svg"
+  },
+  {
+    "className": "bi-reception-3",
+    "src": "/assets/icons/reception-3.svg"
+  },
+  {
+    "className": "bi-reception-4",
+    "src": "/assets/icons/reception-4.svg"
+  },
+  {
+    "className": "bi-record-btn-fill",
+    "src": "/assets/icons/record-btn-fill.svg"
+  },
+  {
+    "className": "bi-record-btn",
+    "src": "/assets/icons/record-btn.svg"
+  },
+  {
+    "className": "bi-record-circle-fill",
+    "src": "/assets/icons/record-circle-fill.svg"
+  },
+  {
+    "className": "bi-record-circle",
+    "src": "/assets/icons/record-circle.svg"
+  },
+  {
+    "className": "bi-record-fill",
+    "src": "/assets/icons/record-fill.svg"
+  },
+  {
+    "className": "bi-record",
+    "src": "/assets/icons/record.svg"
+  },
+  {
+    "className": "bi-record2-fill",
+    "src": "/assets/icons/record2-fill.svg"
+  },
+  {
+    "className": "bi-record2",
+    "src": "/assets/icons/record2.svg"
+  },
+  {
+    "className": "bi-recycle",
+    "src": "/assets/icons/recycle.svg"
+  },
+  {
+    "className": "bi-reddit",
+    "src": "/assets/icons/reddit.svg"
+  },
+  {
+    "className": "bi-regex",
+    "src": "/assets/icons/regex.svg"
+  },
+  {
+    "className": "bi-repeat-1",
+    "src": "/assets/icons/repeat-1.svg"
+  },
+  {
+    "className": "bi-repeat",
+    "src": "/assets/icons/repeat.svg"
+  },
+  {
+    "className": "bi-reply-all-fill",
+    "src": "/assets/icons/reply-all-fill.svg"
+  },
+  {
+    "className": "bi-reply-all",
+    "src": "/assets/icons/reply-all.svg"
+  },
+  {
+    "className": "bi-reply-fill",
+    "src": "/assets/icons/reply-fill.svg"
+  },
+  {
+    "className": "bi-reply",
+    "src": "/assets/icons/reply.svg"
+  },
+  {
+    "className": "bi-rewind-btn-fill",
+    "src": "/assets/icons/rewind-btn-fill.svg"
+  },
+  {
+    "className": "bi-rewind-btn",
+    "src": "/assets/icons/rewind-btn.svg"
+  },
+  {
+    "className": "bi-rewind-circle-fill",
+    "src": "/assets/icons/rewind-circle-fill.svg"
+  },
+  {
+    "className": "bi-rewind-circle",
+    "src": "/assets/icons/rewind-circle.svg"
+  },
+  {
+    "className": "bi-rewind-fill",
+    "src": "/assets/icons/rewind-fill.svg"
+  },
+  {
+    "className": "bi-rewind",
+    "src": "/assets/icons/rewind.svg"
+  },
+  {
+    "className": "bi-robot",
+    "src": "/assets/icons/robot.svg"
+  },
+  {
+    "className": "bi-rocket-fill",
+    "src": "/assets/icons/rocket-fill.svg"
+  },
+  {
+    "className": "bi-rocket-takeoff-fill",
+    "src": "/assets/icons/rocket-takeoff-fill.svg"
+  },
+  {
+    "className": "bi-rocket-takeoff",
+    "src": "/assets/icons/rocket-takeoff.svg"
+  },
+  {
+    "className": "bi-rocket",
+    "src": "/assets/icons/rocket.svg"
+  },
+  {
+    "className": "bi-router-fill",
+    "src": "/assets/icons/router-fill.svg"
+  },
+  {
+    "className": "bi-router",
+    "src": "/assets/icons/router.svg"
+  },
+  {
+    "className": "bi-rss-fill",
+    "src": "/assets/icons/rss-fill.svg"
+  },
+  {
+    "className": "bi-rss",
+    "src": "/assets/icons/rss.svg"
+  },
+  {
+    "className": "bi-rulers",
+    "src": "/assets/icons/rulers.svg"
+  },
+  {
+    "className": "bi-safe-fill",
+    "src": "/assets/icons/safe-fill.svg"
+  },
+  {
+    "className": "bi-safe",
+    "src": "/assets/icons/safe.svg"
+  },
+  {
+    "className": "bi-safe2-fill",
+    "src": "/assets/icons/safe2-fill.svg"
+  },
+  {
+    "className": "bi-safe2",
+    "src": "/assets/icons/safe2.svg"
+  },
+  {
+    "className": "bi-save-fill",
+    "src": "/assets/icons/save-fill.svg"
+  },
+  {
+    "className": "bi-save",
+    "src": "/assets/icons/save.svg"
+  },
+  {
+    "className": "bi-save2-fill",
+    "src": "/assets/icons/save2-fill.svg"
+  },
+  {
+    "className": "bi-save2",
+    "src": "/assets/icons/save2.svg"
+  },
+  {
+    "className": "bi-scissors",
+    "src": "/assets/icons/scissors.svg"
+  },
+  {
+    "className": "bi-scooter",
+    "src": "/assets/icons/scooter.svg"
+  },
+  {
+    "className": "bi-screwdriver",
+    "src": "/assets/icons/screwdriver.svg"
+  },
+  {
+    "className": "bi-sd-card-fill",
+    "src": "/assets/icons/sd-card-fill.svg"
+  },
+  {
+    "className": "bi-sd-card",
+    "src": "/assets/icons/sd-card.svg"
+  },
+  {
+    "className": "bi-search-heart-fill",
+    "src": "/assets/icons/search-heart-fill.svg"
+  },
+  {
+    "className": "bi-search-heart",
+    "src": "/assets/icons/search-heart.svg"
+  },
+  {
+    "className": "bi-search",
+    "src": "/assets/icons/search.svg"
+  },
+  {
+    "className": "bi-segmented-nav",
+    "src": "/assets/icons/segmented-nav.svg"
+  },
+  {
+    "className": "bi-send-arrow-down-fill",
+    "src": "/assets/icons/send-arrow-down-fill.svg"
+  },
+  {
+    "className": "bi-send-arrow-down",
+    "src": "/assets/icons/send-arrow-down.svg"
+  },
+  {
+    "className": "bi-send-arrow-up-fill",
+    "src": "/assets/icons/send-arrow-up-fill.svg"
+  },
+  {
+    "className": "bi-send-arrow-up",
+    "src": "/assets/icons/send-arrow-up.svg"
+  },
+  {
+    "className": "bi-send-check-fill",
+    "src": "/assets/icons/send-check-fill.svg"
+  },
+  {
+    "className": "bi-send-check",
+    "src": "/assets/icons/send-check.svg"
+  },
+  {
+    "className": "bi-send-dash-fill",
+    "src": "/assets/icons/send-dash-fill.svg"
+  },
+  {
+    "className": "bi-send-dash",
+    "src": "/assets/icons/send-dash.svg"
+  },
+  {
+    "className": "bi-send-exclamation-fill",
+    "src": "/assets/icons/send-exclamation-fill.svg"
+  },
+  {
+    "className": "bi-send-exclamation",
+    "src": "/assets/icons/send-exclamation.svg"
+  },
+  {
+    "className": "bi-send-fill",
+    "src": "/assets/icons/send-fill.svg"
+  },
+  {
+    "className": "bi-send-plus-fill",
+    "src": "/assets/icons/send-plus-fill.svg"
+  },
+  {
+    "className": "bi-send-plus",
+    "src": "/assets/icons/send-plus.svg"
+  },
+  {
+    "className": "bi-send-slash-fill",
+    "src": "/assets/icons/send-slash-fill.svg"
+  },
+  {
+    "className": "bi-send-slash",
+    "src": "/assets/icons/send-slash.svg"
+  },
+  {
+    "className": "bi-send-x-fill",
+    "src": "/assets/icons/send-x-fill.svg"
+  },
+  {
+    "className": "bi-send-x",
+    "src": "/assets/icons/send-x.svg"
+  },
+  {
+    "className": "bi-send",
+    "src": "/assets/icons/send.svg"
+  },
+  {
+    "className": "bi-server",
+    "src": "/assets/icons/server.svg"
+  },
+  {
+    "className": "bi-shadows",
+    "src": "/assets/icons/shadows.svg"
+  },
+  {
+    "className": "bi-share-fill",
+    "src": "/assets/icons/share-fill.svg"
+  },
+  {
+    "className": "bi-share",
+    "src": "/assets/icons/share.svg"
+  },
+  {
+    "className": "bi-shield-check",
+    "src": "/assets/icons/shield-check.svg"
+  },
+  {
+    "className": "bi-shield-exclamation",
+    "src": "/assets/icons/shield-exclamation.svg"
+  },
+  {
+    "className": "bi-shield-fill-check",
+    "src": "/assets/icons/shield-fill-check.svg"
+  },
+  {
+    "className": "bi-shield-fill-exclamation",
+    "src": "/assets/icons/shield-fill-exclamation.svg"
+  },
+  {
+    "className": "bi-shield-fill-minus",
+    "src": "/assets/icons/shield-fill-minus.svg"
+  },
+  {
+    "className": "bi-shield-fill-plus",
+    "src": "/assets/icons/shield-fill-plus.svg"
+  },
+  {
+    "className": "bi-shield-fill-x",
+    "src": "/assets/icons/shield-fill-x.svg"
+  },
+  {
+    "className": "bi-shield-fill",
+    "src": "/assets/icons/shield-fill.svg"
+  },
+  {
+    "className": "bi-shield-lock-fill",
+    "src": "/assets/icons/shield-lock-fill.svg"
+  },
+  {
+    "className": "bi-shield-lock",
+    "src": "/assets/icons/shield-lock.svg"
+  },
+  {
+    "className": "bi-shield-minus",
+    "src": "/assets/icons/shield-minus.svg"
+  },
+  {
+    "className": "bi-shield-plus",
+    "src": "/assets/icons/shield-plus.svg"
+  },
+  {
+    "className": "bi-shield-shaded",
+    "src": "/assets/icons/shield-shaded.svg"
+  },
+  {
+    "className": "bi-shield-slash-fill",
+    "src": "/assets/icons/shield-slash-fill.svg"
+  },
+  {
+    "className": "bi-shield-slash",
+    "src": "/assets/icons/shield-slash.svg"
+  },
+  {
+    "className": "bi-shield-x",
+    "src": "/assets/icons/shield-x.svg"
+  },
+  {
+    "className": "bi-shield",
+    "src": "/assets/icons/shield.svg"
+  },
+  {
+    "className": "bi-shift-fill",
+    "src": "/assets/icons/shift-fill.svg"
+  },
+  {
+    "className": "bi-shift",
+    "src": "/assets/icons/shift.svg"
+  },
+  {
+    "className": "bi-shop-window",
+    "src": "/assets/icons/shop-window.svg"
+  },
+  {
+    "className": "bi-shop",
+    "src": "/assets/icons/shop.svg"
+  },
+  {
+    "className": "bi-shuffle",
+    "src": "/assets/icons/shuffle.svg"
+  },
+  {
+    "className": "bi-sign-dead-end-fill",
+    "src": "/assets/icons/sign-dead-end-fill.svg"
+  },
+  {
+    "className": "bi-sign-dead-end",
+    "src": "/assets/icons/sign-dead-end.svg"
+  },
+  {
+    "className": "bi-sign-do-not-enter-fill",
+    "src": "/assets/icons/sign-do-not-enter-fill.svg"
+  },
+  {
+    "className": "bi-sign-do-not-enter",
+    "src": "/assets/icons/sign-do-not-enter.svg"
+  },
+  {
+    "className": "bi-sign-intersection-fill",
+    "src": "/assets/icons/sign-intersection-fill.svg"
+  },
+  {
+    "className": "bi-sign-intersection-side-fill",
+    "src": "/assets/icons/sign-intersection-side-fill.svg"
+  },
+  {
+    "className": "bi-sign-intersection-side",
+    "src": "/assets/icons/sign-intersection-side.svg"
+  },
+  {
+    "className": "bi-sign-intersection-t-fill",
+    "src": "/assets/icons/sign-intersection-t-fill.svg"
+  },
+  {
+    "className": "bi-sign-intersection-t",
+    "src": "/assets/icons/sign-intersection-t.svg"
+  },
+  {
+    "className": "bi-sign-intersection-y-fill",
+    "src": "/assets/icons/sign-intersection-y-fill.svg"
+  },
+  {
+    "className": "bi-sign-intersection-y",
+    "src": "/assets/icons/sign-intersection-y.svg"
+  },
+  {
+    "className": "bi-sign-intersection",
+    "src": "/assets/icons/sign-intersection.svg"
+  },
+  {
+    "className": "bi-sign-merge-left-fill",
+    "src": "/assets/icons/sign-merge-left-fill.svg"
+  },
+  {
+    "className": "bi-sign-merge-left",
+    "src": "/assets/icons/sign-merge-left.svg"
+  },
+  {
+    "className": "bi-sign-merge-right-fill",
+    "src": "/assets/icons/sign-merge-right-fill.svg"
+  },
+  {
+    "className": "bi-sign-merge-right",
+    "src": "/assets/icons/sign-merge-right.svg"
+  },
+  {
+    "className": "bi-sign-no-left-turn-fill",
+    "src": "/assets/icons/sign-no-left-turn-fill.svg"
+  },
+  {
+    "className": "bi-sign-no-left-turn",
+    "src": "/assets/icons/sign-no-left-turn.svg"
+  },
+  {
+    "className": "bi-sign-no-parking-fill",
+    "src": "/assets/icons/sign-no-parking-fill.svg"
+  },
+  {
+    "className": "bi-sign-no-parking",
+    "src": "/assets/icons/sign-no-parking.svg"
+  },
+  {
+    "className": "bi-sign-no-right-turn-fill",
+    "src": "/assets/icons/sign-no-right-turn-fill.svg"
+  },
+  {
+    "className": "bi-sign-no-right-turn",
+    "src": "/assets/icons/sign-no-right-turn.svg"
+  },
+  {
+    "className": "bi-sign-railroad-fill",
+    "src": "/assets/icons/sign-railroad-fill.svg"
+  },
+  {
+    "className": "bi-sign-railroad",
+    "src": "/assets/icons/sign-railroad.svg"
+  },
+  {
+    "className": "bi-sign-stop-fill",
+    "src": "/assets/icons/sign-stop-fill.svg"
+  },
+  {
+    "className": "bi-sign-stop-lights-fill",
+    "src": "/assets/icons/sign-stop-lights-fill.svg"
+  },
+  {
+    "className": "bi-sign-stop-lights",
+    "src": "/assets/icons/sign-stop-lights.svg"
+  },
+  {
+    "className": "bi-sign-stop",
+    "src": "/assets/icons/sign-stop.svg"
+  },
+  {
+    "className": "bi-sign-turn-left-fill",
+    "src": "/assets/icons/sign-turn-left-fill.svg"
+  },
+  {
+    "className": "bi-sign-turn-left",
+    "src": "/assets/icons/sign-turn-left.svg"
+  },
+  {
+    "className": "bi-sign-turn-right-fill",
+    "src": "/assets/icons/sign-turn-right-fill.svg"
+  },
+  {
+    "className": "bi-sign-turn-right",
+    "src": "/assets/icons/sign-turn-right.svg"
+  },
+  {
+    "className": "bi-sign-turn-slight-left-fill",
+    "src": "/assets/icons/sign-turn-slight-left-fill.svg"
+  },
+  {
+    "className": "bi-sign-turn-slight-left",
+    "src": "/assets/icons/sign-turn-slight-left.svg"
+  },
+  {
+    "className": "bi-sign-turn-slight-right-fill",
+    "src": "/assets/icons/sign-turn-slight-right-fill.svg"
+  },
+  {
+    "className": "bi-sign-turn-slight-right",
+    "src": "/assets/icons/sign-turn-slight-right.svg"
+  },
+  {
+    "className": "bi-sign-yield-fill",
+    "src": "/assets/icons/sign-yield-fill.svg"
+  },
+  {
+    "className": "bi-sign-yield",
+    "src": "/assets/icons/sign-yield.svg"
+  },
+  {
+    "className": "bi-signal",
+    "src": "/assets/icons/signal.svg"
+  },
+  {
+    "className": "bi-signpost-2-fill",
+    "src": "/assets/icons/signpost-2-fill.svg"
+  },
+  {
+    "className": "bi-signpost-2",
+    "src": "/assets/icons/signpost-2.svg"
+  },
+  {
+    "className": "bi-signpost-fill",
+    "src": "/assets/icons/signpost-fill.svg"
+  },
+  {
+    "className": "bi-signpost-split-fill",
+    "src": "/assets/icons/signpost-split-fill.svg"
+  },
+  {
+    "className": "bi-signpost-split",
+    "src": "/assets/icons/signpost-split.svg"
+  },
+  {
+    "className": "bi-signpost",
+    "src": "/assets/icons/signpost.svg"
+  },
+  {
+    "className": "bi-sim-fill",
+    "src": "/assets/icons/sim-fill.svg"
+  },
+  {
+    "className": "bi-sim-slash-fill",
+    "src": "/assets/icons/sim-slash-fill.svg"
+  },
+  {
+    "className": "bi-sim-slash",
+    "src": "/assets/icons/sim-slash.svg"
+  },
+  {
+    "className": "bi-sim",
+    "src": "/assets/icons/sim.svg"
+  },
+  {
+    "className": "bi-sina-weibo",
+    "src": "/assets/icons/sina-weibo.svg"
+  },
+  {
+    "className": "bi-skip-backward-btn-fill",
+    "src": "/assets/icons/skip-backward-btn-fill.svg"
+  },
+  {
+    "className": "bi-skip-backward-btn",
+    "src": "/assets/icons/skip-backward-btn.svg"
+  },
+  {
+    "className": "bi-skip-backward-circle-fill",
+    "src": "/assets/icons/skip-backward-circle-fill.svg"
+  },
+  {
+    "className": "bi-skip-backward-circle",
+    "src": "/assets/icons/skip-backward-circle.svg"
+  },
+  {
+    "className": "bi-skip-backward-fill",
+    "src": "/assets/icons/skip-backward-fill.svg"
+  },
+  {
+    "className": "bi-skip-backward",
+    "src": "/assets/icons/skip-backward.svg"
+  },
+  {
+    "className": "bi-skip-end-btn-fill",
+    "src": "/assets/icons/skip-end-btn-fill.svg"
+  },
+  {
+    "className": "bi-skip-end-btn",
+    "src": "/assets/icons/skip-end-btn.svg"
+  },
+  {
+    "className": "bi-skip-end-circle-fill",
+    "src": "/assets/icons/skip-end-circle-fill.svg"
+  },
+  {
+    "className": "bi-skip-end-circle",
+    "src": "/assets/icons/skip-end-circle.svg"
+  },
+  {
+    "className": "bi-skip-end-fill",
+    "src": "/assets/icons/skip-end-fill.svg"
+  },
+  {
+    "className": "bi-skip-end",
+    "src": "/assets/icons/skip-end.svg"
+  },
+  {
+    "className": "bi-skip-forward-btn-fill",
+    "src": "/assets/icons/skip-forward-btn-fill.svg"
+  },
+  {
+    "className": "bi-skip-forward-btn",
+    "src": "/assets/icons/skip-forward-btn.svg"
+  },
+  {
+    "className": "bi-skip-forward-circle-fill",
+    "src": "/assets/icons/skip-forward-circle-fill.svg"
+  },
+  {
+    "className": "bi-skip-forward-circle",
+    "src": "/assets/icons/skip-forward-circle.svg"
+  },
+  {
+    "className": "bi-skip-forward-fill",
+    "src": "/assets/icons/skip-forward-fill.svg"
+  },
+  {
+    "className": "bi-skip-forward",
+    "src": "/assets/icons/skip-forward.svg"
+  },
+  {
+    "className": "bi-skip-start-btn-fill",
+    "src": "/assets/icons/skip-start-btn-fill.svg"
+  },
+  {
+    "className": "bi-skip-start-btn",
+    "src": "/assets/icons/skip-start-btn.svg"
+  },
+  {
+    "className": "bi-skip-start-circle-fill",
+    "src": "/assets/icons/skip-start-circle-fill.svg"
+  },
+  {
+    "className": "bi-skip-start-circle",
+    "src": "/assets/icons/skip-start-circle.svg"
+  },
+  {
+    "className": "bi-skip-start-fill",
+    "src": "/assets/icons/skip-start-fill.svg"
+  },
+  {
+    "className": "bi-skip-start",
+    "src": "/assets/icons/skip-start.svg"
+  },
+  {
+    "className": "bi-skype",
+    "src": "/assets/icons/skype.svg"
+  },
+  {
+    "className": "bi-slack",
+    "src": "/assets/icons/slack.svg"
+  },
+  {
+    "className": "bi-slash-circle-fill",
+    "src": "/assets/icons/slash-circle-fill.svg"
+  },
+  {
+    "className": "bi-slash-circle",
+    "src": "/assets/icons/slash-circle.svg"
+  },
+  {
+    "className": "bi-slash-lg",
+    "src": "/assets/icons/slash-lg.svg"
+  },
+  {
+    "className": "bi-slash-square-fill",
+    "src": "/assets/icons/slash-square-fill.svg"
+  },
+  {
+    "className": "bi-slash-square",
+    "src": "/assets/icons/slash-square.svg"
+  },
+  {
+    "className": "bi-slash",
+    "src": "/assets/icons/slash.svg"
+  },
+  {
+    "className": "bi-sliders",
+    "src": "/assets/icons/sliders.svg"
+  },
+  {
+    "className": "bi-sliders2-vertical",
+    "src": "/assets/icons/sliders2-vertical.svg"
+  },
+  {
+    "className": "bi-sliders2",
+    "src": "/assets/icons/sliders2.svg"
+  },
+  {
+    "className": "bi-smartwatch",
+    "src": "/assets/icons/smartwatch.svg"
+  },
+  {
+    "className": "bi-snapchat",
+    "src": "/assets/icons/snapchat.svg"
+  },
+  {
+    "className": "bi-snow",
+    "src": "/assets/icons/snow.svg"
+  },
+  {
+    "className": "bi-snow2",
+    "src": "/assets/icons/snow2.svg"
+  },
+  {
+    "className": "bi-snow3",
+    "src": "/assets/icons/snow3.svg"
+  },
+  {
+    "className": "bi-sort-alpha-down-alt",
+    "src": "/assets/icons/sort-alpha-down-alt.svg"
+  },
+  {
+    "className": "bi-sort-alpha-down",
+    "src": "/assets/icons/sort-alpha-down.svg"
+  },
+  {
+    "className": "bi-sort-alpha-up-alt",
+    "src": "/assets/icons/sort-alpha-up-alt.svg"
+  },
+  {
+    "className": "bi-sort-alpha-up",
+    "src": "/assets/icons/sort-alpha-up.svg"
+  },
+  {
+    "className": "bi-sort-down-alt",
+    "src": "/assets/icons/sort-down-alt.svg"
+  },
+  {
+    "className": "bi-sort-down",
+    "src": "/assets/icons/sort-down.svg"
+  },
+  {
+    "className": "bi-sort-numeric-down-alt",
+    "src": "/assets/icons/sort-numeric-down-alt.svg"
+  },
+  {
+    "className": "bi-sort-numeric-down",
+    "src": "/assets/icons/sort-numeric-down.svg"
+  },
+  {
+    "className": "bi-sort-numeric-up-alt",
+    "src": "/assets/icons/sort-numeric-up-alt.svg"
+  },
+  {
+    "className": "bi-sort-numeric-up",
+    "src": "/assets/icons/sort-numeric-up.svg"
+  },
+  {
+    "className": "bi-sort-up-alt",
+    "src": "/assets/icons/sort-up-alt.svg"
+  },
+  {
+    "className": "bi-sort-up",
+    "src": "/assets/icons/sort-up.svg"
+  },
+  {
+    "className": "bi-soundwave",
+    "src": "/assets/icons/soundwave.svg"
+  },
+  {
+    "className": "bi-sourceforge",
+    "src": "/assets/icons/sourceforge.svg"
+  },
+  {
+    "className": "bi-speaker-fill",
+    "src": "/assets/icons/speaker-fill.svg"
+  },
+  {
+    "className": "bi-speaker",
+    "src": "/assets/icons/speaker.svg"
+  },
+  {
+    "className": "bi-speedometer",
+    "src": "/assets/icons/speedometer.svg"
+  },
+  {
+    "className": "bi-speedometer2",
+    "src": "/assets/icons/speedometer2.svg"
+  },
+  {
+    "className": "bi-spellcheck",
+    "src": "/assets/icons/spellcheck.svg"
+  },
+  {
+    "className": "bi-spotify",
+    "src": "/assets/icons/spotify.svg"
+  },
+  {
+    "className": "bi-square-fill",
+    "src": "/assets/icons/square-fill.svg"
+  },
+  {
+    "className": "bi-square-half",
+    "src": "/assets/icons/square-half.svg"
+  },
+  {
+    "className": "bi-square",
+    "src": "/assets/icons/square.svg"
+  },
+  {
+    "className": "bi-stack-overflow",
+    "src": "/assets/icons/stack-overflow.svg"
+  },
+  {
+    "className": "bi-stack",
+    "src": "/assets/icons/stack.svg"
+  },
+  {
+    "className": "bi-star-fill",
+    "src": "/assets/icons/star-fill.svg"
+  },
+  {
+    "className": "bi-star-half",
+    "src": "/assets/icons/star-half.svg"
+  },
+  {
+    "className": "bi-star",
+    "src": "/assets/icons/star.svg"
+  },
+  {
+    "className": "bi-stars",
+    "src": "/assets/icons/stars.svg"
+  },
+  {
+    "className": "bi-steam",
+    "src": "/assets/icons/steam.svg"
+  },
+  {
+    "className": "bi-stickies-fill",
+    "src": "/assets/icons/stickies-fill.svg"
+  },
+  {
+    "className": "bi-stickies",
+    "src": "/assets/icons/stickies.svg"
+  },
+  {
+    "className": "bi-sticky-fill",
+    "src": "/assets/icons/sticky-fill.svg"
+  },
+  {
+    "className": "bi-sticky",
+    "src": "/assets/icons/sticky.svg"
+  },
+  {
+    "className": "bi-stop-btn-fill",
+    "src": "/assets/icons/stop-btn-fill.svg"
+  },
+  {
+    "className": "bi-stop-btn",
+    "src": "/assets/icons/stop-btn.svg"
+  },
+  {
+    "className": "bi-stop-circle-fill",
+    "src": "/assets/icons/stop-circle-fill.svg"
+  },
+  {
+    "className": "bi-stop-circle",
+    "src": "/assets/icons/stop-circle.svg"
+  },
+  {
+    "className": "bi-stop-fill",
+    "src": "/assets/icons/stop-fill.svg"
+  },
+  {
+    "className": "bi-stop",
+    "src": "/assets/icons/stop.svg"
+  },
+  {
+    "className": "bi-stoplights-fill",
+    "src": "/assets/icons/stoplights-fill.svg"
+  },
+  {
+    "className": "bi-stoplights",
+    "src": "/assets/icons/stoplights.svg"
+  },
+  {
+    "className": "bi-stopwatch-fill",
+    "src": "/assets/icons/stopwatch-fill.svg"
+  },
+  {
+    "className": "bi-stopwatch",
+    "src": "/assets/icons/stopwatch.svg"
+  },
+  {
+    "className": "bi-strava",
+    "src": "/assets/icons/strava.svg"
+  },
+  {
+    "className": "bi-stripe",
+    "src": "/assets/icons/stripe.svg"
+  },
+  {
+    "className": "bi-subscript",
+    "src": "/assets/icons/subscript.svg"
+  },
+  {
+    "className": "bi-substack",
+    "src": "/assets/icons/substack.svg"
+  },
+  {
+    "className": "bi-subtract",
+    "src": "/assets/icons/subtract.svg"
+  },
+  {
+    "className": "bi-suit-club-fill",
+    "src": "/assets/icons/suit-club-fill.svg"
+  },
+  {
+    "className": "bi-suit-club",
+    "src": "/assets/icons/suit-club.svg"
+  },
+  {
+    "className": "bi-suit-diamond-fill",
+    "src": "/assets/icons/suit-diamond-fill.svg"
+  },
+  {
+    "className": "bi-suit-diamond",
+    "src": "/assets/icons/suit-diamond.svg"
+  },
+  {
+    "className": "bi-suit-heart-fill",
+    "src": "/assets/icons/suit-heart-fill.svg"
+  },
+  {
+    "className": "bi-suit-heart",
+    "src": "/assets/icons/suit-heart.svg"
+  },
+  {
+    "className": "bi-suit-spade-fill",
+    "src": "/assets/icons/suit-spade-fill.svg"
+  },
+  {
+    "className": "bi-suit-spade",
+    "src": "/assets/icons/suit-spade.svg"
+  },
+  {
+    "className": "bi-suitcase-fill",
+    "src": "/assets/icons/suitcase-fill.svg"
+  },
+  {
+    "className": "bi-suitcase-lg-fill",
+    "src": "/assets/icons/suitcase-lg-fill.svg"
+  },
+  {
+    "className": "bi-suitcase-lg",
+    "src": "/assets/icons/suitcase-lg.svg"
+  },
+  {
+    "className": "bi-suitcase",
+    "src": "/assets/icons/suitcase.svg"
+  },
+  {
+    "className": "bi-suitcase2-fill",
+    "src": "/assets/icons/suitcase2-fill.svg"
+  },
+  {
+    "className": "bi-suitcase2",
+    "src": "/assets/icons/suitcase2.svg"
+  },
+  {
+    "className": "bi-sun-fill",
+    "src": "/assets/icons/sun-fill.svg"
+  },
+  {
+    "className": "bi-sun",
+    "src": "/assets/icons/sun.svg"
+  },
+  {
+    "className": "bi-sunglasses",
+    "src": "/assets/icons/sunglasses.svg"
+  },
+  {
+    "className": "bi-sunrise-fill",
+    "src": "/assets/icons/sunrise-fill.svg"
+  },
+  {
+    "className": "bi-sunrise",
+    "src": "/assets/icons/sunrise.svg"
+  },
+  {
+    "className": "bi-sunset-fill",
+    "src": "/assets/icons/sunset-fill.svg"
+  },
+  {
+    "className": "bi-sunset",
+    "src": "/assets/icons/sunset.svg"
+  },
+  {
+    "className": "bi-superscript",
+    "src": "/assets/icons/superscript.svg"
+  },
+  {
+    "className": "bi-symmetry-horizontal",
+    "src": "/assets/icons/symmetry-horizontal.svg"
+  },
+  {
+    "className": "bi-symmetry-vertical",
+    "src": "/assets/icons/symmetry-vertical.svg"
+  },
+  {
+    "className": "bi-table",
+    "src": "/assets/icons/table.svg"
+  },
+  {
+    "className": "bi-tablet-fill",
+    "src": "/assets/icons/tablet-fill.svg"
+  },
+  {
+    "className": "bi-tablet-landscape-fill",
+    "src": "/assets/icons/tablet-landscape-fill.svg"
+  },
+  {
+    "className": "bi-tablet-landscape",
+    "src": "/assets/icons/tablet-landscape.svg"
+  },
+  {
+    "className": "bi-tablet",
+    "src": "/assets/icons/tablet.svg"
+  },
+  {
+    "className": "bi-tag-fill",
+    "src": "/assets/icons/tag-fill.svg"
+  },
+  {
+    "className": "bi-tag",
+    "src": "/assets/icons/tag.svg"
+  },
+  {
+    "className": "bi-tags-fill",
+    "src": "/assets/icons/tags-fill.svg"
+  },
+  {
+    "className": "bi-tags",
+    "src": "/assets/icons/tags.svg"
+  },
+  {
+    "className": "bi-taxi-front-fill",
+    "src": "/assets/icons/taxi-front-fill.svg"
+  },
+  {
+    "className": "bi-taxi-front",
+    "src": "/assets/icons/taxi-front.svg"
+  },
+  {
+    "className": "bi-telegram",
+    "src": "/assets/icons/telegram.svg"
+  },
+  {
+    "className": "bi-telephone-fill",
+    "src": "/assets/icons/telephone-fill.svg"
+  },
+  {
+    "className": "bi-telephone-forward-fill",
+    "src": "/assets/icons/telephone-forward-fill.svg"
+  },
+  {
+    "className": "bi-telephone-forward",
+    "src": "/assets/icons/telephone-forward.svg"
+  },
+  {
+    "className": "bi-telephone-inbound-fill",
+    "src": "/assets/icons/telephone-inbound-fill.svg"
+  },
+  {
+    "className": "bi-telephone-inbound",
+    "src": "/assets/icons/telephone-inbound.svg"
+  },
+  {
+    "className": "bi-telephone-minus-fill",
+    "src": "/assets/icons/telephone-minus-fill.svg"
+  },
+  {
+    "className": "bi-telephone-minus",
+    "src": "/assets/icons/telephone-minus.svg"
+  },
+  {
+    "className": "bi-telephone-outbound-fill",
+    "src": "/assets/icons/telephone-outbound-fill.svg"
+  },
+  {
+    "className": "bi-telephone-outbound",
+    "src": "/assets/icons/telephone-outbound.svg"
+  },
+  {
+    "className": "bi-telephone-plus-fill",
+    "src": "/assets/icons/telephone-plus-fill.svg"
+  },
+  {
+    "className": "bi-telephone-plus",
+    "src": "/assets/icons/telephone-plus.svg"
+  },
+  {
+    "className": "bi-telephone-x-fill",
+    "src": "/assets/icons/telephone-x-fill.svg"
+  },
+  {
+    "className": "bi-telephone-x",
+    "src": "/assets/icons/telephone-x.svg"
+  },
+  {
+    "className": "bi-telephone",
+    "src": "/assets/icons/telephone.svg"
+  },
+  {
+    "className": "bi-tencent-qq",
+    "src": "/assets/icons/tencent-qq.svg"
+  },
+  {
+    "className": "bi-terminal-dash",
+    "src": "/assets/icons/terminal-dash.svg"
+  },
+  {
+    "className": "bi-terminal-fill",
+    "src": "/assets/icons/terminal-fill.svg"
+  },
+  {
+    "className": "bi-terminal-plus",
+    "src": "/assets/icons/terminal-plus.svg"
+  },
+  {
+    "className": "bi-terminal-split",
+    "src": "/assets/icons/terminal-split.svg"
+  },
+  {
+    "className": "bi-terminal-x",
+    "src": "/assets/icons/terminal-x.svg"
+  },
+  {
+    "className": "bi-terminal",
+    "src": "/assets/icons/terminal.svg"
+  },
+  {
+    "className": "bi-text-center",
+    "src": "/assets/icons/text-center.svg"
+  },
+  {
+    "className": "bi-text-indent-left",
+    "src": "/assets/icons/text-indent-left.svg"
+  },
+  {
+    "className": "bi-text-indent-right",
+    "src": "/assets/icons/text-indent-right.svg"
+  },
+  {
+    "className": "bi-text-left",
+    "src": "/assets/icons/text-left.svg"
+  },
+  {
+    "className": "bi-text-paragraph",
+    "src": "/assets/icons/text-paragraph.svg"
+  },
+  {
+    "className": "bi-text-right",
+    "src": "/assets/icons/text-right.svg"
+  },
+  {
+    "className": "bi-text-wrap",
+    "src": "/assets/icons/text-wrap.svg"
+  },
+  {
+    "className": "bi-textarea-resize",
+    "src": "/assets/icons/textarea-resize.svg"
+  },
+  {
+    "className": "bi-textarea-t",
+    "src": "/assets/icons/textarea-t.svg"
+  },
+  {
+    "className": "bi-textarea",
+    "src": "/assets/icons/textarea.svg"
+  },
+  {
+    "className": "bi-thermometer-half",
+    "src": "/assets/icons/thermometer-half.svg"
+  },
+  {
+    "className": "bi-thermometer-high",
+    "src": "/assets/icons/thermometer-high.svg"
+  },
+  {
+    "className": "bi-thermometer-low",
+    "src": "/assets/icons/thermometer-low.svg"
+  },
+  {
+    "className": "bi-thermometer-snow",
+    "src": "/assets/icons/thermometer-snow.svg"
+  },
+  {
+    "className": "bi-thermometer-sun",
+    "src": "/assets/icons/thermometer-sun.svg"
+  },
+  {
+    "className": "bi-thermometer",
+    "src": "/assets/icons/thermometer.svg"
+  },
+  {
+    "className": "bi-threads-fill",
+    "src": "/assets/icons/threads-fill.svg"
+  },
+  {
+    "className": "bi-threads",
+    "src": "/assets/icons/threads.svg"
+  },
+  {
+    "className": "bi-three-dots-vertical",
+    "src": "/assets/icons/three-dots-vertical.svg"
+  },
+  {
+    "className": "bi-three-dots",
+    "src": "/assets/icons/three-dots.svg"
+  },
+  {
+    "className": "bi-thunderbolt-fill",
+    "src": "/assets/icons/thunderbolt-fill.svg"
+  },
+  {
+    "className": "bi-thunderbolt",
+    "src": "/assets/icons/thunderbolt.svg"
+  },
+  {
+    "className": "bi-ticket-detailed-fill",
+    "src": "/assets/icons/ticket-detailed-fill.svg"
+  },
+  {
+    "className": "bi-ticket-detailed",
+    "src": "/assets/icons/ticket-detailed.svg"
+  },
+  {
+    "className": "bi-ticket-fill",
+    "src": "/assets/icons/ticket-fill.svg"
+  },
+  {
+    "className": "bi-ticket-perforated-fill",
+    "src": "/assets/icons/ticket-perforated-fill.svg"
+  },
+  {
+    "className": "bi-ticket-perforated",
+    "src": "/assets/icons/ticket-perforated.svg"
+  },
+  {
+    "className": "bi-ticket",
+    "src": "/assets/icons/ticket.svg"
+  },
+  {
+    "className": "bi-tiktok",
+    "src": "/assets/icons/tiktok.svg"
+  },
+  {
+    "className": "bi-toggle-off",
+    "src": "/assets/icons/toggle-off.svg"
+  },
+  {
+    "className": "bi-toggle-on",
+    "src": "/assets/icons/toggle-on.svg"
+  },
+  {
+    "className": "bi-toggle2-off",
+    "src": "/assets/icons/toggle2-off.svg"
+  },
+  {
+    "className": "bi-toggle2-on",
+    "src": "/assets/icons/toggle2-on.svg"
+  },
+  {
+    "className": "bi-toggles",
+    "src": "/assets/icons/toggles.svg"
+  },
+  {
+    "className": "bi-toggles2",
+    "src": "/assets/icons/toggles2.svg"
+  },
+  {
+    "className": "bi-tools",
+    "src": "/assets/icons/tools.svg"
+  },
+  {
+    "className": "bi-tornado",
+    "src": "/assets/icons/tornado.svg"
+  },
+  {
+    "className": "bi-train-freight-front-fill",
+    "src": "/assets/icons/train-freight-front-fill.svg"
+  },
+  {
+    "className": "bi-train-freight-front",
+    "src": "/assets/icons/train-freight-front.svg"
+  },
+  {
+    "className": "bi-train-front-fill",
+    "src": "/assets/icons/train-front-fill.svg"
+  },
+  {
+    "className": "bi-train-front",
+    "src": "/assets/icons/train-front.svg"
+  },
+  {
+    "className": "bi-train-lightrail-front-fill",
+    "src": "/assets/icons/train-lightrail-front-fill.svg"
+  },
+  {
+    "className": "bi-train-lightrail-front",
+    "src": "/assets/icons/train-lightrail-front.svg"
+  },
+  {
+    "className": "bi-translate",
+    "src": "/assets/icons/translate.svg"
+  },
+  {
+    "className": "bi-transparency",
+    "src": "/assets/icons/transparency.svg"
+  },
+  {
+    "className": "bi-trash-fill",
+    "src": "/assets/icons/trash-fill.svg"
+  },
+  {
+    "className": "bi-trash",
+    "src": "/assets/icons/trash.svg"
+  },
+  {
+    "className": "bi-trash2-fill",
+    "src": "/assets/icons/trash2-fill.svg"
+  },
+  {
+    "className": "bi-trash2",
+    "src": "/assets/icons/trash2.svg"
+  },
+  {
+    "className": "bi-trash3-fill",
+    "src": "/assets/icons/trash3-fill.svg"
+  },
+  {
+    "className": "bi-trash3",
+    "src": "/assets/icons/trash3.svg"
+  },
+  {
+    "className": "bi-tree-fill",
+    "src": "/assets/icons/tree-fill.svg"
+  },
+  {
+    "className": "bi-tree",
+    "src": "/assets/icons/tree.svg"
+  },
+  {
+    "className": "bi-trello",
+    "src": "/assets/icons/trello.svg"
+  },
+  {
+    "className": "bi-triangle-fill",
+    "src": "/assets/icons/triangle-fill.svg"
+  },
+  {
+    "className": "bi-triangle-half",
+    "src": "/assets/icons/triangle-half.svg"
+  },
+  {
+    "className": "bi-triangle",
+    "src": "/assets/icons/triangle.svg"
+  },
+  {
+    "className": "bi-trophy-fill",
+    "src": "/assets/icons/trophy-fill.svg"
+  },
+  {
+    "className": "bi-trophy",
+    "src": "/assets/icons/trophy.svg"
+  },
+  {
+    "className": "bi-tropical-storm",
+    "src": "/assets/icons/tropical-storm.svg"
+  },
+  {
+    "className": "bi-truck-flatbed",
+    "src": "/assets/icons/truck-flatbed.svg"
+  },
+  {
+    "className": "bi-truck-front-fill",
+    "src": "/assets/icons/truck-front-fill.svg"
+  },
+  {
+    "className": "bi-truck-front",
+    "src": "/assets/icons/truck-front.svg"
+  },
+  {
+    "className": "bi-truck",
+    "src": "/assets/icons/truck.svg"
+  },
+  {
+    "className": "bi-tsunami",
+    "src": "/assets/icons/tsunami.svg"
+  },
+  {
+    "className": "bi-tv-fill",
+    "src": "/assets/icons/tv-fill.svg"
+  },
+  {
+    "className": "bi-tv",
+    "src": "/assets/icons/tv.svg"
+  },
+  {
+    "className": "bi-twitch",
+    "src": "/assets/icons/twitch.svg"
+  },
+  {
+    "className": "bi-twitter-x",
+    "src": "/assets/icons/twitter-x.svg"
+  },
+  {
+    "className": "bi-twitter",
+    "src": "/assets/icons/twitter.svg"
+  },
+  {
+    "className": "bi-type-bold",
+    "src": "/assets/icons/type-bold.svg"
+  },
+  {
+    "className": "bi-type-h1",
+    "src": "/assets/icons/type-h1.svg"
+  },
+  {
+    "className": "bi-type-h2",
+    "src": "/assets/icons/type-h2.svg"
+  },
+  {
+    "className": "bi-type-h3",
+    "src": "/assets/icons/type-h3.svg"
+  },
+  {
+    "className": "bi-type-h4",
+    "src": "/assets/icons/type-h4.svg"
+  },
+  {
+    "className": "bi-type-h5",
+    "src": "/assets/icons/type-h5.svg"
+  },
+  {
+    "className": "bi-type-h6",
+    "src": "/assets/icons/type-h6.svg"
+  },
+  {
+    "className": "bi-type-italic",
+    "src": "/assets/icons/type-italic.svg"
+  },
+  {
+    "className": "bi-type-strikethrough",
+    "src": "/assets/icons/type-strikethrough.svg"
+  },
+  {
+    "className": "bi-type-underline",
+    "src": "/assets/icons/type-underline.svg"
+  },
+  {
+    "className": "bi-type",
+    "src": "/assets/icons/type.svg"
+  },
+  {
+    "className": "bi-ubuntu",
+    "src": "/assets/icons/ubuntu.svg"
+  },
+  {
+    "className": "bi-ui-checks-grid",
+    "src": "/assets/icons/ui-checks-grid.svg"
+  },
+  {
+    "className": "bi-ui-checks",
+    "src": "/assets/icons/ui-checks.svg"
+  },
+  {
+    "className": "bi-ui-radios-grid",
+    "src": "/assets/icons/ui-radios-grid.svg"
+  },
+  {
+    "className": "bi-ui-radios",
+    "src": "/assets/icons/ui-radios.svg"
+  },
+  {
+    "className": "bi-umbrella-fill",
+    "src": "/assets/icons/umbrella-fill.svg"
+  },
+  {
+    "className": "bi-umbrella",
+    "src": "/assets/icons/umbrella.svg"
+  },
+  {
+    "className": "bi-unindent",
+    "src": "/assets/icons/unindent.svg"
+  },
+  {
+    "className": "bi-union",
+    "src": "/assets/icons/union.svg"
+  },
+  {
+    "className": "bi-unity",
+    "src": "/assets/icons/unity.svg"
+  },
+  {
+    "className": "bi-universal-access-circle",
+    "src": "/assets/icons/universal-access-circle.svg"
+  },
+  {
+    "className": "bi-universal-access",
+    "src": "/assets/icons/universal-access.svg"
+  },
+  {
+    "className": "bi-unlock-fill",
+    "src": "/assets/icons/unlock-fill.svg"
+  },
+  {
+    "className": "bi-unlock",
+    "src": "/assets/icons/unlock.svg"
+  },
+  {
+    "className": "bi-upc-scan",
+    "src": "/assets/icons/upc-scan.svg"
+  },
+  {
+    "className": "bi-upc",
+    "src": "/assets/icons/upc.svg"
+  },
+  {
+    "className": "bi-upload",
+    "src": "/assets/icons/upload.svg"
+  },
+  {
+    "className": "bi-usb-c-fill",
+    "src": "/assets/icons/usb-c-fill.svg"
+  },
+  {
+    "className": "bi-usb-c",
+    "src": "/assets/icons/usb-c.svg"
+  },
+  {
+    "className": "bi-usb-drive-fill",
+    "src": "/assets/icons/usb-drive-fill.svg"
+  },
+  {
+    "className": "bi-usb-drive",
+    "src": "/assets/icons/usb-drive.svg"
+  },
+  {
+    "className": "bi-usb-fill",
+    "src": "/assets/icons/usb-fill.svg"
+  },
+  {
+    "className": "bi-usb-micro-fill",
+    "src": "/assets/icons/usb-micro-fill.svg"
+  },
+  {
+    "className": "bi-usb-micro",
+    "src": "/assets/icons/usb-micro.svg"
+  },
+  {
+    "className": "bi-usb-mini-fill",
+    "src": "/assets/icons/usb-mini-fill.svg"
+  },
+  {
+    "className": "bi-usb-mini",
+    "src": "/assets/icons/usb-mini.svg"
+  },
+  {
+    "className": "bi-usb-plug-fill",
+    "src": "/assets/icons/usb-plug-fill.svg"
+  },
+  {
+    "className": "bi-usb-plug",
+    "src": "/assets/icons/usb-plug.svg"
+  },
+  {
+    "className": "bi-usb-symbol",
+    "src": "/assets/icons/usb-symbol.svg"
+  },
+  {
+    "className": "bi-usb",
+    "src": "/assets/icons/usb.svg"
+  },
+  {
+    "className": "bi-valentine",
+    "src": "/assets/icons/valentine.svg"
+  },
+  {
+    "className": "bi-valentine2",
+    "src": "/assets/icons/valentine2.svg"
+  },
+  {
+    "className": "bi-vector-pen",
+    "src": "/assets/icons/vector-pen.svg"
+  },
+  {
+    "className": "bi-view-list",
+    "src": "/assets/icons/view-list.svg"
+  },
+  {
+    "className": "bi-view-stacked",
+    "src": "/assets/icons/view-stacked.svg"
+  },
+  {
+    "className": "bi-vignette",
+    "src": "/assets/icons/vignette.svg"
+  },
+  {
+    "className": "bi-vimeo",
+    "src": "/assets/icons/vimeo.svg"
+  },
+  {
+    "className": "bi-vinyl-fill",
+    "src": "/assets/icons/vinyl-fill.svg"
+  },
+  {
+    "className": "bi-vinyl",
+    "src": "/assets/icons/vinyl.svg"
+  },
+  {
+    "className": "bi-virus",
+    "src": "/assets/icons/virus.svg"
+  },
+  {
+    "className": "bi-virus2",
+    "src": "/assets/icons/virus2.svg"
+  },
+  {
+    "className": "bi-voicemail",
+    "src": "/assets/icons/voicemail.svg"
+  },
+  {
+    "className": "bi-volume-down-fill",
+    "src": "/assets/icons/volume-down-fill.svg"
+  },
+  {
+    "className": "bi-volume-down",
+    "src": "/assets/icons/volume-down.svg"
+  },
+  {
+    "className": "bi-volume-mute-fill",
+    "src": "/assets/icons/volume-mute-fill.svg"
+  },
+  {
+    "className": "bi-volume-mute",
+    "src": "/assets/icons/volume-mute.svg"
+  },
+  {
+    "className": "bi-volume-off-fill",
+    "src": "/assets/icons/volume-off-fill.svg"
+  },
+  {
+    "className": "bi-volume-off",
+    "src": "/assets/icons/volume-off.svg"
+  },
+  {
+    "className": "bi-volume-up-fill",
+    "src": "/assets/icons/volume-up-fill.svg"
+  },
+  {
+    "className": "bi-volume-up",
+    "src": "/assets/icons/volume-up.svg"
+  },
+  {
+    "className": "bi-vr",
+    "src": "/assets/icons/vr.svg"
+  },
+  {
+    "className": "bi-wallet-fill",
+    "src": "/assets/icons/wallet-fill.svg"
+  },
+  {
+    "className": "bi-wallet",
+    "src": "/assets/icons/wallet.svg"
+  },
+  {
+    "className": "bi-wallet2",
+    "src": "/assets/icons/wallet2.svg"
+  },
+  {
+    "className": "bi-watch",
+    "src": "/assets/icons/watch.svg"
+  },
+  {
+    "className": "bi-water",
+    "src": "/assets/icons/water.svg"
+  },
+  {
+    "className": "bi-webcam-fill",
+    "src": "/assets/icons/webcam-fill.svg"
+  },
+  {
+    "className": "bi-webcam",
+    "src": "/assets/icons/webcam.svg"
+  },
+  {
+    "className": "bi-wechat",
+    "src": "/assets/icons/wechat.svg"
+  },
+  {
+    "className": "bi-whatsapp",
+    "src": "/assets/icons/whatsapp.svg"
+  },
+  {
+    "className": "bi-wifi-1",
+    "src": "/assets/icons/wifi-1.svg"
+  },
+  {
+    "className": "bi-wifi-2",
+    "src": "/assets/icons/wifi-2.svg"
+  },
+  {
+    "className": "bi-wifi-off",
+    "src": "/assets/icons/wifi-off.svg"
+  },
+  {
+    "className": "bi-wifi",
+    "src": "/assets/icons/wifi.svg"
+  },
+  {
+    "className": "bi-wikipedia",
+    "src": "/assets/icons/wikipedia.svg"
+  },
+  {
+    "className": "bi-wind",
+    "src": "/assets/icons/wind.svg"
+  },
+  {
+    "className": "bi-window-dash",
+    "src": "/assets/icons/window-dash.svg"
+  },
+  {
+    "className": "bi-window-desktop",
+    "src": "/assets/icons/window-desktop.svg"
+  },
+  {
+    "className": "bi-window-dock",
+    "src": "/assets/icons/window-dock.svg"
+  },
+  {
+    "className": "bi-window-fullscreen",
+    "src": "/assets/icons/window-fullscreen.svg"
+  },
+  {
+    "className": "bi-window-plus",
+    "src": "/assets/icons/window-plus.svg"
+  },
+  {
+    "className": "bi-window-sidebar",
+    "src": "/assets/icons/window-sidebar.svg"
+  },
+  {
+    "className": "bi-window-split",
+    "src": "/assets/icons/window-split.svg"
+  },
+  {
+    "className": "bi-window-stack",
+    "src": "/assets/icons/window-stack.svg"
+  },
+  {
+    "className": "bi-window-x",
+    "src": "/assets/icons/window-x.svg"
+  },
+  {
+    "className": "bi-window",
+    "src": "/assets/icons/window.svg"
+  },
+  {
+    "className": "bi-windows",
+    "src": "/assets/icons/windows.svg"
+  },
+  {
+    "className": "bi-wordpress",
+    "src": "/assets/icons/wordpress.svg"
+  },
+  {
+    "className": "bi-wrench-adjustable-circle-fill",
+    "src": "/assets/icons/wrench-adjustable-circle-fill.svg"
+  },
+  {
+    "className": "bi-wrench-adjustable-circle",
+    "src": "/assets/icons/wrench-adjustable-circle.svg"
+  },
+  {
+    "className": "bi-wrench-adjustable",
+    "src": "/assets/icons/wrench-adjustable.svg"
+  },
+  {
+    "className": "bi-wrench",
+    "src": "/assets/icons/wrench.svg"
+  },
+  {
+    "className": "bi-x-circle-fill",
+    "src": "/assets/icons/x-circle-fill.svg"
+  },
+  {
+    "className": "bi-x-circle",
+    "src": "/assets/icons/x-circle.svg"
+  },
+  {
+    "className": "bi-x-diamond-fill",
+    "src": "/assets/icons/x-diamond-fill.svg"
+  },
+  {
+    "className": "bi-x-diamond",
+    "src": "/assets/icons/x-diamond.svg"
+  },
+  {
+    "className": "bi-x-lg",
+    "src": "/assets/icons/x-lg.svg"
+  },
+  {
+    "className": "bi-x-octagon-fill",
+    "src": "/assets/icons/x-octagon-fill.svg"
+  },
+  {
+    "className": "bi-x-octagon",
+    "src": "/assets/icons/x-octagon.svg"
+  },
+  {
+    "className": "bi-x-square-fill",
+    "src": "/assets/icons/x-square-fill.svg"
+  },
+  {
+    "className": "bi-x-square",
+    "src": "/assets/icons/x-square.svg"
+  },
+  {
+    "className": "bi-x",
+    "src": "/assets/icons/x.svg"
+  },
+  {
+    "className": "bi-xbox",
+    "src": "/assets/icons/xbox.svg"
+  },
+  {
+    "className": "bi-yelp",
+    "src": "/assets/icons/yelp.svg"
+  },
+  {
+    "className": "bi-yin-yang",
+    "src": "/assets/icons/yin-yang.svg"
+  },
+  {
+    "className": "bi-youtube",
+    "src": "/assets/icons/youtube.svg"
+  },
+  {
+    "className": "bi-zoom-in",
+    "src": "/assets/icons/zoom-in.svg"
+  },
+  {
+    "className": "bi-zoom-out",
+    "src": "/assets/icons/zoom-out.svg"
+  }
+]
