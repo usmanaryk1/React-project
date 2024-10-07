@@ -6,7 +6,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "./SignupValidation";
 import { useAuth } from "../AuthContext";
 import { useState } from "react";
-import { auth } from "../../../firebaseConfig";
 
 const SignUp = () => {
   const { onSignup } = useAuth();
@@ -16,7 +15,6 @@ const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {

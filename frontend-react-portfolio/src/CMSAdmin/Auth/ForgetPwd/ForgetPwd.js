@@ -13,7 +13,6 @@ const ForgetPwd = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
