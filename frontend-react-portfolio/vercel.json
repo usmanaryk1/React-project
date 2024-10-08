@@ -1,13 +1,4 @@
 {
-  "builds": [
-    {
-      "src": "frontend-react-portfolio/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "build"
-      }
-    }
-  ],
   "rewrites": [
     {
       "source": "/(.*)",
