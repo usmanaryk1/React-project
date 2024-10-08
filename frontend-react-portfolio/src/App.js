@@ -20,41 +20,39 @@ import NotFound from "./Components/404Page/404Page";
 
 function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <div className="App">
-          <Header />
-          <div className="content">
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              {/* <Route path="/blogs/:id">
+    <AuthProvider>
+      <div className="App">
+        <Header />
+        <div className="content">
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            {/* <Route path="/blogs/:id">
               <BlogDetails />
              </Route> */}
-              <Route path={`/works/:id`}>
-                <PortfolioDetails />
-              </Route>
-              <Route
-                path="/form/portfolioDetails-form/:id"
-                component={AddPortfolioDetails}
-              />
-              {/* <Route path="/certifications/:id">
+            <Route path={`/works/:id`}>
+              <PortfolioDetails />
+            </Route>
+            <Route
+              path="/form/portfolioDetails-form/:id"
+              component={AddPortfolioDetails}
+            />
+            {/* <Route path="/certifications/:id">
                 <CertificationDetails />
               </Route> */}
-              <Route path="/form" render={() => <Form />} />
-              <Route path="/form/signup-form" render={() => <SignUp />} />
-              <Route path="/form/login-form" render={() => <Login />} />
-              <Route path="*">
-                <NotFound />
-              </Route>
-            </Switch>
-          </div>
-          <Footer />
-          <ToastContainer />
+            <Route path="/form" render={() => <Form />} />
+            <Route path="/form/signup-form" render={() => <SignUp />} />
+            <Route path="/form/login-form" render={() => <Login />} />
+            <Route path="*">
+              <NotFound />
+            </Route>
+          </Switch>
         </div>
-      </AuthProvider>
-    </BrowserRouter>
+        <Footer />
+        <ToastContainer />
+      </div>
+    </AuthProvider>
   );
 }
 
