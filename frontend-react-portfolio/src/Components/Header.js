@@ -16,10 +16,6 @@ const Header = () => {
 
   const handleDownloadCV = async (e) => {
     e.preventDefault();
-    if (!user) {
-      toast.error("User not found!");
-      return;
-    }
 
     try {
       const response = await axios.get(

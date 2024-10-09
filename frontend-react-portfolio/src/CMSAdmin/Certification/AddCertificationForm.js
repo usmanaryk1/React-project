@@ -395,7 +395,7 @@ const AddCertificationForm = () => {
                       name="time"
                       id="time"
                       className="form-control"
-                      placeholder="Time (10 min)"
+                      placeholder="Duration (6 months)"
                       {...register("time")}
                       required
                     />
