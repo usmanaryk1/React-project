@@ -5,22 +5,21 @@ require("dotenv").config({ path: "./api/.env" });
 const app = express();
 const path = require("path");
 
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://frontend-react-portfolio.vercel.app",
-];
-
 app.use(
   cors({
     origin: function (origin, callback) {
+      const allowedOrigins = [
+        "https://frontend-react-portfolio.vercel.app",
+        "http://localhost:3000",
+      ];
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
       }
     },
-    methods: "GET,POST,PUT,DELETE,OPTIONS,PATCH", // Specify allowed methods
-    credentials: true,
+    methods: "GET,POST,PUT,DELETE,OPTIONS,PATCH",
+    credentials: true, // Allow cookies or other credentials
   })
 );
 
@@ -66,6 +65,9 @@ app.use("/api", Upload_CV);
 app.use("/api", Download_CV);
 app.use("/api", Forgot_Routes);
 app.use("/api", Reset_Routes);
+app.use("/api/*", (req, res, next) => {
+  res.status(404).json({ message: "API route not found" });
+});
 // Serve the static files from the React app (build folder)
 app.use(
   express.static(path.join(__dirname, "../../frontend-react-portfolio/build"))
