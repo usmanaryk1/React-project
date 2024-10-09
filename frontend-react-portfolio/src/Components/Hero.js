@@ -60,7 +60,7 @@ const Hero = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      camcelButtonColor: "#3085d6",
+      cancelButtonColor: "#3085d6",
       confirmButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
