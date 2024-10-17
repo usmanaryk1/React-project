@@ -40,6 +40,7 @@ const Upload_CV = require("../router/uploadCV.js");
 const Download_CV = require("../router/downloadCV.js");
 const Forgot_Routes = require("../router/forgetPwd.js");
 const Reset_Routes = require("../router/resetPwd.js");
+const Terms_Routes = require("../router/termsAndConditions.js");
 
 // Simple route
 app.get("/", (req, res) => {
@@ -65,6 +66,8 @@ app.use("/api", Upload_CV);
 app.use("/api", Download_CV);
 app.use("/api", Forgot_Routes);
 app.use("/api", Reset_Routes);
+app.use("/api/terms", Terms_Routes);
+
 app.use("/api/*", (req, res, next) => {
   res.status(404).json({ message: "API route not found" });
 });
