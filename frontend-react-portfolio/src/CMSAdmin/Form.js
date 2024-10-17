@@ -17,6 +17,7 @@ import PrivateRoute from "./Auth/AuthGuard";
 import { useAuth } from "./Auth/AuthContext";
 import SocialForm from "./Socials/SocialForm";
 import CVUploader from "./UploadCV/CVUploaderForm";
+import TermsAndConditionsEdit from "./TermsAndConditionsEdit/TermsAndConditionsEdit";
 
 const Form = () => {
   const { isAuthenticated } = useAuth();
@@ -133,6 +134,11 @@ const Form = () => {
           <PrivateRoute
             path={`/form/CV-form`}
             component={CVUploader}
+            isAuthenticated={isAuthenticated}
+          />
+          <PrivateRoute
+            path={`/form/termsandconditions`}
+            component={TermsAndConditionsEdit}
             isAuthenticated={isAuthenticated}
           />
         </Switch>

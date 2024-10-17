@@ -34,8 +34,8 @@ const PortfolioDetails = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
       <CustomHero
         heroTitle="Work Details"
         breadcrumbItem1="Home"
-        breadcrumbItem2="Library"
-        breadcrumbItem3="Portfolio Details"
+        breadcrumbItem2="Projects"
+        breadcrumbItem3="Project Details"
       />
       {details && (
         <PortfolioContent

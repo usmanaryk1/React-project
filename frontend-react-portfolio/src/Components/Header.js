@@ -8,6 +8,7 @@ const Header = () => {
   const [navLinks, setNavLinks] = useState([]);
   const { user, onLogout, isAdminPage, isAuthenticated } = useAuth();
   const location = useLocation();
+
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
   const preventRefresh = (e) => {
@@ -62,6 +63,7 @@ const Header = () => {
         { to: "/form/contact-form", label: "Contact" },
         { to: "/form/social-form", label: "Social Links" },
         { to: "/form/CV-form", label: "Upload CV" },
+        { to: "/form/termsandconditions", label: "Terms and Conditions" },
       ]);
     } else {
       setNavLinks([

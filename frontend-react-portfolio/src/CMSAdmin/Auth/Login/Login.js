@@ -42,7 +42,7 @@ const Login = () => {
 
       // Get the ID token
       const firebaseToken = await firebaseUser.getIdToken();
-
+      // console.log("firebasetoken", firebaseToken);
       const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: {

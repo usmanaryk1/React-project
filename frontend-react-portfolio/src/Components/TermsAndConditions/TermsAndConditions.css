@@ -1,0 +1,7 @@
+.conditions-box {
+  max-width: 400rem;
+  padding: 1rem 5rem;
+}
+.conditions-content p {
+  text-align: justify;
+}

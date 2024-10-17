@@ -234,7 +234,24 @@ const SignUp = () => {
                       {errors.confirmPassword.message}
                     </p>
                   )}
-
+                  <div className="TandC">
+                    <input
+                      type="checkbox"
+                      id="TandC"
+                      name="TandC"
+                      {...register("TandC")}
+                      className="mx-2"
+                      required
+                    />
+                    <Link to="/termsandconditions">
+                      <label htmlFor="TandC">
+                        Agree to the Terms and Condtions
+                      </label>
+                    </Link>
+                  </div>
+                  {errors.TandC && (
+                    <p className="error-message">{errors.TandC.message}</p>
+                  )}
                   <div className="sign">
                     <button
                       className="sign-button"
