@@ -1,7 +1,45 @@
 .conditions-box {
   max-width: 400rem;
-  padding: 1rem 5rem;
+  padding: 1.5rem 5rem 1.5rem;
+  margin: 0;
+}
+.conditions-border {
+  max-width: 400rem;
+  padding: 1.5rem 5rem 1.5rem;
+  margin-bottom: 0.8rem;
+  border: 1px dashed #8080806b;
 }
 .conditions-content p {
   text-align: justify;
+  margin: 0;
+}
+
+.crud-actions button {
+  transition: all 0.3s ease-in-out;
+}
+
+.crud-actions button:hover {
+  transform: scale(1.1);
+}
+
+.crud-btn {
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-left: 0.2rem;
+}
+.add-btn {
+  background-color: #128f32;
+  color: white;
+  transition: all 0.3s ease-in-out;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: none;
+}
+
+.add-btn:hover {
+  transform: scale(1.1);
+  background-color: #128f32;
+  color: white;
 }
