@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
   try {
     const TermsAndConditions = await Terms_Model.find(); // Ensure you're querying by the correct field, `email` not `id`
     if (TermsAndConditions.length === 0) {
-      return res.status(404).send("Inforamtion Not Found");
+      return res.status(404).json({ message: "Inforamtion Not Found" });
     }
     res.status(200).json(TermsAndConditions); // 200 OK status code
   } catch (err) {
