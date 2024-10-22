@@ -2,45 +2,75 @@
 
 import axios from "axios";
 import { toast } from "react-toastify";
-
 const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
-
-// Fetch all terms
-
-export const fetchTerms = async () => {
-  try {
-    const response = await axios.get(`${API_URL}/api/terms`);
-    // No need to use response.json(), axios returns the data directly
-    return response.data; // This should be the array of terms
-  } catch (error) {
-    toast.error("Failed to fetch terms");
-    console.error(error);
-    return []; // Return an empty array in case of an error
-  }
-};
+const token = localStorage.getItem("token");
 
 // Add a new term
 export const addTerm = async (newTerm) => {
-  const response = await axios.post(`${API_URL}/api/terms`, newTerm);
-  return response.data;
+  try {
+    const response = await axios.post(`${API_URL}/api/terms`, newTerm, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error adding term:", error.response?.data || error.message);
+  }
 };
 
 // Update an existing term
 export const updateTerm = async (id, updatedTerm) => {
-  const response = await axios.put(`${API_URL}/api/terms/${id}`, updatedTerm);
-  return response.data;
+  try {
+    const response = await axios.put(
+      `${API_URL}/api/terms/${id}`,
+      updatedTerm,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Failed to update term:",
+      error.response?.data || error.message
+    );
+  }
 };
 
 // Delete a term
 export const deleteTerm = async (id) => {
-  const response = await axios.delete(`${API_URL}/api/terms/${id}`);
-  return response.data;
+  try {
+    const response = await axios.delete(`${API_URL}/api/terms/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Failed to delete term:",
+      error.response?.data || error.message
+    );
+  }
 };
 
 // Reorder terms
 export const reorderTerms = async (reorderedTerms) => {
-  const response = await axios.patch(`${API_URL}/api/terms/reorder`, {
-    reorderedTerms,
-  });
-  return response.data;
+  try {
+    const response = await axios.patch(`${API_URL}/api/terms/reorder`, {
+      reorderedTerms,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Failed to update the sequence:",
+      error.response?.data || error.message
+    );
+  }
 };

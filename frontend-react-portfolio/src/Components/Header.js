@@ -119,7 +119,7 @@ const Header = () => {
           >
             <div className="offcanvas-header">
               <h1 className="offcanvas-title logo" id="offcanvasScrollingLabel">
-                <Link to="/">Portfolio</Link>
+                <Link to="/">PortfolioHub</Link>
               </h1>
               <button
                 type="button"
@@ -202,7 +202,7 @@ const Header = () => {
           <div className="container d-flex align-items-center justify-content-between">
             <h1 className="logo">
               <Link to="/" target="_blank">
-                Portfolio
+                PortfolioHub
               </Link>
             </h1>
             <nav id="navbar" className="navbar">
