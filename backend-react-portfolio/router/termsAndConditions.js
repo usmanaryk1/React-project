@@ -36,7 +36,7 @@ router.get("/:id", async (req, res) => {
 // POST TERMS (AUTHENTICATED ONLY)
 
 router.post("/", authenticateJWT, async (req, res) => {
-  console.log("Inside post function");
+  // console.log("Inside post function");
 
   const data = new Terms_Model({
     title: req.body.title,
@@ -56,7 +56,7 @@ router.post("/", authenticateJWT, async (req, res) => {
 
 router.put("/:id", authenticateJWT, async (req, res) => {
   try {
-    console.log("Request Body", req.body);
+    // console.log("Request Body", req.body);
     const updatedTerms = await Terms_Model.findByIdAndUpdate(
       req.params.id,
       req.body,
@@ -90,9 +90,10 @@ router.delete("/:id", authenticateJWT, async (req, res) => {
 });
 
 // REORDER TERMS BY MAPPING REORDERED TERMS
-router.patch("/reorder", async (req, res) => {
+router.patch("/reorder", authenticateJWT, async (req, res) => {
+  // console.log("req.body.reorderedTerms", req.body.reorderedTerms);
   const { reorderedTerms } = req.body; // reorderedTerms: [{ _id, title, content }, ...]
-
+  // console.log("reorderedTerms", reorderedTerms);
   try {
     const bulkOps = reorderedTerms.map((term, index) => ({
       updateOne: {
@@ -101,8 +102,8 @@ router.patch("/reorder", async (req, res) => {
       },
     }));
 
-    await Term.bulkWrite(bulkOps);
-
+    await Terms_Model.bulkWrite(bulkOps);
+    // console.log("Terms reordered in the database");
     res.json({ message: "Terms reordered successfully" });
   } catch (error) {
     res.status(400).json({ message: error.message });
