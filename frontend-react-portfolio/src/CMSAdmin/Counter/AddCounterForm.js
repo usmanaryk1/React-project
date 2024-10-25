@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 import useFetch from "../../Components/useFetch";
 import "../Icons/IconsDropdownCss.css";
 import CustomIconDropdown from "../Icons/CustomIconDropdown";
+import Error from "../../Components/Error/Error";
+import Loading from "../../Components/Loading/Loading";
 
 const AddCounterForm = () => {
   const token = localStorage.getItem("token");
@@ -19,6 +21,8 @@ const AddCounterForm = () => {
     data: counts,
     setData: setCounts,
     refetch,
+    isPending,
+    error,
   } = useFetch(`${API_URL}/api/counts`);
   const {
     register,
@@ -135,6 +139,10 @@ const AddCounterForm = () => {
       toast.error("Failed to delete counter");
     }
   };
+
+  if (isPending) return <Loading />;
+
+  if (error) return <Error message={error} />;
 
   return (
     <>

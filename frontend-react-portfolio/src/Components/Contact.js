@@ -101,11 +101,7 @@ const Contact = ({ onEditClick, onDeleteClick, contact = [], links = [] }) => {
                                   />
                                 </div>
                               </div>
-                              <div className="col-md-12 text-center my-3">
-                                {/* <div className="loading">Loading</div> */}
-                                <div className="error-message" />
-                                {/* <div className="sent-message">Your message has been sent. Thank you!</div> */}
-                              </div>
+
                               <div className="col-md-12 text-center">
                                 <button
                                   type="submit"

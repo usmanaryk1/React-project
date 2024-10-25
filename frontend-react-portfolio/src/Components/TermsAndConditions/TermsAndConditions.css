@@ -44,33 +44,6 @@
   color: white;
 }
 
-.add-btn {
-  background-color: #128f32;
-  color: white;
-  transition: all 0.3s ease-in-out;
-  padding: 10px 25px;
-  border-radius: 25px;
-  cursor: pointer;
-  border: none;
-  margin-right: 5px;
-}
-.add-btn:hover {
-  transform: scale(1.1);
-  background-color: #128f32;
-  color: white;
-}
-
-.remove-btn {
-  transition: all 0.3s ease-in-out;
-  padding: 10px 25px;
-  border-radius: 25px;
-  cursor: pointer;
-  border: none;
-}
-.remove-btn:hover {
-  transform: scale(1.1);
-}
-
 .cancel-btn {
   transition: all 0.3s ease-in-out;
   padding: 10px 25px;
@@ -103,26 +76,6 @@ textarea {
 
 .zeroTerms {
   text-align: center;
-  font-size: 3rem;
-  font-weight: bold;
-}
-
-.loading {
-  text-align: center;
   font-size: 2rem;
   font-weight: bold;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.error {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }

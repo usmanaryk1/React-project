@@ -1,7 +1,6 @@
 // services/termsService.js
 
 import axios from "axios";
-import { toast } from "react-toastify";
 const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 const token = localStorage.getItem("token");
 
@@ -60,12 +59,15 @@ export const deleteTerm = async (id) => {
 // Reorder terms
 export const reorderTerms = async (reorderedTerms) => {
   try {
-    const response = await axios.patch(`${API_URL}/api/terms/reorder`, {
-      reorderedTerms,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.patch(
+      `${API_URL}/api/terms/reorder`,
+      { reorderedTerms }, // Request body
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error(

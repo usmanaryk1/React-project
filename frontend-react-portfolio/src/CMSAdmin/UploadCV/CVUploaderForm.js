@@ -130,6 +130,9 @@ const CVUploader = () => {
                       ? `Uploading ${Math.round(uploadProgress)}%`
                       : "Upload CV"}
                   </button>
+                  <button className="cancel-btn" onClick={() => reset()}>
+                    Cancel
+                  </button>
                 </form>
               </div>
             </div>

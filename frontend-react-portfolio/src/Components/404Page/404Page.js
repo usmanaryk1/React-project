@@ -17,7 +17,9 @@ const NotFound = () => {
                   The page you are looking for might have been removed, had its
                   name changed or is temporarily unavailable
                 </p>
-                <Link to="/">Take to Home</Link>
+                <Link to="/">
+                  <i className="bi bi-house-fill"></i> Take to Home
+                </Link>
               </div>
             </div>
           </div>

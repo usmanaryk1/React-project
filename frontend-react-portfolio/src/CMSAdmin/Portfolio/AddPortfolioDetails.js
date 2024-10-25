@@ -15,6 +15,8 @@ import { v4 } from "uuid";
 import { storage } from "../../firebaseConfig"; // Import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Resizer from "react-image-file-resizer"; // Ensure you have this import
+import Loading from "../../Components/Loading/Loading";
+import Error from "../../Components/Error/Error";
 
 const AddPortfolioDetails = () => {
   const {
@@ -45,9 +47,12 @@ const AddPortfolioDetails = () => {
 
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
-  const { data: details, setData: setDetails } = useFetch(
-    `${API_URL}/api/workDetails`
-  );
+  const {
+    data: details,
+    setData: setDetails,
+    isPending,
+    error,
+  } = useFetch(`${API_URL}/api/workDetails`);
 
   const [currentDetails, setCurrentDetails] = useState(null);
   const [images, setImages] = useState([]);
@@ -304,6 +309,10 @@ const AddPortfolioDetails = () => {
       toast.error("Failed to delete details");
     }
   };
+
+  if (isPending) return <Loading />;
+
+  if (error) return <Error message={error} />;
 
   return (
     <>

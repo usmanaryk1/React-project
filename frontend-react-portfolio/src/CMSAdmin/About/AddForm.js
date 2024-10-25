@@ -9,6 +9,8 @@ import { storage } from "../../firebaseConfig"; // Import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import Resizer from "react-image-file-resizer"; // Import the image resizer
+import Loading from "../../Components/Loading/Loading";
+import Error from "../../Components/Error/Error";
 
 const AddForm = () => {
   const {
@@ -42,6 +44,8 @@ const AddForm = () => {
   const {
     data: about,
     setData: setAbout,
+    isPending,
+    error,
     refetch,
   } = useFetch(`${API_URL}/api/about`);
 
@@ -202,6 +206,10 @@ const AddForm = () => {
       toast.error("Failed to delete about info");
     }
   };
+
+  if (isPending) return <Loading />;
+
+  if (error) return <Error message={error} />;
 
   return (
     <>

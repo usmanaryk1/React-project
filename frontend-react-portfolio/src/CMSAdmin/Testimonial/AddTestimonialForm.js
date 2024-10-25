@@ -9,6 +9,8 @@ import { v4 } from "uuid";
 import { storage } from "../../firebaseConfig"; // Import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Resizer from "react-image-file-resizer"; // Import the image resizer
+import Error from "../../Components/Error/Error";
+import Loading from "../../Components/Loading/Loading";
 
 const AddTestimonialForm = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(null);
@@ -19,6 +21,8 @@ const AddTestimonialForm = () => {
     data: testimonials,
     setData: setTestimonials,
     refetch,
+    isPending,
+    error,
   } = useFetch(`${API_URL}/api/testimonials`);
   const {
     register,
@@ -208,6 +212,9 @@ const AddTestimonialForm = () => {
       console.error("Error deleting testimonial:", error);
     }
   };
+  if (isPending) return <Loading />;
+
+  if (error) return <Error message={error} />;
 
   return (
     <>

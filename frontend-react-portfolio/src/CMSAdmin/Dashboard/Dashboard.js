@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
 import useFetch from "../../Components/useFetch";
+import Loading from "../../Components/Loading/Loading";
+import Error from "../../Components/Error/Error";
 
 const Dashboard = () => {
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
   console.log("API_URL:", API_URL);
-  const { data: formsList, error } = useFetch(`${API_URL}/api/dashboard`);
+  const {
+    data: formsList,
+    error,
+    isPending,
+  } = useFetch(`${API_URL}/api/dashboard`);
   // console.log("Form List:", formsList);
-  if (error) {
-    console.error("Error fetching dashboard data:", error);
-    return <p>Failed to load dashboard data</p>;
-  }
+  if (isPending) return <Loading />;
+  if (error) return <Error message={error} />;
 
   return (
     <>

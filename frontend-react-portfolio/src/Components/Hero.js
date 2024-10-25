@@ -1,32 +1,21 @@
 import Swal from "sweetalert2";
 import React, { useEffect, useRef } from "react";
 import Typed from "typed.js";
-import useFetch from "./useFetch";
 import { useAuth } from "../CMSAdmin/Auth/AuthContext";
-import { forwardRef, useImperativeHandle } from "react";
 
-const Hero = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
-  useImperativeHandle(ref, () => ({
-    childFunction,
-  }));
+const Hero = ({ onDeleteClick, onEditClick, hero = [] }) => {
   const { isAuthenticated, isAdminPage } = useAuth();
-
-  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
-
-  const { data: hero, refetch } = useFetch(`${API_URL}/api/hero`);
 
   // console.log("hero auth: ", isAuthenticated);
 
   // console.log("hero rendering: ", hero);
-
-  const childFunction = (newUser) => {
-    // console.log("test function:", newUser);
-    refetch();
-  };
-  /**
+  /*
    * Intro type effect
    */
+  // Create a ref unconditionally
   const typedRef = useRef(null);
+
+  // Hook for initializing Typed.js
   useEffect(() => {
     if (hero && hero.length > 0) {
       const typedElement = document.querySelector(".typed");
@@ -45,13 +34,13 @@ const Hero = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
           });
         }
       }
-      // Cleanup function to destroy the Typed instance
-      return () => {
-        if (typedRef.current) {
-          typedRef.current.destroy();
-        }
-      };
     }
+    // Cleanup function to destroy the Typed instance
+    return () => {
+      if (typedRef.current) {
+        typedRef.current.destroy();
+      }
+    };
   }, [hero]);
 
   const handleDeleteClick = (heroId) => {
@@ -129,6 +118,6 @@ const Hero = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
       {/* End Hero Section */}
     </>
   );
-});
+};
 
 export default Hero;

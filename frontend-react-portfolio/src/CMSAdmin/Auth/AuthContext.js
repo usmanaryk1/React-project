@@ -1,4 +1,3 @@
-// AuthContext.js
 import React, {
   createContext,
   useState,
@@ -16,7 +15,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const location = useLocation();
   const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true); // New loading state
+  const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const isAdminPage = location.pathname.startsWith("/form");
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
@@ -31,20 +30,53 @@ export const AuthProvider = ({ children }) => {
     setUser(loggedInUser);
     setIsAuthenticated(authentication);
     localStorage.setItem("user", JSON.stringify(loggedInUser));
-    localStorage.setItem("token", token); // Save JWT token
+    localStorage.setItem("token", token);
     localStorage.setItem("userId", loggedInUser._id);
   };
 
-  // Use useCallback to avoid recreating the function on every render
-  const onLogout = useCallback(async () => {
-    await signOut(auth); // Sign out from Firebase
+  const isTokenExpired = (token) => {
+    if (token) {
+      try {
+        const tokenPayload = JSON.parse(atob(token.split(".")[1]));
+        const expiry = tokenPayload.exp * 1000;
+        return Date.now() > expiry;
+      } catch (error) {
+        console.error("Failed to decode the token:", error.message);
+      }
+    }
+    return true; // Default to true if no token
+  };
 
+  const onLogout = useCallback(async () => {
     const token = localStorage.getItem("token");
 
+    if (token) {
+      try {
+        // Check if token has expired
+        if (isTokenExpired(token)) {
+          // Token expired, log out without making a backend request
+          setUser(null);
+          setIsAuthenticated(false);
+          localStorage.removeItem("user");
+          localStorage.removeItem("token");
+          localStorage.removeItem("userId");
+          toast.info("Session expired. Logged out automatically.");
+          await signOut(auth);
+          return;
+        }
+      } catch (error) {
+        console.error("Failed to decode token", error);
+        toast.error("Error Logging out.");
+        await signOut(auth);
+        return;
+      }
+    }
+
+    // Proceed with backend logout if token is valid
     const response = await fetch(`${API_URL}/api/auth/logout`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token} `,
       },
     });
 
@@ -58,19 +90,30 @@ export const AuthProvider = ({ children }) => {
     } else {
       toast.error("Failed to log out. Please try again.");
     }
-  }, [API_URL]);
-  const isTokenExpired = (token) => {
-    if (token) {
-      try {
-        const tokenPayload = JSON.parse(atob(token.split(".")[1]));
-        const expiry = tokenPayload.exp * 1000; // Convert to milliseconds
-        return Date.now() > expiry;
-      } catch (error) {
-        console.error("Failed to decode the token:", error.message);
-      }
-    }
-    return true; // Default to true if no token
-  };
+
+    await signOut(auth);
+  }, [API_URL, auth]);
+
+  // const onLogout = useCallback(async () => {
+  //   await signOut(auth);
+  //   const token = localStorage.getItem("token");
+
+  //   const response = await fetch(`${API_URL}/api/auth/logout`, {
+  //     method: "POST",
+  //   });
+
+  //   if (response.ok) {
+  //     setUser(null);
+  //     setIsAuthenticated(false);
+  //     localStorage.removeItem("user");
+  //     localStorage.removeItem("token");
+  //     localStorage.removeItem("userId");
+  //     toast.success("Logged out successfully!");
+  //   } else {
+  //     toast.error("Failed to log out. Please try again.");
+  //   }
+  // }, [API_URL]);
+
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const token = localStorage.getItem("token");
@@ -98,7 +141,7 @@ export const AuthProvider = ({ children }) => {
         onLogin,
         onLogout,
         isAdminPage,
-        isLoading, // Expose isLoading to consumers
+        isLoading,
       }}
     >
       {children}

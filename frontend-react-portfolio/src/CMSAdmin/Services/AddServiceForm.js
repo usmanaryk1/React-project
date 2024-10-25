@@ -7,6 +7,8 @@ import validationSchema from "./ServiceValidation";
 import Services from "../../Components/Services";
 import "../Icons/IconsDropdownCss.css";
 import CustomIconDropdown from "../Icons/CustomIconDropdown";
+import Loading from "../../Components/Loading/Loading";
+import Error from "../../Components/Error/Error";
 
 const AddServiceForm = () => {
   const token = localStorage.getItem("token");
@@ -19,6 +21,8 @@ const AddServiceForm = () => {
     data: services,
     setData: setServices,
     refetch,
+    isPending,
+    error,
   } = useFetch(`${API_URL}/api/services`);
   const {
     register,
@@ -143,6 +147,10 @@ const AddServiceForm = () => {
     }
   };
 
+  if (isPending) return <Loading />;
+
+  if (error) return <Error message={error} />;
+
   return (
     <>
       {/* Service Form Start */}
@@ -163,32 +171,6 @@ const AddServiceForm = () => {
                     selectedIcon={selectedIcon} // Pass selectedIcon
                     setSelectedIcon={setSelectedIcon} // Pass setter function // Add this line
                   />
-                  {/* <div className="form-group">
-                    <select
-                      name="icon"
-                      className="form-control"
-                      {...register("icon")}
-                    >
-                      <option value="">Select an icon</option>
-                      {icons.map((icon, index) => (
-                        <option key={index} value={icon.className}>
-                          <img
-                            src={icon.src}
-                            alt={icon.className}
-                            style={{
-                              width: "24px",
-                              height: "24px",
-                              marginRight: "8px",
-                            }}
-                          />
-                          {icon.className.replace("bi-", "")}
-                        </option>
-                      ))}
-                    </select>
-                  </div> */}
-                  {/* {errors.icon && (
-                    <p className="error-message">{errors.icon.message}</p>
-                  )} */}
                   <div className="form-group">
                     <input
                       type="text"

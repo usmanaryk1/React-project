@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import validationSchema from "./ContactValidation";
 import useFetch from "../../Components/useFetch";
 import { useState, useEffect } from "react";
+import Loading from "../../Components/Loading/Loading";
+import Error from "../../Components/Error/Error";
 const ContactForm = () => {
   const [currentContact, setCurrentContact] = useState(null);
   const token = localStorage.getItem("token");
@@ -15,6 +17,8 @@ const ContactForm = () => {
     data: contacts,
     setData: setContacts,
     refetch,
+    error,
+    isPending,
   } = useFetch(`${API_URL}/api/contact`);
   const {
     register,
@@ -133,13 +137,14 @@ const ContactForm = () => {
       toast.error("Failed to delete service");
     }
   };
+
+  if (isPending) return <Loading />;
+
+  if (error) return <Error message={error} />;
+
   return (
     <>
-      <section
-        id="contact-form"
-        className="contact-form form"
-        style={{ backgroundImage: "url(assets/img/overlay-bg.jpg)" }}
-      >
+      <section id="contact-form" className="contact-form form">
         <div className="container">
           <div className="row">
             <div className="contact-container">

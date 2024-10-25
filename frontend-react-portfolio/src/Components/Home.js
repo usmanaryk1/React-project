@@ -4,7 +4,9 @@ import Certifications from "./Certifications";
 // import BlogDetails from "./BlogDetails";
 import Contact from "./Contact";
 import Counter from "./Counter";
+import Error from "./Error/Error";
 import Hero from "./Hero";
+import Loading from "./Loading/Loading";
 import Portfolio from "./Portfolio";
 import Services from "./Services";
 import Testimonial from "./Testimonial";
@@ -13,6 +15,7 @@ import useFetch from "./useFetch";
 const Home = () => {
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
+  const { data: hero, isPending, error } = useFetch(`${API_URL}/api/hero`);
   const { data: about } = useFetch(`${API_URL}/api/about`);
   const { data: services } = useFetch(`${API_URL}/api/services`);
   const { data: counts } = useFetch(`${API_URL}/api/counts`);
@@ -22,10 +25,18 @@ const Home = () => {
   const { data: contacts } = useFetch(`${API_URL}/api/contact`);
   const { data: links } = useFetch(`${API_URL}/api/social`);
 
+  if (isPending) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error message={error} />;
+  }
+
   return (
     <>
       <main id="main">
-        <Hero />
+        <Hero hero={hero} />
         <About about={about} />
         <Services
           title="Services"

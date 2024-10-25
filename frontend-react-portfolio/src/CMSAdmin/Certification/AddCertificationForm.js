@@ -9,6 +9,8 @@ import { v4 } from "uuid";
 import { storage } from "../../firebaseConfig"; // Import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Resizer from "react-image-file-resizer"; // Import the image resizer
+import Error from "../../Components/Error/Error";
+import Loading from "../../Components/Loading/Loading";
 
 const AddCertificationForm = () => {
   const [currentCertifications, setCurrentCertifications] = useState(null);
@@ -18,6 +20,8 @@ const AddCertificationForm = () => {
   const {
     data: certifications,
     setData: setCertifications,
+    isPending,
+    error,
     refetch,
   } = useFetch(`${API_URL}/api/certifications`);
   const {
@@ -255,6 +259,10 @@ const AddCertificationForm = () => {
     }
   };
 
+  if (isPending) return <Loading />;
+
+  if (error) return <Error message={error} />;
+
   return (
     <>
       {/* Certification Form Start */}
@@ -266,85 +274,85 @@ const AddCertificationForm = () => {
                 <h2>Add Certifications Info!</h2>
               </div>
               <div className="col-12">
-                <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                  <div className="img-container d-flex">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  noValidate
+                  className="p-0"
+                >
+                  <div className="img-container row justify-content-center">
                     <div
-                      className="image mx-auto"
+                      className="image col-12 col-sm-6 text-center mb-4"
                       onClick={() => handleImageClick("file-input1")}
                     >
-                      {image1 ? (
-                        <img
-                          src={URL.createObjectURL(image1)}
-                          alt=""
-                          className="img-display-before"
+                      <div>
+                        {image1 ? (
+                          <img
+                            src={URL.createObjectURL(image1)}
+                            alt=""
+                            className="img-display-before mx-auto"
+                          />
+                        ) : (
+                          <img
+                            src={
+                              base64Image1 ||
+                              "../assets/img/default-work-image.webp"
+                            }
+                            alt="default"
+                            className="img-display-before mx-auto"
+                          />
+                        )}
+                        <input
+                          type="file"
+                          name="file1"
+                          id="file-input1"
+                          accept={acceptedFileTypes}
+                          multiple={false}
+                          onChange={handleImage1Change}
+                          ref={image1Ref}
+                          style={{ display: "none" }}
+                          required
                         />
-                      ) : (
-                        <img
-                          src={
-                            base64Image1 ||
-                            "../assets/img/default-work-image.webp"
-                          }
-                          alt="default"
-                          className="img-display-before"
-                        />
-                      )}
-                      <input
-                        type="file"
-                        name="file1"
-                        id="file-input1"
-                        accept={acceptedFileTypes}
-                        multiple={false}
-                        onChange={handleImage1Change}
-                        ref={image1Ref}
-                        style={{ display: "none" }}
-                        required
-                      />
-                      {errors.file1 && (
-                        <p className="error-message">{errors.file1.message}</p>
-                      )}
+                      </div>
+                      <label className="my-3">
+                        <b>Choose Project Image</b>
+                      </label>
                     </div>
                     <div
-                      className="image mx-auto"
+                      className="image col-12 col-sm-6 text-center mb-4"
                       onClick={() => handleImageClick("file-input2")}
                     >
-                      {image2 ? (
-                        <img
-                          src={URL.createObjectURL(image2)}
-                          alt=""
-                          className="profile"
+                      <div>
+                        {image2 ? (
+                          <img
+                            src={URL.createObjectURL(image2)}
+                            alt=""
+                            className="profile"
+                          />
+                        ) : (
+                          <img
+                            src={
+                              base64Image2 || "../assets/img/default-image.jpg"
+                            }
+                            alt="default"
+                            className="profile"
+                          />
+                        )}
+                        <input
+                          type="file"
+                          name="file2"
+                          id="file-input2"
+                          accept={acceptedFileTypes}
+                          multiple={false}
+                          onChange={handleImage2Change}
+                          ref={image2Ref}
+                          style={{ display: "none" }}
+                          required
                         />
-                      ) : (
-                        <img
-                          src={
-                            base64Image2 || "../assets/img/default-image.jpg"
-                          }
-                          alt="default"
-                          className="profile"
-                        />
-                      )}
-                      <input
-                        type="file"
-                        name="file2"
-                        id="file-input2"
-                        accept={acceptedFileTypes}
-                        multiple={false}
-                        onChange={handleImage2Change}
-                        ref={image2Ref}
-                        style={{ display: "none" }}
-                        required
-                      />
-                      {errors.file2 && (
-                        <p className="error-message">{errors.file2.message}</p>
-                      )}
+                      </div>
+                      <label className="mx-auto my-3">
+                        <b>Choose Your Image</b>
+                      </label>
                     </div>
-                  </div>
-                  <div className="label-container d-flex">
-                    <label className="mx-auto my-3">
-                      <b>Choose Project Image</b>
-                    </label>
-                    <label className="mx-auto my-3">
-                      <b>Choose Your Image</b>
-                    </label>
                   </div>
 
                   <div className="form-group">
@@ -434,7 +442,7 @@ const AddCertificationForm = () => {
                     )}
                   </div>
 
-                  <div className="buttons">
+                  <div className="buttons d-flex">
                     <button className="reset" type="reset" onClick={onReset}>
                       Reset
                     </button>

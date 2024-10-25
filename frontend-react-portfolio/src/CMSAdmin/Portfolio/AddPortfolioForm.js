@@ -9,6 +9,8 @@ import { v4 } from "uuid";
 import { storage } from "../../firebaseConfig"; // Import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Resizer from "react-image-file-resizer"; // Import the image resizer
+import Error from "../../Components/Error/Error";
+import Loading from "../../Components/Loading/Loading";
 
 const AddPortfolioForm = () => {
   const [currentPortfolio, setCurrentPortfolio] = useState(null);
@@ -18,6 +20,8 @@ const AddPortfolioForm = () => {
     data: works,
     setData: setWorks,
     refetch,
+    isPending,
+    error,
   } = useFetch(`${API_URL}/api/works`);
   const {
     register,
@@ -210,6 +214,10 @@ const AddPortfolioForm = () => {
       console.error("Error deleting portfolio:", error);
     }
   };
+
+  if (isPending) return <Loading />;
+
+  if (error) return <Error message={error} />;
 
   return (
     <>

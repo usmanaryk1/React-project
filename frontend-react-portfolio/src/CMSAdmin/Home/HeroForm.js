@@ -5,17 +5,23 @@ import { toast } from "react-toastify";
 import validationSchema from "./HeroValidation";
 import { useState, useEffect } from "react";
 import useFetch from "../../Components/useFetch";
-import { useRef } from "react";
+import Loading from "../../Components/Loading/Loading";
+import Error from "../../Components/Error/Error";
+
 const HeroForm = () => {
   const token = localStorage.getItem("token");
   // console.log("Stored Token:", token);
 
-  const childRef = useRef();
   const [currentHero, setCurrentHero] = useState(null);
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
 
-  const { data: hero, setData: setHero } = useFetch(`${API_URL}/api/hero`);
+  const {
+    data: hero,
+    setData: setHero,
+    isPending,
+    error,
+  } = useFetch(`${API_URL}/api/hero`);
   console.log("HeroForm", hero);
   const {
     register,
@@ -71,7 +77,6 @@ const HeroForm = () => {
           );
         });
 
-        childRef.current.childFunction();
         toast.success("Content updated successfully");
       }
     } else {
@@ -88,7 +93,6 @@ const HeroForm = () => {
         const result = await response.json();
         // console.log("new hero: ", result);
         setHero((prevHero) => [...prevHero, result]);
-        childRef.current.childFunction();
         toast.success("Hero added successfully");
       } else {
         toast.error("Failed to add Hero");
@@ -119,7 +123,6 @@ const HeroForm = () => {
     });
     if (response.ok) {
       setHero((prevHero) => prevHero.filter((heroData) => heroData._id !== id));
-      childRef.current.childFunction();
       toast.success("Hero section deleted successfully");
       // console.log("Hero section deleted successfully", hero);
     } else {
@@ -127,6 +130,10 @@ const HeroForm = () => {
       toast.error("Failed to delete hero section");
     }
   };
+
+  if (isPending) return <Loading />;
+
+  if (error) return <Error message={error} />;
 
   return (
     <>
@@ -199,12 +206,7 @@ const HeroForm = () => {
         </div>
         <hr />
       </section>
-      <Hero
-        onEditClick={handleEdit}
-        onDeleteClick={handleDelete}
-        ref={childRef}
-        hero={setHero}
-      />
+      <Hero onEditClick={handleEdit} onDeleteClick={handleDelete} hero={hero} />
     </>
   );
 };

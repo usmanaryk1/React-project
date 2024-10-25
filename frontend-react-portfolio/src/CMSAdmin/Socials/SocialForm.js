@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 import Contact from "../../Components/Contact";
 import "../Icons/IconsDropdownCss.css";
 import CustomIconDropdown from "../Icons/CustomIconDropdown";
+import Error from "../../Components/Error/Error";
+import Loading from "../../Components/Loading/Loading";
 
 const SocialForm = () => {
   const [currentLinks, setCurrentLinks] = useState(null);
@@ -19,6 +21,8 @@ const SocialForm = () => {
     data: links,
     setData: setLinks,
     refetch,
+    isPending,
+    error,
   } = useFetch(`${API_URL}/api/social`);
   const {
     register,
@@ -131,6 +135,10 @@ const SocialForm = () => {
     }
   };
 
+  if (isPending) return <Loading />;
+
+  if (error) return <Error message={error} />;
+
   return (
     <>
       <section id="social-form" className="social-form form">
@@ -151,24 +159,6 @@ const SocialForm = () => {
                     selectedIcon={selectedIcon} // Pass selectedIcon
                     setSelectedIcon={setSelectedIcon} // Pass setter function // Add this line
                   />
-                  {/* <div className="form-group">
-                    <select
-                      name="platformIcon"
-                      className="form-control"
-                      {...register("platformIcon")}
-                      required
-                    >
-                      <option value="">Select an icon</option>
-                      {icons.map((icon) => (
-                        <option key={icon} value={icon}>
-                          {icon.replace("bi-", "")}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  {errors.platform && (
-                    <p className="error-message">{errors.platform.message}</p>
-                  )} */}
 
                   <div className="form-group">
                     <input
