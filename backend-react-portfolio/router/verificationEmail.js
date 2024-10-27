@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 
 const sendVerificationEmail = async (link, email) => {
   const mailOptions = {
-    from: `"Portfolio Support" <${process.env.SENDER_EMAIL}>`, // Replace with your sender email
+    from: `"PortfolioHub Support" <${process.env.SENDER_EMAIL}>`, // Replace with your sender email
     to: email,
     subject: "Verify Your Email Address",
     html: `
@@ -39,19 +39,19 @@ const sendVerificationEmail = async (link, email) => {
     <div style="font-family: Helvetica, Arial, sans-serif; min-width: 1000px; overflow: auto; line-height: 2;">
       <div style="margin: 50px auto; width: 70%; padding: 20px 0;">
         <div style="border-bottom: 1px solid #eee;">
-          Portfolio
+          PortfolioHub
         </div>
         <p style="font-size: 1.1em;">Hi,</p>
-        <p>Thank you for choosing Portfolio. Click the button below to verify your email address:</p>
+        <p>Thank you for choosing PortfolioHub. Click the button below to verify your email address:</p>
         <h2 style="margin: 0 auto; width: max-content; padding: 0 10px;">
           <a href="${link}" style="color: white;">
             Verify It's You!
           </a>
         </h2>
-        <p style="font-size: 0.9em;">Regards,<br />Portfolio</p>
+        <p style="font-size: 0.9em;">Regards,<br />PortfolioHub</p>
         <hr style="border: none; border-top: 1px solid #eee;" />
         <div style="float: right; padding: 8px 0; color: #aaa; font-size: 0.8em; line-height: 1; font-weight: 300;">
-          <p>Portfolio Inc</p>
+          <p>PortfolioHub Inc</p>
           <p>Pakistan</p>
         </div>
       </div>

@@ -25,7 +25,7 @@ router.post("/register", async (req, res) => {
 
     // Step 2: If user doesn't exist, proceed with checking username in database (MongoDB)
     const usernameExists = await UserModel.findOne({ username });
-    console.log("username:", usernameExists);
+    // console.log("username:", usernameExists);
     if (usernameExists) {
       return res.status(400).json({
         message: "Username already exists. Please choose another.",
@@ -38,7 +38,7 @@ router.post("/register", async (req, res) => {
       password,
     });
 
-    console.log("firebase user:", UserRecord);
+    // console.log("firebase user:", UserRecord);
 
     // Step 4: Generate email verification link
     const verificationLink = await admin
@@ -47,7 +47,7 @@ router.post("/register", async (req, res) => {
 
     await sendVerificationEmail(verificationLink, email); // Implement sendEmail function
 
-    console.log("verificationLink", verificationLink);
+    // console.log("verificationLink", verificationLink);
 
     // Step 5: Save the user in MongoDB (MongoDB logic here)
     const newUser = new UserModel({
@@ -56,7 +56,7 @@ router.post("/register", async (req, res) => {
       firebaseUID: UserRecord.uid, // Store Firebase UID for reference
       loggedIn: false,
     });
-    console.log("newuser", newUser);
+    // console.log("newuser", newUser);
     await newUser.save();
 
     res.status(201).json({
@@ -151,7 +151,7 @@ router.post("/login", async (req, res) => {
     const accessToken = jwt.sign(
       { id: existingUser._id },
       process.env.JWT_SECRET,
-      { expiresIn: "7d" }
+      { expiresIn: "5m" }
     );
 
     return res.status(200).json({
@@ -160,6 +160,7 @@ router.post("/login", async (req, res) => {
       accessToken,
     });
   } catch (error) {
+    console.error(error);
     return res
       .status(500)
       .json({ error: "Internal server error. Please try again later." });
@@ -215,6 +216,7 @@ router.post("/logout", authenticateJWT, async (req, res) => {
     );
     return res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
+    console.error(error);
     return res
       .status(500)
       .json({ message: "Logout failed", error: error.message });

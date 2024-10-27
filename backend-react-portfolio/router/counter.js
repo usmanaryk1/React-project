@@ -10,7 +10,8 @@ router.get("/", async (req, res) => {
       return res.status(404).send("Inforamtion Not Found");
     }
     res.status(200).json(CountInfo); // 200 OK status code
-  } catch (err) {
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Failed to fetch data" });
   }
 });
@@ -28,7 +29,8 @@ router.get("/:id", async (req, res) => {
         .send({ message: `Information with ID ${Id} not found` });
     }
     res.status(200).json(CountInfo);
-  } catch (err) {
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: `Failed to fetch data with ${Id}` });
   }
 });
@@ -36,7 +38,7 @@ router.get("/:id", async (req, res) => {
 // POST COUNTER INFO (AUTHENTICATED ONLY)
 
 router.post("/", authenticateJWT, async (req, res) => {
-  console.log("Inside post function");
+  // console.log("Inside post function");
 
   const data = new Counter_Model({
     icon: req.body.icon,
@@ -65,6 +67,7 @@ router.put("/:id", authenticateJWT, async (req, res) => {
     );
     res.status(200).json(updatedCounts);
   } catch (error) {
+    console.error(error);
     res.status(400).json({ error: "Failed to update count" });
   }
 });
@@ -85,7 +88,8 @@ router.delete("/:id", authenticateJWT, async (req, res) => {
       message: `Information with ID ${Id} has been deleted`,
       deletedInfo: CountInfo,
     });
-  } catch (err) {
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: `Failed to delete data with ${Id}` });
   }
 });

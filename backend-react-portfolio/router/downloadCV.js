@@ -33,6 +33,7 @@ router.get("/download-cv/:userId", async (req, res) => {
     // Pipe the file stream to the client
     response.data.pipe(res);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 });

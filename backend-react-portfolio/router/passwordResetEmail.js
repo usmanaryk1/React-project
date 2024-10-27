@@ -11,9 +11,9 @@ const transporter = nodemailer.createTransport({
 });
 const sendPasswordResetEmail = async (link, email) => {
   const mailOptions = {
-    from: `"Portfolio Support" <${process.env.SENDER_EMAIL}>`, // Replace with your sender email
+    from: `"PortfolioHub Support" <${process.env.SENDER_EMAIL}>`, // Replace with your sender email
     to: email,
-    subject: "Password Recovery Link",
+    subject: "Reset Your Password",
     html: `
       <!DOCTYPE html>
       <html lang="en">
@@ -39,19 +39,19 @@ const sendPasswordResetEmail = async (link, email) => {
       <div style="font-family: Helvetica, Arial, sans-serif; min-width: 1000px; overflow: auto; line-height: 2;">
         <div style="margin: 50px auto; width: 70%; padding: 20px 0;">
           <div style="border-bottom: 1px solid #eee;">
-            Portfolio
+            PortfolioHub
           </div>
           <p style="font-size: 1.1em;">Hi,</p>
-          <p>Thank you for choosing Portfolio. Click the button below to reset your password:</p>
+          <p>Thank you for choosing PortfolioHub. Click the button below to reset your password:</p>
           <h2 style="margin: 0 auto; width: max-content; padding: 0 10px;">
             <a href="${link}" style="color: white;">
-              Reset your password
+              Reset Your Password
             </a>
           </h2>
-          <p style="font-size: 0.9em;">Regards,<br />Portfolio</p>
+          <p style="font-size: 0.9em;">Regards,<br />PortfolioHub</p>
           <hr style="border: none; border-top: 1px solid #eee;" />
           <div style="float: right; padding: 8px 0; color: #aaa; font-size: 0.8em; line-height: 1; font-weight: 300;">
-            <p>Portfolio Inc</p>
+            <p>PortfolioHub Inc</p>
             <p>Pakistan</p>
           </div>
         </div>

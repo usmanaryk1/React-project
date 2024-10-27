@@ -12,7 +12,8 @@ router.get("/", async (req, res) => {
       return res.status(404).json({ message: "Inforamtion Not Found" });
     }
     res.status(200).json(TermsAndConditions); // 200 OK status code
-  } catch (err) {
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Failed to fetch data" });
   }
 });
@@ -28,7 +29,8 @@ router.get("/:id", async (req, res) => {
       return res.status(404).send("Inforamtion Not Found");
     }
     res.status(200).json(TermsAndConditions);
-  } catch (err) {
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: `Failed to fetch data with ${Id}` });
   }
 });
@@ -64,6 +66,7 @@ router.put("/:id", authenticateJWT, async (req, res) => {
     );
     res.status(200).json(updatedTerms);
   } catch (error) {
+    console.error(error);
     res.status(400).json({ error: `Failed to Update Terms: ${error.message}` });
   }
 });
@@ -84,7 +87,8 @@ router.delete("/:id", authenticateJWT, async (req, res) => {
       message: `Information with ID ${Id} has been deleted`,
       deletedInfo: TermsAndConditions,
     });
-  } catch (err) {
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: `Failed to delete data with ${Id}` });
   }
 });
@@ -106,6 +110,7 @@ router.patch("/reorder", authenticateJWT, async (req, res) => {
     // console.log("Terms reordered in the database");
     res.json({ message: "Terms reordered successfully" });
   } catch (error) {
+    console.error(error);
     res.status(400).json({ message: error.message });
   }
 });

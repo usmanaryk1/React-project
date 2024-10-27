@@ -12,7 +12,8 @@ router.get("/", async (req, res) => {
       return res.status(404).send("Inforamtion Not Found");
     }
     res.status(200).json(PersonalSkills); // 200 OK status code
-  } catch (err) {
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Failed to fetch data" });
   }
 });
@@ -28,7 +29,8 @@ router.get("/:id", async (req, res) => {
       return res.status(404).send("Inforamtion Not Found");
     }
     res.status(200).json(PersonalSkills);
-  } catch (err) {
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: `Failed to fetch data with ${Id}` });
   }
 });
@@ -36,7 +38,7 @@ router.get("/:id", async (req, res) => {
 // POST PERSONAL INFO (AUTHENTICATED ONLY)
 
 router.post("/", authenticateJWT, async (req, res) => {
-  console.log("Inside post function");
+  // console.log("Inside post function");
 
   const data = new Personal_SkillsModel({
     name: req.body.name,
@@ -57,7 +59,7 @@ router.post("/", authenticateJWT, async (req, res) => {
 
 router.put("/:id", authenticateJWT, async (req, res) => {
   try {
-    console.log("Request Body", req.body);
+    // console.log("Request Body", req.body);
     const updatedSkills = await Personal_SkillsModel.findByIdAndUpdate(
       req.params.id,
       req.body,
@@ -65,6 +67,7 @@ router.put("/:id", authenticateJWT, async (req, res) => {
     );
     res.status(200).json(updatedSkills);
   } catch (error) {
+    console.error(error);
     res
       .status(400)
       .json({ error: `Failed to update skills: ${error.message}` });
@@ -87,7 +90,8 @@ router.delete("/:id", authenticateJWT, async (req, res) => {
       message: `Information with ID ${Id} has been deleted`,
       deletedInfo: PersonalSkills,
     });
-  } catch (err) {
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: `Failed to delete data with ${Id}` });
   }
 });
