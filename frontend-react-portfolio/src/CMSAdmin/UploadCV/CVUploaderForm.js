@@ -36,7 +36,7 @@ const CVUploader = () => {
   const onSubmit = async (data) => {
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("token"); // Retrieve userId from local storage
-    console.log(userId);
+    // console.log(userId);
 
     if (!token) {
       toast.error("User not logged in!");
@@ -47,13 +47,13 @@ const CVUploader = () => {
       const storageRef = ref(storage, `CV/${file.name + v4()}`);
       const uploadTask = uploadBytesResumable(storageRef, file);
       setIsSubmitting(true);
-      console.log("data", data, userId);
+      // console.log("data", data, userId);
       uploadTask.on(
         "state_changed",
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
+          // console.log("Upload is " + progress + "% done");
           setUploadProgress(progress);
         },
         (error) => {
@@ -64,7 +64,7 @@ const CVUploader = () => {
         async () => {
           try {
             const url = await getDownloadURL(uploadTask.snapshot.ref);
-            console.log("cvurl", url);
+            // console.log("cvurl", url);
             // Save CV URL to MongoDB using fetch API
             const response = await fetch(`${API_URL}/api/upload-cv`, {
               method: "POST",
@@ -82,11 +82,10 @@ const CVUploader = () => {
               throw new Error(`${response.statusText}`);
             }
 
-            const result = await response.json();
-            console.log("CV uploaded:", result);
+            // console.log("CV uploaded:", result);
             toast.success("CV Uploaded Successfully!");
           } catch (error) {
-            console.error("Error uploading CV:", error);
+            // console.error("Error uploading CV:", error);
             toast.error("Error uploading CV:", error);
           } finally {
             setUploadProgress(0); // Reset progress

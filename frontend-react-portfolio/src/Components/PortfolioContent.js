@@ -6,7 +6,7 @@ import { useAuth } from "../CMSAdmin/Auth/AuthContext";
 const PortfolioContent = ({ onDeleteClick, onEditClick, details, workId }) => {
   const { isAuthenticated, isAdminPage } = useAuth();
 
-  console.log(" portfolio details", details);
+  // console.log(" portfolio details", details);
 
   /**
    * Portfolio details slider
@@ -32,7 +32,7 @@ const PortfolioContent = ({ onDeleteClick, onEditClick, details, workId }) => {
     return <div>Loading...</div>;
   }
 
-  console.log("workId in portfolio Content:", workId);
+  // console.log("workId in portfolio Content:", workId);
 
   const handleDeleteClick = (detailsId) => {
     Swal.fire({

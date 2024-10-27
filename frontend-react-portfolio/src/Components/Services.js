@@ -3,7 +3,7 @@ import { useAuth } from "../CMSAdmin/Auth/AuthContext";
 
 const Services = ({ title, subtitle, onEdit, onDelete, services = [] }) => {
   const { isAuthenticated, isAdminPage } = useAuth();
-  console.log("service content: ", services);
+  // console.log("service content: ", services);
 
   const handleDeleteClick = (serviceId) => {
     Swal.fire({

@@ -7,15 +7,11 @@ const token = localStorage.getItem("token");
 // Add a new term
 export const addTerm = async (newTerm) => {
   try {
-    const response = await axios.post(
-      `${API_URL}/api/terms`,
-      { newTerm },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await axios.post(`${API_URL}/api/terms`, newTerm, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error adding term:", error.response?.data || error.message);
@@ -27,7 +23,7 @@ export const updateTerm = async (id, updatedTerm) => {
   try {
     const response = await axios.put(
       `${API_URL}/api/terms/${id}`,
-      { updatedTerm },
+      updatedTerm,
       {
         headers: {
           Authorization: `Bearer ${token}`,

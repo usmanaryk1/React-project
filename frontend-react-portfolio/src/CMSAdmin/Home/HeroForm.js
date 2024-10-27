@@ -22,7 +22,7 @@ const HeroForm = () => {
     isPending,
     error,
   } = useFetch(`${API_URL}/api/hero`);
-  console.log("HeroForm", hero);
+  // console.log("HeroForm", hero);
   const {
     register,
     handleSubmit,
@@ -110,7 +110,7 @@ const HeroForm = () => {
 
   const handleEdit = (heroItem) => {
     setCurrentHero(heroItem);
-    console.log("onedit: ", heroItem);
+    // console.log("onedit: ", heroItem);
   };
 
   const handleDelete = async (id) => {

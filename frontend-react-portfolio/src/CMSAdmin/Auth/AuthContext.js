@@ -50,49 +50,47 @@ export const AuthProvider = ({ children }) => {
   const onLogout = useCallback(async () => {
     const token = localStorage.getItem("token");
 
-    if (token) {
-      try {
-        // Check if token has expired
-        if (isTokenExpired(token)) {
-          // Token expired, log out without making a backend request
-          setUser(null);
-          setIsAuthenticated(false);
-          localStorage.removeItem("user");
-          localStorage.removeItem("token");
-          localStorage.removeItem("userId");
-          toast.info("Session expired. Logged out automatically.");
-          await signOut(auth);
-          return;
-        }
-      } catch (error) {
-        console.error("Failed to decode token", error);
-        toast.error("Error Logging out.");
-        await signOut(auth);
-        return;
-      }
-    }
-
-    // Proceed with backend logout if token is valid
-    const response = await fetch(`${API_URL}/api/auth/logout`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token} `,
-      },
-    });
-
-    if (response.ok) {
+    if (token && isTokenExpired(token)) {
+      console.log("Token expired. Logging out.");
+      // Clear user session
       setUser(null);
       setIsAuthenticated(false);
       localStorage.removeItem("user");
       localStorage.removeItem("token");
       localStorage.removeItem("userId");
-      toast.success("Logged out successfully!");
-    } else {
-      toast.error("Failed to log out. Please try again.");
+      toast.info("Session expired. Logged out automatically.");
+      await signOut(auth);
+      return;
+    }
+
+    // Proceed with backend logout if the token is valid
+    if (token) {
+      try {
+        const response = await fetch(`${API_URL}/api/auth/logout`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          setUser(null);
+          setIsAuthenticated(false);
+          localStorage.removeItem("user");
+          localStorage.removeItem("token");
+          localStorage.removeItem("userId");
+          toast.success("Logged out successfully!");
+        } else {
+          toast.error("Failed to log out. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error during logout:", error);
+        toast.error("Error logging out. Please try again.");
+      }
     }
 
     await signOut(auth);
-  }, [API_URL, auth]);
+  }, [API_URL]);
 
   // const onLogout = useCallback(async () => {
   //   await signOut(auth);

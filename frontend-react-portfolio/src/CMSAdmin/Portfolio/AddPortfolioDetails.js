@@ -116,7 +116,7 @@ const AddPortfolioDetails = () => {
 
   useEffect(() => {
     if (currentDetails) {
-      console.log("Current Details", currentDetails);
+      // console.log("Current Details", currentDetails);
       setValue("client", currentDetails.pClient);
       setValue("category", currentDetails.pCategory);
       setValue("date", currentDetails.pDate);
@@ -305,7 +305,7 @@ const AddPortfolioDetails = () => {
       toast.success("Details deleted successfully");
       history.push("/form/portfolio-form");
     } catch (error) {
-      console.log("Error deleting details:", error);
+      // console.log("Error deleting details:", error);
       toast.error("Failed to delete details");
     }
   };

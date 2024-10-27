@@ -13,7 +13,7 @@ const Error = ({ message }) => {
                   <img src="./assets/img/alert-img.png" alt="Alert" />
                 </div>
                 <h3>Error</h3>
-                <p>{message}</p>
+                <p>{message}!</p>
                 <Link to="/">
                   <i className="bi bi-house-fill"></i> Take me Home!
                 </Link>

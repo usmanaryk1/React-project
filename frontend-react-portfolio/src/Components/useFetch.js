@@ -9,7 +9,7 @@ const useFetch = (url) => {
 
   useEffect(() => {
     const fetchData = async (data) => {
-      console.log("fetching data", data);
+      // console.log("fetching data", data);
       setIsPending(true);
       try {
         const response = await fetch(url);
@@ -18,7 +18,7 @@ const useFetch = (url) => {
         }
         const result = await response.json();
         setData(result);
-        console.log("fetched data: ", result);
+        // console.log("fetched data: ", result);
         setError(null);
         setIsPending(false);
       } catch (err) {

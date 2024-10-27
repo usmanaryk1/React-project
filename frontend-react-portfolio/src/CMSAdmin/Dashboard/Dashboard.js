@@ -5,7 +5,7 @@ import Error from "../../Components/Error/Error";
 
 const Dashboard = () => {
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
-  console.log("API_URL:", API_URL);
+  // console.log("API_URL:", API_URL);
   const {
     data: formsList,
     error,

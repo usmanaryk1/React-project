@@ -32,7 +32,7 @@ const ForgetPwd = () => {
         body: JSON.stringify({ email }),
       });
       const result = await response.json();
-      console.log("result:", result);
+      // console.log("result:", result);
       if (!response.ok) {
         toast.error(result.message);
       } else {

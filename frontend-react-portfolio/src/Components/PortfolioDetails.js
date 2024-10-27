@@ -6,6 +6,7 @@ import { forwardRef, useImperativeHandle } from "react";
 import { useLocation } from "react-router-dom/cjs/react-router-dom";
 import Loading from "./Loading/Loading";
 import Error from "./Error/Error";
+import NullData from "./NullData/NullData";
 
 const PortfolioDetails = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
   useImperativeHandle(ref, () => ({
@@ -30,11 +31,13 @@ const PortfolioDetails = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
   // console.log("details data ", details);
 
   const childFunction = (newWorkDetailsId) => {
-    console.log("newWorkDetailsId:", newWorkDetailsId);
+    // console.log("newWorkDetailsId:", newWorkDetailsId);
     refetch();
   };
 
   if (isPending) return <Loading />;
+
+  if (!details) return <NullData message="Details" />;
 
   if (error) return <Error message={error} />;
 

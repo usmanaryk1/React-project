@@ -19,6 +19,7 @@ import Error from "../Error/Error";
 import TermsForm from "./TermsForm";
 import TermItem from "./TermItem";
 import { useForm } from "react-hook-form";
+import NullData from "../NullData/NullData";
 
 const TermsandConditions = () => {
   const [editingTerm, setEditingTerm] = useState(null); // Track which term is being edited
@@ -177,7 +178,7 @@ const TermsandConditions = () => {
             />
           ))
         ) : (
-          <p className="zeroTerms mb-3">No terms available</p>
+          <NullData message="Terms" />
         )}
       </div>
     </DndProvider>
