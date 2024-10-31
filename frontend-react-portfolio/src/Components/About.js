@@ -139,9 +139,7 @@ const About = ({ onEditClick, onDeleteClick, about = [] }) => {
                               </div>
                             )}
                           </div>
-                          <p className="lead">{about.desc1}</p>
-                          <p className="lead">{about.desc2}</p>
-                          <p className="lead">{about.desc3}</p>
+                          <p className="lead">{about.desc}</p>
                         </div>
                       </div>
                     </div>

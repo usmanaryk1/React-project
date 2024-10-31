@@ -11,6 +11,7 @@ import { v4 } from "uuid";
 import Resizer from "react-image-file-resizer"; // Import the image resizer
 import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
+import ImageCropper from "../ImageCropper/ImageCropper";
 
 const AddForm = () => {
   const {
@@ -32,12 +33,13 @@ const AddForm = () => {
   });
 
   const token = localStorage.getItem("token");
-  // const firebaseToken = localStorage.getItem("key");
-  const [image, setImage] = useState(null);
   const imageRef = useRef(null);
   const [base64Image, setBase64Image] = useState("");
   const [currentAbout, setCurrentAbout] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
+  const [isCropping, setIsCropping] = useState(false);
+  const [imageSrc, setImageSrc] = useState(null);
+  const [croppedImage, setCroppedImage] = useState(null);
 
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
@@ -49,7 +51,8 @@ const AddForm = () => {
     refetch,
   } = useFetch(`${API_URL}/api/about`);
 
-  // console.log("about:", about);
+  console.log("about", about);
+
   useEffect(() => {
     if (currentAbout) {
       setValue("name", currentAbout.name);
@@ -59,38 +62,50 @@ const AddForm = () => {
       setValue("desc", currentAbout.desc1);
       setValue("isActive", currentAbout.isActive);
       setBase64Image(currentAbout.img);
-      setImage(null);
     } else {
       reset();
       setBase64Image("");
     }
   }, [currentAbout, setValue, reset]);
 
-  const acceptedFileTypes =
-    "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
+  if (isPending) return <Loading />;
 
-  const handleImageClick = () => {
-    document.getElementById("file-input").click();
-  };
+  if (error) return <Error message={error} />;
 
-  const handleImageChange = async (e) => {
+  const handleImageClick = () => imageRef.current.click();
+
+  const handleImageChange = (e) => {
     const file = e.target.files[0];
-    const resizedImage = await resizeImage(file);
-    setBase64Image(resizedImage.base64);
-    // console.log("base64", base64);
-    setImage(resizedImage.file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => setImageSrc(reader.result);
+      reader.readAsDataURL(file);
+      setIsCropping(true);
+    }
   };
-  const resizeImage = (file) => {
-    return new Promise((resolve) => {
+
+  const handleCropComplete = async (croppedImg) => {
+    if (croppedImg) {
+      const resizedImage = await resizeImage(croppedImg);
+      setCroppedImage(resizedImage.file);
+      setBase64Image(resizedImage.base64);
+      setIsCropping(false);
+    } else {
+      console.error("Cropped image is not valid");
+    }
+  };
+
+  const resizeImage = (file) =>
+    new Promise((resolve) => {
       Resizer.imageFileResizer(
         file,
         150,
         150,
         "WEBP",
-        70, // Adjust quality to manage file size
+        70,
         0,
-        async (uri) => {
-          const blob = await fetch(uri).then((r) => r.blob());
+        (uri) => {
+          const blob = new Blob([uri], { type: "image/webp" });
           const resizedFile = new File([blob], file.name, {
             type: "image/webp",
           });
@@ -99,91 +114,77 @@ const AddForm = () => {
         "base64"
       );
     });
+
+  const uploadImageToFirebase = async (croppedImage) => {
+    if (!croppedImage) return null;
+    const imageRef = ref(storage, `aboutImages/${croppedImage.name + v4()}`);
+    await uploadBytes(imageRef, croppedImage);
+    return await getDownloadURL(imageRef); // Generate URL for displaying
   };
 
-  const uploadImageToFirebase = async (imageFile) => {
-    if (!imageFile) return null;
-
-    const imageRef = ref(storage, `aboutImages/${imageFile.name + v4()}`);
-    await uploadBytes(imageRef, imageFile);
-    // Complete the upload
+  const onSubmit = async (formData) => {
+    console.log("formdata", formData);
     setIsSubmitting(true);
-    const downloadURL = await getDownloadURL(imageRef);
-    return downloadURL;
-  };
-
-  const onSubmit = async (formObject) => {
-    setIsSubmitting(true);
+    console.log("base64Image", base64Image);
     let imageUrl = base64Image;
-
-    // If a new image is selected, upload it to Firebase Storage
-    if (image) {
-      try {
-        imageUrl = await uploadImageToFirebase(image);
-      } catch (error) {
-        console.error("Error uploading image to Firebase:", error);
-        toast.error("Failed to upload image");
+    console.log("imageUrl", imageUrl);
+    if (croppedImage) {
+      imageUrl = await uploadImageToFirebase(croppedImage);
+      console.log("imageUrl2", imageUrl);
+      if (!imageUrl) {
+        toast.error("Image upload failed");
+        setIsSubmitting(false);
         return;
       }
     }
 
     const updatedData = {
-      name: formObject.name,
-      profile: formObject.profile,
-      email: formObject.email,
-      phone: formObject.phone,
-      desc1: formObject.desc, // Assuming all desc is in one textarea
+      ...formData,
+      desc: formData.desc,
       img: imageUrl,
-      isActive: formObject.isActive,
     };
-    // console.log("imageUrl", imageUrl);
 
-    if (currentAbout) {
-      const response = await fetch(`${API_URL}/api/about/${currentAbout._id}`, {
-        method: "PUT",
+    try {
+      const method = currentAbout ? "PUT" : "POST";
+      const url = currentAbout
+        ? `${API_URL}/api/about/${currentAbout._id}`
+        : `${API_URL}/api/about`;
+      const response = await fetch(url, {
+        method,
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedData),
       });
-      const result = await response.json();
-      setAbout(about.map((item) => (item._id === result._id ? result : item)));
-      // console.log("About info updated successfully", about);
-      toast.success("About info updated successfully");
-    } else {
-      const response = await fetch(`${API_URL}/api/about`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedData),
-      });
+
       if (response.ok) {
         const result = await response.json();
-        setAbout((prevAboutList) => [...prevAboutList, result]);
-
-        // console.log("About info added successfully", about);
-        toast.success("About info added successfully");
+        if (currentAbout) {
+          setAbout(
+            about.map((item) => (item._id === result._id ? result : item))
+          );
+          toast.success("About info updated successfully");
+        } else {
+          setAbout([...about, result]);
+          toast.success("About info added successfully");
+        }
+        reset();
+        setCurrentAbout(null);
       } else {
-        toast.error("Failed to add about info");
+        throw new Error("Failed to save about info");
       }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setIsSubmitting(false);
+      setBase64Image("");
     }
-
-    reset();
-    setImage(null);
-    setBase64Image("");
-    setIsSubmitting(false);
-    setCurrentAbout(null);
   };
-
   const onReset = () => {
     reset();
-    setImage(null);
+    setCurrentAbout(null);
     setBase64Image("");
-    setIsSubmitting(false);
-    setCurrentAbout(null); // Clear the image state
   };
 
   const handleEdit = (about) => {
@@ -207,10 +208,6 @@ const AddForm = () => {
     }
   };
 
-  if (isPending) return <Loading />;
-
-  if (error) return <Error message={error} />;
-
   return (
     <>
       <section id="about-form" className="form">
@@ -223,39 +220,40 @@ const AddForm = () => {
               <div className="col-12">
                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
                   <div className="img-container text-center">
-                    <div className="image" onClick={handleImageClick}>
-                      {image ? (
-                        <img
-                          src={URL.createObjectURL(image)}
-                          alt=""
-                          className="img-display-after"
-                        />
-                      ) : (
-                        <img
-                          src={base64Image || "../assets/img/default-image.jpg"}
-                          alt="default"
-                          className="img-display-before"
-                        />
-                      )}
+                    <div className="image">
+                      <img
+                        src={base64Image || "../assets/img/default-image.jpg"}
+                        alt="Profile"
+                        className="img-display-before"
+                        onClick={handleImageClick}
+                      />
+
                       <input
                         type="file"
-                        name="file"
-                        id="file-input"
-                        {...register("file")}
-                        accept={acceptedFileTypes}
-                        multiple={false}
-                        onChange={handleImageChange}
                         ref={imageRef}
+                        accept="image/*"
+                        onChange={handleImageChange}
                         style={{ display: "none" }}
                       />
+                      {isCropping && (
+                        <ImageCropper
+                          imageSrc={imageSrc}
+                          onCropComplete={handleCropComplete}
+                          onClose={() => setIsCropping(false)}
+                        />
+                      )}
+                      {/* {croppedImage && (
+                        <img
+                          src={URL.createObjectURL(croppedImage)}
+                          alt="Cropped"
+                        />
+                      )} */}
                     </div>
                     <label className="my-3">
                       <b>Choose Profile Image</b>
                     </label>
                   </div>
-                  {errors.file && (
-                    <p className="error-message">{errors.file.message}</p>
-                  )}
+
                   <div className="form-group">
                     <input
                       type="text"
@@ -365,5 +363,4 @@ const AddForm = () => {
     </>
   );
 };
-
 export default AddForm;
