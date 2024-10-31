@@ -46,7 +46,7 @@ router.post("/", authenticateJWT, async (req, res) => {
     profile: req.body.profile,
     email: req.body.email,
     phone: req.body.phone,
-    desc1: req.body.desc1,
+    desc: req.body.desc,
     img: req.body.img,
     isActive: req.body.isActive,
   });

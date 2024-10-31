@@ -20,7 +20,7 @@ const aboutSchema = new Schema({
     type: String,
     required: true,
   },
-  desc1: {
+  desc: {
     type: String,
     required: true,
   },
