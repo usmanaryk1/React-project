@@ -11,9 +11,9 @@ import Login from "./CMSAdmin/Auth/Login/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "./CMSAdmin/Auth/AuthContext";
-import AddPortfolioDetails from "./CMSAdmin/Portfolio/AddPortfolioDetails";
 import NotFound from "./Components/404Page/404Page";
 import TermsandConditions from "./Components/TermsAndConditions/Terms&Conditions";
+import AddPortfolioDetails from "./CMSAdmin/PortfolioDetails/AddPortfolioDetails";
 
 function App() {
   return (

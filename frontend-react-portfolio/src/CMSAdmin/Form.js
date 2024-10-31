@@ -12,12 +12,12 @@ import ForgetPwd from "./Auth/ForgetPwd/ForgetPwd";
 // import ResetPwd from "./Auth/ResetPwd/ResetPwd";
 import AddTestimonialForm from "./Testimonial/AddTestimonialForm";
 import AddCounterForm from "./Counter/AddCounterForm";
-import AddPortfolioDetails from "./Portfolio/AddPortfolioDetails";
 import PrivateRoute from "./Auth/AuthGuard";
 import { useAuth } from "./Auth/AuthContext";
 import SocialForm from "./Socials/SocialForm";
 import CVUploader from "./UploadCV/CVUploaderForm";
 import TermsAndConditionsEdit from "./TermsAndConditionsEdit/TermsAndConditionsEdit";
+import AddPortfolioDetails from "./PortfolioDetails/AddPortfolioDetails";
 
 const Form = () => {
   const { isAuthenticated } = useAuth();

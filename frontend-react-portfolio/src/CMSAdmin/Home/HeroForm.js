@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import useFetch from "../../Components/useFetch";
 import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
+import "./HeroForm.css";
 
 const HeroForm = () => {
   const token = localStorage.getItem("token");

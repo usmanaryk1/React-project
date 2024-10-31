@@ -1,0 +1,11 @@
+/*--------------------------------------------------------------
+# Hero Form 
+--------------------------------------------------------------*/
+.hero-container {
+  border-radius: 5px;
+  max-width: 550px;
+  margin: 120px auto;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
+}

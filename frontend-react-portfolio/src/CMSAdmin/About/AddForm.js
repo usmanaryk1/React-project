@@ -12,6 +12,7 @@ import Resizer from "react-image-file-resizer"; // Import the image resizer
 import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
 import ImageCropper from "../ImageCropper/ImageCropper";
+import "./AddForm.css";
 
 const AddForm = () => {
   const {
@@ -219,13 +220,12 @@ const AddForm = () => {
               </div>
               <div className="col-12">
                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                  <div className="img-container text-center">
-                    <div className="image">
+                  <div className="img-container row justify-content-center">
+                    <div className="image col-12 text-center">
                       <img
                         src={base64Image || "../assets/img/default-image.jpg"}
                         alt="Profile"
                         className="img-display-before"
-                        onClick={handleImageClick}
                       />
 
                       <input
@@ -249,8 +249,11 @@ const AddForm = () => {
                         />
                       )} */}
                     </div>
-                    <label className="my-3">
-                      <b>Choose Profile Image</b>
+                    <label
+                      className="my-3 img-btn col-12 text-center"
+                      onClick={handleImageClick}
+                    >
+                      Choose Profile Image
                     </label>
                   </div>
 

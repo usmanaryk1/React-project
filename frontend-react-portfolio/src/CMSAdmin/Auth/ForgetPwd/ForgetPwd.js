@@ -4,6 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import "./ForgetPwd.css";
+
 const ForgetPwd = () => {
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
   const [isSubmitting, setIsSubmitting] = useState(false);

@@ -1,0 +1,33 @@
+/*--------------------------------------------------------------
+# About Form 
+--------------------------------------------------------------*/
+.add-container {
+  border-radius: 5px;
+  max-width: 550px;
+  margin: 120px auto;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
+}
+
+.add-container .img-display-before {
+  width: 150px;
+  height: 150px;
+  object-fit: cover; /* Ensures the image is cropped to fill the area */
+  border-radius: 5px;
+}
+
+.img-btn {
+  background: #0062d3;
+  color: #fff;
+  border: 0;
+  max-width: 14rem;
+  min-width: 2rem;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.img-btn:hover {
+  transform: scale(1.05);
+}

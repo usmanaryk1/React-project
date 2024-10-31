@@ -1,0 +1,58 @@
+/*--------------------------------------------------------------
+# Reset Form 
+--------------------------------------------------------------*/
+
+.reset-container {
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 130px auto 50px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
+  text-align: center;
+}
+
+.reset-container h2 {
+  color: black;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.reset-link {
+  background: #0062d3;
+  color: #fff;
+  border: 0;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  width: 100%;
+  margin: 20px auto 5px;
+  transition: transform 0.3s ease;
+}
+
+.reset .reset-link:hover {
+  transform: scale(1.1);
+}
+.reset-dots {
+  background: #0062d3;
+  font-size: 1.5rem;
+  color: #fff;
+  border: 0;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  width: 100%;
+  margin: 20px auto 5px;
+  transition: transform 0.3s ease;
+}
+.reset .reset-dots:hover {
+  transform: scale(1.1);
+}
+.reset-container input {
+  width: 100%;
+  padding: 20px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}

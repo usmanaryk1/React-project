@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth } from "../../../firebaseConfig";
 import { confirmPasswordReset } from "firebase/auth";
+import "./ResetPwd.css";
 
 const ResetPwd = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);

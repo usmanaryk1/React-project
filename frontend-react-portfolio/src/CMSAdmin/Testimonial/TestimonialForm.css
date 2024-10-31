@@ -1,0 +1,26 @@
+/*--------------------------------------------------------------
+# Testimonial Form 
+--------------------------------------------------------------*/
+
+.testimonial-container {
+  border-radius: 5px;
+  max-width: 550px;
+  margin: 120px auto;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
+}
+
+.testimonial-container .img-display-before .img-display-after {
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.testimonial-container .img-display-before {
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
+  object-fit: cover;
+}

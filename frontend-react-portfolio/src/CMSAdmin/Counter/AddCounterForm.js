@@ -9,6 +9,7 @@ import "../Icons/IconsDropdownCss.css";
 import CustomIconDropdown from "../Icons/CustomIconDropdown";
 import Error from "../../Components/Error/Error";
 import Loading from "../../Components/Loading/Loading";
+import "./CounterForm.css";
 
 const AddCounterForm = () => {
   const token = localStorage.getItem("token");

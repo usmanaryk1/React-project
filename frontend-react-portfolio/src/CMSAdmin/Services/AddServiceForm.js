@@ -9,6 +9,7 @@ import "../Icons/IconsDropdownCss.css";
 import CustomIconDropdown from "../Icons/CustomIconDropdown";
 import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
+import "./ServicesForm.css";
 
 const AddServiceForm = () => {
   const token = localStorage.getItem("token");

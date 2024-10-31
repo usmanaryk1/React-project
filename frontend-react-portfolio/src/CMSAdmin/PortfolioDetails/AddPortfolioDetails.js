@@ -17,6 +17,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Resizer from "react-image-file-resizer"; // Ensure you have this import
 import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
+import "./PortfolioDetailsForm.css";
 
 const AddPortfolioDetails = () => {
   const {

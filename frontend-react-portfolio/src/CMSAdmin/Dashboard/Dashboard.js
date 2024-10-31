@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import useFetch from "../../Components/useFetch";
 import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
+import "./Dashboard.css";
 
 const Dashboard = () => {
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";

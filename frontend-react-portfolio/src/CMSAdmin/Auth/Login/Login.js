@@ -7,6 +7,7 @@ import { useAuth } from "../AuthContext";
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
+import "./Login.css";
 
 const Login = () => {
   const { onLogin } = useAuth();

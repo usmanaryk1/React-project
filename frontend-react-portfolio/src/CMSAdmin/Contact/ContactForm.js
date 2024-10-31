@@ -7,6 +7,8 @@ import useFetch from "../../Components/useFetch";
 import { useState, useEffect } from "react";
 import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
+import "./ContactForm.css";
+
 const ContactForm = () => {
   const [currentContact, setCurrentContact] = useState(null);
   const token = localStorage.getItem("token");

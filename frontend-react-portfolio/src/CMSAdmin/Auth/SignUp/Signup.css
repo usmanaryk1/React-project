@@ -1,17 +1,83 @@
+/*--------------------------------------------------------------
+# SignUp Form 
+--------------------------------------------------------------*/
 
-  .swal2-footer .swal2-link {
-    color: #3085d6;
-    text-decoration: none;
-    background-color: #fff;
-    padding: 0.625em 2em;
-    border: 1px solid #3085d6;
-    border-radius: 0.25em;
-    cursor: pointer;
-  }
+.signup-container {
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 130px auto 50px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
+  text-align: center;
+}
 
-  .swal2-footer .swal2-link:hover {
-    background-color: #3085d6;
-    color: #fff;
-  }
+.signup-container h2 {
+  color: black;
+  margin-top: 30px;
+  text-align: center;
+}
 
-  
+.signup-container input[type="checkbox"] {
+  text-align: left;
+}
+
+.sign .sign-button {
+  background: #0062d3;
+  color: #fff;
+  border: 0;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  width: 100%;
+  margin: 20px auto 5px;
+  transition: transform 0.3s ease;
+}
+
+.sign .sign-button:hover {
+  transform: scale(1.1);
+}
+
+.signup-container input {
+  width: 100%;
+  padding: 20px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
+.signup-container .error-message {
+  color: white;
+  text-align: left;
+  background-color: rgb(195 25 25);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+.log {
+  margin: 30px auto;
+  transition: transform 0.3s ease;
+}
+
+.log a {
+  color: #0062d3;
+  cursor: pointer;
+}
+.log:hover {
+  transform: scale(1.1);
+  border-color: #007bff;
+}
+
+.swal2-footer .swal2-link {
+  color: #3085d6;
+  text-decoration: none;
+  background-color: #fff;
+  padding: 0.625em 2em;
+  border: 1px solid #3085d6;
+  border-radius: 0.25em;
+  cursor: pointer;
+}
+
+.swal2-footer .swal2-link:hover {
+  background-color: #3085d6;
+  color: #fff;
+}

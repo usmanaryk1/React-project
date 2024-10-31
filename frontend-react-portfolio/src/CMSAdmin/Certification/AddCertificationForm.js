@@ -11,6 +11,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Resizer from "react-image-file-resizer"; // Import the image resizer
 import Error from "../../Components/Error/Error";
 import Loading from "../../Components/Loading/Loading";
+import "./AddCertification.css";
 
 const AddCertificationForm = () => {
   const [currentCertifications, setCurrentCertifications] = useState(null);

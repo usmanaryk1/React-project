@@ -6,6 +6,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import validationSchema from "./CVValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
+import "./CVForm.css";
 
 const CVUploader = () => {
   const [preview, setPreview] = useState(null);
