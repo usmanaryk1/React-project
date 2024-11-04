@@ -10,7 +10,7 @@
   box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
 }
 
-.add-container .img-display-before {
+.add-container .img-display {
   width: 150px;
   height: 150px;
   object-fit: cover; /* Ensures the image is cropped to fill the area */

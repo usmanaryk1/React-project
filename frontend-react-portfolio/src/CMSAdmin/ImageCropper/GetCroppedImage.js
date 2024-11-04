@@ -1,7 +1,9 @@
-export default function getCroppedImg(imageSrc, croppedAreaPixels) {
+export default function getCroppedImg(imageSrc, fileName, croppedAreaPixels) {
   return new Promise((resolve) => {
     const image = new Image();
+    console.log("image", image);
     image.src = imageSrc;
+    console.log("FILE NAME", fileName);
     image.onload = () => {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
@@ -26,16 +28,13 @@ export default function getCroppedImg(imageSrc, croppedAreaPixels) {
       // Get the blob from the canvas
       canvas.toBlob((blob) => {
         if (blob) {
-          // Create a File object from the blob
-          const file = new File([blob], "croppedImage.webp", {
-            type: "image/webp",
-          });
-          resolve(file);
+          const file = new File([blob], fileName, { type: blob.type });
+          resolve(file); // Return the cropped image as a File object
         } else {
           console.error("Canvas is empty");
           resolve(null);
         }
-      }, "image/webp");
+      }, image.src.split(";")[0].split(":")[1]);
     };
   });
 }

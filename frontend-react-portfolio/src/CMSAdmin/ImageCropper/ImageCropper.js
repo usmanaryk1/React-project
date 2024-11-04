@@ -4,24 +4,36 @@ import Cropper from "react-easy-crop";
 import "./ImageCropper.css"; // Include any styles
 import getCroppedImg from "./GetCroppedImage";
 
-const ImageCropper = ({ imageSrc, onCropComplete, onClose }) => {
+const ImageCropper = ({
+  imageSrc,
+  fileName,
+  onCropComplete,
+  onClose,
+  width,
+  height,
+}) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-
+  console.log("fileName in cropper", fileName);
   const onCropChange = (location) => setCrop(location);
   const onZoomChange = (newZoom) => setZoom(newZoom);
+  const aspectRatio = width / height; // Calculate aspect ratio
 
   const handleCropComplete = useCallback(async () => {
     console.log("croppedAreaPixels", croppedAreaPixels);
     if (croppedAreaPixels) {
-      const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels);
-      console.log("croppedImage", croppedImage);
+      const croppedImg = await getCroppedImg(
+        imageSrc,
+        fileName,
+        croppedAreaPixels
+      );
+      console.log("croppedImg in cropper", croppedImg);
 
-      onCropComplete(croppedImage); // Pass the cropped image data to the parent component
+      onCropComplete(croppedImg); // Pass the cropped image data to the parent component
       onClose(); // Close the cropper modal
     }
-  }, [croppedAreaPixels, imageSrc, onCropComplete, onClose]);
+  }, [croppedAreaPixels, imageSrc, fileName, onCropComplete, onClose]);
 
   const onCropAreaChange = useCallback(
     (_, pixels) => setCroppedAreaPixels(pixels),
@@ -34,16 +46,16 @@ const ImageCropper = ({ imageSrc, onCropComplete, onClose }) => {
         image={imageSrc}
         crop={crop}
         zoom={zoom}
-        aspect={1}
+        aspect={aspectRatio} // Use the dynamic aspect ratio
         onCropChange={onCropChange}
         onZoomChange={onZoomChange}
         onCropComplete={onCropAreaChange}
       />
       <div className="cropper-controls">
-        <button onClick={handleCropComplete} className="crop">
+        <button type="button" onClick={handleCropComplete} className="crop">
           Crop
         </button>
-        <button onClick={onClose} className="cancel">
+        <button type="button" onClick={onClose} className="cancel">
           Cancel
         </button>
       </div>

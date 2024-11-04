@@ -41,6 +41,7 @@ const AddForm = () => {
   const [isCropping, setIsCropping] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
   const [croppedImage, setCroppedImage] = useState(null);
+  const [fileName, setFileName] = useState("");
 
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
@@ -55,12 +56,16 @@ const AddForm = () => {
   console.log("about", about);
 
   useEffect(() => {
+    console.log("Updated cropped image:", croppedImage);
+  }, [croppedImage]); // This will run every time croppedImage changes
+
+  useEffect(() => {
     if (currentAbout) {
       setValue("name", currentAbout.name);
       setValue("profile", currentAbout.profile);
       setValue("email", currentAbout.email);
       setValue("phone", currentAbout.phone);
-      setValue("desc", currentAbout.desc1);
+      setValue("desc", currentAbout.desc);
       setValue("isActive", currentAbout.isActive);
       setBase64Image(currentAbout.img);
     } else {
@@ -76,73 +81,95 @@ const AddForm = () => {
   const handleImageClick = () => imageRef.current.click();
 
   const handleImageChange = (e) => {
+    e.preventDefault(); // Prevent default form submission
     const file = e.target.files[0];
+    console.log("filename", file.name);
+    setFileName(file.name);
+    console.log("file name:", fileName);
     if (file) {
       const reader = new FileReader();
-      reader.onload = () => setImageSrc(reader.result);
+      reader.onload = () => {
+        setImageSrc(reader.result); // Display the original image format for cropping
+        console.log("imageSrc", reader.result);
+        setFileName(file.name); // Keep the original file name and format
+        setIsCropping(true); // Open the cropping modal
+      };
+      reader.onerror = (error) => {
+        console.error("Error reading file:", error);
+      };
       reader.readAsDataURL(file);
-      setIsCropping(true);
     }
   };
 
   const handleCropComplete = async (croppedImg) => {
     if (croppedImg) {
-      const resizedImage = await resizeImage(croppedImg);
-      setCroppedImage(resizedImage.file);
-      setBase64Image(resizedImage.base64);
+      console.log("croppedImg", croppedImg);
+      setCroppedImage(croppedImg); // Use the cropped image directly
+      console.log("cropped image on crop complete", croppedImage);
+      setBase64Image(URL.createObjectURL(croppedImg));
       setIsCropping(false);
     } else {
       console.error("Cropped image is not valid");
     }
   };
 
-  const resizeImage = (file) =>
-    new Promise((resolve) => {
-      Resizer.imageFileResizer(
-        file,
-        150,
-        150,
-        "WEBP",
-        70,
-        0,
-        (uri) => {
-          const blob = new Blob([uri], { type: "image/webp" });
-          const resizedFile = new File([blob], file.name, {
-            type: "image/webp",
-          });
-          resolve({ base64: uri, file: resizedFile });
-        },
-        "base64"
-      );
-    });
-
   const uploadImageToFirebase = async (croppedImage) => {
     if (!croppedImage) return null;
-    const imageRef = ref(storage, `aboutImages/${croppedImage.name + v4()}`);
-    await uploadBytes(imageRef, croppedImage);
-    return await getDownloadURL(imageRef); // Generate URL for displaying
+
+    console.log("croppedImage.name", croppedImage.name);
+
+    const imageRef = ref(storage, `aboutImages/${fileName + v4()}`);
+
+    try {
+      await uploadBytes(imageRef, croppedImage);
+      console.log("Image uploaded successfully:", croppedImage.name);
+      const downloadURL = await getDownloadURL(imageRef);
+      console.log("Download URL:", downloadURL);
+      return downloadURL;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      return null;
+    }
   };
 
   const onSubmit = async (formData) => {
     console.log("formdata", formData);
+    console.log("croppedImage in submit", croppedImage);
+
     setIsSubmitting(true);
+
     console.log("base64Image", base64Image);
+
     let imageUrl = base64Image;
+
     console.log("imageUrl", imageUrl);
+
     if (croppedImage) {
       imageUrl = await uploadImageToFirebase(croppedImage);
+
       console.log("imageUrl2", imageUrl);
+
       if (!imageUrl) {
         toast.error("Image upload failed");
+
         setIsSubmitting(false);
+
         return;
       }
+    } else {
+      toast.error("Please crop the image before submitting.");
+      setIsSubmitting(false);
+      return;
     }
 
     const updatedData = {
-      ...formData,
+      name: formData.name,
+      profile: formData.profile,
+      email: formData.email,
+      phone: formData.phone,
       desc: formData.desc,
-      img: imageUrl,
+      isActive: formData.isActive,
+      img: imageUrl, // Firebase image URL
     };
 
     try {
@@ -180,12 +207,14 @@ const AddForm = () => {
     } finally {
       setIsSubmitting(false);
       setBase64Image("");
+      setCroppedImage(null);
     }
   };
   const onReset = () => {
     reset();
     setCurrentAbout(null);
     setBase64Image("");
+    setCroppedImage(null);
   };
 
   const handleEdit = (about) => {
@@ -219,35 +248,41 @@ const AddForm = () => {
                 <h2>Add About Info!</h2>
               </div>
               <div className="col-12">
-                <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSubmit(onSubmit)(e);
+                  }}
+                  noValidate
+                >
                   <div className="img-container row justify-content-center">
                     <div className="image col-12 text-center">
                       <img
                         src={base64Image || "../assets/img/default-image.jpg"}
                         alt="Profile"
-                        className="img-display-before"
+                        className="img-display"
                       />
 
                       <input
                         type="file"
                         ref={imageRef}
                         accept="image/*"
-                        onChange={handleImageChange}
+                        onChange={(e) => {
+                          e.preventDefault(); // Prevent default form submission
+                          handleImageChange(e);
+                        }}
                         style={{ display: "none" }}
                       />
                       {isCropping && (
                         <ImageCropper
                           imageSrc={imageSrc}
+                          fileName={fileName}
                           onCropComplete={handleCropComplete}
                           onClose={() => setIsCropping(false)}
+                          width={150} // Pass the desired width
+                          height={150} // Pass the desired height
                         />
                       )}
-                      {/* {croppedImage && (
-                        <img
-                          src={URL.createObjectURL(croppedImage)}
-                          alt="Cropped"
-                        />
-                      )} */}
                     </div>
                     <label
                       className="my-3 img-btn col-12 text-center"
