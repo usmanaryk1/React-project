@@ -8,10 +8,10 @@ import useFetch from "../../Components/useFetch";
 import { v4 } from "uuid";
 import { storage } from "../../firebaseConfig"; // Import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import Resizer from "react-image-file-resizer"; // Import the image resizer
 import Error from "../../Components/Error/Error";
 import Loading from "../../Components/Loading/Loading";
 import "./AddCertification.css";
+import ImageCropper from "../ImageCropper/ImageCropper";
 
 const AddCertificationForm = () => {
   const [currentCertifications, setCurrentCertifications] = useState(null);
@@ -43,16 +43,21 @@ const AddCertificationForm = () => {
     },
   });
 
-  const [image1, setImage1] = useState(null);
-  const [image2, setImage2] = useState(null);
+  // const [image1, setImage1] = useState(null);
+  // const [image2, setImage2] = useState(null);
   const image1Ref = useRef(null);
   const image2Ref = useRef(null);
   const [base64Image1, setBase64Image1] = useState("");
   const [base64Image2, setBase64Image2] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
-
-  const acceptedFileTypes =
-    "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
+  const [isCropping1, setIsCropping1] = useState(false);
+  const [isCropping2, setIsCropping2] = useState(false);
+  const [imageSrc1, setImageSrc1] = useState(null);
+  const [imageSrc2, setImageSrc2] = useState(null);
+  const [croppedImage1, setCroppedImage1] = useState(null);
+  const [croppedImage2, setCroppedImage2] = useState(null);
+  const [fileName1, setFileName1] = useState("");
+  const [fileName2, setFileName2] = useState("");
 
   const handleImageClick = (inputId) => {
     document.getElementById(inputId).click();
@@ -60,50 +65,66 @@ const AddCertificationForm = () => {
 
   const handleImage1Change = async (e) => {
     const file = e.target.files[0];
-    const resizedImage = await resizeImage(file);
-    setBase64Image1(resizedImage.base64);
-    setImage1(resizedImage.file);
+    console.log("filename1", file.name);
+    setFileName1(file.name);
+    console.log("file name1:", fileName1);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImageSrc1(reader.result); // Display the original image format for cropping
+        console.log("imageSrc1", reader.result);
+        setFileName1(file.name); // Keep the original file name and format
+        setIsCropping1(true); // Open the cropping modal
+      };
+      reader.onerror = (error) => {
+        console.error("Error reading file:", error);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleImage2Change = async (e) => {
     const file = e.target.files[0];
-    const resizedImage = await resizeImage2(file);
-    setBase64Image2(resizedImage.base64);
-    setImage2(resizedImage.file);
+    console.log("filename2", file.name);
+    setFileName2(file.name);
+    console.log("file name2:", fileName2);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImageSrc2(reader.result); // Display the original image format for cropping
+        console.log("imageSrc2", reader.result);
+        setFileName2(file.name); // Keep the original file name and format
+        setIsCropping2(true); // Open the cropping modal
+      };
+      reader.onerror = (error) => {
+        console.error("Error reading file:", error);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
-  const resizeImage = (file) => {
-    return new Promise((resolve) => {
-      Resizer.imageFileResizer(
-        file,
-        354,
-        236,
-        "JPEG",
-        100,
-        0,
-        (uri) => {
-          resolve({ base64: uri, file });
-        },
-        "base64"
-      );
-    });
+  const handleCropComplete1 = async (croppedImg) => {
+    if (croppedImg) {
+      console.log("croppedImg1", croppedImg);
+      setCroppedImage1(croppedImg); // Use the cropped image directly
+      console.log("cropped image1 on crop complete", croppedImage1);
+      setBase64Image1(URL.createObjectURL(croppedImg));
+      setIsCropping1(false);
+    } else {
+      console.error("Cropped image is not valid");
+    }
   };
 
-  const resizeImage2 = (file) => {
-    return new Promise((resolve) => {
-      Resizer.imageFileResizer(
-        file,
-        32,
-        32,
-        "JPEG",
-        100,
-        0,
-        (uri) => {
-          resolve({ base64: uri, file });
-        },
-        "base64"
-      );
-    });
+  const handleCropComplete2 = async (croppedImg) => {
+    if (croppedImg) {
+      console.log("croppedImg2", croppedImg);
+      setCroppedImage2(croppedImg); // Use the cropped image directly
+      console.log("cropped image2 on crop complete", croppedImage2);
+      setBase64Image2(URL.createObjectURL(croppedImg));
+      setIsCropping2(false);
+    } else {
+      console.error("Cropped image is not valid");
+    }
   };
 
   useEffect(() => {
@@ -116,8 +137,6 @@ const AddCertificationForm = () => {
       setValue("isActive", currentCertifications.isActive);
       setBase64Image1(currentCertifications.image);
       setBase64Image2(currentCertifications.authorImage);
-      setImage1(null); // or set to a placeholder if needed
-      setImage2(null); // or set to a placeholder if needed
     } else {
       reset();
     }
@@ -128,110 +147,139 @@ const AddCertificationForm = () => {
   const uploadImageToFirebase = async (imageFile) => {
     if (!imageFile) return null;
 
+    console.log("croppedImage.name", imageFile.name);
+
     const imageRef = ref(
       storage,
       `certificationImages/${imageFile.name + v4()}`
     );
-    await uploadBytes(imageRef, imageFile);
-    // Complete the upload
-    setIsSubmitting(true);
-    const downloadURL = await getDownloadURL(imageRef);
-    return downloadURL;
+    try {
+      await uploadBytes(imageRef, imageFile);
+      console.log("Image uploaded successfully:", imageFile.name);
+      // Complete the upload
+      setIsSubmitting(true);
+      const downloadURL = await getDownloadURL(imageRef);
+      console.log("Download URL:", downloadURL);
+      return downloadURL;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      return null;
+    }
   };
-  const onSubmit = async (formObject, e) => {
+
+  const onSubmit = async (formData, e) => {
     e.preventDefault();
+    console.log("formdata", formData);
+    console.log("croppedImage1 in submit", croppedImage1);
+    console.log("croppedImage2 in submit", croppedImage2);
     setIsSubmitting(true);
+    console.log("base64Image1", base64Image1);
+    console.log("base64Image2", base64Image2);
+
     let imageUrl1 = base64Image1;
     let imageUrl2 = base64Image2;
+    console.log("imageUrl1", imageUrl1);
+    console.log("imageUrl2", imageUrl2);
     // console.log("Certification Data:", formObject);
-    try {
-      if (image1) {
-        imageUrl1 = await uploadImageToFirebase(image1);
+
+    if (croppedImage1) {
+      imageUrl1 = await uploadImageToFirebase(croppedImage1);
+
+      console.log("imageUrl1", imageUrl1);
+
+      if (!imageUrl1) {
+        toast.error("Image upload failed");
+
+        setIsSubmitting(false);
+
+        return;
       }
-      if (image2) {
-        imageUrl2 = await uploadImageToFirebase(image2);
+      if (croppedImage2) {
+        imageUrl2 = await uploadImageToFirebase(croppedImage2);
+
+        console.log("imageUrl2", imageUrl2);
+
+        if (!imageUrl2) {
+          toast.error("Image upload failed");
+
+          setIsSubmitting(false);
+
+          return;
+        }
+      } else {
+        toast.error("Please crop the image before submitting.");
+        setIsSubmitting(false);
+        return;
       }
 
       const updatedData = {
-        cardTitle: formObject.title,
-        cardCategory: formObject.category,
-        cardDescription: formObject.description,
-        postDate: formObject.time,
-        authorName: formObject.name,
+        cardTitle: formData.title,
+        cardCategory: formData.category,
+        cardDescription: formData.description,
+        postDate: formData.time,
+        authorName: formData.name,
         image: imageUrl1,
         authorImage: imageUrl2,
-        isActive: formObject.isActive,
+        isActive: formData.isActive,
       };
 
       // console.log("imageUrl1", imageUrl1);
       // console.log("imageUrl2", imageUrl2);
 
-      if (currentCertifications) {
-        const response = await fetch(
-          `${API_URL}/api/certifications/${currentCertifications._id}`,
-          {
-            method: "PUT",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedData),
-          }
-        );
-        const result = await response.json();
-        // console.log("Updated certification response:", result);
-        setCertifications(
-          certifications.map((certification) =>
-            certification._id === result._id ? result : certification
-          )
-        );
-        // console.log("Updated certification:", certifications);
-        toast.success("Certificate updated successfully");
-      } else {
-        const response = await fetch(`${API_URL}/api/certifications`, {
-          method: "POST",
+      try {
+        const method = currentCertifications ? "PUT" : "POST";
+        const url = currentCertifications
+          ? `${API_URL}/api/certifications/${currentCertifications._id}`
+          : `${API_URL}/api/certifications`;
+        const response = await fetch(url, {
+          method,
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(updatedData),
         });
+
         if (response.ok) {
           const result = await response.json();
-          // console.log("Added certification response:", result);
-          setCertifications((prevCertificationList) => [
-            ...prevCertificationList,
-            result,
-          ]);
-          // console.log("Added certification:", certifications);
-          toast.success("Certificate added successfully");
+          if (currentCertifications) {
+            setCertifications(
+              certifications.map((certification) =>
+                certification._id === result._id ? result : certification
+              )
+            );
+            toast.success("Certification Updated Successfully");
+          } else {
+            setCertifications((prevCertificationList) => [
+              ...prevCertificationList,
+              result,
+            ]);
+            toast.success("Certification Added Successfully");
+          }
+          reset();
+          setCurrentCertifications(null);
         } else {
-          toast.error("Failed to add Certificate info");
+          throw new Error("Failed to save certification info");
         }
+      } catch (error) {
+        toast.error(error.message);
+      } finally {
+        setIsSubmitting(false);
+        setBase64Image1("");
+        setBase64Image2("");
+        setCroppedImage1(null);
+        setCroppedImage2(null);
       }
-
-      reset();
-      refetch();
-      setImage1(null);
-      setImage2(null);
-      setBase64Image1("");
-      setBase64Image2("");
-      setCurrentCertifications(null);
-    } catch (error) {
-      toast.error("Failed to upload images or submit the form");
-      console.error("Error submitting the form:", error);
-    } finally {
-      setIsSubmitting(false); // Always reset submitting state
     }
   };
 
   const onReset = () => {
     reset();
-    setImage1(null);
-    setImage2(null);
     setBase64Image1("");
     setBase64Image2("");
     setCurrentCertifications(null);
+    setCroppedImage1(null);
+    setCroppedImage2(null);
   };
 
   const handleEdit = (certification) => {
@@ -250,6 +298,7 @@ const AddCertificationForm = () => {
         setCertifications(
           certifications.filter((certification) => certification._id !== id)
         );
+        refetch();
         // console.log("Deleted certification:", certifications);
         toast.success("Certificate deleted successfully");
       } else {
@@ -281,77 +330,81 @@ const AddCertificationForm = () => {
                   className="p-0"
                 >
                   <div className="img-container row justify-content-center">
-                    <div
-                      className="image col-12 col-sm-6 text-center mb-4"
-                      onClick={() => handleImageClick("file-input1")}
-                    >
+                    <div className="image col-12 col-sm-6 text-center mb-4">
                       <div>
-                        {image1 ? (
-                          <img
-                            src={URL.createObjectURL(image1)}
-                            alt=""
-                            className="img-display-before mx-auto"
-                          />
-                        ) : (
-                          <img
-                            src={
-                              base64Image1 ||
-                              "../assets/img/default-work-image.webp"
-                            }
-                            alt="default"
-                            className="img-display-before mx-auto"
-                          />
-                        )}
+                        <img
+                          src={
+                            base64Image1 ||
+                            "../assets/img/default-work-image.webp"
+                          }
+                          alt="default"
+                          className="img-display mx-auto"
+                        />
+
                         <input
                           type="file"
                           name="file1"
                           id="file-input1"
-                          accept={acceptedFileTypes}
-                          multiple={false}
+                          accept="image/*"
                           onChange={handleImage1Change}
                           ref={image1Ref}
                           style={{ display: "none" }}
-                          required
                         />
-                      </div>
-                      <label className="my-3">
-                        <b>Choose Project Image</b>
-                      </label>
-                    </div>
-                    <div
-                      className="image col-12 col-sm-6 text-center mb-4"
-                      onClick={() => handleImageClick("file-input2")}
-                    >
-                      <div>
-                        {image2 ? (
-                          <img
-                            src={URL.createObjectURL(image2)}
-                            alt=""
-                            className="profile"
-                          />
-                        ) : (
-                          <img
-                            src={
-                              base64Image2 || "../assets/img/default-image.jpg"
-                            }
-                            alt="default"
-                            className="profile"
+                        {isCropping1 && (
+                          <ImageCropper
+                            imageSrc={imageSrc1}
+                            fileName={fileName1}
+                            onCropComplete={handleCropComplete1}
+                            onClose={() => setIsCropping1(false)}
+                            width={354} // Pass the desired width
+                            height={236} // Pass the desired height
+                            cropShape="rect"
                           />
                         )}
+                      </div>
+                      <label
+                        className="my-3 img-btn"
+                        onClick={() => handleImageClick("file-input1")}
+                      >
+                        Choose Project Image
+                      </label>
+                    </div>
+                    <div className="image col-12 col-sm-6 text-center mb-4">
+                      <div>
+                        <img
+                          src={
+                            base64Image2 || "../assets/img/default-image.jpg"
+                          }
+                          alt="default"
+                          className="profile"
+                        />
+
                         <input
                           type="file"
                           name="file2"
                           id="file-input2"
-                          accept={acceptedFileTypes}
-                          multiple={false}
+                          accept="image/*"
                           onChange={handleImage2Change}
                           ref={image2Ref}
                           style={{ display: "none" }}
-                          required
                         />
+                        {isCropping2 && (
+                          <ImageCropper
+                            imageSrc={imageSrc2}
+                            fileName={fileName1}
+                            onCropComplete={handleCropComplete2}
+                            onClose={() => setIsCropping2(false)}
+                            width={32} // Pass the desired width
+                            height={32} // Pass the desired height
+                            cropShape="round"
+                          />
+                        )}
                       </div>
-                      <label className="mx-auto my-3">
-                        <b>Choose Your Image</b>
+                      <label
+                        className="mx-auto img-btn my-3"
+                        onClick={() => handleImageClick("file-input2")}
+                      >
+                        Choose Profile Image
                       </label>
                     </div>
                   </div>

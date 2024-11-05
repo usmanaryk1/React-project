@@ -11,6 +11,7 @@ const ImageCropper = ({
   onClose,
   width,
   height,
+  cropShape,
 }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -50,6 +51,7 @@ const ImageCropper = ({
         onCropChange={onCropChange}
         onZoomChange={onZoomChange}
         onCropComplete={onCropAreaChange}
+        cropShape={cropShape} // Apply the shape here
       />
       <div className="cropper-controls">
         <button type="button" onClick={handleCropComplete} className="crop">

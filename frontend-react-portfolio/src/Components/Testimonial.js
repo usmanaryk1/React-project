@@ -89,7 +89,7 @@ const Testimonial = ({ onEditClick, onDeleteClick, testimonials = [] }) => {
                             <img
                               src={testimonial.img}
                               alt=""
-                              className="rounded-circle b-shadow-a"
+                              className="rounded-circle b-shadow-a author-img"
                             />
                             <span className="author"> {testimonial.name} </span>
                           </div>

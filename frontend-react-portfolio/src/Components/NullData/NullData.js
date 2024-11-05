@@ -10,7 +10,7 @@ const NullData = ({ message }) => {
             <div className="col-12">
               <div className="data-message">
                 <p>Oops! No {message} Available.</p>
-                <Link to="/#/form/portfolio-form">
+                <Link to="/form/portfolio-form">
                   <i className="bi bi-house-fill"></i> Go Back to Projects
                 </Link>
               </div>

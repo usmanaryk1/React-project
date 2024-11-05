@@ -8,13 +8,24 @@ import useFetch from "../../Components/useFetch";
 import { storage } from "../../firebaseConfig"; // Import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
-import Resizer from "react-image-file-resizer"; // Import the image resizer
 import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
 import ImageCropper from "../ImageCropper/ImageCropper";
 import "./AddForm.css";
 
 const AddForm = () => {
+  const token = localStorage.getItem("token");
+  const [currentAbout, setCurrentAbout] = useState(null);
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+
+  const {
+    data: about,
+    setData: setAbout,
+    isPending,
+    error,
+    refetch,
+  } = useFetch(`${API_URL}/api/about`);
+
   const {
     register,
     handleSubmit,
@@ -33,55 +44,19 @@ const AddForm = () => {
     },
   });
 
-  const token = localStorage.getItem("token");
   const imageRef = useRef(null);
   const [base64Image, setBase64Image] = useState("");
-  const [currentAbout, setCurrentAbout] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
   const [isCropping, setIsCropping] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
   const [croppedImage, setCroppedImage] = useState(null);
   const [fileName, setFileName] = useState("");
 
-  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
-
-  const {
-    data: about,
-    setData: setAbout,
-    isPending,
-    error,
-    refetch,
-  } = useFetch(`${API_URL}/api/about`);
-
   console.log("about", about);
-
-  useEffect(() => {
-    console.log("Updated cropped image:", croppedImage);
-  }, [croppedImage]); // This will run every time croppedImage changes
-
-  useEffect(() => {
-    if (currentAbout) {
-      setValue("name", currentAbout.name);
-      setValue("profile", currentAbout.profile);
-      setValue("email", currentAbout.email);
-      setValue("phone", currentAbout.phone);
-      setValue("desc", currentAbout.desc);
-      setValue("isActive", currentAbout.isActive);
-      setBase64Image(currentAbout.img);
-    } else {
-      reset();
-      setBase64Image("");
-    }
-  }, [currentAbout, setValue, reset]);
-
-  if (isPending) return <Loading />;
-
-  if (error) return <Error message={error} />;
 
   const handleImageClick = () => imageRef.current.click();
 
   const handleImageChange = (e) => {
-    e.preventDefault(); // Prevent default form submission
     const file = e.target.files[0];
     console.log("filename", file.name);
     setFileName(file.name);
@@ -112,6 +87,21 @@ const AddForm = () => {
       console.error("Cropped image is not valid");
     }
   };
+
+  useEffect(() => {
+    if (currentAbout) {
+      setValue("name", currentAbout.name);
+      setValue("profile", currentAbout.profile);
+      setValue("email", currentAbout.email);
+      setValue("phone", currentAbout.phone);
+      setValue("desc", currentAbout.desc);
+      setValue("isActive", currentAbout.isActive);
+      setBase64Image(currentAbout.img);
+    } else {
+      reset();
+      setBase64Image("");
+    }
+  }, [currentAbout, setValue, reset]);
 
   const uploadImageToFirebase = async (croppedImage) => {
     if (!croppedImage) return null;
@@ -238,23 +228,21 @@ const AddForm = () => {
     }
   };
 
+  if (isPending) return <Loading />;
+
+  if (error) return <Error message={error} />;
+
   return (
     <>
       <section id="about-form" className="form">
         <div className="container">
           <div className="row">
             <div className="add-container">
-              <div className="col-12">
+              <div className="col-sm-12">
                 <h2>Add About Info!</h2>
               </div>
               <div className="col-12">
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    handleSubmit(onSubmit)(e);
-                  }}
-                  noValidate
-                >
+                <form onSubmit={handleSubmit(onSubmit)} noValidate>
                   <div className="img-container row justify-content-center">
                     <div className="image col-12 text-center">
                       <img
@@ -267,10 +255,7 @@ const AddForm = () => {
                         type="file"
                         ref={imageRef}
                         accept="image/*"
-                        onChange={(e) => {
-                          e.preventDefault(); // Prevent default form submission
-                          handleImageChange(e);
-                        }}
+                        onChange={handleImageChange}
                         style={{ display: "none" }}
                       />
                       {isCropping && (
@@ -281,6 +266,7 @@ const AddForm = () => {
                           onClose={() => setIsCropping(false)}
                           width={150} // Pass the desired width
                           height={150} // Pass the desired height
+                          cropShape="rect"
                         />
                       )}
                     </div>

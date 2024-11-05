@@ -1,8 +1,17 @@
 /* ImageCropper.css */
 .cropper-container {
-  position: relative;
-  width: 100%;
-  height: 400px;
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw; /* Full width of the viewport */
+  height: 80vh; /* Full height of the viewport */
+  background: rgba(0, 0, 0, 0.8); /*Semi-transparent background for focus*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure it appears above other elements */
+  overflow: hidden;
 }
 
 .cropper-controls {

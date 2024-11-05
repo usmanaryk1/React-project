@@ -87,6 +87,12 @@ a:hover {
   line-height: 1.1;
 }
 
+.card-img img {
+  width: 354px;
+  height: 236px;
+  overflow: hidden;
+}
+
 .avatar {
   width: 32px;
   height: 32px;
@@ -853,6 +859,9 @@ a:hover {
 
 .about-mf .about-img img {
   margin-left: 10px;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
 }
 
 @media (min-width: 767px) {
@@ -975,6 +984,9 @@ a:hover {
 
 .work-img img {
   transition: all 1s;
+  width: 296;
+  height: 185;
+  overflow: hidden;
 }
 
 .work-content {
@@ -1094,6 +1106,9 @@ a:hover {
 
 .testimonial-box .author-test img {
   margin: 0 auto;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
 }
 
 .testimonial-box .author {

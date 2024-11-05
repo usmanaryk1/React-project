@@ -8,10 +8,10 @@ import useFetch from "../../Components/useFetch";
 import { v4 } from "uuid";
 import { storage } from "../../firebaseConfig"; // Import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import Resizer from "react-image-file-resizer"; // Import the image resizer
 import Error from "../../Components/Error/Error";
 import Loading from "../../Components/Loading/Loading";
 import "./TestimonialForm.css";
+import ImageCropper from "../ImageCropper/ImageCropper";
 
 const AddTestimonialForm = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(null);
@@ -21,10 +21,10 @@ const AddTestimonialForm = () => {
   const {
     data: testimonials,
     setData: setTestimonials,
-    refetch,
     isPending,
     error,
   } = useFetch(`${API_URL}/api/testimonials`);
+
   const {
     register,
     handleSubmit,
@@ -41,44 +41,48 @@ const AddTestimonialForm = () => {
     },
   });
 
-  const [image, setImage] = useState(null);
   const imageRef = useRef(null);
   const [base64Image, setBase64Image] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
-
-  const acceptedFileTypes =
-    "image/x-png, image/png, image/jpg, image/webp, image/jpeg";
+  const [isCropping, setIsCropping] = useState(false);
+  const [imageSrc, setImageSrc] = useState(null);
+  const [croppedImage, setCroppedImage] = useState(null);
+  const [fileName, setFileName] = useState("");
 
   const handleImageClick = () => {
-    document.getElementById("file-input").click();
+    imageRef.current.click();
   };
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    const resizedImage = await resizeImage(file);
-    setBase64Image(resizedImage.base64);
-    // console.log("base64", base64);
-    setImage(resizedImage.file);
+    // console.log("filename", file.name);
+    setFileName(file.name);
+    // console.log("file name:", fileName);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImageSrc(reader.result); // Display the original image format for cropping
+        // console.log("imageSrc", reader.result);
+        setFileName(file.name); // Keep the original file name and format
+        setIsCropping(true); // Open the cropping modal
+      };
+      reader.onerror = (error) => {
+        console.error("Error reading file:", error);
+      };
+      reader.readAsDataURL(file);
+    }
   };
-  const resizeImage = (file) => {
-    return new Promise((resolve) => {
-      Resizer.imageFileResizer(
-        file,
-        150,
-        150,
-        "WEBP",
-        70, // Adjust quality to manage file size
-        0,
-        async (uri) => {
-          const blob = await fetch(uri).then((r) => r.blob());
-          const resizedFile = new File([blob], file.name, {
-            type: "image/webp",
-          });
-          resolve({ base64: uri, file: resizedFile });
-        },
-        "base64"
-      );
-    });
+
+  const handleCropComplete = async (croppedImg) => {
+    if (croppedImg) {
+      // console.log("croppedImg", croppedImg);
+      setCroppedImage(croppedImg); // Use the cropped image directly
+      // console.log("cropped image on crop complete", croppedImage);
+      setBase64Image(URL.createObjectURL(croppedImg));
+      setIsCropping(false);
+    } else {
+      console.error("Cropped image is not valid");
+    }
   };
 
   useEffect(() => {
@@ -87,105 +91,115 @@ const AddTestimonialForm = () => {
       setValue("desc", currentTestimonial.description);
       setValue("isActive", currentTestimonial.isActive);
       setBase64Image(currentTestimonial.img);
-      setImage(null); // or set to a placeholder if needed
     } else {
       reset();
     }
   }, [currentTestimonial, setValue, reset]);
 
-  const uploadImageToFirebase = async (imageFile) => {
-    if (!imageFile) return null;
+  const uploadImageToFirebase = async (croppedImage) => {
+    if (!croppedImage) return null;
 
-    const imageRef = ref(storage, `testimonialImages/${imageFile.name + v4()}`);
-    await uploadBytes(imageRef, imageFile);
-    // Complete the upload
-    setIsSubmitting(true);
-    const downloadURL = await getDownloadURL(imageRef);
-    return downloadURL;
+    // console.log("croppedImage.name", croppedImage.name);
+
+    const imageRef = ref(storage, `testimonialImages/${fileName + v4()}`);
+
+    try {
+      await uploadBytes(imageRef, croppedImage);
+      // console.log("Image uploaded successfully:", croppedImage.name);
+      const downloadURL = await getDownloadURL(imageRef);
+      // console.log("Download URL:", downloadURL);
+      return downloadURL;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      return null;
+    }
   };
 
   // console.log("currentTestimonial:", currentTestimonial);
-  const onSubmit = async (formObject, e) => {
-    e.preventDefault();
+
+  const onSubmit = async (formData) => {
+    // console.log("formdata", formData);
+    // console.log("croppedImage in submit", croppedImage);
+
     setIsSubmitting(true);
+
+    // console.log("base64Image", base64Image);
+
     let imageUrl = base64Image;
 
-    // If a new image is selected, upload it to Firebase Storage
-    if (image) {
-      try {
-        imageUrl = await uploadImageToFirebase(image);
-      } catch (error) {
-        console.error("Error uploading image to Firebase:", error);
-        toast.error("Failed to upload image");
+    // console.log("imageUrl", imageUrl);
+
+    if (croppedImage) {
+      imageUrl = await uploadImageToFirebase(croppedImage);
+
+      // console.log("imageUrl2", imageUrl);
+
+      if (!imageUrl) {
+        toast.error("Image upload failed");
+
+        setIsSubmitting(false);
+
         return;
       }
+    } else {
+      toast.error("Please crop the image before submitting.");
+      setIsSubmitting(false);
+      return;
     }
 
     const updatedData = {
-      name: formObject.name,
-      description: formObject.desc, // Assuming all desc is in one textarea
+      name: formData.name,
+      description: formData.desc, // Assuming all desc is in one textarea
       img: imageUrl,
-      isActive: formObject.isActive,
+      isActive: formData.isActive,
     };
-    // console.log("imageUrl", imageUrl);
 
-    if (currentTestimonial) {
-      const response = await fetch(
-        `${API_URL}/api/testimonials/${currentTestimonial._id}`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedData),
-        }
-      );
-      const result = await response.json();
-      // console.log("Updated testimonial response: ", result);
-      setTestimonials(
-        testimonials.map((testimonial) =>
-          testimonial._id === result._id ? result : testimonial
-        )
-      );
-      // console.log("Updated testimonial: ", testimonials);
-      toast.success("Testimonial updated successfully");
-    } else {
-      const response = await fetch(`${API_URL}/api/testimonials`, {
-        method: "POST",
+    try {
+      const method = currentTestimonial ? "PUT" : "POST";
+      const url = currentTestimonial
+        ? `${API_URL}/api/testimonials/${currentTestimonial._id}`
+        : `${API_URL}/api/testimonials`;
+      const response = await fetch(url, {
+        method,
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedData),
       });
+
       if (response.ok) {
         const result = await response.json();
-        // console.log("Added testimonial response: ", result);
-        setTestimonials((prevTestimonialList) => [
-          ...prevTestimonialList,
-          result,
-        ]);
-        // console.log("Added testimonial: ", testimonials);
-        toast.success("Testimonial added successfully");
+        if (currentTestimonial) {
+          setTestimonials(
+            testimonials.map((testimonial) =>
+              testimonial._id === result._id ? result : testimonial
+            )
+          );
+          toast.success("Testimonial Updated Successfully");
+        } else {
+          setTestimonials([...testimonials, result]);
+          toast.success("Testimonial Added Successfully");
+        }
+        reset();
+        setCurrentTestimonial(null);
       } else {
-        toast.error("Failed to add testimonial info");
+        throw new Error("Failed to save testimonial info");
       }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setIsSubmitting(false);
+      setBase64Image("");
+      setCroppedImage(null);
     }
-
-    reset();
-    setImage(null);
-    setBase64Image("");
-    setIsSubmitting(false);
-    setCurrentTestimonial(null);
-    refetch();
   };
 
-  const onReset = (e) => {
+  const onReset = () => {
     reset();
-    setImage(null);
     setBase64Image("");
     setCurrentTestimonial(null);
+    setCroppedImage(null);
   };
 
   const handleEdit = (testimonial) => {
@@ -230,34 +244,36 @@ const AddTestimonialForm = () => {
               <div className="col-12">
                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
                   <div className="img-container text-center">
-                    <div className="image" onClick={handleImageClick}>
-                      {image ? (
-                        <img
-                          src={URL.createObjectURL(image)}
-                          alt=""
-                          className="img-display-after"
-                        />
-                      ) : (
-                        <img
-                          src={base64Image || "../assets/img/default-image.jpg"}
-                          alt="default"
-                          className="img-display-before"
-                        />
-                      )}
+                    <div className="image">
+                      <img
+                        src={base64Image || "../assets/img/default-image.jpg"}
+                        alt="default"
+                        className="img-display"
+                      />
+
                       <input
                         type="file"
                         name="file"
                         id="file-input"
-                        {...register("file")}
-                        accept={acceptedFileTypes}
-                        multiple={false}
+                        accept="image/*"
                         onChange={handleImageChange}
                         ref={imageRef}
                         style={{ display: "none" }}
                       />
+                      {isCropping && (
+                        <ImageCropper
+                          imageSrc={imageSrc}
+                          fileName={fileName}
+                          onCropComplete={handleCropComplete}
+                          onClose={() => setIsCropping(false)}
+                          width={150} // Pass the desired width
+                          height={150} // Pass the desired height
+                          cropShape="round"
+                        />
+                      )}
                     </div>
-                    <label className="my-3">
-                      <b>Choose Client Image</b>
+                    <label className="my-3 img-btn" onClick={handleImageClick}>
+                      Choose Client Image
                     </label>
                   </div>
                   <div className="form-group">

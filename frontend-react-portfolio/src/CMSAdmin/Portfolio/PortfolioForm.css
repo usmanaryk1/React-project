@@ -14,3 +14,19 @@
   height: 175px;
   width: 250px;
 }
+
+.img-btn {
+  background: #0062d3;
+  color: #fff;
+  border: 0;
+  max-width: 14rem;
+  min-width: 2rem;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.img-btn:hover {
+  transform: scale(1.05);
+}

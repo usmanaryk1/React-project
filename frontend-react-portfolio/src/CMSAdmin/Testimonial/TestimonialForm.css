@@ -18,9 +18,25 @@
   object-fit: cover;
 }
 
-.testimonial-container .img-display-before {
+.testimonial-container .img-display {
   height: 150px;
   width: 150px;
   border-radius: 100%;
   object-fit: cover;
+}
+
+.img-btn {
+  background: #0062d3;
+  color: #fff;
+  border: 0;
+  max-width: 14rem;
+  min-width: 2rem;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.img-btn:hover {
+  transform: scale(1.05);
 }
