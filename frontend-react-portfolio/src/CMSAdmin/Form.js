@@ -18,6 +18,7 @@ import SocialForm from "./Socials/SocialForm";
 import CVUploader from "./UploadCV/CVUploaderForm";
 import TermsAndConditionsEdit from "./TermsAndConditionsEdit/TermsAndConditionsEdit";
 import AddPortfolioDetails from "./PortfolioDetails/AddPortfolioDetails";
+import SkillsEdit from "./Skills/SkillsEdit";
 
 const Form = () => {
   const { isAuthenticated } = useAuth();
@@ -89,6 +90,11 @@ const Form = () => {
           <PrivateRoute
             path={`/form/about-form`}
             component={AddForm}
+            isAuthenticated={isAuthenticated}
+          />
+          <PrivateRoute
+            path={`/form/skills-form`}
+            component={SkillsEdit}
             isAuthenticated={isAuthenticated}
           />
           <PrivateRoute

@@ -17,6 +17,7 @@ const Home = () => {
 
   const { data: hero, isPending, error } = useFetch(`${API_URL}/api/hero`);
   const { data: about } = useFetch(`${API_URL}/api/about`);
+  const { data: skills } = useFetch(`${API_URL}/api/skills`);
   const { data: services } = useFetch(`${API_URL}/api/services`);
   const { data: counts } = useFetch(`${API_URL}/api/counts`);
   const { data: works } = useFetch(`${API_URL}/api/works`);
@@ -37,7 +38,7 @@ const Home = () => {
     <>
       <main id="main">
         <Hero hero={hero} />
-        <About about={about} />
+        <About about={about} skills={skills} />
         <Services
           title="Services"
           subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."

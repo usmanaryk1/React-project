@@ -55,6 +55,7 @@ const Header = () => {
         { to: "/form/dashboard", label: "Dashboard" },
         { to: "/form/hero-form", label: "Home" },
         { to: "/form/about-form", label: "About" },
+        { to: "/form/skills-form", label: "Skills" },
         { to: "/form/service-form", label: "Services" },
         { to: "/form/counter-form", label: "Counter" },
         { to: "/form/portfolio-form", label: "Works" },

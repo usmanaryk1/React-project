@@ -57,14 +57,14 @@ const AddPortfolioForm = () => {
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    console.log("filename", file.name);
+    // console.log("filename", file.name);
     setFileName(file.name);
-    console.log("file name:", fileName);
+    // console.log("file name:", fileName);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
         setImageSrc(reader.result); // Display the original image format for cropping
-        console.log("imageSrc", reader.result);
+        // console.log("imageSrc", reader.result);
         setFileName(file.name); // Keep the original file name and format
         setIsCropping(true); // Open the cropping modal
       };
@@ -77,9 +77,9 @@ const AddPortfolioForm = () => {
 
   const handleCropComplete = async (croppedImg) => {
     if (croppedImg) {
-      console.log("croppedImg", croppedImg);
+      // console.log("croppedImg", croppedImg);
       setCroppedImage(croppedImg); // Use the cropped image directly
-      console.log("cropped image on crop complete", croppedImage);
+      // console.log("cropped image on crop complete", croppedImage);
       setBase64Image(URL.createObjectURL(croppedImg));
       setIsCropping(false);
     } else {

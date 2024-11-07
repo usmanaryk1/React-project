@@ -65,14 +65,14 @@ const AddCertificationForm = () => {
 
   const handleImage1Change = async (e) => {
     const file = e.target.files[0];
-    console.log("filename1", file.name);
+    // console.log("filename1", file.name);
     setFileName1(file.name);
-    console.log("file name1:", fileName1);
+    // console.log("file name1:", fileName1);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
         setImageSrc1(reader.result); // Display the original image format for cropping
-        console.log("imageSrc1", reader.result);
+        // console.log("imageSrc1", reader.result);
         setFileName1(file.name); // Keep the original file name and format
         setIsCropping1(true); // Open the cropping modal
       };
@@ -85,14 +85,14 @@ const AddCertificationForm = () => {
 
   const handleImage2Change = async (e) => {
     const file = e.target.files[0];
-    console.log("filename2", file.name);
+    // console.log("filename2", file.name);
     setFileName2(file.name);
-    console.log("file name2:", fileName2);
+    // console.log("file name2:", fileName2);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
         setImageSrc2(reader.result); // Display the original image format for cropping
-        console.log("imageSrc2", reader.result);
+        // console.log("imageSrc2", reader.result);
         setFileName2(file.name); // Keep the original file name and format
         setIsCropping2(true); // Open the cropping modal
       };
@@ -105,9 +105,9 @@ const AddCertificationForm = () => {
 
   const handleCropComplete1 = async (croppedImg) => {
     if (croppedImg) {
-      console.log("croppedImg1", croppedImg);
+      // console.log("croppedImg1", croppedImg);
       setCroppedImage1(croppedImg); // Use the cropped image directly
-      console.log("cropped image1 on crop complete", croppedImage1);
+      // console.log("cropped image1 on crop complete", croppedImage1);
       setBase64Image1(URL.createObjectURL(croppedImg));
       setIsCropping1(false);
     } else {
@@ -117,9 +117,9 @@ const AddCertificationForm = () => {
 
   const handleCropComplete2 = async (croppedImg) => {
     if (croppedImg) {
-      console.log("croppedImg2", croppedImg);
+      // console.log("croppedImg2", croppedImg);
       setCroppedImage2(croppedImg); // Use the cropped image directly
-      console.log("cropped image2 on crop complete", croppedImage2);
+      // console.log("cropped image2 on crop complete", croppedImage2);
       setBase64Image2(URL.createObjectURL(croppedImg));
       setIsCropping2(false);
     } else {
@@ -147,7 +147,7 @@ const AddCertificationForm = () => {
   const uploadImageToFirebase = async (imageFile) => {
     if (!imageFile) return null;
 
-    console.log("croppedImage.name", imageFile.name);
+    // console.log("croppedImage.name", imageFile.name);
 
     const imageRef = ref(
       storage,
@@ -155,11 +155,11 @@ const AddCertificationForm = () => {
     );
     try {
       await uploadBytes(imageRef, imageFile);
-      console.log("Image uploaded successfully:", imageFile.name);
+      // console.log("Image uploaded successfully:", imageFile.name);
       // Complete the upload
       setIsSubmitting(true);
       const downloadURL = await getDownloadURL(imageRef);
-      console.log("Download URL:", downloadURL);
+      // console.log("Download URL:", downloadURL);
       return downloadURL;
     } catch (error) {
       console.error("Error uploading image:", error);
@@ -169,23 +169,23 @@ const AddCertificationForm = () => {
 
   const onSubmit = async (formData, e) => {
     e.preventDefault();
-    console.log("formdata", formData);
-    console.log("croppedImage1 in submit", croppedImage1);
-    console.log("croppedImage2 in submit", croppedImage2);
+    // console.log("formdata", formData);
+    // console.log("croppedImage1 in submit", croppedImage1);
+    // console.log("croppedImage2 in submit", croppedImage2);
     setIsSubmitting(true);
-    console.log("base64Image1", base64Image1);
-    console.log("base64Image2", base64Image2);
+    // console.log("base64Image1", base64Image1);
+    // console.log("base64Image2", base64Image2);
 
     let imageUrl1 = base64Image1;
     let imageUrl2 = base64Image2;
-    console.log("imageUrl1", imageUrl1);
-    console.log("imageUrl2", imageUrl2);
+    // console.log("imageUrl1", imageUrl1);
+    // console.log("imageUrl2", imageUrl2);
     // console.log("Certification Data:", formObject);
 
     if (croppedImage1) {
       imageUrl1 = await uploadImageToFirebase(croppedImage1);
 
-      console.log("imageUrl1", imageUrl1);
+      // console.log("imageUrl1", imageUrl1);
 
       if (!imageUrl1) {
         toast.error("Image upload failed");
@@ -197,7 +197,7 @@ const AddCertificationForm = () => {
       if (croppedImage2) {
         imageUrl2 = await uploadImageToFirebase(croppedImage2);
 
-        console.log("imageUrl2", imageUrl2);
+        // console.log("imageUrl2", imageUrl2);
 
         if (!imageUrl2) {
           toast.error("Image upload failed");
@@ -391,7 +391,7 @@ const AddCertificationForm = () => {
                         {isCropping2 && (
                           <ImageCropper
                             imageSrc={imageSrc2}
-                            fileName={fileName1}
+                            fileName={fileName2}
                             onCropComplete={handleCropComplete2}
                             onClose={() => setIsCropping2(false)}
                             width={32} // Pass the desired width

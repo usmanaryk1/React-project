@@ -1,7 +1,15 @@
 import Swal from "sweetalert2";
 import { useAuth } from "../CMSAdmin/Auth/AuthContext";
+import Skills from "./Skills/Skills";
 
-const About = ({ onEditClick, onDeleteClick, about = [] }) => {
+const About = ({
+  onEditClick,
+  onDeleteClick,
+  about = [],
+  skills = [],
+  handleEditClick,
+  handleDelete,
+}) => {
   const { isAuthenticated, isAdminPage } = useAuth();
   // console.log("about content:", about);
 
@@ -24,7 +32,7 @@ const About = ({ onEditClick, onDeleteClick, about = [] }) => {
   return (
     <>
       {/* ======= About Section Start======= */}
-      {about && (
+      {Array.isArray(about) && about.length > 0 && (
         <section id="about" className="about-mf sect-pt4 route">
           <div className="container">
             <div className="row">
@@ -64,56 +72,67 @@ const About = ({ onEditClick, onDeleteClick, about = [] }) => {
                             </div>
                           </div>
                         </div>
+
                         <div className="skill-mf">
-                          <p className="title-s">Skill</p>
-                          <span>HTML</span>{" "}
-                          <span className="pull-right">100%</span>
-                          <div className="progress">
-                            <div
-                              className="progress-bar"
-                              role="progressbar"
-                              style={{ width: "100%" }}
-                              aria-valuenow={100}
-                              aria-valuemin={0}
-                              aria-valuemax={100}
-                            />
-                          </div>
-                          <span>CSS3</span>{" "}
-                          <span className="pull-right">95%</span>
-                          <div className="progress">
-                            <div
-                              className="progress-bar"
-                              role="progressbar"
-                              style={{ width: "95%" }}
-                              aria-valuenow={95}
-                              aria-valuemin={0}
-                              aria-valuemax={100}
-                            />
-                          </div>
-                          <span>JAVASCRIPT</span>{" "}
-                          <span className="pull-right">90%</span>
-                          <div className="progress">
-                            <div
-                              className="progress-bar"
-                              role="progressbar"
-                              style={{ width: "90%" }}
-                              aria-valuenow={90}
-                              aria-valuemin={0}
-                              aria-valuemax={100}
-                            />
-                          </div>
-                          <span>REACT</span>{" "}
-                          <span className="pull-right">85%</span>
-                          <div className="progress">
-                            <div
-                              className="progress-bar"
-                              role="progressbar"
-                              style={{ width: "85%" }}
-                              aria-valuenow={85}
-                              aria-valuemin={0}
-                              aria-valuemax={100}
-                            />
-                          </div>
+                          {skills && skills.length > 0 && (
+                            <>
+                              <p className="title-s">Skills</p>
+                              <Skills
+                                skills={skills}
+                                handleDelete={handleDelete}
+                                handleEditClick={handleEditClick}
+                              />
+
+                              {/* <span>HTML</span>{" "}
+                            <span className="pull-right">100%</span>
+                            <div className="progress">
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                style={{ width: "100%" }}
+                                aria-valuenow={100}
+                                aria-valuemin={0}
+                                aria-valuemax={100}
+                              />
+                            </div>
+                            <span>CSS3</span>{" "}
+                            <span className="pull-right">95%</span>
+                            <div className="progress">
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                style={{ width: "95%" }}
+                                aria-valuenow={95}
+                                aria-valuemin={0}
+                                aria-valuemax={100}
+                              />
+                            </div>
+                            <span>JAVASCRIPT</span>{" "}
+                            <span className="pull-right">90%</span>
+                            <div className="progress">
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                style={{ width: "90%" }}
+                                aria-valuenow={90}
+                                aria-valuemin={0}
+                                aria-valuemax={100}
+                              />
+                            </div>
+                            <span>REACT</span>{" "}
+                            <span className="pull-right">85%</span>
+                            <div className="progress">
+                              <div
+                                className="progress-bar"
+                                role="progressbar"
+                                style={{ width: "85%" }}
+                                aria-valuenow={85}
+                                aria-valuemin={0}
+                                aria-valuemax={100}
+                              />
+                              </div>  */}
+                            </>
+                          )}
                         </div>
                       </div>
                       <div className="col-md-6">

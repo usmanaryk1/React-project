@@ -1,15 +1,14 @@
-.conditions-box {
+.skill-box {
   max-width: 400rem;
-  padding: 1.5rem 5rem 1.5rem;
   margin: 0;
 }
-.conditions-border {
+.skill-border {
   max-width: 400rem;
-  padding: 1.5rem 5rem 1.5rem;
-  margin-bottom: 0.8rem;
+  padding: 0.3rem 0.5rem 0rem;
+  margin-bottom: 0.3rem;
   border: 1px dashed #8080806b;
 }
-.conditions-content p {
+.skill-content p {
   text-align: justify;
   margin: 0;
 }
@@ -22,11 +21,17 @@
   transform: scale(1.1);
 }
 
-.crud-btn {
-  padding: 10px 20px;
-  border-radius: 25px;
+.crud-button {
+  border: none;
+  padding: 1px 5px;
   cursor: pointer;
-  margin-left: 0.2rem;
+  font-size: 1rem; /* Adjust size as needed */
+  border-radius: 25px;
+  transition: transform 0.3s ease;
+}
+
+.crud-button:hover {
+  transform: scale(1.1); /* Adjust hover color as needed */
 }
 .save-btn {
   background-color: #128f32;
@@ -55,7 +60,7 @@
   transform: scale(1.1);
 }
 
-.addTerm-container {
+.addSkill-container {
   border-radius: 5px;
   max-width: 550px;
   margin: 120px auto;

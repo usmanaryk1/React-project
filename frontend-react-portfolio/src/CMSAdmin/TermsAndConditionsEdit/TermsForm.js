@@ -50,19 +50,27 @@ const TermsForm = ({
               <h3 className="text-center">
                 {editingTerm ? "Edit Term" : "Add New Term"}
               </h3>
-              <input
-                type="text"
-                {...register("title")}
-                name="title"
-                placeholder="Title"
-              />
+              <div className="form-group">
+                <input
+                  type="text"
+                  {...register("title")}
+                  name="title"
+                  className="form-control"
+                  placeholder="Title"
+                />
+              </div>
+
               {errors.title && <p>{errors.title.message}</p>}
 
-              <textarea
-                {...register("content")}
-                name="content"
-                placeholder="Content"
-              />
+              <div className="form-group">
+                <textarea
+                  {...register("content")}
+                  name="content"
+                  className="form-control"
+                  placeholder="Content"
+                />
+              </div>
+
               {errors.content && <p>{errors.content.message}</p>}
 
               <button

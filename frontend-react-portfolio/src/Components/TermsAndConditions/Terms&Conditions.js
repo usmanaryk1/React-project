@@ -1,25 +1,20 @@
 import { useState } from "react";
-import {
-  addTerm,
-  updateTerm,
-  deleteTerm,
-  reorderTerms,
-} from "../../CMSAdmin/TermsAndConditionsEdit/TermsApis";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useAuth } from "../../CMSAdmin/Auth/AuthContext";
 import "./TermsAndConditions.css";
 import { toast } from "react-toastify";
 import useFetch from "../../Components/useFetch";
-import validationSchema from "./TermsValidation";
+import validationSchema from "../../CMSAdmin/TermsAndConditionsEdit/TermsValidation";
 import Swal from "sweetalert2";
 import { TouchBackend } from "react-dnd-touch-backend";
 import Loading from "../Loading/Loading";
 import Error from "../Error/Error";
-import TermsForm from "./TermsForm";
 import TermItem from "./TermItem";
 import { useForm } from "react-hook-form";
 import NullData from "../NullData/NullData";
+import TermsForm from "../../CMSAdmin/TermsAndConditionsEdit/TermsForm";
+import ApiService from "../../CMSAdmin/ApisService";
 
 const TermsandConditions = () => {
   const [editingTerm, setEditingTerm] = useState(null); // Track which term is being edited
@@ -36,13 +31,14 @@ const TermsandConditions = () => {
 
   const { reset } = useForm();
   const { isAdminPage, isAuthenticated } = useAuth();
+  const termsService = ApiService("api/terms");
   // Handle adding a new term
   const handleAdd = async (formData) => {
     try {
       // Clear editing term if adding
       setIsAdding(true);
       setEditingTerm(null);
-      const addedTerm = await addTerm(formData);
+      const addedTerm = await termsService.addItem(formData);
       if (addedTerm && addedTerm._id) {
         // Ensure addedTerm contains _id
         setTermsList([...termsList, addedTerm]);
@@ -63,7 +59,10 @@ const TermsandConditions = () => {
     if (!editingTerm) return;
     try {
       setIsEditing(true);
-      const updatedTerm = await updateTerm(editingTerm._id, formData);
+      const updatedTerm = await termsService.updateItem(
+        editingTerm._id,
+        formData
+      );
       setTermsList((prevTerms) =>
         prevTerms.map((term) =>
           term._id === editingTerm._id ? updatedTerm : term
@@ -99,7 +98,7 @@ const TermsandConditions = () => {
   const handleDelete = async (id) => {
     try {
       setIsDeleting(id);
-      await deleteTerm(id);
+      await termsService.deleteItem(id);
       setTermsList((prevTerms) => prevTerms.filter((term) => term._id !== id));
       toast.success("Term deleted successfully");
       setIsDeleting(null);
@@ -117,7 +116,7 @@ const TermsandConditions = () => {
       reorderedList.splice(hoverIndex, 0, draggedItem);
 
       // Send reordered list to the server
-      await reorderTerms(
+      await termsService.reorderItems(
         reorderedList.map((term, index) => ({ _id: term._id, order: index }))
       );
       setTermsList(reorderedList); // Update state with new order

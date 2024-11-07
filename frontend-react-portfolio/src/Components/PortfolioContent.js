@@ -50,11 +50,6 @@ const PortfolioContent = ({ onDeleteClick, onEditClick, details, workId }) => {
     });
   };
 
-  // const getBasePath = () => {
-  //     return isAdminPage ? "../../" : "../";
-  // ${getBasePath()}$
-  // };
-
   return (
     <>
       {details && (

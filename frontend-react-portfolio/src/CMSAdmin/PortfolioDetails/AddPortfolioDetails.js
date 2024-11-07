@@ -14,10 +14,10 @@ import {
 import { v4 } from "uuid";
 import { storage } from "../../firebaseConfig"; // Import Firebase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import Resizer from "react-image-file-resizer"; // Ensure you have this import
 import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
 import "./PortfolioDetailsForm.css";
+import ImageCropper from "../ImageCropper/ImageCropper";
 
 const AddPortfolioDetails = () => {
   const {
@@ -60,6 +60,11 @@ const AddPortfolioDetails = () => {
   const [base64Images, setBase64Images] = useState([]);
   const imageRefs = useRef([]);
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
+  const [isCropping, setIsCropping] = useState(false);
+  const [imageSrc, setImageSrc] = useState(null);
+  const [croppedImages, setCroppedImages] = useState([]);
+  const [fileName, setFileName] = useState("");
+  const [croppingIndex, setCroppingIndex] = useState(null);
 
   const handleImageClick = (index) => {
     imageRefs.current[index].click();
@@ -77,42 +82,39 @@ const AddPortfolioDetails = () => {
 
   const handleImageChange = async (e, index) => {
     const file = e.target.files[0];
+    // console.log("filename", file.name);
+    setFileName(file.name);
+    // console.log("file name:", fileName);
     if (file) {
-      const resizedImage = await resizeImage(file);
-
-      setBase64Images((prevState) => {
-        const newImages = [...prevState];
-        newImages[index] = resizedImage.base64;
-        return newImages;
-      });
-
-      setImages((prevState) => {
-        const newImages = [...prevState];
-        newImages[index] = resizedImage.file; // Use resized file
-        return newImages;
-      });
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImageSrc(reader.result); // Display the original image format for cropping
+        // console.log("imageSrc", reader.result);
+        setFileName(file.name); // Keep the original file name and format
+        setIsCropping(true); // Open the cropping modal
+        setCroppingIndex(index);
+      };
+      reader.onerror = (error) => {
+        console.error("Error reading file:", error);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
-  const resizeImage = (file) => {
-    return new Promise((resolve) => {
-      Resizer.imageFileResizer(
-        file,
-        688, // Width
-        398, // Height
-        "WEBP", // Format
-        10, // Quality (adjust this to manage file size)
-        0,
-        async (uri) => {
-          const blob = await fetch(uri).then((r) => r.blob());
-          const resizedFile = new File([blob], file.name, {
-            type: "image/webp",
-          });
-          resolve({ base64: uri, file: resizedFile });
-        },
-        "base64"
-      );
-    });
+  const handleCropComplete = async (croppedImg) => {
+    if (croppedImg) {
+      // console.log("croppedImg", croppedImg);
+      setCroppedImages(croppedImg); // Use the cropped image directly
+      // console.log("cropped image on crop complete", croppedImage);
+      setBase64Images((prevImages) => {
+        const updatedImages = [...prevImages];
+        updatedImages[croppingIndex] = URL.createObjectURL(croppedImg);
+        return updatedImages;
+      });
+      setIsCropping(false);
+    } else {
+      console.error("Cropped image is not valid");
+    }
   };
 
   useEffect(() => {
@@ -124,138 +126,154 @@ const AddPortfolioDetails = () => {
       setValue("link", currentDetails.pURL);
       setValue("desc", currentDetails.desc);
       setValue("isActive", currentDetails.isActive);
-      setBase64Images(currentDetails.slideImages);
-      setImages(new Array(currentDetails.slideImages.length).fill(null));
+      setBase64Images(
+        Array.isArray(currentDetails.slideImages)
+          ? currentDetails.slideImages
+          : []
+      );
     } else {
       reset();
       setBase64Images([]);
-      setImages([]);
     }
   }, [currentDetails, setValue, reset]);
 
   // console.log("currentDetails", currentDetails);
-  const uploadImageToFirebase = async (imageFile) => {
-    if (!imageFile) return null;
 
-    const imageRef = ref(storage, `detailsImages/${imageFile.name + v4()}`);
-    await uploadBytes(imageRef, imageFile);
-    // Complete the upload
-    setIsSubmitting(true);
-    const downloadURL = await getDownloadURL(imageRef);
-    return downloadURL;
+  const uploadImageToFirebase = async (croppedImage) => {
+    if (!croppedImage) return null;
+
+    // console.log("croppedImage.name", croppedImage.name);
+
+    const imageRef = ref(storage, `detailsImages/${fileName + v4()}`);
+
+    try {
+      await uploadBytes(imageRef, croppedImage);
+      // console.log("Image uploaded successfully:", croppedImage.name);
+      const downloadURL = await getDownloadURL(imageRef);
+      // console.log("Download URL:", downloadURL);
+      return downloadURL;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      return null;
+    }
   };
-  const onSubmit = async (formObject) => {
-    setIsSubmitting(true);
-    let imageUrls = [...base64Images];
-    // console.log("imageUrls base64Images", imageUrls);
 
-    for (let i = 0; i < images.length; i++) {
-      if (images[i]) {
+  const onSubmit = async (formData) => {
+    // console.log("formdata", formData);
+    // console.log("croppedImage in submit", croppedImage);
+
+    setIsSubmitting(true);
+
+    // console.log("base64Image", base64Image);
+
+    let imageUrls = [...base64Images];
+
+    // console.log("imageUrl", imageUrl);
+
+    for (let i = 0; i < croppedImages.length; i++) {
+      if (croppedImages[i]) {
         // console.log(`image ${i}:`, images[i]);
-        const downloadUrl = await uploadImageToFirebase(images[i]);
+        const downloadUrl = await uploadImageToFirebase(croppedImages[i]);
         imageUrls[i] = downloadUrl;
+
+        if (!imageUrls[i]) {
+          toast.error("Image upload failed");
+
+          setIsSubmitting(false);
+
+          return;
+        }
+      } else {
+        toast.error("Please crop the image before submitting.");
+        setIsSubmitting(false);
+        return;
       }
     }
 
     const updatedData = {
-      pCategory: formObject.category,
-      pClient: formObject.client,
-      pDate: formObject.date,
-      pURL: formObject.link,
-      desc: formObject.desc,
+      pCategory: formData.category,
+      pClient: formData.client,
+      pDate: formData.date,
+      pURL: formData.link,
+      desc: formData.desc,
       slideImages: imageUrls,
-      isActive: formObject.isActive,
+      isActive: formData.isActive,
     };
 
-    // console.log("ImgaeUrls:", imageUrls);
-    // console.log("updatedData", updatedData);
-    // console.log("workId", workId);
     try {
-      // Send PUT request to update the JSON data
-      if (currentDetails) {
-        const response = await fetch(
-          `${API_URL}/api/workDetails/${currentDetails._id}`,
-          {
-            method: "PUT",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedData),
-          }
-        );
-        const result = await response.json();
-        // console.log("update details response:", result);
-        setDetails(
-          details.map((detail) => (detail._id === result._id ? result : detail))
-        );
-        childRef.current.childFunction();
-        // console.log("Updated Details: ", details);
-        toast.success("Details updated successfully");
-      } else {
-        // Send POST request to update the JSON data
-        const response = await fetch(`${API_URL}/api/workDetails`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedData),
-        });
-        if (!response.ok) {
-          throw new Error(`Failed to add details: ${response.statusText}`);
-        }
-        const result = await response.json();
-        // console.log("RESULT", result, result._id);
-        // Update the workDetailsId in the corresponding work
-        const updatedWorkResponse = await fetch(
-          `${API_URL}/api/works/${workId}`,
-          {
-            method: "PATCH",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ workDetailsId: result._id }),
-          }
-        );
+      const method = currentDetails ? "PUT" : "POST";
+      const url = currentDetails
+        ? `${API_URL}/api/workDetails/${currentDetails._id}`
+        : `${API_URL}/api/workDetails`;
+      const response = await fetch(url, {
+        method,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      });
 
-        // Update the URL
-        queryParams.set("workDetailsId", result._id);
-        history.push({
-          pathname: location.pathname,
-          search: queryParams.toString(),
-        });
-
-        childRef.current.childFunction(result._id);
-        // console.log("updatedWorkResponse", updatedWorkResponse);
-        if (!updatedWorkResponse.ok) {
-          throw new Error(
-            `Failed to update work: ${updatedWorkResponse.statusText}`
+      if (response.ok) {
+        const result = await response.json();
+        if (currentDetails) {
+          setDetails(
+            details.map((detail) =>
+              detail._id === result._id ? result : detail
+            )
           );
+          childRef.current.childFunction();
+          toast.success("Project Details Updated Successfully");
+        } else {
+          const updatedWorkResponse = await fetch(
+            `${API_URL}/api/works/${workId}`,
+            {
+              method: "PATCH",
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ workDetailsId: result._id }),
+            }
+          );
+
+          queryParams.set("workDetailsId", result._id);
+          history.push({
+            pathname: location.pathname,
+            search: queryParams.toString(),
+          });
+
+          childRef.current.childFunction(result._id);
+          // console.log("updatedWorkResponse", updatedWorkResponse);
+          if (!updatedWorkResponse.ok) {
+            throw new Error(
+              `Failed to update work: ${updatedWorkResponse.statusText}`
+            );
+          }
+
+          setDetails([...details, result]);
+          childRef.current.childFunction();
+          toast.success("Project Details Added Successfully");
         }
-        setDetails((prevDetails) => [...prevDetails, result]);
-        childRef.current.childFunction();
-        toast.success("Details added successfully");
+        reset();
+        setCurrentDetails(null);
+      } else {
+        throw new Error("Failed to save project details info");
       }
     } catch (error) {
-      console.error("Error:", error);
       toast.error(error.message);
+    } finally {
       setIsSubmitting(false);
+      setBase64Images([]);
+      setCroppedImages([]);
     }
-
-    reset();
-    setCurrentDetails(null);
-    setBase64Images([]);
-    setImages([]);
-    setIsSubmitting(false);
   };
 
   const onReset = () => {
     reset();
     setCurrentDetails(null);
     setBase64Images([]);
-    setImages([]);
+    setCroppedImages([]);
   };
 
   const handleEdit = (details) => {
@@ -338,19 +356,14 @@ const AddPortfolioDetails = () => {
                           className="image-preview"
                           onClick={() => handleImageClick(index)}
                         >
-                          {base64Image ? (
-                            <img
-                              src={base64Image}
-                              alt="Uploaded"
-                              className="img-display-before mt-3"
-                            />
-                          ) : (
-                            <img
-                              src="../../assets/img/default-work-image.webp"
-                              alt="default"
-                              className="img-display-before"
-                            />
-                          )}
+                          <img
+                            src={
+                              base64Image ||
+                              "../../assets/img/default-work-image.webp"
+                            }
+                            alt="default"
+                            className="img-display"
+                          />
                         </div>
                         <button
                           type="button"
@@ -363,12 +376,22 @@ const AddPortfolioDetails = () => {
                         <input
                           type="file"
                           name={`file${index}`}
-                          // id={`file-input${index}`}
                           {...register(`file${index}`)}
                           onChange={(e) => handleImageChange(e, index)}
                           ref={(el) => (imageRefs.current[index] = el)}
                           style={{ display: "none" }}
                         />
+                        {isCropping && (
+                          <ImageCropper
+                            imageSrc={imageSrc}
+                            fileName={fileName}
+                            onCropComplete={handleCropComplete}
+                            onClose={() => setIsCropping(false)}
+                            width={688} // Pass the desired width
+                            height={398} // Pass the desired height
+                            cropShape="rect"
+                          />
+                        )}
                       </div>
                     ))}
                     <button
