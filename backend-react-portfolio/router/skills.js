@@ -1,48 +1,48 @@
 const express = require("express");
 const authenticateJWT = require("../middleware/authmiddleware.js");
-const Terms_Model = require("../models/termsandconditions.js");
+const Skills_Model = require("../models/skillsSchema.js");
 const router = express.Router();
 
-// GET All TERMS
+// GET All SKILLS
 
 router.get("/", async (req, res) => {
   try {
-    const TermsAndConditions = await Terms_Model.find(); // Ensure you're querying by the correct field, `email` not `id`
-    if (TermsAndConditions.length === 0) {
+    const Skills = await Skills_Model.find(); // Ensure you're querying by the correct field, `email` not `id`
+    if (Skills.length === 0) {
       return res.status(404).json({ message: "Inforamtion Not Found" });
     }
-    res.status(200).json(TermsAndConditions); // 200 OK status code
+    res.status(200).json(Skills); // 200 OK status code
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to fetch data" });
   }
 });
 
-// GET TERMS BY SPECIFIC ID
+// GET SKILLS BY SPECIFIC ID
 
 router.get("/:id", async (req, res) => {
   const Id = req.params.id;
 
   try {
-    const TermsAndConditions = await Terms_Model.findById(Id); // Ensure you're querying by the correct field, `email` not `id`
-    if (!TermsAndConditions) {
+    const Skills = await Skills_Model.findById(Id); // Ensure you're querying by the correct field, `email` not `id`
+    if (!Skills) {
       return res.status(404).send("Inforamtion Not Found");
     }
-    res.status(200).json(TermsAndConditions);
+    res.status(200).json(Skills);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: `Failed to fetch data with ${Id}` });
   }
 });
 
-// POST TERMS (AUTHENTICATED ONLY)
+// POST SKILLS (AUTHENTICATED ONLY)
 
 router.post("/", authenticateJWT, async (req, res) => {
   // console.log("Inside post function");
 
-  const data = new Terms_Model({
-    title: req.body.title,
-    content: req.body.content,
+  const data = new Skills_Model({
+    name: req.body.name,
+    proficiency: req.body.proficiency,
   });
 
   try {
@@ -54,38 +54,38 @@ router.post("/", authenticateJWT, async (req, res) => {
   }
 });
 
-// UPDATE TERMS BY ID (AUTHENTICATED ONLY)
+// UPDATE SKILLS BY ID (AUTHENTICATED ONLY)
 
 router.put("/:id", authenticateJWT, async (req, res) => {
   try {
     // console.log("Request Body", req.body);
-    const updatedTerms = await Terms_Model.findByIdAndUpdate(
+    const updatedSkills = await Skills_Model.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
     );
-    res.status(200).json(updatedTerms);
+    res.status(200).json(updatedSkills);
   } catch (error) {
     console.error(error);
     res.status(400).json({ error: `Failed to Update Terms: ${error.message}` });
   }
 });
 
-// DELETE TERMS BY ID (AUTHENTICATED ONLY)
+// DELETE SKILLS BY ID (AUTHENTICATED ONLY)
 
 router.delete("/:id", authenticateJWT, async (req, res) => {
   const Id = req.params.id;
 
   try {
-    const TermsAndConditions = await Terms_Model.findByIdAndDelete(Id); // Ensure you're querying by the correct field, `email` not `id`
-    if (!TermsAndConditions) {
+    const Skills = await Skills_Model.findByIdAndDelete(Id); // Ensure you're querying by the correct field, `email` not `id`
+    if (!Skills) {
       return res
         .status(404)
         .send({ message: `Information with ID ${Id} not found` });
     }
     res.status(200).send({
       message: `Information with ID ${Id} has been deleted`,
-      deletedInfo: TermsAndConditions,
+      deletedInfo: Skills,
     });
   } catch (error) {
     console.error(error);
@@ -93,23 +93,23 @@ router.delete("/:id", authenticateJWT, async (req, res) => {
   }
 });
 
-// REORDER TERMS BY MAPPING REORDERED TERMS  (AUTHENTICATED ONLY)
+// REORDER SKILLS BY MAPPING REORDERED TERMS (AUTHENTICATED ONLY)
 
 router.patch("/reorder", authenticateJWT, async (req, res) => {
   // console.log("req.body.reorderedTerms", req.body.reorderedTerms);
-  const { reorderedTerms } = req.body; // reorderedTerms: [{ _id, title, content }, ...]
+  const { reorderedSkills } = req.body; // reorderedTerms: [{ _id, title, content }, ...]
   // console.log("reorderedTerms", reorderedTerms);
   try {
-    const bulkOps = reorderedTerms.map((term, index) => ({
+    const bulkOps = reorderedSkills.map((skill, index) => ({
       updateOne: {
-        filter: { _id: term._id },
+        filter: { _id: skill._id },
         update: { $set: { order: index } }, // Assuming you have an 'order' field
       },
     }));
 
-    await Terms_Model.bulkWrite(bulkOps);
+    await Skills_Model.bulkWrite(bulkOps);
     // console.log("Terms reordered in the database");
-    res.json({ message: "Terms reordered successfully" });
+    res.json({ message: "Skiils reordered successfully" });
   } catch (error) {
     console.error(error);
     res.status(400).json({ message: error.message });
