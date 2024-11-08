@@ -379,6 +379,7 @@ const AddForm = () => {
         </div>
         <hr />
       </section>
+
       <About
         onEditClick={handleEdit}
         onDeleteClick={handleDelete}

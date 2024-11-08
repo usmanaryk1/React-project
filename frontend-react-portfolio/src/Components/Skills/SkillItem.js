@@ -4,12 +4,11 @@ import { useDrag, useDrop } from "react-dnd";
 import { useAuth } from "../../CMSAdmin/Auth/AuthContext";
 
 const SkillItem = ({
-  skill,
+  skill = [],
   index,
   moveSkill,
   handleEditClick,
   handleDeleteClick,
-  isDeleting,
 }) => {
   const [{ isDragging }, drag] = useDrag({
     type: "SKILL",

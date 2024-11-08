@@ -14,10 +14,10 @@ import ApiService from "../../CMSAdmin/ApisService";
 const Skills = ({ handleDelete, handleEditClick }) => {
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
   const {
-    data: skillsList,
+    data: skills,
     isPending,
     error,
-    setData: setSkillsList,
+    setData: setSkills,
   } = useFetch(`${API_URL}/api/skills`);
 
   const skillsService = ApiService("api/skills");
@@ -41,7 +41,7 @@ const Skills = ({ handleDelete, handleEditClick }) => {
   // Handle reordering the terms
   const handleReorder = async (dragIndex, hoverIndex) => {
     try {
-      const reorderedList = [...skillsList];
+      const reorderedList = [...skills];
       const [draggedItem] = reorderedList.splice(dragIndex, 1);
       reorderedList.splice(hoverIndex, 0, draggedItem);
 
@@ -49,7 +49,7 @@ const Skills = ({ handleDelete, handleEditClick }) => {
       await skillsService.reorderItems(
         reorderedList.map((skill, index) => ({ _id: skill._id, order: index }))
       );
-      setSkillsList(reorderedList); // Update state with new order
+      setSkills(reorderedList); // Update state with new order
       toast.success("Skills reordered successfully");
     } catch (error) {
       toast.error("Failed to Update the Sequence of Skills");
@@ -65,8 +65,8 @@ const Skills = ({ handleDelete, handleEditClick }) => {
     <DndProvider backend={isTouchDevice ? TouchBackend : HTML5Backend}>
       <div>
         {/* Render Existing Terms */}
-        {skillsList.length > 0 ? (
-          skillsList.map((skill, index) => (
+        {skills.length > 0 ? (
+          skills.map((skill, index) => (
             <SkillItem
               key={skill._id}
               skill={skill}
