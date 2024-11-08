@@ -21,10 +21,6 @@ const userSchema = new Schema(
       required: true,
       unique: true, // Ensure email is unique
     },
-    // password: {
-    //   type: String,
-    //   required: true,
-    // },
     loggedIn: {
       type: Boolean,
       default: false, //User will be logged out by default

@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const certificationSchema = new Schema({
   image: {
     type: String,
-    required: true,
   },
   cardCategory: {
     type: String,
@@ -21,7 +20,6 @@ const certificationSchema = new Schema({
   },
   authorImage: {
     type: String,
-    required: true,
   },
   authorName: {
     type: String,

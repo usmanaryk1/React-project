@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const projectSchema = new Schema({
   workImage: {
     type: String,
-    required: true,
   },
   wTitle: {
     type: String,

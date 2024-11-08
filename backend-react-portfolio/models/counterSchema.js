@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const counterSchema = new Schema({
   icon: {
     type: String,
-    required: true,
   },
   counterEnd: {
     type: Number,

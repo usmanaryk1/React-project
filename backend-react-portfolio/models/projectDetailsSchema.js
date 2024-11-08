@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const projectDetailsSchema = new Schema({
   slideImages: {
     type: [String], // Array of strings
-    required: true,
   },
   pCategory: {
     type: String,

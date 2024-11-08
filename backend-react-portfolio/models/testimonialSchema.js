@@ -13,7 +13,6 @@ const testimonialSchema = new Schema({
   },
   img: {
     type: String,
-    required: true,
   },
   isActive: {
     type: Boolean,

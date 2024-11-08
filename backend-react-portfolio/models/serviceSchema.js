@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const serviceSchema = new Schema({
   sIcon: {
     type: String,
-    required: true,
   },
   sTitle: {
     type: String,
