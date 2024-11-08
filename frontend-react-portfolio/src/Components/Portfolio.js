@@ -57,9 +57,16 @@ const Portfolio = ({ title, subtitle, onEdit, onDelete, works = [] }) => {
                 <div className="col-md-4" key={work._id}>
                   <div className="work-box">
                     {/* <a href={work.linkImage} data-gallery="portfolioGallery" className="portfolio-lightbox"> */}
-                    <div className="work-img">
-                      <img src={work.workImage} alt="" className="img-fluid" />
-                    </div>
+                    {work.workImage && (
+                      <div className="work-img">
+                        <img
+                          src={work.workImage}
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                    )}
+
                     {/* </a> */}
                     {isAuthenticated && isAdminPage && (
                       <div className="admin-actions d-flex align-items-start justify-content-end mt-2 mb-0">

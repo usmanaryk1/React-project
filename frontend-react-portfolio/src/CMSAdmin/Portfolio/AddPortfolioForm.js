@@ -143,18 +143,6 @@ const AddPortfolioForm = () => {
       imageUrl = await uploadImageToFirebase(croppedImage);
 
       // console.log("imageUrl2", imageUrl);
-
-      if (!imageUrl) {
-        toast.error("Image upload failed");
-
-        setIsSubmitting(false);
-
-        return;
-      }
-    } else {
-      toast.error("Please crop the image before submitting.");
-      setIsSubmitting(false);
-      return;
     }
 
     const updatedData = {
@@ -284,9 +272,6 @@ const AddPortfolioForm = () => {
                     <label className="my-3 img-btn" onClick={handleImageClick}>
                       Choose Project Image
                     </label>
-                    {errors.file && (
-                      <p className="error-message">{errors.file.message}</p>
-                    )}
                   </div>
 
                   <div className="from-group">
@@ -296,7 +281,6 @@ const AddPortfolioForm = () => {
                       className="form-control"
                       {...register("title")}
                       placeholder="Add title of Project"
-                      required
                     />
                   </div>
                   {errors.title && (
@@ -310,7 +294,6 @@ const AddPortfolioForm = () => {
                       className="form-control"
                       {...register("link")}
                       placeholder="Share Link of Project"
-                      required
                     />
                   </div>
                   {errors.link && (
@@ -324,7 +307,6 @@ const AddPortfolioForm = () => {
                       className="form-control"
                       {...register("category")}
                       placeholder="Add the category of Project"
-                      required
                     />
                   </div>
                   {errors.category && (
@@ -337,7 +319,6 @@ const AddPortfolioForm = () => {
                       name="date"
                       className="form-control"
                       {...register("date")}
-                      required
                     />
                   </div>
                   {errors.date && (
@@ -351,7 +332,6 @@ const AddPortfolioForm = () => {
                       name="isActive"
                       {...register("isActive")}
                       className="mx-2"
-                      required
                     />
                     <label htmlFor="active">isActive</label>
                   </div>

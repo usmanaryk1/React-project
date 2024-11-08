@@ -1056,7 +1056,7 @@ a:hover {
 
 .portfolio-details .portfolio-info {
   padding: 30px;
-  box-shadow: 0px 0 30px rgba(78, 78, 78, 0.08);
+  box-shadow: 0px 0 30px rgba(78, 78, 78, 0.1);
 }
 
 .portfolio-details .portfolio-info h3 {
@@ -1080,6 +1080,8 @@ a:hover {
 .portfolio-details .portfolio-description {
   padding-top: 30px;
   font-size: 18px;
+  padding: 30px;
+  box-shadow: 0px 0 30px rgba(78, 78, 78, 0.1);
 }
 
 .portfolio-details .portfolio-description h2 {
@@ -1324,22 +1326,27 @@ a:hover {
 --------------------------------------------------------------*/
 .card-box {
   max-height: 497.3px;
+  margin-top: 3rem;
 }
 #certifications {
   padding-bottom: 5rem;
 }
+
 @media (max-width: 767px) {
   #certifications {
     padding-bottom: 3rem;
   }
   .card-box {
-    margin-bottom: 7rem;
+    margin-top: 7rem;
   }
 }
 
 @media (max-width: 413px) {
   #certifications .title-a {
     font-size: 2rem;
+  }
+  .card-box {
+    margin-top: 2rem;
   }
 }
 
@@ -1355,6 +1362,13 @@ a:hover {
 
 .card-certification .card-body {
   position: relative;
+}
+
+.card-img img {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  object-fit: cover;
 }
 
 .card-certification .card-category-box {

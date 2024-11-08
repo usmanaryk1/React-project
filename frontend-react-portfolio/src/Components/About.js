@@ -42,15 +42,18 @@ const About = ({
                     <div className="row">
                       <div className="col-md-6">
                         <div className="row">
-                          <div className="col-sm-6 col-md-5">
-                            <div className="about-img">
-                              <img
-                                src={about.img}
-                                className="img-fluid rounded b-shadow-a"
-                                alt=""
-                              />
+                          {about.img && (
+                            <div className="col-sm-6 col-md-5">
+                              <div className="about-img">
+                                <img
+                                  src={about.img}
+                                  className="img-fluid rounded b-shadow-a"
+                                  alt=""
+                                />
+                              </div>
                             </div>
-                          </div>
+                          )}
+
                           <div className="col-sm-6 col-md-7">
                             <div className="about-info">
                               <p>

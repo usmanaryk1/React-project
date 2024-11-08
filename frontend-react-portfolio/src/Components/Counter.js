@@ -44,11 +44,14 @@ const Counter = ({ onEdit, onDelete, counts = [] }) => {
               {counts.map((counter) => (
                 <div className="col-sm-3 col-lg-3" key={counter._id}>
                   <div className="counter-box counter-box pt-4 pt-md-0">
-                    <div className="counter-ico">
-                      <span className="ico-circle">
-                        <i className={counter.icon} />
-                      </span>
-                    </div>
+                    {counter.icon && (
+                      <div className="counter-ico">
+                        <span className="ico-circle">
+                          <i className={counter.icon} />
+                        </span>
+                      </div>
+                    )}
+
                     <div className="counter-num">
                       <p
                         data-purecounter-start={0}

@@ -58,11 +58,14 @@ const Services = ({ title, subtitle, onEdit, onDelete, services = [] }) => {
                         </button>
                       </div>
                     )}
-                    <div className="service-ico">
-                      <span className="ico-circle">
-                        <i className={service.sIcon} />
-                      </span>
-                    </div>
+                    {service.sIcon && (
+                      <div className="service-ico">
+                        <span className="ico-circle">
+                          <i className={service.sIcon} />
+                        </span>
+                      </div>
+                    )}
+
                     <div className="service-content">
                       <h2 className="s-title">{service.sTitle}</h2>
                       <p className="s-description text-center">

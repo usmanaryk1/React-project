@@ -162,7 +162,6 @@ const ContactForm = () => {
                       className="form-control"
                       {...register("description")}
                       placeholder="Description"
-                      required
                     />
                   </div>
                   {errors.description && (
@@ -178,7 +177,6 @@ const ContactForm = () => {
                       className="form-control"
                       {...register("location")}
                       placeholder="Location"
-                      required
                     />
                   </div>
                   {errors.location && (
@@ -191,8 +189,7 @@ const ContactForm = () => {
                       name="number"
                       className="form-control"
                       {...register("number")}
-                      placeholder="Telephone Number"
-                      required
+                      placeholder="Phone Number"
                     />
                   </div>
                   {errors.number && (
@@ -206,7 +203,6 @@ const ContactForm = () => {
                       className="form-control"
                       {...register("email")}
                       placeholder="Email"
-                      required
                     />
                   </div>
                   {errors.email && (
@@ -220,7 +216,6 @@ const ContactForm = () => {
                       name="isActive"
                       {...register("isActive")}
                       className="mx-2"
-                      required
                     />
                     <label htmlFor="isActive">isActive</label>
                     {errors.isActive && (

@@ -97,15 +97,15 @@ const SkillsEdit = () => {
         />
       </section>
       <hr />
-      {/* <About
+      <About
         handleEditClick={handleUpdate}
         handleDelete={handleDelete}
         skills={skills}
-      /> */}
+      />
 
       <Skills
         handleDelete={handleDelete}
-        handleEditClick={handleUpdate}
+        handleEditClick={(skill) => setEditingSkill(skill)}
         skills={skills}
       />
     </>

@@ -16,7 +16,7 @@ const ImageCropper = ({
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-  console.log("fileName in cropper", fileName);
+  // console.log("fileName in cropper", fileName);
   const onCropChange = (location) => setCrop(location);
   const onZoomChange = (newZoom) => setZoom(newZoom);
   const aspectRatio = width / height; // Calculate aspect ratio
@@ -29,7 +29,7 @@ const ImageCropper = ({
         fileName,
         croppedAreaPixels
       );
-      console.log("croppedImg in cropper", croppedImg);
+      // console.log("croppedImg in cropper", croppedImg);
 
       onCropComplete(croppedImg); // Pass the cropped image data to the parent component
       onClose(); // Close the cropper modal

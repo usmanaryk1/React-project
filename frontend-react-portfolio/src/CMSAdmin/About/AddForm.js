@@ -138,18 +138,6 @@ const AddForm = () => {
       imageUrl = await uploadImageToFirebase(croppedImage);
 
       console.log("imageUrl2", imageUrl);
-
-      if (!imageUrl) {
-        toast.error("Image upload failed");
-
-        setIsSubmitting(false);
-
-        return;
-      }
-    } else {
-      toast.error("Please crop the image before submitting.");
-      setIsSubmitting(false);
-      return;
     }
 
     const updatedData = {
@@ -285,7 +273,6 @@ const AddForm = () => {
                       className="form-control"
                       {...register("name")}
                       placeholder="Full Name"
-                      required
                     />
                   </div>
                   {errors.name && (
@@ -299,7 +286,6 @@ const AddForm = () => {
                       className="form-control"
                       {...register("profile")}
                       placeholder="Occupation"
-                      required
                     />
                   </div>
                   {errors.profile && (
@@ -313,7 +299,6 @@ const AddForm = () => {
                       className="form-control"
                       {...register("email")}
                       placeholder="Email"
-                      required
                     />
                   </div>
                   {errors.email && (
@@ -327,7 +312,6 @@ const AddForm = () => {
                       className="form-control"
                       {...register("phone")}
                       placeholder="Phone Number"
-                      required
                     />
                   </div>
                   {errors.phone && (
@@ -340,7 +324,6 @@ const AddForm = () => {
                       className="form-control"
                       {...register("desc")}
                       placeholder="Description"
-                      required
                     ></textarea>
                   </div>
                   {errors.desc && (
@@ -353,7 +336,6 @@ const AddForm = () => {
                       name="isActive"
                       {...register("isActive")}
                       className="mx-2"
-                      required
                     />
                     <label htmlFor="active">isActive</label>
                   </div>

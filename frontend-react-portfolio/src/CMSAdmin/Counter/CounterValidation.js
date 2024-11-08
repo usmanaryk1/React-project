@@ -2,7 +2,6 @@ import * as yup from "yup";
 
 const validationSchema = yup
   .object({
-    icon: yup.string().required("Icon is required!"),
     title: yup
       .string()
       .required("Title is required!")

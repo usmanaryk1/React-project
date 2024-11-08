@@ -175,18 +175,6 @@ const AddPortfolioDetails = () => {
         // console.log(`image ${i}:`, images[i]);
         const downloadUrl = await uploadImageToFirebase(croppedImages[i]);
         imageUrls[i] = downloadUrl;
-
-        if (!imageUrls[i]) {
-          toast.error("Image upload failed");
-
-          setIsSubmitting(false);
-
-          return;
-        }
-      } else {
-        toast.error("Please crop the image before submitting.");
-        setIsSubmitting(false);
-        return;
       }
     }
 
@@ -410,7 +398,6 @@ const AddPortfolioDetails = () => {
                       className="form-control"
                       {...register("client")}
                       placeholder="Client Company"
-                      required
                     />
                   </div>
                   {errors.name && (
@@ -424,7 +411,6 @@ const AddPortfolioDetails = () => {
                       className="form-control"
                       {...register("category")}
                       placeholder="Category of Project"
-                      required
                     />
                   </div>
                   {errors.category && (
@@ -438,7 +424,6 @@ const AddPortfolioDetails = () => {
                       className="form-control"
                       {...register("date")}
                       placeholder="Date (YY-MM-DD)"
-                      required
                     />
                   </div>
                   {errors.date && (
@@ -452,7 +437,6 @@ const AddPortfolioDetails = () => {
                       className="form-control"
                       {...register("link")}
                       placeholder="Enter link to your project"
-                      required
                     />
                   </div>
                   {errors.link && (
@@ -465,7 +449,6 @@ const AddPortfolioDetails = () => {
                       className="form-control"
                       {...register("desc")}
                       placeholder="Description"
-                      required
                     ></textarea>
                   </div>
                   {errors.desc && (
@@ -479,7 +462,6 @@ const AddPortfolioDetails = () => {
                       name="isActive"
                       {...register("isActive")}
                       className="mx-2"
-                      required
                     />
                     <label htmlFor="active">isActive</label>
                   </div>

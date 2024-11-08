@@ -133,18 +133,6 @@ const AddTestimonialForm = () => {
       imageUrl = await uploadImageToFirebase(croppedImage);
 
       // console.log("imageUrl2", imageUrl);
-
-      if (!imageUrl) {
-        toast.error("Image upload failed");
-
-        setIsSubmitting(false);
-
-        return;
-      }
-    } else {
-      toast.error("Please crop the image before submitting.");
-      setIsSubmitting(false);
-      return;
     }
 
     const updatedData = {
@@ -283,7 +271,6 @@ const AddTestimonialForm = () => {
                       className="form-control"
                       {...register("name")}
                       placeholder="Client Name"
-                      required
                     />
                   </div>
                   {errors.name && (
@@ -296,7 +283,6 @@ const AddTestimonialForm = () => {
                       className="form-control"
                       {...register("desc")}
                       placeholder="Description"
-                      required
                     ></textarea>
                   </div>
                   {errors.desc && (

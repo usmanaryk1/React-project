@@ -157,7 +157,6 @@ const AddCertificationForm = () => {
       await uploadBytes(imageRef, imageFile);
       // console.log("Image uploaded successfully:", imageFile.name);
       // Complete the upload
-      setIsSubmitting(true);
       const downloadURL = await getDownloadURL(imageRef);
       // console.log("Download URL:", downloadURL);
       return downloadURL;
@@ -167,8 +166,7 @@ const AddCertificationForm = () => {
     }
   };
 
-  const onSubmit = async (formData, e) => {
-    e.preventDefault();
+  const onSubmit = async (formData) => {
     // console.log("formdata", formData);
     // console.log("croppedImage1 in submit", croppedImage1);
     // console.log("croppedImage2 in submit", croppedImage2);
@@ -186,90 +184,70 @@ const AddCertificationForm = () => {
       imageUrl1 = await uploadImageToFirebase(croppedImage1);
 
       // console.log("imageUrl1", imageUrl1);
+    }
+    if (croppedImage2) {
+      imageUrl2 = await uploadImageToFirebase(croppedImage2);
 
-      if (!imageUrl1) {
-        toast.error("Image upload failed");
-
-        setIsSubmitting(false);
-
-        return;
-      }
-      if (croppedImage2) {
-        imageUrl2 = await uploadImageToFirebase(croppedImage2);
-
-        // console.log("imageUrl2", imageUrl2);
-
-        if (!imageUrl2) {
-          toast.error("Image upload failed");
-
-          setIsSubmitting(false);
-
-          return;
-        }
-      } else {
-        toast.error("Please crop the image before submitting.");
-        setIsSubmitting(false);
-        return;
-      }
-
-      const updatedData = {
-        cardTitle: formData.title,
-        cardCategory: formData.category,
-        cardDescription: formData.description,
-        postDate: formData.time,
-        authorName: formData.name,
-        image: imageUrl1,
-        authorImage: imageUrl2,
-        isActive: formData.isActive,
-      };
-
-      // console.log("imageUrl1", imageUrl1);
       // console.log("imageUrl2", imageUrl2);
+    }
 
-      try {
-        const method = currentCertifications ? "PUT" : "POST";
-        const url = currentCertifications
-          ? `${API_URL}/api/certifications/${currentCertifications._id}`
-          : `${API_URL}/api/certifications`;
-        const response = await fetch(url, {
-          method,
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedData),
-        });
+    const updatedData = {
+      cardTitle: formData.title,
+      cardCategory: formData.category,
+      cardDescription: formData.description,
+      postDate: formData.time,
+      authorName: formData.name,
+      image: imageUrl1,
+      authorImage: imageUrl2,
+      isActive: formData.isActive,
+    };
 
-        if (response.ok) {
-          const result = await response.json();
-          if (currentCertifications) {
-            setCertifications(
-              certifications.map((certification) =>
-                certification._id === result._id ? result : certification
-              )
-            );
-            toast.success("Certification Updated Successfully");
-          } else {
-            setCertifications((prevCertificationList) => [
-              ...prevCertificationList,
-              result,
-            ]);
-            toast.success("Certification Added Successfully");
-          }
-          reset();
-          setCurrentCertifications(null);
+    // console.log("imageUrl1", imageUrl1);
+    // console.log("imageUrl2", imageUrl2);
+
+    try {
+      const method = currentCertifications ? "PUT" : "POST";
+      const url = currentCertifications
+        ? `${API_URL}/api/certifications/${currentCertifications._id}`
+        : `${API_URL}/api/certifications`;
+      const response = await fetch(url, {
+        method,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        if (currentCertifications) {
+          setCertifications(
+            certifications.map((certification) =>
+              certification._id === result._id ? result : certification
+            )
+          );
+          toast.success("Certification Updated Successfully");
         } else {
-          throw new Error("Failed to save certification info");
+          setCertifications((prevCertificationList) => [
+            ...prevCertificationList,
+            result,
+          ]);
+          toast.success("Certification Added Successfully");
         }
-      } catch (error) {
-        toast.error(error.message);
-      } finally {
-        setIsSubmitting(false);
-        setBase64Image1("");
-        setBase64Image2("");
-        setCroppedImage1(null);
-        setCroppedImage2(null);
+        reset();
+        setCurrentCertifications(null);
+      } else {
+        throw new Error("Failed to save certification info");
       }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setIsSubmitting(false);
+      setBase64Image1("");
+      setBase64Image2("");
+      setCroppedImage1(null);
+      setCroppedImage2(null);
     }
   };
 
@@ -416,7 +394,6 @@ const AddCertificationForm = () => {
                       className="form-control"
                       {...register("title")}
                       placeholder="Tille of Certificate"
-                      required
                     />
                   </div>
                   {errors.title && (
@@ -430,7 +407,6 @@ const AddCertificationForm = () => {
                       className="form-control"
                       {...register("category")}
                       placeholder="Category of Certificate"
-                      required
                     />
                   </div>
                   {errors.category && (
@@ -444,7 +420,6 @@ const AddCertificationForm = () => {
                       className="form-control"
                       {...register("name")}
                       placeholder="Your Name"
-                      required
                     />
                   </div>
                   {errors.name && (
@@ -459,7 +434,6 @@ const AddCertificationForm = () => {
                       className="form-control"
                       placeholder="Duration (6 months)"
                       {...register("time")}
-                      required
                     />
                   </div>
                   {errors.time && (
@@ -472,7 +446,6 @@ const AddCertificationForm = () => {
                       className="form-control"
                       {...register("description")}
                       placeholder="Description"
-                      required
                     ></textarea>
                   </div>
                   {errors.description && (
@@ -488,7 +461,6 @@ const AddCertificationForm = () => {
                       name="isActive"
                       {...register("isActive")}
                       className="mx-2"
-                      required
                     />
                     <label htmlFor="active">isActive</label>
                     {errors.isActive && (

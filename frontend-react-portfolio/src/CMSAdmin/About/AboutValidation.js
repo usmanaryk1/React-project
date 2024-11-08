@@ -42,7 +42,7 @@ const validationSchema = yup
       .required("Missing Phone Number")
       .matches(
         /^[0-9]{11}$/,
-        "Phone number must be 10 digits. Alphabates are not allowed."
+        "Phone number must be 11 digits. Alphabates are not allowed."
       ),
     desc: yup.string().required("Missing Description"),
     isActive: yup

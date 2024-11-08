@@ -86,11 +86,16 @@ const Testimonial = ({ onEditClick, onDeleteClick, testimonials = [] }) => {
                             </div>
                           )}
                           <div className="author-test">
-                            <img
-                              src={testimonial.img}
-                              alt=""
-                              className="rounded-circle b-shadow-a author-img"
-                            />
+                            {testimonial.img && (
+                              <div>
+                                <img
+                                  src={testimonial.img}
+                                  alt=""
+                                  className="rounded-circle b-shadow-a author-img"
+                                />
+                              </div>
+                            )}
+
                             <span className="author"> {testimonial.name} </span>
                           </div>
                           <div className="content-test">

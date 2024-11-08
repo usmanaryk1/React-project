@@ -46,13 +46,16 @@ const Certifications = ({
               {certifications.map((certification) => (
                 <div className="col-md-4 card-box" key={certification._id}>
                   <div className="card card-certification">
-                    <div className="card-img">
-                      <img
-                        src={certification.image}
-                        alt=""
-                        className="img-fluid"
-                      />
-                    </div>
+                    {certification.image && (
+                      <div className="card-img">
+                        <img
+                          src={certification.image}
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                    )}
+
                     <div className="card-body">
                       <div className="card-category-box">
                         <div className="card-category">
@@ -94,16 +97,19 @@ const Certifications = ({
                     </div>
                     <div className="card-footer">
                       <div className="post-author">
-                        <a href="/">
-                          <img
-                            src={certification.authorImage}
-                            alt=""
-                            className="avatar rounded-circle"
-                          />
-                          <span className="author">
-                            {certification.authorName}
-                          </span>
-                        </a>
+                        {certification.authorImage && (
+                          <div>
+                            <img
+                              src={certification.authorImage}
+                              alt=""
+                              className="avatar rounded-circle"
+                            />
+                          </div>
+                        )}
+
+                        <span className="author">
+                          {certification.authorName}
+                        </span>
                       </div>
                       <div className="post-date">
                         <span className="bi bi-clock" />{" "}
