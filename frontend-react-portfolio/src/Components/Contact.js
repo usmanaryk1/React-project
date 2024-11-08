@@ -172,7 +172,7 @@ const Contact = ({ onEditClick, onDeleteClick, contact = [], links = [] }) => {
                                     </span>
                                   </a>
                                   {isAuthenticated && isAdminPage && (
-                                    <div className="admin-actions mt-3 me-2 d-flex justify-content-start">
+                                    <div className="admin-actions mt-3 me-1 d-flex justify-content-start">
                                       <button
                                         className="admin-btn btn btn-primary btn-sm me-1"
                                         aria-label="Edit"

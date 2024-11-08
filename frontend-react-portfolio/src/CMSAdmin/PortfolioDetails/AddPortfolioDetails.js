@@ -400,8 +400,8 @@ const AddPortfolioDetails = () => {
                       placeholder="Client Company"
                     />
                   </div>
-                  {errors.name && (
-                    <p className="error-message">{errors.name.message}</p>
+                  {errors.client && (
+                    <p className="error-message">{errors.client.message}</p>
                   )}
 
                   <div className="from-group">

@@ -60,7 +60,9 @@ const TermsForm = ({
                 />
               </div>
 
-              {errors.title && <p>{errors.title.message}</p>}
+              {errors.title && (
+                <p className="error-message">{errors.title.message}</p>
+              )}
 
               <div className="form-group">
                 <textarea
@@ -71,7 +73,9 @@ const TermsForm = ({
                 />
               </div>
 
-              {errors.content && <p>{errors.content.message}</p>}
+              {errors.content && (
+                <p className="error-message">{errors.content.message}</p>
+              )}
 
               <button
                 className="save-btn btn btn-sm"

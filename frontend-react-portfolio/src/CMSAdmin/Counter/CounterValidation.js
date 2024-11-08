@@ -12,8 +12,9 @@ const validationSchema = yup
       ),
     counts: yup
       .string()
-      .matches(/^\d+$/, "Counts should be a string of numbers!")
-      .required("Counts are required!"),
+      .required("Counts are required!")
+      .matches(/^\d+$/, "Counts should be a string of numbers!"),
+
     isActive: yup
       .bool()
       .oneOf([true], "Please check this field")

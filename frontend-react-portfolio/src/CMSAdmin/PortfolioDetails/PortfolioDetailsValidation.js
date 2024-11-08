@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 const validationSchema = yup
   .object({
-    client: yup.string().required("Title is required"),
+    client: yup.string().required("Client Company name is required"),
 
     link: yup.string().url("Invalid URL format").required("Link is required"),
 
@@ -11,7 +11,7 @@ const validationSchema = yup
 
     date: yup
       .string()
-      .matches(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format")
+
       .required("Date is required"),
 
     isActive: yup

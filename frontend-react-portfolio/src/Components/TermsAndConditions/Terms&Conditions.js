@@ -46,8 +46,8 @@ const TermsandConditions = () => {
       } else {
         toast.error("Failed to Add the Term. Invalid response from server.");
       }
-      setIsAdding(false);
       reset();
+      setIsAdding(false);
     } catch (error) {
       toast.error("Failed to Add the Term");
       setIsAdding(false);

@@ -31,13 +31,14 @@
 .save-btn {
   background-color: #128f32;
   color: white;
-  transition: all 0.3s ease-in-out;
+  border: 0;
   padding: 10px 25px;
   border-radius: 25px;
   cursor: pointer;
-  border: none;
   margin-right: 5px;
+  transition: all 0.3s ease-in-out;
 }
+
 .save-btn:hover {
   transform: scale(1.1);
   background-color: #128f32;
