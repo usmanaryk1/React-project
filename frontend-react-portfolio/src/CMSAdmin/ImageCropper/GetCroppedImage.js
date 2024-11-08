@@ -2,7 +2,7 @@ export default function getCroppedImg(imageSrc, fileName, croppedAreaPixels) {
   return new Promise((resolve) => {
     const image = new Image();
     // console.log("image", image);
-    // image.src = imageSrc;
+    image.src = imageSrc;
     // console.log("FILE NAME", fileName);
     image.onload = () => {
       const canvas = document.createElement("canvas");
