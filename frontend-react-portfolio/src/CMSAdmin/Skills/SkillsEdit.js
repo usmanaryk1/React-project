@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Skills from "../../Components/Skills/Skills";
 import ApiService from "../ApisService";
 import SkillsForm from "./SkillsForm";
 import useFetch from "../../Components/useFetch";
@@ -33,7 +32,7 @@ const SkillsEdit = () => {
       const addedSkill = await skillsService.addItem(formData);
       if (addedSkill && addedSkill._id) {
         // Ensure addedTerm contains _id
-        setSkills([...skills, addedSkill]);
+        setSkills((prevSkills) => [...prevSkills, addedSkill]);
         toast.success("Skill Added Successfully");
       } else {
         toast.error("Failed to Add the Skill. Invalid response from server.");
@@ -80,6 +79,23 @@ const SkillsEdit = () => {
     }
   };
 
+  const handleReorder = async (dragIndex, hoverIndex) => {
+    try {
+      const reorderedList = [...skills];
+      const [draggedItem] = reorderedList.splice(dragIndex, 1);
+      reorderedList.splice(hoverIndex, 0, draggedItem);
+
+      // Send reordered list to the server
+      await skillsService.reorderItems(
+        reorderedList.map((skill, index) => ({ _id: skill._id, order: index }))
+      );
+      setSkills(reorderedList); // Update state with new order
+      toast.success("Skills reordered successfully");
+    } catch (error) {
+      toast.error("Failed to Update the Sequence of Skills");
+    }
+  };
+
   if (isPending) return <Loading />;
   if (error) return <Error message={error} />;
 
@@ -98,14 +114,9 @@ const SkillsEdit = () => {
       </section>
       <hr />
       <About
-        handleEditClick={handleUpdate}
-        handleDelete={handleDelete}
-        skills={skills}
-      />
-
-      <Skills
-        handleDelete={handleDelete}
         handleEditClick={(skill) => setEditingSkill(skill)}
+        handleDelete={handleDelete}
+        handleReorder={handleReorder}
         skills={skills}
       />
     </>

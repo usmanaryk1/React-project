@@ -65,7 +65,7 @@ const SkillsForm = ({
               )}
 
               <div className="form-group">
-                <textarea
+                <input
                   {...register("proficiency")}
                   name="proficiency"
                   className="form-control"

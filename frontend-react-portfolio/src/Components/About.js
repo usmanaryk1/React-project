@@ -9,9 +9,9 @@ const About = ({
   skills = [],
   handleEditClick,
   handleDelete,
+  handleReorder,
 }) => {
   const { isAuthenticated, isAdminPage } = useAuth();
-  // console.log("about content:", about);
 
   const handleDeleteClick = (aboutId) => {
     Swal.fire({
@@ -31,114 +31,67 @@ const About = ({
 
   return (
     <>
-      {/* ======= About Section Start======= */}
-      {Array.isArray(about) && about.length > 0 && (
+      {/* About Section */}
+      {about && (
         <section id="about" className="about-mf sect-pt4 route">
           <div className="container">
             <div className="row">
               <div className="col-sm-12">
-                {about.map((about) => (
-                  <div className="box-shadow-full" key={about._id}>
-                    <div className="row">
-                      <div className="col-md-6">
-                        <div className="row">
-                          {about.img && (
+                <div className="box-shadow-full">
+                  <div className="row">
+                    <div className="col-md-6">
+                      {about.map((item) => (
+                        <div className="row" key={item._id}>
+                          {item.img && (
                             <div className="col-sm-6 col-md-5">
                               <div className="about-img">
                                 <img
-                                  src={about.img}
+                                  src={item.img}
                                   className="img-fluid rounded b-shadow-a"
-                                  alt=""
+                                  alt="Profile"
                                 />
                               </div>
                             </div>
                           )}
-
                           <div className="col-sm-6 col-md-7">
                             <div className="about-info">
                               <p>
                                 <span className="title-s">Name: </span>{" "}
-                                <span> {about.name} </span>
+                                {item.name}
                               </p>
                               <p>
                                 <span className="title-s">Profile: </span>{" "}
-                                <span> {about.profile} </span>
+                                {item.profile}
                               </p>
                               <p>
                                 <span className="title-s">Email: </span>{" "}
-                                <span> {about.email} </span>
+                                {item.email}
                               </p>
                               <p>
                                 <span className="title-s">Phone: </span>{" "}
-                                <span> {about.phone} </span>
+                                {item.phone}
                               </p>
                             </div>
                           </div>
                         </div>
-
-                        <div className="skill-mf">
-                          {skills && skills.length > 0 && (
-                            <>
-                              <p className="title-s">Skills</p>
-                              <Skills
-                                skills={skills}
-                                handleDelete={handleDelete}
-                                handleEditClick={handleEditClick}
-                              />
-
-                              {/* <span>HTML</span>{" "}
-                            <span className="pull-right">100%</span>
-                            <div className="progress">
-                              <div
-                                className="progress-bar"
-                                role="progressbar"
-                                style={{ width: "100%" }}
-                                aria-valuenow={100}
-                                aria-valuemin={0}
-                                aria-valuemax={100}
-                              />
-                            </div>
-                            <span>CSS3</span>{" "}
-                            <span className="pull-right">95%</span>
-                            <div className="progress">
-                              <div
-                                className="progress-bar"
-                                role="progressbar"
-                                style={{ width: "95%" }}
-                                aria-valuenow={95}
-                                aria-valuemin={0}
-                                aria-valuemax={100}
-                              />
-                            </div>
-                            <span>JAVASCRIPT</span>{" "}
-                            <span className="pull-right">90%</span>
-                            <div className="progress">
-                              <div
-                                className="progress-bar"
-                                role="progressbar"
-                                style={{ width: "90%" }}
-                                aria-valuenow={90}
-                                aria-valuemin={0}
-                                aria-valuemax={100}
-                              />
-                            </div>
-                            <span>REACT</span>{" "}
-                            <span className="pull-right">85%</span>
-                            <div className="progress">
-                              <div
-                                className="progress-bar"
-                                role="progressbar"
-                                style={{ width: "85%" }}
-                                aria-valuenow={85}
-                                aria-valuemin={0}
-                                aria-valuemax={100}
-                              />
-                              </div>  */}
-                            </>
-                          )}
-                        </div>
+                      ))}
+                      <div className="skill-mf">
+                        {skills && skills.length > 0 && (
+                          <div>
+                            <p className="title-s">Skills</p>
+                            <Skills
+                              skills={skills}
+                              handleDelete={handleDelete}
+                              handleEditClick={handleEditClick}
+                              handleReorder={handleReorder}
+                            />
+                          </div>
+                        )}
                       </div>
-                      <div className="col-md-6">
+                    </div>
+
+                    {about.map((item) => (
+                      <div className="col-md-6" key={item._id}>
                         <div className="about-me pt-4 pt-md-0">
                           <div className="title-box-2 d-flex justify-content-between">
                             <h5 className="title-left">About</h5>
@@ -146,33 +99,30 @@ const About = ({
                               <div className="admin-actions">
                                 <button
                                   className="admin-btn btn btn-primary btn-sm me-1"
-                                  aria-label="Edit"
-                                  onClick={() => onEditClick(about)}
+                                  onClick={() => onEditClick(item)}
                                 >
                                   <i className="bi bi-pencil" />
                                 </button>
                                 <button
                                   className="admin-btn btn btn-danger btn-sm"
-                                  aria-label="Delete"
-                                  onClick={() => handleDeleteClick(about._id)}
+                                  onClick={() => handleDeleteClick(item._id)}
                                 >
                                   <i className="bi bi-trash" />
                                 </button>
                               </div>
                             )}
                           </div>
-                          <p className="lead">{about.desc}</p>
+                          <p className="lead">{item.desc}</p>
                         </div>
                       </div>
-                    </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           </div>
         </section>
       )}
-      {/* End About Section */}
     </>
   );
 };

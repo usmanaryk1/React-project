@@ -1,10 +1,10 @@
 .skill-box {
-  max-width: 400rem;
+  max-width: 30rem;
   margin: 0;
 }
 .skill-border {
-  max-width: 400rem;
-  padding: 0.3rem 0.5rem 0rem;
+  max-width: 30rem;
+  padding: 0.4rem 0.5rem;
   margin-bottom: 0.3rem;
   border: 1px dashed #8080806b;
 }
@@ -42,6 +42,7 @@
   cursor: pointer;
   border: none;
   margin-right: 5px;
+  margin-top: 10px;
 }
 .save-btn:hover {
   transform: scale(1.1);
@@ -55,6 +56,7 @@
   border-radius: 25px;
   cursor: pointer;
   border: none;
+  margin-top: 10px;
 }
 .cancel-btn:hover {
   transform: scale(1.1);
