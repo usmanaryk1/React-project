@@ -650,7 +650,7 @@ a:hover {
   transition: 0.5s;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1024px) {
   .mobile-nav-toggle {
     display: block;
   }

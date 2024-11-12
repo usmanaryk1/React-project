@@ -8,11 +8,13 @@ const useFetch = (url) => {
   const [fetchKey, setFetchKey] = useState(0); // Add fetch key
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
     const fetchData = async (data) => {
       // console.log("fetching data", data);
       setIsPending(true);
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, { signal });
         if (!response.ok) {
           throw new Error("Could not fetch data from that resource");
         }
@@ -22,19 +24,19 @@ const useFetch = (url) => {
         setError(null);
         setIsPending(false);
       } catch (err) {
-        setError(err.message);
-        setIsPending(false);
+        if (err.name !== "AbortError") {
+          // Ignore abort errors
+          setError(err.message);
+        }
       } finally {
         setIsPending(false);
       }
     };
     fetchData();
-  }, [url, fetchKey]);
 
-  // useEffect(() => {
-  //     fetchData();
-  //     console.log('useEffect fetch:');
-  // }, [fetchData]);
+    // Cleanup function to abort the fetch if the component unmounts or if url changes
+    return () => controller.abort();
+  }, [url, fetchKey]);
 
   const refetch = () => setFetchKey((prevKey) => prevKey + 1);
 

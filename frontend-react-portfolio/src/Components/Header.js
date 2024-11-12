@@ -8,6 +8,7 @@ const Header = () => {
   const [navLinks, setNavLinks] = useState([]);
   const { user, onLogout, isAdminPage, isAuthenticated } = useAuth();
   const location = useLocation();
+  const userId = localStorage.getItem("userId");
 
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
@@ -19,12 +20,9 @@ const Header = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.get(
-        `${API_URL}/api/download-cv/${user._id}`,
-        {
-          responseType: "blob", // Ensures the file is treated as binary data
-        }
-      );
+      const response = await axios.get(`${API_URL}/api/download-cv/${userId}`, {
+        responseType: "blob", // Ensures the file is treated as binary data
+      });
 
       if (response.status === 200) {
         // Create a link element and trigger the download
@@ -226,6 +224,7 @@ const Header = () => {
                     Download CV
                   </button>
                 </li>
+
                 <li className="dropdown nav-link">
                   {isAuthenticated && user ? (
                     <>

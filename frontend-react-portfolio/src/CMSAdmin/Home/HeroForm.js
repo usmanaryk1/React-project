@@ -78,7 +78,7 @@ const HeroForm = () => {
           );
         });
 
-        toast.success("Content updated successfully");
+        toast.success("Hero Content Updated Successfully");
       }
     } else {
       // Add new service
@@ -94,7 +94,7 @@ const HeroForm = () => {
         const result = await response.json();
         // console.log("new hero: ", result);
         setHero((prevHero) => [...prevHero, result]);
-        toast.success("Hero added successfully");
+        toast.success("Hero Content Added Successfully");
       } else {
         toast.error("Failed to add Hero");
       }
@@ -124,7 +124,7 @@ const HeroForm = () => {
     });
     if (response.ok) {
       setHero((prevHero) => prevHero.filter((heroData) => heroData._id !== id));
-      toast.success("Hero section deleted successfully");
+      toast.success("Hero Content Deleted Successfully");
       // console.log("Hero section deleted successfully", hero);
     } else {
       console.error("Failed to delete section");

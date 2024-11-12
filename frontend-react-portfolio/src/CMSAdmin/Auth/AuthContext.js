@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(false);
       localStorage.removeItem("user");
       localStorage.removeItem("token");
-      localStorage.removeItem("userId");
+      // localStorage.removeItem("userId");
       toast.info("Session expired. Logged out automatically.");
       await signOut(auth);
       return;
@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
           setIsAuthenticated(false);
           localStorage.removeItem("user");
           localStorage.removeItem("token");
-          localStorage.removeItem("userId");
+          // localStorage.removeItem("userId");
           toast.success("Logged out successfully!");
         } else {
           toast.error("Failed to log out. Please try again.");
