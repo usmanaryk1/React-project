@@ -39,3 +39,28 @@
   cursor: pointer;
   border-radius: 25px;
 }
+@media (max-width: 812px) {
+  .cropper-container {
+    width: 70vw; /* Full width of the viewport */
+    /* Full height of the viewport */
+    height: 80vh;
+  }
+}
+@media (max-width: 532px) {
+  .cropper-container {
+    width: 80vw; /* Full width of the viewport */
+    height: 80vh; /*Full height of the viewport */
+  }
+}
+@media (max-width: 360px) {
+  .cropper-container {
+    width: 90vw; /* Full width of the viewport */
+    height: 60vh; /* Full height of the viewport */
+  }
+}
+@media (max-width: 260px) {
+  .cropper-container {
+    width: 100vw; /* Full width of the viewport */
+    height: 60vh; /* Full height of the viewport */
+  }
+}

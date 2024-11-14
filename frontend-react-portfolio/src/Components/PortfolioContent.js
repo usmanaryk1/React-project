@@ -102,7 +102,7 @@ const PortfolioContent = ({ onDeleteClick, onEditClick, details, workId }) => {
                 className={
                   details.slideImages?.length > 0
                     ? "col-lg-4"
-                    : "col-lg-12 mx-auto d-flex"
+                    : "col-lg-12 mx-auto d-md-flex"
                 }
               >
                 <div
@@ -132,7 +132,9 @@ const PortfolioContent = ({ onDeleteClick, onEditClick, details, workId }) => {
 
                 <div
                   className={
-                    details.slideImages?.length > 0 ? "mt-2" : "col-lg-6 ms-2"
+                    details.slideImages?.length > 0
+                      ? "mt-3"
+                      : "col-lg-6 ms-2 mt-3 mt-md-0"
                   }
                 >
                   <div className="portfolio-description">
