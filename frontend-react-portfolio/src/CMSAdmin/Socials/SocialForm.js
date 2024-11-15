@@ -152,7 +152,6 @@ const SocialForm = () => {
               <div className="col-12">
                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
                   <CustomIconDropdown
-                    // icons={icons}
                     name="platformIcon"
                     register={register}
                     errors={errors}

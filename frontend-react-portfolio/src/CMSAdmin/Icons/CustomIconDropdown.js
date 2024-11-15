@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
+import debounce from "lodash.debounce";
 
 const CustomIconDropdown = ({
   selectedIcon,
@@ -6,53 +7,54 @@ const CustomIconDropdown = ({
   register,
   setValue,
   errors,
-  name, // Accept a dynamic name prop
+  name,
 }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [icons, setIcons] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-    if (!icons.length) {
-      // Fetch icons only when the dropdown is opened for the first time
-      fetch("/assets/data/icons.json")
-        .then((response) => response.json())
-        .then((data) => setIcons(data))
-        .catch((error) => console.error("Error loading icons:", error));
-    }
-  };
+  // Fetch icons only once on component mount
+  useEffect(() => {
+    fetch("/assets/data/icons.json")
+      .then((response) => response.json())
+      .then((data) => setIcons(data))
+      .catch((error) => console.error("Error loading icons:", error));
+  }, []);
 
   const handleIconSelect = (icon) => {
     setSelectedIcon(icon.className);
-    setValue(name, icon.className); // Use setValue with dynamic name
+    setValue(name, icon.className);
     setDropdownOpen(false); // Close dropdown after selection
   };
 
-  const selectedIconObject = icons.find(
-    (icon) => icon.className === selectedIcon
+  // Debounced search input to optimize performance
+  const handleSearchChange = debounce((event) => {
+    const term = event.target.value.toLowerCase();
+    setSearchTerm(term);
+    setDropdownOpen(term.length > 0); // Open dropdown if there's a search term
+  }, 300);
+
+  const filteredIcons = useMemo(
+    () =>
+      icons.filter((icon) => icon.className.toLowerCase().includes(searchTerm)),
+    [icons, searchTerm]
   );
 
   return (
     <div className="form-group">
       <div className="custom-dropdown">
-        <button type="button" className="dropdown-btn" onClick={toggleDropdown}>
-          {selectedIcon && selectedIconObject ? (
-            <>
-              <img
-                src={selectedIconObject.src}
-                alt={selectedIcon}
-                style={{ width: "24px", height: "24px", marginRight: "8px" }}
-                loading="lazy" // Lazy load the selected icon image
-              />
-              {selectedIcon.replace("bi-", "")}
-            </>
-          ) : (
-            "Select an icon"
-          )}
-        </button>
-        {dropdownOpen && (
+        {/* Persistent search input */}
+        <input
+          type="text"
+          placeholder="Search icon..."
+          onChange={handleSearchChange}
+          className="search-input"
+        />
+
+        {/* Show dropdown only if open and there are filtered results */}
+        {dropdownOpen && filteredIcons.length > 0 && (
           <ul className="dropdown-menu">
-            {icons.map((icon, index) => (
+            {filteredIcons.map((icon, index) => (
               <li
                 key={index}
                 className="dropdown-item"
@@ -63,7 +65,7 @@ const CustomIconDropdown = ({
                   src={icon.src}
                   alt={icon.className}
                   style={{ width: "24px", height: "24px", marginLeft: "auto" }}
-                  loading="lazy" // Lazy load the icon image
+                  loading="lazy"
                 />
               </li>
             ))}
@@ -72,9 +74,9 @@ const CustomIconDropdown = ({
       </div>
       <input
         type="hidden"
-        name={name} // Use the dynamic name prop here
+        name={name}
         value={selectedIcon}
-        {...register(name)} // Register the input with dynamic name
+        {...register(name)}
       />
       {errors[name] && <p className="error-message">{errors[name]?.message}</p>}
     </div>
