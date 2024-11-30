@@ -32,7 +32,7 @@ const TermItem = ({
   return (
     <div
       ref={(node) => (isAdminPage && isAuthenticated ? drag(drop(node)) : null)}
-      style={{ opacity: isDragging ? 0.5 : 1 }}
+      style={{ opacity: isDragging ? 0.5 : 1, cursor: "grab" }}
       className="term-item"
     >
       <section id="conditions" className="conditions-mf route">

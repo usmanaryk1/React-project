@@ -13,6 +13,8 @@ const SkillsEdit = () => {
   const [editingSkill, setEditingSkill] = useState(null); // Track which term is being edited
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [updating, setUpdating] = useState(false);
+  const [reorderedSkills, setReorderedSkills] = useState([]); // To track reordering changes
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
   const {
     data: skills,
@@ -79,20 +81,51 @@ const SkillsEdit = () => {
     }
   };
 
-  const handleReorder = async (dragIndex, hoverIndex) => {
-    try {
-      const reorderedList = [...skills];
-      const [draggedItem] = reorderedList.splice(dragIndex, 1);
-      reorderedList.splice(hoverIndex, 0, draggedItem);
+  // const handleReorder = async (dragIndex, hoverIndex) => {
+  //   try {
+  //     const reorderedList = [...skills];
+  //     const [draggedItem] = reorderedList.splice(dragIndex, 1);
+  //     reorderedList.splice(hoverIndex, 0, draggedItem);
 
-      // Send reordered list to the server
-      await skillsService.reorderItems(
-        reorderedList.map((skill, index) => ({ _id: skill._id, order: index }))
-      );
-      setSkills(reorderedList); // Update state with new order
+  //     // Send reordered list to the server
+  //     await skillsService.reorderItems(
+  //       reorderedList.map((skill, index) => ({ _id: skill._id, order: index }))
+  //     );
+  //     setSkills(reorderedList); // Update state with new order
+  //     toast.success("Skills reordered successfully");
+  //   } catch (error) {
+  //     toast.error("Failed to Update the Sequence of Skills");
+  //   }
+  // };
+
+  const handleReorder = async (dragIndex, hoverIndex) => {
+    const reorderedList = [...skills];
+    const [draggedItem] = reorderedList.splice(dragIndex, 1);
+    reorderedList.splice(hoverIndex, 0, draggedItem);
+    console.log("reorderedList skills", reorderedList);
+
+    setSkills(reorderedList); // Update the skills list locally
+    setReorderedSkills(reorderedList);
+  };
+
+  const handleSaveReorder = async () => {
+    try {
+      setUpdating(true);
+      // Make API call with the final reordered list
+
+      const reorderedSkill = skills.map((skill, index) => ({
+        _id: skill._id,
+        order: index, // Use the correct order here
+      }));
+      console.log("Final Payload to Save:", reorderedSkill);
+
+      await skillsService.reorderItems(reorderedSkill);
+      setUpdating(false);
       toast.success("Skills reordered successfully");
+      setReorderedSkills([]);
     } catch (error) {
-      toast.error("Failed to Update the Sequence of Skills");
+      setUpdating(false);
+      toast.error("Failed to update the sequence of skills");
     }
   };
 
@@ -112,7 +145,18 @@ const SkillsEdit = () => {
           validationSchema={validationSchema}
         />
       </section>
+      {/* Update Order Button */}
       <hr />
+      <div className="d-flex justify-content-end">
+        <button
+          className="updateorder-btn"
+          onClick={handleSaveReorder}
+          disabled={!reorderedSkills.length || updating}
+        >
+          {updating ? "Updating" : "Update Order"}
+        </button>
+      </div>
+
       <About
         handleEditClick={(skill) => setEditingSkill(skill)}
         handleDelete={handleDelete}

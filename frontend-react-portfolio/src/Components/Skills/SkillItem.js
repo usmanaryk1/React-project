@@ -31,7 +31,10 @@ const SkillItem = ({
   return (
     <div
       ref={(node) => (isAdminPage && isAuthenticated ? drag(drop(node)) : null)}
-      style={{ opacity: isDragging ? 0.5 : 1 }}
+      style={{
+        opacity: isDragging ? 0.5 : 1,
+        cursor: "grab", // Indicates draggable UI element
+      }}
       className="skill-item"
     >
       <section id="skills" className="skills-mf route">

@@ -8,7 +8,7 @@ const Header = () => {
   const [navLinks, setNavLinks] = useState([]);
   const { user, onLogout, isAdminPage, isAuthenticated } = useAuth();
   const location = useLocation();
-  const userId = localStorage.getItem("userId");
+  // const userId = localStorage.getItem("userId");
 
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
@@ -16,11 +16,41 @@ const Header = () => {
     e.preventDefault();
   };
 
+  // const handleDownloadCV = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const response = await axios.get(`${API_URL}/api/download-cv/${userId}`, {
+  //       responseType: "blob", // Ensures the file is treated as binary data
+  //     });
+
+  //     if (response.status === 200) {
+  //       // Create a link element and trigger the download
+  //       const url = window.URL.createObjectURL(new Blob([response.data]));
+  //       const link = document.createElement("a");
+  //       link.href = url;
+  //       link.setAttribute("download", "My CV.pdf"); // Set the file name dynamically if needed
+  //       document.body.appendChild(link);
+  //       link.click();
+  //       document.body.removeChild(link);
+  //     } else {
+  //       toast.error("Failed to download CV");
+  //     }
+  //   } catch (error) {
+  //     if (error.response && error.response.status === 404) {
+  //       toast.error("CV not found");
+  //     } else {
+  //       console.error(error); // Log detailed error for debugging
+  //       toast.error("An error occurred while downloading the CV");
+  //     }
+  //   }
+  // };
+
   const handleDownloadCV = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.get(`${API_URL}/api/download-cv/${userId}`, {
+      const response = await axios.get(`${API_URL}/api/download-cv`, {
         responseType: "blob", // Ensures the file is treated as binary data
       });
 
