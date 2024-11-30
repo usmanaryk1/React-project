@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const TermsAndConditions = await Terms_Model.find(); // Ensure you're querying by the correct field, `email` not `id`
+    const TermsAndConditions = await Terms_Model.find().sort({ order: 1 }); // Ensure you're querying by the correct field, `email` not `id`
     if (TermsAndConditions.length === 0) {
       return res.status(404).json({ message: "Inforamtion Not Found" });
     }
@@ -97,10 +97,10 @@ router.delete("/:id", authenticateJWT, async (req, res) => {
 
 router.patch("/reorder", authenticateJWT, async (req, res) => {
   // console.log("req.body.reorderedTerms", req.body.reorderedTerms);
-  const { reorderedTerms } = req.body; // reorderedTerms: [{ _id, title, content }, ...]
+  const { reorderedItems } = req.body; // reorderedTerms: [{ _id, title, content }, ...]
   // console.log("reorderedTerms", reorderedTerms);
   try {
-    const bulkOps = reorderedTerms.map((term, index) => ({
+    const bulkOps = reorderedItems.map((term, index) => ({
       updateOne: {
         filter: { _id: term._id },
         update: { $set: { order: index } }, // Assuming you have an 'order' field

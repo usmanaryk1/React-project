@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const Skills = await Skills_Model.find(); // Ensure you're querying by the correct field, `email` not `id`
+    const Skills = await Skills_Model.find().sort({ order: 1 }); // Ensure you're querying by the correct field, `order` and get the result in ascending order
     if (Skills.length === 0) {
       return res.status(404).json({ message: "Inforamtion Not Found" });
     }
@@ -95,24 +95,90 @@ router.delete("/:id", authenticateJWT, async (req, res) => {
 
 // REORDER SKILLS BY MAPPING REORDERED TERMS (AUTHENTICATED ONLY)
 
+// router.patch("/reorder", authenticateJWT, async (req, res) => {
+//   console.log("req.body", req.body);
+//   console.log("req.body.reorderedItems", req.body.reorderedItems);
+//   const reorderedItems = req.body.reorderedItems; // reorderedItems: [{ _id, order }, ...]
+//   console.log("reorderedItems", reorderedItems);
+//   try {
+//     const bulkOps = reorderedItems.map((skill) => ({
+//       updateOne: {
+//         filter: { _id: skill._id },
+//         update: { $set: { order: skill.order } }, // Use skill.order
+//       },
+//     }));
+//     console.log("bulkops", bulkOps);
+//     const reorderedSkills = await Skills_Model.bulkWrite(bulkOps);
+//     // console.log("Terms reordered in the database");
+//     res.json({
+//       reorderedSkills: reorderedSkills,
+//       message: "Skiils reordered successfully",
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(400).json({ message: error.message });
+//   }
+// });
+
+// router.patch("/reorder", authenticateJWT, async (req, res) => {
+//   try {
+//     console.log("Incoming Request Body:", req.body);
+
+//     const reorderedItems = req.body.reorderedItems; // Assuming { reorderedItems: [...] }
+//     if (!reorderedItems || !Array.isArray(reorderedItems)) {
+//       return res.status(400).json({ message: "Invalid payload formate" });
+//     }
+
+//     console.log("Reordered Items:", reorderedItems);
+
+//     const bulkOps = reorderedItems.map((skill) => ({
+//       updateOne: {
+//         filter: { _id: skill._id },
+//         update: { $set: { order: skill.order } },
+//       },
+//     }));
+
+//     console.log("Generated bulk operations:", JSON.stringify(bulkOps, null, 2));
+
+//     const result = await Skills_Model.bulkWrite(bulkOps);
+//     console.log("BulkWrite Result:", result);
+
+//     res.json({ message: "Skills reordered successfully" });
+//   } catch (error) {
+//     console.error(
+//       "Error reordering skills:",
+//       error.stack || error.message || error
+//     );
+//     res.status(400).json({ message: "Failed to reorder skills" });
+//   }
+// });
+
 router.patch("/reorder", authenticateJWT, async (req, res) => {
-  // console.log("req.body.reorderedTerms", req.body.reorderedTerms);
-  const { reorderedSkills } = req.body; // reorderedTerms: [{ _id, title, content }, ...]
-  // console.log("reorderedTerms", reorderedTerms);
   try {
-    const bulkOps = reorderedSkills.map((skill, index) => ({
+    const { reorderedItems } = req.body; // [{ _id, order }, ...]
+
+    if (!Array.isArray(reorderedItems)) {
+      return res
+        .status(400)
+        .json({ message: "Invalid reordered items format" });
+    }
+
+    console.log("Reordered Items:", reorderedItems);
+
+    const bulkOps = reorderedItems.map((skill) => ({
       updateOne: {
         filter: { _id: skill._id },
-        update: { $set: { order: index } }, // Assuming you have an 'order' field
+        update: { $set: { order: skill.order } }, // Use the order field from client
       },
     }));
 
-    await Skills_Model.bulkWrite(bulkOps);
-    // console.log("Terms reordered in the database");
-    res.json({ message: "Skiils reordered successfully" });
+    const result = await Skills_Model.bulkWrite(bulkOps);
+    console.log("BulkWrite Result:", result);
+
+    res.json({ message: "Skills reordered successfully" });
   } catch (error) {
-    console.error(error);
-    res.status(400).json({ message: error.message });
+    console.error("Error reordering skills:", error.stack || error.message);
+    res.status(400).json({ message: "Failed to reorder skills" });
   }
 });
 
