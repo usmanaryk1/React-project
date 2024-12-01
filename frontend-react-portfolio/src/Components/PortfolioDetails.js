@@ -37,7 +37,14 @@ const PortfolioDetails = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
 
   if (isPending) return <Loading />;
 
-  if (!details) return <NullData message="Details" />;
+  if (!details)
+    return (
+      <NullData
+        message="Details"
+        link="/form/portfolio-form"
+        redirect_to="Projects"
+      />
+    );
 
   if (error) return <Error message={error} />;
 

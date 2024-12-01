@@ -33,7 +33,7 @@ const SkillItem = ({
       ref={(node) => (isAdminPage && isAuthenticated ? drag(drop(node)) : null)}
       style={{
         opacity: isDragging ? 0.5 : 1,
-        cursor: "grab", // Indicates draggable UI element
+        cursor: isAdminPage && isAuthenticated ? "grab" : "default", // Indicates draggable UI element
       }}
       className="skill-item"
     >

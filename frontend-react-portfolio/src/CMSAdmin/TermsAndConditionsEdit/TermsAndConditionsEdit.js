@@ -13,7 +13,6 @@ const TermsAndConditionsEdit = () => {
   const [editingTerm, setEditingTerm] = useState(null); // Track which term is being edited
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(null); // Track deleting by ID
   const [updating, setUpdating] = useState(false);
   const [reorderedTerms, setReorderedTerms] = useState([]); // To track reordering changes
 
@@ -79,14 +78,11 @@ const TermsAndConditionsEdit = () => {
   // Handle deleting a term
   const handleDelete = async (id) => {
     try {
-      setIsDeleting(id);
       await termsService.deleteItem(id);
       setTermsList((prevTerms) => prevTerms.filter((term) => term._id !== id));
       toast.success("Term deleted successfully");
-      setIsDeleting(null);
     } catch (error) {
       toast.error("Failed to Delete the Term");
-      setIsDeleting(null);
     }
   };
 
@@ -159,6 +155,7 @@ const TermsAndConditionsEdit = () => {
           {updating ? "Updating" : "Update Order"}
         </button>
       </div>
+      <hr />
       <TermsandConditions
         handleEditClick={(term) => setEditingTerm(term)}
         handleDelete={handleDelete}

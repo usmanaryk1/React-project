@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import About from "./About";
 import Certifications from "./Certifications";
 // import Blog from "./Blog";
@@ -13,7 +14,12 @@ import Testimonial from "./Testimonial";
 import useFetch from "./useFetch";
 
 const Home = () => {
-  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+  const API_URL = useMemo(
+    () => process.env.REACT_APP_BACKEND_URL || "http://localhost:8000",
+    []
+  );
+  // const API_URL =
+  //   process.env.REACT_APP_BACKEND_URL || "http://localhost:8000/api/";
 
   const { data: hero, isPending, error } = useFetch(`${API_URL}/api/hero`);
   const { data: about } = useFetch(`${API_URL}/api/about`);
@@ -37,27 +43,27 @@ const Home = () => {
   return (
     <>
       <main id="main">
-        <Hero hero={hero} />
-        <About about={about} skills={skills} />
+        <Hero hero={hero || []} />
+        <About about={about || []} skills={skills || []} />
         <Services
           title="Services"
           subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-          services={services}
+          services={services || []}
         />
-        <Counter counts={counts} />
+        <Counter counts={counts || []} />
         <Portfolio
           title="Portfolio"
           subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-          works={works}
+          works={works || []}
         />
-        <Testimonial testimonials={testimonials} />
+        <Testimonial testimonials={testimonials || []} />
         {/*<Blog title="Blogs" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." /> */}
         <Certifications
           title="Certifications"
           subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-          certifications={certifications}
+          certifications={certifications || []}
         />
-        <Contact contact={contacts} links={links} />
+        <Contact contact={contacts || []} links={links || []} />
       </main>
       {/* End #main */}
     </>

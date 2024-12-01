@@ -14,8 +14,16 @@ import { AuthProvider } from "./CMSAdmin/Auth/AuthContext";
 import NotFound from "./Components/404Page/404Page";
 import TermsandConditions from "./Components/TermsAndConditions/Terms&Conditions";
 import AddPortfolioDetails from "./CMSAdmin/PortfolioDetails/AddPortfolioDetails";
+import { useMemo } from "react";
+import useFetch from "./Components/useFetch";
+import Loading from "./Components/Loading/Loading";
 
 function App() {
+  const API_URL = useMemo(
+    () => process.env.REACT_APP_BACKEND_URL || "http://localhost:8000",
+    []
+  );
+  const { data: termsList, isPending } = useFetch(`${API_URL}/api/terms`);
   return (
     <AuthProvider>
       <div className="App">
@@ -43,7 +51,13 @@ function App() {
             <Route path="/form/login-form" render={() => <Login />} />
             <Route
               path="/termsandconditions"
-              render={() => <TermsandConditions />}
+              render={() =>
+                isPending ? (
+                  <Loading />
+                ) : (
+                  <TermsandConditions termsList={termsList} />
+                )
+              }
             />
             <Route path="*">
               <NotFound />

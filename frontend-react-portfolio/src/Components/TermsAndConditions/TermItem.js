@@ -9,7 +9,6 @@ const TermItem = ({
   moveTerm,
   handleEditClick,
   handleDeleteClick,
-  isDeleting,
 }) => {
   const [{ isDragging }, drag] = useDrag({
     type: "TERM",
@@ -32,7 +31,10 @@ const TermItem = ({
   return (
     <div
       ref={(node) => (isAdminPage && isAuthenticated ? drag(drop(node)) : null)}
-      style={{ opacity: isDragging ? 0.5 : 1, cursor: "grab" }}
+      style={{
+        opacity: isDragging ? 0.5 : 1,
+        cursor: isAdminPage && isAuthenticated ? "grab" : "default",
+      }}
       className="term-item"
     >
       <section id="conditions" className="conditions-mf route">
@@ -60,9 +62,8 @@ const TermItem = ({
                       <button
                         className="crud-btn btn btn-danger btn-sm"
                         onClick={() => handleDeleteClick(term._id)}
-                        disabled={isDeleting === term._id} // Disable while submitting
                       >
-                        {isDeleting === term._id ? "Deleteing..." : "Delete"}
+                        Delete
                       </button>
                     </div>
                   )}
