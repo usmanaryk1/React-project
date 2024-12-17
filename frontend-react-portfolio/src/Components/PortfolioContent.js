@@ -5,12 +5,12 @@ import { useAuth } from "../CMSAdmin/Auth/AuthContext";
 
 const PortfolioContent = ({ onDeleteClick, onEditClick, details, workId }) => {
   const { isAuthenticated, isAdminPage } = useAuth();
-
   // console.log(" portfolio details", details);
 
   /**
    * Portfolio details slider
    */
+
   useEffect(() => {
     const swiper = new Swiper(".portfolio-details-slider", {
       speed: 400,
@@ -85,13 +85,6 @@ const PortfolioContent = ({ onDeleteClick, onEditClick, details, workId }) => {
                           <img src={image} alt={`Slide`} />
                         </div>
                       ))}
-                      {/* 
-                    <div className="swiper-slide">
-                      <img src={details.slideImage2} alt="" />
-                    </div>
-                    <div className="swiper-slide">
-                      <img src={details.slideImage3} alt="" />
-                    </div> */}
                     </div>
                     <div className="swiper-pagination" />
                   </div>

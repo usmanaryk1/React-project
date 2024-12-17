@@ -5,13 +5,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "./CertificationValidation";
 import { toast } from "react-toastify";
 import useFetch from "../../Components/useFetch";
-import { v4 } from "uuid";
-import { storage } from "../../firebaseConfig"; // Import Firebase storage
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Error from "../../Components/Error/Error";
 import Loading from "../../Components/Loading/Loading";
 import "./AddCertification.css";
 import ImageCropper from "../ImageCropper/ImageCropper";
+import { uploadImageToFirebase } from "../Util Functions/uploadImageToFirebase";
 
 const AddCertificationForm = () => {
   const [currentCertifications, setCurrentCertifications] = useState(null);
@@ -65,9 +63,6 @@ const AddCertificationForm = () => {
 
   const handleImage1Change = async (e) => {
     const file = e.target.files[0];
-    // console.log("filename1", file.name);
-    setFileName1(file.name);
-    // console.log("file name1:", fileName1);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -85,9 +80,6 @@ const AddCertificationForm = () => {
 
   const handleImage2Change = async (e) => {
     const file = e.target.files[0];
-    // console.log("filename2", file.name);
-    setFileName2(file.name);
-    // console.log("file name2:", fileName2);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -142,30 +134,6 @@ const AddCertificationForm = () => {
     }
   }, [currentCertifications, setValue, reset]);
 
-  // console.log("currentCertifications", currentCertifications);
-
-  const uploadImageToFirebase = async (imageFile) => {
-    if (!imageFile) return null;
-
-    // console.log("croppedImage.name", imageFile.name);
-
-    const imageRef = ref(
-      storage,
-      `certificationImages/${imageFile.name + v4()}`
-    );
-    try {
-      await uploadBytes(imageRef, imageFile);
-      // console.log("Image uploaded successfully:", imageFile.name);
-      // Complete the upload
-      const downloadURL = await getDownloadURL(imageRef);
-      // console.log("Download URL:", downloadURL);
-      return downloadURL;
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      return null;
-    }
-  };
-
   const onSubmit = async (formData) => {
     // console.log("formdata", formData);
     // console.log("croppedImage1 in submit", croppedImage1);
@@ -181,12 +149,18 @@ const AddCertificationForm = () => {
     // console.log("Certification Data:", formObject);
 
     if (croppedImage1) {
-      imageUrl1 = await uploadImageToFirebase(croppedImage1);
+      imageUrl1 = await uploadImageToFirebase(
+        croppedImage1,
+        "certificationImages"
+      );
 
       // console.log("imageUrl1", imageUrl1);
     }
     if (croppedImage2) {
-      imageUrl2 = await uploadImageToFirebase(croppedImage2);
+      imageUrl2 = await uploadImageToFirebase(
+        croppedImage2,
+        "certificationImages"
+      );
 
       // console.log("imageUrl2", imageUrl2);
     }

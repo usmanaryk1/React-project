@@ -59,13 +59,13 @@ const Footer = () => {
       {/* use this as future reference and use logic */}
 
       {/* <div id="preloader"></div> */}
-      <a
-        href="#home"
+      <Link
+        to="/"
         className="back-to-top d-flex align-items-center justify-content-center"
         onClick={scrollToTop}
       >
         <i className="bi bi-arrow-up-short"></i>
-      </a>
+      </Link>
     </>
   );
 };

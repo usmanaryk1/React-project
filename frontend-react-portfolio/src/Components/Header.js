@@ -96,7 +96,7 @@ const Header = () => {
       ]);
     } else {
       setNavLinks([
-        { to: "/#hero", label: "Home" },
+        { to: "/", label: "Home" },
         { to: "/#about", label: "About" },
         { to: "/#services", label: "Services" },
         { to: "/#work", label: "Work" },

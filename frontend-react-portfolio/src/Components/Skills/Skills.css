@@ -49,10 +49,10 @@
   background-color: #128f32;
   color: white;
 }
-.save-btn:disabled {
+/* .save-btn:disabled {
   background-color: #89cf9b;
   cursor: not-allowed;
-}
+} */
 .cancel-btn {
   transition: all 0.3s ease-in-out;
   padding: 10px 25px;
@@ -95,7 +95,7 @@ textarea {
   margin-right: 7rem;
 }
 
-.updateorder-btn:disabled {
+/* .updateorder-btn:disabled {
   background-color: #89cf9b;
   cursor: not-allowed;
-}
+} */

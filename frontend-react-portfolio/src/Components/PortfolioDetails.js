@@ -55,6 +55,8 @@ const PortfolioDetails = forwardRef(({ onDeleteClick, onEditClick }, ref) => {
         breadcrumbItem1="Home"
         breadcrumbItem2="Projects"
         breadcrumbItem3="Project Details"
+        link1="/"
+        link2="/#work"
       />
       {details && (
         <PortfolioContent

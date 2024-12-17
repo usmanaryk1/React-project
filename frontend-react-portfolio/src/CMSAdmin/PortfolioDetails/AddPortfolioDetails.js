@@ -11,13 +11,11 @@ import {
   useHistory,
   useLocation,
 } from "react-router-dom/cjs/react-router-dom";
-import { v4 } from "uuid";
-import { storage } from "../../firebaseConfig"; // Import Firebase storage
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
 import "./PortfolioDetailsForm.css";
 import ImageCropper from "../ImageCropper/ImageCropper";
+import { uploadImageToFirebase } from "../Util Functions/uploadImageToFirebase";
 
 const AddPortfolioDetails = () => {
   const {
@@ -82,9 +80,6 @@ const AddPortfolioDetails = () => {
 
   const handleImageChange = async (e, index) => {
     const file = e.target.files[0];
-    // console.log("filename", file.name);
-    setFileName(file.name);
-    // console.log("file name:", fileName);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -139,25 +134,6 @@ const AddPortfolioDetails = () => {
 
   // console.log("currentDetails", currentDetails);
 
-  const uploadImageToFirebase = async (croppedImage) => {
-    if (!croppedImage) return null;
-
-    // console.log("croppedImage.name", croppedImage.name);
-
-    const imageRef = ref(storage, `detailsImages/${fileName + v4()}`);
-
-    try {
-      await uploadBytes(imageRef, croppedImage);
-      // console.log("Image uploaded successfully:", croppedImage.name);
-      const downloadURL = await getDownloadURL(imageRef);
-      // console.log("Download URL:", downloadURL);
-      return downloadURL;
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      return null;
-    }
-  };
-
   const onSubmit = async (formData) => {
     // console.log("formdata", formData);
     // console.log("croppedImage in submit", croppedImage);
@@ -173,7 +149,10 @@ const AddPortfolioDetails = () => {
     for (let i = 0; i < croppedImages.length; i++) {
       if (croppedImages[i]) {
         // console.log(`image ${i}:`, images[i]);
-        const downloadUrl = await uploadImageToFirebase(croppedImages[i]);
+        const downloadUrl = await uploadImageToFirebase(
+          croppedImages[i],
+          "detailsImages"
+        );
         imageUrls[i] = downloadUrl;
       }
     }

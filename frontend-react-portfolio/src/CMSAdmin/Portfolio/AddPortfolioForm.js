@@ -5,13 +5,11 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import validationSchema from "./PortfolioValidation";
 import useFetch from "../../Components/useFetch";
-import { v4 } from "uuid";
-import { storage } from "../../firebaseConfig"; // Import Firebase storage
 import Error from "../../Components/Error/Error";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Loading from "../../Components/Loading/Loading";
 import "./PortfolioForm.css";
 import ImageCropper from "../ImageCropper/ImageCropper";
+import { uploadImageToFirebase } from "../Util Functions/uploadImageToFirebase";
 
 const AddPortfolioForm = () => {
   const token = localStorage.getItem("token");
@@ -57,9 +55,6 @@ const AddPortfolioForm = () => {
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    // console.log("filename", file.name);
-    setFileName(file.name);
-    // console.log("file name:", fileName);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -108,25 +103,6 @@ const AddPortfolioForm = () => {
     return `${month}-${day}-${year}`;
   };
 
-  const uploadImageToFirebase = async (croppedImage) => {
-    if (!croppedImage) return null;
-
-    // console.log("croppedImage.name", croppedImage.name);
-
-    const imageRef = ref(storage, `projectImages/${fileName + v4()}`);
-
-    try {
-      await uploadBytes(imageRef, croppedImage);
-      // console.log("Image uploaded successfully:", croppedImage.name);
-      const downloadURL = await getDownloadURL(imageRef);
-      // console.log("Download URL:", downloadURL);
-      return downloadURL;
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      return null;
-    }
-  };
-
   const onSubmit = async (formData) => {
     // console.log("formdata", formData);
     // console.log("croppedImage in submit", croppedImage);
@@ -140,7 +116,7 @@ const AddPortfolioForm = () => {
     // console.log("imageUrl", imageUrl);
 
     if (croppedImage) {
-      imageUrl = await uploadImageToFirebase(croppedImage);
+      imageUrl = await uploadImageToFirebase(croppedImage, "projectImages");
 
       // console.log("imageUrl2", imageUrl);
     }

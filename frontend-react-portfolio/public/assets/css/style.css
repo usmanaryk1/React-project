@@ -31,6 +31,10 @@ h6 {
   transform: translate(1000%, 50%);
 }
 
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 a {
   color: #1e1e1e;
   text-decoration: none;
@@ -87,11 +91,11 @@ a:hover {
   line-height: 1.1;
 }
 
-.card-img img {
+/* .card-img img {
   width: 354px;
   height: 236px;
   overflow: hidden;
-}
+} */
 
 .avatar {
   width: 32px;
@@ -542,7 +546,8 @@ a:hover {
   margin-left: 5px;
 }
 
-.navbar > ul > li > button:before .navbar > ul > li > a:before {
+.navbar > ul > li > button:before,
+.navbar > ul > li > a:before {
   content: "";
   position: absolute;
   width: 100%;
@@ -1364,12 +1369,25 @@ a:hover {
   position: relative;
 }
 
-.card-img img {
+/* .card-img img {
   width: 100%;
   height: auto;
   overflow: hidden;
   object-fit: cover;
+} */
+
+.card-img img {
+  max-width: "100%";
+  max-height: "100%";
+  object-fit: "contain";
+  background-color: "#fff";
 }
+
+/* .img-fluid {
+  display: block;
+  margin: auto;
+  background-color: white; /* Optional: Add a white background for visual clarity */
+/* }  */
 
 .card-certification .card-category-box {
   position: absolute;

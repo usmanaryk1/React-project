@@ -5,13 +5,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import validationSchema from "./AboutValidation";
 import useFetch from "../../Components/useFetch";
-import { storage } from "../../firebaseConfig"; // Import Firebase storage
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { v4 } from "uuid";
 import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
 import ImageCropper from "../ImageCropper/ImageCropper";
 import "./AddForm.css";
+import { uploadImageToFirebase } from "../Util Functions/uploadImageToFirebase";
 
 const AddForm = () => {
   const token = localStorage.getItem("token");
@@ -58,9 +56,6 @@ const AddForm = () => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    console.log("filename", file.name);
-    setFileName(file.name);
-    console.log("file name:", fileName);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -103,25 +98,6 @@ const AddForm = () => {
     }
   }, [currentAbout, setValue, reset]);
 
-  const uploadImageToFirebase = async (croppedImage) => {
-    if (!croppedImage) return null;
-
-    console.log("croppedImage.name", croppedImage.name);
-
-    const imageRef = ref(storage, `aboutImages/${fileName + v4()}`);
-
-    try {
-      await uploadBytes(imageRef, croppedImage);
-      console.log("Image uploaded successfully:", croppedImage.name);
-      const downloadURL = await getDownloadURL(imageRef);
-      console.log("Download URL:", downloadURL);
-      return downloadURL;
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      return null;
-    }
-  };
-
   const onSubmit = async (formData) => {
     console.log("formdata", formData);
     console.log("croppedImage in submit", croppedImage);
@@ -135,7 +111,7 @@ const AddForm = () => {
     console.log("imageUrl", imageUrl);
 
     if (croppedImage) {
-      imageUrl = await uploadImageToFirebase(croppedImage);
+      imageUrl = await uploadImageToFirebase(croppedImage, "aboutImages");
 
       console.log("imageUrl2", imageUrl);
     }
