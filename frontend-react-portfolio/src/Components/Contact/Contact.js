@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
-import { useAuth } from "../CMSAdmin/Auth/AuthContext";
+import { useAuth } from "../../CMSAdmin/Auth/AuthContext";
+import ContactForm from "./ContactForm";
 
 const Contact = ({ onEditClick, onDeleteClick, contact = [], links = [] }) => {
   const { isAuthenticated, isAdminPage } = useAuth();
@@ -49,69 +50,7 @@ const Contact = ({ onEditClick, onDeleteClick, contact = [], links = [] }) => {
                           <h5 className="title-left">Send Message Us</h5>
                         </div>
                         <div>
-                          <form>
-                            <div className="row">
-                              <div className="col-md-12 mb-3">
-                                <div className="form-group">
-                                  <input
-                                    type="text"
-                                    className="form-control"
-                                    name="name"
-                                    id="name"
-                                    placeholder="Your Name"
-                                    autoComplete="on"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-md-12 mb-3">
-                                <div className="form-group">
-                                  <input
-                                    type="email"
-                                    className="form-control"
-                                    name="email"
-                                    id="email"
-                                    placeholder="Your Email"
-                                    autoComplete="on"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-md-12 mb-3">
-                                <div className="form-group">
-                                  <input
-                                    type="text"
-                                    className="form-control"
-                                    name="subject"
-                                    id="subject"
-                                    placeholder="Subject"
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-md-12">
-                                <div className="form-group">
-                                  <textarea
-                                    className="form-control"
-                                    name="message"
-                                    rows={5}
-                                    placeholder="Message"
-                                    required
-                                    defaultValue={""}
-                                  />
-                                </div>
-                              </div>
-
-                              <div className="col-md-12 text-center">
-                                <button
-                                  type="submit"
-                                  className="button button-a button-big button-rouded"
-                                >
-                                  Send Message
-                                </button>
-                              </div>
-                            </div>
-                          </form>
+                          <ContactForm />
                         </div>
                       </div>
                       <div className="col-md-6">

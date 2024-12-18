@@ -16,6 +16,7 @@ import Error from "../../Components/Error/Error";
 import "./PortfolioDetailsForm.css";
 import ImageCropper from "../ImageCropper/ImageCropper";
 import { uploadImageToFirebase } from "../Util Functions/uploadImageToFirebase";
+import { getImageAspectRatio } from "../Util Functions/getImageAspectRatio";
 
 const AddPortfolioDetails = () => {
   const {
@@ -63,6 +64,7 @@ const AddPortfolioDetails = () => {
   const [croppedImages, setCroppedImages] = useState([]);
   const [fileName, setFileName] = useState("");
   const [croppingIndex, setCroppingIndex] = useState(null);
+  const [cropAspectRatio, setCropAspectRatio] = useState(null);
 
   const handleImageClick = (index) => {
     imageRefs.current[index].click();
@@ -81,18 +83,15 @@ const AddPortfolioDetails = () => {
   const handleImageChange = async (e, index) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImageSrc(reader.result); // Display the original image format for cropping
-        // console.log("imageSrc", reader.result);
-        setFileName(file.name); // Keep the original file name and format
-        setIsCropping(true); // Open the cropping modal
-        setCroppingIndex(index);
-      };
-      reader.onerror = (error) => {
-        console.error("Error reading file:", error);
-      };
-      reader.readAsDataURL(file);
+      setFileName(file.name);
+      const imageDataUrl = URL.createObjectURL(file);
+      // console.log("imageDataUrl", imageDataUrl);
+      setImageSrc(imageDataUrl); // Set image for cropper
+      const aspect = await getImageAspectRatio(imageDataUrl); // Dynamically determine aspect ratio
+      // console.log("aspect", aspect);
+      setCropAspectRatio(aspect);
+      setIsCropping(true); // Open cropper modal
+      setCroppingIndex(index);
     }
   };
 
@@ -356,6 +355,7 @@ const AddPortfolioDetails = () => {
                             onClose={() => setIsCropping(false)}
                             width={688} // Pass the desired width
                             height={398} // Pass the desired height
+                            aspect={cropAspectRatio}
                             cropShape="rect"
                           />
                         )}

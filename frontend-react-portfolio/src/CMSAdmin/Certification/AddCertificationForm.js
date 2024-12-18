@@ -10,6 +10,8 @@ import Loading from "../../Components/Loading/Loading";
 import "./AddCertification.css";
 import ImageCropper from "../ImageCropper/ImageCropper";
 import { uploadImageToFirebase } from "../Util Functions/uploadImageToFirebase";
+import { getImageAspectRatio } from "../Util Functions/getImageAspectRatio";
+import { Redirect } from "react-router-dom/cjs/react-router-dom";
 
 const AddCertificationForm = () => {
   const [currentCertifications, setCurrentCertifications] = useState(null);
@@ -41,8 +43,6 @@ const AddCertificationForm = () => {
     },
   });
 
-  // const [image1, setImage1] = useState(null);
-  // const [image2, setImage2] = useState(null);
   const image1Ref = useRef(null);
   const image2Ref = useRef(null);
   const [base64Image1, setBase64Image1] = useState("");
@@ -56,6 +56,15 @@ const AddCertificationForm = () => {
   const [croppedImage2, setCroppedImage2] = useState(null);
   const [fileName1, setFileName1] = useState("");
   const [fileName2, setFileName2] = useState("");
+  const [cropAspectRatio, setCropAspectRatio] = useState(null);
+
+  useEffect(() => {
+    if (!token) {
+      toast.error("Please log in to continue.");
+      // Redirect logic here, e.g., window.location.href = "/login";
+      Redirect("/form/login-form");
+    }
+  }, [token]);
 
   const handleImageClick = (inputId) => {
     document.getElementById(inputId).click();
@@ -64,37 +73,34 @@ const AddCertificationForm = () => {
   const handleImage1Change = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImageSrc1(reader.result); // Display the original image format for cropping
-        // console.log("imageSrc1", reader.result);
-        setFileName1(file.name); // Keep the original file name and format
-        setIsCropping1(true); // Open the cropping modal
-      };
-      reader.onerror = (error) => {
-        console.error("Error reading file:", error);
-      };
-      reader.readAsDataURL(file);
+      setFileName1(file.name);
+      const imageDataUrl = URL.createObjectURL(file);
+      // console.log("imageDataUrl", imageDataUrl);
+      setImageSrc1(imageDataUrl); // Set image for cropper
+      const aspect = await getImageAspectRatio(imageDataUrl); // Dynamically determine aspect ratio
+      // console.log("aspect", aspect);
+      setCropAspectRatio(aspect);
+      setIsCropping1(true); // Open cropper modal
     }
   };
+
+  useEffect(() => {
+    if (imageSrc1) return () => URL.revokeObjectURL(imageSrc1);
+  }, [imageSrc1]);
 
   const handleImage2Change = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImageSrc2(reader.result); // Display the original image format for cropping
-        // console.log("imageSrc2", reader.result);
-        setFileName2(file.name); // Keep the original file name and format
-        setIsCropping2(true); // Open the cropping modal
-      };
-      reader.onerror = (error) => {
-        console.error("Error reading file:", error);
-      };
-      reader.readAsDataURL(file);
+      setFileName2(file.name);
+      const imageDataUrl = URL.createObjectURL(file);
+      // console.log("imageDataUrl", imageDataUrl);
+      setImageSrc2(imageDataUrl); // Set image for cropper
+      setIsCropping2(true); // Open cropper modal
     }
   };
-
+  useEffect(() => {
+    if (imageSrc2) return () => URL.revokeObjectURL(imageSrc2);
+  }, [imageSrc2]);
   const handleCropComplete1 = async (croppedImg) => {
     if (croppedImg) {
       // console.log("croppedImg1", croppedImg);
@@ -142,8 +148,8 @@ const AddCertificationForm = () => {
     // console.log("base64Image1", base64Image1);
     // console.log("base64Image2", base64Image2);
 
-    let imageUrl1 = base64Image1;
-    let imageUrl2 = base64Image2;
+    let imageUrl1 = base64Image1 || "";
+    let imageUrl2 = base64Image2 || "";
     // console.log("imageUrl1", imageUrl1);
     // console.log("imageUrl2", imageUrl2);
     // console.log("Certification Data:", formObject);
@@ -163,6 +169,11 @@ const AddCertificationForm = () => {
       );
 
       // console.log("imageUrl2", imageUrl2);
+    }
+    if (!imageUrl1 || !imageUrl2) {
+      toast.error("Failed to upload images. Please try again.");
+      setIsSubmitting(false);
+      return;
     }
 
     const updatedData = {
@@ -310,6 +321,7 @@ const AddCertificationForm = () => {
                             onClose={() => setIsCropping1(false)}
                             width={354} // Pass the desired width
                             height={236} // Pass the desired height
+                            aspect={cropAspectRatio} // Dynamic aspect ratio
                             cropShape="rect"
                           />
                         )}
@@ -318,7 +330,7 @@ const AddCertificationForm = () => {
                         className="my-3 img-btn"
                         onClick={() => handleImageClick("file-input1")}
                       >
-                        Choose Project Image
+                        Select Certification
                       </label>
                     </div>
                     <div className="image col-12 col-sm-6 text-center mb-4">

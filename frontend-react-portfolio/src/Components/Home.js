@@ -3,7 +3,7 @@ import About from "./About";
 import Certifications from "./Certifications";
 // import Blog from "./Blog";
 // import BlogDetails from "./BlogDetails";
-import Contact from "./Contact";
+import Contact from "./Contact/Contact";
 import Counter from "./Counter";
 import Error from "./Error/Error";
 import Hero from "./Hero";

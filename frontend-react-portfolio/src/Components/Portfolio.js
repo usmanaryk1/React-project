@@ -54,15 +54,21 @@ const Portfolio = ({ title, subtitle, onEdit, onDelete, works = [] }) => {
             </div>
             <div className="row">
               {works.map((work) => (
-                <div className="col-md-4" key={work._id}>
+                <div className="col-md-4 col-sm-6" key={work._id}>
                   <div className="work-box">
                     {/* <a href={work.linkImage} data-gallery="portfolioGallery" className="portfolio-lightbox"> */}
                     {work.workImage && (
                       <div className="work-img">
                         <img
                           src={work.workImage}
-                          alt=""
+                          alt="project"
                           className="img-fluid"
+                          style={{
+                            maxHeight: "100%",
+                            maxWidth: "100%",
+                            objectFit: "contain",
+                            transition: "all 1s",
+                          }}
                         />
                       </div>
                     )}

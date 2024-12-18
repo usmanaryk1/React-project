@@ -10,6 +10,8 @@ import Loading from "../../Components/Loading/Loading";
 import "./PortfolioForm.css";
 import ImageCropper from "../ImageCropper/ImageCropper";
 import { uploadImageToFirebase } from "../Util Functions/uploadImageToFirebase";
+import { Redirect } from "react-router-dom/cjs/react-router-dom";
+import { getImageAspectRatio } from "../Util Functions/getImageAspectRatio";
 
 const AddPortfolioForm = () => {
   const token = localStorage.getItem("token");
@@ -48,6 +50,15 @@ const AddPortfolioForm = () => {
   const [imageSrc, setImageSrc] = useState(null);
   const [croppedImage, setCroppedImage] = useState(null);
   const [fileName, setFileName] = useState("");
+  const [cropAspectRatio, setCropAspectRatio] = useState(null);
+
+  useEffect(() => {
+    if (!token) {
+      toast.error("Please log in to continue.");
+      // Redirect logic here, e.g., window.location.href = "/login";
+      Redirect("/form/login-form");
+    }
+  }, [token]);
 
   const handleImageClick = () => {
     imageRef.current.click();
@@ -56,20 +67,16 @@ const AddPortfolioForm = () => {
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImageSrc(reader.result); // Display the original image format for cropping
-        // console.log("imageSrc", reader.result);
-        setFileName(file.name); // Keep the original file name and format
-        setIsCropping(true); // Open the cropping modal
-      };
-      reader.onerror = (error) => {
-        console.error("Error reading file:", error);
-      };
-      reader.readAsDataURL(file);
+      setFileName(file.name);
+      const imageDataUrl = URL.createObjectURL(file);
+      // console.log("imageDataUrl", imageDataUrl);
+      setImageSrc(imageDataUrl); // Set image for cropper
+      const aspect = await getImageAspectRatio(imageDataUrl); // Dynamically determine aspect ratio
+      // console.log("aspect", aspect);
+      setCropAspectRatio(aspect);
+      setIsCropping(true); // Open cropper modal
     }
   };
-
   const handleCropComplete = async (croppedImg) => {
     if (croppedImg) {
       // console.log("croppedImg", croppedImg);
@@ -241,6 +248,7 @@ const AddPortfolioForm = () => {
                           onClose={() => setIsCropping(false)}
                           width={356} // Pass the desired width
                           height={223} // Pass the desired height
+                          aspect={cropAspectRatio} // Dynamic aspect ratio
                           cropShape="rect"
                         />
                       )}

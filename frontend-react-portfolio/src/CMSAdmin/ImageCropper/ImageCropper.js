@@ -11,6 +11,7 @@ const ImageCropper = ({
   onClose,
   width,
   height,
+  aspect,
   cropShape,
 }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -19,7 +20,7 @@ const ImageCropper = ({
   // console.log("fileName in cropper", fileName);
   const onCropChange = (location) => setCrop(location);
   const onZoomChange = (newZoom) => setZoom(newZoom);
-  const aspectRatio = width / height; // Calculate aspect ratio
+  // const aspectRatio = width / height; // Calculate aspect ratio
 
   const handleCropComplete = useCallback(async () => {
     console.log("croppedAreaPixels", croppedAreaPixels);
@@ -47,7 +48,7 @@ const ImageCropper = ({
         image={imageSrc}
         crop={crop}
         zoom={zoom}
-        aspect={aspectRatio} // Use the dynamic aspect ratio
+        aspect={aspect || width / height} // Default to aspect if dynamic one isn't passed
         onCropChange={onCropChange}
         onZoomChange={onZoomChange}
         onCropComplete={onCropAreaChange}

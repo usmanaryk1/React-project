@@ -44,14 +44,22 @@ const Certifications = ({
             </div>
             <div className="row">
               {certifications.map((certification) => (
-                <div className="col-md-4 card-box" key={certification._id}>
+                <div
+                  className="col-lg-4 col-sm-6 card-box"
+                  key={certification._id}
+                >
                   <div className="card card-certification">
                     {certification.image && (
                       <div className="card-img">
                         <img
                           src={certification.image}
-                          alt=""
+                          alt="certification"
                           className="img-fluid"
+                          style={{
+                            maxHeight: "100%",
+                            maxWidth: "100%",
+                            objectFit: "contain",
+                          }}
                         />
                       </div>
                     )}

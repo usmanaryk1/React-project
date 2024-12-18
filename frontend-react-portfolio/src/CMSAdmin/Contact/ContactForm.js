@@ -1,4 +1,4 @@
-import Contact from "../../Components/Contact";
+import Contact from "../../Components/Contact/Contact";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";

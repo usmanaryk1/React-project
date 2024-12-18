@@ -82,7 +82,15 @@ const PortfolioContent = ({ onDeleteClick, onEditClick, details, workId }) => {
                     <div className="swiper-wrapper align-items-center">
                       {details.slideImages.map((image, index) => (
                         <div className="swiper-slide" key={index}>
-                          <img src={image} alt={`Slide`} />
+                          <img
+                            src={image}
+                            alt={`Slide`}
+                            style={{
+                              maxHeight: "100%",
+                              maxWidth: "100%",
+                              objectFit: "contain",
+                            }}
+                          />
                         </div>
                       ))}
                     </div>
