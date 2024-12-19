@@ -41,9 +41,16 @@ router.post("/register", async (req, res) => {
     // console.log("firebase user:", UserRecord);
 
     // Step 4: Generate email verification link
+    // Generate password reset link with a custom continue URL
+    const actionCodeSettings = {
+      url: `${
+        process.env.FRONTEND_LOCALHOST_URL || process.env.FRONTEND_VERCEL_URL
+      }/#/form/login-form`, // Your frontend URL with reset password path
+      handleCodeInApp: true, // Indicates that you want the user to be directed back to your app
+    };
     const verificationLink = await admin
       .auth()
-      .generateEmailVerificationLink(email);
+      .generateEmailVerificationLink(email, actionCodeSettings);
 
     await sendVerificationEmail(verificationLink, email); // Implement sendEmail function
 

@@ -42,6 +42,7 @@ const Forgot_Routes = require("../router/forgetPwd.js");
 const Reset_Routes = require("../router/resetPwd.js");
 const Terms_Routes = require("../router/termsAndConditions.js");
 const Skills_Routes = require("../router/skills.js");
+const ContactUs_Routes = require("../router/contactForm.js");
 
 // Simple route
 app.get("/", (req, res) => {
@@ -59,6 +60,7 @@ app.use("/api/works", Project_Routes);
 app.use("/api/testimonials", Testimonial_Routes);
 app.use("/api/certifications", Certification_Routes);
 app.use("/api/contact", Contact_Routes);
+app.use("/api/contactUs", ContactUs_Routes);
 app.use("/api/social", Social_Routes);
 app.use("/api/workDetails", ProjectDetails_Routes);
 app.use("/api/auth", Auth_Routes);
