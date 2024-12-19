@@ -61,7 +61,6 @@ const SignUp = () => {
 
         onSignup(result.user, false);
         // Optionally redirect user after successful signup
-        history.push("/form/login-form");
       } else {
         // Handle backend error response
         Swal.fire({

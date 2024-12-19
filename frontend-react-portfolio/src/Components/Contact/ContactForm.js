@@ -16,19 +16,22 @@ function ContactForm() {
 
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
   const userId = localStorage.getItem("userId");
+
   const onSubmit = async (formData) => {
-    console.log("fromdata:", formData);
+    console.log("formdata:", formData);
 
     try {
-      const response = fetch(`${API_URL}/api/contactUs`, {
+      const response = await fetch(`${API_URL}/api/contactUs`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ ...formData, userId }),
       });
-      const result = await response.json();
+      console.log("response:", response);
       if (response.ok) {
+        const result = await response.json();
+        console.log("result:", result);
         toast.success(result.message || "Message sent successfully!");
       } else {
         toast.error("Something went wrong. Please try again.");

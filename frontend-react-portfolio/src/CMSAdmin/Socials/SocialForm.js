@@ -56,10 +56,15 @@ const SocialForm = () => {
     setIsSubmitting(true);
     const formData = {
       platformIcon: data.platformIcon,
-      link: data.link,
       isActive: data.isActive,
     };
 
+    // if the platform is whatsapp, create the link
+    if (data.platformIcon === "whatsapp") {
+      formData.link = `https://wa.me/${data.link.replace(/\D/g, "")}`; // Strip the non-numeric character
+    } else {
+      formData.link = data.link;
+    }
     if (currentLinks) {
       // Update service
       //   const updatedLink = { ...currentLinks, ...formData };
@@ -166,7 +171,7 @@ const SocialForm = () => {
                       name="link"
                       className="form-control"
                       {...register("link")}
-                      placeholder="Link of your accounnt"
+                      placeholder="Link of your account"
                       required
                     />
                   </div>
