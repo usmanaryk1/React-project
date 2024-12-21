@@ -33,11 +33,6 @@ const SocialForm = () => {
     setValue,
   } = useForm({
     resolver: yupResolver(validationSchema),
-    defaultValues: {
-      platformIcon: "",
-      link: "",
-      isActive: false,
-    },
   });
 
   useEffect(() => {
@@ -51,20 +46,21 @@ const SocialForm = () => {
       setSelectedIcon(""); // Reset selectedIcon when no currentService
     }
   }, [currentLinks, setValue, reset]);
-
+  // console.log("selected icon:", selectedIcon);
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     const formData = {
       platformIcon: data.platformIcon,
       isActive: data.isActive,
     };
-
+    // console.log("platformicon:", data.platformIcon);
     // if the platform is whatsapp, create the link
-    if (data.platformIcon === "whatsapp") {
+    if (data.platformIcon === "bi-whatsapp") {
       formData.link = `https://wa.me/${data.link.replace(/\D/g, "")}`; // Strip the non-numeric character
     } else {
       formData.link = data.link;
     }
+    // console.log("formdata link:", formData.link);
     if (currentLinks) {
       // Update service
       //   const updatedLink = { ...currentLinks, ...formData };

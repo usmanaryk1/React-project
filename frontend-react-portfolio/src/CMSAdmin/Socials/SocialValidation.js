@@ -1,43 +1,18 @@
-// import * as yup from "yup";
-
-// const validationSchema = yup
-//   .object({
-//     platformIcon: yup.string().required("Icon is Missing."),
-//     link: yup.string().when("platformIcon", {
-//       is: "whatsapp",
-//       then: yup
-//         .string()
-//         .matches(/^\+?[1-9]\d{1,14}$/, "Please enter a valid phone number")
-//         .required("Whatsapp number is required!"),
-//       otherwise: yup
-//         .string()
-//         .url("Please enter a valid URL")
-//         .required("Link is required!"),
-//     }),
-//     isActive: yup
-//       .bool()
-//       .oneOf([true], "Please check this field")
-//       .required("Please check this field"),
-//   })
-//   .required();
-
-// export default validationSchema;
 import * as yup from "yup";
 
-const validationSchema = yup.object({
-  platformIcon: yup.string().required("Platform icon is required"),
-  link: yup.string().when("platformIcon", {
-    is: (platformIcon) => platformIcon === "whatsapp", // Correct condition here
-    then: yup
-      .string()
-      .matches(/^\+?[1-9]\d{1,14}$/, "Please enter a valid phone number")
-      .required("WhatsApp number is required"),
-    otherwise: yup
-      .string()
-      .url("Please enter a valid URL")
-      .required("Link is required"),
-  }),
-  isActive: yup.boolean().required(),
+const validationSchema = yup.object().shape({
+  platformIcon: yup.string().nullable().required("Platform icon is required"),
+  link: yup
+    .string()
+    .required("Link is required")
+    .test("isValidLink", "Invalid link or phone number", function (value) {
+      const { platformIcon } = this.parent;
+      if (platformIcon === "bi-whatsapp") {
+        return /^\+?[1-9]\d{1,14}$/.test(value);
+      }
+      return yup.string().url().isValidSync(value);
+    }),
+  isActive: yup.boolean().required("Active status is required"),
 });
 
 export default validationSchema;

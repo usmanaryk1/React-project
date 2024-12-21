@@ -12,7 +12,7 @@ const CustomIconDropdown = ({
   const [icons, setIcons] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+  // console.log("name", name);
   // Fetch icons only once on component mount
   useEffect(() => {
     fetch("/assets/data/icons.json")
@@ -23,6 +23,7 @@ const CustomIconDropdown = ({
 
   const handleIconSelect = (icon) => {
     setSelectedIcon(icon.className);
+
     setValue(name, icon.className);
     setDropdownOpen(false); // Close dropdown after selection
   };
