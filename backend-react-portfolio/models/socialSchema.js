@@ -10,14 +10,6 @@ const socialSchema = new Schema({
   link: {
     type: String,
     required: true,
-    validate: {
-      validator: function (v) {
-        return /^(https?:\/\/)?([a-zA-Z0-9.-]+)\.([a-zA-Z]{2,6})([/\w .-]*)*\/?$/.test(
-          v
-        );
-      },
-      message: (props) => `${props.value} is not a valid URL!`,
-    },
   },
   isActive: {
     type: Boolean,
