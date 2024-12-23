@@ -54,7 +54,7 @@ const AddServiceForm = () => {
     }
   }, [currentService, setValue, reset]);
 
-  // console.log("currentService: ", currentService);
+  console.log("currentService: ", currentService);
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);

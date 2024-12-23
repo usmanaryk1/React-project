@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./Signup.css";
 import { useForm } from "react-hook-form";
@@ -24,7 +24,6 @@ const SignUp = () => {
       confirmPassword: "",
     },
   });
-  const history = useHistory(); // for programmatic navigation
 
   // console.log("Signup component received onSignup prop:", onSignup);
 

@@ -1111,12 +1111,10 @@ a:hover {
 .swiper-slide {
   width: 100%; /* Landscape width */
   height: 398px; /* Landscape height */
-  background-color: #f0f0f0; /* Optional: Background color for whitespace */
   display: flex;
   justify-content: center; /* Horizontally center image */
   align-items: center; /* Vertically center image */
   overflow: hidden; /* Prevent overflow */
-  border: 1px solid #ccc; /* Optional: Border for visualization */
 }
 
 /* .swiper-slide img {
@@ -1696,6 +1694,14 @@ input[type="number"],
   width: 100%;
   padding: 10px 10px;
   margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+  border-radius: 5px;
+}
+.form input[type="search"] {
+  width: 100%;
+  padding: 10px 10px;
   border: 1px solid #ddd;
   box-sizing: border-box;
   display: block;

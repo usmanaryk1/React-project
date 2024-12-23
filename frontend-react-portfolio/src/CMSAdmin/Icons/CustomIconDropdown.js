@@ -26,6 +26,7 @@ const CustomIconDropdown = ({
 
     setValue(name, icon.className);
     setDropdownOpen(false); // Close dropdown after selection
+    console.log("Selected icon:", icon.className); // Debugging log
   };
 
   // Debounced search input to optimize performance
@@ -45,12 +46,14 @@ const CustomIconDropdown = ({
     <div className="form-group">
       <div className="custom-dropdown">
         {/* Persistent search input */}
-        <input
-          type="text"
-          placeholder="Search icon..."
-          onChange={handleSearchChange}
-          className="search-input"
-        />
+        <div className="form-group">
+          <input
+            type="search"
+            placeholder="Search icon..."
+            onChange={handleSearchChange}
+            className="form-control search-input"
+          />
+        </div>
 
         {/* Show dropdown only if open and there are filtered results */}
         {dropdownOpen && filteredIcons.length > 0 && (
