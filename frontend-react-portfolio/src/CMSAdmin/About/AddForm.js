@@ -10,6 +10,7 @@ import Error from "../../Components/Error/Error";
 import ImageCropper from "../ImageCropper/ImageCropper";
 import "./AddForm.css";
 import { uploadImageToFirebase } from "../Util Functions/uploadImageToFirebase";
+import ToggleSection from "../ToggleSection/ToggleSection";
 
 const AddForm = () => {
   const token = localStorage.getItem("token");
@@ -337,12 +338,13 @@ const AddForm = () => {
         </div>
         <hr />
       </section>
-
-      <About
-        onEditClick={handleEdit}
-        onDeleteClick={handleDelete}
-        about={about}
-      />
+      <ToggleSection title="About Section">
+        <About
+          onEditClick={handleEdit}
+          onDeleteClick={handleDelete}
+          about={about}
+        />
+      </ToggleSection>
     </>
   );
 };

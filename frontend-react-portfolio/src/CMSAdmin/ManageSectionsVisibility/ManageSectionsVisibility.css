@@ -1,0 +1,159 @@
+/* .manage-sections-container {
+  border-radius: 5px;
+  max-width: 80%;
+  margin: 120px auto;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
+}
+.visibility-heading {
+  text-align: center;
+  padding: 2rem;
+} */
+
+/* General Section Styling */
+#manage-sections {
+  background-color: #ffffff;
+  padding: 40px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* font-family: "Roboto", sans-serif; */
+  margin: 5.625rem auto;
+  max-width: 900px;
+}
+
+.manage-sections-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Heading Styling */
+.visibility-heading h2 {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #222222;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #eeeeee;
+  padding-bottom: 1rem;
+}
+
+/* Section Item Styling */
+.section-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #f5f5f5;
+  transition: background-color 0.2s ease;
+}
+
+.section-item:hover {
+  background-color: #f9f9f9;
+}
+
+.section-item:last-child {
+  border-bottom: none;
+}
+
+/* Section Name Styling */
+.section-name {
+  flex: 1;
+  font-size: 18px;
+  color: #333333;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 15px;
+}
+
+/* Toggle Button Container */
+.toggle-container {
+  flex-shrink: 0;
+  min-width: 120px;
+  text-align: right;
+}
+
+/* Toggle Button Styling */
+.toggle-btn {
+  color: #666666;
+  cursor: pointer;
+
+  transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Visible State */
+.toggle-btn.visible {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+/* Hidden State */
+.toggle-btn.hidden {
+  border-color: #e0e0e0;
+  color: #888888;
+}
+
+/* Icon Container */
+.toggle-icon {
+  display: flex;
+  width: 3.25rem; /* Fixed width for smooth movement */
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Icon Inside Toggle Button */
+.toggle-icon i {
+  font-size: 1.938rem;
+  color: #ffffff;
+  transition: transform 0.3s ease-in-out;
+  position: absolute;
+}
+
+/* Icon States */
+.toggle-btn.visible .toggle-icon i {
+  transform: translateX(10px); /* Shift right */
+  color: #007bff;
+}
+
+.toggle-btn.hidden .toggle-icon i {
+  transform: translateX(-10px); /* Shift left */
+  color: #888888;
+}
+
+/* Hover Effects */
+.toggle-btn:hover {
+  border-color: #0056b3;
+  color: #ffffff;
+}
+
+.section-item:hover {
+  background-color: #f5f5f5;
+  border-color: #cccccc;
+  color: #555555;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .section-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-name {
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .toggle-container {
+    text-align: left;
+    width: 100%;
+  }
+}

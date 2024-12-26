@@ -81,6 +81,7 @@ const Header = () => {
     if (isAuthenticated && isAdminPage) {
       setNavLinks([
         { to: "/form/dashboard", label: "Dashboard" },
+        { to: "/form/manage-sections", label: "Manage Sections" },
         { to: "/form/hero-form", label: "Home" },
         { to: "/form/about-form", label: "About" },
         { to: "/form/skills-form", label: "Skills" },

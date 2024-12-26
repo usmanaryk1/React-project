@@ -19,14 +19,11 @@ import CVUploader from "./UploadCV/CVUploaderForm";
 import TermsAndConditionsEdit from "./TermsAndConditionsEdit/TermsAndConditionsEdit";
 import AddPortfolioDetails from "./PortfolioDetails/AddPortfolioDetails";
 import SkillsEdit from "./Skills/SkillsEdit";
+import ManageSectionsVisibility from "./ManageSectionsVisibility/ManageSectionsVisibility";
 
 const Form = () => {
   const { isAuthenticated } = useAuth();
 
-  // let { path } = useRouteMatch();
-  // let { url } = useRouteMatch();
-  // console.log("form auth", isAuthenticated);
-  // console.log("path", path);
   return (
     <>
       <section id="form">
@@ -81,6 +78,11 @@ const Form = () => {
             isAuthenticated={isAuthenticated}
             title="FORMS"
             subtitle="Navigate to any form"
+          />
+          <PrivateRoute
+            path={`/form/manage-sections`}
+            component={ManageSectionsVisibility}
+            isAuthenticated={isAuthenticated}
           />
           <PrivateRoute
             path={`/form/hero-form`}

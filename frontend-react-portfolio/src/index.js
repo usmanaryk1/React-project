@@ -5,12 +5,15 @@ import ReactDOM from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 import App from "./App";
 import { AuthProvider } from "./CMSAdmin/Auth/AuthContext";
+import { SectionVisibilityProvider } from "./CMSAdmin/SectionVisibilityContext/SectionVisibilityContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <HashRouter>
     <AuthProvider>
-      <App />
+      <SectionVisibilityProvider>
+        <App />
+      </SectionVisibilityProvider>
     </AuthProvider>
   </HashRouter>
 );
