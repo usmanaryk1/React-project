@@ -81,19 +81,21 @@
 .toggle-btn {
   color: #666666;
   cursor: pointer;
-
-  transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  background: none; /* Remove background */
+  border: none; /* Remove border */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  outline: none;
+  transition: transform 0.3s ease-in-out;
 }
 
 /* Visible State */
 .toggle-btn.visible {
-  border-color: #007bff;
   color: #007bff;
 }
 
 /* Hidden State */
 .toggle-btn.hidden {
-  border-color: #e0e0e0;
   color: #888888;
 }
 
@@ -129,7 +131,6 @@
 
 /* Hover Effects */
 .toggle-btn:hover {
-  border-color: #0056b3;
   color: #ffffff;
 }
 
