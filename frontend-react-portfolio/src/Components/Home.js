@@ -80,7 +80,7 @@ const Home = () => {
         {sections.find(
           (section) =>
             section.name === "Testimonial Section" && section.isVisible
-        ) && <Testimonial testimonials={testimonials || []} />}
+        ) && <Testimonial testimonials={testimonials || []} className="mt-5" />}
 
         {/* <Blog title="Blogs" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />*/}
 
