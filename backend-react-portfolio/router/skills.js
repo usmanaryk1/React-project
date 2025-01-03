@@ -24,7 +24,7 @@ router.get("/:id", async (req, res) => {
   const Id = req.params.id;
 
   try {
-    const Skills = await Skills_Model.findById(Id); // Ensure you're querying by the correct field, `email` not `id`
+    const Skills = await Skills_Model.findById(Id); // Ensure you're querying by the correct field, `id`
     if (!Skills) {
       return res.status(404).send("Inforamtion Not Found");
     }

@@ -13,7 +13,7 @@ const skillsSchema = new Schema({
   },
   order: {
     type: Number, // To track the order of terms
-    default: 0,
+    default: null,
   },
 });
 
