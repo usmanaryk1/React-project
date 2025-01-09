@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { useSectionVisibility } from "../SectionVisibilityContext/SectionVisibilityContext";
 import "./ManageSectionsVisibility.css";
-import useFetch from "../../Components/useFetch";
 import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
 import NullData from "../../Components/NullData/NullData";

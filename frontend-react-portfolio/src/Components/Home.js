@@ -13,6 +13,7 @@ import Services from "./Services";
 import Testimonial from "./Testimonial";
 import useFetch from "./useFetch";
 import { useSectionVisibility } from "../CMSAdmin/SectionVisibilityContext/SectionVisibilityContext";
+import Sections from "./Sections/Sections";
 
 const Home = () => {
   const API_URL = useMemo(
@@ -27,12 +28,13 @@ const Home = () => {
   const { data: counts } = useFetch(`${API_URL}/api/counts`);
   const { data: works } = useFetch(`${API_URL}/api/works`);
   const { data: testimonials } = useFetch(`${API_URL}/api/testimonials`);
+  const { data: sectionData } = useFetch(`${API_URL}/api/sections`);
   const { data: certifications } = useFetch(`${API_URL}/api/certifications`);
   const { data: contacts } = useFetch(`${API_URL}/api/contact`);
   const { data: links } = useFetch(`${API_URL}/api/social`);
 
   const { sections } = useSectionVisibility();
-  // console.log("sections in home:", sections);
+  // console.log("section in home:", sectionData);
   if (isPending) {
     return <Loading />;
   }
@@ -83,6 +85,9 @@ const Home = () => {
         ) && <Testimonial testimonials={testimonials || []} className="mt-5" />}
 
         {/* <Blog title="Blogs" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />*/}
+        {sections.find(
+          (section) => section.name === "Other Section" && section.isVisible
+        ) && <Sections section={sectionData || []} />}
 
         {sections.find(
           (section) =>
