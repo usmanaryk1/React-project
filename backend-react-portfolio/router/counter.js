@@ -5,7 +5,7 @@ const authenticateJWT = require("../middleware/authmiddleware.js");
 // GET ALL COUNTER INFO
 router.get("/", async (req, res) => {
   try {
-    const CountInfo = await Counter_Model.find(); // Ensure you're querying by the correct field, `id`
+    const CountInfo = await Counter_Model.find();
     if (CountInfo.length === 0) {
       return res.status(404).send("Inforamtion Not Found");
     }
