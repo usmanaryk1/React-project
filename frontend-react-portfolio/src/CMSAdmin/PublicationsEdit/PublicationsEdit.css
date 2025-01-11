@@ -1,0 +1,19 @@
+#publications-form {
+  margin-top: 3rem;
+}
+.crud-btns {
+  margin: 3rem 0;
+  text-align: right;
+}
+
+.addSection-btn {
+  background-color: #128f32;
+  color: white;
+  transition: all 0.3s ease-in-out;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: none;
+  margin-right: 7rem;
+  margin-top: 3rem;
+}

@@ -10,7 +10,9 @@ import { SectionVisibilityProvider } from "./CMSAdmin/SectionVisibilityContext/S
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <HashRouter>
+    {/* Authentication Context for managing user authentication */}
     <AuthProvider>
+      {/* Section Visibility Context for dynamic section rendering */}
       <SectionVisibilityProvider>
         <App />
       </SectionVisibilityProvider>

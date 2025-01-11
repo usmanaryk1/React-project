@@ -20,6 +20,7 @@ import TermsAndConditionsEdit from "./TermsAndConditionsEdit/TermsAndConditionsE
 import AddPortfolioDetails from "./PortfolioDetails/AddPortfolioDetails";
 import SkillsEdit from "./Skills/SkillsEdit";
 import ManageSectionsVisibility from "./ManageSectionsVisibility/ManageSectionsVisibility";
+import PublicationsEdit from "./PublicationsEdit/PublicationsEdit";
 
 const Form = () => {
   const { isAuthenticated } = useAuth();
@@ -122,6 +123,11 @@ const Form = () => {
           <PrivateRoute
             path={`/form/testimonial-form`}
             component={AddTestimonialForm}
+            isAuthenticated={isAuthenticated}
+          />
+          <PrivateRoute
+            path={`/form/publications-form`}
+            component={PublicationsEdit}
             isAuthenticated={isAuthenticated}
           />
           <PrivateRoute

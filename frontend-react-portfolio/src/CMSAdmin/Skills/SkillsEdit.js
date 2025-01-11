@@ -81,23 +81,6 @@ const SkillsEdit = () => {
     }
   };
 
-  // const handleReorder = async (dragIndex, hoverIndex) => {
-  //   try {
-  //     const reorderedList = [...skills];
-  //     const [draggedItem] = reorderedList.splice(dragIndex, 1);
-  //     reorderedList.splice(hoverIndex, 0, draggedItem);
-
-  //     // Send reordered list to the server
-  //     await skillsService.reorderItems(
-  //       reorderedList.map((skill, index) => ({ _id: skill._id, order: index }))
-  //     );
-  //     setSkills(reorderedList); // Update state with new order
-  //     toast.success("Skills reordered successfully");
-  //   } catch (error) {
-  //     toast.error("Failed to Update the Sequence of Skills");
-  //   }
-  // };
-
   const handleReorder = async (dragIndex, hoverIndex) => {
     const reorderedList = [...skills];
     const [draggedItem] = reorderedList.splice(dragIndex, 1);

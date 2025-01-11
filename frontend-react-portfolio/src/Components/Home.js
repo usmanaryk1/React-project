@@ -13,7 +13,7 @@ import Services from "./Services";
 import Testimonial from "./Testimonial";
 import useFetch from "./useFetch";
 import { useSectionVisibility } from "../CMSAdmin/SectionVisibilityContext/SectionVisibilityContext";
-import Sections from "./Sections/Sections";
+import Publications from "./Publications/Publications";
 
 const Home = () => {
   const API_URL = useMemo(
@@ -28,7 +28,7 @@ const Home = () => {
   const { data: counts } = useFetch(`${API_URL}/api/counts`);
   const { data: works } = useFetch(`${API_URL}/api/works`);
   const { data: testimonials } = useFetch(`${API_URL}/api/testimonials`);
-  const { data: sectionData } = useFetch(`${API_URL}/api/sections`);
+  const { data: publications } = useFetch(`${API_URL}/api/publications`);
   const { data: certifications } = useFetch(`${API_URL}/api/certifications`);
   const { data: contacts } = useFetch(`${API_URL}/api/contact`);
   const { data: links } = useFetch(`${API_URL}/api/social`);
@@ -86,8 +86,9 @@ const Home = () => {
 
         {/* <Blog title="Blogs" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />*/}
         {sections.find(
-          (section) => section.name === "Other Section" && section.isVisible
-        ) && <Sections section={sectionData || []} />}
+          (section) =>
+            section.name === "Publications Section" && section.isVisible
+        ) && <Publications publications={publications || []} />}
 
         {sections.find(
           (section) =>

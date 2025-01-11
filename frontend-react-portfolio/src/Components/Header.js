@@ -89,6 +89,7 @@ const Header = () => {
         { to: "/form/counter-form", label: "Counter" },
         { to: "/form/portfolio-form", label: "Works" },
         { to: "/form/testimonial-form", label: "Testimonial" },
+        { to: "/form/publications-form", label: "Publications" },
         { to: "/form/certification-form", label: "Certification" },
         { to: "/form/contact-form", label: "Contact" },
         { to: "/form/social-form", label: "Social Links" },
