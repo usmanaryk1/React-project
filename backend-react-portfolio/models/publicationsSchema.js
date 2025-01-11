@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const sectionSchema = new Schema({
+const publicationsSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -12,5 +12,5 @@ const sectionSchema = new Schema({
   },
 });
 
-const Sections_Model = mongoose.model("sections", sectionSchema);
-module.exports = Sections_Model;
+const Publications_Model = mongoose.model("publications", publicationsSchema);
+module.exports = Publications_Model;

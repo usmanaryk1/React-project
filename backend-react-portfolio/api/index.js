@@ -44,7 +44,7 @@ const Terms_Routes = require("../router/termsAndConditions.js");
 const Skills_Routes = require("../router/skills.js");
 const ContactUs_Routes = require("../router/contactForm.js");
 const SectionVisibility_Routes = require("../router/SectionVisibility.js");
-const Sections_Routes = require("../router/sections.js");
+const Publications_Routes = require("../router/publications.js");
 
 // Simple route
 app.get("/", (req, res) => {
@@ -74,7 +74,7 @@ app.use("/api", Reset_Routes);
 app.use("/api/terms", Terms_Routes);
 app.use("/api/skills", Skills_Routes);
 app.use("/api/sectionVisibility", SectionVisibility_Routes);
-app.use("/api/sections", Sections_Routes);
+app.use("/api/publications", Publications_Routes);
 
 app.use("/api/*", (req, res, next) => {
   res.status(404).json({ message: "API route not found" });
