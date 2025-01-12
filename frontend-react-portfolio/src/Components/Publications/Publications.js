@@ -4,7 +4,7 @@ import { useAuth } from "../../CMSAdmin/Auth/AuthContext";
 import "./Publications.css";
 
 const Publications = ({ publications = [], onEditClick, onDelete }) => {
-  // console.log("sectionsData", section);
+  console.log("publications in home", publications);
   const { isAuthenticated, isAdminPage } = useAuth();
   const handleDeleteClick = (sectionId) => {
     Swal.fire({
@@ -23,7 +23,7 @@ const Publications = ({ publications = [], onEditClick, onDelete }) => {
   };
   return (
     <>
-      <section id="section" className="section-mf route pt-3">
+      <section id="section" className="section-mf route">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -62,9 +62,12 @@ const Publications = ({ publications = [], onEditClick, onDelete }) => {
                       </div>
                       <div className="row">
                         <div className="col-12">
-                          <div className="section-content">
-                            {publication.content}
-                          </div>
+                          <div
+                            className="section-content"
+                            dangerouslySetInnerHTML={{
+                              __html: publication.content,
+                            }}
+                          ></div>
                         </div>
                       </div>
                     </div>

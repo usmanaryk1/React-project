@@ -16,24 +16,30 @@ const PublicationsEdit = () => {
     `${API_URL}/api/publications`
   );
 
+  console.log("publications in form", publications);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPublications, setCurrentPublications] = useState(null);
 
-  const publicationsService = ApiService("/api/publications");
+  const publicationsService = ApiService("api/publications");
 
   const handleAddClick = useCallback(() => {
+    console.log("Add button clicked");
     setCurrentPublications(null);
     setIsModalOpen(true);
   }, []);
 
-  const handleEditClick = useCallback(() => {
-    setCurrentPublications(publications);
+  const handleEditClick = useCallback((publication) => {
+    console.log("Edit button clicked", publication);
+    setCurrentPublications(publication);
     setIsModalOpen(true);
-  }, [publications]);
+  }, []);
 
   const handleModalSubmit = useCallback(
     (data) => {
+      console.log("Save button clicked");
       if (currentPublications) {
+        console.log("currentPublications", currentPublications);
         publicationsService
           .updateItem(currentPublications._id, data)
           .then((updatedData) => {
@@ -42,32 +48,39 @@ const PublicationsEdit = () => {
                 publication._id === updatedData._id ? updatedData : publication
               )
             );
-            setIsModalOpen(false);
             toast.success("Data updated successfully");
           })
           .catch((err) => {
             console.error(err);
-            toast.error("Failed to update data", err.message);
+            toast.error(
+              "Failed to update data",
+              err.response?.data?.message || err.message
+            );
           });
       } else {
         publicationsService
           .addItem(data)
           .then((addedData) => {
+            console.log("addedData", addedData);
             setPublications((prevData) => [...prevData, addedData]);
-            setIsModalOpen(false);
             toast.success("Data added successfully");
           })
           .catch((err) => {
             console.error(err);
-            toast.error("Failed to Add Data", err.message);
+            toast.error(
+              "Server error.Please try again.",
+              err.response?.data?.message || err.message
+            );
           });
       }
+      setIsModalOpen(false);
     },
     [currentPublications, publicationsService, setPublications]
   );
 
   const handleDelete = useCallback(
     (id) => {
+      console.log("delete button clicked");
       try {
         publicationsService.deleteItem(id).then(() => {
           setPublications((prevPub) =>
@@ -100,7 +113,7 @@ const PublicationsEdit = () => {
           isOpen={isModalOpen}
           onSubmit={handleModalSubmit}
           onClose={() => setIsModalOpen(false)}
-          initialData={currentPublications || {}}
+          initialData={currentPublications ?? { title: "", content: "" }}
         />
       </div>
     </>

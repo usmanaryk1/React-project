@@ -1,8 +1,11 @@
 /*--------------------------------------------------------------
 # Sections
 --------------------------------------------------------------*/
-.section-mf .box-shadow-full {
+.section-mf {
   padding-top: 4rem;
+}
+.section-mf .section-container {
+  padding-top: 1rem;
   padding-bottom: 4rem;
 }
 
