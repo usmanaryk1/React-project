@@ -92,7 +92,7 @@ router.delete("/:id", authenticateJWT, async (req, res) => {
       message: `Information with ID ${Id} has been deleted`,
       deletedInfo: AboutInfo,
     });
-  } catch (err) {
+  } catch (error) {
     console.error(error);
     res.status(500).json({ error: `Failed to delete data with ${Id}` });
   }
