@@ -313,7 +313,11 @@ const AddPortfolioDetails = () => {
                 <h2>Add Portfolio Details Info!</h2>
               </div>
               <div className="col-12">
-                <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="form-container"
+                  noValidate
+                >
                   <div className="text-center">
                     {base64Images.map((base64Image, index) => (
                       <div className="image" key={index}>

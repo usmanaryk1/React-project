@@ -4,7 +4,7 @@ import { useAuth } from "../../CMSAdmin/Auth/AuthContext";
 import "./Publications.css";
 
 const Publications = ({ publications = [], onEditClick, onDelete }) => {
-  console.log("publications in home", publications);
+  // console.log("publications in home", publications);
   const { isAuthenticated, isAdminPage } = useAuth();
   const handleDeleteClick = (sectionId) => {
     Swal.fire({

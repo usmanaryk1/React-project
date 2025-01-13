@@ -110,7 +110,10 @@ const CVUploader = () => {
                 <h2>Upload Your CV!</h2>
               </div>
               <div className="col-12">
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="form-container"
+                >
                   <input
                     type="file"
                     accept="application/pdf"

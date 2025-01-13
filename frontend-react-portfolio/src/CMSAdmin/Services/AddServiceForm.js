@@ -163,7 +163,11 @@ const AddServiceForm = () => {
                 <h2>Add Services Info!</h2>
               </div>
               <div className="col-12">
-                <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="form-container"
+                  noValidate
+                >
                   <CustomIconDropdown
                     name="icon"
                     register={register}

@@ -290,7 +290,7 @@ const AddCertificationForm = () => {
                 <form
                   onSubmit={handleSubmit(onSubmit)}
                   noValidate
-                  className="p-0"
+                  className="form-container p-0"
                 >
                   <div className="img-container row justify-content-center">
                     <div className="image col-12 col-sm-6 text-center mb-4">

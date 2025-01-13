@@ -23,15 +23,6 @@ const ManageSectionsVisibility = () => {
         ? { ...section, isVisible: !section.isVisible }
         : section
     );
-    // Find the toggled section
-    // const toggledSection = updatedSections.find(
-    //   (section) => section.name === name
-    // );
-
-    // if (!toggledSection) {
-    //   toast.error("Section not found.");
-    //   return;
-    // }
 
     setSections(updatedSections);
     // Persist to backend

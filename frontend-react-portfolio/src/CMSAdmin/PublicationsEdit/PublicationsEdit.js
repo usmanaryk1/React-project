@@ -5,6 +5,8 @@ import useFetch from "../../Components/useFetch";
 import ApiService from "../ApisService";
 import EditorModal from "../EditorModal/EditorModal";
 import { toast } from "react-toastify";
+import Loading from "../../Components/Loading/Loading";
+import Error from "../../Components/Error/Error";
 
 const PublicationsEdit = () => {
   const API_URL = useMemo(
@@ -12,11 +14,14 @@ const PublicationsEdit = () => {
     []
   );
 
-  const { data: publications, setData: setPublications } = useFetch(
-    `${API_URL}/api/publications`
-  );
+  const {
+    data: publications,
+    setData: setPublications,
+    isPending,
+    error,
+  } = useFetch(`${API_URL}/api/publications`);
 
-  console.log("publications in form", publications);
+  // console.log("publications in form", publications);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPublications, setCurrentPublications] = useState(null);
@@ -24,20 +29,25 @@ const PublicationsEdit = () => {
   const publicationsService = ApiService("api/publications");
 
   const handleAddClick = useCallback(() => {
-    console.log("Add button clicked");
+    // console.log("Add button clicked");
     setCurrentPublications(null);
     setIsModalOpen(true);
   }, []);
 
   const handleEditClick = useCallback((publication) => {
-    console.log("Edit button clicked", publication);
+    // console.log("Edit button clicked", publication);
     setCurrentPublications(publication);
     setIsModalOpen(true);
   }, []);
 
   const handleModalSubmit = useCallback(
     (data) => {
-      console.log("Save button clicked");
+      // console.log("Save button clicked");
+      // Ensure the form data is not empty before making API calls
+      if (!data.title || !data.content) {
+        toast.error("Please fill out all fields before submitting.");
+        return;
+      }
       if (currentPublications) {
         console.log("currentPublications", currentPublications);
         publicationsService
@@ -80,7 +90,7 @@ const PublicationsEdit = () => {
 
   const handleDelete = useCallback(
     (id) => {
-      console.log("delete button clicked");
+      // console.log("delete button clicked");
       try {
         publicationsService.deleteItem(id).then(() => {
           setPublications((prevPub) =>
@@ -95,6 +105,10 @@ const PublicationsEdit = () => {
     },
     [publicationsService, setPublications]
   );
+
+  if (isPending) return <Loading />;
+
+  if (error) return <Error message={error} />;
 
   return (
     <>

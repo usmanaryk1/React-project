@@ -1671,7 +1671,7 @@ footer .credits a {
 .form {
   min-height: 300px;
 }
-form {
+.form-container {
   max-width: 600px;
   margin: 50px auto 0;
   padding: 10px;

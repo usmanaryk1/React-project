@@ -206,7 +206,11 @@ const AddForm = () => {
                 <h2>Add About Info!</h2>
               </div>
               <div className="col-12">
-                <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="form-container"
+                  noValidate
+                >
                   <div className="img-container row justify-content-center">
                     <div className="image col-12 text-center">
                       <img

@@ -46,7 +46,11 @@ const TermsForm = ({
       <div className="row">
         <div className="col-12">
           <div className="addTerm-container">
-            <form onSubmit={handleSubmit(handleFormSubmit)}>
+            <form
+              onSubmit={handleSubmit(handleFormSubmit)}
+              className="form-container"
+              noValidate
+            >
               <h3 className="text-center">
                 {editingTerm ? "Edit Term" : "Add New Term"}
               </h3>

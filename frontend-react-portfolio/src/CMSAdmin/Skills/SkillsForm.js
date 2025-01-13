@@ -46,7 +46,10 @@ const SkillsForm = ({
       <div className="row">
         <div className="col-12">
           <div className="addSkill-container">
-            <form onSubmit={handleSubmit(handleFormSubmit)}>
+            <form
+              onSubmit={handleSubmit(handleFormSubmit)}
+              className="form-container"
+            >
               <h3 className="text-center">
                 {editingSkill ? "Edit Skill" : "Add New Skill"}
               </h3>

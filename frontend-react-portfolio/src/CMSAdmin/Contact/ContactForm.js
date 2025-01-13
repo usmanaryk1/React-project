@@ -154,7 +154,11 @@ const ContactForm = () => {
                 <h2>Add Contact Info!</h2>
               </div>
               <div className="col-12">
-                <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="form-container"
+                  noValidate
+                >
                   <div className="form-froup">
                     <input
                       type="text"

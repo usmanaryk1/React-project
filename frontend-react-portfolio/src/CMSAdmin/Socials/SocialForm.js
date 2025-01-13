@@ -151,7 +151,11 @@ const SocialForm = () => {
                 <h2>Add Social Links!</h2>
               </div>
               <div className="col-12">
-                <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="form-container"
+                  noValidate
+                >
                   <CustomIconDropdown
                     name="platformIcon"
                     register={register}
