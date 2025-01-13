@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   // console.log("Dashboard get");
   try {
-    const DashboardInfo = await Dashboard_Model.find(); // Ensure you're querying by the correct field, `id`
+    const DashboardInfo = await Dashboard_Model.find();
     if (DashboardInfo.length === 0) {
       return res.status(404).send("Inforamtion Not Found");
     }

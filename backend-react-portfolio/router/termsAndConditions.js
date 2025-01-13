@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const TermsAndConditions = await Terms_Model.find().sort({ order: 1 }); // Ensure you're querying by the correct field, `email` not `id`
+    const TermsAndConditions = await Terms_Model.find().sort({ order: 1 }); // Ensure you're querying by the correct field, `order` and get the result in ascending order
     if (TermsAndConditions.length === 0) {
       return res.status(404).json({ message: "Inforamtion Not Found" });
     }
@@ -24,7 +24,7 @@ router.get("/:id", async (req, res) => {
   const Id = req.params.id;
 
   try {
-    const TermsAndConditions = await Terms_Model.findById(Id); // Ensure you're querying by the correct field, `email` not `id`
+    const TermsAndConditions = await Terms_Model.findById(Id); // Ensure you're querying by the correct `id`
     if (!TermsAndConditions) {
       return res.status(404).send("Inforamtion Not Found");
     }
@@ -77,7 +77,7 @@ router.delete("/:id", authenticateJWT, async (req, res) => {
   const Id = req.params.id;
 
   try {
-    const TermsAndConditions = await Terms_Model.findByIdAndDelete(Id); // Ensure you're querying by the correct field, `email` not `id`
+    const TermsAndConditions = await Terms_Model.findByIdAndDelete(Id); // Ensure you're querying by the correct field, `id`
     if (!TermsAndConditions) {
       return res
         .status(404)
@@ -109,10 +109,10 @@ router.patch("/reorder", authenticateJWT, async (req, res) => {
 
     await Terms_Model.bulkWrite(bulkOps);
     // console.log("Terms reordered in the database");
-    res.json({ message: "Terms reordered successfully" });
+    res.status(200).json({ message: "Terms reordered successfully" });
   } catch (error) {
     console.error(error);
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 });
 

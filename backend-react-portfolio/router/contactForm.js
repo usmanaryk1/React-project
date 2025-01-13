@@ -6,9 +6,9 @@ require("dotenv").config({ path: "./api/.env" });
 
 router.post("/", async (req, res) => {
   const { name, email, message, userId } = req.body;
-  console.log(
-    `name:${name}, email:${email}, message:${message}, userId:${userId}`
-  );
+  // console.log(
+  //   `name:${name}, email:${email}, message:${message}, userId:${userId}`
+  // );
   if (!name || !email || !message || !userId) {
     return res.status(400).json({ message: "All fields are required." });
   }
@@ -99,7 +99,7 @@ router.post("/", async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-    console.log("Email sent successfully");
+    // console.log("Email sent successfully");
     res.status(200).json({ message: "Message sent successfully!" });
   } catch (error) {
     console.error("Error:", error);

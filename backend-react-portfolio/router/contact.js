@@ -7,7 +7,7 @@ const authenticateJWT = require("../middleware/authmiddleware.js");
 
 router.get("/", async (req, res) => {
   try {
-    const ContactInfo = await Contact_Model.find(); // Ensure you're querying by the correct field, `id`
+    const ContactInfo = await Contact_Model.find();
     if (ContactInfo.length === 0) {
       return res.status(404).send("Inforamtion Not Found");
     }

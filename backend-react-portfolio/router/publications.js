@@ -32,7 +32,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// POST SECTION
+// POST SECTION (AUTHENTICATED ONLY)
 
 router.post("/", authenticateJWT, async (req, res) => {
   try {
@@ -45,7 +45,7 @@ router.post("/", authenticateJWT, async (req, res) => {
   }
 });
 
-// UPDATE THE SECTION BY ID
+// UPDATE THE SECTION BY ID (AUTHENTICATED ONLY)
 
 router.put("/:id", authenticateJWT, async (req, res) => {
   try {
@@ -64,7 +64,7 @@ router.put("/:id", authenticateJWT, async (req, res) => {
   }
 });
 
-// DELETE A SECTION BY ID
+// DELETE A SECTION BY ID (AUTHENTICATED ONLY)
 
 router.delete("/:id", authenticateJWT, async (req, res) => {
   try {

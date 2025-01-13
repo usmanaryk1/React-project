@@ -6,7 +6,7 @@ const router = express.Router();
 // GET ALL SERVICE INFO
 router.get("/", async (req, res) => {
   try {
-    const ServiceInfo = await Service_Model.find(); // Ensure you're querying by the correct field, `id`
+    const ServiceInfo = await Service_Model.find();
     if (ServiceInfo.length === 0) {
       return res.status(404).send("Inforamtion Not Found");
     }

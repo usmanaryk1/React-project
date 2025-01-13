@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const PersonalSkills = await Personal_SkillsModel.find(); // Ensure you're querying by the correct field, `email` not `id`
+    const PersonalSkills = await Personal_SkillsModel.find();
     if (PersonalSkills.length === 0) {
       return res.status(404).send("Inforamtion Not Found");
     }
@@ -24,7 +24,7 @@ router.get("/:id", async (req, res) => {
   const Id = req.params.id;
 
   try {
-    const PersonalSkills = await Personal_SkillsModel.findById(Id); // Ensure you're querying by the correct field, `email` not `id`
+    const PersonalSkills = await Personal_SkillsModel.findById(Id); // Ensure you're querying by the correct `id`
     if (!PersonalSkills) {
       return res.status(404).send("Inforamtion Not Found");
     }
@@ -80,7 +80,7 @@ router.delete("/:id", authenticateJWT, async (req, res) => {
   const Id = req.params.id;
 
   try {
-    const PersonalSkills = await Personal_SkillsModel.findByIdAndDelete(Id); // Ensure you're querying by the correct field, `email` not `id`
+    const PersonalSkills = await Personal_SkillsModel.findByIdAndDelete(Id); // Ensure you're querying by the correct `id`
     if (!PersonalSkills) {
       return res
         .status(404)

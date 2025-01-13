@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const SocialInfo = await Social_Model.find(); // Ensure you're querying by the correct field, `id`
+    const SocialInfo = await Social_Model.find();
     if (SocialInfo.length === 0) {
       return res.status(404).send("Inforamtion Not Found");
     }

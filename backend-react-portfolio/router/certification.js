@@ -7,7 +7,7 @@ const authenticateJWT = require("../middleware/authmiddleware.js");
 
 router.get("/", async (req, res) => {
   try {
-    const CertificationInfo = await Certification_Model.find(); // Ensure you're querying by the correct field, `id`
+    const CertificationInfo = await Certification_Model.find();
     if (CertificationInfo.length === 0) {
       return res.status(404).send("Inforamtion Not Found");
     }

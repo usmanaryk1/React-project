@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
     if (sections.length === 0) {
       res.status(404).json({ message: "Sections not found." });
     }
-    console.log("sections", sections);
+    // console.log("sections", sections);
     res.status(200).json(sections);
   } catch (error) {
     console.error(error);
