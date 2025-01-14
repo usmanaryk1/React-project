@@ -13,11 +13,6 @@ const validationSchema = yup
       .string()
 
       .required("Date is required"),
-
-    isActive: yup
-      .bool()
-      .oneOf([true], "Please check this field")
-      .required("Please check this field"),
   })
   .required();
 

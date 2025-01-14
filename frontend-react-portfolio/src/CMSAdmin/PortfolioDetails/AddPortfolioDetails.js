@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import { useState, useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
@@ -17,6 +17,8 @@ import "./PortfolioDetailsForm.css";
 import ImageCropper from "../ImageCropper/ImageCropper";
 import { uploadImageToFirebase } from "../Util Functions/uploadImageToFirebase";
 import { getImageAspectRatio } from "../Util Functions/getImageAspectRatio";
+import ImageUpload from "../ImageUpload/ImageUpload";
+import ReusableForm from "../ReusableForm/ReusableForm";
 
 const AddPortfolioDetails = () => {
   const {
@@ -55,106 +57,129 @@ const AddPortfolioDetails = () => {
   } = useFetch(`${API_URL}/api/workDetails`);
 
   const [currentDetails, setCurrentDetails] = useState(null);
-  const [images, setImages] = useState([]);
   const [base64Images, setBase64Images] = useState([]);
   const imageRefs = useRef([]);
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
-  const [isCropping, setIsCropping] = useState(false);
-  const [imageSrc, setImageSrc] = useState(null);
-  const [croppedImages, setCroppedImages] = useState([]);
-  const [fileName, setFileName] = useState("");
-  const [croppingIndex, setCroppingIndex] = useState(null);
-  const [cropAspectRatio, setCropAspectRatio] = useState(null);
+  const [cropData, setCropData] = useState({
+    isCropping: false,
+    imageSrc: null,
+    fileName: null,
+    croppingIndex: null,
+    cropAspectRatio: null,
+  });
 
-  const handleImageClick = (index) => {
-    imageRefs.current[index].click();
-  };
+  const fields = [
+    {
+      name: "client",
+      type: "text",
+      placeholder: "Client Company",
+      validation: { required: true },
+    },
+    {
+      name: "category",
+      type: "text",
+      placeholder: "Category of Project",
+      validation: { required: true },
+    },
+    {
+      name: "date",
+      type: "date",
+      placeholder: "Date (YY-MM-DD)",
+      validation: { required: true },
+    },
+    {
+      name: "link",
+      type: "text",
+      placeholder: "Enter link to your project",
+      validation: { required: true },
+    },
+    {
+      name: "desc",
+      type: "textarea",
+      placeholder: "Description",
+      validation: { required: true },
+    },
+  ];
 
-  const addNewImageInput = () => {
-    setImages((prevState) => [...prevState, null]);
-    setBase64Images((prevState) => [...prevState, ""]);
-  };
-
-  const removeImage = (index) => {
-    setImages((prevState) => prevState.filter((_, i) => i !== index));
-    setBase64Images((prevState) => prevState.filter((_, i) => i !== index));
-  };
-
-  const handleImageChange = async (e, index) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFileName(file.name);
-      const imageDataUrl = URL.createObjectURL(file);
-      // console.log("imageDataUrl", imageDataUrl);
-      setImageSrc(imageDataUrl); // Set image for cropper
-      const aspect = await getImageAspectRatio(imageDataUrl); // Dynamically determine aspect ratio
-      // console.log("aspect", aspect);
-      setCropAspectRatio(aspect);
-      setIsCropping(true); // Open cropper modal
-      setCroppingIndex(index);
-    }
-  };
-
-  const handleCropComplete = async (croppedImg) => {
-    if (croppedImg) {
-      // console.log("croppedImg", croppedImg);
-      setCroppedImages(croppedImg); // Use the cropped image directly
-      // console.log("cropped image on crop complete", croppedImage);
-      setBase64Images((prevImages) => {
-        const updatedImages = [...prevImages];
-        updatedImages[croppingIndex] = URL.createObjectURL(croppedImg);
-        return updatedImages;
-      });
-      setIsCropping(false);
-    } else {
-      console.error("Cropped image is not valid");
-    }
-  };
-
-  useEffect(() => {
+  const loadDetails = useCallback(() => {
+    console.log("Loading details:", currentDetails); // Debugging line
     if (currentDetails) {
-      // console.log("Current Details", currentDetails);
       setValue("client", currentDetails.pClient);
       setValue("category", currentDetails.pCategory);
       setValue("date", currentDetails.pDate);
       setValue("link", currentDetails.pURL);
       setValue("desc", currentDetails.desc);
       setValue("isActive", currentDetails.isActive);
-      setBase64Images(
-        Array.isArray(currentDetails.slideImages)
-          ? currentDetails.slideImages
-          : []
-      );
+      setBase64Images(currentDetails.slideImages || []);
     } else {
       reset();
       setBase64Images([]);
     }
   }, [currentDetails, setValue, reset]);
 
-  // console.log("currentDetails", currentDetails);
+  useEffect(() => {
+    loadDetails();
+  }, [loadDetails]);
+
+  const handleImageClick = (index) => {
+    imageRefs.current[index].click();
+  };
+
+  const addNewImageInput = () => {
+    setBase64Images((prevState) => [...prevState, ""]);
+  };
+
+  const removeImage = (index) => {
+    setBase64Images((prevState) => prevState.filter((_, i) => i !== index));
+  };
+
+  const handleImageChange = async (e, index) => {
+    const file = e.target.files[0];
+    if (file) {
+      setCropData({ ...cropData, fileName: file.name });
+      const imageDataUrl = URL.createObjectURL(file);
+      // console.log("imageDataUrl", imageDataUrl);
+      const aspect = await getImageAspectRatio(imageDataUrl); // Dynamically determine aspect ratio
+      // console.log("aspect", aspect);
+      setCropData({
+        isCropping: true,
+        imageSrc: imageDataUrl,
+        croppingIndex: index,
+        cropAspectRatio: aspect,
+      });
+    }
+  };
+
+  const handleCropComplete = async (croppedImg) => {
+    if (croppedImg) {
+      try {
+        const downloadUrl = await uploadImageToFirebase(
+          croppedImg,
+          "detailsImages"
+        );
+        setBase64Images((prevImages) => {
+          const updatedImages = [...prevImages];
+          // console.log("updatedImages", updatedImages);
+          updatedImages[cropData.croppingIndex] = downloadUrl;
+          // console.log(
+          //   "updatedImages[croppingIndex]",
+          //   updatedImages[croppingIndex]
+          // );
+          return updatedImages;
+        });
+        setCropData({ ...cropData, isCropping: false });
+      } catch (error) {
+        console.error("Failed to upload cropped image.", error);
+      }
+    } else {
+      console.error("Cropped image is not valid");
+    }
+  };
 
   const onSubmit = async (formData) => {
     // console.log("formdata", formData);
-    // console.log("croppedImage in submit", croppedImage);
 
     setIsSubmitting(true);
-
-    // console.log("base64Image", base64Image);
-
-    let imageUrls = [...base64Images];
-
-    // console.log("imageUrl", imageUrl);
-
-    for (let i = 0; i < croppedImages.length; i++) {
-      if (croppedImages[i]) {
-        // console.log(`image ${i}:`, images[i]);
-        const downloadUrl = await uploadImageToFirebase(
-          croppedImages[i],
-          "detailsImages"
-        );
-        imageUrls[i] = downloadUrl;
-      }
-    }
 
     const updatedData = {
       pCategory: formData.category,
@@ -162,8 +187,7 @@ const AddPortfolioDetails = () => {
       pDate: formData.date,
       pURL: formData.link,
       desc: formData.desc,
-      slideImages: imageUrls,
-      isActive: formData.isActive,
+      slideImages: base64Images,
     };
 
     try {
@@ -202,7 +226,13 @@ const AddPortfolioDetails = () => {
               body: JSON.stringify({ workDetailsId: result._id }),
             }
           );
+          // console.log("updatedWorkResponse", updatedWorkResponse);
 
+          if (!updatedWorkResponse.ok) {
+            throw new Error(
+              `Failed to update work: ${updatedWorkResponse.statusText}`
+            );
+          }
           queryParams.set("workDetailsId", result._id);
           history.push({
             pathname: location.pathname,
@@ -210,12 +240,6 @@ const AddPortfolioDetails = () => {
           });
 
           childRef.current.childFunction(result._id);
-          // console.log("updatedWorkResponse", updatedWorkResponse);
-          if (!updatedWorkResponse.ok) {
-            throw new Error(
-              `Failed to update work: ${updatedWorkResponse.statusText}`
-            );
-          }
 
           setDetails([...details, result]);
           childRef.current.childFunction();
@@ -231,7 +255,6 @@ const AddPortfolioDetails = () => {
     } finally {
       setIsSubmitting(false);
       setBase64Images([]);
-      setCroppedImages([]);
     }
   };
 
@@ -239,7 +262,6 @@ const AddPortfolioDetails = () => {
     reset();
     setCurrentDetails(null);
     setBase64Images([]);
-    setCroppedImages([]);
   };
 
   const handleEdit = (details) => {
@@ -276,17 +298,9 @@ const AddPortfolioDetails = () => {
         );
       }
 
-      queryParams.set("workDetailsId", null);
-      history.push({
-        pathname: location.pathname,
-        search: queryParams.toString(),
-      });
-
       // Update the URL
       setDetails(details.filter((detail) => detail._id !== detailsId));
-      if (childRef.current && childRef.current.childFunction) {
-        childRef.current.childFunction();
-      }
+
       toast.success("Details deleted successfully");
       history.push("/form/portfolio-form");
     } catch (error) {
@@ -321,20 +335,15 @@ const AddPortfolioDetails = () => {
                   <div className="text-center">
                     {base64Images.map((base64Image, index) => (
                       <div className="image" key={index}>
-                        {/* Image or default placeholder */}
-                        <div
-                          className="image-preview"
-                          onClick={() => handleImageClick(index)}
-                        >
-                          <img
-                            src={
-                              base64Image ||
-                              "../../assets/img/default-work-image.webp"
-                            }
-                            alt="default"
-                            className="img-display"
-                          />
-                        </div>
+                        <ImageUpload
+                          index={index}
+                          register={register}
+                          base64Image={base64Image}
+                          handleImageClick={handleImageClick}
+                          imageRefs={imageRefs}
+                          handleImageChange={handleImageChange}
+                          removeImage={removeImage}
+                        />
                         <button
                           type="button"
                           className="btn btn-danger btn-sm mt-2"
@@ -342,27 +351,6 @@ const AddPortfolioDetails = () => {
                         >
                           Remove
                         </button>
-                        {/* File input */}
-                        <input
-                          type="file"
-                          name={`file${index}`}
-                          {...register(`file${index}`)}
-                          onChange={(e) => handleImageChange(e, index)}
-                          ref={(el) => (imageRefs.current[index] = el)}
-                          style={{ display: "none" }}
-                        />
-                        {isCropping && (
-                          <ImageCropper
-                            imageSrc={imageSrc}
-                            fileName={fileName}
-                            onCropComplete={handleCropComplete}
-                            onClose={() => setIsCropping(false)}
-                            width={688} // Pass the desired width
-                            height={398} // Pass the desired height
-                            aspect={cropAspectRatio}
-                            cropShape="rect"
-                          />
-                        )}
                       </div>
                     ))}
                     <button
@@ -370,11 +358,34 @@ const AddPortfolioDetails = () => {
                       className="btn add-more-btn my-3 text-center"
                       onClick={addNewImageInput}
                     >
-                      {images.length === 0 ? "Add Project Image" : "Add More +"}
+                      {/* {images.length === 0 ? "Add Project Image" : "Add More +"} */}
+                      {base64Images.length === 0
+                        ? "Add Project Image"
+                        : "Add More +"}
                     </button>
+                    {cropData.isCropping && (
+                      <ImageCropper
+                        imageSrc={cropData.imageSrc}
+                        fileName={cropData.fileName}
+                        onCropComplete={handleCropComplete}
+                        onClose={() =>
+                          setCropData({ ...cropData, isCropping: false })
+                        }
+                        width={688} // Pass the desired width
+                        height={398} // Pass the desired height
+                        aspect={cropData.cropAspectRatio}
+                        cropShape="rect"
+                      />
+                    )}
                   </div>
-
-                  <div className="from-group">
+                  <ReusableForm
+                    fields={fields}
+                    register={register}
+                    errors={errors}
+                    isSubmitting={isSubmitting}
+                    onReset={onReset}
+                  />
+                  {/* <div className="from-group">
                     <input
                       type="text"
                       name="client"
@@ -382,11 +393,10 @@ const AddPortfolioDetails = () => {
                       {...register("client")}
                       placeholder="Client Company"
                     />
+                    {errors.client && (
+                      <p className="error-message">{errors.client.message}</p>
+                    )}
                   </div>
-                  {errors.client && (
-                    <p className="error-message">{errors.client.message}</p>
-                  )}
-
                   <div className="from-group">
                     <input
                       type="text"
@@ -395,11 +405,10 @@ const AddPortfolioDetails = () => {
                       {...register("category")}
                       placeholder="Category of Project"
                     />
+                    {errors.category && (
+                      <p className="error-message">{errors.category.message}</p>
+                    )}
                   </div>
-                  {errors.category && (
-                    <p className="error-message">{errors.category.message}</p>
-                  )}
-
                   <div className="from-group">
                     <input
                       type="date"
@@ -408,11 +417,10 @@ const AddPortfolioDetails = () => {
                       {...register("date")}
                       placeholder="Date (YY-MM-DD)"
                     />
+                    {errors.date && (
+                      <p className="error-message">{errors.date.message}</p>
+                    )}
                   </div>
-                  {errors.date && (
-                    <p className="error-message">{errors.date.message}</p>
-                  )}
-
                   <div className="from-group">
                     <input
                       type="text"
@@ -421,24 +429,22 @@ const AddPortfolioDetails = () => {
                       {...register("link")}
                       placeholder="Enter link to your project"
                     />
-                  </div>
-                  {errors.link && (
-                    <p className="error-message">{errors.link.message}</p>
-                  )}
-
-                  <div className="from-group">
+                    {errors.link && (
+                      <p className="error-message">{errors.link.message}</p>
+                    )}
+                  </div>*/}
+                  {/* <div className="from-group">
                     <textarea
                       name="desc"
                       className="form-control"
                       {...register("desc")}
                       placeholder="Description"
                     ></textarea>
-                  </div>
-                  {errors.desc && (
-                    <p className="error-message">{errors.desc.message}</p>
-                  )}
-
-                  <div className="isActive">
+                    {errors.desc && (
+                      <p className="error-message">{errors.desc.message}</p>
+                    )}
+                  </div> */}
+                  {/* <div className="isActive">
                     <input
                       type="checkbox"
                       id="active"
@@ -450,8 +456,8 @@ const AddPortfolioDetails = () => {
                   </div>
                   {errors.isActive && (
                     <p className="error-message">{errors.isActive.message}</p>
-                  )}
-                  <div className="buttons">
+                  )} */}
+                  {/* <div className="buttons">
                     <button className="reset" type="reset" onClick={onReset}>
                       Reset
                     </button>
@@ -462,7 +468,7 @@ const AddPortfolioDetails = () => {
                     >
                       {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
-                  </div>
+                  </div> */}
                 </form>
               </div>
             </div>
