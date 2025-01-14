@@ -49,7 +49,6 @@ router.post("/", authenticateJWT, async (req, res) => {
     pDate: req.body.pDate,
     pURL: req.body.pURL,
     desc: req.body.desc,
-    isActive: req.body.isActive,
   });
 
   try {

@@ -26,10 +26,6 @@ const projectDetailsSchema = new Schema({
     type: String,
     required: true,
   },
-  isActive: {
-    type: Boolean,
-    default: true,
-  },
 });
 
 // Create the model
