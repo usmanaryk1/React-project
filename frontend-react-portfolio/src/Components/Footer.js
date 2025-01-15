@@ -39,16 +39,10 @@ const Footer = () => {
             <div className="col-sm-12">
               <div className="copyright-box">
                 <p className="copyright">
-                  © Copyright <strong>Portfolio</strong>. All Rights Reserved
+                  © Copyright <strong>PortfolioHub</strong>. All Rights Reserved
                 </p>
                 <div className="credits">
-                  {/*
-        All the links in the footer should remain intact.
-        You can delete the links only if you purchased the pro version.
-        Licensing information: https://bootstrapmade.com/license/
-        Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=DevFolio
-      */}
-                  Designed by <Link to="/">Portfolio</Link>
+                  Designed by <Link to="/">PortfolioHub</Link>
                 </div>
               </div>
             </div>
@@ -56,9 +50,7 @@ const Footer = () => {
         </div>
       </footer>
       {/* End  Footer */}
-      {/* use this as future reference and use logic */}
-
-      {/* <div id="preloader"></div> */}
+      {/*Back to top button*/}
       <Link
         to="/"
         className="back-to-top d-flex align-items-center justify-content-center"

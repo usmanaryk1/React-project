@@ -16,36 +16,6 @@ const Header = () => {
     e.preventDefault();
   };
 
-  // const handleDownloadCV = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const response = await axios.get(`${API_URL}/api/download-cv/${userId}`, {
-  //       responseType: "blob", // Ensures the file is treated as binary data
-  //     });
-
-  //     if (response.status === 200) {
-  //       // Create a link element and trigger the download
-  //       const url = window.URL.createObjectURL(new Blob([response.data]));
-  //       const link = document.createElement("a");
-  //       link.href = url;
-  //       link.setAttribute("download", "My CV.pdf"); // Set the file name dynamically if needed
-  //       document.body.appendChild(link);
-  //       link.click();
-  //       document.body.removeChild(link);
-  //     } else {
-  //       toast.error("Failed to download CV");
-  //     }
-  //   } catch (error) {
-  //     if (error.response && error.response.status === 404) {
-  //       toast.error("CV not found");
-  //     } else {
-  //       console.error(error); // Log detailed error for debugging
-  //       toast.error("An error occurred while downloading the CV");
-  //     }
-  //   }
-  // };
-
   const handleDownloadCV = async (e) => {
     e.preventDefault();
 
@@ -108,10 +78,10 @@ const Header = () => {
     }
   }, [isAuthenticated, isAdminPage]);
 
-  const ActiveLink = (link) => {
-    // console.log("Location", location, "Link:", link);
-    return location.pathname === link;
-  };
+  // const ActiveLink = (link) => {
+  //   // console.log("Location", location, "Link:", link);
+  //   return location.pathname === link;
+  // };
 
   const isActiveLink = (link) => {
     const linkHash = link.split("#")[1] ? `#${link.split("#")[1]}` : null;
@@ -166,7 +136,7 @@ const Header = () => {
                     <li key={index}>
                       <Link
                         className={`nav-link ${
-                          ActiveLink(link.to) ? "active" : ""
+                          isActiveLink(link.to) ? "active" : ""
                         }`}
                         smooth
                         to={link.to}
