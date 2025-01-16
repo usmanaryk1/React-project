@@ -1,34 +1,20 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import BacktotopBtn from "./BacktotopBtn";
+import { toggleBacktotop, scrollToTop } from "./UtilFunctions/handleBacktotop";
 
 const Footer = () => {
   useEffect(() => {
-    const toggleBacktotop = () => {
-      const backtotop = document.querySelector(".back-to-top");
-      if (backtotop) {
-        if (window.scrollY > 100) {
-          backtotop.classList.add("active");
-        } else {
-          backtotop.classList.remove("active");
-        }
-      }
-    };
-
+    // adds event on load and scroll
     window.addEventListener("load", toggleBacktotop);
     window.addEventListener("scroll", toggleBacktotop);
 
+    // cleanup function to remove event on load and scroll
     return () => {
       window.removeEventListener("load", toggleBacktotop);
       window.removeEventListener("scroll", toggleBacktotop);
     };
   }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
 
   return (
     <>
@@ -50,14 +36,8 @@ const Footer = () => {
         </div>
       </footer>
       {/* End  Footer */}
-      {/*Back to top button*/}
-      <Link
-        to="/"
-        className="back-to-top d-flex align-items-center justify-content-center"
-        onClick={scrollToTop}
-      >
-        <i className="bi bi-arrow-up-short"></i>
-      </Link>
+
+      <BacktotopBtn scrollToTop={scrollToTop} />
     </>
   );
 };

@@ -1,49 +1,18 @@
-import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../CMSAdmin/Auth/AuthContext";
 import { useLocation } from "react-router-dom/cjs/react-router-dom";
-import { toast } from "react-toastify";
-import axios from "axios";
+import { handleDownloadCV } from "./UtilFunctions/handleDownloadCV";
+import OffCanvasHeader from "./OffCanvasHeader";
+import HorizontalHeader from "./HorizontalHeader";
+
 const Header = () => {
   const [navLinks, setNavLinks] = useState([]);
   const { user, onLogout, isAdminPage, isAuthenticated } = useAuth();
   const location = useLocation();
   // const userId = localStorage.getItem("userId");
 
-  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
-
   const preventRefresh = (e) => {
     e.preventDefault();
-  };
-
-  const handleDownloadCV = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.get(`${API_URL}/api/download-cv`, {
-        responseType: "blob", // Ensures the file is treated as binary data
-      });
-
-      if (response.status === 200) {
-        // Create a link element and trigger the download
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "My CV.pdf"); // Set the file name dynamically if needed
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } else {
-        toast.error("Failed to download CV");
-      }
-    } catch (error) {
-      if (error.response && error.response.status === 404) {
-        toast.error("CV not found");
-      } else {
-        console.error(error); // Log detailed error for debugging
-        toast.error("An error occurred while downloading the CV");
-      }
-    }
   };
 
   useEffect(() => {
@@ -78,14 +47,8 @@ const Header = () => {
     }
   }, [isAuthenticated, isAdminPage]);
 
-  // const ActiveLink = (link) => {
-  //   // console.log("Location", location, "Link:", link);
-  //   return location.pathname === link;
-  // };
-
   const isActiveLink = (link) => {
     const linkHash = link.split("#")[1] ? `#${link.split("#")[1]}` : null;
-
     // console.log("Location", location);
     // console.log("link:", link);
 
@@ -96,187 +59,26 @@ const Header = () => {
   return (
     <>
       {isAdminPage && isAuthenticated ? (
-        <header id="header" className="fixed-top vertical-header">
-          <button
-            className="btn toggle-button"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasScrolling"
-            aria-controls="offcanvasScrolling"
-          >
-            <i
-              className="bi bi-list"
-              style={{ fontSize: "2rem", color: "white" }}
-            ></i>
-          </button>
-
-          <div
-            className="offcanvas offcanvas-start"
-            data-bs-scroll="true"
-            data-bs-backdrop="false"
-            tabIndex="-1"
-            id="offcanvasScrolling"
-            aria-labelledby="offcanvasScrollingLabel"
-          >
-            <div className="offcanvas-header">
-              <h1 className="offcanvas-title logo" id="offcanvasScrollingLabel">
-                <Link to="/">PortfolioHub</Link>
-              </h1>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="offcanvas-body">
-              <nav id="navbar" className="vertical-navbar">
-                <ul>
-                  {navLinks.map((link, index) => (
-                    <li key={index}>
-                      <Link
-                        className={`nav-link ${
-                          isActiveLink(link.to) ? "active" : ""
-                        }`}
-                        smooth
-                        to={link.to}
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                  <li className="dropdown nav-link">
-                    {isAuthenticated && user ? (
-                      <>
-                        <a href="/" onClick={preventRefresh}>
-                          <span>{user.username}</span>
-                          <i className="bi bi-chevron-down" />
-                        </a>
-                        <ul>
-                          <li>
-                            <Link smooth to="/" onClick={onLogout}>
-                              Log Out
-                            </Link>
-                          </li>
-                          {isAdminPage ? (
-                            <li>
-                              <Link smooth to="/">
-                                Go to User Portal
-                              </Link>
-                            </li>
-                          ) : (
-                            <li>
-                              <Link smooth to="/form/dashboard">
-                                Go to Admin Portal
-                              </Link>
-                            </li>
-                          )}
-                        </ul>
-                      </>
-                    ) : (
-                      <>
-                        <a href="/" onClick={preventRefresh}>
-                          <span>Register</span>
-                          <i
-                            className={`bi bi-chevron-down ${
-                              user && isAdminPage ? "bi bi-chevron-right" : ""
-                            }`}
-                          />
-                        </a>
-                        <ul>
-                          <li>
-                            <Link smooth to="/form/login-form">
-                              Log in
-                            </Link>
-                          </li>
-                        </ul>
-                      </>
-                    )}
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </header>
+        <OffCanvasHeader
+          navLinks={navLinks}
+          isActiveLink={isActiveLink}
+          isAuthenticated={isAuthenticated}
+          user={user}
+          onLogout={onLogout}
+          preventRefresh={preventRefresh}
+          isAdminPage={isAdminPage}
+        />
       ) : (
-        <header id="header" className="fixed-top">
-          <div className="container d-flex align-items-center justify-content-between">
-            <h1 className="logo">
-              <Link to="/" target="_blank">
-                PortfolioHub
-              </Link>
-            </h1>
-            <nav id="navbar" className="navbar">
-              <ul>
-                {navLinks.map((link, index) => (
-                  <li key={index}>
-                    <Link
-                      className={`nav-link ${
-                        isActiveLink(link.to) ? "active" : ""
-                      }`}
-                      smooth
-                      to={link.to}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-                <li className="download">
-                  <button onClick={handleDownloadCV} className="btn">
-                    Download CV
-                  </button>
-                </li>
-
-                <li className="dropdown nav-link">
-                  {isAuthenticated && user ? (
-                    <>
-                      <a href="/" onClick={preventRefresh}>
-                        <span>{user.username}</span>
-                        <i className="bi bi-chevron-down" />
-                      </a>
-                      <ul>
-                        <li>
-                          <Link smooth to="/" onClick={onLogout}>
-                            Log Out
-                          </Link>
-                        </li>
-                        {isAdminPage ? (
-                          <li>
-                            <Link smooth to="/">
-                              Go to User Portal
-                            </Link>
-                          </li>
-                        ) : (
-                          <li>
-                            <Link smooth to="/form/dashboard">
-                              Go to Admin Portal
-                            </Link>
-                          </li>
-                        )}
-                      </ul>
-                    </>
-                  ) : (
-                    <>
-                      <a href="/" onClick={preventRefresh}>
-                        <span>Register</span>
-                        <i className="bi bi-chevron-down" />
-                      </a>
-                      <ul>
-                        <li>
-                          <Link smooth to="/form/login-form">
-                            Log in
-                          </Link>
-                        </li>
-                      </ul>
-                    </>
-                  )}
-                </li>
-              </ul>
-              <i className="bi bi-list mobile-nav-toggle" />
-            </nav>
-            {/* .navbar */}
-          </div>
-        </header>
+        <HorizontalHeader
+          navLinks={navLinks}
+          isActiveLink={isActiveLink}
+          isAuthenticated={isAuthenticated}
+          user={user}
+          preventRefresh={preventRefresh}
+          onLogout={onLogout}
+          isAdminPage={isAdminPage}
+          handleDownloadCV={handleDownloadCV}
+        />
       )}
     </>
   );
