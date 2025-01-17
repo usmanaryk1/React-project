@@ -32,8 +32,6 @@ const Home = () => {
   const { data: certifications } = useFetch(`${API_URL}/api/certifications`);
   const { data: contacts } = useFetch(`${API_URL}/api/contact`);
   const { data: links } = useFetch(`${API_URL}/api/social`);
-
-  // const { sections } = useSectionVisibility() || { sections: [] }; // Default to empty array
   const { sections = [] } = useSectionVisibility();
 
   // console.log("section in home:", sectionData);
@@ -45,80 +43,52 @@ const Home = () => {
     return <Error message={error} />;
   }
 
+  // Helper function to check if a section should be rendered
+  const shouldRenderSection = (name) =>
+    sections.find((section) => section.name === name && section.isVisible);
+
   return (
     <>
       <main id="main">
-        {sections &&
-          sections.find(
-            (section) => section.name === "Hero Section" && section.isVisible
-          ) && <Hero hero={hero || []} />}
-        {/* <Hero hero={hero || []} /> */}
-
-        {sections &&
-          sections.find(
-            (section) => section.name === "About Section" && section.isVisible
-          ) && <About about={about || []} skills={skills || []} />}
-
-        {sections &&
-          sections.find(
-            (section) =>
-              section.name === "Services Section" && section.isVisible
-          ) && (
-            <Services
-              title="Services"
-              subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-              services={services || []}
-            />
-          )}
-
-        {sections &&
-          sections.find(
-            (section) => section.name === "Counter Section" && section.isVisible
-          ) && <Counter counts={counts || []} />}
-
-        {sections &&
-          sections.find(
-            (section) =>
-              section.name === "Portfolio Section" && section.isVisible
-          ) && (
-            <Portfolio
-              title="Portfolio"
-              subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-              works={works || []}
-            />
-          )}
-
-        {sections &&
-          sections.find(
-            (section) =>
-              section.name === "Testimonial Section" && section.isVisible
-          ) && (
-            <Testimonial testimonials={testimonials || []} className="mt-5" />
-          )}
-
-        {/* <Blog title="Blogs" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />*/}
-        {sections &&
-          sections.find(
-            (section) =>
-              section.name === "Publications Section" && section.isVisible
-          ) && <Publications publications={publications || []} />}
-
-        {sections &&
-          sections.find(
-            (section) =>
-              section.name === "Certifications Section" && section.isVisible
-          ) && (
-            <Certifications
-              title="Certifications"
-              subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-              certifications={certifications || []}
-            />
-          )}
-
-        {sections &&
-          sections.find(
-            (section) => section.name === "Contact Section" && section.isVisible
-          ) && <Contact contact={contacts || []} links={links || []} />}
+        {sections && shouldRenderSection("Hero Section") && (
+          <Hero hero={hero || []} />
+        )}
+        {sections && shouldRenderSection("About Section") && (
+          <About about={about || []} skills={skills || []} />
+        )}
+        {sections && shouldRenderSection("Services Section") && (
+          <Services
+            title="Services"
+            subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+            services={services || []}
+          />
+        )}
+        {sections && shouldRenderSection("Counter Section") && (
+          <Counter counts={counts || []} />
+        )}
+        {sections && shouldRenderSection("Portfolio Section") && (
+          <Portfolio
+            title="Portfolio"
+            subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+            works={works || []}
+          />
+        )}
+        {sections && shouldRenderSection("Testimonial Section") && (
+          <Testimonial testimonials={testimonials || []} className="mt-5" />
+        )}
+        {sections && shouldRenderSection("Publications Section") && (
+          <Publications publications={publications || []} />
+        )}
+        {sections && shouldRenderSection("Certifications Section") && (
+          <Certifications
+            title="Certifications"
+            subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+            certifications={certifications || []}
+          />
+        )}
+        {sections && shouldRenderSection("Contact Section") && (
+          <Contact contact={contacts || []} links={links || []} />
+        )}
       </main>
       {/* End #main */}
     </>
