@@ -33,7 +33,9 @@ const Home = () => {
   const { data: contacts } = useFetch(`${API_URL}/api/contact`);
   const { data: links } = useFetch(`${API_URL}/api/social`);
 
-  const { sections } = useSectionVisibility();
+  // const { sections } = useSectionVisibility() || { sections: [] }; // Default to empty array
+  const { sections = [] } = useSectionVisibility();
+
   // console.log("section in home:", sectionData);
   if (isPending) {
     return <Loading />;
@@ -46,64 +48,77 @@ const Home = () => {
   return (
     <>
       <main id="main">
-        {sections.find(
-          (section) => section.name === "Hero Section" && section.isVisible
-        ) && <Hero hero={hero || []} />}
+        {sections &&
+          sections.find(
+            (section) => section.name === "Hero Section" && section.isVisible
+          ) && <Hero hero={hero || []} />}
         {/* <Hero hero={hero || []} /> */}
 
-        {sections.find(
-          (section) => section.name === "About Section" && section.isVisible
-        ) && <About about={about || []} skills={skills || []} />}
+        {sections &&
+          sections.find(
+            (section) => section.name === "About Section" && section.isVisible
+          ) && <About about={about || []} skills={skills || []} />}
 
-        {sections.find(
-          (section) => section.name === "Services Section" && section.isVisible
-        ) && (
-          <Services
-            title="Services"
-            subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-            services={services || []}
-          />
-        )}
+        {sections &&
+          sections.find(
+            (section) =>
+              section.name === "Services Section" && section.isVisible
+          ) && (
+            <Services
+              title="Services"
+              subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+              services={services || []}
+            />
+          )}
 
-        {sections.find(
-          (section) => section.name === "Counter Section" && section.isVisible
-        ) && <Counter counts={counts || []} />}
+        {sections &&
+          sections.find(
+            (section) => section.name === "Counter Section" && section.isVisible
+          ) && <Counter counts={counts || []} />}
 
-        {sections.find(
-          (section) => section.name === "Portfolio Section" && section.isVisible
-        ) && (
-          <Portfolio
-            title="Portfolio"
-            subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-            works={works || []}
-          />
-        )}
+        {sections &&
+          sections.find(
+            (section) =>
+              section.name === "Portfolio Section" && section.isVisible
+          ) && (
+            <Portfolio
+              title="Portfolio"
+              subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+              works={works || []}
+            />
+          )}
 
-        {sections.find(
-          (section) =>
-            section.name === "Testimonial Section" && section.isVisible
-        ) && <Testimonial testimonials={testimonials || []} className="mt-5" />}
+        {sections &&
+          sections.find(
+            (section) =>
+              section.name === "Testimonial Section" && section.isVisible
+          ) && (
+            <Testimonial testimonials={testimonials || []} className="mt-5" />
+          )}
 
         {/* <Blog title="Blogs" subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />*/}
-        {sections.find(
-          (section) =>
-            section.name === "Publications Section" && section.isVisible
-        ) && <Publications publications={publications || []} />}
+        {sections &&
+          sections.find(
+            (section) =>
+              section.name === "Publications Section" && section.isVisible
+          ) && <Publications publications={publications || []} />}
 
-        {sections.find(
-          (section) =>
-            section.name === "Certifications Section" && section.isVisible
-        ) && (
-          <Certifications
-            title="Certifications"
-            subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-            certifications={certifications || []}
-          />
-        )}
+        {sections &&
+          sections.find(
+            (section) =>
+              section.name === "Certifications Section" && section.isVisible
+          ) && (
+            <Certifications
+              title="Certifications"
+              subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+              certifications={certifications || []}
+            />
+          )}
 
-        {sections.find(
-          (section) => section.name === "Contact Section" && section.isVisible
-        ) && <Contact contact={contacts || []} links={links || []} />}
+        {sections &&
+          sections.find(
+            (section) => section.name === "Contact Section" && section.isVisible
+          ) && <Contact contact={contacts || []} links={links || []} />}
       </main>
       {/* End #main */}
     </>

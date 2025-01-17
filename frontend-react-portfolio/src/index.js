@@ -6,6 +6,7 @@ import { HashRouter } from "react-router-dom";
 import App from "./App";
 import { AuthProvider } from "./CMSAdmin/Auth/AuthContext";
 import { SectionVisibilityProvider } from "./CMSAdmin/SectionVisibilityContext/SectionVisibilityContext";
+import { FetchCacheProvider } from "./Components/Context/FetchCacheContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -13,9 +14,11 @@ root.render(
     {/* Authentication Context for managing user authentication */}
     <AuthProvider>
       {/* Section Visibility Context for dynamic section rendering */}
-      <SectionVisibilityProvider>
-        <App />
-      </SectionVisibilityProvider>
+      <FetchCacheProvider>
+        <SectionVisibilityProvider>
+          <App />
+        </SectionVisibilityProvider>
+      </FetchCacheProvider>
     </AuthProvider>
   </HashRouter>
 );
