@@ -39,10 +39,15 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", authenticateJWT, async (req, res) => {
   // console.log("Inside post function");
+  // Find the current maximum order in the collection
+  const lastSection = await Skills_Model.findOne().sort({ order: -1 });
 
+  // Calculate the next order value
+  const newOrder = lastSection ? lastSection.order + 1 : 0;
   const data = new Skills_Model({
     name: req.body.name,
     proficiency: req.body.proficiency,
+    order: newOrder,
   });
 
   try {
