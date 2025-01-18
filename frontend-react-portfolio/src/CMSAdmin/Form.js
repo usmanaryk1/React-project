@@ -19,8 +19,8 @@ import CVUploader from "./UploadCV/CVUploaderForm";
 import TermsAndConditionsEdit from "./TermsAndConditionsEdit/TermsAndConditionsEdit";
 import AddPortfolioDetails from "./PortfolioDetails/AddPortfolioDetails";
 import SkillsEdit from "./Skills/SkillsEdit";
-import ManageSectionsVisibility from "./ManageSectionsVisibility/ManageSectionsVisibility";
 import PublicationsEdit from "./PublicationsEdit/PublicationsEdit";
+import ManageSections from "./ManageSections/ManageSections";
 
 const Form = () => {
   const { isAuthenticated } = useAuth();
@@ -82,7 +82,7 @@ const Form = () => {
           />
           <PrivateRoute
             path={`/form/manage-sections`}
-            component={ManageSectionsVisibility}
+            component={ManageSections}
             isAuthenticated={isAuthenticated}
           />
           <PrivateRoute
