@@ -2,7 +2,7 @@ const express = require("express");
 const SectionVisibility_Model = require("../models/sectionVisibilitySchema ");
 const authenticateJWT = require("../middleware/authmiddleware");
 const router = express.Router();
-
+const { ObjectId } = require("mongodb");
 // GET ALL SECTIONS
 router.get("/", async (req, res) => {
   try {
@@ -57,7 +57,7 @@ router.patch("/reorder", authenticateJWT, async (req, res) => {
 
     const bulkOps = reorderedItems.map((section) => ({
       updateOne: {
-        filter: { _id: section._id },
+        filter: { _id: new ObjectId(section._id) },
         update: { $set: { order: section.order } }, // Use the order field from client
       },
     }));
@@ -65,7 +65,9 @@ router.patch("/reorder", authenticateJWT, async (req, res) => {
     const result = await SectionVisibility_Model.bulkWrite(bulkOps);
     // console.log("BulkWrite Result:", result);
 
-    res.status(200).json({ message: "Sections reordered successfully" });
+    res
+      .status(200)
+      .json({ message: "Sections reordered successfully", data: result });
   } catch (error) {
     console.error("Error reordering Sections:", error.stack || error.message);
     res.status(400).json({ message: "Failed to reorder Sections" });
