@@ -4,7 +4,8 @@ import { useAuth } from "../Auth/AuthContext";
 
 const ItemType = "SECTION_ITEM";
 const DraggableSections = memo(
-  ({ section, index, sections, moveSection, toggleVisibility }) => {
+  ({ section, index, moveSection, toggleVisibility }) => {
+    // console.log("sections in draggable section", sections);
     const { isAdminPage, isAuthenticated } = useAuth();
 
     const [{ isDragging }, drag] = useDrag({
@@ -17,11 +18,7 @@ const DraggableSections = memo(
       accept: ItemType,
       hover: (draggedItem) => {
         if (draggedItem.index !== index) {
-          const reordered = [...sections];
-          const [movedItem] = reordered.splice(draggedItem.index, 1);
-          reordered.splice(index, 0, movedItem);
-
-          moveSection(reordered); // Notify parent of the new order
+          moveSection(draggedItem.index, index);
           draggedItem.index = index;
         }
       },

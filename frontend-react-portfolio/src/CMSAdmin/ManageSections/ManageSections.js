@@ -19,7 +19,8 @@ const ManageSections = () => {
     moveSection,
     saveOrder,
   } = useSectionManager();
-  console.log("sections", sections);
+  // console.log("sections", sections);
+  // console.log("updatedSections", updatedSections);
 
   if (isPending) {
     return <Loading />;
@@ -28,7 +29,8 @@ const ManageSections = () => {
   if (error) {
     return <Error message={error} />;
   }
-  const isTouchDevice = "ontouchstart" in window; // Simple check for touch support
+  const isTouchDevice =
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
   return (
     <>
       <DndProvider backend={isTouchDevice ? TouchBackend : HTML5Backend}>
@@ -55,7 +57,6 @@ const ManageSections = () => {
                     key={section._id}
                     section={section}
                     index={index}
-                    sections={updatedSections}
                     moveSection={moveSection}
                     toggleVisibility={toggleVisibility}
                   />

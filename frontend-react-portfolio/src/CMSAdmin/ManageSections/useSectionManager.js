@@ -15,7 +15,7 @@ export const useSectionManager = () => {
   // State for tracking reordered sections
   const [updatedSections, setUpdatedSections] = useState([]);
   const [isOrderChanged, setIsOrderChanged] = useState(false); // Button state
-  const SectionsService = ApiService();
+  const SectionsService = ApiService("api/sectionVisibility");
 
   useEffect(() => {
     setUpdatedSections(sections || []);
@@ -28,7 +28,7 @@ export const useSectionManager = () => {
         : section
     );
 
-    setSections(updated);
+    setUpdatedSections(updated);
     // Persist to backend
     try {
       const response = await fetch(`${API_URL}/api/sectionVisibility`, {
@@ -56,26 +56,37 @@ export const useSectionManager = () => {
   };
 
   const moveSection = (dragIndex, hoverIndex) => {
-    const draggedSection = updatedSections[dragIndex];
     const reorderedSections = [...updatedSections];
-    reorderedSections.splice(dragIndex, 1);
+    const [draggedSection] = reorderedSections.splice(dragIndex, 1);
     reorderedSections.splice(hoverIndex, 0, draggedSection);
-
+    // console.log("reordered sections", reorderedSections);
     setUpdatedSections(reorderedSections);
     setIsOrderChanged(true);
   };
 
   const saveOrder = async () => {
     try {
-      await SectionsService.reorderItems(reorderedSections);
-      if (!response.ok) {
-        toast.error("Failed to update the order of sections.");
-      } else {
+      setIsOrderChanged(true);
+
+      // console.log("updatedSections in hook", updatedSections);
+      // Make API call with the final reordered list
+
+      const reorderedItems = updatedSections.map((section, index) => ({
+        _id: section._id,
+        order: index, // Use the correct order here
+      }));
+      // console.log("Final Payload to Save:", reorderedItems);
+      const response = await SectionsService.reorderItems(reorderedItems);
+
+      if (response.message === "Sections reordered successfully") {
         toast.success("Order updated successfully.");
         setSections(updatedSections);
         setIsOrderChanged(false);
+      } else {
+        throw new Error(response.message || "Failed to save order.");
       }
     } catch (error) {
+      setIsOrderChanged(false);
       console.error("Order Updated Failed:", error);
       toast.error("An error occurred while updating the order.");
     }
