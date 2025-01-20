@@ -10,6 +10,9 @@ const sectionVisibilitySchema = new Schema({
     type: Boolean,
     required: true,
   },
+  order: {
+    type: Number,
+  },
 });
 
 //two argument need in schema 1st one is name  and 2nd one is Schema

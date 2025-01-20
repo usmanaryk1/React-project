@@ -2,7 +2,7 @@ const express = require("express");
 const SectionVisibility_Model = require("../models/sectionVisibilitySchema ");
 const authenticateJWT = require("../middleware/authmiddleware");
 const router = express.Router();
-const { ObjectId } = require("mongodb");
+
 // GET ALL SECTIONS
 router.get("/", async (req, res) => {
   try {
@@ -46,8 +46,11 @@ router.post("/", authenticateJWT, async (req, res) => {
 router.patch("/reorder", authenticateJWT, async (req, res) => {
   try {
     const { reorderedItems } = req.body; // [{ _id, order }, ...]
-
-    if (!Array.isArray(reorderedItems)) {
+    console.log("reordered items:", reorderedItems);
+    if (
+      !Array.isArray(reorderedItems) ||
+      reorderedItems.some((item) => !item._id || item.order === undefined)
+    ) {
       return res
         .status(400)
         .json({ message: "Invalid reordered items format" });
@@ -57,7 +60,7 @@ router.patch("/reorder", authenticateJWT, async (req, res) => {
 
     const bulkOps = reorderedItems.map((section) => ({
       updateOne: {
-        filter: { _id: new ObjectId(section._id) },
+        filter: { _id: section._id },
         update: { $set: { order: section.order } }, // Use the order field from client
       },
     }));
