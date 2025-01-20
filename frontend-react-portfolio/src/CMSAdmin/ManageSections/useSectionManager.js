@@ -15,6 +15,7 @@ export const useSectionManager = () => {
   // State for tracking reordered sections
   const [updatedSections, setUpdatedSections] = useState([]);
   const [isOrderChanged, setIsOrderChanged] = useState(false); // Button state
+  const [isUpdating, setIsUpdating] = useState(false);
   const SectionsService = ApiService("api/sectionVisibility");
 
   useEffect(() => {
@@ -67,8 +68,7 @@ export const useSectionManager = () => {
 
   const saveOrder = async () => {
     try {
-      setIsOrderChanged(true);
-
+      setIsUpdating(true);
       // console.log("updatedSections in hook", updatedSections);
       // Make API call with the final reordered list
 
@@ -82,6 +82,7 @@ export const useSectionManager = () => {
       if (response.message === "Sections reordered successfully") {
         toast.success("Order updated successfully.");
         setSections(updatedSections);
+        setIsUpdating(false);
         setIsOrderChanged(false);
       } else {
         throw new Error(response.message || "Failed to save order.");
@@ -96,6 +97,7 @@ export const useSectionManager = () => {
     sections,
     updatedSections,
     isOrderChanged,
+    isUpdating,
     isPending,
     error,
     toggleVisibility,

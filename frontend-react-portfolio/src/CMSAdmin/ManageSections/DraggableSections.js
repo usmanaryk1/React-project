@@ -32,16 +32,16 @@ const DraggableSections = memo(
           className="row section-item"
           style={{
             opacity: isDragging ? 0.5 : 1,
-            cursor: isAdminPage && isAuthenticated ? "grab" : "default",
+            cursor: "grab",
           }}
         >
-          <div className="col-8">
+          <div className="col-6">
             <div className="section-name">
               <span>{section.name}</span>
             </div>
           </div>
 
-          <div className="col-4">
+          <div className="col-6">
             <div className="toggle-container">
               <button
                 onClick={() => toggleVisibility(section.name)}

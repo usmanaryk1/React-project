@@ -13,6 +13,7 @@ const ManageSections = () => {
     sections,
     updatedSections,
     isOrderChanged,
+    isUpdating,
     isPending,
     error,
     toggleVisibility,
@@ -44,13 +45,16 @@ const ManageSections = () => {
                   </div>
                 </div>
               </div>
-              <button
-                className="update-order-btn"
-                onClick={saveOrder}
-                disabled={!isOrderChanged}
-              >
-                Update Order
-              </button>
+              <div className="d-flex justify-content-end">
+                <button
+                  className="update-order-btn"
+                  onClick={saveOrder}
+                  disabled={!isOrderChanged || isUpdating}
+                >
+                  {isUpdating ? "Updating..." : "Update Order"}
+                </button>
+              </div>
+
               {updatedSections && updatedSections.length > 0 ? (
                 updatedSections.map((section, index) => (
                   <DraggableSections

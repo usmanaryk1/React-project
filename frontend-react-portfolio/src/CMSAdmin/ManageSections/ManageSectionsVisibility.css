@@ -44,9 +44,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 0;
-  border-bottom: 1px solid #f5f5f5;
+  padding: 12px 8px;
   transition: background-color 0.2s ease;
+  border: 1px dashed #8080806b;
+  margin-bottom: 8px;
 }
 
 .section-item:hover {
@@ -138,6 +139,24 @@
   background-color: #f5f5f5;
   border-color: #cccccc;
   color: #555555;
+}
+.section-border {
+  margin-bottom: 0.3rem;
+}
+.manage-sections-container .update-order-btn {
+  background-color: #128f32;
+  color: white;
+  transition: all 0.3s ease-in-out;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 8px;
+}
+
+.manage-sections-container .update-order-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* Responsive Adjustments */
