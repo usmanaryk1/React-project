@@ -1,8 +1,6 @@
 import { useMemo } from "react";
 import About from "./About";
 import Certifications from "./Certifications";
-// import Blog from "./Blog";
-// import BlogDetails from "./BlogDetails";
 import Contact from "./Contact/Contact";
 import Counter from "./Counter";
 import Error from "./Error/Error";
@@ -21,7 +19,7 @@ const Home = () => {
     []
   );
 
-  const { data: hero, isPending, error } = useFetch(`${API_URL}/api/hero`);
+  const { data: hero } = useFetch(`${API_URL}/api/hero`);
   const { data: about } = useFetch(`${API_URL}/api/about`);
   const { data: skills } = useFetch(`${API_URL}/api/skills`);
   const { data: services } = useFetch(`${API_URL}/api/services`);
@@ -32,9 +30,14 @@ const Home = () => {
   const { data: certifications } = useFetch(`${API_URL}/api/certifications`);
   const { data: contacts } = useFetch(`${API_URL}/api/contact`);
   const { data: links } = useFetch(`${API_URL}/api/social`);
-  const { sections = [] } = useSectionVisibility();
-
-  // console.log("section in home:", sectionData);
+  const { sections = [], isPending, error } = useSectionVisibility();
+  // Sort and filter sections based on visibility and order
+  const visibleSections = useMemo(() => {
+    return (sections || []) // Ensure sections is an array
+      .filter((section) => section.isVisible) // Filter out invisible sections
+      .sort((a, b) => a.order - b.order); // Sort by order
+  }, [sections]);
+  // Check for loading and error states
   if (isPending) {
     return <Loading />;
   }
@@ -43,52 +46,77 @@ const Home = () => {
     return <Error message={error} />;
   }
 
-  // Helper function to check if a section should be rendered
-  const shouldRenderSection = (name) =>
-    sections.find((section) => section.name === name && section.isVisible);
-
   return (
     <>
       <main id="main">
-        {sections && shouldRenderSection("Hero Section") && (
-          <Hero hero={hero || []} />
-        )}
-        {sections && shouldRenderSection("About Section") && (
-          <About about={about || []} skills={skills || []} />
-        )}
-        {sections && shouldRenderSection("Services Section") && (
-          <Services
-            title="Services"
-            subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-            services={services || []}
-          />
-        )}
-        {sections && shouldRenderSection("Counter Section") && (
-          <Counter counts={counts || []} />
-        )}
-        {sections && shouldRenderSection("Portfolio Section") && (
-          <Portfolio
-            title="Portfolio"
-            subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-            works={works || []}
-          />
-        )}
-        {sections && shouldRenderSection("Testimonial Section") && (
-          <Testimonial testimonials={testimonials || []} className="mt-5" />
-        )}
-        {sections && shouldRenderSection("Publications Section") && (
-          <Publications publications={publications || []} />
-        )}
-        {sections && shouldRenderSection("Certifications Section") && (
-          <Certifications
-            title="Certifications"
-            subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-            certifications={certifications || []}
-          />
-        )}
-        {sections && shouldRenderSection("Contact Section") && (
-          <Contact contact={contacts || []} links={links || []} />
-        )}
+        {visibleSections.map((section) => {
+          switch (section.name) {
+            case "Hero Section":
+              return <Hero key={section._id} hero={hero || []} />;
+            case "About Section":
+              return (
+                <About
+                  key={section._id}
+                  about={about || []}
+                  skills={skills || []}
+                />
+              );
+            case "Services Section":
+              return (
+                <Services
+                  key={section._id}
+                  title="Services"
+                  subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+                  services={services || []}
+                />
+              );
+            case "Counter Section":
+              return <Counter key={section._id} counts={counts || []} />;
+            case "Portfolio Section":
+              return (
+                <Portfolio
+                  key={section._id}
+                  title="Portfolio"
+                  subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+                  works={works || []}
+                />
+              );
+            case "Testimonial Section":
+              return (
+                <Testimonial
+                  key={section._id}
+                  testimonials={testimonials || []}
+                  className="mt-5"
+                />
+              );
+            case "Publications Section":
+              return (
+                <Publications
+                  key={section._id}
+                  publications={publications || []}
+                />
+              );
+            case "Certifications Section":
+              return (
+                <Certifications
+                  key={section._id}
+                  title="Certifications"
+                  subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+                  certifications={certifications || []}
+                />
+              );
+            case "Contact Section":
+              return (
+                <Contact
+                  key={section._id}
+                  contact={contacts || []}
+                  links={links || []}
+                />
+              );
+            default:
+              return null; // In case of an unknown section name
+          }
+        })}
       </main>
       {/* End #main */}
     </>

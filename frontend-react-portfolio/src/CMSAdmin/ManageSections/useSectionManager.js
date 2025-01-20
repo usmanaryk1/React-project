@@ -29,6 +29,7 @@ export const useSectionManager = () => {
     );
 
     setUpdatedSections(updated);
+    setSections(updated); // Update context state
     // Persist to backend
     try {
       const response = await fetch(`${API_URL}/api/sectionVisibility`, {
