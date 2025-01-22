@@ -54,10 +54,6 @@
   background-color: #f9f9f9;
 }
 
-.section-item:last-child {
-  border-bottom: none;
-}
-
 /* Section Name Styling */
 .section-name {
   flex: 1;

@@ -9,7 +9,8 @@ export const useSectionManager = () => {
     []
   );
 
-  const { sections, setSections, isPending, error } = useSectionVisibility();
+  const { sections, setSections, isPending, error, refetch } =
+    useSectionVisibility();
   const token = localStorage.getItem("token");
 
   // State for tracking reordered sections
@@ -82,6 +83,7 @@ export const useSectionManager = () => {
       if (response.message === "Sections reordered successfully") {
         toast.success("Order updated successfully.");
         setSections(updatedSections);
+        refetch();
         setIsUpdating(false);
         setIsOrderChanged(false);
       } else {

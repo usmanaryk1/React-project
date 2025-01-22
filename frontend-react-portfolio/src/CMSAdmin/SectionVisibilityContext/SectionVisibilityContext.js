@@ -14,11 +14,12 @@ export const SectionVisibilityProvider = ({ children }) => {
     setData: setSections,
     isPending,
     error,
+    refetch,
   } = useFetch(`${API_URL}/api/sectionVisibility`);
 
   return (
     <SectionVisibilityContext.Provider
-      value={{ sections, setSections, isPending, error }}
+      value={{ sections, setSections, isPending, error, refetch }}
     >
       {children}
     </SectionVisibilityContext.Provider>
