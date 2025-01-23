@@ -66,7 +66,7 @@ const Home = () => {
                 <Services
                   key={section._id}
                   title="Services"
-                  subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+                  subtitle="Delivering solutions that exceed expectations."
                   services={services || []}
                 />
               );
@@ -77,7 +77,7 @@ const Home = () => {
                 <Portfolio
                   key={section._id}
                   title="Portfolio"
-                  subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+                  subtitle="We turn ideas into impactful results."
                   works={works || []}
                 />
               );
@@ -101,7 +101,7 @@ const Home = () => {
                 <Certifications
                   key={section._id}
                   title="Certifications"
-                  subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+                  subtitle="Showcasing milestones of excellence"
                   certifications={certifications || []}
                 />
               );
