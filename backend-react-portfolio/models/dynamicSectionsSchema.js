@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const publicationsSchema = new Schema({
+const dynamicSectionsSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -12,5 +12,8 @@ const publicationsSchema = new Schema({
   },
 });
 
-const Publications_Model = mongoose.model("publications", publicationsSchema);
-module.exports = Publications_Model;
+const DynamicSectionsModel = mongoose.model(
+  "DynamicSections",
+  dynamicSectionsSchema
+);
+module.exports = DynamicSectionsModel;

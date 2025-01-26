@@ -1,17 +1,17 @@
 const express = require("express");
-const Publications_Model = require("../models/publicationsSchema");
 const authenticateJWT = require("../middleware/authmiddleware");
+const DynamicSectionsModel = require("../models/dynamicSectionsSchema");
 const router = express.Router();
 
 // GET ALL SECTIONS
 router.get("/", async (req, res) => {
   try {
-    const publications = await Publications_Model.find();
+    const dynamicSections = await DynamicSectionsModel.find();
     // console.log("sections", sections);
-    if (publications.length === 0) {
+    if (dynamicSections.length === 0) {
       return res.status(404).send("Information Not Found");
     }
-    res.status(200).json(publications);
+    res.status(200).json(dynamicSections);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const section = await Publications_Model.findById(req.params.id);
+    const section = await DynamicSectionsModel.findById(req.params.id);
     if (!section) {
       return res.status(404).send("No Information Found");
     }
@@ -36,7 +36,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", authenticateJWT, async (req, res) => {
   try {
-    const newSection = new Publications_Model(req.body);
+    const newSection = new DynamicSectionsModel(req.body);
     const data = await newSection.save();
     res.status(200).json(data);
   } catch (error) {
@@ -49,7 +49,7 @@ router.post("/", authenticateJWT, async (req, res) => {
 
 router.put("/:id", authenticateJWT, async (req, res) => {
   try {
-    const updatedSection = await Publications_Model.findByIdAndUpdate(
+    const updatedSection = await DynamicSectionsModel.findByIdAndUpdate(
       req.params.id,
       req.body,
       {
@@ -68,7 +68,7 @@ router.put("/:id", authenticateJWT, async (req, res) => {
 
 router.delete("/:id", authenticateJWT, async (req, res) => {
   try {
-    const deletedSection = await Publications_Model.findByIdAndDelete(
+    const deletedSection = await DynamicSectionsModel.findByIdAndDelete(
       req.params.id
     );
     if (!deletedSection) {
