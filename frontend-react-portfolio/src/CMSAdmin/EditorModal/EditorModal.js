@@ -3,16 +3,23 @@ import "./EditorModal.css";
 import { useForm, Controller } from "react-hook-form";
 import ValidationSchema from "./ValidationSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
 
 const EditorModal = ({ isOpen, onClose, onSubmit, initialData }) => {
   const {
     handleSubmit,
     control,
     formState: { errors },
+    reset,
   } = useForm({
-    defaultValues: initialData,
+    // defaultValues: initialData || { title: "", content: "" }, // Provide fallback
     resolver: yupResolver(ValidationSchema),
   });
+  console.log("Inital data in editor", initialData);
+  // Use useEffect to reset the form when initialData changes
+  useEffect(() => {
+    reset(initialData); // Reset the form with the new initial data
+  }, [initialData, reset]);
 
   if (!isOpen) return null;
 
@@ -43,13 +50,6 @@ const EditorModal = ({ isOpen, onClose, onSubmit, initialData }) => {
           {errors.title && (
             <p className="error-message">{errors.title.message}</p>
           )}
-          {/* <input
-          type="text"
-          placeholder="Enter title"
-          value={formData.title}
-          className="modal-title-input"
-          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-        /> */}
 
           {/* Description Field */}
           <label htmlFor="description" className="editor-label">
@@ -59,18 +59,17 @@ const EditorModal = ({ isOpen, onClose, onSubmit, initialData }) => {
             name="content"
             control={control}
             render={({ field }) => (
-              <JoditEditor {...field} value={field.value || ""} />
+              <JoditEditor
+                {...field}
+                value={field.value || ""}
+                onChange={(newContent) => field.onChange(newContent)} // Update the form state on change
+              />
             )}
           />
           {errors.content && (
             <p className="error-message mt-2">{errors.content.message}</p>
           )}
-          {/* <JoditEditor
-          value={formData.content}
-          onChange={(newContent) =>
-            setFormData({ ...formData, content: newContent })
-          }
-        /> */}
+
           <div className="modal-actions">
             <button
               // onClick={() => onSubmit(formData)}

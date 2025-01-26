@@ -21,6 +21,7 @@ const Header = () => {
       setNavLinks([
         { to: "/form/dashboard", label: "Dashboard" },
         { to: "/form/manage-sections", label: "Manage Sections" },
+        { to: "/form/publications-form", label: "Add More Sections" },
         { to: "/form/hero-form", label: "Home" },
         { to: "/form/about-form", label: "About" },
         { to: "/form/skills-form", label: "Skills" },
@@ -28,7 +29,6 @@ const Header = () => {
         { to: "/form/counter-form", label: "Counter" },
         { to: "/form/portfolio-form", label: "Works" },
         { to: "/form/testimonial-form", label: "Testimonial" },
-        { to: "/form/publications-form", label: "Publications" },
         { to: "/form/certification-form", label: "Certification" },
         { to: "/form/contact-form", label: "Contact" },
         { to: "/form/social-form", label: "Social Links" },

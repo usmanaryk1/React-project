@@ -1,42 +1,47 @@
-import { useMemo, useState, useCallback } from "react";
-import Publications from "../../Components/Publications/Publications";
-import "./PublicationsEdit.css";
+import { useMemo, useState, useCallback, useEffect } from "react";
+import "./DynamicSectionsEdit.css";
 import useFetch from "../../Components/useFetch";
 import ApiService from "../ApisService";
 import EditorModal from "../EditorModal/EditorModal";
 import { toast } from "react-toastify";
 import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
+import DynamicSections from "../../Components/DynamicSections/DynamicSections";
 
-const PublicationsEdit = () => {
+const DynamicSectionsEdit = () => {
   const API_URL = useMemo(
     () => process.env.REACT_APP_BACKEND_URL || "http://localhost:8000",
     []
   );
 
   const {
-    data: publications,
-    setData: setPublications,
+    data: dynamicSections,
+    setData: setDynamicSections,
     isPending,
     error,
-  } = useFetch(`${API_URL}/api/publications`);
+  } = useFetch(`${API_URL}/api/dynamicSections`);
 
-  // console.log("publications in form", publications);
+  console.log("dynamicSections in form", dynamicSections);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentPublications, setCurrentPublications] = useState(null);
+  const [currentDynamicSection, setCurrentDynamicSection] = useState(null);
 
-  const publicationsService = ApiService("api/publications");
+  const DynamicSectionService = ApiService("api/dynamicSections");
+
+  useEffect(() => {
+    console.log("currentDynamicSection updated:", currentDynamicSection);
+  }, [currentDynamicSection]);
 
   const handleAddClick = useCallback(() => {
     // console.log("Add button clicked");
-    setCurrentPublications(null);
+    setCurrentDynamicSection(null);
     setIsModalOpen(true);
   }, []);
 
-  const handleEditClick = useCallback((publication) => {
-    // console.log("Edit button clicked", publication);
-    setCurrentPublications(publication);
+  const handleEditClick = useCallback((dynamicSection) => {
+    console.log("Edit button clicked", dynamicSection);
+    setCurrentDynamicSection(dynamicSection);
+    console.log("currentPubllications", currentDynamicSection);
     setIsModalOpen(true);
   }, []);
 
@@ -48,14 +53,13 @@ const PublicationsEdit = () => {
         toast.error("Please fill out all fields before submitting.");
         return;
       }
-      if (currentPublications) {
-        console.log("currentPublications", currentPublications);
-        publicationsService
-          .updateItem(currentPublications._id, data)
+      if (currentDynamicSection) {
+        console.log("currentDynamicSection", currentDynamicSection);
+        DynamicSectionService.updateItem(currentDynamicSection._id, data)
           .then((updatedData) => {
-            setPublications((prevPublication) =>
-              prevPublication.map((publication) =>
-                publication._id === updatedData._id ? updatedData : publication
+            setDynamicSections((prevSection) =>
+              prevSection.map((section) =>
+                section._id === updatedData._id ? updatedData : section
               )
             );
             toast.success("Data updated successfully");
@@ -68,11 +72,10 @@ const PublicationsEdit = () => {
             );
           });
       } else {
-        publicationsService
-          .addItem(data)
+        DynamicSectionService.addItem(data)
           .then((addedData) => {
             console.log("addedData", addedData);
-            setPublications((prevData) => [...prevData, addedData]);
+            setDynamicSections((prevData) => [...prevData, addedData]);
             toast.success("Data added successfully");
           })
           .catch((err) => {
@@ -85,16 +88,16 @@ const PublicationsEdit = () => {
       }
       setIsModalOpen(false);
     },
-    [currentPublications, publicationsService, setPublications]
+    [currentDynamicSection, DynamicSectionService, setDynamicSections]
   );
 
   const handleDelete = useCallback(
     (id) => {
       // console.log("delete button clicked");
       try {
-        publicationsService.deleteItem(id).then(() => {
-          setPublications((prevPub) =>
-            prevPub.filter((publication) => publication._id !== id)
+        DynamicSectionService.deleteItem(id).then(() => {
+          setDynamicSections((prevSec) =>
+            prevSec.filter((section) => section._id !== id)
           );
           toast.success("Data Deleted successfully");
         });
@@ -103,7 +106,7 @@ const PublicationsEdit = () => {
         toast.error("Failed to Delete the Data", error.message);
       }
     },
-    [publicationsService, setPublications]
+    [DynamicSectionService, setDynamicSections]
   );
 
   if (isPending) return <Loading />;
@@ -112,14 +115,14 @@ const PublicationsEdit = () => {
 
   return (
     <>
-      <div id="publications-form">
+      <div id="dynamicSections-form">
         <div className="d-flex justify-content-end">
           <button className="addSection-btn" onClick={handleAddClick}>
             Add New Section
           </button>
         </div>
-        <Publications
-          publications={publications}
+        <DynamicSections
+          dynamicSections={dynamicSections}
           onEditClick={handleEditClick}
           onDelete={handleDelete}
         />
@@ -127,11 +130,11 @@ const PublicationsEdit = () => {
           isOpen={isModalOpen}
           onSubmit={handleModalSubmit}
           onClose={() => setIsModalOpen(false)}
-          initialData={currentPublications ?? { title: "", content: "" }}
+          initialData={currentDynamicSection ?? { title: "", content: "" }}
         />
       </div>
     </>
   );
 };
 
-export default PublicationsEdit;
+export default DynamicSectionsEdit;

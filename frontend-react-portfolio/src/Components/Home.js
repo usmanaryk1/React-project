@@ -11,7 +11,7 @@ import Services from "./Services";
 import Testimonial from "./Testimonial";
 import useFetch from "./useFetch";
 import { useSectionVisibility } from "../CMSAdmin/SectionVisibilityContext/SectionVisibilityContext";
-import Publications from "./Publications/Publications";
+import DynamicSections from "./DynamicSections/DynamicSections";
 
 const Home = () => {
   const API_URL = useMemo(
@@ -26,7 +26,7 @@ const Home = () => {
   const { data: counts } = useFetch(`${API_URL}/api/counts`);
   const { data: works } = useFetch(`${API_URL}/api/works`);
   const { data: testimonials } = useFetch(`${API_URL}/api/testimonials`);
-  const { data: publications } = useFetch(`${API_URL}/api/publications`);
+  const { data: dynamicSections } = useFetch(`${API_URL}/api/dynamicSections`);
   const { data: certifications } = useFetch(`${API_URL}/api/certifications`);
   const { data: contacts } = useFetch(`${API_URL}/api/contact`);
   const { data: links } = useFetch(`${API_URL}/api/social`);
@@ -89,11 +89,11 @@ const Home = () => {
                   className="mt-5"
                 />
               );
-            case "Publications Section":
+            case "DynamicSections":
               return (
-                <Publications
+                <DynamicSections
                   key={section._id}
-                  publications={publications || []}
+                  dynamicSections={dynamicSections || []}
                 />
               );
             case "Certifications Section":

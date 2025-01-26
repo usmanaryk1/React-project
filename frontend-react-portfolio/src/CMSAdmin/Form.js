@@ -19,8 +19,8 @@ import CVUploader from "./UploadCV/CVUploaderForm";
 import TermsAndConditionsEdit from "./TermsAndConditionsEdit/TermsAndConditionsEdit";
 import AddPortfolioDetails from "./PortfolioDetails/AddPortfolioDetails";
 import SkillsEdit from "./Skills/SkillsEdit";
-import PublicationsEdit from "./PublicationsEdit/PublicationsEdit";
 import ManageSections from "./ManageSections/ManageSections";
+import DynamicSectionsEdit from "./DynamicSectionsEdit/DynamicSectionsEdit";
 
 const Form = () => {
   const { isAuthenticated } = useAuth();
@@ -86,6 +86,11 @@ const Form = () => {
             isAuthenticated={isAuthenticated}
           />
           <PrivateRoute
+            path={`/form/dynamicSections-form`}
+            component={DynamicSectionsEdit}
+            isAuthenticated={isAuthenticated}
+          />
+          <PrivateRoute
             path={`/form/hero-form`}
             component={HeroForm}
             isAuthenticated={isAuthenticated}
@@ -125,11 +130,7 @@ const Form = () => {
             component={AddTestimonialForm}
             isAuthenticated={isAuthenticated}
           />
-          <PrivateRoute
-            path={`/form/publications-form`}
-            component={PublicationsEdit}
-            isAuthenticated={isAuthenticated}
-          />
+
           <PrivateRoute
             path={`/form/certification-form`}
             component={AddCertificationForm}

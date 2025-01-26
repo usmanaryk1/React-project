@@ -1,10 +1,10 @@
 import React from "react";
 import Swal from "sweetalert2";
 import { useAuth } from "../../CMSAdmin/Auth/AuthContext";
-import "./Publications.css";
+import "./DynamicSections.css";
 
-const Publications = ({ publications = [], onEditClick, onDelete }) => {
-  // console.log("publications in home", publications);
+const DynamicSections = ({ dynamicSections = [], onEditClick, onDelete }) => {
+  console.log("dynamicSections in home", dynamicSections);
   const { isAuthenticated, isAdminPage } = useAuth();
   const handleDeleteClick = (sectionId) => {
     Swal.fire({
@@ -23,18 +23,22 @@ const Publications = ({ publications = [], onEditClick, onDelete }) => {
   };
   return (
     <>
-      <section id="section" className="section-mf route">
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <div className="section-container">
-                {publications &&
-                  publications.map((publication) => (
-                    <div key={publication._id}>
+      {dynamicSections &&
+        dynamicSections.map((dynamicSection) => (
+          <section
+            id="section"
+            className="section-mf route"
+            key={dynamicSection._id}
+          >
+            <div className="container">
+              <div className="row">
+                <div className="col-12">
+                  <div className="section-container">
+                    <div>
                       <div className="row">
                         <div className="col-9">
                           <div className="section-title title-box-2 d-flex justify-content-between">
-                            <h5>{publication.title}</h5>
+                            <h5>{dynamicSection.title}</h5>
                           </div>
                         </div>
                         <div className="col-3">
@@ -43,14 +47,14 @@ const Publications = ({ publications = [], onEditClick, onDelete }) => {
                               <div>
                                 <button
                                   className="admin-btn btn btn-primary btn-sm me-1"
-                                  onClick={() => onEditClick(publication)}
+                                  onClick={() => onEditClick(dynamicSection)}
                                 >
                                   <i className="bi bi-pencil" />
                                 </button>
                                 <button
                                   className="admin-btn btn btn-danger btn-sm"
                                   onClick={() =>
-                                    handleDeleteClick(publication._id)
+                                    handleDeleteClick(dynamicSection._id)
                                   }
                                 >
                                   <i className="bi bi-trash" />
@@ -65,20 +69,20 @@ const Publications = ({ publications = [], onEditClick, onDelete }) => {
                           <div
                             className="section-content"
                             dangerouslySetInnerHTML={{
-                              __html: publication.content,
+                              __html: dynamicSection.content,
                             }}
                           ></div>
                         </div>
                       </div>
                     </div>
-                  ))}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        ))}
     </>
   );
 };
 
-export default Publications;
+export default DynamicSections;
