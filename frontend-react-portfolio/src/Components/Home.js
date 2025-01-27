@@ -89,7 +89,7 @@ const Home = () => {
                   className="mt-5"
                 />
               );
-            case "DynamicSections":
+            case "Dynamic Sections":
               return (
                 <DynamicSections
                   key={section._id}
