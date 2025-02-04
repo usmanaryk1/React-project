@@ -13,13 +13,13 @@ const NotFound = () => {
                   <h1>404</h1>
                 </div>
                 <h2>We are sorry, page not found!</h2>
+                <Link to="/">
+                  <i className="bi bi-house-fill"></i> Take to Home
+                </Link>
                 <p className="mb-5">
                   The page you are looking for might have been removed, had its
                   name changed or is temporarily unavailable
                 </p>
-                <Link to="/">
-                  <i className="bi bi-house-fill"></i> Take to Home
-                </Link>
               </div>
             </div>
           </div>
