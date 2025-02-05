@@ -24,12 +24,12 @@ const Footer = () => {
           <div className="row">
             <div className="col-sm-12">
               <div className="copyright-box">
-                <p className="copyright">
-                  © Copyright <strong>PortfolioHub</strong>. All Rights Reserved
-                </p>
                 <div className="credits">
                   Designed by <Link to="/">PortfolioHub</Link>
                 </div>
+                <p className="copyright">
+                  © Copyright <strong>PortfolioHub</strong>. All Rights Reserved
+                </p>
               </div>
             </div>
           </div>
