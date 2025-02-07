@@ -30,9 +30,6 @@ const Footer = () => {
                 <div className="credits">
                   Designed by <Link to="/">PortfolioHub</Link>
                 </div>
-                <div className="credits">
-                  Powered by <Link to="/">web app</Link>
-                </div>
               </div>
             </div>
           </div>
