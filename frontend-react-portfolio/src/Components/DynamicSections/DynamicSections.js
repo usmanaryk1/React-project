@@ -1,11 +1,22 @@
 import React from "react";
 import Swal from "sweetalert2";
-import { useAuth } from "../../CMSAdmin/Auth/AuthContext";
 import "./DynamicSections.css";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { TouchBackend } from "react-dnd-touch-backend";
+import Dynamicitem from "./Dynamicitem";
+import NullData from "../NullData/NullData";
+import { useForm } from "react-hook-form";
 
-const DynamicSections = ({ dynamicSections = [], onEditClick, onDelete }) => {
-  console.log("dynamicSections in home", dynamicSections);
-  const { isAuthenticated, isAdminPage } = useAuth();
+const DynamicSections = ({
+  dynamicSections = [],
+  onEditClick,
+  onDelete,
+  handleReorder,
+}) => {
+  // console.log("dynamicSections in home", dynamicSections);
+  const { reset } = useForm();
+
   const handleDeleteClick = (sectionId) => {
     Swal.fire({
       title: "Are you sure?",
@@ -21,66 +32,27 @@ const DynamicSections = ({ dynamicSections = [], onEditClick, onDelete }) => {
       }
     });
   };
+  const isTouchDevice = "ontouchstart" in window; // Simple check for touch support
+
   return (
     <>
-      {dynamicSections &&
-        dynamicSections.map((dynamicSection) => (
-          <section
-            id="section"
-            className="section-mf route"
-            key={dynamicSection._id}
-          >
-            <div className="container">
-              <div className="row">
-                <div className="col-12">
-                  <div className="section-container">
-                    <div>
-                      <div className="row">
-                        <div className="col-9">
-                          <div className="section-title title-box-2 d-flex justify-content-between">
-                            <h5>{dynamicSection.title}</h5>
-                          </div>
-                        </div>
-                        <div className="col-3">
-                          {isAuthenticated && isAdminPage && (
-                            <div className="admin-actions crud-btns">
-                              <div>
-                                <button
-                                  className="admin-btn btn btn-primary btn-sm me-1"
-                                  onClick={() => onEditClick(dynamicSection)}
-                                >
-                                  <i className="bi bi-pencil" />
-                                </button>
-                                <button
-                                  className="admin-btn btn btn-danger btn-sm"
-                                  onClick={() =>
-                                    handleDeleteClick(dynamicSection._id)
-                                  }
-                                >
-                                  <i className="bi bi-trash" />
-                                </button>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-12">
-                          <div
-                            className="section-content"
-                            dangerouslySetInnerHTML={{
-                              __html: dynamicSection.content,
-                            }}
-                          ></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        ))}
+      <DndProvider backend={isTouchDevice ? TouchBackend : HTML5Backend}>
+        {dynamicSections.length > 0 ? (
+          dynamicSections.map((dynamicSection, index) => (
+            <Dynamicitem
+              key={dynamicSection._id}
+              dynamicSection={dynamicSection}
+              index={index}
+              moveTerm={handleReorder}
+              onEditClick={() => onEditClick(dynamicSection)}
+              handleDeleteClick={() => handleDeleteClick(dynamicSection._id)}
+              parentReset={reset}
+            />
+          ))
+        ) : (
+          <NullData message="Terms" link="/" redirect_to="Home" />
+        )}
+      </DndProvider>
     </>
   );
 };

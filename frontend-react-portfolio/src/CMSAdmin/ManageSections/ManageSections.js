@@ -10,7 +10,6 @@ import { useSectionManager } from "./useSectionManager";
 
 const ManageSections = () => {
   const {
-    sections,
     updatedSections,
     isOrderChanged,
     isUpdating,

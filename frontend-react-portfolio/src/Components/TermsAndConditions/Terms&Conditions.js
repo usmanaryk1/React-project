@@ -16,11 +16,9 @@ const TermsandConditions = ({
 }) => {
   const { isAuthenticated, isAdminPage } = useAuth();
 
-  console.log("termslist", termsList);
+  // console.log("termslist", termsList);
   const { reset } = useForm();
-  if (!termsList.length) {
-    return <div>Loading...</div>; // Loader for empty state
-  }
+
   const handleDeleteClick = (id) => {
     Swal.fire({
       title: "Are you sure?",
