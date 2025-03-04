@@ -1,13 +1,14 @@
 import { useAuth } from "../../CMSAdmin/Auth/AuthContext";
 import { useDrag, useDrop } from "react-dnd";
 
-const Dynamicitem = (
+const Dynamicitem = ({
   dynamicSection,
   index,
   moveTerm,
   onEditClick,
-  handleDeleteClick
-) => {
+  handleDeleteClick,
+}) => {
+  // console.log("dynamic section", dynamicSection);
   const [{ isDragging }, drag] = useDrag({
     type: "DYNAMICITEM",
     item: { index },
