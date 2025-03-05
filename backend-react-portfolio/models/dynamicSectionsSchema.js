@@ -10,6 +10,9 @@ const dynamicSectionsSchema = new Schema({
     type: String,
     required: true,
   },
+  order: {
+    type: Number, // To track the order of terms
+  },
 });
 
 const DynamicSectionsModel = mongoose.model(

@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const admin = require("../api/firebaseAdmin.js");
 
 const authenticateJWT = async (req, res, next) => {
   const authHeader = req.headers.authorization;
