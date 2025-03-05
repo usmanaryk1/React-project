@@ -37,7 +37,7 @@ const DynamicSections = ({
   return (
     <>
       <DndProvider backend={isTouchDevice ? TouchBackend : HTML5Backend}>
-        {dynamicSections.length > 0 ? (
+        {dynamicSections && dynamicSections.length > 0 ? (
           dynamicSections.map((dynamicSection, index) => (
             <Dynamicitem
               key={dynamicSection._id}
