@@ -72,7 +72,17 @@ const DynamicSectionsEdit = () => {
           toast.success("Data updated successfully");
         } else {
           // Add a new section
-          const addedData = await DynamicSectionService.addItem(data);
+          // const addedData = await DynamicSectionService.addItem(data);
+          // Fetch the current max order and increment
+          const maxOrder =
+            dynamicSections.length > 0
+              ? Math.max(...dynamicSections.map((section) => section.order))
+              : 0;
+
+          const addedData = await DynamicSectionService.addItem({
+            ...data,
+            order: maxOrder + 1,
+          });
           setDynamicSections((prevData) => [...prevData, addedData]);
           toast.success("Data added successfully");
 
