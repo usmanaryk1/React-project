@@ -31,8 +31,8 @@ router.post("/", authenticateJWT, async (req, res) => {
 
     const UpdatedSections = await SectionVisibility_Model.findOneAndUpdate(
       { name },
-      { isVisible },
-      { order: newOrder },
+      { isVisible, order: newOrder },
+
       { new: true, upsert: true } // Update if exists, otherwise create
     );
 
