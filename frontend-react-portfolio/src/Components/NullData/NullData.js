@@ -9,7 +9,7 @@ const NullData = ({ message, link, redirect_to }) => {
           <div className="row">
             <div className="col-12">
               <div className="data-message">
-                <p>Oops! No {message} Available.</p>
+                <p>Add Your First {message}!</p>
                 <Link to={link}>
                   <i className="bi bi-house-fill"></i> Take me to {redirect_to}
                 </Link>

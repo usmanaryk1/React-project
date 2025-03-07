@@ -15,7 +15,7 @@ const EditorModal = ({ isOpen, onClose, onSubmit, initialData }) => {
     // defaultValues: initialData || { title: "", content: "" }, // Provide fallback
     resolver: yupResolver(ValidationSchema),
   });
-  console.log("Inital data in editor", initialData);
+  // console.log("Inital data in editor", initialData);
   // Use useEffect to reset the form when initialData changes
   useEffect(() => {
     reset(initialData); // Reset the form with the new initial data

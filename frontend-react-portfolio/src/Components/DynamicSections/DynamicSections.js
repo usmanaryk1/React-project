@@ -12,9 +12,9 @@ const DynamicSections = ({
   dynamicSections = [],
   onEditClick,
   onDelete,
-  handleReorder,
+  // handleReorder,
 }) => {
-  // console.log("dynamicSections in home", dynamicSections);
+  console.log("dynamicSections in home", dynamicSections);
   const { reset } = useForm();
 
   const handleDeleteClick = (sectionId) => {
@@ -40,17 +40,17 @@ const DynamicSections = ({
         {dynamicSections && dynamicSections.length > 0 ? (
           dynamicSections.map((dynamicSection, index) => (
             <Dynamicitem
-              key={dynamicSection._id}
+              key={dynamicSection._id || index}
               dynamicSection={dynamicSection}
               index={index}
-              moveTerm={handleReorder}
+              // moveTerm={handleReorder}
               onEditClick={() => onEditClick(dynamicSection)}
               handleDeleteClick={() => handleDeleteClick(dynamicSection._id)}
               parentReset={reset}
             />
           ))
         ) : (
-          <NullData message="Terms" link="/" redirect_to="Home" />
+          <NullData message="Section" link="/" redirect_to="Home" />
         )}
       </DndProvider>
     </>

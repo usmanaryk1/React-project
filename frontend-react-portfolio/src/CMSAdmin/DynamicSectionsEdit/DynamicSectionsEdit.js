@@ -20,11 +20,12 @@ const DynamicSectionsEdit = () => {
     setData: setDynamicSections,
     isPending,
     error,
+    refetch,
   } = useFetch(`${API_URL}/api/dynamicSections`);
 
-  const { sections, setSections, refetch } = useSectionVisibility();
-  const [updating, setUpdating] = useState(false);
-  const [reorderedSections, setReorderedSections] = useState([]); // To track reordering changes
+  const { sections, setSections } = useSectionVisibility();
+  // const [updating, setUpdating] = useState(false);
+  // const [reorderedSections, setReorderedSections] = useState([]); // To track reordering changes
   // console.log("dynamicSections in form", dynamicSections);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,8 +34,9 @@ const DynamicSectionsEdit = () => {
   const DynamicSectionService = ApiService("api/dynamicSections");
 
   useEffect(() => {
-    console.log("currentDynamicSection updated:", currentDynamicSection);
-  }, [currentDynamicSection]);
+    // console.log("currentDynamicSection updated:", currentDynamicSection);
+    refetch();
+  }, [sections]);
 
   const handleAddClick = useCallback(() => {
     // console.log("Add button clicked");
@@ -45,7 +47,7 @@ const DynamicSectionsEdit = () => {
   const handleEditClick = useCallback((dynamicSection) => {
     console.log("Edit button clicked", dynamicSection);
     setCurrentDynamicSection(dynamicSection);
-    console.log("currentPubllications", currentDynamicSection);
+    // console.log("currentPubllications", currentDynamicSection);
     setIsModalOpen(true);
   }, []);
 
@@ -78,32 +80,33 @@ const DynamicSectionsEdit = () => {
             dynamicSections.length > 0
               ? Math.max(...dynamicSections.map((section) => section.order))
               : 0;
-
+          console.log("data", data);
           const addedData = await DynamicSectionService.addItem({
             ...data,
             order: maxOrder + 1,
           });
           setDynamicSections((prevData) => [...prevData, addedData]);
           toast.success("Data added successfully");
-
+          console.log("added data:", addedData);
           // Also update the Manage Sections collection
           const manageSectionPayload = {
-            name: `${addedData.title} Section`,
+            name: `${addedData.section.title} Section`,
             isVisible: true,
+            order: addedData.section.order, // Add the order here
           };
           console.log("manageSectionPayload", manageSectionPayload);
           const newSection = await ApiService("api/sectionVisibility").addItem(
             manageSectionPayload
           );
           setSections((prevSec) => [...prevSec, newSection]);
-          console.log("sections is dynamic section:", sections);
+          // console.log("Sections in dynamic section:", sections);
           refetch();
         }
       } catch (error) {
-        console.error(err);
+        console.error(error);
         toast.error(
           "Error occurred while processing the request.",
-          err.response?.data?.message || err.message
+          error.response?.data?.message || error.message
         );
       }
       setIsModalOpen(false);
@@ -129,36 +132,36 @@ const DynamicSectionsEdit = () => {
     [DynamicSectionService, setDynamicSections]
   );
 
-  const handleReorder = async (dragIndex, hoverIndex) => {
-    const reorderedList = [...dynamicSections];
-    const [draggedItem] = reorderedList.splice(dragIndex, 1);
-    reorderedList.splice(hoverIndex, 0, draggedItem);
-    console.log("reorderedList sections", reorderedList);
+  // const handleReorder = async (dragIndex, hoverIndex) => {
+  //   const reorderedList = [...dynamicSections];
+  //   const [draggedItem] = reorderedList.splice(dragIndex, 1);
+  //   reorderedList.splice(hoverIndex, 0, draggedItem);
+  //   console.log("reorderedList sections", reorderedList);
 
-    setDynamicSections(reorderedList); // Update the skills list locally
-    setReorderedSections(reorderedList);
-  };
+  //   setDynamicSections(reorderedList); // Update the skills list locally
+  //   setReorderedSections(reorderedList);
+  // };
 
-  const handleSaveReorder = async () => {
-    try {
-      setUpdating(true);
-      // Make API call with the final reordered list
+  // const handleSaveReorder = async () => {
+  //   try {
+  //     setUpdating(true);
+  //     // Make API call with the final reordered list
 
-      const reorderedSection = dynamicSections.map((section, index) => ({
-        _id: section._id,
-        order: index, // Use the correct order here
-      }));
-      console.log("Final Payload to Save:", reorderedSection);
+  //     const reorderedSection = dynamicSections.map((section, index) => ({
+  //       _id: section._id,
+  //       order: index + 1, // Use the correct order here
+  //     }));
+  //     console.log("Final Payload to Save:", reorderedSection);
 
-      await DynamicSectionService.reorderItems(reorderedSection);
-      setUpdating(false);
-      toast.success("Sections reordered successfully");
-      setReorderedSections([]);
-    } catch (error) {
-      setUpdating(false);
-      toast.error("Failed to update the sequence of sections");
-    }
-  };
+  //     await DynamicSectionService.reorderItems(reorderedSection);
+  //     setUpdating(false);
+  //     toast.success("Sections reordered successfully");
+  //     setReorderedSections([]);
+  //   } catch (error) {
+  //     setUpdating(false);
+  //     toast.error("Failed to update the sequence of sections");
+  //   }
+  // };
 
   if (isPending) return <Loading />;
 
@@ -174,7 +177,7 @@ const DynamicSectionsEdit = () => {
         </div>
         {/* Update Order Button */}
         <hr />
-        <div className="d-flex justify-content-end">
+        {/* <div className="d-flex justify-content-end">
           <button
             className="updateorder-btn"
             onClick={handleSaveReorder}
@@ -182,12 +185,12 @@ const DynamicSectionsEdit = () => {
           >
             {updating ? "Updating" : "Update Order"}
           </button>
-        </div>
+        </div> */}
         <DynamicSections
           dynamicSections={dynamicSections}
           onEditClick={handleEditClick}
           onDelete={handleDelete}
-          handleReorder={handleReorder}
+          // handleReorder={handleReorder}
         />
         <EditorModal
           isOpen={isModalOpen}

@@ -4,38 +4,38 @@ import { useDrag, useDrop } from "react-dnd";
 const Dynamicitem = ({
   dynamicSection,
   index,
-  moveTerm,
+  // moveTerm,
   onEditClick,
   handleDeleteClick,
 }) => {
   // console.log("dynamic section", dynamicSection);
-  const [{ isDragging }, drag] = useDrag({
-    type: "DYNAMICITEM",
-    item: { index },
-    collect: (monitor) => ({ isDragging: monitor.isDragging() }),
-  });
+  // const [{ isDragging }, drag] = useDrag({
+  //   type: "DYNAMICITEM",
+  //   item: { index },
+  //   collect: (monitor) => ({ isDragging: monitor.isDragging() }),
+  // });
 
-  const [, drop] = useDrop({
-    accept: "DYNAMICITEM",
+  // const [, drop] = useDrop({
+  //   accept: "DYNAMICITEM",
 
-    hover: (draggedItem) => {
-      if (draggedItem.index !== index) {
-        moveTerm(draggedItem.index, index);
-        draggedItem.index = index;
-      }
-    },
-  });
+  //   hover: (draggedItem) => {
+  //     if (draggedItem.index !== index) {
+  //       moveTerm(draggedItem.index, index);
+  //       draggedItem.index = index;
+  //     }
+  //   },
+  // });
 
   const { isAdminPage, isAuthenticated } = useAuth();
 
   return (
     <section
       id="section"
-      ref={(node) => (isAdminPage && isAuthenticated ? drag(drop(node)) : null)}
+      // ref={(node) => (isAdminPage && isAuthenticated ? drag(drop(node)) : null)}
       className="section-mf route"
       key={dynamicSection._id}
       style={{
-        opacity: isDragging ? 0.5 : 1,
+        // opacity: isDragging ? 0.5 : 1,
         cursor: isAdminPage && isAuthenticated ? "grab" : "default",
       }}
     >
