@@ -1,6 +1,11 @@
 const express = require("express");
 const authenticateJWT = require("../middleware/authmiddleware");
 const DynamicSectionsModel = require("../models/dynamicSectionsSchema");
+const {
+  createDynamicCollection,
+  deleteDynamicCollection,
+  updateDynamicCollection,
+} = require("../utils/createDynamicCollection");
 const router = express.Router();
 
 // GET ALL SECTIONS
@@ -11,7 +16,7 @@ router.get("/", async (req, res) => {
     });
     // console.log("sections", sections);
     if (dynamicSections.length === 0) {
-      return res.status(404).send("Information Not Found");
+      return res.status(200).json([]); // Return an empty array with 200 status
     }
     res.status(200).json(dynamicSections);
   } catch (error) {
@@ -35,38 +40,32 @@ router.get("/:id", async (req, res) => {
 });
 
 // POST SECTION (AUTHENTICATED ONLY)
-
-router.post("/", authenticateJWT, async (req, res) => {
-  // Find the current maximum order in the collection
-  const lastSection = await DynamicSectionsModel.findOne().sort({ order: -1 });
-
-  // Calculate the next order value
-  const newOrder = lastSection ? lastSection.order + 1 : 0;
-  const newSection = new DynamicSectionsModel({
-    title: req.body.title,
-    content: req.body.content,
-    order: newOrder,
-  });
-  try {
-    const data = await newSection.save();
-    res.status(200).json(data);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: error.message });
-  }
-});
+router.post("/", authenticateJWT, createDynamicCollection);
 
 // UPDATE THE SECTION BY ID (AUTHENTICATED ONLY)
 
 router.put("/:id", authenticateJWT, async (req, res) => {
   try {
+    const { title, content } = req.body;
+    if (!title || !content) {
+      return res
+        .status(400)
+        .json({ message: "Title and content are required" });
+    }
     const updatedSection = await DynamicSectionsModel.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      { title, content }, // Only update title and content
       {
         new: true,
       }
     );
+
+    // Update the corresponding dynamic collection
+    const collectionName = updatedSection.title
+      .toLowerCase()
+      .replace(/\s+/g, "_");
+
+    await updateDynamicCollection(collectionName, { title, content });
 
     res.status(200).json(updatedSection);
   } catch (error) {
@@ -85,6 +84,14 @@ router.delete("/:id", authenticateJWT, async (req, res) => {
     if (!deletedSection) {
       return res.status(404).json({ message: "No information found" });
     }
+
+    // Remove from sectionVisibility collection
+    await SectionVisibilityModel.findOneAndDelete({
+      name: `${deletedSection.title} Section`,
+    });
+
+    // Delete the dynamic collection itself (if you want to remove it)
+    await deleteDynamicCollection(deletedSection.title);
     res.status(200).json({ message: "Information has been deleted" });
   } catch (error) {
     console.error(error);
@@ -94,33 +101,33 @@ router.delete("/:id", authenticateJWT, async (req, res) => {
 
 // REORDER SECTIONS BY MAPPING REORDERED TERMS (AUTHENTICATED ONLY)
 
-router.patch("/reorder", authenticateJWT, async (req, res) => {
-  try {
-    const { reorderedItems } = req.body; // [{ _id, order }, ...]
+// router.patch("/reorder", authenticateJWT, async (req, res) => {
+//   try {
+//     const { reorderedItems } = req.body; // [{ _id, order }, ...]
 
-    if (!Array.isArray(reorderedItems)) {
-      return res
-        .status(400)
-        .json({ message: "Invalid reordered items format" });
-    }
+//     if (!Array.isArray(reorderedItems)) {
+//       return res
+//         .status(400)
+//         .json({ message: "Invalid reordered items format" });
+//     }
 
-    // console.log("Reordered Items:", reorderedItems);
+//     // console.log("Reordered Items:", reorderedItems);
 
-    const bulkOps = reorderedItems.map((section) => ({
-      updateOne: {
-        filter: { _id: section._id },
-        update: { $set: { order: section.order } }, // Use the order field from client
-      },
-    }));
+//     const bulkOps = reorderedItems.map((section) => ({
+//       updateOne: {
+//         filter: { _id: section._id },
+//         update: { $set: { order: section.order } }, // Use the order field from client
+//       },
+//     }));
 
-    const result = await DynamicSectionsModel.bulkWrite(bulkOps);
-    // console.log("BulkWrite Result:", result);
+//     const result = await DynamicSectionsModel.bulkWrite(bulkOps);
+//     // console.log("BulkWrite Result:", result);
 
-    res.status(200).json({ message: "Sections reordered successfully" });
-  } catch (error) {
-    console.error("Error reordering sections:", error.stack || error.message);
-    res.status(400).json({ message: "Failed to reorder sections" });
-  }
-});
+//     res.status(200).json({ message: "Sections reordered successfully" });
+//   } catch (error) {
+//     console.error("Error reordering sections:", error.stack || error.message);
+//     res.status(400).json({ message: "Failed to reorder sections" });
+//   }
+// });
 
 module.exports = router;
