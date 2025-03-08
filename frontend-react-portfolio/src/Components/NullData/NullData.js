@@ -11,7 +11,8 @@ const NullData = ({ message, link, redirect_to }) => {
               <div className="data-message">
                 <p>Add Your First {message}!</p>
                 <Link to={link}>
-                  <i className="bi bi-house-fill"></i> Take me to {redirect_to}
+                  <i className="bi bi-house-fill"></i> Take me Home{" "}
+                  {redirect_to}
                 </Link>
               </div>
             </div>

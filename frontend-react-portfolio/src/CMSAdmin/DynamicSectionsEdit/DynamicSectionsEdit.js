@@ -85,9 +85,9 @@ const DynamicSectionsEdit = () => {
           console.log("added data:", addedData);
           // Also update the Manage Sections collection
           const manageSectionPayload = {
-            name: `${addedData.section.title} Section`,
+            name: `${addedData.title} Section`,
             isVisible: true,
-            order: addedData.section.order, // Add the order here
+            order: addedData.order, // Add the order here
           };
           console.log("manageSectionPayload", manageSectionPayload);
           const newSection = await ApiService("api/sectionVisibility").addItem(
@@ -96,7 +96,6 @@ const DynamicSectionsEdit = () => {
           setSections((prevSec) => [...prevSec, newSection]);
           fetch();
           // console.log("Sections in dynamic section:", sections);
-          refetch();
         }
       } catch (error) {
         console.error(error);
@@ -105,6 +104,8 @@ const DynamicSectionsEdit = () => {
           error.response?.data?.message || error.message
         );
       }
+
+      refetch();
       setIsModalOpen(false);
     },
     [currentDynamicSection, DynamicSectionService, setDynamicSections]
@@ -122,6 +123,7 @@ const DynamicSectionsEdit = () => {
             prevSec.filter((section) => section._id !== id)
           );
           fetch();
+
           refetch();
           toast.success("Data Deleted successfully");
         });

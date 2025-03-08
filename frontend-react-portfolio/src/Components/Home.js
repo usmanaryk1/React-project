@@ -38,6 +38,17 @@ const Home = () => {
       .filter((section) => section.isVisible) // Filter out invisible sections
       .sort((a, b) => a.order - b.order); // Sort by order
   }, [sections]);
+
+  // const matchedDynamicSections = visibleSections
+  //   .map((section) => {
+  //     return dynamicSections.find((dynamicSection) => {
+  //       const cleanSectionName = section.name.replace(" Section", "").trim();
+  //       return dynamicSection.title.trim() === cleanSectionName;
+  //     });
+  //   })
+  //   .filter(Boolean); // Remove undefined values
+
+  // console.log("matchedDynamicSection", matchedDynamicSection);
   // Check for loading and error states
   if (isPending) {
     return <Loading />;
@@ -46,7 +57,9 @@ const Home = () => {
   if (error) {
     return <Error message={error} />;
   }
-
+  // console.log("matchedDynamic section", matchedDynamicSection);
+  console.log("Dynamic Sections from API:", dynamicSections);
+  console.log("Visible Sections from Context:", visibleSections);
   return (
     <>
       {/* <main id="main">
@@ -121,6 +134,11 @@ const Home = () => {
       </main> */}
       <main id="main">
         {visibleSections.map((section) => {
+          const matchedDynamic = (dynamicSections || []).find(
+            (dynamicSection) =>
+              dynamicSection.title.trim() ===
+              section.name.replace(" Section", "").trim()
+          );
           // Handle static sections
           switch (section.name) {
             case "Hero Section":
@@ -169,21 +187,6 @@ const Home = () => {
                   certifications={certifications || []}
                 />
               );
-            case "Dynamic Sections":
-              const matchedDynamicSection = dynamicSections.find(
-                (dynamicSection) => dynamicSection.title === section.name
-              );
-
-              if (matchedDynamicSection) {
-                return (
-                  <DynamicSections
-                    key={section._id}
-                    dynamicSections={[matchedDynamicSection]}
-                    className="mb-5"
-                  />
-                );
-              }
-              return null;
 
             case "Contact Section":
               return (
@@ -194,7 +197,17 @@ const Home = () => {
                 />
               );
             default:
-              return <NullData meesage="Section" />;
+              // Render matched dynamic sections
+              if (matchedDynamic) {
+                return (
+                  <DynamicSections
+                    key={section._id}
+                    dynamicSections={[matchedDynamic]}
+                    className="mb-5"
+                  />
+                );
+              }
+              return null;
           }
         })}
       </main>

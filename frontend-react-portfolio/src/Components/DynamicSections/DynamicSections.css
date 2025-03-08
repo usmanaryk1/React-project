@@ -2,7 +2,8 @@
 # Sections
 --------------------------------------------------------------*/
 .section-mf {
-  padding-top: 2rem;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
 }
 .section-mf .section-container {
   padding-top: 1rem;
@@ -17,7 +18,7 @@
 }
 
 .section-container {
-  padding: 0.5rem 3rem 3rem;
+  padding: 0.5rem 3rem 4rem;
   position: relative;
   background-color: #fff;
   z-index: 2;
@@ -46,12 +47,6 @@
   .section-container {
     padding: 0.5rem 3rem 3rem;
   }
-}
-
-.section-border {
-  padding: 0.6rem 0.6rem;
-  margin-bottom: 0.3rem;
-  border: 1px dashed #8080806b;
 }
 
 .section-box {
