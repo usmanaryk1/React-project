@@ -6,6 +6,7 @@ const {
   deleteDynamicCollection,
   updateDynamicCollection,
 } = require("../utils/createDynamicCollection");
+const SectionVisibility_Model = require("../models/sectionVisibilitySchema ");
 const router = express.Router();
 
 // GET ALL SECTIONS
@@ -40,64 +41,104 @@ router.get("/:id", async (req, res) => {
 });
 
 // POST SECTION (AUTHENTICATED ONLY)
-router.post("/", authenticateJWT, createDynamicCollection);
+router.post("/", authenticateJWT, async (req, res) => {
+  try {
+    const { title, content } = req.body;
+    const newSection = await DynamicSectionsModel.create({ title, content });
+
+    // await SectionVisibility_Model.create({
+    //   name: title,
+    //   isVisible: true,
+    //   order: await DynamicSectionsModel.countDocuments(),
+    // });
+    res.status(201).json(newSection);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+// router.post("/", authenticateJWT, createDynamicCollection);
 
 // UPDATE THE SECTION BY ID (AUTHENTICATED ONLY)
 
-router.put("/:id", authenticateJWT, async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const { title, content } = req.body;
-    if (!title || !content) {
-      return res
-        .status(400)
-        .json({ message: "Title and content are required" });
-    }
-    const updatedSection = await DynamicSectionsModel.findByIdAndUpdate(
-      req.params.id,
-      { title, content }, // Only update title and content
-      {
-        new: true,
-      }
+    await DynamicSectionsModel.findByIdAndUpdate(req.params.id, {
+      title,
+      content,
+    });
+    await SectionVisibility_Model.findOneAndUpdate(
+      { name: title },
+      { name: title }
     );
-
-    // Update the corresponding dynamic collection
-    const collectionName = updatedSection.title
-      .toLowerCase()
-      .replace(/\s+/g, "_");
-
-    await updateDynamicCollection(collectionName, { title, content });
-
-    res.status(200).json(updatedSection);
+    res.status(200).json({ message: "Section updated successfully" });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: error.message });
   }
 });
+
+// router.put("/:id", authenticateJWT, async (req, res) => {
+//   try {
+//     const { title, content } = req.body;
+//     if (!title || !content) {
+//       return res
+//         .status(400)
+//         .json({ message: "Title and content are required" });
+//     }
+//     const updatedSection = await DynamicSectionsModel.findByIdAndUpdate(
+//       req.params.id,
+//       { title, content }, // Only update title and content
+//       {
+//         new: true,
+//       }
+//     );
+
+//     // Update the corresponding dynamic collection
+//     const collectionName = updatedSection.title
+//       .toLowerCase()
+//       .replace(/\s+/g, "_");
+
+//     await updateDynamicCollection(collectionName, { title, content });
+
+//     res.status(200).json(updatedSection);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: error.message });
+//   }
+// });
 
 // DELETE A SECTION BY ID (AUTHENTICATED ONLY)
-
-router.delete("/:id", authenticateJWT, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
-    const deletedSection = await DynamicSectionsModel.findByIdAndDelete(
-      req.params.id
-    );
-    if (!deletedSection) {
-      return res.status(404).json({ message: "No information found" });
-    }
-
-    // Remove from sectionVisibility collection
-    await SectionVisibilityModel.findOneAndDelete({
-      name: `${deletedSection.title} Section`,
-    });
-
-    // Delete the dynamic collection itself (if you want to remove it)
-    await deleteDynamicCollection(deletedSection.title);
-    res.status(200).json({ message: "Information has been deleted" });
+    const section = await DynamicSectionsModel.findByIdAndDelete(req.params.id);
+    await SectionVisibility_Model.findOneAndDelete({ name: section.title });
+    res.status(200).json({ message: "Section deleted successfully" });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: error.message });
   }
 });
+// router.delete("/:id", authenticateJWT, async (req, res) => {
+//   try {
+//     const deletedSection = await DynamicSectionsModel.findByIdAndDelete(
+//       req.params.id
+//     );
+//     if (!deletedSection) {
+//       return res.status(404).json({ message: "No information found" });
+//     }
+
+//     // Remove from sectionVisibility collection
+//     await SectionVisibility_Model.findOneAndDelete({
+//       name: `${deletedSection.title} Section`,
+//     });
+
+//     // Delete the dynamic collection itself (if you want to remove it)
+//     await deleteDynamicCollection(deletedSection.title);
+//     res.status(200).json({ message: "Information has been deleted" });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: error.message });
+//   }
+// });
 
 // REORDER SECTIONS BY MAPPING REORDERED TERMS (AUTHENTICATED ONLY)
 

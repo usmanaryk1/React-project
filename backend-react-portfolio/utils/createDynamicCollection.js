@@ -9,16 +9,17 @@ const createDynamicCollection = async (req, res) => {
   try {
     let collectionName = title.replace(/\s+/g, "_").toLowerCase();
     // Check for existing collections and add a suffix if necessary
-    let counter = 1;
-    const collections = await mongoose.connection.db
-      .listCollections()
-      .toArray();
-    const collectionNames = collections.map((col) => col.name);
 
-    while (collectionNames.includes(collectionName)) {
-      collectionName = `${title.replace(/\s+/g, "_").toLowerCase()}_${counter}`;
-      counter++;
+    const collections = await mongoose.connection.db
+      .listCollections({ collectionName })
+      .toArray();
+
+    if (collections.length > 0) {
+      return res
+        .status(400)
+        .json({ message: `Section '${title}' already exists` });
     }
+
     console.log(`Creating collection: ${collectionName}`);
     // Define a dynamic schema
     const DynamicSchema = new mongoose.Schema({
