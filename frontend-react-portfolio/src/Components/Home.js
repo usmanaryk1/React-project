@@ -12,6 +12,7 @@ import Testimonial from "./Testimonial";
 import useFetch from "./useFetch";
 import { useSectionVisibility } from "../CMSAdmin/SectionVisibilityContext/SectionVisibilityContext";
 import DynamicSections from "./DynamicSections/DynamicSections";
+import NullData from "./NullData/NullData";
 
 const Home = () => {
   const API_URL = useMemo(
@@ -48,7 +49,7 @@ const Home = () => {
 
   return (
     <>
-      <main id="main">
+      {/* <main id="main">
         {visibleSections.map((section) => {
           switch (section.name) {
             case "Hero Section":
@@ -115,6 +116,85 @@ const Home = () => {
               );
             default:
               return null; // In case of an unknown section name
+          }
+        })}
+      </main> */}
+      <main id="main">
+        {visibleSections.map((section) => {
+          // Handle static sections
+          switch (section.name) {
+            case "Hero Section":
+              return <Hero key={section._id} hero={hero || []} />;
+            case "About Section":
+              return (
+                <About
+                  key={section._id}
+                  about={about || []}
+                  skills={skills || []}
+                />
+              );
+            case "Services Section":
+              return (
+                <Services
+                  key={section._id}
+                  services={services || []}
+                  title="Services"
+                  subtitle="Delivering solutions that exceed expectations."
+                />
+              );
+            case "Counter Section":
+              return <Counter key={section._id} counts={counts || []} />;
+            case "Portfolio Section":
+              return (
+                <Portfolio
+                  key={section._id}
+                  works={works || []}
+                  title="Portfolio"
+                  subtitle="We turn ideas into impactful results."
+                />
+              );
+            case "Testimonial Section":
+              return (
+                <Testimonial
+                  key={section._id}
+                  testimonials={testimonials || []}
+                />
+              );
+            case "Certifications Section":
+              return (
+                <Certifications
+                  key={section._id}
+                  title="Certifications"
+                  subtitle="Showcasing milestones of excellence"
+                  certifications={certifications || []}
+                />
+              );
+            case "Dynamic Sections":
+              const matchedDynamicSection = dynamicSections.find(
+                (dynamicSection) => dynamicSection.title === section.name
+              );
+
+              if (matchedDynamicSection) {
+                return (
+                  <DynamicSections
+                    key={section._id}
+                    dynamicSections={[matchedDynamicSection]}
+                    className="mb-5"
+                  />
+                );
+              }
+              return null;
+
+            case "Contact Section":
+              return (
+                <Contact
+                  key={section._id}
+                  contact={contacts || []}
+                  links={links || []}
+                />
+              );
+            default:
+              return <NullData meesage="Section" />;
           }
         })}
       </main>

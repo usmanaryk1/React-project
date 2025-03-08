@@ -23,7 +23,7 @@ const DynamicSectionsEdit = () => {
     refetch,
   } = useFetch(`${API_URL}/api/dynamicSections`);
 
-  const { sections, setSections } = useSectionVisibility();
+  const { sections, setSections, refetch: fetch } = useSectionVisibility();
   // const [updating, setUpdating] = useState(false);
   // const [reorderedSections, setReorderedSections] = useState([]); // To track reordering changes
   // console.log("dynamicSections in form", dynamicSections);
@@ -32,11 +32,6 @@ const DynamicSectionsEdit = () => {
   const [currentDynamicSection, setCurrentDynamicSection] = useState(null);
 
   const DynamicSectionService = ApiService("api/dynamicSections");
-
-  useEffect(() => {
-    // console.log("currentDynamicSection updated:", currentDynamicSection);
-    refetch();
-  }, [sections]);
 
   const handleAddClick = useCallback(() => {
     // console.log("Add button clicked");
@@ -99,6 +94,7 @@ const DynamicSectionsEdit = () => {
             manageSectionPayload
           );
           setSections((prevSec) => [...prevSec, newSection]);
+          fetch();
           // console.log("Sections in dynamic section:", sections);
           refetch();
         }
@@ -122,6 +118,11 @@ const DynamicSectionsEdit = () => {
           setDynamicSections((prevSec) =>
             prevSec.filter((section) => section._id !== id)
           );
+          setSections((prevSec) =>
+            prevSec.filter((section) => section._id !== id)
+          );
+          fetch();
+          refetch();
           toast.success("Data Deleted successfully");
         });
       } catch (error) {
