@@ -111,7 +111,10 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const section = await DynamicSectionsModel.findByIdAndDelete(req.params.id);
-    await SectionVisibility_Model.findOneAndDelete({ name: section.title });
+    console.log("sectionDeleted", section);
+    await SectionVisibility_Model.findOneAndDelete({
+      name: `${section.title} Section`,
+    });
     res.status(200).json({ message: "Section deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
