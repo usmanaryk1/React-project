@@ -17,7 +17,6 @@ router.get("/", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch data" });
   }
 });
-
 router.post("/", authenticateJWT, async (req, res) => {
   const { name, isVisible, isDynamic } = req.body;
   try {
@@ -34,6 +33,23 @@ router.post("/", authenticateJWT, async (req, res) => {
       { isVisible, order: newOrder, isDynamic },
 
       { new: true, upsert: true } // Update if exists, otherwise create
+    );
+
+    res.status(200).json(UpdatedSections);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error Updating Visibility State" });
+  }
+});
+
+router.put("/toggleVisibility", authenticateJWT, async (req, res) => {
+  const { name, isVisible } = req.body;
+  try {
+    const UpdatedSections = await SectionVisibility_Model.findOneAndUpdate(
+      { name },
+      { isVisible },
+
+      { new: true } // Update if exists, otherwise create
     );
 
     res.status(200).json(UpdatedSections);
