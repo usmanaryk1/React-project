@@ -35,34 +35,23 @@ const Dashboard = () => {
             <div className="row">
               {formsList.map((formItem) => (
                 <div className="col-md-4" key={formItem._id}>
-                  <div className="service-box">
-                    <div className="service-ico">
-                      <span className="ico-circle">
-                        <i className={formItem.Icon} />
-                      </span>
+                  <Link to={formItem.link}>
+                    <div className="service-box">
+                      <div className="service-ico">
+                        <span className="ico-circle">
+                          <i className={formItem.Icon} />
+                        </span>
+                      </div>
+                      <div className="service-content">
+                        <h2 className="s-title">{formItem.Title}</h2>
+                        <p className="s-description text-center form-link">
+                          <div className="link-item">
+                            {formItem.Description}
+                          </div>
+                        </p>
+                      </div>
                     </div>
-                    <div className="service-content">
-                      <h2 className="s-title">{formItem.Title}</h2>
-                      <p className="s-description text-center form-link">
-                        <Link
-                          to={formItem.link}
-                          className="link-item"
-                          style={{
-                            display: "inline-block",
-                            transition: "transform 0.3s ease-in-out",
-                          }}
-                          onMouseEnter={(e) =>
-                            (e.target.style.transform = "scale(1.1)")
-                          }
-                          onMouseLeave={(e) =>
-                            (e.target.style.transform = "scale(1)")
-                          }
-                        >
-                          {formItem.Description}
-                        </Link>
-                      </p>
-                    </div>
-                  </div>
+                  </Link>
                 </div>
               ))}
             </div>
