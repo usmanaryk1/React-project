@@ -44,13 +44,11 @@ router.get("/:id", async (req, res) => {
 router.post("/", authenticateJWT, async (req, res) => {
   try {
     const { title, content } = req.body;
-    const newSection = await DynamicSectionsModel.create({ title, content });
+    const newSection = await DynamicSectionsModel.create({
+      title,
+      content,
+    });
 
-    // await SectionVisibility_Model.create({
-    //   name: title,
-    //   isVisible: true,
-    //   order: await DynamicSectionsModel.countDocuments(),
-    // });
     res.status(201).json(newSection);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -113,7 +111,7 @@ router.delete("/:id", async (req, res) => {
     const section = await DynamicSectionsModel.findByIdAndDelete(req.params.id);
     console.log("sectionDeleted", section);
     await SectionVisibility_Model.findOneAndDelete({
-      name: `${section.title} Section`,
+      name: `${section.title}`,
     });
     res.status(200).json({ message: "Section deleted successfully" });
   } catch (error) {
