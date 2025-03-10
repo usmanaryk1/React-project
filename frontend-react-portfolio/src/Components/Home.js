@@ -59,7 +59,7 @@ const Home = () => {
           if (section.isDynamic) {
             const matchedDynamic = dynamicSections?.find(
               (dynamicSection) =>
-                dynamicSection.title.trim() === section.name.trim()
+                dynamicSection.name.trim() === section.name.trim()
             );
 
             if (matchedDynamic) {
