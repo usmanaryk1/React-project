@@ -7,13 +7,32 @@ import TermItem from "./TermItem";
 import { useForm } from "react-hook-form";
 import NullData from "../NullData/NullData";
 import { useAuth } from "../../CMSAdmin/Auth/AuthContext";
-
+import { useMemo, useState } from "react";
+import useFetch from "../useFetch";
+import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 const TermsandConditions = ({
   handleDelete,
   handleEditClick,
   termsList = [], // Default value
+  isEdit = false,
   handleReorder,
 }) => {
+  const API_URL = useMemo(
+    () => process.env.REACT_APP_BACKEND_URL || "http://localhost:8000",
+    []
+  );
+  const {
+    data: termsData,
+    isPending,
+    error,
+  } = useFetch(`${API_URL}/api/terms`);
+  console.log("isEdit outside");
+  if (!isEdit) {
+    termsList = termsData;
+    console.log("isEdit inside");
+  }
+
   const { isAuthenticated, isAdminPage } = useAuth();
 
   // console.log("termslist", termsList);
@@ -36,30 +55,36 @@ const TermsandConditions = ({
   };
 
   const isTouchDevice = "ontouchstart" in window; // Simple check for touch support
+  if (isPending) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error message={error} />;
+  }
 
   return (
     <DndProvider backend={isTouchDevice ? TouchBackend : HTML5Backend}>
       <div>
         {/* ======= Terms and Conditions ======= */}
-        {isAuthenticated && !isAdminPage && (
-          <div
-            className="hero hero-single route bg-image"
-            alt="Terms and Conditions"
-            style={{ backgroundImage: "url(../assets/img/overlay-bg.jpg)" }}
-          >
-            <div className="overlay-mf"></div>
-            <div className="hero-content display-table">
-              <div className="table-cell">
-                <div className="container">
-                  <h2 className="hero-title mb-4">TERMS AND CONDITIONS</h2>
-                </div>
+
+        <div
+          className="hero hero-single route bg-image"
+          alt="Terms and Conditions"
+          style={{ backgroundImage: "url(../assets/img/overlay-bg.jpg)" }}
+        >
+          <div className="overlay-mf"></div>
+          <div className="hero-content display-table">
+            <div className="table-cell">
+              <div className="container">
+                <h2 className="hero-title mb-4">TERMS AND CONDITIONS</h2>
               </div>
             </div>
           </div>
-        )}
+        </div>
 
         {/* Render Existing Terms */}
-        {termsList.length > 0 ? (
+        {termsList?.length > 0 ? (
           termsList.map((term, index) => (
             <TermItem
               key={term._id}

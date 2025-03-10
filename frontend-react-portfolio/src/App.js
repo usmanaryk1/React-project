@@ -23,7 +23,7 @@ function App() {
     () => process.env.REACT_APP_BACKEND_URL || "http://localhost:8000",
     []
   );
-  const { data: termsList, isPending } = useFetch(`${API_URL}/api/terms`);
+  // const { data: termsList, isPending } = useFetch(`${API_URL}/api/terms`);
   return (
     <AuthProvider>
       <div className="App">
@@ -51,13 +51,7 @@ function App() {
             <Route path="/form/login-form" render={() => <Login />} />
             <Route
               path="/termsandconditions"
-              render={() =>
-                isPending ? (
-                  <Loading />
-                ) : (
-                  <TermsandConditions termsList={termsList} />
-                )
-              }
+              render={() => <TermsandConditions termsList={null} />}
             />
             <Route path="*">
               <NotFound />
