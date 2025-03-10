@@ -13,6 +13,7 @@ import useFetch from "./useFetch";
 import { useSectionVisibility } from "../CMSAdmin/SectionVisibilityContext/SectionVisibilityContext";
 import DynamicSections from "./DynamicSections/DynamicSections";
 import NullData from "./NullData/NullData";
+import TermsandConditions from "./TermsAndConditions/Terms&Conditions";
 
 const Home = () => {
   const API_URL = useMemo(
@@ -31,6 +32,8 @@ const Home = () => {
   const { data: certifications } = useFetch(`${API_URL}/api/certifications`);
   const { data: contacts } = useFetch(`${API_URL}/api/contact`);
   const { data: links } = useFetch(`${API_URL}/api/social`);
+  const { data: termsList } = useFetch(`${API_URL}/api/terms`);
+
   const { sections = [], isPending, error } = useSectionVisibility();
   // Sort and filter sections based on visibility and order
   const visibleSections = useMemo(() => {
@@ -185,6 +188,14 @@ const Home = () => {
                   title="Certifications"
                   subtitle="Showcasing milestones of excellence"
                   certifications={certifications || []}
+                />
+              );
+
+            case "Terms and Conditions Section":
+              return (
+                <TermsandConditions
+                  termsList={termsList || []}
+                  className="mt-5"
                 />
               );
 
