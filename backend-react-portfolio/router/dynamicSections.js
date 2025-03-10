@@ -43,10 +43,12 @@ router.get("/:id", async (req, res) => {
 // POST SECTION (AUTHENTICATED ONLY)
 router.post("/", authenticateJWT, async (req, res) => {
   try {
-    const { title, content } = req.body;
+    const { title, content, order, isDynamic } = req.body;
     const newSection = await DynamicSectionsModel.create({
       title,
       content,
+      order,
+      isDynamic,
     });
 
     res.status(201).json(newSection);
