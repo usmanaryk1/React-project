@@ -84,6 +84,7 @@ const PortfolioContent = ({ onDeleteClick, onEditClick, details, workId }) => {
                         <div className="swiper-slide" key={index}>
                           <img
                             src={image}
+                            loading="lazy"
                             alt={`Slide`}
                             style={{
                               maxHeight: "100%",

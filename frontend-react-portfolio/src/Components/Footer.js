@@ -6,12 +6,12 @@ import { toggleBacktotop, scrollToTop } from "./UtilFunctions/handleBacktotop";
 const Footer = () => {
   useEffect(() => {
     // adds event on load and scroll
-    window.addEventListener("load", toggleBacktotop);
+    window.addEventListener("DOMContentLoaded", toggleBacktotop);
     window.addEventListener("scroll", toggleBacktotop);
 
     // cleanup function to remove event on load and scroll
     return () => {
-      window.removeEventListener("load", toggleBacktotop);
+      window.removeEventListener("DOMContentLoaded", toggleBacktotop);
       window.removeEventListener("scroll", toggleBacktotop);
     };
   }, []);

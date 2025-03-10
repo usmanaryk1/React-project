@@ -90,6 +90,7 @@ const Testimonial = ({ onEditClick, onDeleteClick, testimonials = [] }) => {
                               <div>
                                 <img
                                   src={testimonial.img}
+                                  loading="lazy"
                                   alt=""
                                   className="rounded-circle b-shadow-a author-img"
                                 />

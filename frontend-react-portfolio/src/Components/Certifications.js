@@ -46,13 +46,13 @@ const Certifications = ({
               {certifications.map((certification) => (
                 <div
                   className="col-lg-4 col-sm-6 card-box"
-                  key={certification._id}
-                >
+                  key={certification._id}>
                   <div className="card card-certification">
                     {certification.image && (
                       <div className="card-img">
                         <img
                           src={certification.image}
+                          loading="lazy"
                           alt="certification"
                           className="img-fluid"
                           style={{
@@ -109,6 +109,7 @@ const Certifications = ({
                           <div>
                             <img
                               src={certification.authorImage}
+                              loading="lazy"
                               alt=""
                               className="avatar rounded-circle"
                             />

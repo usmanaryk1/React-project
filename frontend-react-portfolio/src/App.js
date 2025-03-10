@@ -1,20 +1,20 @@
-import Footer from "./Components/Footer";
+import { useMemo } from "react";
+import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
+import { AuthProvider } from "./CMSAdmin/Auth/AuthContext";
+import "react-toastify/dist/ReactToastify.css";
 import Header from "./Components/Header";
+import Footer from "./Components/Footer";
 import Home from "./Components/Home";
 // import BlogDetails from "./Components/BlogDetails";
-import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import PortfolioDetails from "./Components/PortfolioDetails";
 // import CertificationDetails from "./Components/CertificationDetails";
 import Form from "./CMSAdmin/Form";
 import SignUp from "./CMSAdmin/Auth/SignUp/SignUp";
 import Login from "./CMSAdmin/Auth/Login/Login";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { AuthProvider } from "./CMSAdmin/Auth/AuthContext";
 import NotFound from "./Components/404Page/404Page";
 import TermsandConditions from "./Components/TermsAndConditions/Terms&Conditions";
 import AddPortfolioDetails from "./CMSAdmin/PortfolioDetails/AddPortfolioDetails";
-import { useMemo } from "react";
 import useFetch from "./Components/useFetch";
 import Loading from "./Components/Loading/Loading";
 

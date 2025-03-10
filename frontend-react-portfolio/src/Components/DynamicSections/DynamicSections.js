@@ -14,7 +14,7 @@ const DynamicSections = ({
   onDelete,
   // handleReorder,
 }) => {
-  console.log("dynamicSections in home", dynamicSections);
+  // console.log("dynamicSections in home", dynamicSections);
   const { reset } = useForm();
 
   const handleDeleteClick = (sectionId) => {

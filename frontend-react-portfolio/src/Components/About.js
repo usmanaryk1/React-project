@@ -1,6 +1,8 @@
+import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { useAuth } from "../CMSAdmin/Auth/AuthContext";
 import Skills from "./Skills/Skills";
+import ProfileImageSkeletonLoading from "./ProfileImageSkeletonLoading";
 
 const About = ({
   onEditClick,
@@ -12,6 +14,21 @@ const About = ({
   handleReorder,
 }) => {
   const { isAuthenticated, isAdminPage } = useAuth();
+  const [imageLoaded, setImageLoaded] = useState({}); // Store image load states
+  useEffect(() => {
+    const loadImages = () => {
+      about.forEach((item) => {
+        if (item.img) {
+          const img = new Image();
+          img.src = item.img;
+          img.onload = () => {
+            setImageLoaded((prevState) => ({ ...prevState, [item._id]: true }));
+          };
+        }
+      });
+    };
+    loadImages();
+  }, [about]);
 
   const handleDeleteClick = (aboutId) => {
     Swal.fire({
@@ -45,11 +62,16 @@ const About = ({
                           {item.img && (
                             <div className="col-sm-6 col-md-5">
                               <div className="about-img">
-                                <img
-                                  src={item.img}
-                                  className="img-fluid rounded b-shadow-a"
-                                  alt="Profile"
-                                />
+                                 {!imageLoaded[item._id] ? (
+                                  <ProfileImageSkeletonLoading />
+                                  ) : (
+                                    <img
+                                      src={item.img}
+                                      loading="lazy"
+                                      className="img-fluid rounded b-shadow-a"
+                                      alt={item.name || "User Avatar"}
+                                    />
+                                  )}
                               </div>
                             </div>
                           )}

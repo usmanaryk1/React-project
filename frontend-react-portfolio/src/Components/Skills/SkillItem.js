@@ -79,6 +79,7 @@ const SkillItem = ({
                       aria-valuenow={100}
                       aria-valuemin={0}
                       aria-valuemax={100}
+                      aria-label={`Skill proficiency: ${skill.name} at ${skill.proficiency}%`}
                     />
                   </div>
                 </div>

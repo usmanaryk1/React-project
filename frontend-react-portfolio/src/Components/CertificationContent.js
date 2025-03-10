@@ -34,7 +34,7 @@ const CertificationContent = () => {
               <div className="col-md-8">
                 <div className="post-box">
                   <div className="post-thumb">
-                    <img src={image} className="img-fluid" alt="" />
+                    <img src={image} loading="lazy" className="img-fluid" alt="" />
                   </div>
                   <div className="post-meta">
                     <h1 className="article-title">{articleTitle}</h1>
@@ -71,7 +71,7 @@ const CertificationContent = () => {
                   <ul className="list-comments">
                     <li>
                       <div className="comment-avatar">
-                        <img src="../assets/img/testimonial-2.jpg" alt="" />
+                        <img src="../assets/img/testimonial-2.jpg" loading="lazy" alt="" />
                       </div>
                       <div className="comment-details">
                         <h4 className="comment-author">Oliver Colmenares</h4>
@@ -88,7 +88,7 @@ const CertificationContent = () => {
                     </li>
                     <li>
                       <div className="comment-avatar">
-                        <img src="../assets/img/testimonial-4.jpg" alt="" />
+                        <img src="../assets/img/testimonial-4.jpg" loading="lazy" alt="" />
                       </div>
                       <div className="comment-details">
                         <h4 className="comment-author">Carmen Vegas</h4>
@@ -105,7 +105,7 @@ const CertificationContent = () => {
                     </li>
                     <li className="comment-children">
                       <div className="comment-avatar">
-                        <img src="../assets/img/testimonial-2.jpg" alt="" />
+                        <img src="../assets/img/testimonial-2.jpg" loading="lazy" alt="" />
                       </div>
                       <div className="comment-details">
                         <h4 className="comment-author">Oliver Colmenares</h4>
@@ -120,7 +120,7 @@ const CertificationContent = () => {
                     </li>
                     <li>
                       <div className="comment-avatar">
-                        <img src="../assets/img/testimonial-2.jpg" alt="" />
+                        <img src="../assets/img/testimonial-2.jpg" loading="lazy" alt="" />
                       </div>
                       <div className="comment-details">
                         <h4 className="comment-author">Oliver Colmenares</h4>

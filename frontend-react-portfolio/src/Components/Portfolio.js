@@ -61,6 +61,7 @@ const Portfolio = ({ title, subtitle, onEdit, onDelete, works = [] }) => {
                       <div className="work-img">
                         <img
                           src={work.workImage}
+                          loading="lazy"
                           alt="project"
                           className="img-fluid"
                           style={{

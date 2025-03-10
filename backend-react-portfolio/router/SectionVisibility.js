@@ -18,6 +18,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+// GET ONLY VISIBLE SECTIONS
+router.get("/visible", async (req, res) => {
+  try {
+    const visibleSections = await SectionVisibility_Model.find({ isVisible: true }).sort({ order: 1 });
+    if (visibleSections.length === 0) {
+      return res.status(404).json({ message: "No visible sections found." });
+    }
+    res.status(200).json(visibleSections);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch data" });
+  }
+});
+
 router.post("/", authenticateJWT, async (req, res) => {
   const { name, isVisible } = req.body;
   try {
