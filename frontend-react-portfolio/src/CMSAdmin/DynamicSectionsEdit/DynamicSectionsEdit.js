@@ -61,33 +61,39 @@ const DynamicSectionsEdit = () => {
             currentDynamicSection._id,
             data
           );
+
           setDynamicSections((prevSections) =>
             prevSections.map((section) =>
               section._id === updatedData._id ? updatedData : section
             )
           );
+
           toast.success("Data updated successfully");
         } else {
           // Add a new section
-          // const addedData = await DynamicSectionService.addItem(data);
+
+          console.log("data", data);
+
+          const addedData = await DynamicSectionService.addItem({
+            ...data,
+            isDynamic: true,
+          });
+          setDynamicSections((prevData) => [...prevData, addedData]);
+          toast.success("Data added successfully");
+
+          console.log("added data:", addedData);
+
           // Fetch the current max order and increment
           const maxOrder =
             dynamicSections.length > 0
               ? Math.max(...dynamicSections.map((section) => section.order))
               : 0;
-          console.log("data", data);
-          const addedData = await DynamicSectionService.addItem({
-            ...data,
-            order: maxOrder + 1,
-          });
-          setDynamicSections((prevData) => [...prevData, addedData]);
-          toast.success("Data added successfully");
-          console.log("added data:", addedData);
+
           // Also update the Manage Sections collection
           const manageSectionPayload = {
             name: `${addedData.title}`,
             isVisible: true,
-            order: addedData.order, // Add the order here
+            order: maxOrder + 1, // Add the order here
             isDynamic: true,
           };
           console.log("manageSectionPayload", manageSectionPayload);
