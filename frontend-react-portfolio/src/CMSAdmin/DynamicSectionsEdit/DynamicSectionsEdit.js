@@ -85,9 +85,10 @@ const DynamicSectionsEdit = () => {
           console.log("added data:", addedData);
           // Also update the Manage Sections collection
           const manageSectionPayload = {
-            name: `${addedData.title} Section`,
+            name: `${addedData.title}`,
             isVisible: true,
             order: addedData.order, // Add the order here
+            isDynamic: true,
           };
           console.log("manageSectionPayload", manageSectionPayload);
           const newSection = await ApiService("api/sectionVisibility").addItem(
