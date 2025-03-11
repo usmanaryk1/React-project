@@ -75,9 +75,20 @@ const useFetchAll = (API_URL, endpoints) => {
           })
         );
 
-        // Convert response array to object format { "hero": data, "about": data, ... }
+        // Convert response array to object format { "hero": data, "dynamicSections": data, ... }
         const results = Object.fromEntries(responses);
-console.log("results",results);
+
+           // Process dynamicSections (if exists) in fomate like { "hero": data, "award": data, ... }
+           if (results.dynamicSections && results.dynamicSections?.length > 0) {
+            results.dynamicSections.forEach(section => {
+              console.log("section section",section);
+              
+              results[section.name] = [section];
+            });
+            delete results.dynamicSections; // Remove the original key
+          }
+
+        console.log("results",results);
 
         if (isMounted) {
           setData(results);

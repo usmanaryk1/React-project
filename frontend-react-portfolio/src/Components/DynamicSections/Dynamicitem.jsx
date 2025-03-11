@@ -54,7 +54,7 @@ const Dynamicitem = ({
                   <div className="row">
                     <div className="col-9">
                       <div className="section-title title-box-2 d-flex justify-content-between">
-                        <h5>{dynamicSection.title}</h5>
+                        <h5>{dynamicSection.name}</h5>
                       </div>
                     </div>
                     <div className="col-3">
