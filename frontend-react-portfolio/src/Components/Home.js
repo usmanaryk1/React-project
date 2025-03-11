@@ -256,25 +256,6 @@ const Home = () => {
     []
   );
 
-  // ✅ State management for API data
-  // const [data, setData] = useState({});
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
-
-
-// const { sections = [], isPending } = useSectionVisibility();
-// console.log("sections",sections);
-// console.log(`useSectionVisibility execution time`, sections);
-
-// const {
-//   data: sectionsVisible,
-//   setData: setSectionsVisible,
-//   isPending: isPendingVisible,
-//   error: errorVisible,
-//   refetch: refetchVisible,
-// } = useFetch(`${API_URL}/api/sectionVisibility/visible`);
-// console.log("sectionsVisible",sectionsVisible);
-
 const endpoints = useMemo(
   () => [
     "hero",
@@ -294,6 +275,7 @@ const endpoints = useMemo(
 );
 
 const { data, isLoading, error } = useFetchAll(API_URL, endpoints);
+// console.log("data loop",data)
 
 const [visibleSections, setVisibleSections] = useState([]);
 const [isPending, setIsPending] = useState(true); // Initially true
@@ -305,7 +287,7 @@ useEffect(() => {
       const response = await fetch(`${API_URL}/api/sectionVisibility/visible`);
       const dataVisible = await response.json();
       setVisibleSections(dataVisible); // Set state with fetched data
-      console.log("dataVisible seee",dataVisible);
+      // console.log("dataVisible seee",dataVisible);
     } catch (error) {
       console.error("Error fetching visible sections:", error);
     } finally {
@@ -317,52 +299,6 @@ useEffect(() => {
 }, []); // Runs only once when component mounts
 
 
-  // ✅ Fetch all API data in a single batch
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setLoading(true);
-  //     setError(null);
-  //     console.log("loading",loading);
-  //     try {
-  //       const endpoints = [
-  //         "hero",
-  //         "about",
-  //         "contact",
-  //         "dynamicSections",
-  //         "skills",
-  //         "services",
-  //         "counts",
-  //         "works",
-  //         "testimonials",
-  //         "certifications",
-  //         "social",
-  //       ];
-        
-  //       const responses = await Promise.all(
-  //         endpoints.map((endpoint) => fetch(`${API_URL}/api/${endpoint}`).then((res) => res.json()))
-  //       );
-  //       console.log("responses",responses);
-
-  //       const result = Object.fromEntries(endpoints.map((key, index) => [key, responses[index]]));
-  //       setData(result);
-  //     } catch (err) {
-  //       setError("Failed to load data. Please try again.");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []); //[API_URL]
-
-    // ✅ Memoize visible sections 
-  //order for section
-  // const visibleSections = useMemo(() => {
-  //   return (sections || [])
-  //     .filter((section) => section.isVisible)
-  //     .sort((a, b) => a.order - b.order);
-  // }, [sections]);
-
   // ✅ Handle Loading & Error
   if (isLoading || isPending) return <Loading />;
   if (error) return <Error message={error} />;
@@ -371,6 +307,8 @@ useEffect(() => {
     <main id="main">
       <Suspense fallback={<Loading />}>
         {visibleSections.map((section) => {
+          // console.log("section._id",section._id, section);
+          console.log("data[section, section.name]",section, data[section.name]);
           
           return (
             <LazyLoadSection key={section._id}>
