@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { storage } from "../../firebaseConfig";
 import { toast } from "react-toastify";
@@ -7,13 +7,14 @@ import { v4 } from "uuid";
 import validationSchema from "./CVValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./CVForm.css";
+import CVPreview from "./CVPreview";
+import useFetch from "../../Components/useFetch";
 
 const CVUploader = () => {
-  const [preview, setPreview] = useState(null);
+  const [preview, setPreview] = useState();
   const [file, setFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0); // Track upload progress
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
-  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
   const {
     register,
@@ -23,7 +24,20 @@ const CVUploader = () => {
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
+  const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
+  const userId = localStorage.getItem("userId"); // Retrieve userId from local storage
+  const token = localStorage.getItem("token");
+  const { data: cv, setData: setCv } = useFetch(
+    `${API_URL}/api/getCV/${userId}`
+  );
+  useEffect(() => {
+    if (cv) {
+      setPreview(cv.cvUrl); // Load existing CV preview
+      // console.log("preview initial:", preview);
+    }
+  }, [cv]);
+  // console.log("cv", cv);
   const onFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
@@ -35,8 +49,6 @@ const CVUploader = () => {
   };
 
   const onSubmit = async (data) => {
-    const userId = localStorage.getItem("userId");
-    const token = localStorage.getItem("token"); // Retrieve userId from local storage
     // console.log(userId);
 
     if (!token) {
@@ -65,6 +77,7 @@ const CVUploader = () => {
         async () => {
           try {
             const url = await getDownloadURL(uploadTask.snapshot.ref);
+            setCv(url);
             // console.log("cvurl", url);
             // Save CV URL to MongoDB using fetch API
             const response = await fetch(`${API_URL}/api/upload-cv`, {
@@ -84,6 +97,9 @@ const CVUploader = () => {
             }
 
             // console.log("CV uploaded:", result);
+            setPreview(url); // Set preview to uploaded file URL
+            console.log("preview set:", preview);
+
             toast.success("CV Uploaded Successfully!");
           } catch (error) {
             // console.error("Error uploading CV:", error);
@@ -92,7 +108,7 @@ const CVUploader = () => {
             setUploadProgress(0); // Reset progress
             setIsSubmitting(false);
             reset();
-            setPreview(null);
+
             setFile(null);
           }
         }
@@ -133,25 +149,20 @@ const CVUploader = () => {
                       ? `Uploading ${Math.round(uploadProgress)}%`
                       : "Upload CV"}
                   </button>
-                  <button className="cancel-btn" onClick={() => reset()}>
+                  <button
+                    className="cancel-btn"
+                    onClick={() => {
+                      reset();
+                      setFile(null);
+                    }}
+                  >
                     Cancel
                   </button>
                 </form>
               </div>
             </div>
             <hr />
-            {preview && (
-              <div className="cv-preview">
-                <h3>Preview:</h3>
-                <iframe
-                  src={preview}
-                  width="80%"
-                  height="700px"
-                  title="CV_Preview"
-                  className="border border-dark  border-5 "
-                />
-              </div>
-            )}
+            <CVPreview preview={preview} />
           </div>
         </div>
       </section>

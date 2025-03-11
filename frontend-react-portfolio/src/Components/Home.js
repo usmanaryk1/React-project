@@ -140,7 +140,7 @@
 //               section.name.replace(" Section", "").trim()
 //           );
 //           console.log("section.name",section.name);
-          
+
 //           // Handle static sections
 //           switch (section.name) {
 //             case "Hero Section":
@@ -220,8 +220,6 @@
 
 // export default Home;
 
-
-
 import { useMemo, useState, useEffect, Suspense, lazy } from "react";
 import LazyLoadSection from "./LazyLoadSection";
 import Loading from "./Loading/Loading";
@@ -232,11 +230,10 @@ import CertificationSkeletonLoader from "./certificationSkeletonLoader";
 import HeroSkeletonLoader from "./heroSkeletonLoader";
 import AboutSkeletonLoader from "./aboutSkeletonLoader";
 
-
 import DynamicSections from "./DynamicSections/DynamicSections";
 import useFetchAll from "./useFetchAll";
 import useFetch from "./useFetch";
-
+import CVPreview from "../CMSAdmin/UploadCV/CVPreview";
 
 // ✅ Lazy load sections
 const Hero = lazy(() => import("./Hero"));
@@ -247,7 +244,9 @@ const Portfolio = lazy(() => import("./Portfolio"));
 const Testimonial = lazy(() => import("./Testimonial"));
 const Certifications = lazy(() => import("./Certifications"));
 const Contact = lazy(() => import("./Contact/Contact"));
-const TermsandConditions = lazy(() => import("./TermsAndConditions/Terms&Conditions"));
+const TermsandConditions = lazy(() =>
+  import("./TermsAndConditions/Terms&Conditions")
+);
 // const DynamicSections = lazy(() => import("./DynamicSections/DynamicSections"));
 
 const Home = () => {
@@ -255,49 +254,52 @@ const Home = () => {
     () => process.env.REACT_APP_BACKEND_URL || "http://localhost:8000",
     []
   );
+  const userId = localStorage.getItem("userId"); // Retrieve userId from local storage
+  // const { data: cv } = useFetch(`${API_URL}/api/getCV/${userId}`);
+  const endpoints = useMemo(
+    () => [
+      "hero",
+      "about",
+      "contact",
+      "dynamicSections",
+      "skills",
+      "services",
+      "counts",
+      "works",
+      "testimonials",
+      "certifications",
+      "social",
+      "terms",
+      `getCV/:${userId}`,
+    ],
+    [userId]
+  );
 
-const endpoints = useMemo(
-  () => [
-    "hero",
-    "about",
-    "contact",
-    "dynamicSections",
-    "skills",
-    "services",
-    "counts",
-    "works",
-    "testimonials",
-    "certifications",
-    "social",
-    "terms"
-  ],
-  []
-);
+  const { data, isLoading, error } = useFetchAll(API_URL, endpoints);
+  // console.log("data loop",data)
+  console.log("data.:", data);
+  const [visibleSections, setVisibleSections] = useState([]);
+  const [isPending, setIsPending] = useState(true); // Initially true
 
-const { data, isLoading, error } = useFetchAll(API_URL, endpoints);
-// console.log("data loop",data)
+  useEffect(() => {
+    setIsPending(true); // Set loading state to true before fetching
+    const fetchVisibleSections = async () => {
+      try {
+        const response = await fetch(
+          `${API_URL}/api/sectionVisibility/visible`
+        );
+        const dataVisible = await response.json();
+        setVisibleSections(dataVisible); // Set state with fetched data
+        // console.log("dataVisible seee",dataVisible);
+      } catch (error) {
+        console.error("Error fetching visible sections:", error);
+      } finally {
+        setIsPending(false); // Set loading state to false after fetch completes
+      }
+    };
 
-const [visibleSections, setVisibleSections] = useState([]);
-const [isPending, setIsPending] = useState(true); // Initially true
-
-useEffect(() => {
-  setIsPending(true); // Set loading state to true before fetching
-  const fetchVisibleSections = async () => {
-    try {
-      const response = await fetch(`${API_URL}/api/sectionVisibility/visible`);
-      const dataVisible = await response.json();
-      setVisibleSections(dataVisible); // Set state with fetched data
-      // console.log("dataVisible seee",dataVisible);
-    } catch (error) {
-      console.error("Error fetching visible sections:", error);
-    } finally {
-      setIsPending(false); // Set loading state to false after fetch completes
-    }
-  };
-
-  fetchVisibleSections();
-}, []); // Runs only once when component mounts
-
+    fetchVisibleSections();
+  }, []); // Runs only once when component mounts
 
   // ✅ Handle Loading & Error
   if (isLoading || isPending) return <Loading />;
@@ -308,35 +310,150 @@ useEffect(() => {
       <Suspense fallback={<Loading />}>
         {visibleSections.map((section) => {
           // console.log("section._id",section._id, section);
-          console.log("data[section, section.name]",section, data[section.name]);
-          
+          // console.log("data[section, section.name]",section, data[section.name]);
+
           return (
             <LazyLoadSection key={section._id}>
               {(() => {
                 //terms is missing
                 switch (section.name) {
-                  case "Hero": 
-                    return !data.hero || data.hero.length === 0 ? (<div className="row justify-content-center"><div className="col-md-12">  <HeroSkeletonLoader /></div> </div>) : (<Hero key={section._id} hero={data.hero[0] || {}} />);
+                  case "Hero":
+                    return !data.hero || data.hero.length === 0 ? (
+                      <div className="row justify-content-center">
+                        <div className="col-md-12">
+                          {" "}
+                          <HeroSkeletonLoader />
+                        </div>{" "}
+                      </div>
+                    ) : (
+                      <Hero key={section._id} hero={data.hero[0] || {}} />
+                    );
                   case "About":
-                    return !data.about || data.about.length === 0 ? (<div className="row justify-content-center"><div className="col-md-10">  <AboutSkeletonLoader /></div> <About about={data.about || []} skills={data.skills || []} /> </div>) : (<About key={section._id} about={data.about || []} skills={data.skills || []} />);
+                    return !data.about || data.about.length === 0 ? (
+                      <div className="row justify-content-center">
+                        <div className="col-md-10">
+                          {" "}
+                          <AboutSkeletonLoader />
+                        </div>{" "}
+                        <About
+                          about={data.about || []}
+                          skills={data.skills || []}
+                        />{" "}
+                      </div>
+                    ) : (
+                      <About
+                        key={section._id}
+                        about={data.about || []}
+                        skills={data.skills || []}
+                      />
+                    );
                   case "Services":
-                    return <Services key={section._id} services={data.services || []} title="Services" subtitle="Delivering solutions that exceed expectations." />;
+                    return (
+                      <Services
+                        key={section._id}
+                        services={data.services || []}
+                        title="Services"
+                        subtitle="Delivering solutions that exceed expectations."
+                      />
+                    );
                   case "Counter":
-                    return <Counter key={section._id} counts={data.counts || []} />;
+                    return (
+                      <Counter key={section._id} counts={data.counts || []} />
+                    );
                   case "Portfolio":
-                    return !data.works || data.works.length === 0 ? (<div className="row justify-content-center"><div className="col-md-3"> <PortfolioCardSkeletonLoading /> </div> <div className="col-md-3">   <PortfolioCardSkeletonLoading />  </div>  <div className="col-md-3">  <PortfolioCardSkeletonLoading /></div> </div>) : (<Portfolio key={section._id} works={data.works} title="Portfolio" subtitle="We turn ideas into impactful results." />);
-                    // <Portfolio works={data.works || []} title="Portfolio" subtitle="We turn ideas into impactful results." />;
+                    return !data.works || data.works.length === 0 ? (
+                      <div className="row justify-content-center">
+                        <div className="col-md-3">
+                          {" "}
+                          <PortfolioCardSkeletonLoading />{" "}
+                        </div>{" "}
+                        <div className="col-md-3">
+                          {" "}
+                          <PortfolioCardSkeletonLoading />{" "}
+                        </div>{" "}
+                        <div className="col-md-3">
+                          {" "}
+                          <PortfolioCardSkeletonLoading />
+                        </div>{" "}
+                      </div>
+                    ) : (
+                      <Portfolio
+                        key={section._id}
+                        works={data.works}
+                        title="Portfolio"
+                        subtitle="We turn ideas into impactful results."
+                      />
+                    );
+                  // <Portfolio works={data.works || []} title="Portfolio" subtitle="We turn ideas into impactful results." />;
                   case "Testimonial":
-                    return <Testimonial key={section._id} testimonials={data.testimonials || []} />;
+                    return (
+                      <Testimonial
+                        key={section._id}
+                        testimonials={data.testimonials || []}
+                      />
+                    );
                   case "Certifications":
-                    return !data.certifications || data.certifications.length === 0 ? (<div className="row justify-content-center"><div className="col-md-3"> <CertificationSkeletonLoader /> </div> <div className="col-md-3">   <CertificationSkeletonLoader />  </div>  <div className="col-md-3">  <CertificationSkeletonLoader /></div> </div>) : (<Certifications title="Certifications" subtitle="Showcasing milestones of excellence" key={section._id} certifications={data.certifications || []} />);
+                    return !data.certifications ||
+                      data.certifications.length === 0 ? (
+                      <div className="row justify-content-center">
+                        <div className="col-md-3">
+                          {" "}
+                          <CertificationSkeletonLoader />{" "}
+                        </div>{" "}
+                        <div className="col-md-3">
+                          {" "}
+                          <CertificationSkeletonLoader />{" "}
+                        </div>{" "}
+                        <div className="col-md-3">
+                          {" "}
+                          <CertificationSkeletonLoader />
+                        </div>{" "}
+                      </div>
+                    ) : (
+                      <Certifications
+                        title="Certifications"
+                        subtitle="Showcasing milestones of excellence"
+                        key={section._id}
+                        certifications={data.certifications || []}
+                      />
+                    );
                   case "Contact":
-                    return <Contact key={section._id} contact={data.contact || []} links={data.social || []} />;
+                    return (
+                      <Contact
+                        key={section._id}
+                        contact={data.contact || []}
+                        links={data.social || []}
+                      />
+                    );
                   case "Terms and Conditions":
-                    return <TermsandConditions key={section._id} termsList={data.termsList || []} className="mt-5" />;
+                    return (
+                      <TermsandConditions
+                        key={section._id}
+                        termsList={data.termsList || []}
+                        className="mt-5"
+                      />
+                    );
+                  case "CV":
+                    return (
+                      <LazyLoadSection key={section._id}>
+                        {!cv ? (
+                          <Loading />
+                        ) : (
+                          <CVPreview
+                            key={section._id}
+                            preview={data.cvUrl || []}
+                          />
+                        )}
+                      </LazyLoadSection>
+                    );
                   default:
-                    return data[section.name]? <DynamicSections dynamicSections={data[section.name]} className="mb-5" /> : null;
-                    //matchedDynamic ? <DynamicSections key={section._id} dynamicSections={[matchedDynamic]} className="mb-5" /> : null;
+                    return data[section.name] ? (
+                      <DynamicSections
+                        dynamicSections={data[section.name]}
+                        className="mb-5"
+                      />
+                    ) : null;
+                  //matchedDynamic ? <DynamicSections key={section._id} dynamicSections={[matchedDynamic]} className="mb-5" /> : null;
                 }
               })()}
             </LazyLoadSection>
