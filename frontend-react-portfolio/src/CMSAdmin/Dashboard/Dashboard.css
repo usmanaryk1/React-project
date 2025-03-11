@@ -4,10 +4,3 @@
 #dashboard {
   padding-top: 6.25rem;
 }
-.link-item {
-  transition: transform 0.3s ease;
-}
-
-.link-item:hover {
-  transform: scale(1.1); /* Slightly increase the size of the link on hover */
-}

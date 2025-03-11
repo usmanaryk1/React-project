@@ -23,10 +23,7 @@ const DynamicSectionsEdit = () => {
     refetch,
   } = useFetch(`${API_URL}/api/dynamicSections`);
 
-  const { sections, setSections, refetch: fetch } = useSectionVisibility();
-  // const [updating, setUpdating] = useState(false);
-  // const [reorderedSections, setReorderedSections] = useState([]); // To track reordering changes
-  // console.log("dynamicSections in form", dynamicSections);
+  const { setSections, refetch: fetch } = useSectionVisibility();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentDynamicSection, setCurrentDynamicSection] = useState(null);
@@ -50,7 +47,7 @@ const DynamicSectionsEdit = () => {
     async (data) => {
       // console.log("Save button clicked");
       // Ensure the form data is not empty before making API calls
-      if (!data.title || !data.content) {
+      if (!data.name || !data.content) {
         toast.error("Please fill out all fields before submitting.");
         return;
       }
@@ -61,33 +58,40 @@ const DynamicSectionsEdit = () => {
             currentDynamicSection._id,
             data
           );
+
           setDynamicSections((prevSections) =>
             prevSections.map((section) =>
               section._id === updatedData._id ? updatedData : section
             )
           );
+
           toast.success("Data updated successfully");
         } else {
           // Add a new section
-          // const addedData = await DynamicSectionService.addItem(data);
+
+          console.log("data", data);
+
+          const addedData = await DynamicSectionService.addItem({
+            ...data,
+            isDynamic: true,
+          });
+          setDynamicSections((prevData) => [...prevData, addedData]);
+          toast.success("Data added successfully");
+
+          console.log("added data:", addedData);
+
           // Fetch the current max order and increment
           const maxOrder =
             dynamicSections.length > 0
               ? Math.max(...dynamicSections.map((section) => section.order))
               : 0;
-          console.log("data", data);
-          const addedData = await DynamicSectionService.addItem({
-            ...data,
-            order: maxOrder + 1,
-          });
-          setDynamicSections((prevData) => [...prevData, addedData]);
-          toast.success("Data added successfully");
-          console.log("added data:", addedData);
+
           // Also update the Manage Sections collection
           const manageSectionPayload = {
-            name: `${addedData.title} Section`,
+            name: `${addedData.name}`,
             isVisible: true,
-            order: addedData.order, // Add the order here
+            order: maxOrder + 1, // Add the order here
+            isDynamic: true,
           };
           console.log("manageSectionPayload", manageSectionPayload);
           const newSection = await ApiService("api/sectionVisibility").addItem(
@@ -135,37 +139,6 @@ const DynamicSectionsEdit = () => {
     [DynamicSectionService, setDynamicSections]
   );
 
-  // const handleReorder = async (dragIndex, hoverIndex) => {
-  //   const reorderedList = [...dynamicSections];
-  //   const [draggedItem] = reorderedList.splice(dragIndex, 1);
-  //   reorderedList.splice(hoverIndex, 0, draggedItem);
-  //   console.log("reorderedList sections", reorderedList);
-
-  //   setDynamicSections(reorderedList); // Update the skills list locally
-  //   setReorderedSections(reorderedList);
-  // };
-
-  // const handleSaveReorder = async () => {
-  //   try {
-  //     setUpdating(true);
-  //     // Make API call with the final reordered list
-
-  //     const reorderedSection = dynamicSections.map((section, index) => ({
-  //       _id: section._id,
-  //       order: index + 1, // Use the correct order here
-  //     }));
-  //     console.log("Final Payload to Save:", reorderedSection);
-
-  //     await DynamicSectionService.reorderItems(reorderedSection);
-  //     setUpdating(false);
-  //     toast.success("Sections reordered successfully");
-  //     setReorderedSections([]);
-  //   } catch (error) {
-  //     setUpdating(false);
-  //     toast.error("Failed to update the sequence of sections");
-  //   }
-  // };
-
   if (isPending) return <Loading />;
 
   if (error) return <Error message={error} />;
@@ -178,28 +151,17 @@ const DynamicSectionsEdit = () => {
             Add New Section
           </button>
         </div>
-        {/* Update Order Button */}
-        <hr />
-        {/* <div className="d-flex justify-content-end">
-          <button
-            className="updateorder-btn"
-            onClick={handleSaveReorder}
-            disabled={!reorderedSections.length || updating}
-          >
-            {updating ? "Updating" : "Update Order"}
-          </button>
-        </div> */}
+
         <DynamicSections
           dynamicSections={dynamicSections}
           onEditClick={handleEditClick}
           onDelete={handleDelete}
-          // handleReorder={handleReorder}
         />
         <EditorModal
           isOpen={isModalOpen}
           onSubmit={handleModalSubmit}
           onClose={() => setIsModalOpen(false)}
-          initialData={currentDynamicSection ?? { title: "", content: "" }}
+          initialData={currentDynamicSection ?? { name: "", content: "" }}
         />
       </div>
     </>

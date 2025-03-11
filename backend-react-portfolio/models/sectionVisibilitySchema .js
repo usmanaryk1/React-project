@@ -13,6 +13,9 @@ const sectionVisibilitySchema = new Schema({
   order: {
     type: Number,
   },
+  isDynamic: {
+    type: Boolean,
+  },
 });
 
 //two argument need in schema 1st one is name  and 2nd one is Schema

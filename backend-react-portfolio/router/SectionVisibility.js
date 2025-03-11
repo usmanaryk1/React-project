@@ -33,7 +33,7 @@ router.get("/visible", async (req, res) => {
 });
 
 router.post("/", authenticateJWT, async (req, res) => {
-  const { name, isVisible } = req.body;
+  const { name, isVisible, isDynamic } = req.body;
   try {
     // Find the current maximum order in the collection
     const lastSection = await SectionVisibility_Model.findOne().sort({
@@ -45,9 +45,26 @@ router.post("/", authenticateJWT, async (req, res) => {
 
     const UpdatedSections = await SectionVisibility_Model.findOneAndUpdate(
       { name },
-      { isVisible, order: newOrder },
+      { isVisible, order: newOrder, isDynamic },
 
       { new: true, upsert: true } // Update if exists, otherwise create
+    );
+
+    res.status(200).json(UpdatedSections);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error Updating Visibility State" });
+  }
+});
+
+router.put("/toggleVisibility", authenticateJWT, async (req, res) => {
+  const { name, isVisible } = req.body;
+  try {
+    const UpdatedSections = await SectionVisibility_Model.findOneAndUpdate(
+      { name },
+      { isVisible },
+
+      { new: true } // Update if exists, otherwise create
     );
 
     res.status(200).json(UpdatedSections);

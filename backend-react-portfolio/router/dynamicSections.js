@@ -43,14 +43,14 @@ router.get("/:id", async (req, res) => {
 // POST SECTION (AUTHENTICATED ONLY)
 router.post("/", authenticateJWT, async (req, res) => {
   try {
-    const { title, content } = req.body;
-    const newSection = await DynamicSectionsModel.create({ title, content });
+    const { name, content, order, isDynamic } = req.body;
+    const newSection = await DynamicSectionsModel.create({
+      name,
+      content,
+      order,
+      isDynamic,
+    });
 
-    // await SectionVisibility_Model.create({
-    //   name: title,
-    //   isVisible: true,
-    //   order: await DynamicSectionsModel.countDocuments(),
-    // });
     res.status(201).json(newSection);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -62,14 +62,14 @@ router.post("/", authenticateJWT, async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const { title, content } = req.body;
+    const { name, content } = req.body;
     await DynamicSectionsModel.findByIdAndUpdate(req.params.id, {
-      title,
+      name,
       content,
     });
     await SectionVisibility_Model.findOneAndUpdate(
-      { name: title },
-      { name: title }
+      { name: name },
+      { name: name }
     );
     res.status(200).json({ message: "Section updated successfully" });
   } catch (error) {
@@ -113,7 +113,7 @@ router.delete("/:id", async (req, res) => {
     const section = await DynamicSectionsModel.findByIdAndDelete(req.params.id);
     console.log("sectionDeleted", section);
     await SectionVisibility_Model.findOneAndDelete({
-      name: `${section.title} Section`,
+      name: `${section.name}`,
     });
     res.status(200).json({ message: "Section deleted successfully" });
   } catch (error) {
@@ -140,37 +140,6 @@ router.delete("/:id", async (req, res) => {
 //   } catch (error) {
 //     console.error(error);
 //     res.status(500).json({ message: error.message });
-//   }
-// });
-
-// REORDER SECTIONS BY MAPPING REORDERED TERMS (AUTHENTICATED ONLY)
-
-// router.patch("/reorder", authenticateJWT, async (req, res) => {
-//   try {
-//     const { reorderedItems } = req.body; // [{ _id, order }, ...]
-
-//     if (!Array.isArray(reorderedItems)) {
-//       return res
-//         .status(400)
-//         .json({ message: "Invalid reordered items format" });
-//     }
-
-//     // console.log("Reordered Items:", reorderedItems);
-
-//     const bulkOps = reorderedItems.map((section) => ({
-//       updateOne: {
-//         filter: { _id: section._id },
-//         update: { $set: { order: section.order } }, // Use the order field from client
-//       },
-//     }));
-
-//     const result = await DynamicSectionsModel.bulkWrite(bulkOps);
-//     // console.log("BulkWrite Result:", result);
-
-//     res.status(200).json({ message: "Sections reordered successfully" });
-//   } catch (error) {
-//     console.error("Error reordering sections:", error.stack || error.message);
-//     res.status(400).json({ message: "Failed to reorder sections" });
 //   }
 // });
 

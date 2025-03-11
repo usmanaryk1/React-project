@@ -22,7 +22,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.editor-title,
+.editor-name,
 .editor-label {
   font-size: 14px;
   font-weight: bold;
@@ -30,7 +30,7 @@
   display: block;
 }
 
-.modal-title-input {
+.modal-name-input {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;

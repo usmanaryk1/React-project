@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const dynamicSectionsSchema = new Schema({
-  title: {
+  name: {
     type: String,
     required: true,
   },
@@ -12,6 +12,9 @@ const dynamicSectionsSchema = new Schema({
   },
   order: {
     type: Number, // To track the order of terms
+  },
+  isDynamic: {
+    type: Boolean,
   },
 });
 

@@ -34,18 +34,21 @@ export const useSectionManager = () => {
     setSections(updated); // Update context state
     // Persist to backend
     try {
-      const response = await fetch(`${API_URL}/api/sectionVisibility`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          isVisible: !sections.find((section) => section.name === name)
-            .isVisible,
-        }),
-      });
+      const response = await fetch(
+        `${API_URL}/api/sectionVisibility/toggleVisibility`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            isVisible: !sections.find((section) => section.name === name)
+              .isVisible,
+          }),
+        }
+      );
 
       if (!response.ok) {
         toast.error("Failed to update the visibility state of sections.");

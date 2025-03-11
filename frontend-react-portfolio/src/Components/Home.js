@@ -247,6 +247,7 @@ const Portfolio = lazy(() => import("./Portfolio"));
 const Testimonial = lazy(() => import("./Testimonial"));
 const Certifications = lazy(() => import("./Certifications"));
 const Contact = lazy(() => import("./Contact/Contact"));
+const TermsandConditions = lazy(() => import("./TermsAndConditions/Terms&Conditions"));
 // const DynamicSections = lazy(() => import("./DynamicSections/DynamicSections"));
 
 const Home = () => {
@@ -287,7 +288,7 @@ const endpoints = useMemo(
     "testimonials",
     "certifications",
     "social",
-    // "terms"
+    "terms"
   ],
   []
 );
@@ -370,12 +371,6 @@ useEffect(() => {
     <main id="main">
       <Suspense fallback={<Loading />}>
         {visibleSections.map((section) => {
-          // find which one section is dynamic
-          const matchedDynamic = (data.dynamicSections || []).find(
-            (dynamicSection) =>
-              dynamicSection.title.trim() === section.name.replace(" Section", "").trim()
-          );
-          // console.log("section._id",section._id, section);
           
           return (
             <LazyLoadSection key={section._id}>
@@ -383,24 +378,27 @@ useEffect(() => {
                 //terms is missing
                 switch (section.name) {
                   case "Hero": 
-                    return !data.hero || data.certifications.length === 0 ? (<div className="row justify-content-center"><div className="col-md-12">  <HeroSkeletonLoader /></div> </div>) : (<Hero hero={data.hero || []} />);
+                    return !data.hero || data.hero.length === 0 ? (<div className="row justify-content-center"><div className="col-md-12">  <HeroSkeletonLoader /></div> </div>) : (<Hero key={section._id} hero={data.hero[0] || {}} />);
                   case "About":
-                    return !data.about || data.certifications.length === 0 ? (<div className="row justify-content-center"><div className="col-md-10">  <AboutSkeletonLoader /></div> <About about={data.about || []} skills={data.skills || []} /> </div>) : (<About about={data.about || []} skills={data.skills || []} />);
+                    return !data.about || data.about.length === 0 ? (<div className="row justify-content-center"><div className="col-md-10">  <AboutSkeletonLoader /></div> <About about={data.about || []} skills={data.skills || []} /> </div>) : (<About key={section._id} about={data.about || []} skills={data.skills || []} />);
                   case "Services":
-                    return <Services services={data.services || []} title="Services" subtitle="Delivering solutions that exceed expectations." />;
+                    return <Services key={section._id} services={data.services || []} title="Services" subtitle="Delivering solutions that exceed expectations." />;
                   case "Counter":
-                    return <Counter counts={data.counts || []} />;
+                    return <Counter key={section._id} counts={data.counts || []} />;
                   case "Portfolio":
-                    return !data.works || data.certifications.length === 0 ? (<div className="row justify-content-center"><div className="col-md-3"> <PortfolioCardSkeletonLoading /> </div> <div className="col-md-3">   <PortfolioCardSkeletonLoading />  </div>  <div className="col-md-3">  <PortfolioCardSkeletonLoading /></div> </div>) : (<Portfolio works={data.works} title="Portfolio" subtitle="We turn ideas into impactful results." />);
+                    return !data.works || data.works.length === 0 ? (<div className="row justify-content-center"><div className="col-md-3"> <PortfolioCardSkeletonLoading /> </div> <div className="col-md-3">   <PortfolioCardSkeletonLoading />  </div>  <div className="col-md-3">  <PortfolioCardSkeletonLoading /></div> </div>) : (<Portfolio key={section._id} works={data.works} title="Portfolio" subtitle="We turn ideas into impactful results." />);
                     // <Portfolio works={data.works || []} title="Portfolio" subtitle="We turn ideas into impactful results." />;
                   case "Testimonial":
-                    return <Testimonial testimonials={data.testimonials || []} />;
+                    return <Testimonial key={section._id} testimonials={data.testimonials || []} />;
                   case "Certifications":
-                    return !data.certifications || data.certifications.length === 0 ? (<div className="row justify-content-center"><div className="col-md-3"> <CertificationSkeletonLoader /> </div> <div className="col-md-3">   <CertificationSkeletonLoader />  </div>  <div className="col-md-3">  <CertificationSkeletonLoader /></div> </div>) : (<Certifications title="Certifications" subtitle="Showcasing milestones of excellence" certifications={data.certifications || []} />);
+                    return !data.certifications || data.certifications.length === 0 ? (<div className="row justify-content-center"><div className="col-md-3"> <CertificationSkeletonLoader /> </div> <div className="col-md-3">   <CertificationSkeletonLoader />  </div>  <div className="col-md-3">  <CertificationSkeletonLoader /></div> </div>) : (<Certifications title="Certifications" subtitle="Showcasing milestones of excellence" key={section._id} certifications={data.certifications || []} />);
                   case "Contact":
-                    return <Contact contact={data.contact || []} links={data.social || []} />;
+                    return <Contact key={section._id} contact={data.contact || []} links={data.social || []} />;
+                  case "Terms and Conditions":
+                    return <TermsandConditions key={section._id} termsList={data.termsList || []} className="mt-5" />;
                   default:
-                    return matchedDynamic ? <DynamicSections dynamicSections={[matchedDynamic]} className="mb-5" /> : null;
+                    return data[section.name]? <DynamicSections dynamicSections={data[section.name]} className="mb-5" /> : null;
+                    //matchedDynamic ? <DynamicSections key={section._id} dynamicSections={[matchedDynamic]} className="mb-5" /> : null;
                 }
               })()}
             </LazyLoadSection>

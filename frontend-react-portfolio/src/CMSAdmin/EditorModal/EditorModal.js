@@ -30,25 +30,25 @@ const EditorModal = ({ isOpen, onClose, onSubmit, initialData }) => {
         <hr />
         {/* Title Field */}
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="title" className="editor-title">
-            Title
+          <label htmlFor="name" className="editor-name">
+            Name
           </label>
           {/* Used controller instaed of register because it doesn't work well with custom inputs like JoditEditor */}
           <Controller
-            name="title" // specifies the field's name in the form
+            name="name" // specifies the field's name in the form
             control={control} // connects the field to React Hook Form's internal state management
             // The render function provides the field object (which includes value, onChange, onBlur, etc.) to bind to the input component
             render={({ field }) => (
               <input
                 {...field}
                 type="text"
-                placeholder="Enter title"
-                className="modal-title-input"
+                placeholder="Enter name"
+                className="modal-name-input"
               />
             )}
           />
-          {errors.title && (
-            <p className="error-message">{errors.title.message}</p>
+          {errors.name && (
+            <p className="error-message">{errors.name.message}</p>
           )}
 
           {/* Description Field */}
