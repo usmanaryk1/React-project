@@ -3,7 +3,7 @@ const CV_Model = require("../models/CVSchema");
 const axios = require("axios");
 const router = express.Router();
 
-// Fetch CV URL by userId
+// Fetch CV URL by userId and download
 router.get("/download-cv", async (req, res) => {
   const { userId } = req.params;
 
