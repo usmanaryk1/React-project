@@ -247,32 +247,12 @@ const Portfolio = lazy(() => import("./Portfolio"));
 const Testimonial = lazy(() => import("./Testimonial"));
 const Certifications = lazy(() => import("./Certifications"));
 const Contact = lazy(() => import("./Contact/Contact"));
-// const DynamicSections = lazy(() => import("./DynamicSections/DynamicSections"));
 
 const Home = () => {
   const API_URL = useMemo(
     () => process.env.REACT_APP_BACKEND_URL || "http://localhost:8000",
     []
   );
-
-  // ✅ State management for API data
-  // const [data, setData] = useState({});
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
-
-
-// const { sections = [], isPending } = useSectionVisibility();
-// console.log("sections",sections);
-// console.log(`useSectionVisibility execution time`, sections);
-
-// const {
-//   data: sectionsVisible,
-//   setData: setSectionsVisible,
-//   isPending: isPendingVisible,
-//   error: errorVisible,
-//   refetch: refetchVisible,
-// } = useFetch(`${API_URL}/api/sectionVisibility/visible`);
-// console.log("sectionsVisible",sectionsVisible);
 
 const endpoints = useMemo(
   () => [
@@ -293,6 +273,7 @@ const endpoints = useMemo(
 );
 
 const { data, isLoading, error } = useFetchAll(API_URL, endpoints);
+// console.log("data loop",data)
 
 const [visibleSections, setVisibleSections] = useState([]);
 const [isPending, setIsPending] = useState(true); // Initially true
@@ -304,7 +285,7 @@ useEffect(() => {
       const response = await fetch(`${API_URL}/api/sectionVisibility/visible`);
       const dataVisible = await response.json();
       setVisibleSections(dataVisible); // Set state with fetched data
-      console.log("dataVisible seee",dataVisible);
+      // console.log("dataVisible seee",dataVisible);
     } catch (error) {
       console.error("Error fetching visible sections:", error);
     } finally {
@@ -316,52 +297,6 @@ useEffect(() => {
 }, []); // Runs only once when component mounts
 
 
-  // ✅ Fetch all API data in a single batch
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setLoading(true);
-  //     setError(null);
-  //     console.log("loading",loading);
-  //     try {
-  //       const endpoints = [
-  //         "hero",
-  //         "about",
-  //         "contact",
-  //         "dynamicSections",
-  //         "skills",
-  //         "services",
-  //         "counts",
-  //         "works",
-  //         "testimonials",
-  //         "certifications",
-  //         "social",
-  //       ];
-        
-  //       const responses = await Promise.all(
-  //         endpoints.map((endpoint) => fetch(`${API_URL}/api/${endpoint}`).then((res) => res.json()))
-  //       );
-  //       console.log("responses",responses);
-
-  //       const result = Object.fromEntries(endpoints.map((key, index) => [key, responses[index]]));
-  //       setData(result);
-  //     } catch (err) {
-  //       setError("Failed to load data. Please try again.");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []); //[API_URL]
-
-    // ✅ Memoize visible sections 
-  //order for section
-  // const visibleSections = useMemo(() => {
-  //   return (sections || [])
-  //     .filter((section) => section.isVisible)
-  //     .sort((a, b) => a.order - b.order);
-  // }, [sections]);
-
   // ✅ Handle Loading & Error
   if (isLoading || isPending) return <Loading />;
   if (error) return <Error message={error} />;
@@ -370,12 +305,8 @@ useEffect(() => {
     <main id="main">
       <Suspense fallback={<Loading />}>
         {visibleSections.map((section) => {
-          // find which one section is dynamic
-          const matchedDynamic = (data.dynamicSections || []).find(
-            (dynamicSection) =>
-              dynamicSection.title.trim() === section.name.replace(" Section", "").trim()
-          );
           // console.log("section._id",section._id, section);
+          console.log("data[section, section.name]",section, data[section.name]);
           
           return (
             <LazyLoadSection key={section._id}>
@@ -383,15 +314,15 @@ useEffect(() => {
                 //terms is missing
                 switch (section.name) {
                   case "Hero": 
-                    return !data.hero || data.certifications.length === 0 ? (<div className="row justify-content-center"><div className="col-md-12">  <HeroSkeletonLoader /></div> </div>) : (<Hero hero={data.hero || []} />);
+                    return !data.hero || data.hero.length === 0 ? (<div className="row justify-content-center"><div className="col-md-12">  <HeroSkeletonLoader /></div> </div>) : (<Hero hero={data.hero[0] || {}} />);
                   case "About":
-                    return !data.about || data.certifications.length === 0 ? (<div className="row justify-content-center"><div className="col-md-10">  <AboutSkeletonLoader /></div> <About about={data.about || []} skills={data.skills || []} /> </div>) : (<About about={data.about || []} skills={data.skills || []} />);
+                    return !data.about || data.about.length === 0 ? (<div className="row justify-content-center"><div className="col-md-10">  <AboutSkeletonLoader /></div> <About about={data.about || []} skills={data.skills || []} /> </div>) : (<About about={data.about || []} skills={data.skills || []} />);
                   case "Services":
                     return <Services services={data.services || []} title="Services" subtitle="Delivering solutions that exceed expectations." />;
                   case "Counter":
                     return <Counter counts={data.counts || []} />;
                   case "Portfolio":
-                    return !data.works || data.certifications.length === 0 ? (<div className="row justify-content-center"><div className="col-md-3"> <PortfolioCardSkeletonLoading /> </div> <div className="col-md-3">   <PortfolioCardSkeletonLoading />  </div>  <div className="col-md-3">  <PortfolioCardSkeletonLoading /></div> </div>) : (<Portfolio works={data.works} title="Portfolio" subtitle="We turn ideas into impactful results." />);
+                    return !data.works || data.works.length === 0 ? (<div className="row justify-content-center"><div className="col-md-3"> <PortfolioCardSkeletonLoading /> </div> <div className="col-md-3">   <PortfolioCardSkeletonLoading />  </div>  <div className="col-md-3">  <PortfolioCardSkeletonLoading /></div> </div>) : (<Portfolio works={data.works} title="Portfolio" subtitle="We turn ideas into impactful results." />);
                     // <Portfolio works={data.works || []} title="Portfolio" subtitle="We turn ideas into impactful results." />;
                   case "Testimonial":
                     return <Testimonial testimonials={data.testimonials || []} />;
@@ -399,8 +330,9 @@ useEffect(() => {
                     return !data.certifications || data.certifications.length === 0 ? (<div className="row justify-content-center"><div className="col-md-3"> <CertificationSkeletonLoader /> </div> <div className="col-md-3">   <CertificationSkeletonLoader />  </div>  <div className="col-md-3">  <CertificationSkeletonLoader /></div> </div>) : (<Certifications title="Certifications" subtitle="Showcasing milestones of excellence" certifications={data.certifications || []} />);
                   case "Contact":
                     return <Contact contact={data.contact || []} links={data.social || []} />;
-                  default:
-                    return matchedDynamic ? <DynamicSections dynamicSections={[matchedDynamic]} className="mb-5" /> : null;
+                    default:
+                    return data[section.name]? <DynamicSections dynamicSections={data[section.name]} className="mb-5" /> : null;
+                    // return matchedDynamic ? <DynamicSections dynamicSections={[matchedDynamic]} className="mb-5" /> : null;
                 }
               })()}
             </LazyLoadSection>
