@@ -233,7 +233,7 @@ import AboutSkeletonLoader from "./aboutSkeletonLoader";
 import DynamicSections from "./DynamicSections/DynamicSections";
 import useFetchAll from "./useFetchAll";
 import useFetch from "./useFetch";
-import CVPreview from "../CMSAdmin/UploadCV/CVPreview";
+// import CVPreview from "../CMSAdmin/UploadCV/CVPreview";
 
 // ✅ Lazy load sections
 const Hero = lazy(() => import("./Hero"));
@@ -247,6 +247,7 @@ const Contact = lazy(() => import("./Contact/Contact"));
 const TermsandConditions = lazy(() =>
   import("./TermsAndConditions/Terms&Conditions")
 );
+const CVPreview = lazy(() => import("../CMSAdmin/UploadCV/CVPreview"));
 // const DynamicSections = lazy(() => import("./DynamicSections/DynamicSections"));
 
 const Home = () => {
@@ -270,7 +271,7 @@ const Home = () => {
       "certifications",
       "social",
       "terms",
-      `getCV/:${userId}`,
+      `getCV/${userId}`,
     ],
     [userId]
   );
@@ -289,6 +290,9 @@ const Home = () => {
           `${API_URL}/api/sectionVisibility/visible`
         );
         const dataVisible = await response.json();
+
+        //---------------------temparary add CV in visible section --------------------------------------???????
+        dataVisible.push({_id: '676da0dd78c3e330a3e66c29', name: 'CV', isVisible: true, order: 20, isDynamic: false})
         setVisibleSections(dataVisible); // Set state with fetched data
         // console.log("dataVisible seee",dataVisible);
       } catch (error) {
@@ -310,7 +314,7 @@ const Home = () => {
       <Suspense fallback={<Loading />}>
         {visibleSections.map((section) => {
           // console.log("section._id",section._id, section);
-          // console.log("data[section, section.name]",section, data[section.name]);
+          console.log("data[section, section.name]",section, data[section.name]);
 
           return (
             <LazyLoadSection key={section._id}>
@@ -434,18 +438,14 @@ const Home = () => {
                       />
                     );
                   case "CV":
-                    return (
-                      <LazyLoadSection key={section._id}>
-                        {!cv ? (
+                    return !data[`getCV/${userId}`] ? (
                           <Loading />
                         ) : (
                           <CVPreview
                             key={section._id}
-                            preview={data.cvUrl || []}
+                            preview={data[`getCV/${userId}`]["cvUrl"] || {}}
                           />
-                        )}
-                      </LazyLoadSection>
-                    );
+                        );
                   default:
                     return data[section.name] ? (
                       <DynamicSections
