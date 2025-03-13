@@ -1,17 +1,16 @@
 /*--------------------------------------------------------------
 # Sections
 --------------------------------------------------------------*/
-.section-mf {
-  padding-top: 3rem;
-  padding-bottom: 2rem;
+.dynamicSections {
+  margin-top: 1rem;
 }
-.section-mf .section-container {
+.dynamicSections .section-container {
   padding-top: 1rem;
   padding-bottom: 4rem;
 }
 
 @media (min-width: 767px) {
-  .section-mf .box-pl2 {
+  .dynamicSections .box-pl2 {
     margin-top: 3rem;
     padding-left: 0rem;
   }

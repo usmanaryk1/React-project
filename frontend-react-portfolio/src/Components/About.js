@@ -50,7 +50,7 @@ const About = ({
     <>
       {/* About Section */}
       {about && (
-        <section id="about" className="about-mf sect-pt4 route">
+        <section id="about" className="about-mf route">
           <div className="container">
             <div className="row">
               <div className="col-sm-12">
@@ -62,16 +62,16 @@ const About = ({
                           {item.img && (
                             <div className="col-sm-6 col-md-5">
                               <div className="about-img">
-                                 {!imageLoaded[item._id] ? (
+                                {!imageLoaded[item._id] ? (
                                   <ProfileImageSkeletonLoading />
-                                  ) : (
-                                    <img
-                                      src={item.img}
-                                      loading="lazy"
-                                      className="img-fluid rounded b-shadow-a"
-                                      alt={item.name || "User Avatar"}
-                                    />
-                                  )}
+                                ) : (
+                                  <img
+                                    src={item.img}
+                                    loading="lazy"
+                                    className="img-fluid rounded b-shadow-a"
+                                    alt={item.name || "User Avatar"}
+                                  />
+                                )}
                               </div>
                             </div>
                           )}

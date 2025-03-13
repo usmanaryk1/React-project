@@ -31,7 +31,7 @@ const Certifications = ({
     <>
       {/* ======= Certifications Section ======= */}
       {certifications && (
-        <section id="certifications" className="blog-mf sect-pt4 route pt-5">
+        <section id="certifications" className=" sect-pt4 route">
           <div className="container">
             <div className="row">
               <div className="col-sm-12">
@@ -46,7 +46,8 @@ const Certifications = ({
               {certifications.map((certification) => (
                 <div
                   className="col-lg-4 col-sm-6 card-box"
-                  key={certification._id}>
+                  key={certification._id}
+                >
                   <div className="card card-certification">
                     {certification.image && (
                       <div className="card-img">

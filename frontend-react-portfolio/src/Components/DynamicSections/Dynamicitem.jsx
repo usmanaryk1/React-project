@@ -4,7 +4,11 @@ const Dynamicitem = ({ dynamicSection, onEditClick, handleDeleteClick }) => {
   const { isAdminPage, isAuthenticated } = useAuth();
 
   return (
-    <section id="section" className="section-mf route" key={dynamicSection._id}>
+    <section
+      id="section"
+      className="dynamicSections route"
+      key={dynamicSection._id}
+    >
       <div className="container">
         <div className="row">
           <div className="col-12">
