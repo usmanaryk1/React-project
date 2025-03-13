@@ -35,7 +35,7 @@ const Contact = ({ onEditClick, onDeleteClick, contact = [], links = [] }) => {
       {contact && (
         <section
           id="contact"
-          className="paralax-mf footer-paralax bg-image sect-mt4 route"
+          className="paralax-mf footer-paralax bg-image route"
           style={{ backgroundImage: "url(../assets/img/overlay-bg.jpg)" }}
         >
           <div className="overlay-mf" />

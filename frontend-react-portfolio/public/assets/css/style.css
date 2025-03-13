@@ -141,6 +141,7 @@ a:hover {
 .paralax-mf {
   position: relative;
   padding: 4rem 0;
+  margin-bottom: 1rem;
 }
 
 .display-table {
@@ -176,7 +177,7 @@ a:hover {
 
 /*--/ Title A /--*/
 .title-box {
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .title-a {
@@ -763,6 +764,9 @@ a:hover {
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
+#hero {
+  margin-bottom: 1rem;
+}
 .hero {
   /* height: 100vh; */
   height: 30rem;
@@ -850,8 +854,7 @@ a:hover {
 # About
 --------------------------------------------------------------*/
 .about-mf .box-shadow-full {
-  margin-bottom: 0;
-  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .about-mf .about-img {
@@ -1346,18 +1349,12 @@ a:hover {
 --------------------------------------------------------------*/
 .card-box {
   max-height: 497.3px;
-  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
-#certifications .sect-pt4 {
-  padding: 0;
-  margin-top: 1rem;
-}
+
 @media (max-width: 1199px) {
-  /* #certifications {
-    padding-bottom: 3rem;
-  } */
   .card-box {
-    margin-top: 3rem;
+    margin-bottom: 3rem;
   }
 }
 @media (max-width: 767px) {
@@ -1365,7 +1362,7 @@ a:hover {
     padding-bottom: 3rem;
   } */
   .card-box {
-    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 }
 

@@ -41,7 +41,7 @@ const Portfolio = ({ title, subtitle, onEdit, onDelete, works = [] }) => {
     <>
       {/* ======= Portfolio Section ======= */}
       {works && (
-        <section id="work" className="portfolio-mf sect-pt4 route">
+        <section id="work" className="portfolio-mf route">
           <div className="container">
             <div className="row">
               <div className="col-sm-12">
