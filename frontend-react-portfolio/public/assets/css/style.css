@@ -16,6 +16,11 @@ body {
 .content {
   margin-top: 4.3rem;
 }
+@media (max-width: 1024px) {
+  .content {
+    margin-top: 3.3rem;
+  }
+}
 h1,
 h2,
 h3,
@@ -486,15 +491,6 @@ a:hover {
 
 #header .logo a {
   color: #fff;
-}
-
-#header .logo img {
-  max-height: 40px;
-}
-
-#header.header-scrolled {
-  background: rgba(0, 0, 0, 0.9);
-  padding: 12px 0;
 }
 
 /*--------------------------------------------------------------

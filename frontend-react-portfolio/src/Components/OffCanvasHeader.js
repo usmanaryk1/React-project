@@ -21,7 +21,7 @@ const OffCanvasHeader = ({
         >
           <i
             className="bi bi-list"
-            style={{ fontSize: "2rem", color: "white" }}
+            style={{ fontSize: "1.5rem", color: "white" }}
           ></i>
         </button>
 

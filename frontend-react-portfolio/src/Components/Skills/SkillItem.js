@@ -48,7 +48,7 @@ const SkillItem = ({
               >
                 <div className="skill-content">
                   <div className="d-flex justify-content-between">
-                    <div className="content">
+                    <div className="skills-data">
                       <span>{skill.name}</span>{" "}
                       <span className="pull-right">{skill.proficiency}%</span>
                     </div>
