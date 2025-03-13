@@ -14,7 +14,7 @@ body {
   color: #4e4e4e;
 }
 .content {
-  margin-top: 5rem;
+  margin-top: 4.3rem;
 }
 h1,
 h2,
@@ -135,7 +135,7 @@ a:hover {
 
 .paralax-mf {
   position: relative;
-  padding: 8rem 0;
+  padding: 4rem 0;
 }
 
 .display-table {
@@ -242,8 +242,8 @@ a:hover {
 }
 
 .socials .ico-circle {
-  height: 40px;
-  width: 40px;
+  height: 35px;
+  width: 35px;
   font-size: 1.2rem;
   border-radius: 50%;
   line-height: 1.6;
@@ -768,7 +768,8 @@ a:hover {
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
-  height: 100vh;
+  /* height: 100vh; */
+  height: 30rem;
   position: relative;
   color: #fff;
 }
@@ -817,11 +818,12 @@ a:hover {
 }
 
 .hero-single {
-  height: 350px;
+  /* height: 350px; */
+  height: 15rem;
 }
 
 .hero-single .hero-content {
-  margin-top: 30px;
+  /* margin-top: 30px; */
 }
 
 .hero-single .hero-title {

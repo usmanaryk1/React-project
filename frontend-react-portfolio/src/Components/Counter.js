@@ -43,7 +43,7 @@ const Counter = ({ onEdit, onDelete, counts = [] }) => {
             <div className="row">
               {counts.map((counter) => (
                 <div className="col-sm-3 col-lg-3" key={counter._id}>
-                  <div className="counter-box counter-box pt-4 pt-md-0">
+                  <div className="counter-box counter-box pt-4 ">
                     {counter.icon && (
                       <div className="counter-ico">
                         <span className="ico-circle">

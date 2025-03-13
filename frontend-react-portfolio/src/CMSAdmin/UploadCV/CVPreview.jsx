@@ -1,6 +1,6 @@
 const CVPreview = ({ preview }) => {
   return preview ? (
-    <div className="cv-Preview">
+    <div className="cv-Preview container">
       <iframe
         src={preview}
         width="100%"
