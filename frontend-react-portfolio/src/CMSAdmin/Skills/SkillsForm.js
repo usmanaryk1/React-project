@@ -69,10 +69,13 @@ const SkillsForm = ({
 
               <div className="form-group">
                 <input
+                  type="number"
                   {...register("proficiency")}
                   name="proficiency"
                   className="form-control"
                   placeholder="Proficiency Level (%)"
+                  max="100"
+                  onkeypress="if (this.value.length > 2) return false;"
                 />
               </div>
 

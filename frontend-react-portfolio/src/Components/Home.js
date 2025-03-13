@@ -291,8 +291,6 @@ const Home = () => {
         );
         const dataVisible = await response.json();
 
-        //---------------------temparary add CV in visible section --------------------------------------???????
-        dataVisible.push({_id: '676da0dd78c3e330a3e66c29', name: 'CV', isVisible: true, order: 20, isDynamic: false})
         setVisibleSections(dataVisible); // Set state with fetched data
         // console.log("dataVisible seee",dataVisible);
       } catch (error) {
@@ -314,7 +312,11 @@ const Home = () => {
       <Suspense fallback={<Loading />}>
         {visibleSections.map((section) => {
           // console.log("section._id",section._id, section);
-          console.log("data[section, section.name]",section, data[section.name]);
+          console.log(
+            "data[section, section.name]",
+            section,
+            data[section.name]
+          );
 
           return (
             <LazyLoadSection key={section._id}>
@@ -439,13 +441,13 @@ const Home = () => {
                     );
                   case "CV":
                     return !data[`getCV/${userId}`] ? (
-                          <Loading />
-                        ) : (
-                          <CVPreview
-                            key={section._id}
-                            preview={data[`getCV/${userId}`]["cvUrl"] || {}}
-                          />
-                        );
+                      <Loading />
+                    ) : (
+                      <CVPreview
+                        key={section._id}
+                        preview={data[`getCV/${userId}`]["cvUrl"] || {}}
+                      />
+                    );
                   default:
                     return data[section.name] ? (
                       <DynamicSections
