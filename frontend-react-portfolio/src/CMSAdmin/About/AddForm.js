@@ -113,7 +113,7 @@ const AddForm = () => {
     if (croppedImage) {
       imageUrl = await uploadImageToFirebase(croppedImage, "aboutImages");
 
-      console.log("imageUrl2", imageUrl);
+      console.log("imageUrl firebase:", imageUrl);
     }
 
     const updatedData = {

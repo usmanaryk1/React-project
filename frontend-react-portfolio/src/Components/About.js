@@ -17,6 +17,7 @@ const About = ({
   const [imageLoaded, setImageLoaded] = useState({}); // Store image load states
   useEffect(() => {
     const loadImages = () => {
+      if (!about || !Array.isArray(about)) return; // Add this check
       about.forEach((item) => {
         if (item.img) {
           const img = new Image();

@@ -1348,7 +1348,7 @@ a:hover {
 # Certification
 --------------------------------------------------------------*/
 .card-box {
-  max-height: 497.3px;
+  max-height: 551.3px;
   margin-bottom: 2rem;
 }
 
@@ -1371,7 +1371,7 @@ a:hover {
     font-size: 2rem;
   }
   .card-box {
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     max-height: 500px;
     margin-bottom: 2rem;
   }
