@@ -142,6 +142,7 @@ const AddPortfolioDetails = () => {
       const aspect = await getImageAspectRatio(imageDataUrl); // Dynamically determine aspect ratio
       // console.log("aspect", aspect);
       setCropData({
+        ...cropData,
         isCropping: true,
         imageSrc: imageDataUrl,
         croppingIndex: index,
@@ -151,22 +152,20 @@ const AddPortfolioDetails = () => {
   };
 
   const handleCropComplete = async (croppedImg) => {
+    console.log("cropped image in handlecropcomplete:", croppedImg);
     if (croppedImg) {
       try {
-        const downloadUrl = await uploadImageToFirebase(
-          croppedImg,
-          "detailsImages"
-        );
         setBase64Images((prevImages) => {
-          const updatedImages = [...prevImages];
+          const updatedImages = [...prevImages, croppedImg];
           // console.log("updatedImages", updatedImages);
-          updatedImages[cropData.croppingIndex] = downloadUrl;
+          updatedImages[cropData.croppingIndex] = croppedImg;
           // console.log(
           //   "updatedImages[croppingIndex]",
           //   updatedImages[croppingIndex]
           // );
           return updatedImages;
         });
+        console.log("base64images on crop complete:", base64Images);
         setCropData({ ...cropData, isCropping: false });
       } catch (error) {
         console.error("Failed to upload cropped image.", error);
@@ -176,10 +175,32 @@ const AddPortfolioDetails = () => {
     }
   };
 
+  const uploadAllImages = async () => {
+    try {
+      const uploadedUrls = await Promise.all(
+        base64Images.map(async (image) => {
+          if (image.startsWith("data:image/")) {
+            // Upload only new base64 images
+            return await uploadImageToFirebase(image, "detailsImages");
+          }
+          return image; // Keep existing image URLs
+        })
+      );
+      return uploadedUrls;
+    } catch (error) {
+      console.error("Image upload failed:", error);
+      toast.error("Image upload failed. Please try again.");
+      throw error;
+    }
+  };
+
   const onSubmit = async (formData) => {
     // console.log("formdata", formData);
 
     setIsSubmitting(true);
+
+    const oldImages = currentDetails?.slideImages || [];
+    const uploadedImageUrls = await uploadAllImages();
 
     const updatedData = {
       pCategory: formData.category,
@@ -187,7 +208,8 @@ const AddPortfolioDetails = () => {
       pDate: formData.date,
       pURL: formData.link,
       desc: formData.desc,
-      slideImages: base64Images,
+      slideImages: uploadedImageUrls,
+      oldImages,
     };
 
     try {
