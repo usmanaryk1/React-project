@@ -1,4 +1,5 @@
 import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
+import { Offcanvas } from "bootstrap";
 
 const OffCanvasHeader = ({
   navLinks,
@@ -28,7 +29,7 @@ const OffCanvasHeader = ({
         <div
           className="offcanvas offcanvas-start"
           data-bs-scroll="true"
-          data-bs-backdrop="false"
+          data-bs-backdrop="true"
           tabIndex="-1"
           id="offcanvasScrolling"
           aria-labelledby="offcanvasScrollingLabel"
@@ -55,6 +56,13 @@ const OffCanvasHeader = ({
                       }`}
                       smooth
                       to={link.to}
+                      onClick={() => {
+                        const offcanvasElement =
+                          document.getElementById("offcanvasScrolling");
+                        const bsOffcanvas =
+                          Offcanvas.getInstance(offcanvasElement);
+                        bsOffcanvas.hide(); // Close the offcanvas
+                      }}
                     >
                       {link.label}
                     </Link>
