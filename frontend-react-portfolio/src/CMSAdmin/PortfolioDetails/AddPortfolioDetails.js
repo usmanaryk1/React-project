@@ -102,7 +102,7 @@ const AddPortfolioDetails = () => {
   ];
 
   const loadDetails = useCallback(() => {
-    console.log("Loading details:", currentDetails); // Debugging line
+    // console.log("Loading details:", currentDetails); // Debugging line
     if (currentDetails) {
       setValue("client", currentDetails.pClient);
       setValue("category", currentDetails.pCategory);
@@ -110,7 +110,13 @@ const AddPortfolioDetails = () => {
       setValue("link", currentDetails.pURL);
       setValue("desc", currentDetails.desc);
       setValue("isActive", currentDetails.isActive);
-      setBase64Images(currentDetails.slideImages || []);
+      // Set existing images or empty array
+      setBase64Images(
+        currentDetails.slideImages?.map((imageUrl) => ({
+          file: null,
+          preview: imageUrl,
+        })) || []
+      );
     } else {
       reset();
       setBase64Images([]);
@@ -136,36 +142,38 @@ const AddPortfolioDetails = () => {
   const handleImageChange = async (e, index) => {
     const file = e.target.files[0];
     if (file) {
-      setCropData({ ...cropData, fileName: file.name });
+      // console.log("file:", file);
+      // console.log("filename:", file.name);
+
       const imageDataUrl = URL.createObjectURL(file);
       // console.log("imageDataUrl", imageDataUrl);
       const aspect = await getImageAspectRatio(imageDataUrl); // Dynamically determine aspect ratio
       // console.log("aspect", aspect);
-      setCropData({
-        ...cropData,
+      setCropData((prev) => ({
+        ...prev,
+        fileName: file.name, // Ensure fileName is updated correctly
         isCropping: true,
         imageSrc: imageDataUrl,
         croppingIndex: index,
         cropAspectRatio: aspect,
-      });
+      }));
     }
   };
 
   const handleCropComplete = async (croppedImg) => {
-    console.log("cropped image in handlecropcomplete:", croppedImg);
+    // console.log("cropped image in handlecropcomplete:", croppedImg);
     if (croppedImg) {
       try {
+        const imagePreviewUrl = URL.createObjectURL(croppedImg); // Create preview URL
+
         setBase64Images((prevImages) => {
-          const updatedImages = [...prevImages, croppedImg];
-          // console.log("updatedImages", updatedImages);
-          updatedImages[cropData.croppingIndex] = croppedImg;
-          // console.log(
-          //   "updatedImages[croppingIndex]",
-          //   updatedImages[croppingIndex]
-          // );
+          const updatedImages = [...prevImages];
+          updatedImages[cropData.croppingIndex] = {
+            file: croppedImg, // Store the actual file
+            preview: imagePreviewUrl, // Store preview URL
+          };
           return updatedImages;
         });
-        console.log("base64images on crop complete:", base64Images);
         setCropData({ ...cropData, isCropping: false });
       } catch (error) {
         console.error("Failed to upload cropped image.", error);
@@ -178,14 +186,17 @@ const AddPortfolioDetails = () => {
   const uploadAllImages = async () => {
     try {
       const uploadedUrls = await Promise.all(
-        base64Images.map(async (image) => {
-          if (image.startsWith("data:image/")) {
-            // Upload only new base64 images
-            return await uploadImageToFirebase(image, "detailsImages");
+        base64Images.map(async (imageData) => {
+          if (imageData.file) {
+            // console.log("Uploading file:", imageData.file.name);
+            // Upload new files to Firebase
+            return await uploadImageToFirebase(imageData.file, "detailsImages");
           }
-          return image; // Keep existing image URLs
+          // console.log("Using existing image URL:", imageData.preview);
+          return imageData.preview; // Keep existing image URL
         })
       );
+      // console.log("Uploaded URLs:", uploadedUrls);
       return uploadedUrls;
     } catch (error) {
       console.error("Image upload failed:", error);
@@ -199,7 +210,6 @@ const AddPortfolioDetails = () => {
 
     setIsSubmitting(true);
 
-    const oldImages = currentDetails?.slideImages || [];
     const uploadedImageUrls = await uploadAllImages();
 
     const updatedData = {
@@ -355,26 +365,27 @@ const AddPortfolioDetails = () => {
                   noValidate
                 >
                   <div className="text-center">
-                    {base64Images.map((base64Image, index) => (
-                      <div className="image" key={index}>
-                        <ImageUpload
-                          index={index}
-                          register={register}
-                          base64Image={base64Image}
-                          handleImageClick={handleImageClick}
-                          imageRefs={imageRefs}
-                          handleImageChange={handleImageChange}
-                          removeImage={removeImage}
-                        />
-                        <button
-                          type="button"
-                          className="btn btn-danger btn-sm mt-2"
-                          onClick={() => removeImage(index)}
-                        >
-                          Remove
-                        </button>
-                      </div>
-                    ))}
+                    {base64Images &&
+                      base64Images.map((imageData, index) => (
+                        <div className="image" key={index}>
+                          <ImageUpload
+                            index={index}
+                            register={register}
+                            base64Image={imageData.preview}
+                            handleImageClick={handleImageClick}
+                            imageRefs={imageRefs}
+                            handleImageChange={handleImageChange}
+                            removeImage={removeImage}
+                          />
+                          <button
+                            type="button"
+                            className="btn btn-danger btn-sm mt-2"
+                            onClick={() => removeImage(index)}
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      ))}
                     <button
                       type="button"
                       className="btn add-more-btn my-3 text-center"
@@ -407,90 +418,6 @@ const AddPortfolioDetails = () => {
                     isSubmitting={isSubmitting}
                     onReset={onReset}
                   />
-                  {/* <div className="from-group">
-                    <input
-                      type="text"
-                      name="client"
-                      className="form-control"
-                      {...register("client")}
-                      placeholder="Client Company"
-                    />
-                    {errors.client && (
-                      <p className="error-message">{errors.client.message}</p>
-                    )}
-                  </div>
-                  <div className="from-group">
-                    <input
-                      type="text"
-                      name="category"
-                      className="form-control"
-                      {...register("category")}
-                      placeholder="Category of Project"
-                    />
-                    {errors.category && (
-                      <p className="error-message">{errors.category.message}</p>
-                    )}
-                  </div>
-                  <div className="from-group">
-                    <input
-                      type="date"
-                      name="date"
-                      className="form-control"
-                      {...register("date")}
-                      placeholder="Date (YY-MM-DD)"
-                    />
-                    {errors.date && (
-                      <p className="error-message">{errors.date.message}</p>
-                    )}
-                  </div>
-                  <div className="from-group">
-                    <input
-                      type="text"
-                      name="link"
-                      className="form-control"
-                      {...register("link")}
-                      placeholder="Enter link to your project"
-                    />
-                    {errors.link && (
-                      <p className="error-message">{errors.link.message}</p>
-                    )}
-                  </div>*/}
-                  {/* <div className="from-group">
-                    <textarea
-                      name="desc"
-                      className="form-control"
-                      {...register("desc")}
-                      placeholder="Description"
-                    ></textarea>
-                    {errors.desc && (
-                      <p className="error-message">{errors.desc.message}</p>
-                    )}
-                  </div> */}
-                  {/* <div className="isActive">
-                    <input
-                      type="checkbox"
-                      id="active"
-                      name="isActive"
-                      {...register("isActive")}
-                      className="mx-2"
-                    />
-                    <label htmlFor="active">isActive</label>
-                  </div>
-                  {errors.isActive && (
-                    <p className="error-message">{errors.isActive.message}</p>
-                  )} */}
-                  {/* <div className="buttons">
-                    <button className="reset" type="reset" onClick={onReset}>
-                      Reset
-                    </button>
-                    <button
-                      type="submit"
-                      className="submit"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? "Submitting..." : "Submit"}
-                    </button>
-                  </div> */}
                 </form>
               </div>
             </div>
