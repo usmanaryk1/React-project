@@ -65,27 +65,36 @@ const updateProjectDetails = async (req, res) => {
   const Id = req.params.id;
 
   try {
-    // const ProjectDetails = await ProjectDetails_Model.findById(Id);
-    // if (!ProjectDetails) {
-    //   return res
-    //     .status(404)
-    //     .send({ message: `Information with ID ${Id} not found` });
+    const existingDetails = await ProjectDetails_Model.findById(Id);
+
+    if (!existingDetails) {
+      return res.status(404).json({ message: `Details with ${Id} not found` });
+    }
+
+    // Old images from the database
+    const oldImages = existingDetails.slideImages || [];
+    console.log("oldImages:", oldImages);
+    // New Images from the req.body
+    const newImages = req.body.slideImages || [];
+    console.log("newImages:", newImages);
+    // Identify which images were removed
+    const imagesToDelete = await oldImages.filter(
+      (oldImage) => !newImages.includes(oldImage)
+    );
+    console.log("imagesToDelete:", imagesToDelete);
+
+    // Delete only the removed images from Firebase
+    await Promise.all(imagesToDelete.map(deleteImageFromFirebase));
+
+    // if (req.body.slideImages && existingDetails.slideImages) {
+    //   await Promise.all(
+    //     existingDetails.slideImages.map(async (imageUrl) => {
+    //       await deleteImageFromFirebase(imageUrl);
+    //     })
+    //   );
     // }
-
-    // // Extract the image path from the URL (if stored as a URL)
-    // const { slideImages } = req.body;
-
-    // if (ProjectDetails.slideImages[i]) {
-    //     for (let i=0; i<=slideImages.length; i++){
-    //         if(i===ProjectDetails.slideImages.index)
-    //     }
-
-    //         await deleteImageFromFirebase(ProjectDetails.slideImages[i]);
-
-    // }
-
     const updatedDetails = await ProjectDetails_Model.findByIdAndUpdate(
-      req.params.id,
+      Id,
       req.body,
       { new: true }
     );
@@ -111,8 +120,12 @@ const deleteProjectDetails = async (req, res) => {
 
     // Extract the image path from the URL (if stored as a URL)
 
-    if (ProjectDetails.slideImages) {
-      await deleteImageFromFirebase(ProjectDetails.slideImages);
+    if (ProjectDetails.slideImages && ProjectDetails.slideImages.length > 0) {
+      await Promise.all(
+        ProjectDetails.slideImages.map(async (imageUrl) => {
+          await deleteImageFromFirebase(imageUrl);
+        })
+      );
     }
 
     const deletedDetails = await ProjectDetails_Model.findByIdAndDelete(Id); // Ensure you're querying by the correct field, `id`
