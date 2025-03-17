@@ -219,7 +219,6 @@ const AddPortfolioDetails = () => {
       pURL: formData.link,
       desc: formData.desc,
       slideImages: uploadedImageUrls,
-      oldImages,
     };
 
     try {

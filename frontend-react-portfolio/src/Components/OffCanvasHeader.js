@@ -1,5 +1,6 @@
 import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
 import { Offcanvas } from "bootstrap";
+import { useEffect } from "react";
 
 const OffCanvasHeader = ({
   navLinks,
@@ -10,6 +11,16 @@ const OffCanvasHeader = ({
   preventRefresh,
   isAdminPage,
 }) => {
+  useEffect(() => {
+    const tooltipTriggerList = document.querySelectorAll(
+      '[data-bs-toggle="tooltip"]'
+    );
+
+    tooltipTriggerList.forEach((tooltipTriggerEl) => {
+      new window.bootstrap.Tooltip(tooltipTriggerEl);
+    });
+  }, []);
+
   const closeCanvas = () => {
     const offcanvasElement = document.getElementById("offcanvasScrolling");
     const bsOffcanvas = Offcanvas.getInstance(offcanvasElement);
@@ -54,7 +65,22 @@ const OffCanvasHeader = ({
           <div className="offcanvas-header">
             <h1 className="offcanvas-title logo" id="offcanvasScrollingLabel">
               <Link to="/">PortfolioHub</Link>
+              {isAuthenticated && isAdminPage && (
+                <Link
+                  to="/"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="bottom"
+                  data-bs-html="true"
+                  data-bs-title="Go to User Portal"
+                >
+                  <i
+                    className="bi bi-arrow-repeat"
+                    style={{ fontSize: "1.5rem", marginLeft: "1rem" }}
+                  />
+                </Link>
+              )}
             </h1>
+
             <button
               type="button"
               className="btn-close"
@@ -80,52 +106,17 @@ const OffCanvasHeader = ({
                   </li>
                 ))}
                 <li className="dropdown nav-link">
-                  {isAuthenticated && user ? (
-                    <>
-                      <a href="/" onClick={preventRefresh}>
-                        <span>{user.username}</span>
-                        <i className="bi bi-chevron-down" />
-                      </a>
-                      <ul>
-                        <li>
-                          <Link smooth to="/" onClick={onLogout}>
-                            Log Out
-                          </Link>
-                        </li>
-                        {isAdminPage ? (
-                          <li>
-                            <Link smooth to="/">
-                              Go to User Portal
-                            </Link>
-                          </li>
-                        ) : (
-                          <li>
-                            <Link smooth to="/form/dashboard">
-                              Go to Admin Portal
-                            </Link>
-                          </li>
-                        )}
-                      </ul>
-                    </>
-                  ) : (
-                    <>
-                      <a href="/" onClick={preventRefresh}>
-                        <span>Register</span>
-                        <i
-                          className={`bi bi-chevron-down ${
-                            user && isAdminPage ? "bi bi-chevron-right" : ""
-                          }`}
-                        />
-                      </a>
-                      <ul>
-                        <li>
-                          <Link smooth to="/form/login-form">
-                            Log in
-                          </Link>
-                        </li>
-                      </ul>
-                    </>
-                  )}
+                  <a href="/" onClick={preventRefresh}>
+                    <span>{user.username}</span>
+                    <i className="bi bi-chevron-down" />
+                  </a>
+                  <ul>
+                    <li>
+                      <Link smooth to="/" onClick={onLogout}>
+                        Log Out
+                      </Link>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </nav>

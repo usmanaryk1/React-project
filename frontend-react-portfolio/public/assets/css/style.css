@@ -1944,3 +1944,12 @@ input[type="number"],
   border-bottom: 0.063rem solid #e9ecef; /* Example border */
   background-color: #070707; /* Example background color */
 }
+
+/* Change tooltip background color, text color, font size, and padding */
+.tooltip .tooltip-inner {
+  background-color: white !important; /* Green background */
+  color: black !important; /* White text */
+  font-size: 14px !important; /* Change font size */
+  padding: 10px !important; /* Adjust padding */
+  border-radius: 8px !important; /* Round corners */
+}

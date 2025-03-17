@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
-
+import { Tooltip } from "bootstrap";
 const HorizontalHeader = ({
   navLinks,
   isActiveLink,
@@ -11,6 +11,15 @@ const HorizontalHeader = ({
   handleDownloadCV,
   onLogout,
 }) => {
+  useEffect(() => {
+    const tooltipTriggerList = document.querySelectorAll(
+      '[data-bs-toggle="tooltip"]'
+    );
+
+    tooltipTriggerList.forEach((tooltipTriggerEl) => {
+      new window.bootstrap.Tooltip(tooltipTriggerEl);
+    });
+  }, []);
   const [isMobileMenuOpen, setMobileMenu] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   // Function to toggle mobile menu
@@ -100,23 +109,6 @@ const HorizontalHeader = ({
                           Log Out
                         </Link>
                       </li>
-                      {isAdminPage ? (
-                        <li>
-                          <Link smooth to="/" onClick={closeMobileMenu}>
-                            Go to User Portal
-                          </Link>
-                        </li>
-                      ) : (
-                        <li>
-                          <Link
-                            smooth
-                            to="/form/dashboard"
-                            onClick={closeMobileMenu}
-                          >
-                            Go to Admin Portal
-                          </Link>
-                        </li>
-                      )}
                     </ul>
                   </>
                 ) : (
@@ -145,6 +137,36 @@ const HorizontalHeader = ({
                   </>
                 )}
               </li>
+              {isAuthenticated && (
+                <li>
+                  <Link
+                    to="form/dashboard"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="bottom"
+                    data-bs-html="true"
+                    data-bs-title="Go to Admin Portal"
+                  >
+                    <i
+                      className="bi bi-arrow-repeat"
+                      style={{ fontSize: "1.5rem" }}
+                    />
+                  </Link>
+
+                  {/* {isAdminPage ? (
+                <li>
+                  <Link smooth to="/" onClick={closeMobileMenu}>
+                    Go to User Portal
+                  </Link>
+                </li>
+              ) : (
+                <li>
+                  <Link smooth to="/form/dashboard" onClick={closeMobileMenu}>
+                    Go to Admin Portal
+                  </Link>
+                </li>
+              )} */}
+                </li>
+              )}
             </ul>
             <i
               className={`bi ${
