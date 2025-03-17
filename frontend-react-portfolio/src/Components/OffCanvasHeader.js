@@ -10,6 +10,23 @@ const OffCanvasHeader = ({
   preventRefresh,
   isAdminPage,
 }) => {
+  const closeCanvas = () => {
+    const offcanvasElement = document.getElementById("offcanvasScrolling");
+    const bsOffcanvas = Offcanvas.getInstance(offcanvasElement);
+    if (bsOffcanvas) {
+      bsOffcanvas.hide(); // Close the offcanvas
+    }
+
+    // Ensure the backdrop is removed
+    setTimeout(() => {
+      const backdrop = document.querySelector(".offcanvas-backdrop");
+      if (backdrop) {
+        backdrop.remove();
+      }
+      document.body.classList.remove("offcanvas-open"); // Removes any leftover classes that might be causing dimming
+    }, 300); // Delay slightly to allow the transition to complete
+  };
+
   return (
     <>
       <header id="header" className="fixed-top vertical-header">
@@ -56,13 +73,7 @@ const OffCanvasHeader = ({
                       }`}
                       smooth
                       to={link.to}
-                      onClick={() => {
-                        const offcanvasElement =
-                          document.getElementById("offcanvasScrolling");
-                        const bsOffcanvas =
-                          Offcanvas.getInstance(offcanvasElement);
-                        bsOffcanvas.hide(); // Close the offcanvas
-                      }}
+                      onClick={() => closeCanvas()}
                     >
                       {link.label}
                     </Link>

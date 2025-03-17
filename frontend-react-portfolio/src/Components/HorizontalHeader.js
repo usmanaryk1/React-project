@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
 
 const HorizontalHeader = ({
@@ -10,6 +11,22 @@ const HorizontalHeader = ({
   handleDownloadCV,
   onLogout,
 }) => {
+  const [isMobileMenuOpen, setMobileMenu] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  // Function to toggle mobile menu
+  const toggleMobileMenu = () => {
+    setMobileMenu(!isMobileMenuOpen);
+  };
+
+  // Function to close the mobile menu
+  const closeMobileMenu = () => {
+    setMobileMenu(false);
+  };
+
+  const toggleDropdown = (index) => {
+    setActiveDropdown(activeDropdown === index ? null : index);
+  };
+
   return (
     <>
       <header id="header" className="fixed-top">
@@ -19,7 +36,10 @@ const HorizontalHeader = ({
               PortfolioHub
             </Link>
           </h1>
-          <nav id="navbar" className="navbar">
+          <nav
+            id="navbar"
+            className={`navbar ${isMobileMenuOpen ? "navbar-mobile" : ""}`}
+          >
             <ul>
               {navLinks.map((link, index) => (
                 <li key={index}>
@@ -29,13 +49,23 @@ const HorizontalHeader = ({
                     }`}
                     smooth
                     to={link.to}
+                    scroll={(el) => {
+                      el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }}
+                    onClick={closeMobileMenu}
                   >
                     {link.label}
                   </Link>
                 </li>
               ))}
               <li className="download">
-                <button onClick={handleDownloadCV} className="btn">
+                <button
+                  onClick={() => {
+                    handleDownloadCV();
+                    closeMobileMenu();
+                  }}
+                  className="btn"
+                >
                   Download CV
                 </button>
               </li>
@@ -43,25 +73,46 @@ const HorizontalHeader = ({
               <li className="dropdown nav-link">
                 {isAuthenticated && user ? (
                   <>
-                    <a href="/" onClick={preventRefresh}>
+                    <a
+                      href="/"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        toggleDropdown("user");
+                      }}
+                    >
                       <span>{user.username}</span>
                       <i className="bi bi-chevron-down" />
                     </a>
-                    <ul>
+                    <ul
+                      className={
+                        activeDropdown === "user" ? "dropdown-active" : ""
+                      }
+                    >
                       <li>
-                        <Link smooth to="/" onClick={onLogout}>
+                        <Link
+                          smooth
+                          to="/"
+                          onClick={() => {
+                            closeMobileMenu();
+                            onLogout();
+                          }}
+                        >
                           Log Out
                         </Link>
                       </li>
                       {isAdminPage ? (
                         <li>
-                          <Link smooth to="/">
+                          <Link smooth to="/" onClick={closeMobileMenu}>
                             Go to User Portal
                           </Link>
                         </li>
                       ) : (
                         <li>
-                          <Link smooth to="/form/dashboard">
+                          <Link
+                            smooth
+                            to="/form/dashboard"
+                            onClick={closeMobileMenu}
+                          >
                             Go to Admin Portal
                           </Link>
                         </li>
@@ -70,13 +121,23 @@ const HorizontalHeader = ({
                   </>
                 ) : (
                   <>
-                    <a href="/" onClick={preventRefresh}>
+                    <a
+                      href="/"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        preventRefresh();
+                      }}
+                    >
                       <span>Register</span>
                       <i className="bi bi-chevron-down" />
                     </a>
                     <ul>
                       <li>
-                        <Link smooth to="/form/login-form">
+                        <Link
+                          smooth
+                          to="/form/login-form"
+                          onClick={closeMobileMenu}
+                        >
                           Log in
                         </Link>
                       </li>
@@ -85,7 +146,12 @@ const HorizontalHeader = ({
                 )}
               </li>
             </ul>
-            <i className="bi bi-list mobile-nav-toggle" />
+            <i
+              className={`bi ${
+                isMobileMenuOpen ? "bi-x" : "bi-list"
+              } mobile-nav-toggle`}
+              onClick={toggleMobileMenu}
+            />
           </nav>
           {/* .navbar */}
         </div>

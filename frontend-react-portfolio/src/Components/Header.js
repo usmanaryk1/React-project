@@ -22,7 +22,7 @@ const Header = () => {
         { to: "/form/dashboard", label: "Dashboard" },
         { to: "/form/manage-sections", label: "Manage Sections" },
         { to: "/form/dynamicSections-form", label: "Create Sections" },
-        { to: "/form/hero-form", label: "Home" },
+        { to: "/form/hero-form", label: "Introduction" },
         { to: "/form/about-form", label: "About" },
         { to: "/form/skills-form", label: "Skills" },
         { to: "/form/service-form", label: "Services" },
@@ -38,10 +38,10 @@ const Header = () => {
     } else {
       setNavLinks([
         { to: "/", label: "Home" },
-        { to: "/#about", label: "About" },
-        { to: "/#services", label: "Services" },
-        { to: "/#work", label: "Work" },
-        { to: "/#certifications", label: "Certifications" },
+        { to: "#about", label: "About" },
+        { to: "#services", label: "Services" },
+        { to: "#work", label: "Work" },
+        { to: "#certifications", label: "Certifications" },
         // { to: "/#contact", label: "Contact" },
       ]);
     }
