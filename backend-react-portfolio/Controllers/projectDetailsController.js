@@ -86,13 +86,6 @@ const updateProjectDetails = async (req, res) => {
     // Delete only the removed images from Firebase
     await Promise.all(imagesToDelete.map(deleteImageFromFirebase));
 
-    // if (req.body.slideImages && existingDetails.slideImages) {
-    //   await Promise.all(
-    //     existingDetails.slideImages.map(async (imageUrl) => {
-    //       await deleteImageFromFirebase(imageUrl);
-    //     })
-    //   );
-    // }
     const updatedDetails = await ProjectDetails_Model.findByIdAndUpdate(
       Id,
       req.body,
