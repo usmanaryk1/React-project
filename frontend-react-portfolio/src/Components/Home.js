@@ -323,7 +323,7 @@ const Home = () => {
               {(() => {
                 //terms is missing
                 switch (section.name) {
-                  case "Hero":
+                  case "Introduction":
                     return !data.hero || data.hero.length === 0 ? (
                       <div className="row justify-content-center">
                         <div className="col-md-12">

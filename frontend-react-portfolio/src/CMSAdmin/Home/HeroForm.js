@@ -143,7 +143,7 @@ const HeroForm = () => {
           <div className="row">
             <div className="hero-container">
               <div className="col-12">
-                <h2>Add Home Info!</h2>
+                <h2>Add Introduction Info!</h2>
               </div>
               <div className="col-12">
                 <form
@@ -211,7 +211,11 @@ const HeroForm = () => {
         </div>
         <hr />
       </section>
-      <Hero onEditClick={handleEdit} onDeleteClick={handleDelete} hero={hero} />
+      <Hero
+        onEditClick={handleEdit}
+        onDeleteClick={handleDelete}
+        hero={hero?.[0] || []}
+      />
     </>
   );
 };
