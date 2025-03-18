@@ -4,37 +4,42 @@ const authenticateJWT = require("../middleware/authmiddleware");
 const router = express.Router();
 
 // Fetch CV URL by userId
-router.get("/getCV/:userId", async (req, res) => {
-  const { userId } = req.params;
+router.get("/cvs", authenticateJWT, async (req, res) => {
+  if (!req.user || !req.user.id) {
+    return res.status(401).json({ message: "Unauthorized: User not found" });
+  }
+  const userId = req.user.id;
 
   try {
-    const cv = await CV_Model.findOne({ userId });
+    const cvs = await CV_Model.find({ userId });
 
-    if (!cv) {
+    if (!cvs) {
       return res.status(404).json({ message: "CV not found" });
     }
-    console.log("cv:", cv);
+    console.log("cvs:", cvs);
     // Return the CV URL directly
-    res.status(200).json({ cvUrl: cv.cvUrl });
+    res.status(200).json(cvs);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Failed to fetch CV URL." });
+    res.status(500).json({ message: "Failed to fetch CVs." });
   }
 });
 
 // POST route to save CV URL
 router.post("/upload-cv", authenticateJWT, async (req, res) => {
-  const { userId, cvUrl } = req.body;
-  // console.log("userid", req.body.userId);
+  const { cvUrl, isVisible } = req.body;
+  const userId = req.user.id; // Extract userId from token
+
+  console.log("userid", userId);
   // console.log("cvurl", req.body.cvUrl);
 
   try {
     // console.log("Request Body:", req.body); // Log request body
-    if (!userId || !cvUrl) {
-      return res.status(400).json({ message: "Missing userId or cvUrl" });
+    if (!cvUrl) {
+      return res.status(400).json({ message: "Missing cvUrl" });
     }
 
-    const newCV = new CV_Model({ userId, cvUrl });
+    const newCV = new CV_Model({ userId, cvUrl, isVisible });
     const savedCV = await newCV.save();
 
     // console.log("CV Saved:", savedCV); // Log saved CV

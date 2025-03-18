@@ -8,6 +8,7 @@ const cvSchema = new Schema({
     required: true,
   },
   cvUrl: { type: String, required: true },
+  isVisible: { type: Boolean, default: true }, // Control visibility of CV
 });
 
 const CV_Model = mongoose.model("CV", cvSchema);
