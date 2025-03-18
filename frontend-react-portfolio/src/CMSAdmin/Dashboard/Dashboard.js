@@ -45,9 +45,9 @@ const Dashboard = () => {
                       <div className="service-content">
                         <h2 className="s-title">{formItem.Title}</h2>
                         <p className="s-description text-center form-link">
-                          <div className="link-item">
+                          <span className="link-item">
                             {formItem.Description}
-                          </div>
+                          </span>
                         </p>
                       </div>
                     </div>

@@ -26,17 +26,10 @@ const CVUploader = () => {
   });
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
-  const userId = localStorage.getItem("userId"); // Retrieve userId from local storage
   const token = localStorage.getItem("token");
-  const { data: cv, setData: setCv } = useFetch(
-    `${API_URL}/api/getCV/${userId}`
-  );
-  useEffect(() => {
-    if (cv) {
-      setPreview(cv.cvUrl); // Load existing CV preview
-      // console.log("preview initial:", preview);
-    }
-  }, [cv]);
+  const { data: cvs, setData: setCvs } = useFetch(`${API_URL}/api/cvs`);
+  console.log("cvs:", cvs);
+
   // console.log("cv", cv);
   const onFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -77,7 +70,7 @@ const CVUploader = () => {
         async () => {
           try {
             const url = await getDownloadURL(uploadTask.snapshot.ref);
-            setCv(url);
+            setCvs(url);
             // console.log("cvurl", url);
             // Save CV URL to MongoDB using fetch API
             const response = await fetch(`${API_URL}/api/upload-cv`, {
@@ -87,7 +80,7 @@ const CVUploader = () => {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                userId: userId,
+                isVisible: true,
                 cvUrl: url,
               }),
             });
@@ -162,7 +155,7 @@ const CVUploader = () => {
               </div>
             </div>
             <hr />
-            <CVPreview preview={preview} />
+            <CVPreview preview={preview} cvs={cvs || []} />
           </div>
         </div>
       </section>

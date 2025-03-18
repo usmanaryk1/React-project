@@ -69,7 +69,12 @@ const useFetchAll = (API_URL, endpoints) => {
 
         const responses = await Promise.all(
           endpoints.map(async (endpoint) => {
-            const res = await fetch(`${API_URL}/api/${endpoint}`);
+            const res = await fetch(`${API_URL}/api/${endpoint}`, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json",
+              },
+            });
             if (!res.ok) throw new Error(`Failed to fetch ${endpoint}`);
             return [endpoint, await res.json()]; // Return key-value pairs
           })
@@ -78,17 +83,17 @@ const useFetchAll = (API_URL, endpoints) => {
         // Convert response array to object format { "hero": data, "dynamicSections": data, ... }
         const results = Object.fromEntries(responses);
 
-           // Process dynamicSections (if exists) in fomate like { "hero": data, "award": data, ... }
-           if (results.dynamicSections && results.dynamicSections?.length > 0) {
-            results.dynamicSections.forEach(section => {
-              console.log("section section",section);
-              
-              results[section.name] = [section];
-            });
-            delete results.dynamicSections; // Remove the original key
-          }
+        // Process dynamicSections (if exists) in fomate like { "hero": data, "award": data, ... }
+        if (results.dynamicSections && results.dynamicSections?.length > 0) {
+          results.dynamicSections.forEach((section) => {
+            console.log("section section", section);
 
-        console.log("results",results);
+            results[section.name] = [section];
+          });
+          delete results.dynamicSections; // Remove the original key
+        }
+
+        console.log("results", results);
 
         if (isMounted) {
           setData(results);

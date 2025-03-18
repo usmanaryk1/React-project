@@ -13,8 +13,9 @@ root.render(
   <HashRouter>
     {/* Authentication Context for managing user authentication */}
     <AuthProvider>
-      {/* Section Visibility Context for dynamic section rendering */}
+      {/*Context for caching data*/}
       <FetchCacheProvider>
+        {/* Section Visibility Context for dynamic section rendering */}
         <SectionVisibilityProvider>
           <App />
         </SectionVisibilityProvider>

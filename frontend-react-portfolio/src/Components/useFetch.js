@@ -75,7 +75,15 @@ const useFetch = (url) => {
         }
 
         // Fetch data if not cached
-        const response = await axios.get(url, { signal, timeout: 10000 });
+        const response = await axios.get(
+          url,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          },
+          { signal, timeout: 10000 }
+        );
         const result = response.data;
 
         // Cache the response in global state

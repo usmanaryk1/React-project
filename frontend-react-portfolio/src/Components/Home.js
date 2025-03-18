@@ -255,7 +255,7 @@ const Home = () => {
     () => process.env.REACT_APP_BACKEND_URL || "http://localhost:8000",
     []
   );
-  const userId = localStorage.getItem("userId"); // Retrieve userId from local storage
+  // const userId = localStorage.getItem("userId"); // Retrieve userId from local storage
   // const { data: cv } = useFetch(`${API_URL}/api/getCV/${userId}`);
   const endpoints = useMemo(
     () => [
@@ -271,9 +271,9 @@ const Home = () => {
       "certifications",
       "social",
       "terms",
-      `getCV/${userId}`,
+      "cvs",
     ],
-    [userId]
+    []
   );
 
   const { data, isLoading, error } = useFetchAll(API_URL, endpoints);
@@ -440,12 +440,12 @@ const Home = () => {
                       />
                     );
                   case "CV":
-                    return !data[`getCV/${userId}`] ? (
+                    return !data["cvs"] ? (
                       <Loading />
                     ) : (
                       <CVPreview
                         key={section._id}
-                        preview={data[`getCV/${userId}`]["cvUrl"] || {}}
+                        preview={data[`cvs`].cvUrl || {}}
                       />
                     );
                   default:
