@@ -60,7 +60,7 @@ const postAboutInfo = async (req, res) => {
     res.status(201).json(val);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Failed to save data" });
+    return res.status(500).json({ error: "Failed to save data" });
   }
 };
 
@@ -88,7 +88,7 @@ const updateAboutInfo = async (req, res) => {
     res.status(200).json(updatedAbout);
   } catch (error) {
     console.error(error);
-    res.status(400).json({ error: "Failed to update about info" });
+    return res.status(400).json({ error: "Failed to update about info" });
   }
 };
 

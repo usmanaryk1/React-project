@@ -36,7 +36,6 @@ const Social_Routes = require("../router/social.js");
 const ProjectDetails_Routes = require("../router/projectDetails.js");
 const Auth_Routes = require("../router/auth_users.js");
 const Dashboard_Routes = require("../router/dashboard.js");
-const Upload_CV = require("../router/uploadCV.js");
 const Download_CV = require("../router/downloadCV.js");
 const Forgot_Routes = require("../router/forgetPwd.js");
 const Reset_Routes = require("../router/resetPwd.js");
@@ -45,6 +44,7 @@ const Skills_Routes = require("../router/skills.js");
 const ContactUs_Routes = require("../router/contactForm.js");
 const SectionVisibility_Routes = require("../router/SectionVisibility.js");
 const DynamicSections_Routes = require("../router/dynamicSections.js");
+const CV = require("../router/CV.js");
 
 // Simple route
 app.get("/", (req, res) => {
@@ -67,7 +67,7 @@ app.use("/api/social", Social_Routes);
 app.use("/api/workDetails", ProjectDetails_Routes);
 app.use("/api/auth", Auth_Routes);
 app.use("/api/dashboard", Dashboard_Routes);
-app.use("/api", Upload_CV);
+app.use("/api/cv", CV);
 app.use("/api", Download_CV);
 app.use("/api", Forgot_Routes);
 app.use("/api", Reset_Routes);
