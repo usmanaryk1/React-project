@@ -224,7 +224,6 @@ import { useMemo, useState, useEffect, Suspense, lazy } from "react";
 import LazyLoadSection from "./LazyLoadSection";
 import Loading from "./Loading/Loading";
 import Error from "./Error/Error";
-import { useSectionVisibility } from "../CMSAdmin/SectionVisibilityContext/SectionVisibilityContext";
 import PortfolioCardSkeletonLoading from "./portfolioCardSkeletonLoading";
 import CertificationSkeletonLoader from "./certificationSkeletonLoader";
 import HeroSkeletonLoader from "./heroSkeletonLoader";
@@ -232,7 +231,6 @@ import AboutSkeletonLoader from "./aboutSkeletonLoader";
 
 import DynamicSections from "./DynamicSections/DynamicSections";
 import useFetchAll from "./useFetchAll";
-import useFetch from "./useFetch";
 // import CVPreview from "../CMSAdmin/UploadCV/CVPreview";
 
 // ✅ Lazy load sections
@@ -271,7 +269,7 @@ const Home = () => {
       "certifications",
       "social",
       "terms",
-      "cvs",
+      "cv",
     ],
     []
   );
@@ -279,6 +277,7 @@ const Home = () => {
   const { data, isLoading, error } = useFetchAll(API_URL, endpoints);
   // console.log("data loop",data)
   console.log("data.:", data);
+  console.log("data.cvs:", data.cvs);
   const [visibleSections, setVisibleSections] = useState([]);
   const [isPending, setIsPending] = useState(true); // Initially true
 
@@ -443,10 +442,7 @@ const Home = () => {
                     return !data["cvs"] ? (
                       <Loading />
                     ) : (
-                      <CVPreview
-                        key={section._id}
-                        preview={data[`cvs`].cvUrl || {}}
-                      />
+                      <CVPreview key={section._id} cvs={data.cvs || []} />
                     );
                   default:
                     return data[section.name] ? (

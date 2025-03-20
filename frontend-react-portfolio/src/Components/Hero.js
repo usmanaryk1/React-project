@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, lazy } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../CMSAdmin/Auth/AuthContext";
 
 const Hero = ({ onDeleteClick, onEditClick, hero = {} }) => {

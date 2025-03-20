@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 import { useAuth } from "../Auth/AuthContext";
 import "./CVPreview.css";
 
-const CVPreview = ({ cvs = [], preview, onEditClick }) => {
+const CVPreview = ({ cvs = [], preview, onEditClick, onDeleteClick }) => {
   const { isAuthenticated, isAdminPage } = useAuth();
 
   const handleDeleteClick = (cvId) => {
@@ -16,7 +16,7 @@ const CVPreview = ({ cvs = [], preview, onEditClick }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // onDeleteClick(cvId);
+        onDeleteClick(cvId);
       }
     });
   };
@@ -24,38 +24,44 @@ const CVPreview = ({ cvs = [], preview, onEditClick }) => {
   return (
     <>
       {/* CV Previews */}
-      {cvs?.map((cv) => (
-        <div className="cv-preview container" key={cv._id}>
-          {/* Admin Actions */}
-          {isAuthenticated && isAdminPage && (
-            <div className="admin-actions d-flex justify-content-end">
-              <div className="d-inline-block mx-1">
-                <button
-                  className="admin-btn btn btn-primary btn-sm"
-                  aria-label="Edit"
-                  onClick={() => onEditClick(cv)}
-                >
-                  <i className="bi bi-pencil" />
-                </button>
-                <button
-                  className="admin-btn btn btn-danger btn-sm"
-                  aria-label="Delete"
-                  onClick={() => handleDeleteClick(cv._id)}
-                >
-                  <i className="bi bi-trash" />
-                </button>
+
+      {Array.isArray(cvs) && cvs.length > 0 ? (
+        cvs?.map((cv) => (
+          <div className="cv-preview container" key={cv._id}>
+            {/* Admin Actions */}
+            {isAuthenticated && isAdminPage && (
+              <div className="admin-actions d-flex justify-content-end">
+                <div className="d-inline-block mx-1">
+                  <button
+                    className="admin-btn btn btn-primary btn-sm"
+                    aria-label="Edit"
+                    onClick={() => onEditClick(cv)}
+                  >
+                    <i className="bi bi-pencil" />
+                  </button>
+                  <button
+                    className="admin-btn btn btn-danger btn-sm"
+                    aria-label="Delete"
+                    onClick={() => handleDeleteClick(cv._id)}
+                  >
+                    <i className="bi bi-trash" />
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
-          <iframe
-            src={preview || cv.cvUrl} // Ensure `cv.cvUrl` is a valid URL
-            width="100%"
-            height="800px"
-            title="CV Preview"
-            className="cv-preview border border-dark border-5"
-          ></iframe>
-        </div>
-      ))}
+            )}
+
+            <iframe
+              src={preview || cv.cvUrl}
+              width="100%"
+              height="800px"
+              title="CV Preview"
+              className="cv-preview border border-dark border-5"
+            ></iframe>
+          </div>
+        ))
+      ) : (
+        <p className="cv-para">No CVs uploaded yet.</p>
+      )}
     </>
   );
 };
