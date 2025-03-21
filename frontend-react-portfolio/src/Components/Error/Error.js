@@ -7,7 +7,7 @@ const Error = ({ message }) => {
       <div className="error-page">
         <div className="container">
           <div className="row">
-            <div className="col-4 d-flex flex-column justify-content-center">
+            <div className="col-xl-4 d-flex flex-column justify-content-center">
               <div className="error">
                 <div className="alertimage d-flex">
                   <img src="./assets/img/alert-img.png" alt="Alert" />
@@ -19,7 +19,7 @@ const Error = ({ message }) => {
                 </Link>
               </div>
             </div>
-            <div className="col-8">
+            <div className="col-xl-8">
               <div className="error-img">
                 <img src="./assets/img/error-image.png" alt="error-image" />
               </div>
