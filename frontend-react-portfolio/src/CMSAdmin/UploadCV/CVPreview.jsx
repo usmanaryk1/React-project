@@ -1,8 +1,16 @@
 import Swal from "sweetalert2";
 import { useAuth } from "../Auth/AuthContext";
 import "./CVPreview.css";
+import ToggleButton from "./ToggleButton";
+import useFetch from "../../Components/useFetch";
 
-const CVPreview = ({ cvs = [], preview, onEditClick, onDeleteClick }) => {
+const CVPreview = ({
+  cv,
+  preview,
+  onEditClick,
+  onDeleteClick,
+  toggleVisibility,
+}) => {
   const { isAuthenticated, isAdminPage } = useAuth();
 
   const handleDeleteClick = (cvId) => {
@@ -25,43 +33,38 @@ const CVPreview = ({ cvs = [], preview, onEditClick, onDeleteClick }) => {
     <>
       {/* CV Previews */}
 
-      {Array.isArray(cvs) && cvs.length > 0 ? (
-        cvs?.map((cv) => (
-          <div className="cv-preview container" key={cv._id}>
-            {/* Admin Actions */}
-            {isAuthenticated && isAdminPage && (
-              <div className="admin-actions d-flex justify-content-end">
-                <div className="d-inline-block mx-1">
-                  <button
-                    className="admin-btn btn btn-primary btn-sm"
-                    aria-label="Edit"
-                    onClick={() => onEditClick(cv)}
-                  >
-                    <i className="bi bi-pencil" />
-                  </button>
-                  <button
-                    className="admin-btn btn btn-danger btn-sm"
-                    aria-label="Delete"
-                    onClick={() => handleDeleteClick(cv._id)}
-                  >
-                    <i className="bi bi-trash" />
-                  </button>
-                </div>
-              </div>
-            )}
-
-            <iframe
-              src={preview || cv.cvUrl}
-              width="100%"
-              height="800px"
-              title="CV Preview"
-              className="cv-preview border border-dark border-5"
-            ></iframe>
+      <div className="cv-preview container" key={cv._id}>
+        {/* Admin Actions */}
+        {isAuthenticated && isAdminPage && (
+          <div className="admin-actions d-flex justify-content-end">
+            <div className="d-inline-block mx-1">
+              <button
+                className="admin-btn btn btn-primary btn-sm"
+                aria-label="Edit"
+                onClick={() => onEditClick(cv)}
+              >
+                <i className="bi bi-pencil" />
+              </button>
+              <button
+                className="admin-btn btn btn-danger btn-sm"
+                aria-label="Delete"
+                onClick={() => handleDeleteClick(cv._id)}
+              >
+                <i className="bi bi-trash" />
+              </button>
+            </div>
+            <ToggleButton toggleVisibility={toggleVisibility} cv={cv} />
           </div>
-        ))
-      ) : (
-        <p className="cv-para">No CVs uploaded yet.</p>
-      )}
+        )}
+        <iframe
+          key={cv._id}
+          src={preview || cv.cvUrl}
+          width="100%"
+          height="800px"
+          title="CV Preview"
+          className="cv-preview border border-dark border-5"
+        ></iframe>
+      </div>
     </>
   );
 };

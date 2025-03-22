@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { storage } from "../../firebaseConfig";
 import { toast } from "react-toastify";
@@ -36,7 +36,6 @@ const CVUploader = () => {
   } = useFetch(`${API_URL}/api/cv`);
   console.log("cvs:", cvs);
 
-  // console.log("cv", cv);
   const onFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
@@ -54,14 +53,6 @@ const CVUploader = () => {
     // Set the preview to the CV URL
     setPreview(cv.cvUrl); // Set only the current CV URL as preview // Set only the current CV URL as preview
   };
-
-  // useEffect(() => {
-  //   if (currentCV) {
-  //     setValue("file", currentCV.cvUrl);
-  //   } else {
-  //     reset();
-  //   }
-  // }, [currentCV, setValue, reset]);
 
   const onSubmit = async (data) => {
     if (!token) {
@@ -165,6 +156,42 @@ const CVUploader = () => {
       toast.error("Error deleting CV. Please try again.");
     }
   };
+
+  const toggleVisibility = async (id) => {
+    console.log("id", id);
+
+    const currentCV = cvs.find((cv) => cv._id === id);
+    if (!currentCV) return toast.error("CV not found!");
+
+    const updatedCVs = cvs.map((cv) =>
+      cv._id === id ? { ...cv, isVisible: !cv.isVisible } : cv
+    );
+
+    setCvs(updatedCVs);
+
+    try {
+      const response = await fetch(`${API_URL}/api/cv/toggleVisibility`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          isVisible: !currentCV.isVisible,
+        }),
+      });
+
+      if (!response.ok) {
+        toast.error("Failed to update the visibility state of CV.");
+      } else {
+        toast.success("Visibility State Updated Successfully.");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occured." || error.message);
+    }
+  };
   return (
     <>
       <section id="CV-form" className="form">
@@ -211,12 +238,17 @@ const CVUploader = () => {
               </div>
             </div>
             <hr />
-            <CVPreview
-              preview={preview}
-              cvs={cvs || []}
-              onEditClick={handleEdit}
-              onDeleteClick={handleDelete}
-            />
+            {cvs?.map((cv) => (
+              <div key={cv._id}>
+                <CVPreview
+                  preview={preview}
+                  cv={cv || []}
+                  onEditClick={handleEdit}
+                  onDeleteClick={handleDelete}
+                  toggleVisibility={toggleVisibility}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>

@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { AuthProvider } from "./CMSAdmin/Auth/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,15 +14,8 @@ import { ToastContainer } from "react-toastify";
 import NotFound from "./Components/404Page/404Page";
 import TermsandConditions from "./Components/TermsAndConditions/Terms&Conditions";
 import AddPortfolioDetails from "./CMSAdmin/PortfolioDetails/AddPortfolioDetails";
-import useFetch from "./Components/useFetch";
-import Loading from "./Components/Loading/Loading";
 
 function App() {
-  const API_URL = useMemo(
-    () => process.env.REACT_APP_BACKEND_URL || "http://localhost:8000",
-    []
-  );
-  // const { data: termsList, isPending } = useFetch(`${API_URL}/api/terms`);
   return (
     <AuthProvider>
       <div className="App">

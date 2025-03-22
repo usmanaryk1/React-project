@@ -7,7 +7,7 @@ import TermItem from "./TermItem";
 import { useForm } from "react-hook-form";
 import NullData from "../NullData/NullData";
 import { useAuth } from "../../CMSAdmin/Auth/AuthContext";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import useFetch from "../useFetch";
 import Loading from "../Loading/Loading";
 import Error from "../Error/Error";

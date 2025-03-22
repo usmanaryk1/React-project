@@ -228,10 +228,9 @@ import PortfolioCardSkeletonLoading from "./portfolioCardSkeletonLoading";
 import CertificationSkeletonLoader from "./certificationSkeletonLoader";
 import HeroSkeletonLoader from "./heroSkeletonLoader";
 import AboutSkeletonLoader from "./aboutSkeletonLoader";
-
 import DynamicSections from "./DynamicSections/DynamicSections";
 import useFetchAll from "./useFetchAll";
-// import CVPreview from "../CMSAdmin/UploadCV/CVPreview";
+import useFetch from "./useFetch";
 
 // ✅ Lazy load sections
 const Hero = lazy(() => import("./Hero"));
@@ -253,8 +252,6 @@ const Home = () => {
     () => process.env.REACT_APP_BACKEND_URL || "http://localhost:8000",
     []
   );
-  // const userId = localStorage.getItem("userId"); // Retrieve userId from local storage
-  // const { data: cv } = useFetch(`${API_URL}/api/getCV/${userId}`);
   const endpoints = useMemo(
     () => [
       "hero",
@@ -277,10 +274,13 @@ const Home = () => {
   const { data, isLoading, error } = useFetchAll(API_URL, endpoints);
   // console.log("data loop",data)
   console.log("data.:", data);
-  console.log("data.cvs:", data.cvs);
   const [visibleSections, setVisibleSections] = useState([]);
   const [isPending, setIsPending] = useState(true); // Initially true
+  const { data: visibleCVs, setData: setVisibleCVs } = useFetch(
+    `${API_URL}/api/cv/visibleCVs`
+  );
 
+  console.log("visibleCVs:", visibleCVs);
   useEffect(() => {
     setIsPending(true); // Set loading state to true before fetching
     const fetchVisibleSections = async () => {
@@ -439,11 +439,15 @@ const Home = () => {
                       />
                     );
                   case "CV":
-                    return !data["cvs"] ? (
+                    return !data["cv"] ? (
                       <Loading />
                     ) : (
-                      <CVPreview key={section._id} cvs={data.cvs || []} />
+                      visibleCVs &&
+                        visibleCVs.map((cv) => (
+                          <CVPreview key={cv._id} cv={cv || []} />
+                        ))
                     );
+
                   default:
                     return data[section.name] ? (
                       <DynamicSections

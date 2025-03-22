@@ -15,7 +15,6 @@ const TermsAndConditionsEdit = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [updating, setUpdating] = useState(false);
   const [reorderedTerms, setReorderedTerms] = useState([]); // To track reordering changes
-  const [isEdit, setIsEdit] = useState(true);
 
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
   const {

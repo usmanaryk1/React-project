@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback, useEffect } from "react";
+import { useMemo, useState, useCallback } from "react";
 import "./DynamicSectionsEdit.css";
 import useFetch from "../../Components/useFetch";
 import ApiService from "../ApisService";

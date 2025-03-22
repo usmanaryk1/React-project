@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
-import { Tooltip } from "bootstrap";
 const HorizontalHeader = ({
   navLinks,
   isActiveLink,
@@ -151,20 +150,6 @@ const HorizontalHeader = ({
                       style={{ fontSize: "1.5rem" }}
                     />
                   </Link>
-
-                  {/* {isAdminPage ? (
-                <li>
-                  <Link smooth to="/" onClick={closeMobileMenu}>
-                    Go to User Portal
-                  </Link>
-                </li>
-              ) : (
-                <li>
-                  <Link smooth to="/form/dashboard" onClick={closeMobileMenu}>
-                    Go to Admin Portal
-                  </Link>
-                </li>
-              )} */}
                 </li>
               )}
             </ul>
