@@ -11,7 +11,7 @@ const {
 const router = express.Router();
 
 // Fetch all CVS
-router.get("/", authenticateJWT, getAllCvs);
+router.get("/", getAllCvs);
 
 // Fetch all visible CVS
 router.get("/visibleCVs", visibleCVs);

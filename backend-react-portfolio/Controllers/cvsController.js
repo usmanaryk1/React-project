@@ -1,17 +1,16 @@
-const express = require("express");
 const CV_Model = require("../models/CVSchema");
 const { bucket } = require("../api/firebaseAdmin.js");
 const { default: mongoose } = require("mongoose");
 
 // Fetch CV URL by userId
 const getAllCvs = async (req, res) => {
-  if (!req.user || !req.user.id) {
-    return res.status(401).json({ message: "Unauthorized: User not found" });
-  }
-  const userId = req.user.id;
+  // if (!req.user || !req.user.id) {
+  //   return res.status(401).json({ message: "Unauthorized: User not found" });
+  // }
+  // const userId = req.user.id;
 
   try {
-    const cvs = await CV_Model.find({ userId });
+    const cvs = await CV_Model.find();
 
     if (!cvs) {
       return res.status(404).json({ message: "CV not found" });
