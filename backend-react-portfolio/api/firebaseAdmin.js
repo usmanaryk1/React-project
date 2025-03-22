@@ -21,5 +21,7 @@ if (!admin.apps.length) {
     storageBucket: process.env.FIREBASE_STORAGE_BUCKET, // Add bucket if needed
   });
 }
+console.log(admin.app().options);
 
-module.exports = admin;
+const bucket = admin.storage().bucket();
+module.exports = { admin, bucket };

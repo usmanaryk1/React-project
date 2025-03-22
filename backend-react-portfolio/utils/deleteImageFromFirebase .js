@@ -1,5 +1,4 @@
-const admin = require("../api/firebaseAdmin.js");
-const bucket = admin.storage().bucket();
+const { bucket } = require("../api/firebaseAdmin.js");
 
 // Delete image from Firebase
 const deleteImageFromFirebase = async (imageUrl) => {

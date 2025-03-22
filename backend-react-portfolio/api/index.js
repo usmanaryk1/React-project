@@ -7,19 +7,18 @@ const path = require("path");
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      const allowedOrigins = [
-        "https://frontend-react-portfolio.vercel.app",
-        "http://localhost:3000",
-      ];
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: [
+      "https://frontend-react-portfolio.vercel.app",
+      "http://localhost:3000",
+    ],
     methods: "GET,POST,PUT,DELETE,OPTIONS,PATCH",
-    credentials: true, // Allow cookies or other credentials
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "X-Requested-With",
+      "Accept",
+    ],
+    credentials: true,
   })
 );
 

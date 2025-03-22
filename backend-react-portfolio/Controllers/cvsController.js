@@ -1,6 +1,6 @@
 const express = require("express");
 const CV_Model = require("../models/CVSchema");
-const admin = require("../api/firebaseAdmin.js");
+const { bucket } = require("../api/firebaseAdmin.js");
 const { default: mongoose } = require("mongoose");
 
 // Fetch CV URL by userId
@@ -84,11 +84,7 @@ const updateCV = async (req, res) => {
       const filePath = cv.cvUrl.split("/o/")[1].split("?")[0];
 
       // Delete file from Firebase Storage
-      await admin
-        .storage()
-        .bucket()
-        .file(decodeURIComponent(filePath))
-        .delete();
+      await bucket.file(decodeURIComponent(filePath)).delete();
     }
 
     // Update in MongoDB
