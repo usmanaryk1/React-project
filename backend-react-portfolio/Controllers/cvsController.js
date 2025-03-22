@@ -156,4 +156,51 @@ const deleteCV = async (req, res) => {
   }
 };
 
-module.exports = { getAllCvs, uploadCv, updateCV, deleteCV };
+const toggleVisibility = async (req, res) => {
+  const { id, isVisible } = req.body;
+  try {
+    // Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(String(id))) {
+      return res.status(400).json({ message: "Invalid CV ID format" });
+    }
+
+    const objectId = new mongoose.Types.ObjectId(id);
+
+    const UpdatedCVs = await CV_Model.findOneAndUpdate(
+      { _id: objectId }, // Corrected query
+      { isVisible },
+
+      { new: true } // Update if exists, otherwise create
+    );
+    if (!UpdatedCVs) {
+      return res.status(404).json({ message: "CV not found" });
+    }
+    res.status(200).json(UpdatedCVs);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error Updating Visibility State" });
+  }
+};
+
+const visibleCVs = async (req, res) => {
+  try {
+    const visibleCVs = await CV_Model.find({
+      isVisible: true,
+    }).sort({ order: 1 });
+    if (visibleCVs.length === 0) {
+      return res.status(404).json({ message: "No visible CVs found." });
+    }
+    res.status(200).json(visibleCVs);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch data" });
+  }
+};
+module.exports = {
+  getAllCvs,
+  uploadCv,
+  updateCV,
+  deleteCV,
+  toggleVisibility,
+  visibleCVs,
+};
