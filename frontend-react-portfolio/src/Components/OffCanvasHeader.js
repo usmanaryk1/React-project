@@ -17,7 +17,12 @@ const OffCanvasHeader = ({
     );
 
     tooltipTriggerList.forEach((tooltipTriggerEl) => {
-      new window.bootstrap.Tooltip(tooltipTriggerEl);
+      const tooltipInstance = new window.bootstrap.Tooltip(tooltipTriggerEl);
+
+      // Manually hide tooltip when clciking on the link
+      tooltipTriggerEl.addEventListener("click", () => {
+        tooltipInstance.hide();
+      });
     });
   }, []);
 
@@ -41,18 +46,39 @@ const OffCanvasHeader = ({
   return (
     <>
       <header id="header" className="fixed-top vertical-header">
-        <button
-          className="btn toggle-button"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasScrolling"
-          aria-controls="offcanvasScrolling"
-        >
-          <i
-            className="bi bi-list"
-            style={{ fontSize: "1.5rem", color: "white" }}
-          ></i>
-        </button>
+        <div className="d-flex justify-content-between align-items-center">
+          <button
+            className="btn toggle-button"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasScrolling"
+            aria-controls="offcanvasScrolling"
+          >
+            <i
+              className="bi bi-list"
+              style={{ fontSize: "1.5rem", color: "white" }}
+            ></i>
+          </button>
+          {isAuthenticated && isAdminPage && (
+            <Link
+              to="/"
+              data-bs-toggle="tooltip"
+              data-bs-placement="bottom"
+              data-bs-html="true"
+              data-bs-title="Go to User Portal"
+              style={{ marginRight: "1rem" }}
+            >
+              <i
+                className="bi bi-arrow-repeat"
+                style={{
+                  fontSize: "1.5rem",
+                  color: "white",
+                  paddingTop: "1rem",
+                }}
+              />
+            </Link>
+          )}
+        </div>
 
         <div
           className="offcanvas offcanvas-start"
@@ -65,20 +91,6 @@ const OffCanvasHeader = ({
           <div className="offcanvas-header">
             <h1 className="offcanvas-title logo" id="offcanvasScrollingLabel">
               <Link to="/">PortfolioHub</Link>
-              {isAuthenticated && isAdminPage && (
-                <Link
-                  to="/"
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="bottom"
-                  data-bs-html="true"
-                  data-bs-title="Go to User Portal"
-                >
-                  <i
-                    className="bi bi-arrow-repeat"
-                    style={{ fontSize: "1.5rem", marginLeft: "1rem" }}
-                  />
-                </Link>
-              )}
             </h1>
 
             <button
