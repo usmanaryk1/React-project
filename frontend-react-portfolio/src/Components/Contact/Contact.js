@@ -47,7 +47,7 @@ const Contact = ({ onEditClick, onDeleteClick, contact = [], links = [] }) => {
                     <div className="row">
                       <div className="col-md-6">
                         <div className="title-box-2">
-                          <h5 className="title-left">Send Message Us</h5>
+                          <h5 className="title-left">Send Us Message</h5>
                         </div>
                         <div>
                           <ContactForm />

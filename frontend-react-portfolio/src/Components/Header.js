@@ -22,6 +22,7 @@ const Header = () => {
         { to: "/form/dashboard", label: "Dashboard" },
         { to: "/form/manage-sections", label: "Manage Sections" },
         { to: "/form/dynamicSections-form", label: "Create Sections" },
+        { to: "/form/settings", label: "Settings" },
         { to: "/form/hero-form", label: "Introduction" },
         { to: "/form/about-form", label: "About" },
         { to: "/form/skills-form", label: "Skills" },

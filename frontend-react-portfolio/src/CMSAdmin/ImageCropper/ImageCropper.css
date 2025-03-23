@@ -1,4 +1,6 @@
-/* ImageCropper.css */
+/*--------------------------------------------------------------
+#  Image Cropper
+--------------------------------------------------------------*/
 .cropper-container {
   position: fixed;
   top: 55%;
@@ -39,6 +41,10 @@
   cursor: pointer;
   border-radius: 25px;
 }
+
+/*--------------------------------------------------------------
+#  Rresponsive Media Queries
+--------------------------------------------------------------*/
 @media (max-width: 812px) {
   .cropper-container {
     width: 70vw; /* Full width of the viewport */

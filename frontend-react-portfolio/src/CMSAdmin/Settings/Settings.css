@@ -1,0 +1,88 @@
+/*--------------------------------------------------------------
+#  Form
+--------------------------------------------------------------*/
+.settings-form {
+  min-height: 300px;
+}
+.settings-container {
+  border-radius: 5px;
+  max-width: 650px;
+  margin: 28px auto;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px 6px rgba(186 168 168 / 62%);
+}
+.form-card {
+  max-width: 600px;
+  margin: 50px auto 0;
+  padding: 10px;
+}
+.form-card label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0 auto;
+}
+.settings-form input[type="text"],
+.form textarea {
+  width: 60%;
+  padding: 10px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+  border-radius: 5px;
+}
+
+.settings-form .updateTitle-btn {
+  background: #128f32;
+  color: #fff;
+  border: 0;
+  padding: 10px 25px;
+  margin-right: 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.settings-form .updateTitle-btn:hover {
+  transform: scale(1.1);
+}
+
+.settings-form .cancel-btn {
+  background: #0062d3;
+  color: #fff;
+  border: 0;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.settings-form .reset:hover {
+  transform: scale(1.1);
+}
+
+/*--------------------------------------------------------------
+#  Rresponsive Media Queries
+--------------------------------------------------------------*/
+/* @media (max-width: 775px) {
+  .settings-form input[type="text"],
+  .form textarea {
+    width: 80%;
+  }
+} */
+@media (max-width: 992px) {
+  .settings-form input[type="text"],
+  .form textarea {
+    width: 100%;
+  }
+}
+
+@media (max-width: 266px) {
+  .settings-form .updateTitle-btn {
+    padding: 10px 20px;
+  }
+  .settings-form .cancel-btn {
+    padding: 10px 20px;
+  }
+}

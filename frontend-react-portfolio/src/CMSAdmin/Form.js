@@ -21,6 +21,7 @@ import AddPortfolioDetails from "./PortfolioDetails/AddPortfolioDetails";
 import SkillsEdit from "./Skills/SkillsEdit";
 import ManageSections from "./ManageSections/ManageSections";
 import DynamicSectionsEdit from "./DynamicSectionsEdit/DynamicSectionsEdit";
+import Settings from "./Settings/Settings";
 
 const Form = () => {
   const { isAuthenticated } = useAuth();
@@ -154,6 +155,11 @@ const Form = () => {
           <PrivateRoute
             path={`/form/termsandconditions`}
             component={TermsAndConditionsEdit}
+            isAuthenticated={isAuthenticated}
+          />
+          <PrivateRoute
+            path={`/form/settings`}
+            component={Settings}
             isAuthenticated={isAuthenticated}
           />
         </Switch>
