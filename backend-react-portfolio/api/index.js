@@ -44,7 +44,7 @@ const ContactUs_Routes = require("../router/contactForm.js");
 const SectionVisibility_Routes = require("../router/SectionVisibility.js");
 const DynamicSections_Routes = require("../router/dynamicSections.js");
 const CV = require("../router/CV.js");
-
+const Settings_Route = require("../router/settings.js");
 // Simple route
 app.get("/", (req, res) => {
   res.send("Welcome to API!");
@@ -74,6 +74,7 @@ app.use("/api/terms", Terms_Routes);
 app.use("/api/skills", Skills_Routes);
 app.use("/api/sectionVisibility", SectionVisibility_Routes);
 app.use("/api/dynamicSections", DynamicSections_Routes);
+app.use("/api/settings", Settings_Routes);
 
 app.use("/api/*", (req, res, next) => {
   res.status(404).json({ message: "API route not found" });
