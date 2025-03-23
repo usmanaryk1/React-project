@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
+import { handleTooltip } from "./UtilFunctions/TooltipFunction";
 const HorizontalHeader = ({
   navLinks,
   isActiveLink,
@@ -11,13 +12,7 @@ const HorizontalHeader = ({
   onLogout,
 }) => {
   useEffect(() => {
-    const tooltipTriggerList = document.querySelectorAll(
-      '[data-bs-toggle="tooltip"]'
-    );
-
-    tooltipTriggerList.forEach((tooltipTriggerEl) => {
-      new window.bootstrap.Tooltip(tooltipTriggerEl);
-    });
+    handleTooltip();
   }, []);
   const [isMobileMenuOpen, setMobileMenu] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);

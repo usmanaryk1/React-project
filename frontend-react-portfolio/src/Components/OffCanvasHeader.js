@@ -1,6 +1,7 @@
 import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
 import { Offcanvas } from "bootstrap";
 import { useEffect } from "react";
+import { handleTooltip } from "./UtilFunctions/TooltipFunction";
 
 const OffCanvasHeader = ({
   navLinks,
@@ -12,18 +13,7 @@ const OffCanvasHeader = ({
   isAdminPage,
 }) => {
   useEffect(() => {
-    const tooltipTriggerList = document.querySelectorAll(
-      '[data-bs-toggle="tooltip"]'
-    );
-
-    tooltipTriggerList.forEach((tooltipTriggerEl) => {
-      const tooltipInstance = new window.bootstrap.Tooltip(tooltipTriggerEl);
-
-      // Manually hide tooltip when clciking on the link
-      tooltipTriggerEl.addEventListener("click", () => {
-        tooltipInstance.hide();
-      });
-    });
+    handleTooltip();
   }, []);
 
   const closeCanvas = () => {
