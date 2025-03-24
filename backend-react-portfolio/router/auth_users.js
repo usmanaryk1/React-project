@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const UserModel = require("../models/userSchema");
 const authenticateJWT = require("../middleware/authmiddleware");
 const router = express.Router();
-const admin = require("../api/firebaseAdmin.js");
+const { admin } = require("../api/firebaseAdmin.js");
 const checkFirebaseUserByEmail = require("../utils/checkFirebaseUser.js");
 const sendVerificationEmail = require("./verificationEmail.js");
 

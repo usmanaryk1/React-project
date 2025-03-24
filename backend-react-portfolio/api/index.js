@@ -44,7 +44,7 @@ const ContactUs_Routes = require("../router/contactForm.js");
 const SectionVisibility_Routes = require("../router/SectionVisibility.js");
 const DynamicSections_Routes = require("../router/dynamicSections.js");
 const CV = require("../router/CV.js");
-const Settings_Route = require("../router/settings.js");
+const Settings_Routes = require("../router/settings.js");
 // Simple route
 app.get("/", (req, res) => {
   res.send("Welcome to API!");

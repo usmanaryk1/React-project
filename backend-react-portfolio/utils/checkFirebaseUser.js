@@ -1,4 +1,4 @@
-const admin = require("../api/firebaseAdmin"); // Import Firebase Admin SDK
+const { admin } = require("../api/firebaseAdmin"); // Import Firebase Admin SDK
 
 // Utility to check if a user exists in Firebase by email
 const checkFirebaseUserByEmail = async (email) => {

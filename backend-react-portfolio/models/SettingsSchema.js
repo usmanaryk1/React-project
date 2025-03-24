@@ -5,6 +5,8 @@ const Schema = mongoose.Schema;
 const settingsSchema = new Schema({
   title: { type: String, required: true },
   subtitle: { type: String },
+  hasSubtitle: { type: Boolean },
+  name: { type: String },
 });
 
 //two argument need in schema 1st one is name  and 2nd one is Schema

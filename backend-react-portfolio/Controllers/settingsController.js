@@ -16,20 +16,42 @@ const getSettings = async (req, res) => {
   }
 };
 
-const updateSettings = async (req, res) => {
-  const sectionTitle = req.params.title;
+// CREATE SETTINGS
+const createSettings = async (req, res) => {
   try {
-    const updatedSetting = await SectionSetting.findOneAndUpdate(
-      { sectionTitle },
-      req.body,
-      { new: true, upsert: true }
-    );
+    const { title, subtitle } = req.body;
 
-    return res.status(200).json(updatedSetting);
+    // Check if section already exists
+    let existingData = await Settings_Model.findOne({ title });
+    if (existingData) {
+      return res.status(400).json({ error: "Same data already exists" });
+    }
+
+    const newSetting = new Settings_Model({ title, subtitle });
+    await newSetting.save();
+    return res.status(201).json(newSetting);
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Failed to update." });
+    return res.status(500).json({ error: "Failed to create setting" });
   }
 };
 
-module.exports = { getSettings, updateSettings };
+const updateSettings = async (req, res) => {
+  try {
+    const { title, subtitle } = req.body;
+    const updatedSetting = await Settings_Model.findByIdAndUpdate(
+      req.params.id,
+      { title, subtitle },
+      { new: true }
+    );
+
+    if (!updatedSetting) {
+      return res.status(404).json({ error: "Setting not found" });
+    }
+
+    return res.status(200).json(updatedSetting);
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to update setting" });
+  }
+};
+
+module.exports = { getSettings, createSettings, updateSettings };
