@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import { useAuth } from "../CMSAdmin/Auth/AuthContext";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { Link } from "react-router-dom";
 
 const Portfolio = ({ title, subtitle, onEdit, onDelete, works = [] }) => {
   const { isAuthenticated, isAdminPage } = useAuth();
@@ -55,7 +56,12 @@ const Portfolio = ({ title, subtitle, onEdit, onDelete, works = [] }) => {
             <div className="row">
               {works.map((work) => (
                 <div className="col-md-4 col-sm-6" key={work._id}>
-                  <div className="work-box anime-box">
+                  <div
+                    className="work-box anime-box"
+                    onClick={() => {
+                      handleClickLink(work);
+                    }}
+                  >
                     {/* <a href={work.linkImage} data-gallery="portfolioGallery" className="portfolio-lightbox"> */}
                     {work.workImage && (
                       <div className="work-img">
@@ -97,9 +103,9 @@ const Portfolio = ({ title, subtitle, onEdit, onDelete, works = [] }) => {
                       <div className="row">
                         <div className="col-sm-8">
                           <h2 className="w-title">
-                            <a href={work.pURL} target="blank">
+                            <Link to={work.pURL} target="blank">
                               {work.wTitle}
-                            </a>
+                            </Link>
                           </h2>
                           <div className="w-more">
                             <span className="w-ctegory">{work.wCategory}</span>{" "}
@@ -107,12 +113,7 @@ const Portfolio = ({ title, subtitle, onEdit, onDelete, works = [] }) => {
                           </div>
                         </div>
                         <div className="col-sm-4">
-                          <div
-                            className="w-like"
-                            onClick={() => {
-                              handleClickLink(work);
-                            }}
-                          >
+                          <div className="w-like">
                             <span className="bi bi-plus-circle" />
                           </div>
                         </div>
