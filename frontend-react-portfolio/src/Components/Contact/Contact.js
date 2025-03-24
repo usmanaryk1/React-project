@@ -2,7 +2,13 @@ import Swal from "sweetalert2";
 import { useAuth } from "../../CMSAdmin/Auth/AuthContext";
 import ContactForm from "./ContactForm";
 
-const Contact = ({ onEditClick, onDeleteClick, contact = [], links = [] }) => {
+const Contact = ({
+  onEditClick,
+  onDeleteClick,
+  contact = [],
+  links = [],
+  title,
+}) => {
   const { isAuthenticated, isAdminPage } = useAuth();
 
   const handleDelete = (id) => {
@@ -77,7 +83,7 @@ const Contact = ({ onEditClick, onDeleteClick, contact = [], links = [] }) => {
                           </div>
                         )}
                         <div className="title-box-2 pt-4 pt-md-0">
-                          <h5 className="title-left">Get in Touch</h5>
+                          <h5 className="title-left">{title}</h5>
                         </div>
                         {contact &&
                           contact.map((contact) => (

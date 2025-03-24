@@ -14,6 +14,27 @@ const OffCanvasHeader = ({
 }) => {
   useEffect(() => {
     handleTooltip();
+    const offcanvasElement = document.getElementById("offcanvasScrolling");
+    if (offcanvasElement) {
+      const removeBackdrop = () => {
+        setTimeout(() => {
+          const backdrop = document.querySelector(".offcanvas-backdrop");
+          if (backdrop) {
+            backdrop.remove(); // Ensure the backdrop is removed
+          }
+          document.body.classList.remove("offcanvas-open");
+        }, 100);
+      };
+
+      offcanvasElement.addEventListener("hidden.bs.offcanvas", removeBackdrop);
+
+      return () => {
+        offcanvasElement.removeEventListener(
+          "hidden.bs.offcanvas",
+          removeBackdrop
+        );
+      };
+    }
   }, []);
 
   const closeCanvas = () => {

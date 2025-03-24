@@ -6,7 +6,7 @@ const Dynamicitem = ({ dynamicSection, onEditClick, handleDeleteClick }) => {
   return (
     <section
       id="section"
-      className="dynamicSections route"
+      className="dynamicSections route mt-4"
       key={dynamicSection._id}
     >
       <div className="container">

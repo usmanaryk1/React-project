@@ -279,6 +279,7 @@ const Home = () => {
   const { data: visibleCVs, setData: setVisibleCVs } = useFetch(
     `${API_URL}/api/cv/visibleCVs`
   );
+  const { data: settings } = useFetch(`${API_URL}/api/settings`);
 
   console.log("visibleCVs:", visibleCVs);
   useEffect(() => {
@@ -305,7 +306,7 @@ const Home = () => {
   // ✅ Handle Loading & Error
   if (isLoading || isPending) return <Loading />;
   if (error) return <Error message={error} />;
-
+  if (!settings) return <Loading />;
   return (
     <main id="main">
       <Suspense fallback={<Loading />}>
@@ -316,7 +317,15 @@ const Home = () => {
             section,
             data[section.name]
           );
+          const sectionSettings =
+            Object.values(settings).find((s) => s.name === section.name) || {};
 
+          const sectionTitle = sectionSettings.title || section.name;
+          const sectionSubtitle = sectionSettings.subtitle || "";
+
+          console.log("settings", settings);
+          console.log("sectionTitle", sectionTitle);
+          console.log("sectionSubtitle", sectionSubtitle);
           return (
             <LazyLoadSection key={section._id}>
               {(() => {
@@ -350,6 +359,7 @@ const Home = () => {
                         key={section._id}
                         about={data.about || []}
                         skills={data.skills || []}
+                        title={sectionTitle}
                       />
                     );
                   case "Services":
@@ -357,8 +367,8 @@ const Home = () => {
                       <Services
                         key={section._id}
                         services={data.services || []}
-                        title="Services"
-                        subtitle="Delivering solutions that exceed expectations."
+                        title={sectionTitle}
+                        subtitle={sectionSubtitle}
                       />
                     );
                   case "Counter":
@@ -385,8 +395,8 @@ const Home = () => {
                       <Portfolio
                         key={section._id}
                         works={data.works}
-                        title="Portfolio"
-                        subtitle="We turn ideas into impactful results."
+                        title={sectionTitle}
+                        subtitle={sectionSubtitle}
                       />
                     );
                   // <Portfolio works={data.works || []} title="Portfolio" subtitle="We turn ideas into impactful results." />;
@@ -416,8 +426,8 @@ const Home = () => {
                       </div>
                     ) : (
                       <Certifications
-                        title="Certifications"
-                        subtitle="Showcasing milestones of excellence"
+                        title={sectionTitle}
+                        subtitle={sectionSubtitle}
                         key={section._id}
                         certifications={data.certifications || []}
                       />
@@ -428,6 +438,7 @@ const Home = () => {
                         key={section._id}
                         contact={data.contact || []}
                         links={data.social || []}
+                        title={sectionTitle}
                       />
                     );
                   case "Terms and Conditions":
@@ -436,6 +447,7 @@ const Home = () => {
                         key={section._id}
                         termsList={data.termsList || []}
                         className="mt-5"
+                        title={sectionTitle}
                       />
                     );
                   case "CV":

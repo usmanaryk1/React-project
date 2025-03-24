@@ -17,6 +17,7 @@ const TermsandConditions = ({
   termsList = [], // Default value
   isEdit = false,
   handleReorder,
+  title,
 }) => {
   const API_URL = useMemo(
     () => process.env.REACT_APP_BACKEND_URL || "http://localhost:8000",
@@ -77,7 +78,7 @@ const TermsandConditions = ({
           <div className="hero-content display-table">
             <div className="table-cell">
               <div className="container">
-                <h2 className="hero-title">TERMS AND CONDITIONS</h2>
+                <h2 className="hero-title">{title}</h2>
               </div>
             </div>
           </div>
@@ -85,21 +86,21 @@ const TermsandConditions = ({
 
         {/* Render Existing Terms */}
         <div className="box-shadow-full">
-        {termsList?.length > 0 ? (
-          termsList.map((term, index) => (
-            <TermItem
-              key={term._id}
-              term={term}
-              index={index}
-              moveTerm={handleReorder}
-              handleEditClick={() => handleEditClick(term)}
-              handleDeleteClick={() => handleDeleteClick(term._id)}
-              parentReset={reset}
-            />
-          ))
-        ) : (
-          <NullData message="Terms" link="/" redirect_to="Home" />
-        )}
+          {termsList?.length > 0 ? (
+            termsList.map((term, index) => (
+              <TermItem
+                key={term._id}
+                term={term}
+                index={index}
+                moveTerm={handleReorder}
+                handleEditClick={() => handleEditClick(term)}
+                handleDeleteClick={() => handleDeleteClick(term._id)}
+                parentReset={reset}
+              />
+            ))
+          ) : (
+            <NullData message="Terms" link="/" redirect_to="Home" />
+          )}
         </div>
       </div>
     </DndProvider>

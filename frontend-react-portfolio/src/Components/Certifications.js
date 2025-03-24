@@ -31,7 +31,7 @@ const Certifications = ({
     <>
       {/* ======= Certifications Section ======= */}
       {certifications && (
-        <section id="certifications" className="route">
+        <section id="certifications" className="route mt-4">
           <div className="container">
             <div className="row">
               <div className="col-sm-12">

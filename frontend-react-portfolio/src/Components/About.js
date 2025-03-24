@@ -12,6 +12,7 @@ const About = ({
   handleEditClick,
   handleDelete,
   handleReorder,
+  title,
 }) => {
   const { isAuthenticated, isAdminPage } = useAuth();
   const [imageLoaded, setImageLoaded] = useState({}); // Store image load states
@@ -117,7 +118,7 @@ const About = ({
                       <div className="col-md-6" key={item._id}>
                         <div className="about-me pt-4 pt-md-0">
                           <div className="title-box-2 d-flex justify-content-between">
-                            <h5 className="title-left">About</h5>
+                            <h5 className="title-left">{title}</h5>
                             {isAuthenticated && isAdminPage && (
                               <div className="admin-actions">
                                 <button

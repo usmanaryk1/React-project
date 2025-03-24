@@ -25,7 +25,7 @@ const Services = ({ title, subtitle, onEdit, onDelete, services = [] }) => {
     <>
       {/* ======= Services Section ======= */}
       {services && (
-        <section id="services" className="services-mf route">
+        <section id="services" className="services-mf route mt-4">
           <div className="container">
             <div className="row">
               <div className="col-sm-12">
