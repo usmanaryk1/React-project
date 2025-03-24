@@ -40,7 +40,7 @@ const TermItem = ({
       <section id="conditions" className="conditions-mf route">
         <div className="container">
           <div className="row">
-            <div className="col-12">
+            <div className="col-sm-12">
               <div
                 className={
                   isAdminPage && isAuthenticated

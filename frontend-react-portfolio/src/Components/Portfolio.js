@@ -55,7 +55,7 @@ const Portfolio = ({ title, subtitle, onEdit, onDelete, works = [] }) => {
             <div className="row">
               {works.map((work) => (
                 <div className="col-md-4 col-sm-6" key={work._id}>
-                  <div className="work-box">
+                  <div className="work-box anime-box">
                     {/* <a href={work.linkImage} data-gallery="portfolioGallery" className="portfolio-lightbox"> */}
                     {work.workImage && (
                       <div className="work-img">

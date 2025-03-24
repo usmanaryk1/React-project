@@ -42,7 +42,7 @@ const Contact = ({ onEditClick, onDeleteClick, contact = [], links = [] }) => {
           <div className="container">
             <div className="row">
               <div className="col-sm-12">
-                <div className="contact-mf">
+                <div className="contact-mf anime-box">
                   <div id="contact" className="box-shadow-full">
                     <div className="row">
                       <div className="col-md-6">

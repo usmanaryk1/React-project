@@ -48,7 +48,7 @@ const Certifications = ({
                   className="col-lg-4 col-sm-6 card-box"
                   key={certification._id}
                 >
-                  <div className="card card-certification">
+                  <div className="card card-certification anime-box">
                     {certification.image && (
                       <div className="card-img">
                         <img

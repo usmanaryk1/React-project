@@ -36,7 +36,7 @@ const Dashboard = () => {
               {formsList.map((formItem) => (
                 <div className="col-md-4" key={formItem._id}>
                   <Link to={formItem.link}>
-                    <div className="service-box">
+                    <div className="service-box anime-box">
                       <div className="service-ico">
                         <span className="ico-circle">
                           <i className={formItem.Icon} />

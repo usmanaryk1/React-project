@@ -252,7 +252,7 @@ a:hover {
   width: 35px;
   font-size: 1.2rem;
   border-radius: 50%;
-  line-height: 1.6;
+  line-height: 1.7;
   margin: 0 0.8rem 0;
   box-shadow: 0 0 0 3px #0078ff;
   transition: all 500ms ease;
@@ -907,6 +907,7 @@ a:hover {
   color: #fff;
   background-color: #0078ff;
   box-shadow: 0 0 0 10px #cde1f8;
+  transform: translateY(-5px);
 }
 
 .service-box .service-ico {
@@ -1952,4 +1953,13 @@ input[type="number"],
   font-size: 14px !important; /* Change font size */
   padding: 10px !important; /* Adjust padding */
   border-radius: 8px !important; /* Round corners */
+}
+
+.anime-box {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.anime-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }

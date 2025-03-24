@@ -84,6 +84,7 @@ const TermsandConditions = ({
         </div>
 
         {/* Render Existing Terms */}
+        <div className="box-shadow-full">
         {termsList?.length > 0 ? (
           termsList.map((term, index) => (
             <TermItem
@@ -99,6 +100,7 @@ const TermsandConditions = ({
         ) : (
           <NullData message="Terms" link="/" redirect_to="Home" />
         )}
+        </div>
       </div>
     </DndProvider>
   );
