@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
 import { handleTooltip } from "./UtilFunctions/TooltipFunction";
+import { closeCanvas } from "./UtilFunctions/HandleOffcanvas";
+
 const HorizontalHeader = ({
   navLinks,
   isActiveLink,
@@ -33,35 +35,31 @@ const HorizontalHeader = ({
   return (
     <>
       <header id="header" className="fixed-top">
-        <div className="container d-flex align-items-center justify-content-between">
-          <h1 className="logo">
+        <div className="container">
+          {/* <h1 className="logo">
             <Link to="/" target="_blank">
-              PortfolioHub
+              Portfolio
             </Link>
-          </h1>
-          <nav
-            id="navbar"
-            className={`navbar ${isMobileMenuOpen ? "navbar-mobile" : ""}`}
-          >
-            <ul>
-              {navLinks.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    className={`nav-link ${
-                      isActiveLink(link.to) ? "active" : ""
-                    }`}
-                    smooth
-                    to={link.to}
-                    scroll={(el) => {
-                      el.scrollIntoView({ behavior: "smooth", block: "start" });
-                    }}
-                    onClick={closeMobileMenu}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-              <li className="download">
+          </h1> */}
+          <div className="d-flex justify-content-between">
+            <button
+              className="btn toggle-button"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasScrolling"
+              aria-controls="offcanvasScrolling"
+            >
+              <i
+                className="bi bi-list"
+                style={{ fontSize: "1.5rem", color: "white" }}
+              ></i>
+            </button>
+            <nav
+              id="navbar"
+              className={`navbar ${isMobileMenuOpen ? "navbar-mobile" : ""}`}
+            >
+              <ul>
+                {/* <li className="download">
                 <button
                   onClick={() => {
                     handleDownloadCV();
@@ -71,68 +69,67 @@ const HorizontalHeader = ({
                 >
                   Download CV
                 </button>
-              </li>
+              </li> */}
 
-              <li className="dropdown nav-link">
-                {isAuthenticated && user ? (
-                  <>
-                    <a
-                      href="/"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        toggleDropdown("user");
-                      }}
-                    >
-                      <span>{user.username}</span>
-                      <i className="bi bi-chevron-down" />
-                    </a>
-                    <ul
-                      className={
-                        activeDropdown === "user" ? "dropdown-active" : ""
-                      }
-                    >
-                      <li>
-                        <Link
-                          smooth
-                          to="/"
-                          onClick={() => {
-                            closeMobileMenu();
-                            onLogout();
-                          }}
-                        >
-                          Log Out
-                        </Link>
-                      </li>
-                    </ul>
-                  </>
-                ) : (
-                  <>
-                    <a
-                      href="/"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        preventRefresh();
-                      }}
-                    >
-                      <span>Register</span>
-                      <i className="bi bi-chevron-down" />
-                    </a>
-                    <ul>
-                      <li>
-                        <Link
-                          smooth
-                          to="/form/login-form"
-                          onClick={closeMobileMenu}
-                        >
-                          Log in
-                        </Link>
-                      </li>
-                    </ul>
-                  </>
-                )}
-              </li>
-              {isAuthenticated && (
-                <li>
+                <li className="dropdown nav-link">
+                  {isAuthenticated && user ? (
+                    <>
+                      <a
+                        href="/"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          toggleDropdown("user");
+                        }}
+                      >
+                        <span>{user.username}</span>
+                        <i className="bi bi-chevron-down" />
+                      </a>
+                      <ul
+                        className={
+                          activeDropdown === "user" ? "dropdown-active" : ""
+                        }
+                      >
+                        <li>
+                          <Link
+                            smooth
+                            to="/"
+                            onClick={() => {
+                              closeMobileMenu();
+                              onLogout();
+                            }}
+                          >
+                            Log Out
+                          </Link>
+                        </li>
+                      </ul>
+                    </>
+                  ) : (
+                    <>
+                      <a
+                        href="/"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          preventRefresh();
+                        }}
+                      >
+                        <span>Register</span>
+                        <i className="bi bi-chevron-down" />
+                      </a>
+                      <ul>
+                        <li>
+                          <Link
+                            smooth
+                            to="/form/login-form"
+                            onClick={closeMobileMenu}
+                          >
+                            Log in
+                          </Link>
+                        </li>
+                      </ul>
+                    </>
+                  )}
+                </li>
+                {isAuthenticated && (
                   <Link
                     to="form/dashboard"
                     data-bs-toggle="tooltip"
@@ -141,20 +138,61 @@ const HorizontalHeader = ({
                     data-bs-title="Go to Admin Portal"
                   >
                     <i
-                      className="bi bi-arrow-repeat"
+                      className="bi bi-arrow-left-right"
                       style={{ fontSize: "1.5rem" }}
                     />
                   </Link>
-                </li>
-              )}
-            </ul>
-            <i
+                )}
+              </ul>
+              {/* <i
               className={`bi ${
                 isMobileMenuOpen ? "bi-x" : "bi-list"
               } mobile-nav-toggle`}
               onClick={toggleMobileMenu}
-            />
-          </nav>
+            /> */}
+            </nav>
+          </div>
+
+          <div
+            className="offcanvas offcanvas-start"
+            data-bs-scroll="true"
+            data-bs-backdrop="true"
+            tabIndex="-1"
+            id="offcanvasScrolling"
+            aria-labelledby="offcanvasScrollingLabel"
+          >
+            <div className="offcanvas-header">
+              <h1 className="offcanvas-title logo" id="offcanvasScrollingLabel">
+                <Link to="/">PortfolioHub</Link>
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="offcanvas-body">
+              <nav id="navbar" className="vertical-navbar">
+                <ul>
+                  {navLinks.map((link, index) => (
+                    <li key={index}>
+                      <Link
+                        className={`nav-link ${
+                          isActiveLink(link.to) ? "active" : ""
+                        }`}
+                        smooth
+                        to={link.to}
+                        onClick={() => closeCanvas()}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
+          </div>
           {/* .navbar */}
         </div>
       </header>

@@ -535,7 +535,7 @@ a:hover {
   transition: 0.3s;
   letter-spacing: 0.4px;
   position: relative;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .navbar a i,
@@ -654,14 +654,14 @@ a:hover {
   transition: 0.5s;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 657px) {
   .mobile-nav-toggle {
     display: block;
   }
-
+  /* 
   .navbar ul {
     display: none;
-  }
+  } */
 }
 
 .navbar-mobile {
@@ -764,7 +764,7 @@ a:hover {
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
-#hero {
+#introduction {
   margin-bottom: 1rem;
 }
 .hero {
@@ -1866,6 +1866,7 @@ input[type="number"],
   padding: 0rem 0.313rem 0rem 0rem;
   position: relative;
 }
+.vertical-navbar > ul > li > button:before,
 .vertical-navbar > ul > li > a:before {
   content: "";
   position: absolute;
@@ -1889,6 +1890,8 @@ input[type="number"],
   text-transform: uppercase;
 }
 .vertical-navbar a:hover:before,
+.vertical-navbar button:hover:before,
+.vertical-navbar li:hover > button:before,
 .vertical-navbar li:hover > a:before,
 .vertical-navbar .active:before {
   visibility: visible;

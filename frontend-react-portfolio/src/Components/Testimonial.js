@@ -49,6 +49,7 @@ const Testimonial = ({ onEditClick, onDeleteClick, testimonials = [] }) => {
       {/* ======= Testimonials Section ======= */}
       {testimonials && (
         <div
+          id="testimonial"
           className="testimonials paralax-mf bg-image"
           style={{ backgroundImage: "url(../assets/img/overlay-bg.jpg)" }}
         >

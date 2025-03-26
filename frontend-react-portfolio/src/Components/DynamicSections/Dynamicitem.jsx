@@ -5,23 +5,26 @@ const Dynamicitem = ({ dynamicSection, onEditClick, handleDeleteClick }) => {
 
   return (
     <section
-      id="section"
+      id={`${dynamicSection.name.toLowerCase()}`}
       className="dynamicSections route mt-4"
       key={dynamicSection._id}
     >
       <div className="container">
+        <div className="row">
+          <div className="col-sm-12">
+            <div className="title-box text-center">
+              <h3 className="title-a">{dynamicSection.name}</h3>
+              <div className="line-mf" />
+            </div>
+          </div>
+        </div>
         <div className="row">
           <div className="col-12">
             <div className="section-box">
               <div className="section-container">
                 <div>
                   <div className="row">
-                    <div className="col-9">
-                      <div className="section-title title-box-2 d-flex justify-content-between">
-                        <h5>{dynamicSection.name}</h5>
-                      </div>
-                    </div>
-                    <div className="col-3">
+                    <div className="col-12">
                       {isAuthenticated && isAdminPage && (
                         <div className="admin-actions crud-btns">
                           <div>

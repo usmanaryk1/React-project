@@ -1,14 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useAuth } from "../CMSAdmin/Auth/AuthContext";
 import { useLocation } from "react-router-dom/cjs/react-router-dom";
 import { handleDownloadCV } from "./UtilFunctions/handleDownloadCV";
 import OffCanvasHeader from "./OffCanvasHeader";
 import HorizontalHeader from "./HorizontalHeader";
+import useFetch from "./useFetch";
 
 const Header = () => {
   const [navLinks, setNavLinks] = useState([]);
   const { user, onLogout, isAdminPage, isAuthenticated } = useAuth();
   const location = useLocation();
+
+  const API_URL = useMemo(
+    () => process.env.REACT_APP_BACKEND_URL || "http://localhost:8000",
+    []
+  );
+
+  const { data: visibleSections } = useFetch(
+    `${API_URL}/api/sectionVisibility/visible`
+  );
+
+  const { data: settings } = useFetch(`${API_URL}/api/settings`);
+
   // const userId = localStorage.getItem("userId");
 
   const preventRefresh = (e) => {
@@ -36,17 +49,29 @@ const Header = () => {
         { to: "/form/CV-form", label: "Upload CV" },
         { to: "/form/termsandconditions", label: "Terms and Conditions" },
       ]);
-    } else {
-      setNavLinks([
+    } else if (visibleSections && settings) {
+      const updatedNavLinks = [
         { to: "/", label: "Home" },
-        { to: "#about", label: "About" },
-        { to: "#services", label: "Services" },
-        { to: "#work", label: "Work" },
-        { to: "#certifications", label: "Certifications" },
-        // { to: "/#contact", label: "Contact" },
-      ]);
+        ...visibleSections.map((section) => {
+          const sectionSettings =
+            Object.values(settings).find((s) => s.name === section.name) || {};
+
+          const sectionTitle = sectionSettings.title || section.name;
+          console.log("sectionTitle:", sectionTitle);
+          const sectionName = section.name;
+          const sectionLink = sectionName.toLowerCase().replace(/\s+/g, "");
+          console.log("sectionLink", sectionLink);
+
+          return {
+            to: `#${section.name.toLowerCase().replace(/\s+/g, "")}`,
+            label: `${sectionTitle ? sectionTitle : section.name}`,
+          };
+        }),
+      ];
+
+      setNavLinks(updatedNavLinks);
     }
-  }, [isAuthenticated, isAdminPage]);
+  }, [isAuthenticated, isAdminPage, visibleSections, settings]);
 
   const isActiveLink = (link) => {
     const linkHash = link.split("#")[1] ? `#${link.split("#")[1]}` : null;

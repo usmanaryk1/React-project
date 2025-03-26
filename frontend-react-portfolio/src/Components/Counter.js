@@ -36,6 +36,7 @@ const Counter = ({ onEdit, onDelete, counts = [] }) => {
       {counts && (
         <div
           className="section-counter paralax-mf bg-image"
+          id="counter"
           style={{ backgroundImage: "url(../assets/img/counters-bg.jpg)" }}
         >
           <div className="overlay-mf" />

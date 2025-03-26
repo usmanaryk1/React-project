@@ -1,7 +1,7 @@
 import { HashLink as Link } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
-import { Offcanvas } from "bootstrap";
 import { useEffect } from "react";
 import { handleTooltip } from "./UtilFunctions/TooltipFunction";
+import { closeCanvas } from "./UtilFunctions/HandleOffcanvas";
 
 const OffCanvasHeader = ({
   navLinks,
@@ -37,23 +37,6 @@ const OffCanvasHeader = ({
     }
   }, []);
 
-  const closeCanvas = () => {
-    const offcanvasElement = document.getElementById("offcanvasScrolling");
-    const bsOffcanvas = Offcanvas.getInstance(offcanvasElement);
-    if (bsOffcanvas) {
-      bsOffcanvas.hide(); // Close the offcanvas
-    }
-
-    // Ensure the backdrop is removed
-    setTimeout(() => {
-      const backdrop = document.querySelector(".offcanvas-backdrop");
-      if (backdrop) {
-        backdrop.remove();
-      }
-      document.body.classList.remove("offcanvas-open"); // Removes any leftover classes that might be causing dimming
-    }, 300); // Delay slightly to allow the transition to complete
-  };
-
   return (
     <>
       <header id="header" className="fixed-top vertical-header">
@@ -80,7 +63,7 @@ const OffCanvasHeader = ({
               style={{ marginRight: "1rem" }}
             >
               <i
-                className="bi bi-arrow-repeat"
+                className="bi bi-arrow-left-right"
                 style={{
                   fontSize: "1.5rem",
                   color: "white",

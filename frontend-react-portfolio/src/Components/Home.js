@@ -312,20 +312,20 @@ const Home = () => {
       <Suspense fallback={<Loading />}>
         {visibleSections.map((section) => {
           // console.log("section._id",section._id, section);
-          console.log(
-            "data[section, section.name]",
-            section,
-            data[section.name]
-          );
+          // console.log(
+          //   "data[section, section.name]",
+          //   section,
+          //   data[section.name]
+          // );
           const sectionSettings =
             Object.values(settings).find((s) => s.name === section.name) || {};
 
           const sectionTitle = sectionSettings.title || section.name;
           const sectionSubtitle = sectionSettings.subtitle || "";
 
-          console.log("settings", settings);
-          console.log("sectionTitle", sectionTitle);
-          console.log("sectionSubtitle", sectionSubtitle);
+          // console.log("settings", settings);
+          // console.log("sectionTitle", sectionTitle);
+          // console.log("sectionSubtitle", sectionSubtitle);
           return (
             <LazyLoadSection key={section._id}>
               {(() => {

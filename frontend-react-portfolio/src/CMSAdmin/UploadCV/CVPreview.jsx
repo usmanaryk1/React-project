@@ -2,7 +2,6 @@ import Swal from "sweetalert2";
 import { useAuth } from "../Auth/AuthContext";
 import "./CVPreview.css";
 import ToggleButton from "./ToggleButton";
-import useFetch from "../../Components/useFetch";
 
 const CVPreview = ({
   cv,
@@ -33,7 +32,7 @@ const CVPreview = ({
     <>
       {/* CV Previews */}
 
-      <div className="cv-preview container" key={cv._id}>
+      <div id="cv" className="cv-preview container" key={cv._id}>
         {/* Admin Actions */}
         {isAuthenticated && isAdminPage && (
           <div className="admin-actions d-flex justify-content-end">

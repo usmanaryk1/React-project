@@ -48,7 +48,7 @@ const Hero = ({ onDeleteClick, onEditClick, hero = {} }) => {
     <>
       {hero && (
         <div
-          id="hero"
+          id="introduction"
           className="hero route bg-image"
           style={{
             backgroundImage: `url(${process.env.PUBLIC_URL}/assets/img/counters-bg.jpg)`,
@@ -79,7 +79,7 @@ const Hero = ({ onDeleteClick, onEditClick, hero = {} }) => {
 
               {/* Hero Content */}
               <div className="container">
-                <h1 className="hero-title mb-4">I am {hero.name}</h1>
+                <h1 className="hero-title mb-4">{hero.name}</h1>
                 <p className="hero-subtitle">
                   {hero.skills && (
                     <span

@@ -70,6 +70,7 @@ const TermsandConditions = ({
         {/* ======= Terms and Conditions ======= */}
 
         <div
+          id="termsandconditions"
           className="hero hero-single route bg-image"
           alt="Terms and Conditions"
           style={{ backgroundImage: "url(../assets/img/overlay-bg.jpg)" }}
