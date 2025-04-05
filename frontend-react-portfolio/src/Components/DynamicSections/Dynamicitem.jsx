@@ -20,7 +20,7 @@ const Dynamicitem = ({ dynamicSection, onEditClick, handleDeleteClick }) => {
         </div>
         <div className="row">
           <div className="col-12">
-            <div className="section-box">
+            <div className="section-box anime-box">
               <div className="section-container">
                 <div>
                   <div className="row">
