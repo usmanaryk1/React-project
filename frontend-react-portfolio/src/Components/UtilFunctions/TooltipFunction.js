@@ -1,4 +1,7 @@
 export const handleTooltip = () => {
+  const existingTooltips = document.querySelectorAll(".tooltip");
+  existingTooltips.forEach((el) => el.remove());
+
   const tooltipTriggerList = document.querySelectorAll(
     '[data-bs-toggle="tooltip"]'
   );

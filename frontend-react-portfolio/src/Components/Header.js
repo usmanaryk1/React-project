@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useAuth } from "../CMSAdmin/Auth/AuthContext";
 import { useLocation } from "react-router-dom/cjs/react-router-dom";
-import { handleDownloadCV } from "./UtilFunctions/handleDownloadCV";
-import OffCanvasHeader from "./OffCanvasHeader";
 import HorizontalHeader from "./HorizontalHeader";
 import useFetch from "./useFetch";
+import OffCanvasHeader from "./OffCanvasHeader";
 
 const Header = () => {
   const [navLinks, setNavLinks] = useState([]);
@@ -57,10 +56,7 @@ const Header = () => {
             Object.values(settings).find((s) => s.name === section.name) || {};
 
           const sectionTitle = sectionSettings.title || section.name;
-          console.log("sectionTitle:", sectionTitle);
-          const sectionName = section.name;
-          const sectionLink = sectionName.toLowerCase().replace(/\s+/g, "");
-          console.log("sectionLink", sectionLink);
+          // console.log("sectionTitle:", sectionTitle);
 
           return {
             to: `#${section.name.toLowerCase().replace(/\s+/g, "")}`,
@@ -84,28 +80,18 @@ const Header = () => {
 
   return (
     <>
-      {isAdminPage && isAuthenticated ? (
-        <OffCanvasHeader
-          navLinks={navLinks}
-          isActiveLink={isActiveLink}
-          isAuthenticated={isAuthenticated}
-          user={user}
-          onLogout={onLogout}
-          preventRefresh={preventRefresh}
-          isAdminPage={isAdminPage}
-        />
-      ) : (
-        <HorizontalHeader
-          navLinks={navLinks}
-          isActiveLink={isActiveLink}
-          isAuthenticated={isAuthenticated}
-          user={user}
-          preventRefresh={preventRefresh}
-          onLogout={onLogout}
-          isAdminPage={isAdminPage}
-          handleDownloadCV={handleDownloadCV}
-        />
-      )}
+      <header id="header" className="fixed-top">
+        <div className="container">
+          <HorizontalHeader
+            isAuthenticated={isAuthenticated}
+            user={user}
+            preventRefresh={preventRefresh}
+            onLogout={onLogout}
+            isAdminPage={isAdminPage}
+          />
+          <OffCanvasHeader navLinks={navLinks} isActiveLink={isActiveLink} />
+        </div>
+      </header>
     </>
   );
 };
