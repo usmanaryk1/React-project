@@ -1356,10 +1356,10 @@ a:hover {
   max-height: 650px;
   overflow-y: auto;
   padding: 15px;
-  border-radius: 10px;
-  background: #dddddd;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.2);
   scrollbar-color: #888 #f1f1f1;
+  margin-bottom: 2rem;
 }
 
 /* Scrollbar for Chrome, Edge */
