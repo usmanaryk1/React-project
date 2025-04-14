@@ -1,14 +1,12 @@
 const CV_Model = require("../models/CVSchema");
-const { bucket } = require("../api/firebaseAdmin.js");
+const { admin, bucket } = require("../api/firebaseAdmin.js");
 const { default: mongoose } = require("mongoose");
+const {
+  deleteImageFromFirebase,
+} = require("../utils/deleteImageFromFirebase .js");
 
 // Fetch CV URL by userId
 const getAllCvs = async (req, res) => {
-  // if (!req.user || !req.user.id) {
-  //   return res.status(401).json({ message: "Unauthorized: User not found" });
-  // }
-  // const userId = req.user.id;
-
   try {
     const cvs = await CV_Model.find();
 
@@ -53,43 +51,27 @@ const uploadCv = async (req, res) => {
 const updateCV = async (req, res) => {
   console.log("CV update route");
 
-  const Id = req.params.id;
-  const userId = req.user.id; // Ensure user updates only their CV
   try {
-    // Validate ObjectId
-    if (!mongoose.Types.ObjectId.isValid(Id)) {
-      return res.status(400).json({ message: "Invalid CV ID format" });
-    }
-
-    // Convert Id to ObjectId
-    const objectId = new mongoose.Types.ObjectId(Id);
+    const { id } = req.params;
+    const userId = req.user.id;
+    const objectId = new mongoose.Types.ObjectId(id);
 
     const cv = await CV_Model.findOne({ _id: objectId, userId });
     if (!cv) {
       return res
         .status(404)
-        .json({ message: `Information with Id ${Id} not found.` });
+        .json({ message: `Information with Id ${id} not found.` });
     }
 
-    // Check if the user owns the CV
-    if (cv.userId.toString() !== userId) {
-      return res
-        .status(403)
-        .json({ message: "Unauthorized to delete this CV" });
-    }
-
-    if (cv.cvUrl) {
-      // Extract the Firebase Storage URL
-      const filePath = cv.cvUrl.split("/o/")[1].split("?")[0];
-
-      // Delete file from Firebase Storage
-      await bucket.file(decodeURIComponent(filePath)).delete();
+    // Only delete old file if it's different from the new one
+    if (cv.cvUrl && req.body.cvUrl && cv.cvUrl !== req.body.cvUrl) {
+      await deleteImageFromFirebase(cv.cvUrl);
     }
 
     // Update in MongoDB
     const updatedCV = await CV_Model.findByIdAndUpdate(
-      objectId,
-      { cvUrl: req.body.cvUrl },
+      { _id: objectId, userId },
+      { $set: req.body },
       { new: true }
     );
 
@@ -102,78 +84,54 @@ const updateCV = async (req, res) => {
 
 const deleteCV = async (req, res) => {
   console.log("CV delete route");
-  const Id = req.params.id;
-  const userId = req.user.id; // Ensure user updates only their CV
 
   try {
-    // Validate ObjectId
-    if (!mongoose.Types.ObjectId.isValid(Id)) {
-      return res.status(400).json({ message: "Invalid CV ID format" });
-    }
-
-    // Convert Id to ObjectId
-    const objectId = new mongoose.Types.ObjectId(Id);
+    const { id } = req.params;
+    const userId = req.user.id;
+    const objectId = new mongoose.Types.ObjectId(id);
 
     const cv = await CV_Model.findOne({ _id: objectId, userId });
+
     if (!cv) {
-      return res
-        .status(404)
-        .send({ message: `Information with ID ${Id} not found` });
+      return res.status(404).json({ message: `CV with ID ${id} not found` });
     }
 
-    // Check if the user owns the CV
-    if (cv.userId.toString() !== userId) {
-      return res
-        .status(403)
-        .json({ message: "Unauthorized to delete this CV" });
-    }
-
+    // Delete file from Firebase if it exists
     if (cv.cvUrl) {
-      // Extract the Firebase Storage URL
-      const filePath = cv.cvUrl.split("/o/")[1].split("?")[0];
-
-      // Delete file from Firebase Storage
-      await admin
-        .storage()
-        .bucket()
-        .file(decodeURIComponent(filePath))
-        .delete();
+      await deleteImageFromFirebase(cv.cvUrl);
     }
-    await CV_Model.findByIdAndDelete(objectId); // Ensure you're querying by the correct field, `id`
+    await CV_Model.deleteOne({ _id: objectId }); // Ensure you're querying by the correct field, `id`
 
     console.log("CV deleted");
-    res.status(200).send({
-      message: `Information with ID ${Id} has been deleted`,
+    return res.status(200).json({
+      message: `Information with ID ${id} has been deleted`,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: `Failed to delete data with ${Id}` });
+    return res.status(500).json({ error: `Failed to delete data` });
   }
 };
 
 const toggleVisibility = async (req, res) => {
-  const { id, isVisible } = req.body;
   try {
-    // Validate ObjectId
-    if (!mongoose.Types.ObjectId.isValid(String(id))) {
-      return res.status(400).json({ message: "Invalid CV ID format" });
-    }
+    const { isVisible } = req.body;
+    const { id } = req.params;
+    const userId = req.user.id;
 
     const objectId = new mongoose.Types.ObjectId(id);
 
     const UpdatedCVs = await CV_Model.findOneAndUpdate(
-      { _id: objectId }, // Corrected query
+      { _id: objectId, userId }, // Corrected query
       { isVisible },
-
       { new: true } // Update if exists, otherwise create
     );
     if (!UpdatedCVs) {
       return res.status(404).json({ message: "CV not found" });
     }
-    res.status(200).json(UpdatedCVs);
+    return res.status(200).json(UpdatedCVs);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Error Updating Visibility State" });
+    return res.status(500).json({ error: "Error Updating Visibility State" });
   }
 };
 
@@ -185,10 +143,10 @@ const visibleCVs = async (req, res) => {
     if (visibleCVs.length === 0) {
       return res.status(404).json({ message: "No visible CVs found." });
     }
-    res.status(200).json(visibleCVs);
+    return res.status(200).json(visibleCVs);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Failed to fetch data" });
+    return res.status(500).json({ error: "Failed to fetch data" });
   }
 };
 module.exports = {

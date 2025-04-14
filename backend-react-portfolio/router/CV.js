@@ -26,6 +26,6 @@ router.put("/:id", authenticateJWT, updateCV);
 router.delete("/:id", authenticateJWT, deleteCV);
 
 // UPDATE VISIBILITY STATE OF CV
-router.delete("/:id", authenticateJWT, toggleVisibility);
+router.put("/visibility/:id", authenticateJWT, toggleVisibility);
 
 module.exports = router;
