@@ -168,11 +168,6 @@ const ContactForm = () => {
                       placeholder="Description"
                     />
                   </div>
-                  {errors.description && (
-                    <p className="error-message">
-                      {errors.description.message}
-                    </p>
-                  )}
 
                   <div className="form-group">
                     <input
@@ -183,9 +178,6 @@ const ContactForm = () => {
                       placeholder="Location"
                     />
                   </div>
-                  {errors.location && (
-                    <p className="error-message">{errors.location.message}</p>
-                  )}
 
                   <div className="form-group">
                     <input
