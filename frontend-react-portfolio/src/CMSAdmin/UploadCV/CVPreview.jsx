@@ -32,7 +32,18 @@ const CVPreview = ({
     <>
       {/* CV Previews */}
 
-      <div id="cv" className="cv-preview container" key={cv._id}>
+      <div id="cv" className="cv-preview container">
+        {preview && (
+          <div className="preview-container">
+            <iframe
+              src={preview}
+              width="100%"
+              height="500px"
+              title="Live Preview"
+              className="cv-preview border border-dark border-5"
+            />
+          </div>
+        )}
         {/* Admin Actions */}
         {isAuthenticated && isAdminPage && (
           <div className="admin-actions d-flex justify-content-end">
@@ -57,7 +68,7 @@ const CVPreview = ({
         )}
         <iframe
           key={cv._id}
-          src={preview || cv.cvUrl}
+          src={cv.cvUrl}
           width="100%"
           height="800px"
           title="CV Preview"

@@ -50,8 +50,6 @@ const CVUploader = () => {
   const handleEdit = async (cv) => {
     setCurrentCV(cv);
     setValue("file", cv.cvUrl); // Set form value (assuming it's a text URL)
-    // Set the preview to the CV URL
-    setPreview(cv.cvUrl); // Set only the current CV URL as preview // Set only the current CV URL as preview
   };
 
   const onSubmit = async (data) => {
@@ -80,7 +78,6 @@ const CVUploader = () => {
         async () => {
           try {
             const url = await getDownloadURL(uploadTask.snapshot.ref);
-            setCvs((prevCvs) => [...prevCvs, { cvUrl: url }]);
 
             const method = currentCV ? "PUT" : "POST";
             const apiUrl = currentCV
@@ -104,16 +101,16 @@ const CVUploader = () => {
                     item._id === result._id ? result : item
                   )
                 );
+
                 toast.success("CV updated successfully");
               } else {
-                setCvs([...cvs, result]);
+                refetch();
                 toast.success("CV Uploaded Successfully");
               }
             } else {
               throw new Error(`${response.statusText}`);
             }
-
-            setPreview((prevPreviews) => [...prevPreviews, url]);
+            setPreview(url); // only one preview
           } catch (error) {
             console.error("Error uploading CV:", error);
             toast.error("Error uploading CV:", error.message);
@@ -122,6 +119,7 @@ const CVUploader = () => {
             setIsSubmitting(false);
             reset();
             setFile(null);
+            setPreview(null);
           }
         }
       );
@@ -170,7 +168,7 @@ const CVUploader = () => {
     setCvs(updatedCVs);
 
     try {
-      const response = await fetch(`${API_URL}/api/cv/toggleVisibility`, {
+      const response = await fetch(`${API_URL}/api/cv//visibility/${id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -184,6 +182,7 @@ const CVUploader = () => {
 
       if (!response.ok) {
         toast.error("Failed to update the visibility state of CV.");
+        refetch();
       } else {
         toast.success("Visibility State Updated Successfully.");
       }
