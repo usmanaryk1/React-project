@@ -3,11 +3,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import validationSchema from "./HeroValidation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import useFetch from "../../Components/useFetch";
 import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
 import "./HeroForm.css";
+import { uploadImageToFirebase } from "../Util Functions/uploadImageToFirebase";
+import { getImageAspectRatio } from "../Util Functions/getImageAspectRatio";
 
 const HeroForm = () => {
   const token = localStorage.getItem("token");
@@ -16,6 +18,13 @@ const HeroForm = () => {
   const [currentHero, setCurrentHero] = useState(null);
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
+  const imageRef = useRef(null);
+  const [base64Image, setBase64Image] = useState("");
+  const [isCropping, setIsCropping] = useState(false);
+  const [imageSrc, setImageSrc] = useState(null);
+  const [croppedImage, setCroppedImage] = useState(null);
+  const [fileName, setFileName] = useState("");
+  const [cropAspectRatio, setCropAspectRatio] = useState(null);
 
   const {
     data: hero,
@@ -39,11 +48,42 @@ const HeroForm = () => {
     },
   });
 
+  const handleImageClick = () => {
+    imageRef.current.click();
+  };
+
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFileName(file.name);
+      const imageDataUrl = URL.createObjectURL(file);
+      // console.log("imageDataUrl", imageDataUrl);
+      setImageSrc(imageDataUrl); // Set image for cropper
+      const aspect = await getImageAspectRatio(imageDataUrl); // Dynamically determine aspect ratio
+      // console.log("aspect", aspect);
+      setCropAspectRatio(aspect);
+      setIsCropping(true); // Open cropper modal
+    }
+  };
+
+  const handleCropComplete = async (croppedImg) => {
+    if (croppedImg) {
+      // console.log("croppedImg", croppedImg);
+      setCroppedImage(croppedImg); // Use the cropped image directly
+      // console.log("cropped image on crop complete", croppedImage);
+      setBase64Image(URL.createObjectURL(croppedImg));
+      setIsCropping(false);
+    } else {
+      console.error("Cropped image is not valid");
+    }
+  };
+
   useEffect(() => {
     if (currentHero) {
       setValue("name", currentHero.name);
       setValue("skills", currentHero.skills);
       setValue("isActive", currentHero.isActive);
+      setBase64Image(currentHero.image);
     } else {
       reset();
     }
@@ -52,56 +92,63 @@ const HeroForm = () => {
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
+
+    let imageUrl = base64Image;
+
+    if (croppedImage) {
+      imageUrl = await uploadImageToFirebase(croppedImage, "projectImages");
+
+      // console.log("imageUrl2", imageUrl);
+    }
+
     const formData = {
+      image: imageUrl,
       name: data.name,
       skills: data.skills,
       isActive: data.isActive,
     };
-    if (currentHero) {
-      // Update hero
-      // const updatedHero = { ...currentHero, ...formData };
-      const response = await fetch(`${API_URL}/api/hero/${currentHero._id}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      if (response.ok) {
-        const result = await response.json();
-        // console.log("Updated hero response:", result);
-        setHero((prevHero) => {
-          // console.log("Previous Hero:", prevHero);
-          return prevHero.map((heroData) =>
-            heroData._id === result._id ? result : heroData
-          );
-        });
 
-        toast.success("Hero Content Updated Successfully");
-      }
-    } else {
-      // Add new service
-      const response = await fetch(`${API_URL}/api/hero`, {
-        method: "POST",
+    try {
+      const method = currentHero ? "PUT" : "POST";
+      const url = currentHero
+        ? `${API_URL}/api/hero/${currentHero._id}`
+        : `${API_URL}/api/hero`;
+      const response = await fetch(url, {
+        method,
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
+
       if (response.ok) {
         const result = await response.json();
-        // console.log("new hero: ", result);
-        setHero((prevHero) => [...prevHero, result]);
-        toast.success("Hero Content Added Successfully");
+        if (currentHero) {
+          setHero((prevHero) => {
+            // console.log("Previous Hero:", prevHero);
+            return prevHero.map((heroData) =>
+              heroData._id === result._id ? result : heroData
+            );
+          });
+          toast.success("Introduction Content Updated Successfully");
+        } else {
+          setHero([...hero, result]);
+          toast.success("Introduction Content Added Successfully");
+        }
+        // console.log("Updated hero response:", result);
       } else {
-        toast.error("Failed to add Hero");
+        throw new Error("Failed to save Introduction info");
       }
+      reset();
+      setCurrentHero(null);
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      reset();
+      setIsSubmitting(false);
+      setCurrentHero(null);
     }
-    reset();
-    setIsSubmitting(false);
-    setCurrentHero(null);
   };
 
   const onReset = () => {
@@ -151,6 +198,41 @@ const HeroForm = () => {
                   className="form-container"
                   noValidate
                 >
+                  <div className="img-container text-center">
+                    <div className="image">
+                      <img
+                        src={
+                          base64Image || "../assets/img/default-work-image.webp"
+                        }
+                        alt="default"
+                        className="img-display-before"
+                      />
+
+                      <input
+                        type="file"
+                        name="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        ref={imageRef}
+                        style={{ display: "none" }}
+                      />
+                      {isCropping && (
+                        <ImageCropper
+                          imageSrc={imageSrc}
+                          fileName={fileName}
+                          onCropComplete={handleCropComplete}
+                          onClose={() => setIsCropping(false)}
+                          width={356} // Pass the desired width
+                          height={223} // Pass the desired height
+                          aspect={cropAspectRatio} // Dynamic aspect ratio
+                          cropShape="rect"
+                        />
+                      )}
+                    </div>
+                    <label className="my-3 img-btn" onClick={handleImageClick}>
+                      Choose Project Image
+                    </label>
+                  </div>
                   <div className="form-group">
                     <input
                       type="text"
