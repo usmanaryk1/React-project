@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../CMSAdmin/Auth/AuthContext";
 
-const Hero = ({ onDeleteClick, onEditClick, hero = {} }) => {
+const Hero = ({ onDeleteClick, onEditClick, personalSkills = {} }) => {
   const { isAuthenticated, isAdminPage } = useAuth();
   const typedRef = useRef(null);
   const typedElementRef = useRef(null);
@@ -13,23 +13,25 @@ const Hero = ({ onDeleteClick, onEditClick, hero = {} }) => {
   useEffect(() => {
     setIsComponentLoaded(true);
 
-    if (Object.keys(hero).length > 0) {
+    if (Object.keys(personalSkills).length > 0) {
       requestIdleCallback(() => {
         import("typed.js").then((mod) => setTypedModule(() => mod.default));
       });
     }
-  }, [hero]);
+  }, [personalSkills]);
 
   // Start Typed.js after the component is fully loaded
   useEffect(() => {
     if (
       TypedModule &&
       isComponentLoaded &&
-      Object.keys(hero).length > 0 &&
+      Object.keys(personalSkills).length > 0 &&
       typedElementRef.current
     ) {
       setTimeout(() => {
-        const typedStrings = hero.skills ? hero.skills.split(",") : [];
+        const typedStrings = personalSkills.skills
+          ? personalSkills.skills.split(",")
+          : [];
         if (typedStrings.length > 0 && typedElementRef.current) {
           typedRef.current = new TypedModule(typedElementRef.current, {
             strings: typedStrings,
@@ -42,16 +44,20 @@ const Hero = ({ onDeleteClick, onEditClick, hero = {} }) => {
       }, 100); // Small delay to allow the DOM to settle
     }
     return () => typedRef.current?.destroy();
-  }, [TypedModule, isComponentLoaded, hero]);
+  }, [TypedModule, isComponentLoaded, personalSkills]);
 
   return (
     <>
-      {hero && (
+      {personalSkills && (
         <div
           id="introduction"
           className="hero route bg-image"
           style={{
-            backgroundImage: `url(${process.env.PUBLIC_URL}/assets/img/counters-bg.jpg)`,
+            backgroundImage: `url(${
+              personalSkills.image
+                ? personalSkills.image
+                : "/assets/img/counters-bg.jpg"
+            })`,
           }}
         >
           <div className="overlay-itro" />
@@ -63,14 +69,14 @@ const Hero = ({ onDeleteClick, onEditClick, hero = {} }) => {
                   <button
                     className="admin-btn btn btn-primary btn-sm me-1"
                     aria-label="Edit"
-                    onClick={() => onEditClick(hero)}
+                    onClick={() => onEditClick(personalSkills)}
                   >
                     <i className="bi bi-pencil" />
                   </button>
                   <button
                     className="admin-btn btn btn-danger btn-sm me-5"
                     aria-label="Delete"
-                    onClick={() => onDeleteClick(hero._id)}
+                    onClick={() => onDeleteClick(personalSkills._id)}
                   >
                     <i className="bi bi-trash" />
                   </button>
@@ -79,13 +85,13 @@ const Hero = ({ onDeleteClick, onEditClick, hero = {} }) => {
 
               {/* Hero Content */}
               <div className="container">
-                <h1 className="hero-title mb-4">{hero.name}</h1>
+                <h1 className="hero-title mb-4">{personalSkills.name}</h1>
                 <p className="hero-subtitle">
-                  {hero.skills && (
+                  {personalSkills.skills && (
                     <span
                       className="typed"
                       ref={typedElementRef}
-                      data-typed-items={hero.skills}
+                      data-typed-items={personalSkills.skills}
                     />
                   )}
                 </p>

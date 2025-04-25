@@ -10,6 +10,7 @@ import Error from "../../Components/Error/Error";
 import "./HeroForm.css";
 import { uploadImageToFirebase } from "../Util Functions/uploadImageToFirebase";
 import { getImageAspectRatio } from "../Util Functions/getImageAspectRatio";
+import ImageCropper from "../ImageCropper/ImageCropper";
 
 const HeroForm = () => {
   const token = localStorage.getItem("token");
@@ -31,7 +32,7 @@ const HeroForm = () => {
     setData: setHero,
     isPending,
     error,
-  } = useFetch(`${API_URL}/api/hero`);
+  } = useFetch(`${API_URL}/api/personalSkills`);
   // console.log("HeroForm", hero);
   const {
     register,
@@ -111,8 +112,8 @@ const HeroForm = () => {
     try {
       const method = currentHero ? "PUT" : "POST";
       const url = currentHero
-        ? `${API_URL}/api/hero/${currentHero._id}`
-        : `${API_URL}/api/hero`;
+        ? `${API_URL}/api/personalSkills/${currentHero._id}`
+        : `${API_URL}/api/personalSkills`;
       const response = await fetch(url, {
         method,
         headers: {
@@ -163,7 +164,7 @@ const HeroForm = () => {
 
   const handleDelete = async (id) => {
     // console.log("Deleting service with ID:", id);
-    const response = await fetch(`${API_URL}/api/hero/${id}`, {
+    const response = await fetch(`${API_URL}/api/personalSkills/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,

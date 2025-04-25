@@ -254,7 +254,7 @@ const Home = () => {
   );
   const endpoints = useMemo(
     () => [
-      "hero",
+      "personalSkills",
       "about",
       "contact",
       "dynamicSections",
@@ -332,7 +332,8 @@ const Home = () => {
                 //terms is missing
                 switch (section.name) {
                   case "Introduction":
-                    return !data.hero || data.hero.length === 0 ? (
+                    return !data.personalSkills ||
+                      data.personalSkills.length === 0 ? (
                       <div className="row justify-content-center">
                         <div className="col-md-12">
                           {" "}
@@ -340,7 +341,10 @@ const Home = () => {
                         </div>{" "}
                       </div>
                     ) : (
-                      <Hero key={section._id} hero={data.hero[0] || {}} />
+                      <Hero
+                        key={section._id}
+                        personalSkills={data.personalSkills[0] || {}}
+                      />
                     );
                   case "About":
                     return !data.about || data.about.length === 0 ? (
