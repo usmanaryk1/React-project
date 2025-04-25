@@ -5,6 +5,10 @@ const Schema = mongoose.Schema;
 
 //advance mongodb query search query
 const personalSchema = new Schema({
+  image: {
+    type: String,
+    required: false,
+  },
   name: {
     type: String,
     required: true,

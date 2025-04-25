@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
   try {
     const PersonalSkills = await Personal_SkillsModel.find();
     if (PersonalSkills.length === 0) {
-      return res.status(404).send("Inforamtion Not Found");
+      return res.status(200).json({ message: "Inforamtion Not Found" });
     }
     res.status(200).json(PersonalSkills); // 200 OK status code
   } catch (error) {
@@ -42,6 +42,7 @@ router.post("/", authenticateJWT, async (req, res) => {
 
   const data = new Personal_SkillsModel({
     name: req.body.name,
+    image: req.body.image,
     skills: req.body.skills,
     isActive: req.body.isActive,
   });

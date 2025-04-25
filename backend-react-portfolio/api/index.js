@@ -53,7 +53,7 @@ app.get("/", (req, res) => {
 // USE ROUTES
 app.use(express.json());
 
-app.use("/api/hero", personal_SkillsRoutes);
+app.use("/api/personalSkills", personal_SkillsRoutes);
 app.use("/api/about", About_Routes);
 app.use("/api/services", Service_Routes);
 app.use("/api/counts", Counter_Routes);
