@@ -16,7 +16,7 @@ const HeroForm = () => {
   const token = localStorage.getItem("token");
   // console.log("Stored Token:", token);
 
-  const [currentHero, setCurrentHero] = useState(null);
+  const [currentPersonalSkills, setCurrentPersonalSkills] = useState(null);
   const API_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
   const imageRef = useRef(null);
@@ -28,10 +28,11 @@ const HeroForm = () => {
   const [cropAspectRatio, setCropAspectRatio] = useState(null);
 
   const {
-    data: hero,
-    setData: setHero,
+    data: personalSkills,
+    setData: setPersonalSkills,
     isPending,
     error,
+    refetch,
   } = useFetch(`${API_URL}/api/personalSkills`);
   // console.log("HeroForm", hero);
   const {
@@ -80,16 +81,16 @@ const HeroForm = () => {
   };
 
   useEffect(() => {
-    if (currentHero) {
-      setValue("name", currentHero.name);
-      setValue("skills", currentHero.skills);
-      setValue("isActive", currentHero.isActive);
-      setBase64Image(currentHero.image);
+    if (currentPersonalSkills) {
+      setValue("name", currentPersonalSkills.name);
+      setValue("skills", currentPersonalSkills.skills);
+      setValue("isActive", currentPersonalSkills.isActive);
+      setBase64Image(currentPersonalSkills.image);
     } else {
       reset();
     }
-  }, [currentHero, setValue, reset]);
-  // console.log("currentHero ", currentHero);
+  }, [currentPersonalSkills, setValue, reset]);
+  // console.log("currentPersonalSkills ", currentPersonalSkills);
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
@@ -110,9 +111,9 @@ const HeroForm = () => {
     };
 
     try {
-      const method = currentHero ? "PUT" : "POST";
-      const url = currentHero
-        ? `${API_URL}/api/personalSkills/${currentHero._id}`
+      const method = currentPersonalSkills ? "PUT" : "POST";
+      const url = currentPersonalSkills
+        ? `${API_URL}/api/personalSkills/${currentPersonalSkills._id}`
         : `${API_URL}/api/personalSkills`;
       const response = await fetch(url, {
         method,
@@ -125,40 +126,41 @@ const HeroForm = () => {
 
       if (response.ok) {
         const result = await response.json();
-        if (currentHero) {
-          setHero((prevHero) => {
+        if (currentPersonalSkills) {
+          setPersonalSkills((prevSkills) => {
             // console.log("Previous Hero:", prevHero);
-            return prevHero.map((heroData) =>
-              heroData._id === result._id ? result : heroData
+            return prevSkills.map((skillsData) =>
+              skillsData._id === result._id ? result : skillsData
             );
           });
           toast.success("Introduction Content Updated Successfully");
         } else {
-          setHero([...hero, result]);
+          setPersonalSkills([...personalSkills, result]);
           toast.success("Introduction Content Added Successfully");
         }
+        refetch();
+        reset();
+        setCurrentPersonalSkills(null);
         // console.log("Updated hero response:", result);
       } else {
         throw new Error("Failed to save Introduction info");
       }
-      reset();
-      setCurrentHero(null);
     } catch (error) {
       toast.error(error.message);
     } finally {
       reset();
       setIsSubmitting(false);
-      setCurrentHero(null);
+      setCurrentPersonalSkills(null);
     }
   };
 
   const onReset = () => {
     reset();
-    setCurrentHero(null);
+    setCurrentPersonalSkills(null);
   };
 
   const handleEdit = (heroItem) => {
-    setCurrentHero(heroItem);
+    setCurrentPersonalSkills(heroItem);
     // console.log("onedit: ", heroItem);
   };
 
@@ -171,12 +173,14 @@ const HeroForm = () => {
       },
     });
     if (response.ok) {
-      setHero((prevHero) => prevHero.filter((heroData) => heroData._id !== id));
-      toast.success("Hero Content Deleted Successfully");
-      // console.log("Hero section deleted successfully", hero);
+      setPersonalSkills((prevSkills) =>
+        prevSkills.filter((skillsData) => skillsData._id !== id)
+      );
+      toast.success("Introduction Content Deleted Successfully");
+      // console.log("Introduction section deleted successfully", personalSkills);
     } else {
       console.error("Failed to delete section");
-      toast.error("Failed to delete hero section");
+      toast.error("Failed to delete introduction section");
     }
   };
 
@@ -297,7 +301,7 @@ const HeroForm = () => {
       <Hero
         onEditClick={handleEdit}
         onDeleteClick={handleDelete}
-        hero={hero?.[0] || []}
+        personalSkills={personalSkills?.[0] || []}
       />
     </>
   );
