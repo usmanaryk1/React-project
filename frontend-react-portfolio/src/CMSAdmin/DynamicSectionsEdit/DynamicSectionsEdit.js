@@ -119,17 +119,20 @@ const DynamicSectionsEdit = () => {
     (id) => {
       // console.log("delete button clicked");
       try {
-        DynamicSectionService.deleteItem(id).then(() => {
-          setDynamicSections((prevSec) =>
-            prevSec.filter((section) => section._id !== id)
-          );
-          setSections((prevSec) =>
-            prevSec.filter((section) => section._id !== id)
-          );
-          fetch();
+        DynamicSectionService.deleteItem(id).then(async () => {
+          // Also delete from sectionVisibility
+          await ApiService("api/sectionVisibility").deleteItem(id);
 
+          setDynamicSections((prevSection) => {
+            prevSection.filter((section) => section._id !== id);
+          });
+
+          setSections((prevSec) => {
+            prevSec.filter((section) => section._id !== id);
+          });
+          fetch();
           refetch();
-          toast.success("Data Deleted successfully");
+          toast.success("Data deleted successfully.");
         });
       } catch (error) {
         console.error(error);
