@@ -48,31 +48,6 @@ const ForgetPwd = () => {
     }
   };
 
-  // const onSubmit = ({ email }) => {
-  //   setIsSubmitting(true);
-  //   axios
-  //     .post(
-  //       `${API_URL}/api/forgot-password`,
-  //       { email }, // Now, email is correctly passed as a string
-  //       {
-  //         withCredentials: true,
-  //       }
-  //     )
-  //     .then((res) => {
-  //       if (res.data.message === "Success") {
-  //         history.push("/form/login-form");
-  //       }
-  //       setIsSubmitting(false);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       toast.error(`Error: ${err.response?.data?.message || err.message}`);
-  //       setIsSubmitting(false);
-  //     });
-
-  //   reset();
-  // };
-
   return (
     <>
       <section
